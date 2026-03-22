@@ -1,0 +1,243 @@
+"""Download raw data for the Michigan redistricting pipeline.
+
+Data sources:
+  1. Congressional district boundaries — NHGIS via IPUMS API
+     Requires a free API key: https://account.ipums.org/api_keys
+     Set NHGIS_API_KEY in .env (see .env.example)
+
+  2. US House election returns — MIT Election Lab via Harvard Dataverse
+     Public, no key required.
+     Dataset: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IG0UN2
+
+Usage:
+  uv run python -m pipeline.download
+"""
+
+import io
+import os
+import re
+import sys
+import time
+
+from dotenv import load_dotenv
+
+load_dotenv()
+import zipfile
+from pathlib import Path
+
+import requests
+
+from .config import (
+    CYCLES,
+    MIT_ELECTIONS_DOI,
+    MIT_ELECTIONS_FILENAME,
+    NHGIS_API_BASE,
+    NHGIS_API_VERSION,
+    RAW_DIR,
+)
+
+RAW = Path(RAW_DIR)
+BOUNDARIES_DIR = RAW / "boundaries"
+ELECTIONS_DIR = RAW / "elections"
+
+
+# ---------------------------------------------------------------------------
+# NHGIS / IPUMS API — congressional district boundaries
+# ---------------------------------------------------------------------------
+
+def _nhgis_headers(api_key: str) -> dict:
+    return {"Authorization": api_key}
+
+
+def _nhgis_url(path: str) -> str:
+    return f"{NHGIS_API_BASE}{path}?product=nhgis&version={NHGIS_API_VERSION}"
+
+
+def list_nhgis_shapefiles(api_key: str) -> list[dict]:
+    """Return the NHGIS shapefile catalog so you can verify shapefile IDs."""
+    url = f"{NHGIS_API_BASE}/metadata/nhgis/shapefiles?version={NHGIS_API_VERSION}"
+    resp = requests.get(url, headers=_nhgis_headers(api_key), timeout=30)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def submit_nhgis_extract(api_key: str) -> str:
+    """Submit a shapefile extract for all Michigan redistricting cycles.
+
+    Returns the extract ID to poll with wait_for_nhgis_extract().
+    """
+    shapefile_ids = [meta["shapefile_id"] for meta in CYCLES.values()]
+    payload = {
+        "shapefiles": shapefile_ids,
+    }
+    url = _nhgis_url("/extracts/")
+    resp = requests.post(url, json=payload, headers=_nhgis_headers(api_key), timeout=30)
+    if not resp.ok:
+        print(f"NHGIS API error {resp.status_code}:")
+        try:
+            print(resp.json())
+        except Exception:
+            print(resp.text)
+        sys.exit(1)
+    extract_id = resp.json()["number"]
+    print(f"  Submitted NHGIS extract #{extract_id}")
+    return extract_id
+
+
+def wait_for_nhgis_extract(api_key: str, extract_id: str, poll_seconds: int = 15) -> str:
+    """Poll until the extract is ready. Returns the download URL."""
+    url = _nhgis_url(f"/extracts/{extract_id}")
+    print(f"  Waiting for extract #{extract_id} to complete", end="", flush=True)
+    while True:
+        resp = requests.get(url, headers=_nhgis_headers(api_key), timeout=30)
+        resp.raise_for_status()
+        data = resp.json()
+        status = data["status"]
+        if status == "completed":
+            print(" done.")
+            return data["download_links"]["gis_data"]
+        elif status == "failed":
+            print(f"\nExtract failed: {data}")
+            sys.exit(1)
+        print(".", end="", flush=True)
+        time.sleep(poll_seconds)
+
+
+def _extract_inner_zips() -> None:
+    """Extract any inner shapefile ZIPs under BOUNDARIES_DIR into cd{congress} dirs.
+
+    NHGIS outer ZIPs contain one inner ZIP per shapefile, named like:
+      nhgis0005_shapefile_tl2000_us_cd103rd_1990.zip
+    We parse the congress number from the filename with a regex.
+    """
+    inner_zips = list(BOUNDARIES_DIR.rglob("nhgis*_shapefile_*.zip"))
+    if not inner_zips:
+        print("  WARNING: no inner shapefile ZIPs found under boundaries/")
+        return
+    # Use the latest extract's ZIPs (highest nhgis number) to avoid duplicates
+    latest = sorted(inner_zips, key=lambda p: p.name)[-len(CYCLES):]
+    for zip_path in sorted(latest):
+        m = re.search(r"cd(\d+)", zip_path.name)
+        if not m:
+            print(f"  WARNING: could not parse congress from {zip_path.name}, skipping.")
+            continue
+        congress = int(m.group(1))
+        dst_dir = BOUNDARIES_DIR / f"cd{congress}"
+        if dst_dir.exists():
+            continue
+        dst_dir.mkdir()
+        with zipfile.ZipFile(zip_path) as zf:
+            zf.extractall(dst_dir)
+        print(f"  Extracted cd{congress} → {dst_dir}")
+
+
+def download_nhgis_boundaries(api_key: str) -> None:
+    """Download NHGIS congressional district shapefiles for all MI cycles."""
+    BOUNDARIES_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Check if all cycles already extracted
+    all_present = all(
+        (BOUNDARIES_DIR / f"cd{meta['congress']}").exists()
+        for meta in CYCLES.values()
+    )
+    if all_present:
+        print("  NHGIS boundaries already extracted, skipping.")
+        return
+
+    # If inner ZIPs already downloaded from a prior run, extract without re-downloading
+    if list(BOUNDARIES_DIR.rglob("nhgis*_shapefile_*.zip")):
+        print("  Inner ZIPs found on disk, extracting without re-downloading...")
+        _extract_inner_zips()
+        return
+
+    extract_id = submit_nhgis_extract(api_key)
+    download_url = wait_for_nhgis_extract(api_key, extract_id)
+
+    print(f"  Downloading boundaries ZIP from NHGIS...")
+    resp = requests.get(download_url, headers=_nhgis_headers(api_key),
+                        stream=True, timeout=120)
+    resp.raise_for_status()
+
+    # Outer ZIP contains inner ZIPs — one per shapefile. Extract outer first.
+    outer = zipfile.ZipFile(io.BytesIO(resp.content))
+    outer.extractall(BOUNDARIES_DIR)
+
+    # Now extract all inner ZIPs found anywhere under BOUNDARIES_DIR.
+    _extract_inner_zips()
+    print(f"  Saved boundaries to {BOUNDARIES_DIR}")
+
+
+# ---------------------------------------------------------------------------
+# MIT Election Lab — US House returns 1976–2022
+# ---------------------------------------------------------------------------
+
+def _dataverse_file_id(doi: str, filename: str) -> int:
+    """Look up a file's numeric ID in a Harvard Dataverse dataset by filename."""
+    url = (
+        f"https://dataverse.harvard.edu/api/datasets/:persistentId/versions/"
+        f":latest/files?persistentId={doi}"
+    )
+    resp = requests.get(url, timeout=30)
+    resp.raise_for_status()
+    files = resp.json()["data"]
+    for f in files:
+        if f["dataFile"]["filename"] == filename:
+            return f["dataFile"]["id"]
+    available = [f["dataFile"]["filename"] for f in files]
+    raise FileNotFoundError(
+        f"{filename!r} not found in {doi}. Available files: {available}"
+    )
+
+
+def download_mit_elections() -> None:
+    """Download the MIT Election Lab US House returns CSV."""
+    ELECTIONS_DIR.mkdir(parents=True, exist_ok=True)
+    dest = ELECTIONS_DIR / MIT_ELECTIONS_FILENAME
+    if dest.exists():
+        print(f"  MIT elections CSV already present, skipping.")
+        return
+
+    print(f"  Looking up {MIT_ELECTIONS_FILENAME} in Harvard Dataverse...")
+    file_id = _dataverse_file_id(MIT_ELECTIONS_DOI, MIT_ELECTIONS_FILENAME)
+    url = f"https://dataverse.harvard.edu/api/access/datafile/{file_id}"
+    print(f"  Downloading MIT Election Lab returns (file ID {file_id})...")
+    resp = requests.get(url, stream=True, timeout=120)
+    resp.raise_for_status()
+    with open(dest, "wb") as fh:
+        for chunk in resp.iter_content(chunk_size=1 << 16):
+            fh.write(chunk)
+    print(f"  Saved to {dest}")
+
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
+
+def main() -> None:
+    print("=== Downloading Michigan redistricting data ===\n")
+
+    # --- Congressional district boundaries (NHGIS) ---
+    api_key = os.getenv("NHGIS_API_KEY", "").strip()
+    if not api_key:
+        print(
+            "ERROR: Set NHGIS_API_KEY environment variable.\n"
+            "  Get a free key at https://account.ipums.org/api_keys\n"
+            "  Then run: NHGIS_API_KEY=your_key python -m pipeline.download"
+        )
+        sys.exit(1)
+
+    print(f"  API key loaded: {len(api_key)} chars, starts with '{api_key[:4]}...'")
+    print("[1/2] Congressional district boundaries (NHGIS)...")
+    download_nhgis_boundaries(api_key)
+
+    # --- Election returns (MIT Election Lab) ---
+    print("\n[2/2] US House election returns (MIT Election Lab)...")
+    download_mit_elections()
+
+    print("\nAll downloads complete.")
+    print(f"  Boundaries : {BOUNDARIES_DIR}")
+    print(f"  Elections  : {ELECTIONS_DIR}")
+
+
+if __name__ == "__main__":
+    main()

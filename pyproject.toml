@@ -1,0 +1,14 @@
+[project]
+name = "districtdrift"
+version = "0.1.0"
+description = "Historical gerrymandering data pipeline for districtdrift.org"
+requires-python = ">=3.14"
+dependencies = [
+    "geopandas>=1.1.3",
+    "numpy>=2.4.3",
+    "pandas>=3.0.1",
+    "pyproj>=3.7.2",
+    "python-dotenv>=1.2.2",
+    "requests>=2.32.5",
+    "shapely>=2.1.2",
+]

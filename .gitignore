@@ -1,0 +1,14 @@
+data/
+tiles/
+*.pmtiles
+*.pyc
+__pycache__/
+.env
+.venv/
+uv.lock
+*.zip
+*.shp
+*.dbf
+*.shx
+*.prj
+*.cpg
