@@ -34,6 +34,24 @@
     },
   ];
 
+  const STATES: Record<string, { name: string; flag: string }> = {
+    MI: { name: 'Michigan', flag: '◉' },
+    NC: { name: 'North Carolina', flag: '◉' },
+  };
+
+  let selectedState = $state('MI');
+  let stateMenuOpen = $state(false);
+
+  function selectState(po: string) {
+    if (po === selectedState) { stateMenuOpen = false; return; }
+    selectedState = po;
+    stateMenuOpen = false;
+    manualYear = 2022;
+    animTick = CYCLES.indexOf(2022);
+    animating = false;
+    hoveredYear = null;
+  }
+
   const CYCLES = [1992, 2002, 2012, 2022];
   const YEAR_COLOR: Record<number, string> = {
     1992: '#CA8A04', 2002: '#0D9488', 2012: '#9333EA', 2022: '#DB2777',
@@ -83,12 +101,15 @@
     redistricting_controller: s.redistricting_controller,
   })));
 
-  onMount(async () => {
-    const res = await fetch('/mi_stats.json');
+  async function loadStats(po: string) {
+    const res = await fetch(`/${po.toLowerCase()}_stats.json`);
     const data = await res.json();
     stats = data.cycles;
     credits = data.credits ?? [];
-  });
+  }
+
+  onMount(() => loadStats(selectedState));
+  $effect(() => { loadStats(selectedState); });
 
   // animTick is the only thing that changes in the interval — avoids writing $state from async
   let _animId: ReturnType<typeof setInterval> | null = null;
@@ -117,8 +138,14 @@
   }
 </script>
 
+<svelte:window onclick={(e) => {
+  if (stateMenuOpen && !(e.target as Element)?.closest?.('.state-selector-wrap')) {
+    stateMenuOpen = false;
+  }
+}} />
+
 <svelte:head>
-  <title>District Drift — Michigan Congressional Gerrymandering</title>
+  <title>District Drift — {STATES[selectedState].name} Congressional Gerrymandering</title>
 </svelte:head>
 
 {#snippet cycleControls()}
@@ -179,17 +206,39 @@
       <p class="tagline">Three decades of congressional redistricting <span class="version">v{__APP_VERSION__}</span></p>
     </div>
 
-    <div class="state-selector" title="More states coming soon">
-      <span class="state-icon">◉</span>
-      <span class="state-name">Michigan</span>
-      <span class="state-chevron">▾</span>
+    <div class="state-selector-wrap">
+      <button
+        class="state-selector"
+        class:open={stateMenuOpen}
+        onclick={() => stateMenuOpen = !stateMenuOpen}
+        aria-haspopup="listbox"
+        aria-expanded={stateMenuOpen}
+      >
+        <span class="state-icon">{STATES[selectedState].flag}</span>
+        <span class="state-name">{STATES[selectedState].name}</span>
+        <span class="state-chevron">▾</span>
+      </button>
+      {#if stateMenuOpen}
+        <ul class="state-menu" role="listbox">
+          {#each Object.entries(STATES) as [po, info]}
+            <li
+              role="option"
+              aria-selected={po === selectedState}
+              class:active={po === selectedState}
+              onclick={() => selectState(po)}
+            >{info.name}</li>
+          {/each}
+        </ul>
+      {/if}
     </div>
 
   </header>
 
   <main>
     <div class="map-wrap" style:margin-bottom="{mapPanelBottom}px">
-      <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} />
+      {#key selectedState}
+        <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} />
+      {/key}
     </div>
 
     {#if panelPosition === 'side'}
@@ -216,11 +265,11 @@
             <p class="note">{displayStats.notes ? `ⓘ ${displayStats.notes}` : ''}</p>
           </section>
 
-          {#if CYCLE_EVENTS[displayYear]?.length}
+          {#if CYCLE_EVENTS[selectedState]?.[displayYear]?.length}
             <details class="events-section" open>
               <summary>Key events</summary>
               <ul class="events">
-                {#each [...CYCLE_EVENTS[displayYear]].reverse() as ev}
+                {#each [...CYCLE_EVENTS[selectedState]?.[displayYear]].reverse() as ev}
                   <li>
                     <strong>
                       {#if ev.url}
@@ -339,9 +388,9 @@
 
             <div class="bottom-pane">
               <p class="bottom-pane-label">Key events</p>
-              {#if CYCLE_EVENTS[displayYear]?.length}
+              {#if CYCLE_EVENTS[selectedState]?.[displayYear]?.length}
                 <ul class="events">
-                  {#each [...CYCLE_EVENTS[displayYear]].reverse() as ev}
+                  {#each [...CYCLE_EVENTS[selectedState]?.[displayYear]].reverse() as ev}
                     <li>
                       <strong>
                         {#if ev.url}
@@ -395,6 +444,8 @@
   .tagline { margin: 0; font-size: 0.72rem; opacity: 0.45; letter-spacing: 0.01em; }
   .version { opacity: 0.45; font-size: 0.65rem; margin-left: 0.4rem; }
 
+  .state-selector-wrap { position: relative; }
+
   .state-selector {
     display: flex;
     align-items: center;
@@ -403,13 +454,43 @@
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 20px;
-    cursor: default;
+    cursor: pointer;
     transition: background 0.15s;
+    color: #fff;
+    font-size: 0.85rem;
+    font-family: inherit;
   }
-  .state-selector:hover { background: rgba(255,255,255,0.12); }
+  .state-selector:hover, .state-selector.open { background: rgba(255,255,255,0.14); }
   .state-icon { font-size: 0.7rem; opacity: 0.6; }
-  .state-name { font-size: 0.85rem; font-weight: 600; }
+  .state-name { font-weight: 600; }
   .state-chevron { font-size: 0.6rem; opacity: 0.4; }
+
+  .state-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: #1a1a2e;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0.3rem 0;
+    min-width: 100%;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    overflow: hidden;
+  }
+  .state-menu li {
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.1s, color 0.1s;
+  }
+  .state-menu li:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .state-menu li.active { color: #fff; font-weight: 700; }
 
   .sticky-controls-header {
     display: flex;

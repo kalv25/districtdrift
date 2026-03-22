@@ -6,13 +6,20 @@
   import { Protocol } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0 }: {
+  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI' }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;
+    statePo?: string;
   } = $props();
 
-  const MI_BOUNDS: maplibregl.LngLatBoundsLike = [[-90.5, 41.7], [-82.1, 48.3]];
+  const stateL = statePo.toLowerCase();
+
+  const STATE_VIEW: Record<string, { bounds: maplibregl.LngLatBoundsLike; center: [number, number]; zoom: number }> = {
+    MI: { bounds: [[-90.5, 41.7], [-82.1, 48.3]], center: [-84.5, 44.5], zoom: 5.5 },
+    NC: { bounds: [[-84.3, 33.8], [-75.5, 36.6]], center: [-79.9, 35.2], zoom: 6.2 },
+  };
+  const stateView = STATE_VIEW[statePo] ?? STATE_VIEW['MI'];
 
   const FILL_COLOR = [
     'case',
@@ -72,7 +79,7 @@
 
   async function loadGeo(year: number): Promise<GeoJSON.FeatureCollection> {
     if (geoCache.has(year)) return geoCache.get(year)!;
-    const res = await fetch(`/geo/mi_${year}.geojson`);
+    const res = await fetch(`/geo/${stateL}_${year}.geojson`);
     if (!res.ok) throw new Error(`geo load failed: ${res.status}`);
     const fc = await res.json() as GeoJSON.FeatureCollection;
     geoCache.set(year, fc);
@@ -313,9 +320,9 @@
     requestAnimationFrame(() => {
       map.resize();
       if (pb > 0) {
-        map.fitBounds(MI_BOUNDS, { padding: 40, duration: 700, essential: true });
+        map.fitBounds(stateView.bounds, { padding: 40, duration: 700, essential: true });
       } else {
-        map.flyTo({ center: [-84.5, 44.5], zoom: 5.5, duration: 700, essential: true });
+        map.flyTo({ center: stateView.center, zoom: stateView.zoom, duration: 700, essential: true });
       }
     });
   });
@@ -342,16 +349,16 @@
         },
         layers: [{ id: 'basemap', type: 'raster', source: 'carto-light' }],
       },
-      center: [-84.5, 44.5],
-      zoom: 5.5,
+      center: stateView.center,
+      zoom: stateView.zoom,
     });
 
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
     map.on('load', () => {
-      map.addSource('mi-districts', {
+      map.addSource('state-districts', {
         type: 'vector',
-        url: 'pmtiles:///tiles/mi_districts.pmtiles',
+        url: `pmtiles:///tiles/${stateL}_districts.pmtiles`,
       });
 
       const emptyFC: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] };
@@ -362,8 +369,8 @@
       map.addLayer({
         id: 'districts-fill-back',
         type: 'fill',
-        source: 'mi-districts',
-        'source-layer': 'mi_districts',
+        source: 'state-districts',
+        'source-layer': `${stateL}_districts`,
         filter: ['==', ['get', 'cycle_year'], selectedYear],
         paint: {
           'fill-color': FILL_COLOR,
@@ -376,8 +383,8 @@
       map.addLayer({
         id: 'districts-fill-front',
         type: 'fill',
-        source: 'mi-districts',
-        'source-layer': 'mi_districts',
+        source: 'state-districts',
+        'source-layer': `${stateL}_districts`,
         filter: ['==', ['get', 'cycle_year'], selectedYear],
         paint: {
           'fill-color': FILL_COLOR,
@@ -432,8 +439,8 @@
       map.addLayer({
         id: 'districts-hover',
         type: 'fill',
-        source: 'mi-districts',
-        'source-layer': 'mi_districts',
+        source: 'state-districts',
+        'source-layer': `${stateL}_districts`,
         filter: ['==', ['get', 'cycle_year'], selectedYear],
         paint: {
           'fill-color': '#000',
@@ -444,15 +451,15 @@
       map.on('mousemove', 'districts-fill-front', (e) => {
         if (!e.features?.length) return;
         if (hoveredId !== undefined)
-          map.setFeatureState({ source: 'mi-districts', sourceLayer: 'mi_districts', id: hoveredId }, { hover: false });
+          map.setFeatureState({ source: 'state-districts', sourceLayer: `${stateL}_districts`, id: hoveredId }, { hover: false });
         hoveredId = e.features[0].id;
-        map.setFeatureState({ source: 'mi-districts', sourceLayer: 'mi_districts', id: hoveredId }, { hover: true });
+        map.setFeatureState({ source: 'state-districts', sourceLayer: `${stateL}_districts`, id: hoveredId }, { hover: true });
         map.getCanvas().style.cursor = 'pointer';
       });
 
       map.on('mouseleave', 'districts-fill-front', () => {
         if (hoveredId !== undefined)
-          map.setFeatureState({ source: 'mi-districts', sourceLayer: 'mi_districts', id: hoveredId }, { hover: false });
+          map.setFeatureState({ source: 'state-districts', sourceLayer: `${stateL}_districts`, id: hoveredId }, { hover: false });
         hoveredId = undefined;
         map.getCanvas().style.cursor = '';
       });

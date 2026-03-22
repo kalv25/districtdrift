@@ -1,4 +1,4 @@
-"""Download raw data for the Michigan redistricting pipeline.
+"""Download raw data for the redistricting pipeline.
 
 Data sources:
   1. Congressional district boundaries — NHGIS via IPUMS API
@@ -10,9 +10,11 @@ Data sources:
      Dataset: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IG0UN2
 
 Usage:
-  uv run python -m pipeline.download
+  uv run python -m pipeline.download          # downloads boundaries for all configured states
+  uv run python -m pipeline.download --state NC
 """
 
+import argparse
 import io
 import os
 import re
@@ -28,12 +30,13 @@ from pathlib import Path
 import requests
 
 from .config import (
-    CYCLES,
+    ALL_SHAPEFILE_IDS,
     MIT_ELECTIONS_DOI,
     MIT_ELECTIONS_FILENAME,
     NHGIS_API_BASE,
     NHGIS_API_VERSION,
     RAW_DIR,
+    STATES,
 )
 
 RAW = Path(RAW_DIR)
@@ -61,15 +64,12 @@ def list_nhgis_shapefiles(api_key: str) -> list[dict]:
     return resp.json()
 
 
-def submit_nhgis_extract(api_key: str) -> str:
-    """Submit a shapefile extract for all Michigan redistricting cycles.
+def submit_nhgis_extract(api_key: str, shapefile_ids: list[str]) -> str:
+    """Submit a shapefile extract for the given shapefile IDs.
 
     Returns the extract ID to poll with wait_for_nhgis_extract().
     """
-    shapefile_ids = [meta["shapefile_id"] for meta in CYCLES.values()]
-    payload = {
-        "shapefiles": shapefile_ids,
-    }
+    payload = {"shapefiles": shapefile_ids}
     url = _nhgis_url("/extracts/")
     resp = requests.post(url, json=payload, headers=_nhgis_headers(api_key), timeout=30)
     if not resp.ok:
@@ -103,19 +103,27 @@ def wait_for_nhgis_extract(api_key: str, extract_id: str, poll_seconds: int = 15
         time.sleep(poll_seconds)
 
 
-def _extract_inner_zips() -> None:
-    """Extract any inner shapefile ZIPs under BOUNDARIES_DIR into cd{congress} dirs.
+def _congress_from_shapefile_id(shapefile_id: str) -> int | None:
+    """Parse congress number from a shapefile ID like 'us_cd108th_2000_tl2010'."""
+    m = re.search(r"cd(\d+)", shapefile_id)
+    return int(m.group(1)) if m else None
+
+
+def _extract_inner_zips(shapefile_ids: list[str]) -> None:
+    """Extract inner shapefile ZIPs under BOUNDARIES_DIR into cd{congress} dirs.
 
     NHGIS outer ZIPs contain one inner ZIP per shapefile, named like:
       nhgis0005_shapefile_tl2000_us_cd103rd_1990.zip
-    We parse the congress number from the filename with a regex.
     """
     inner_zips = list(BOUNDARIES_DIR.rglob("nhgis*_shapefile_*.zip"))
     if not inner_zips:
         print("  WARNING: no inner shapefile ZIPs found under boundaries/")
         return
-    # Use the latest extract's ZIPs (highest nhgis number) to avoid duplicates
-    latest = sorted(inner_zips, key=lambda p: p.name)[-len(CYCLES):]
+
+    # Keep only the most recent extract's ZIPs (highest nhgis number) to avoid
+    # duplicates when the same shapefile_id appears multiple times.
+    n = len(shapefile_ids)
+    latest = sorted(inner_zips, key=lambda p: p.name)[-n:]
     for zip_path in sorted(latest):
         m = re.search(r"cd(\d+)", zip_path.name)
         if not m:
@@ -131,15 +139,16 @@ def _extract_inner_zips() -> None:
         print(f"  Extracted cd{congress} → {dst_dir}")
 
 
-def download_nhgis_boundaries(api_key: str) -> None:
-    """Download NHGIS congressional district shapefiles for all MI cycles."""
+def download_nhgis_boundaries(api_key: str, shapefile_ids: list[str]) -> None:
+    """Download NHGIS congressional district shapefiles for the given shapefile IDs."""
     BOUNDARIES_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Check if all cycles already extracted
-    all_present = all(
-        (BOUNDARIES_DIR / f"cd{meta['congress']}").exists()
-        for meta in CYCLES.values()
-    )
+    # Determine which congress dirs are needed
+    congress_numbers = [_congress_from_shapefile_id(sid) for sid in shapefile_ids]
+    needed = [c for c in congress_numbers if c is not None]
+
+    # Check if all needed congress dirs already exist
+    all_present = all((BOUNDARIES_DIR / f"cd{c}").exists() for c in needed)
     if all_present:
         print("  NHGIS boundaries already extracted, skipping.")
         return
@@ -147,10 +156,10 @@ def download_nhgis_boundaries(api_key: str) -> None:
     # If inner ZIPs already downloaded from a prior run, extract without re-downloading
     if list(BOUNDARIES_DIR.rglob("nhgis*_shapefile_*.zip")):
         print("  Inner ZIPs found on disk, extracting without re-downloading...")
-        _extract_inner_zips()
+        _extract_inner_zips(shapefile_ids)
         return
 
-    extract_id = submit_nhgis_extract(api_key)
+    extract_id = submit_nhgis_extract(api_key, shapefile_ids)
     download_url = wait_for_nhgis_extract(api_key, extract_id)
 
     print(f"  Downloading boundaries ZIP from NHGIS...")
@@ -163,12 +172,12 @@ def download_nhgis_boundaries(api_key: str) -> None:
     outer.extractall(BOUNDARIES_DIR)
 
     # Now extract all inner ZIPs found anywhere under BOUNDARIES_DIR.
-    _extract_inner_zips()
+    _extract_inner_zips(shapefile_ids)
     print(f"  Saved boundaries to {BOUNDARIES_DIR}")
 
 
 # ---------------------------------------------------------------------------
-# MIT Election Lab — US House returns 1976–2022
+# MIT Election Lab — US House returns 1976–2024
 # ---------------------------------------------------------------------------
 
 def _dataverse_file_id(doi: str, filename: str) -> int:
@@ -214,7 +223,31 @@ def download_mit_elections() -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    print("=== Downloading Michigan redistricting data ===\n")
+    parser = argparse.ArgumentParser(description="Download redistricting source data")
+    parser.add_argument(
+        "--state", default=None,
+        help="State postal code (e.g. MI, NC). Defaults to all configured states.",
+    )
+    args = parser.parse_args()
+
+    if args.state:
+        state_key = args.state.upper()
+        if state_key not in STATES:
+            print(f"ERROR: Unknown state '{args.state}'. Known: {list(STATES)}")
+            sys.exit(1)
+        states_to_download = {state_key: STATES[state_key]}
+    else:
+        states_to_download = STATES
+
+    # Collect unique shapefile IDs across all requested states
+    shapefile_ids = list({
+        meta["shapefile_id"]
+        for state in states_to_download.values()
+        for meta in state["cycles"].values()
+    })
+
+    state_names = ", ".join(s["name"] for s in states_to_download.values())
+    print(f"=== Downloading redistricting data ({state_names}) ===\n")
 
     # --- Congressional district boundaries (NHGIS) ---
     api_key = os.getenv("NHGIS_API_KEY", "").strip()
@@ -227,8 +260,8 @@ def main() -> None:
         sys.exit(1)
 
     print(f"  API key loaded: {len(api_key)} chars, starts with '{api_key[:4]}...'")
-    print("[1/2] Congressional district boundaries (NHGIS)...")
-    download_nhgis_boundaries(api_key)
+    print(f"[1/2] Congressional district boundaries (NHGIS) — {len(shapefile_ids)} shapefiles...")
+    download_nhgis_boundaries(api_key, shapefile_ids)
 
     # --- Election returns (MIT Election Lab) ---
     print("\n[2/2] US House election returns (MIT Election Lab)...")

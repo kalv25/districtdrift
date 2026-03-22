@@ -1,26 +1,92 @@
-"""Shared constants for the Michigan redistricting pipeline."""
+"""Shared configuration for the redistricting data pipeline.
 
-# Michigan FIPS state code
-MI_FIPS = "26"
-MI_STATE_PO = "MI"
+Each state entry contains:
+  fips   — two-digit Census state FIPS code
+  crs    — projected CRS for accurate area/perimeter calculations
+  cycles — redistricting cycles keyed by first election year
+             congress              : Congress number drawn under those maps
+             shapefile_id          : NHGIS national shapefile ID (same across states)
+             seats                 : congressional seat count
+             redistricting_controller
+             notes (optional)      : litigation / special circumstances
+"""
 
-# Congressional election years and their redistricting cycle
-# Each maps to: the Congress number drawn under that cycle's maps
-CYCLES = {
-    1992: {"congress": 103, "shapefile_id": "us_cd103rd_1990_tl2000", "seats": 16,
-           "redistricting_controller": "Republican"},
-    2002: {"congress": 108, "shapefile_id": "us_cd108th_2000_tl2010", "seats": 15,
-           "redistricting_controller": "Split (Dem governor, Rep legislature)"},
-    2012: {"congress": 113, "shapefile_id": "us_cd113th_2012_tl2012", "seats": 14,
-           "redistricting_controller": "Republican",
-           "notes": "2011 maps subject to litigation; remedial maps used in 2020 only"},
-    2022: {"congress": 118, "shapefile_id": "us_cd118th_2022_tl2022", "seats": 13,
-           "redistricting_controller": "Independent Commission (MICRC)",
-           "notes": "Proposal 2 (2018) created the Michigan Independent Citizens Redistricting Commission"},
+STATES: dict[str, dict] = {
+    "MI": {
+        "name": "Michigan",
+        "fips": "26",
+        "crs": "EPSG:6493",   # Michigan GeoRef
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 16,
+                "redistricting_controller": "Republican",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 15,
+                "redistricting_controller": "Split (Dem governor, Rep legislature)",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 14,
+                "redistricting_controller": "Republican",
+                "notes": "2011 maps subject to litigation; remedial maps used in 2020 only",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 13,
+                "redistricting_controller": "Independent Commission (MICRC)",
+                "notes": "Proposal 2 (2018) created the Michigan Independent Citizens Redistricting Commission",
+            },
+        },
+    },
+    "NC": {
+        "name": "North Carolina",
+        "fips": "37",
+        "crs": "EPSG:32119",  # NC State Plane (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 12,
+                "redistricting_controller": "Democrat",
+                "notes": "Shaw v. Reno (1993) challenged majority-minority district shapes; maps redrawn multiple times through decade",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 13,
+                "redistricting_controller": "Democrat",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 13,
+                "redistricting_controller": "Republican",
+                "notes": "Cooper v. Harris (2017) struck 2 districts as racial gerrymanders; Rucho v. Common Cause (2019) blocked federal partisan gerrymandering review",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 14,
+                "redistricting_controller": "Republican",
+                "notes": "Harper v. Hall: NC Supreme Court struck maps, then reversed after court composition changed; new maps enacted 2023",
+            },
+        },
+    },
 }
 
-# CRS for accurate area/perimeter calculations (Michigan GeoRef)
-MICHIGAN_CRS = "EPSG:6493"
+# NHGIS shapefile IDs needed (de-duplicated across all states)
+ALL_SHAPEFILE_IDS = list({
+    meta["shapefile_id"]
+    for state in STATES.values()
+    for meta in state["cycles"].values()
+})
 
 # MIT Election Lab US House returns — Harvard Dataverse
 MIT_ELECTIONS_DOI = "doi:10.7910/DVN/IG0UN2"
@@ -34,3 +100,11 @@ NHGIS_API_VERSION = "v1"
 RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
 TILES_DIR = "tiles"
+
+
+def get_state(state_po: str) -> dict:
+    """Return state config for the given postal abbreviation (e.g. 'MI', 'NC')."""
+    key = state_po.upper()
+    if key not in STATES:
+        raise ValueError(f"Unknown state '{state_po}'. Known states: {list(STATES)}")
+    return STATES[key]

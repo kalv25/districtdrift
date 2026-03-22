@@ -1,0 +1,84 @@
+{
+  "state": "North Carolina",
+  "fips": "37",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 12,
+      "redistricting_controller": "Democrat",
+      "notes": "Shaw v. Reno (1993) challenged majority-minority district shapes; maps redrawn multiple times through decade",
+      "efficiency_gap": -0.0966,
+      "mean_median_diff": -0.0266,
+      "seats_d": 8,
+      "seats_r": 4,
+      "votes_d": 1282474,
+      "votes_r": 1203983,
+      "seat_vote_ratio_d": 1.2925
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 13,
+      "redistricting_controller": "Democrat",
+      "notes": "",
+      "efficiency_gap": -0.0662,
+      "mean_median_diff": -0.0134,
+      "seats_d": 6,
+      "seats_r": 7,
+      "votes_d": 970716,
+      "votes_r": 1209033,
+      "seat_vote_ratio_d": 1.0364
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 13,
+      "redistricting_controller": "Republican",
+      "notes": "Cooper v. Harris (2017) struck 2 districts as racial gerrymanders; Rucho v. Common Cause (2019) blocked federal partisan gerrymandering review",
+      "efficiency_gap": 0.2137,
+      "mean_median_diff": 0.0784,
+      "seats_d": 4,
+      "seats_r": 9,
+      "votes_d": 2218357,
+      "votes_r": 2137167,
+      "seat_vote_ratio_d": 0.6041
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 14,
+      "redistricting_controller": "Republican",
+      "notes": "Harper v. Hall: NC Supreme Court struck maps, then reversed after court composition changed; new maps enacted 2023",
+      "efficiency_gap": -0.0386,
+      "mean_median_diff": -0.0066,
+      "seats_d": 7,
+      "seats_r": 7,
+      "votes_d": 1795170,
+      "votes_r": 1956906,
+      "seat_vote_ratio_d": 1.045
+    }
+  ]
+}

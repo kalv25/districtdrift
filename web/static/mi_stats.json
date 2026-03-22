@@ -2,10 +2,26 @@
   "state": "Michigan",
   "fips": "26",
   "credits": [
-    {"label": "Redistricting Data Hub", "url": "https://redistrictingdatahub.org", "note": "precinct election results & shapefiles"},
-    {"label": "NHGIS", "url": "https://www.nhgis.org", "note": "congressional district boundaries"},
-    {"label": "Princeton Gerrymandering Project", "url": "https://gerrymander.princeton.edu", "note": "partisan scores"},
-    {"label": "US Census TIGER", "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html", "note": "base geography"}
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
   ],
   "cycles": [
     {
