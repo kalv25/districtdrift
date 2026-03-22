@@ -176,7 +176,7 @@
   <header>
     <div class="brand">
       <h1>District<span class="accent">Drift</span></h1>
-      <p class="tagline">Three decades of congressional redistricting</p>
+      <p class="tagline">Three decades of congressional redistricting <span class="version">v{__APP_VERSION__}</span></p>
     </div>
 
     <div class="state-selector" title="More states coming soon">
@@ -185,13 +185,6 @@
       <span class="state-chevron">▾</span>
     </div>
 
-    <button
-      class="icon-btn"
-      title={panelPosition === 'side' ? 'Switch to bottom panel' : 'Switch to side panel'}
-      onclick={() => panelPosition = panelPosition === 'side' ? 'bottom' : 'side'}
-    >
-      {panelPosition === 'side' ? '⬇' : '➡'}
-    </button>
   </header>
 
   <main>
@@ -202,7 +195,14 @@
     {#if panelPosition === 'side'}
       <aside class="panel side">
         <section class="sticky-controls">
-          <h2>Redistricting cycle</h2>
+          <div class="sticky-controls-header">
+            <h2>Redistricting cycle</h2>
+            <button
+              class="panel-toggle-btn"
+              title="Switch to bottom panel"
+              onclick={() => panelPosition = 'bottom'}
+            >⬇</button>
+          </div>
           {@render cycleControls()}
         </section>
 
@@ -308,6 +308,11 @@
           {:else}
             <span class="bottom-year">{selectedYear}</span>
           {/if}
+          <button
+            class="panel-toggle-btn"
+            title="Switch to side panel"
+            onclick={() => panelPosition = 'side'}
+          >➡</button>
         </div>
 
         <div class="bottom-hr"></div>
@@ -388,6 +393,7 @@
   h1 { margin: 0; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
   .accent { color: #e05c5c; }
   .tagline { margin: 0; font-size: 0.72rem; opacity: 0.45; letter-spacing: 0.01em; }
+  .version { opacity: 0.45; font-size: 0.65rem; margin-left: 0.4rem; }
 
   .state-selector {
     display: flex;
@@ -405,19 +411,34 @@
   .state-name { font-size: 0.85rem; font-weight: 600; }
   .state-chevron { font-size: 0.6rem; opacity: 0.4; }
 
-  .icon-btn {
-    margin-left: auto;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #fff;
-    border-radius: 4px;
-    padding: 0.3rem 0.65rem;
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
-    transition: background 0.15s;
+  .sticky-controls-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.35rem;
   }
-  .icon-btn:hover { background: rgba(255,255,255,0.15); }
+  .sticky-controls-header h2 { margin: 0; }
+
+  .panel-toggle-btn {
+    background: transparent;
+    border: 1px solid #ddd;
+    color: #999;
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    line-height: 1;
+    transition: background 0.15s, color 0.15s;
+  }
+  .panel-toggle-btn:hover { background: #f0f0f0; color: #555; }
+  .panel.bottom .panel-toggle-btn {
+    border-color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.5);
+  }
+  .panel.bottom .panel-toggle-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.9);
+  }
 
   main { flex: 1; display: flex; min-height: 0; position: relative; }
   .map-wrap { flex: 1; min-width: 0; transition: margin-bottom 0.4s ease; }

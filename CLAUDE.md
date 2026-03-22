@@ -7,6 +7,7 @@ at every level: national, state, congressional district, and precinct.
 
 Domain: districtdrift.org (.org signals nonprofit/public interest)
 Status: Michigan fully implemented; ready to expand to additional states.
+Version: CalVer — `YYYY.M.D` format (e.g. `2026.3.22`). Set in `web/package.json` and `pyproject.toml`; injected into the frontend via `vite.config.ts` as `__APP_VERSION__`; displayed in the header tagline and stamped into `<meta name="version">` via `+layout.svelte`.
 
 ---
 

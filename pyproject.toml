@@ -1,6 +1,6 @@
 [project]
 name = "districtdrift"
-version = "0.1.0"
+version = "2026.3.22"
 description = "Historical gerrymandering data pipeline for districtdrift.org"
 requires-python = ">=3.14"
 dependencies = [

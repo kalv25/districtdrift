@@ -6,6 +6,8 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<meta name="version" content={__APP_VERSION__} />
+	<meta name="generator" content="districtdrift {__APP_VERSION__}" />
 </svelte:head>
 
 {@render children()}
