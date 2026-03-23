@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { geoAlbersUsa, geoPath } from 'd3-geo';
+  import { geoAlbersUsa, geoPath, geoCentroid } from 'd3-geo';
   import * as topojson from 'topojson-client';
   import type { Topology } from 'topojson-specification';
 
@@ -21,17 +21,20 @@
     selectedYear,
     onStateClick,
     fullDataStates = [],
+    animating = false,
+    onToggleAnimation,
   }: {
     selectedYear: number;
     onStateClick: (po: string) => void;
     fullDataStates?: string[];
+    animating?: boolean;
+    onToggleAnimation?: () => void;
   } = $props();
 
   function hasFullData(po: string): boolean {
     return fullDataStates.includes(po);
   }
 
-  // Fetch nation stats and US TopoJSON in parallel on mount
   let nationData = $state<StateData[]>([]);
   let topology = $state<Topology | null>(null);
   let loading = $state(true);
@@ -39,7 +42,6 @@
   onMount(async () => {
     const [statsRes, topoRes] = await Promise.all([
       fetch('/nation_stats.json'),
-      // us-atlas 10m TopoJSON served from node_modules via Vite
       import('us-atlas/states-10m.json'),
     ]);
     const stats = await statsRes.json();
@@ -48,7 +50,7 @@
     loading = false;
   });
 
-  // ── Map geometry ─────────────────────────────────────────────────────────────
+  // ── Map geometry ──────────────────────────────────────────────────────────────
 
   let container = $state<HTMLDivElement | null>(null);
   let svgW = $state(800);
@@ -65,7 +67,6 @@
     return () => ro.disconnect();
   });
 
-  // AlbersUSA default frame is 960×600; scale and translate to fit container.
   const projection = $derived(
     geoAlbersUsa()
       .scale(Math.min(svgW / 960, svgH / 600) * 1000)
@@ -73,18 +74,21 @@
   );
   const pathGen = $derived(geoPath(projection));
 
-  type StatePath = { po: string; d: string | null };
+  type StatePath = { po: string; d: string | null; cx: number | null; cy: number | null; area: number };
   const statePaths: StatePath[] = $derived(
     topology
       ? (topojson.feature(topology, (topology as any).objects.states) as unknown as GeoJSON.FeatureCollection)
-          .features.map(f => ({
-            po: fipsToPostal(f.id as string | number),
-            d: pathGen(f),
-          }))
+          .features.map(f => {
+            const po = fipsToPostal(f.id as string | number);
+            const d = pathGen(f);
+            const c = projection(geoCentroid(f));
+            const area = pathGen.area(f);
+            return { po, d, cx: c ? c[0] : null, cy: c ? c[1] : null, area };
+          })
       : []
   );
 
-  // FIPS (numeric state id from us-atlas) → postal code
+  // FIPS → postal
   const FIPS_TO_POSTAL: Record<string, string> = {
     '01':'AL','02':'AK','04':'AZ','05':'AR','06':'CA','08':'CO','09':'CT',
     '10':'DE','12':'FL','13':'GA','15':'HI','16':'ID','17':'IL','18':'IN',
@@ -101,13 +105,12 @@
     return FIPS_TO_POSTAL[s] ?? '';
   }
 
-  // ── EG color scale ───────────────────────────────────────────────────────────
-  // positive EG = R-favoring (red), negative EG = D-favoring (blue)
+  // ── EG color scale ────────────────────────────────────────────────────────────
 
   function egColor(eg: number | null | undefined, active = true): string {
-    if (eg === null || eg === undefined) return active ? '#c8c8c8' : '#e8e8e8';
+    if (eg === null || eg === undefined) return active ? '#c8c8c8' : '#e0e0e0';
     const abs = Math.abs(eg);
-    const t = Math.min(1, abs / 0.25); // saturates at ±25%
+    const t = Math.min(1, abs / 0.25);
     if (active) {
       if (eg > 0.02)  return interpolateRed(t);
       if (eg < -0.02) return interpolateBlue(t);
@@ -120,7 +123,6 @@
   }
 
   function interpolateRed(t: number): string {
-    // light pink → deep red
     const r = Math.round(220 + (180 - 220) * t);
     const g = Math.round(150 + (30  - 150) * t);
     const b = Math.round(150 + (30  - 150) * t);
@@ -128,7 +130,6 @@
   }
 
   function interpolateBlue(t: number): string {
-    // light blue → deep blue
     const r = Math.round(150 + (25  - 150) * t);
     const g = Math.round(190 + (80  - 190) * t);
     const b = Math.round(220 + (180 - 220) * t);
@@ -137,13 +138,10 @@
 
   // ── State data lookup ─────────────────────────────────────────────────────────
 
-  const byPo = $derived(
-    Object.fromEntries(nationData.map(s => [s.state_po, s]))
-  );
+  const byPo = $derived(Object.fromEntries(nationData.map(s => [s.state_po, s])));
 
   function getEg(po: string): number | null {
-    const cycle = byPo[po]?.cycles.find(c => c.year === selectedYear);
-    return cycle?.efficiency_gap ?? null;
+    return byPo[po]?.cycles.find(c => c.year === selectedYear)?.efficiency_gap ?? null;
   }
 
   function getStateName(po: string): string {
@@ -154,7 +152,18 @@
     return byPo[po]?.cycles.find(c => c.year === selectedYear) ?? null;
   }
 
-  // ── Tooltip ──────────────────────────────────────────────────────────────────
+  // ── National totals ───────────────────────────────────────────────────────────
+
+  const nationalTotals = $derived((() => {
+    let d = 0, r = 0, total = 0;
+    for (const s of nationData) {
+      const c = s.cycles.find(cy => cy.year === selectedYear);
+      if (c) { d += c.seats_d; r += c.seats_r; total += c.seats; }
+    }
+    return { d, r, total };
+  })());
+
+  // ── Tooltip ───────────────────────────────────────────────────────────────────
 
   let hovered = $state<{ po: string; x: number; y: number } | null>(null);
 
@@ -162,26 +171,35 @@
     hovered = { po, x: e.offsetX, y: e.offsetY };
   }
 
-  // ── Rank list ────────────────────────────────────────────────────────────────
+  // ── Rank list ─────────────────────────────────────────────────────────────────
 
-  const ranked: { po: string; name: string; eg: number }[] = $derived(
+  const ranked = $derived(
     nationData
       .map(s => ({ po: s.state_po, name: s.state_name, eg: getEg(s.state_po) }))
       .filter(s => s.eg !== null)
-      .sort((a, b) => b.eg! - a.eg!) as { po: string; name: string; eg: number }[]
+      .sort((a, b) => (b.eg ?? 0) - (a.eg ?? 0)) as { po: string; name: string; eg: number }[]
   );
 
   function egLabel(eg: number | null): string {
     if (eg === null) return '—';
     const pct = (Math.abs(eg) * 100).toFixed(1);
     if (Math.abs(eg) < 0.02) return '≈ neutral';
-    return eg > 0 ? `+${pct}% R` : `-${pct}% D`;
+    return eg > 0 ? `+${pct}% R` : `−${pct}% D`;
   }
 
   function voteShareLabel(c: CycleStat): string {
     const total = c.votes_d + c.votes_r;
     if (!total) return '—';
     return ((c.votes_d / total) * 100).toFixed(1) + '% D';
+  }
+
+  function seatGapLabel(c: CycleStat): string {
+    const total = c.votes_d + c.votes_r;
+    if (!total || !c.seats) return '—';
+    const voteShareD = c.votes_d / total;
+    const seatShareD = c.seats_d / c.seats;
+    const gap = (seatShareD - voteShareD) * 100;
+    return (gap >= 0 ? '+' : '') + gap.toFixed(1) + '% seat gap';
   }
 </script>
 
@@ -190,7 +208,8 @@
     <div class="loading">Loading map…</div>
   {:else}
     <svg width={svgW} height={svgH} class="nation-svg">
-      {#each statePaths as { po, d }}
+      <!-- State fills -->
+      {#each statePaths as { po, d, cx, cy, area }}
         {#if d && po}
           {@const eg = getEg(po)}
           {@const full = hasFullData(po)}
@@ -212,21 +231,59 @@
           />
         {/if}
       {/each}
+
+      <!-- State abbreviation labels (only for states large enough) -->
+      {#each statePaths as { po, cx, cy, area }}
+        {#if po && cx !== null && cy !== null && area > 400}
+          <text
+            x={cx}
+            y={cy}
+            text-anchor="middle"
+            dominant-baseline="middle"
+            font-size={area > 2000 ? '9' : '7.5'}
+            font-weight="600"
+            fill="rgba(0,0,0,0.55)"
+            pointer-events="none"
+            class="state-label"
+          >{po}</text>
+        {/if}
+      {/each}
     </svg>
 
     <!-- Tooltip -->
     {#if hovered}
       {@const c = getCycle(hovered.po)}
       {@const full = hasFullData(hovered.po)}
+      {@const tooltipRight = hovered.x > svgW * 0.65}
       <div
         class="map-tooltip"
-        style="left:{hovered.x + 14}px; top:{hovered.y}px"
+        class:flip-left={tooltipRight}
+        style="left:{hovered.x + (tooltipRight ? -14 : 14)}px; top:{hovered.y}px"
       >
         <strong>{getStateName(hovered.po)}</strong>
         {#if c}
-          <span>EG: {egLabel(c.efficiency_gap)}</span>
-          <span>{c.seats_d}D / {c.seats_r}R of {c.seats}</span>
-          <span>D votes: {voteShareLabel(c)}</span>
+          <span class="tt-row">
+            <span class="tt-label">Efficiency gap</span>
+            <span class="tt-val">{egLabel(c.efficiency_gap)}</span>
+          </span>
+          <span class="tt-row">
+            <span class="tt-label">Seats</span>
+            <span class="tt-val">{c.seats_d}D / {c.seats_r}R of {c.seats}</span>
+          </span>
+          <span class="tt-row">
+            <span class="tt-label">D vote share</span>
+            <span class="tt-val">{voteShareLabel(c)}</span>
+          </span>
+          {#if c.mean_median_diff !== null}
+            <span class="tt-row">
+              <span class="tt-label">Mean–median</span>
+              <span class="tt-val">{c.mean_median_diff > 0 ? '+' : ''}{(c.mean_median_diff * 100).toFixed(1)}%</span>
+            </span>
+          {/if}
+          <span class="tt-row">
+            <span class="tt-label">Seat gap</span>
+            <span class="tt-val">{seatGapLabel(c)}</span>
+          </span>
         {:else}
           <span>No election data</span>
         {/if}
@@ -248,25 +305,47 @@
       </div>
     </div>
 
-    <!-- Side panel: ranked list -->
+    <!-- Rank panel -->
     <div class="rank-panel">
-      <p class="rank-heading">Most gerrymandered — {selectedYear}</p>
+      <p class="rank-heading">National — {selectedYear}</p>
+      <div class="national-totals">
+        <span class="nt-d">{nationalTotals.d}D</span>
+        <span class="nt-sep">/</span>
+        <span class="nt-r">{nationalTotals.r}R</span>
+        <span class="nt-of">of {nationalTotals.total}</span>
+      </div>
+
+      <div class="rank-section-label r-label">Most R-favoring</div>
       <div class="rank-list">
-        {#each ranked.slice(0, 5) as s}
-          <button class="rank-row r-row" onclick={() => onStateClick(s.po)}>
+        {#each ranked.slice(0, 7) as s}
+          {@const full = hasFullData(s.po)}
+          <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}>
             <span class="rank-state">{s.po}</span>
-            <span class="rank-eg" style="color: {egColor(s.eg)}">{egLabel(s.eg)}</span>
-          </button>
-        {/each}
-        <div class="rank-divider"></div>
-        {#each [...ranked].reverse().slice(0, 5) as s}
-          <button class="rank-row d-row" onclick={() => onStateClick(s.po)}>
-            <span class="rank-state">{s.po}</span>
-            <span class="rank-eg" style="color: {egColor(s.eg)}">{egLabel(s.eg)}</span>
+            <span class="rank-name">{s.name}</span>
+            <span class="rank-eg rank-eg-r">{egLabel(s.eg)}</span>
           </button>
         {/each}
       </div>
-      <p class="rank-note">Click any state to explore</p>
+
+      <div class="rank-divider"></div>
+
+      <div class="rank-section-label d-label">Most D-favoring</div>
+      <div class="rank-list">
+        {#each [...ranked].reverse().slice(0, 7) as s}
+          {@const full = hasFullData(s.po)}
+          <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}>
+            <span class="rank-state">{s.po}</span>
+            <span class="rank-name">{s.name}</span>
+            <span class="rank-eg rank-eg-d">{egLabel(s.eg)}</span>
+          </button>
+        {/each}
+      </div>
+
+      {#if onToggleAnimation}
+        <button class="rank-play" class:playing={animating} onclick={onToggleAnimation} title={animating ? 'Pause' : 'Animate cycles'}>
+          {animating ? '⏸ Pause' : '▶ Animate'}
+        </button>
+      {/if}
     </div>
   {/if}
 </div>
@@ -296,35 +375,47 @@
   .state-path {
     cursor: default;
     transition: opacity 0.15s;
+    stroke-width: 0.6;
   }
   .state-path.has-full-data {
     cursor: pointer;
     stroke-width: 1;
   }
-  .state-path.has-full-data:hover { opacity: 0.78; }
+  .state-path.has-full-data:hover { opacity: 0.75; }
 
+  .state-label {
+    font-family: inherit;
+    letter-spacing: 0.02em;
+    user-select: none;
+  }
+
+  /* Tooltip */
   .map-tooltip {
     position: absolute;
     transform: translateY(calc(-100% - 8px));
-    background: rgba(12, 12, 22, 0.92);
+    background: rgba(12, 12, 22, 0.93);
     backdrop-filter: blur(6px);
     color: #fff;
-    font-size: 0.78rem;
-    padding: 0.45rem 0.8rem;
-    border-radius: 7px;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
     pointer-events: none;
     white-space: nowrap;
     box-shadow: 0 2px 12px rgba(0,0,0,0.4);
     z-index: 20;
     display: flex;
     flex-direction: column;
-    gap: 0.1rem;
+    gap: 0.15rem;
   }
-  .map-tooltip strong { font-size: 0.85rem; margin-bottom: 0.1rem; }
-  .map-tooltip span { opacity: 0.8; }
-  .tooltip-cta { opacity: 1; color: #80c8ff; font-weight: 600; margin-top: 0.15rem; }
-  .tooltip-soon { opacity: 0.5; font-style: italic; margin-top: 0.15rem; }
+  .map-tooltip.flip-left { transform: translateX(-100%) translateY(calc(-100% - 8px)); }
+  .map-tooltip strong { font-size: 0.82rem; margin-bottom: 0.2rem; }
+  .tt-row { display: flex; gap: 0.5rem; justify-content: space-between; }
+  .tt-label { opacity: 0.6; }
+  .tt-val { font-weight: 600; }
+  .tooltip-cta { color: #80c8ff; font-weight: 600; margin-top: 0.25rem; }
+  .tooltip-soon { opacity: 0.45; font-style: italic; margin-top: 0.2rem; }
 
+  /* Legend */
   .eg-legend {
     position: absolute;
     bottom: 1.5rem;
@@ -336,22 +427,21 @@
     gap: 0.25rem;
     pointer-events: none;
   }
-
   .legend-gradient {
     width: 200px;
     height: 10px;
     border-radius: 5px;
     background: linear-gradient(to right, #1960b4, #96c4e8, #b0b8b0, #dc9696, #b41e1e);
   }
-
   .legend-labels {
     display: flex;
     justify-content: space-between;
     width: 200px;
-    font-size: 0.65rem;
+    font-size: 0.63rem;
     color: var(--text-muted);
   }
 
+  /* Rank panel */
   .rank-panel {
     position: absolute;
     top: 1rem;
@@ -359,46 +449,70 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 0.75rem;
-    width: 180px;
+    padding: 0.65rem 0.7rem;
+    width: 210px;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.25rem;
     box-shadow: 0 2px 12px var(--shadow-sm);
   }
 
   .rank-heading {
     margin: 0;
-    font-size: 0.65rem;
+    font-size: 0.63rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.07em;
     color: var(--text-label);
   }
 
-  .rank-list {
+  .national-totals {
     display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
+    align-items: baseline;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.1rem;
   }
+  .nt-d { color: #4a90d9; }
+  .nt-r { color: #e05c5c; }
+  .nt-sep, .nt-of { color: var(--text-muted); font-weight: 400; font-size: 0.72rem; }
+
+  .rank-section-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    margin-top: 0.1rem;
+  }
+  .r-label { color: #b91c1c; background: rgba(220,90,90,0.1); }
+  .d-label { color: #1d4ed8; background: rgba(74,144,217,0.1); }
+
+  .rank-list { display: flex; flex-direction: column; gap: 0.05rem; }
 
   .rank-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 0.3rem;
     background: none;
     border: none;
-    padding: 0.25rem 0.4rem;
+    padding: 0.2rem 0.3rem;
     border-radius: 4px;
-    cursor: pointer;
     font-family: inherit;
-    transition: background 0.12s;
     width: 100%;
+    cursor: default;
+    opacity: 0.55;
   }
-  .rank-row:hover { background: var(--btn-hover); }
+  .rank-row.rank-clickable { cursor: pointer; opacity: 1; }
+  .rank-row.rank-clickable:hover { background: var(--btn-hover); }
 
-  .rank-state { font-size: 0.78rem; font-weight: 700; color: var(--text); }
-  .rank-eg { font-size: 0.72rem; font-weight: 600; }
+  .rank-state { font-size: 0.72rem; font-weight: 700; color: var(--text); width: 1.8em; flex-shrink: 0; }
+  .rank-name { font-size: 0.68rem; color: var(--text-muted); flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rank-eg { font-size: 0.68rem; font-weight: 600; flex-shrink: 0; }
+  .rank-eg-r { color: #b91c1c; }
+  .rank-eg-d { color: #1d4ed8; }
 
   .rank-divider {
     height: 1px;
@@ -406,15 +520,24 @@
     margin: 0.2rem 0;
   }
 
-  .rank-note {
-    margin: 0;
-    font-size: 0.63rem;
-    color: var(--text-dim);
-    text-align: center;
+  .rank-play {
+    margin-top: 0.3rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.3rem;
+    font-family: inherit;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.12s, color 0.12s;
   }
+  .rank-play:hover { background: var(--btn-hover); color: var(--text); }
+  .rank-play.playing { color: #f0a500; border-color: #f0a500; }
 
   @media (max-width: 639px) {
     .rank-panel { display: none; }
-    .eg-legend { bottom: 3.5rem; } /* clear the cycle bar */
+    .eg-legend { bottom: 3.5rem; }
   }
 </style>

@@ -611,7 +611,7 @@
   <main class:ph={panelLayout === 'horizontal'}>
     <div class="map-wrap">
       {#if viewMode === 'nation'}
-        <NationView selectedYear={selectedYear} onStateClick={selectState} fullDataStates={Object.keys(STATES)} />
+        <NationView selectedYear={selectedYear} onStateClick={selectState} fullDataStates={Object.keys(STATES)} {animating} onToggleAnimation={toggleAnimation} />
         <!-- Floating cycle bar for nation view -->
         <div class="nation-cycle-bar">
           {@render cycleControls()}

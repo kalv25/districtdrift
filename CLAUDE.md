@@ -179,7 +179,10 @@ districtdrift/
 ---
 
 ## Next steps (in priority order)
-1. **Add a second state** — establishes the multi-state pattern end-to-end
-2. **Nation view** — 50-state overview colored by gerrymandering severity
-3. **Precinct layer** — raw vote data overlaid on district view (most data-intensive)
-4. **Deploy to Cloudflare** — Pages + R2 for tile hosting
+1. ~~**Add a second state**~~ ✓ — all 17 states fully implemented with per-district + demographics data
+2. ~~**Nation view**~~ ✓ — NationView.svelte renders all 50 states colored by EG with rankings panel
+3. ~~**Deploy to Cloudflare**~~ ✓ — live at districtdrift.org via Cloudflare Pages (auto-deploys from git)
+4. **Improve nation view** — richer interaction, better color scale, cycle comparison, state tooltips
+5. **More states' events data** — events.ts currently covers MI + GA well; expand to remaining 15
+6. **UI refinements** — polish based on usage and feedback
+7. **Precinct layer** *(next major version)* — raw precinct vote data overlaid on district view; requires RDH shapefiles, join to election results, tippecanoe tiling (~175k precincts nationally)
