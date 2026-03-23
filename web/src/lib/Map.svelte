@@ -372,14 +372,13 @@
     if (!map?.isStyleLoaded() || !map.getLayer('districts-fill-front')) return;
 
     cancelMorph();
-    const isInitial = prevYear === null;
-    const fromYear = chronoPrevYear(year); // always the cycle-prior year, not nav history
+    const fromYear = chronoPrevYear(year);
 
     legendCurrYear = year;
-    legendPrevYear = fromYear;  // legend reflects chrono prev, not nav history
+    legendPrevYear = fromYear;
 
-    // Ghost fill → always the cycle-prior year (or hidden if none)
-    if (!isInitial && map.getLayer('districts-fill-back')) {
+    // Ghost fill → always the chrono-prior year (or hidden if none)
+    if (map.getLayer('districts-fill-back')) {
       if (fromYear !== null) {
         map.setFilter('districts-fill-back', ['==', ['get', 'cycle_year'], fromYear]);
         map.setPaintProperty('districts-fill-back', 'fill-opacity', 0.14);
@@ -399,22 +398,13 @@
     if (map.getLayer('districts-hover'))
       map.setFilter('districts-hover', ['==', ['get', 'cycle_year'], year]);
 
-    if (isInitial) {
-      // First load: show boundaries immediately, no animation
-      map.setPaintProperty('draw-lines', 'line-color', lineColor(year));
-      map.setPaintProperty('draw-glow',  'line-color', lineColor(year));
-      loadGeo(year).then(fc => {
-        if (morphTargetYear !== null && morphTargetYear !== year) return;
-        const rings = allRings(fc).map(r => resample(r, MORPH_N));
-        (map.getSource('draw') as maplibregl.GeoJSONSource).setData(ringsToFC(rings));
-        currBoundary = rings;
-      });
-    } else if (prevYear !== year) {
+    // prevYear starts null, so prevYear !== year is true on initial load too —
+    // no special-casing needed; initial load with a chrono-prev gets full context.
+    if (prevYear !== year) {
       if (fromYear !== null) {
-        // Animate from chrono-previous cycle — prev-lines set inside transitionBoundary
         transitionBoundary(fromYear, year);
       } else {
-        // First cycle year selected (e.g. 1992): no prev, just show directly
+        // First cycle year (e.g. 1992): no previous context to show
         map.setLayoutProperty('prev-lines', 'visibility', 'none');
         map.setPaintProperty('draw-lines', 'line-color', lineColor(year));
         map.setPaintProperty('draw-glow',  'line-color', lineColor(year));
