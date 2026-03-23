@@ -46,6 +46,7 @@
     OH: { name: 'Ohio', flag: '◉' },
     VA: { name: 'Virginia', flag: '◉' },
     FL: { name: 'Florida', flag: '◉' },
+    IL: { name: 'Illinois', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view

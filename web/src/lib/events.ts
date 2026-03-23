@@ -93,6 +93,61 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
   },
 
+  IL: {
+    1992: [
+      {
+        title: 'Illinois loses 2 seats',
+        detail: 'The 1990 census reduces Illinois\'s delegation from 22 to 20, reflecting population loss to Sun Belt states. Republican governor Jim Edgar and a Democratic-controlled General Assembly must negotiate a map.',
+      },
+      {
+        title: 'Negotiated maps preserve incumbent seats',
+        detail: 'With split control, the resulting maps are a classic incumbent-protection compromise. Both parties\' incumbents are drawn into safe seats, producing a delegation that changes little despite Illinois\'s shifting demographics.',
+      },
+      {
+        title: 'Chicago\'s majority-Black districts anchor the Democratic side',
+        detail: 'The 1st and 7th Districts on Chicago\'s South and West Sides are majority-Black districts anchored by decades of Black political representation. The 4th District — shaped like a pair of earmuffs connected by a thin strip along I-294 — is a majority-Hispanic district created to comply with VRA requirements.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Illinois loses 1 seat; legislature deadlocks',
+        detail: 'The 2000 census reduces the delegation from 20 to 19. Republican governor George Ryan and a split legislature — Democratic Senate, Republican House — cannot agree on a congressional map.',
+      },
+      {
+        title: '⚖ Hastert v. State Board of Elections — court draws the map',
+        detail: 'With the legislature deadlocked, House Speaker Dennis Hastert (R) and other Republican members file suit seeking a court-drawn map favorable to Republicans. A three-judge federal panel draws its own congressional map in October 2001, attempting a neutral compromise. Democrats retain a slight edge, winning 10 of 19 seats in 2002.',
+      },
+    ],
+    2012: [
+      {
+        title: 'Illinois loses 1 seat; Democrats take full control',
+        detail: 'The 2010 census reduces the delegation from 19 to 18. Despite a strong Republican year nationally, Democrats retain control of both chambers of the Illinois General Assembly, giving them unilateral redistricting power alongside Governor Pat Quinn (D).',
+      },
+      {
+        title: 'Democrats draw a 12-6 map in a 55% Democratic state',
+        detail: 'The Democratic-drawn map is widely cited as one of the most aggressive Democratic gerrymanders of the cycle, producing a 12-6 delegation on roughly 55% of the statewide vote. Republicans are packed into 6 districts in rural downstate Illinois and the collar counties around Chicago.',
+      },
+      {
+        title: 'The "Earmuffs" 4th District survives — then grows stranger',
+        detail: 'The majority-Hispanic 4th District, which connects two Hispanic communities on Chicago\'s North and South Sides via a narrow strip along the highway, is retained and modified. It becomes a recurring example cited in debates over whether VRA compliance and partisan gerrymanding can be intertwined.',
+      },
+    ],
+    2022: [
+      {
+        title: 'Illinois loses 1 seat; Democrats draw another aggressive map',
+        detail: 'The 2020 census reduces the delegation from 18 to 17. Governor J.B. Pritzker (D) and a Democratic legislature pass new congressional maps designed to deliver 14 of 17 seats — a near-maximal gerrymander in a state trending toward Democrats but not by that margin.',
+      },
+      {
+        title: 'Final maps scaled back but still heavily Democratic',
+        detail: 'After early drafts drawing 14 safe Democratic seats draw criticism, the legislature passes slightly revised maps. Analysts estimate the maps would produce 13-14 Democratic seats. In 2022, Democrats win 14 of 17 seats.',
+      },
+      {
+        title: '⚖ Illinois State Conference of NAACP v. Illinois State Board of Elections',
+        detail: 'Civil rights groups challenge the Democratic maps as diluting Black and Hispanic voting power — arguing that in combining minority communities with white liberal neighborhoods to create \"coalition districts,\" the maps actually reduce minority political control. The case highlights tensions between maximizing minority representation and partisan advantage within the same party\'s coalition.',
+      },
+    ],
+  },
+
   FL: {
     1992: [
       {

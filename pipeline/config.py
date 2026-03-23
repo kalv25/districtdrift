@@ -80,6 +80,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "IL": {
+        "name": "Illinois",
+        "fips": "17",
+        "crs": "EPSG:32616",   # UTM Zone 16N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 20,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Edgar (R) and a Democratic-controlled General Assembly produced negotiated maps; Illinois lost 2 seats from the 1990 census. Note: NHGIS 103rd Congress shapefile severely incomplete for Illinois — only districts 11-12 and 14-20 have boundaries; districts 1-10 and 13 are missing.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 19,
+                "redistricting_controller": "Court-drawn (split government)",
+                "notes": "Governor Ryan (R) and a split legislature deadlocked; a federal court drew the congressional map in Hastert v. State Board of Elections (2001); Illinois lost 1 seat",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 18,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Quinn (D) and a Democratic-controlled legislature drew maps producing a 12-6 Democratic delegation; Illinois lost 1 seat from the 2010 census",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 17,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Pritzker (D) and Democratic legislature drew aggressive maps after Illinois lost 1 seat; challenged under VRA for diluting Black and Hispanic representation in Illinois State Conference of NAACP v. Illinois State Board of Elections",
+            },
+        },
+    },
     "FL": {
         "name": "Florida",
         "fips": "12",

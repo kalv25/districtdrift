@@ -1,0 +1,116 @@
+{
+  "state": "Illinois",
+  "fips": "17",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 20,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Edgar (R) and a Democratic-controlled General Assembly produced negotiated maps; Illinois lost 2 seats from the 1990 census",
+      "efficiency_gap": -0.0087,
+      "mean_median_diff": -0.0316,
+      "seats_d": 5,
+      "seats_r": 4,
+      "votes_d": 1202859,
+      "votes_r": 1078798,
+      "seat_vote_ratio_d": 0.4742,
+      "avg_compactness": 0.2789,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 2,
+        "competitive": 0,
+        "lean_r": 3,
+        "solid_r": 1
+      }
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 19,
+      "redistricting_controller": "Court-drawn (split government)",
+      "notes": "Governor Ryan (R) and a split legislature deadlocked; a federal court drew the congressional map in Hastert v. State Board of Elections (2001); Illinois lost 1 seat",
+      "efficiency_gap": 0.0912,
+      "mean_median_diff": 0.0821,
+      "seats_d": 9,
+      "seats_r": 10,
+      "votes_d": 1740541,
+      "votes_r": 1657183,
+      "seat_vote_ratio_d": 0.9247,
+      "avg_compactness": 0.1967,
+      "competitiveness": {
+        "solid_d": 9,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 1,
+        "solid_r": 8
+      }
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 18,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Quinn (D) and a Democratic-controlled legislature drew maps producing a 12-6 Democratic delegation; Illinois lost 1 seat from the 2010 census",
+      "efficiency_gap": -0.0232,
+      "mean_median_diff": 0.0205,
+      "seats_d": 12,
+      "seats_r": 6,
+      "votes_d": 2743702,
+      "votes_r": 2207818,
+      "seat_vote_ratio_d": 1.2031,
+      "avg_compactness": 0.1652,
+      "competitiveness": {
+        "solid_d": 7,
+        "lean_d": 1,
+        "competitive": 5,
+        "lean_r": 2,
+        "solid_r": 3
+      }
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 17,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Pritzker (D) and Democratic legislature drew aggressive maps after Illinois lost 1 seat; challenged under VRA for diluting Black and Hispanic representation in Illinois State Conference of NAACP v. Illinois State Board of Elections",
+      "efficiency_gap": -0.1557,
+      "mean_median_diff": 0.0176,
+      "seats_d": 14,
+      "seats_r": 3,
+      "votes_d": 2271361,
+      "votes_r": 1768782,
+      "seat_vote_ratio_d": 1.4648,
+      "avg_compactness": 0.1471,
+      "competitiveness": {
+        "solid_d": 8,
+        "lean_d": 3,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 3
+      }
+    }
+  ]
+}
