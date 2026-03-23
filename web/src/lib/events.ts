@@ -793,4 +793,46 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       },
     ],
   },
+  NJ: {
+    1992: [
+      {
+        title: 'Bipartisan Apportionment Commission structure',
+        detail: 'New Jersey uses a bipartisan Apportionment Commission — 6 Democrats, 6 Republicans, plus a tiebreaker appointed by the NJ Supreme Court Chief Justice.',
+      },
+      {
+        title: 'Democratic tiebreaker selects Democratic plan',
+        detail: 'The commission deadlocked along party lines; a Democratic tiebreaker selected the Democratic plan. Maps produced a delegation roughly reflecting New Jersey\'s partisan lean at the time.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Republican tiebreaker Nathaniel Gorenstein chooses Republican plan',
+        detail: 'The bipartisan commission deadlocked again; Republican tiebreaker Nathaniel Gorenstein chose the Republican plan. Maps were drawn to favor Republicans, who won 7 of 13 seats in 2002 despite New Jersey\'s Democratic lean.',
+      },
+      {
+        title: 'Tiebreaker\'s party affiliation determined the partisan outcome',
+        detail: 'The tiebreaker\'s party affiliation determined the partisan outcome — illustrating the limits of \'bipartisan\' commissions where the tiebreaker holds all the power.',
+      },
+    ],
+    2012: [
+      {
+        title: 'New Jersey loses 1 seat after the 2010 census',
+        detail: 'New Jersey\'s congressional delegation falls from 13 to 12 districts after the 2010 census.',
+      },
+      {
+        title: 'Tiebreaker John Farmer chooses compromise plan',
+        detail: 'The bipartisan commission deadlocked; tiebreaker John Farmer, a former state attorney general, chose a compromise plan. Maps produced a near-even 6-6 delegation split in a state with a consistent Democratic lean.',
+      },
+    ],
+    2022: [
+      {
+        title: 'Commission deadlocks for the third consecutive cycle',
+        detail: 'The bipartisan commission deadlocked for the third consecutive cycle. Tiebreaker Philip Carchman, a retired NJ appellate judge, chose the Democratic plan in January 2022.',
+      },
+      {
+        title: '⚖ Republican challenge to maps fails',
+        detail: 'Republican lawmakers challenged the process but courts upheld the maps. Maps produced a 9-3 Democratic delegation in a state Biden won by 16 points.',
+      },
+    ],
+  },
 };

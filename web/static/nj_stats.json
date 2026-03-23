@@ -1,0 +1,116 @@
+{
+  "state": "New Jersey",
+  "fips": "34",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 13,
+      "redistricting_controller": "Bipartisan Commission",
+      "notes": "New Jersey uses a bipartisan Apportionment Commission (6 Democrats, 6 Republicans + 1 tiebreaker); a Democratic tiebreaker chose the Democratic plan for the 1992 maps",
+      "efficiency_gap": -0.0288,
+      "mean_median_diff": -0.0355,
+      "seats_d": 7,
+      "seats_r": 6,
+      "votes_d": 1354915,
+      "votes_r": 1503145,
+      "seat_vote_ratio_d": 1.1358,
+      "avg_compactness": 0.124,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 1,
+        "competitive": 2,
+        "lean_r": 1,
+        "solid_r": 5
+      }
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 13,
+      "redistricting_controller": "Bipartisan Commission",
+      "notes": "The bipartisan commission deadlocked; Republican tiebreaker Nathaniel Gorenstein chose the Republican plan, producing maps that helped Republicans win 7 of 13 seats in 2002",
+      "efficiency_gap": 0.0995,
+      "mean_median_diff": -0.0571,
+      "seats_d": 7,
+      "seats_r": 6,
+      "votes_d": 1030204,
+      "votes_r": 933964,
+      "seat_vote_ratio_d": 1.0266,
+      "avg_compactness": 0.1122,
+      "competitiveness": {
+        "solid_d": 7,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 5
+      }
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 12,
+      "redistricting_controller": "Bipartisan Commission",
+      "notes": "New Jersey lost 1 seat after the 2010 census; the bipartisan commission deadlocked again; tiebreaker John Farmer chose a compromise plan producing a 6-6 delegation split",
+      "efficiency_gap": 0.1737,
+      "mean_median_diff": 0.0311,
+      "seats_d": 6,
+      "seats_r": 6,
+      "votes_d": 1794301,
+      "votes_r": 1430325,
+      "seat_vote_ratio_d": 0.8986,
+      "avg_compactness": 0.1329,
+      "competitiveness": {
+        "solid_d": 6,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 4,
+        "solid_r": 1
+      }
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 12,
+      "redistricting_controller": "Bipartisan Commission",
+      "notes": "The bipartisan commission deadlocked; tiebreaker Philip Carchman chose the Democratic plan in January 2022, producing maps that helped Democrats hold a 9-3 advantage in a state Biden won by 16 points",
+      "efficiency_gap": -0.1327,
+      "mean_median_diff": -0.1006,
+      "seats_d": 7,
+      "seats_r": 5,
+      "votes_d": 1127017,
+      "votes_r": 1000868,
+      "seat_vote_ratio_d": 1.1014,
+      "avg_compactness": 0.1508,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 3,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 4
+      }
+    }
+  ]
+}

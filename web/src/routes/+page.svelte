@@ -50,6 +50,7 @@
     FL: { name: 'Florida', flag: '◉' },
     IL: { name: 'Illinois', flag: '◉' },
     NY: { name: 'New York', flag: '◉' },
+    NJ: { name: 'New Jersey', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view

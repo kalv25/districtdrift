@@ -430,6 +430,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "NJ": {
+        "name": "New Jersey",
+        "fips": "34",
+        "crs": "EPSG:32618",   # NAD83 / UTM Zone 18N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 13,
+                "redistricting_controller": "Bipartisan Commission",
+                "notes": "New Jersey uses a bipartisan Apportionment Commission (6 Democrats, 6 Republicans + 1 tiebreaker); a Democratic tiebreaker chose the Democratic plan for the 1992 maps",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 13,
+                "redistricting_controller": "Bipartisan Commission",
+                "notes": "The bipartisan commission deadlocked; Republican tiebreaker Nathaniel Gorenstein chose the Republican plan, producing maps that helped Republicans win 7 of 13 seats in 2002",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 12,
+                "redistricting_controller": "Bipartisan Commission",
+                "notes": "New Jersey lost 1 seat after the 2010 census; the bipartisan commission deadlocked again; tiebreaker John Farmer chose a compromise plan producing a 6-6 delegation split",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 12,
+                "redistricting_controller": "Bipartisan Commission",
+                "notes": "The bipartisan commission deadlocked; tiebreaker Philip Carchman chose the Democratic plan in January 2022, producing maps that helped Democrats hold a 9-3 advantage in a state Biden won by 16 points",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",
