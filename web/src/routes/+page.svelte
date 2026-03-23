@@ -57,7 +57,7 @@
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view
-  let viewMode = $state<'nation' | string>('nation');
+  let viewMode = $state<'nation' | string>('MI');
   let selectedState = $derived(viewMode === 'nation' ? 'MI' : viewMode);
   let stateMenuOpen = $state(false);
 
@@ -427,7 +427,7 @@
 
       <div class="dc-body">
       {#if pinnedDistData == null}
-        <p class="dc-pending">District {pinnedDistrict} did not exist in {selectedYear}.<br>Michigan had {pinnedCycleData?.total_seats ?? '?'} seats that cycle.</p>
+        <p class="dc-pending">District {pinnedDistrict} did not exist in {selectedYear}.<br>{STATES[selectedState]?.name ?? selectedState} had {pinnedCycleData?.total_seats ?? '?'} seats that cycle.</p>
       {:else}
 
         {#if districtTab === 'partisan'}
