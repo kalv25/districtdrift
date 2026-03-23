@@ -63,6 +63,22 @@
   };
   const lineColor = (y: number) => YEAR_LINE_COLOR[y] ?? '#e2e8f0';
 
+  // Per-district boundary colors — 20 visually distinct hues, cycle with modulo.
+  // Avoids the blue (#4a90d9) and red (#e05c5c) used for party fills.
+  const DISTRICT_PALETTE = [
+    '#fb923c','#fbbf24','#4ade80','#34d399','#22d3ee',
+    '#38bdf8','#818cf8','#a78bfa','#e879f9','#f472b6',
+    '#fdba74','#86efac','#6ee7b7','#67e8f9','#7dd3fc',
+    '#c4b5fd','#f9a8d4','#fde68a','#d9f99d','#bbf7d0',
+  ];
+  // MapLibre match expression: district % palette_size → color
+  const DISTRICT_COLOR_EXPR: maplibregl.ExpressionSpecification = (() => {
+    const expr: any[] = ['match', ['%', ['to-number', ['get', 'district'], 0], DISTRICT_PALETTE.length]];
+    DISTRICT_PALETTE.forEach((c, i) => expr.push(i, c));
+    expr.push('#aaaaaa'); // fallback
+    return expr as maplibregl.ExpressionSpecification;
+  })();
+
   // Animation config
   const MORPH_MS       = 900;  // morph duration
   const MORPH_N        = 80;   // resampled vertices per ring
@@ -75,6 +91,7 @@
     fromRing: Ring;
     toRing:   Ring;
     animate:  boolean;
+    district: number;
   };
 
   // Swing overlay config
@@ -89,7 +106,7 @@
   let fitDebounceId: ReturnType<typeof setTimeout> | null = null;
   let resizeObserver: ResizeObserver;
   let morphTargetYear: number | null = null;
-  let currBoundary: Ring[] | null = null; // rings currently drawn on screen
+  let currBoundary: Array<[Ring, number]> | null = null; // [ring, districtNum] pairs currently drawn
   let swingTimeoutId: ReturnType<typeof setTimeout> | null = null;
   let swingVisible = false;                   // plain — must NOT be $state (read inside $effect via clearSwingOverlay)
   let swingMarkers: maplibregl.Marker[] = [];
@@ -152,15 +169,16 @@
     return best;
   }
 
-  function allRings(fc: GeoJSON.FeatureCollection): Ring[] {
-    const rings: Ring[] = [];
+  function allRings(fc: GeoJSON.FeatureCollection): Array<[Ring, number]> {
+    const result: Array<[Ring, number]> = [];
     for (const feat of fc.features) {
+      const d = typeof feat.properties?.district === 'number' ? feat.properties.district : 0;
       const g = feat.geometry as GeoJSON.Geometry;
-      if (g.type === 'Polygon') rings.push(g.coordinates[0] as Ring);
+      if (g.type === 'Polygon') result.push([g.coordinates[0] as Ring, d]);
       else if (g.type === 'MultiPolygon')
-        for (const poly of (g as GeoJSON.MultiPolygon).coordinates) rings.push(poly[0] as Ring);
+        for (const poly of (g as GeoJSON.MultiPolygon).coordinates) result.push([poly[0] as Ring, d]);
     }
-    return rings;
+    return result;
   }
 
   function centroid(ring: Ring): [number, number] {
@@ -334,7 +352,7 @@
     const fromCents = fromRings.map(centroid);
     const toCents   = toRings.map(centroid);
 
-    return toFC.features.map((_, ti) => {
+    return toFC.features.map((toFeat, ti) => {
       const tc = toCents[ti];
       let bestDist = Infinity, bestFi = -1;
       for (let fi = 0; fi < fromCents.length; fi++) {
@@ -348,8 +366,9 @@
       const fromRing   = bestFi >= 0 && bestDist < MAX_MATCH_DIST ? alignRing(rawFrom, toRing) : toRing;
       const maxDisp    = fromRing.reduce((mx, p, i) =>
         Math.max(mx, Math.hypot(toRing[i][0] - p[0], toRing[i][1] - p[1])), 0);
+      const district   = typeof toFeat.properties?.district === 'number' ? toFeat.properties.district : ti + 1;
 
-      return { fromRing, toRing, animate: bestFi >= 0 && bestDist < MAX_MATCH_DIST && maxDisp >= MIN_DISP };
+      return { fromRing, toRing, animate: bestFi >= 0 && bestDist < MAX_MATCH_DIST && maxDisp >= MIN_DISP, district };
     });
   }
 
@@ -375,11 +394,11 @@
 
       source.setData({
         type: 'FeatureCollection',
-        features: pairs.map(({ fromRing, toRing, animate }) => {
+        features: pairs.map(({ fromRing, toRing, animate, district }) => {
           const ring: Ring = animate
             ? fromRing.map((p, i) => [p[0] + (toRing[i][0] - p[0]) * t, p[1] + (toRing[i][1] - p[1]) * t])
             : toRing;
-          return { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: ring } };
+          return { type: 'Feature', properties: { district }, geometry: { type: 'LineString', coordinates: ring } };
         }),
       });
 
@@ -395,11 +414,11 @@
 
   // ── Year transition ─────────────────────────────────────────────────────────
 
-  function ringsToFC(rings: Ring[]): GeoJSON.FeatureCollection {
+  function ringsToFC(entries: Array<[Ring, number]>): GeoJSON.FeatureCollection {
     return {
       type: 'FeatureCollection',
-      features: rings.map(ring => ({
-        type: 'Feature', properties: {},
+      features: entries.map(([ring, district]) => ({
+        type: 'Feature', properties: { district },
         geometry: { type: 'LineString', coordinates: ring },
       })),
     };
@@ -417,20 +436,17 @@
     if (morphTargetYear !== toYear) return;
 
     // Show chrono-previous boundaries as dashed reference (always from GeoJSON, not nav history)
-    const fromRings = allRings(fromFC).map(r => resample(r, MORPH_N));
-    (map.getSource('prev') as maplibregl.GeoJSONSource).setData(ringsToFC(fromRings));
-    map.setPaintProperty('prev-lines', 'line-color', lineColor(fromYear));
+    const fromEntries = allRings(fromFC).map(([r, d]) => [resample(r, MORPH_N), d] as [Ring, number]);
+    (map.getSource('prev') as maplibregl.GeoJSONSource).setData(ringsToFC(fromEntries));
     map.setLayoutProperty('prev-lines', 'visibility', 'visible');
 
-    map.setPaintProperty('draw-lines', 'line-color', lineColor(toYear));
-    map.setPaintProperty('draw-glow',  'line-color', lineColor(toYear));
     const pairs = matchDistricts(fromFC, toFC);
 
     showSwingOverlay(fromFC, toFC);
 
     startMorph(pairs, () => {
       if (morphTargetYear !== toYear) return;
-      currBoundary = allRings(toFC).map(r => resample(r, MORPH_N));
+      currBoundary = allRings(toFC).map(([r, d]) => [resample(r, MORPH_N), d] as [Ring, number]);
     });
   }
 
@@ -468,13 +484,11 @@
       } else {
         // First cycle year (e.g. 1992): no previous context to show
         map.setLayoutProperty('prev-lines', 'visibility', 'none');
-        map.setPaintProperty('draw-lines', 'line-color', lineColor(year));
-        map.setPaintProperty('draw-glow',  'line-color', lineColor(year));
         loadGeo(year).then(fc => {
           if (morphTargetYear !== null && morphTargetYear !== year) return;
-          const rings = allRings(fc).map(r => resample(r, MORPH_N));
-          (map.getSource('draw') as maplibregl.GeoJSONSource).setData(ringsToFC(rings));
-          currBoundary = rings;
+          const entries = allRings(fc).map(([r, d]) => [resample(r, MORPH_N), d] as [Ring, number]);
+          (map.getSource('draw') as maplibregl.GeoJSONSource).setData(ringsToFC(entries));
+          currBoundary = entries;
         });
       }
     }
@@ -653,16 +667,16 @@
         },
       });
 
-      // 4. Previous year boundaries — faded dashed reference
+      // 4. Previous year boundaries — dashed, same district colors at lower opacity
       map.addLayer({
         id: 'prev-lines',
         type: 'line',
         source: 'prev',
         layout: { visibility: 'none', 'line-cap': 'round', 'line-join': 'round' },
         paint: {
-          'line-color': '#888',
+          'line-color': DISTRICT_COLOR_EXPR,
           'line-width': 1.5,
-          'line-opacity': 0.4,
+          'line-opacity': 0.5,
           'line-dasharray': [4, 3],
         },
       });
@@ -674,22 +688,22 @@
         source: 'draw',
         layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: {
-          'line-color': lineColor(selectedYear),
-          'line-width': 10,
-          'line-blur': 6,
-          'line-opacity': 0.25,
+          'line-color': DISTRICT_COLOR_EXPR,
+          'line-width': 12,
+          'line-blur': 8,
+          'line-opacity': 0.28,
         },
       });
 
-      // 4b. Current year boundaries — solid, animated during transition
+      // 4b. Current year boundaries — solid, slightly thicker
       map.addLayer({
         id: 'draw-lines',
         type: 'line',
         source: 'draw',
         layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: {
-          'line-color': lineColor(selectedYear),
-          'line-width': 2,
+          'line-color': DISTRICT_COLOR_EXPR,
+          'line-width': 2.5,
           'line-opacity': 1,
         },
       });
