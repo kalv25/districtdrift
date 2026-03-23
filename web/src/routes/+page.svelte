@@ -5,6 +5,7 @@
   import SeatVoteChart from '$lib/SeatVoteChart.svelte';
   import TrendChart from '$lib/TrendChart.svelte';
   import { CYCLE_EVENTS } from '$lib/events';
+  import CompetitivenessChart from '$lib/CompetitivenessChart.svelte';
 
   type Resource = { label: string; url: string; description: string; };
   const RESOURCES: { heading: string; links: Resource[] }[] = [
@@ -96,6 +97,10 @@
   const isBottomPanel = $derived(panelPosition === 'bottom' || panelPosition === 'bottom-wide');
   let mapPanelBottom = $derived(isBottomPanel ? bottomPanelH + BOTTOM_OFFSET_PX : 0);
 
+  type Competitiveness = {
+    solid_d: number; lean_d: number; competitive: number;
+    lean_r: number; solid_r: number;
+  };
   type CycleStats = {
     cycle_year: number; congress: number; total_seats: number;
     redistricting_controller: string; notes: string;
@@ -103,6 +108,8 @@
     seats_d: number; seats_r: number;
     votes_d: number; votes_r: number;
     seat_vote_ratio_d: number | null;
+    avg_compactness: number | null;
+    competitiveness: Competitiveness;
   };
   type DataCredit = { label: string; url: string; note: string; };
 
@@ -114,6 +121,11 @@
     efficiency_gap: s.efficiency_gap,
     redistricting_controller: s.redistricting_controller,
   })));
+
+  let competCycles = $derived(stats
+    .filter(s => s.competitiveness)
+    .map(s => ({ cycle_year: s.cycle_year, competitiveness: s.competitiveness }))
+  );
 
   async function loadStats(po: string) {
     const res = await fetch(`/${po.toLowerCase()}_stats.json`);
@@ -144,6 +156,13 @@
     const pct = (Math.abs(eg) * 100).toFixed(1);
     if (Math.abs(eg) < 0.02) return '≈ 0% (neutral)';
     return eg > 0 ? `+${pct}% (favors R)` : `-${pct}% (favors D)`;
+  }
+
+  // Mean-median: negative = median above mean = D votes packed = favors R
+  function mmLabel(mm: number): string {
+    const pct = (Math.abs(mm) * 100).toFixed(1);
+    if (Math.abs(mm) < 0.01) return '≈ 0% (neutral)';
+    return mm > 0 ? `+${pct}% (favors D)` : `-${pct}% (favors R)`;
   }
 
   function voteShare(d: number, r: number): string {
@@ -225,6 +244,15 @@
           class:favor-d={displayStats.efficiency_gap < -0.02}>
         {egLabel(displayStats.efficiency_gap)}
       </dd>
+      <dt>Mean–median</dt>
+      <dd class:favor-r={displayStats.mean_median_diff < -0.02}
+          class:favor-d={displayStats.mean_median_diff > 0.02}>
+        {mmLabel(displayStats.mean_median_diff)}
+      </dd>
+      <dt>Seat / vote</dt>
+      <dd>{displayStats.seat_vote_ratio_d !== null ? displayStats.seat_vote_ratio_d.toFixed(2) + '×' : '—'}</dd>
+      <dt>Compactness</dt>
+      <dd>{displayStats.avg_compactness !== null ? (displayStats.avg_compactness * 100).toFixed(1) + '%' : '—'}</dd>
     </dl>
   {/if}
 {/snippet}
@@ -393,6 +421,13 @@
             <p class="chart-note">+ favors R &nbsp;·&nbsp; − favors D</p>
             <EGChart cycles={egCycles} selectedYear={displayYear} />
           </section>
+
+          {#if competCycles.length}
+            <section class="chart-section">
+              <h2>District competitiveness — all cycles</h2>
+              <CompetitivenessChart cycles={competCycles} selectedYear={displayYear} />
+            </section>
+          {/if}
         {/if}
 
         {#if credits.length}
@@ -503,6 +538,13 @@
                 <p class="chart-note">+ favors R &nbsp;·&nbsp; − favors D</p>
                 <EGChart cycles={egCycles} selectedYear={displayYear} />
               </div>
+              {#if competCycles.length}
+                <div class="bottom-pane-divider"></div>
+                <div class="bottom-pane">
+                  <p class="bottom-pane-label">District competitiveness</p>
+                  <CompetitivenessChart cycles={competCycles} selectedYear={displayYear} />
+                </div>
+              {/if}
             {/if}
 
           </div>

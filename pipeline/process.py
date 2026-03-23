@@ -232,6 +232,21 @@ def process_cycle(
         if total_2party > 0 and votes_d > 0 else None
     )
 
+    # Average compactness across districts with valid geometry
+    pp_valid = valid["polsby_popper"].dropna()
+    avg_compactness = round(float(pp_valid.mean()), 4) if not pp_valid.empty else None
+
+    # District competitiveness breakdown by partisan lean
+    # Thresholds: solid D >60%, lean D 55–60%, competitive 45–55%, lean R 40–45%, solid R <40%
+    lean = valid["partisan_lean_d"].dropna()
+    competitiveness = {
+        "solid_d":    int((lean > 0.60).sum()),
+        "lean_d":     int(((lean > 0.55) & (lean <= 0.60)).sum()),
+        "competitive": int(((lean >= 0.45) & (lean <= 0.55)).sum()),
+        "lean_r":     int(((lean >= 0.40) & (lean < 0.45)).sum()),
+        "solid_r":    int((lean < 0.40).sum()),
+    }
+
     cycle_stats = {
         "cycle_year": cycle_year,
         "congress": meta["congress"],
@@ -245,6 +260,8 @@ def process_cycle(
         "votes_d": votes_d,
         "votes_r": votes_r,
         "seat_vote_ratio_d": round(seat_vote_ratio, 4) if seat_vote_ratio else None,
+        "avg_compactness": avg_compactness,
+        "competitiveness": competitiveness,
     }
 
     gdf["polsby_popper"] = gdf["polsby_popper"].round(4)

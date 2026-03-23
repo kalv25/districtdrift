@@ -36,7 +36,15 @@
       "seats_r": 4,
       "votes_d": 1282474,
       "votes_r": 1203983,
-      "seat_vote_ratio_d": 1.2925
+      "seat_vote_ratio_d": 1.2925,
+      "avg_compactness": 0.0841,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 2,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 3
+      }
     },
     {
       "cycle_year": 2002,
@@ -50,7 +58,15 @@
       "seats_r": 7,
       "votes_d": 970716,
       "votes_r": 1209033,
-      "seat_vote_ratio_d": 1.0364
+      "seat_vote_ratio_d": 1.0364,
+      "avg_compactness": 0.1209,
+      "competitiveness": {
+        "solid_d": 5,
+        "lean_d": 1,
+        "competitive": 1,
+        "lean_r": 1,
+        "solid_r": 5
+      }
     },
     {
       "cycle_year": 2012,
@@ -64,7 +80,15 @@
       "seats_r": 9,
       "votes_d": 2218357,
       "votes_r": 2137167,
-      "seat_vote_ratio_d": 0.6041
+      "seat_vote_ratio_d": 0.6041,
+      "avg_compactness": 0.1051,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 3,
+        "lean_r": 5,
+        "solid_r": 2
+      }
     },
     {
       "cycle_year": 2022,
@@ -78,7 +102,15 @@
       "seats_r": 7,
       "votes_d": 1795170,
       "votes_r": 1956906,
-      "seat_vote_ratio_d": 1.045
+      "seat_vote_ratio_d": 1.045,
+      "avg_compactness": 0.2756,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 1,
+        "competitive": 4,
+        "lean_r": 2,
+        "solid_r": 4
+      }
     }
   ]
 }
