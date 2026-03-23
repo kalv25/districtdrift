@@ -29,7 +29,7 @@
       "congress": 103,
       "total_seats": 21,
       "redistricting_controller": "Split (Dem governor, Rep legislature)",
-      "notes": "Governor Bob Casey (D) and a Republican-controlled legislature negotiated maps; result was roughly proportional",
+      "notes": "Governor Bob Casey (D) and a Republican-controlled legislature negotiated maps; result was roughly proportional. Note: NHGIS 103rd Congress shapefile is missing district boundaries for PA-14 and PA-18.",
       "efficiency_gap": -0.0874,
       "mean_median_diff": -0.0332,
       "seats_d": 10,
@@ -44,7 +44,218 @@
         "competitive": 5,
         "lean_r": 1,
         "solid_r": 7
-      }
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.8092,
+          "polsby_popper": 0.0493,
+          "d_votes": 150172,
+          "r_votes": 35419,
+          "total_votes_cast": 185591,
+          "margin_pct": 0.6183,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.7743,
+          "polsby_popper": 0.1495,
+          "d_votes": 164355,
+          "r_votes": 47906,
+          "total_votes_cast": 213927,
+          "margin_pct": 0.5486,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6012,
+          "polsby_popper": 0.1927,
+          "d_votes": 130828,
+          "r_votes": 86787,
+          "total_votes_cast": 221971,
+          "margin_pct": 0.2024,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.7938,
+          "polsby_popper": 0.1811,
+          "d_votes": 186684,
+          "r_votes": 48484,
+          "total_votes_cast": 237922,
+          "margin_pct": 0.5877,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.28,
+          "d_votes": 0,
+          "r_votes": 188911,
+          "total_votes_cast": 188911,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.5207,
+          "polsby_popper": 0.2242,
+          "d_votes": 108312,
+          "r_votes": 99694,
+          "total_votes_cast": 208006,
+          "margin_pct": 0.0414,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.3365,
+          "polsby_popper": 0.2096,
+          "d_votes": 91623,
+          "r_votes": 180648,
+          "total_votes_cast": 273898,
+          "margin_pct": 0.327,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.4682,
+          "polsby_popper": 0.4132,
+          "d_votes": 114095,
+          "r_votes": 129593,
+          "total_votes_cast": 249538,
+          "margin_pct": 0.0636,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.2711,
+          "d_votes": 0,
+          "r_votes": 182406,
+          "total_votes_cast": 182406,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 10,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.3281,
+          "d_votes": 0,
+          "r_votes": 189414,
+          "total_votes_cast": 209548,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 11,
+          "won_by": "D",
+          "partisan_lean_d": 0.6709,
+          "polsby_popper": 0.3075,
+          "d_votes": 138875,
+          "r_votes": 68112,
+          "total_votes_cast": 206987,
+          "margin_pct": 0.3419,
+          "contested": true
+        },
+        {
+          "district": 12,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.2383,
+          "d_votes": 166916,
+          "r_votes": 0,
+          "total_votes_cast": 166916,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 13,
+          "won_by": "D",
+          "partisan_lean_d": 0.5027,
+          "polsby_popper": 0.2486,
+          "d_votes": 127685,
+          "r_votes": 126312,
+          "total_votes_cast": 253997,
+          "margin_pct": 0.0054,
+          "contested": true
+        },
+        {
+          "district": 15,
+          "won_by": "D",
+          "partisan_lean_d": 0.5282,
+          "polsby_popper": 0.3631,
+          "d_votes": 111419,
+          "r_votes": 99520,
+          "total_votes_cast": 213324,
+          "margin_pct": 0.0564,
+          "contested": true
+        },
+        {
+          "district": 16,
+          "won_by": "R",
+          "partisan_lean_d": 0.3516,
+          "polsby_popper": 0.2964,
+          "d_votes": 74741,
+          "r_votes": 137823,
+          "total_votes_cast": 212564,
+          "margin_pct": 0.2968,
+          "contested": true
+        },
+        {
+          "district": 17,
+          "won_by": "R",
+          "partisan_lean_d": 0.3049,
+          "polsby_popper": 0.2369,
+          "d_votes": 65881,
+          "r_votes": 150158,
+          "total_votes_cast": 216039,
+          "margin_pct": 0.3901,
+          "contested": true
+        },
+        {
+          "district": 19,
+          "won_by": "R",
+          "partisan_lean_d": 0.4314,
+          "polsby_popper": 0.386,
+          "d_votes": 74798,
+          "r_votes": 98599,
+          "total_votes_cast": 217587,
+          "margin_pct": 0.1373,
+          "contested": true
+        },
+        {
+          "district": 20,
+          "won_by": "D",
+          "partisan_lean_d": 0.5073,
+          "polsby_popper": 0.2535,
+          "d_votes": 114898,
+          "r_votes": 111591,
+          "total_votes_cast": 226489,
+          "margin_pct": 0.0146,
+          "contested": true
+        },
+        {
+          "district": 21,
+          "won_by": "R",
+          "partisan_lean_d": 0.3196,
+          "polsby_popper": 0.2229,
+          "d_votes": 70802,
+          "r_votes": 150729,
+          "total_votes_cast": 221531,
+          "margin_pct": 0.3608,
+          "contested": true
+        }
+      ]
     },
     {
       "cycle_year": 2002,
@@ -66,7 +277,218 @@
         "competitive": 3,
         "lean_r": 1,
         "solid_r": 10
-      }
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.8741,
+          "polsby_popper": 0.0475,
+          "d_votes": 121076,
+          "r_votes": 17444,
+          "total_votes_cast": 140090,
+          "margin_pct": 0.7481,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.8777,
+          "polsby_popper": 0.1647,
+          "d_votes": 150623,
+          "r_votes": 20988,
+          "total_votes_cast": 171611,
+          "margin_pct": 0.7554,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.1411,
+          "d_votes": 0,
+          "r_votes": 116763,
+          "total_votes_cast": 150329,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3545,
+          "polsby_popper": 0.246,
+          "d_votes": 71674,
+          "r_votes": 130534,
+          "total_votes_cast": 202218,
+          "margin_pct": 0.2911,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.2419,
+          "d_votes": 0,
+          "r_votes": 124942,
+          "total_votes_cast": 143211,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.4863,
+          "polsby_popper": 0.0922,
+          "d_votes": 98128,
+          "r_votes": 103648,
+          "total_votes_cast": 201791,
+          "margin_pct": 0.0274,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.3391,
+          "polsby_popper": 0.1741,
+          "d_votes": 75055,
+          "r_votes": 146296,
+          "total_votes_cast": 221351,
+          "margin_pct": 0.3218,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.3741,
+          "polsby_popper": 0.3289,
+          "d_votes": 76178,
+          "r_votes": 127475,
+          "total_votes_cast": 203687,
+          "margin_pct": 0.2519,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "R",
+          "partisan_lean_d": 0.2893,
+          "polsby_popper": 0.1344,
+          "d_votes": 50558,
+          "r_votes": 124184,
+          "total_votes_cast": 174849,
+          "margin_pct": 0.4213,
+          "contested": true
+        },
+        {
+          "district": 10,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.1919,
+          "d_votes": 0,
+          "r_votes": 152017,
+          "total_votes_cast": 164159,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 11,
+          "won_by": "D",
+          "partisan_lean_d": 0.5672,
+          "polsby_popper": 0.2564,
+          "d_votes": 93758,
+          "r_votes": 71543,
+          "total_votes_cast": 168615,
+          "margin_pct": 0.1344,
+          "contested": true
+        },
+        {
+          "district": 12,
+          "won_by": "D",
+          "partisan_lean_d": 0.7348,
+          "polsby_popper": 0.0546,
+          "d_votes": 124201,
+          "r_votes": 44818,
+          "total_votes_cast": 169028,
+          "margin_pct": 0.4697,
+          "contested": true
+        },
+        {
+          "district": 13,
+          "won_by": "D",
+          "partisan_lean_d": 0.5184,
+          "polsby_popper": 0.1073,
+          "d_votes": 107945,
+          "r_votes": 100295,
+          "total_votes_cast": 211867,
+          "margin_pct": 0.0367,
+          "contested": true
+        },
+        {
+          "district": 14,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.0951,
+          "d_votes": 123323,
+          "r_votes": 0,
+          "total_votes_cast": 123412,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 15,
+          "won_by": "R",
+          "partisan_lean_d": 0.4264,
+          "polsby_popper": 0.2332,
+          "d_votes": 73212,
+          "r_votes": 98493,
+          "total_votes_cast": 171713,
+          "margin_pct": 0.1472,
+          "contested": true
+        },
+        {
+          "district": 16,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.229,
+          "d_votes": 0,
+          "r_votes": 119046,
+          "total_votes_cast": 134597,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 17,
+          "won_by": "D",
+          "partisan_lean_d": 0.5141,
+          "polsby_popper": 0.3198,
+          "d_votes": 103483,
+          "r_votes": 97802,
+          "total_votes_cast": 201291,
+          "margin_pct": 0.0282,
+          "contested": true
+        },
+        {
+          "district": 18,
+          "won_by": "R",
+          "partisan_lean_d": 0.3986,
+          "polsby_popper": 0.0626,
+          "d_votes": 79451,
+          "r_votes": 119885,
+          "total_votes_cast": 199349,
+          "margin_pct": 0.2028,
+          "contested": true
+        },
+        {
+          "district": 19,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.4113,
+          "d_votes": 0,
+          "r_votes": 143097,
+          "total_votes_cast": 157145,
+          "margin_pct": null,
+          "contested": false
+        }
+      ]
     },
     {
       "cycle_year": 2012,
@@ -88,7 +510,207 @@
         "competitive": 1,
         "lean_r": 7,
         "solid_r": 5
-      }
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.8495,
+          "polsby_popper": 0.0581,
+          "d_votes": 235394,
+          "r_votes": 41708,
+          "total_votes_cast": 277102,
+          "margin_pct": 0.699,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.905,
+          "polsby_popper": 0.3923,
+          "d_votes": 318176,
+          "r_votes": 33381,
+          "total_votes_cast": 356386,
+          "margin_pct": 0.8101,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.4277,
+          "polsby_popper": 0.2036,
+          "d_votes": 123933,
+          "r_votes": 165826,
+          "total_votes_cast": 302514,
+          "margin_pct": 0.1446,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3656,
+          "polsby_popper": 0.396,
+          "d_votes": 104643,
+          "r_votes": 181603,
+          "total_votes_cast": 303980,
+          "margin_pct": 0.2689,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.3708,
+          "polsby_popper": 0.2623,
+          "d_votes": 104725,
+          "r_votes": 177740,
+          "total_votes_cast": 282465,
+          "margin_pct": 0.2585,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.4286,
+          "polsby_popper": 0.0821,
+          "d_votes": 143803,
+          "r_votes": 191725,
+          "total_votes_cast": 335528,
+          "margin_pct": 0.1428,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.406,
+          "polsby_popper": 0.0408,
+          "d_votes": 143509,
+          "r_votes": 209942,
+          "total_votes_cast": 353451,
+          "margin_pct": 0.188,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.434,
+          "polsby_popper": 0.3663,
+          "d_votes": 152859,
+          "r_votes": 199379,
+          "total_votes_cast": 352238,
+          "margin_pct": 0.1321,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "R",
+          "partisan_lean_d": 0.3833,
+          "polsby_popper": 0.1366,
+          "d_votes": 105128,
+          "r_votes": 169177,
+          "total_votes_cast": 274305,
+          "margin_pct": 0.2335,
+          "contested": true
+        },
+        {
+          "district": 10,
+          "won_by": "R",
+          "partisan_lean_d": 0.3442,
+          "polsby_popper": 0.145,
+          "d_votes": 94227,
+          "r_votes": 179563,
+          "total_votes_cast": 273790,
+          "margin_pct": 0.3117,
+          "contested": true
+        },
+        {
+          "district": 11,
+          "won_by": "R",
+          "partisan_lean_d": 0.4146,
+          "polsby_popper": 0.136,
+          "d_votes": 118231,
+          "r_votes": 166967,
+          "total_votes_cast": 285198,
+          "margin_pct": 0.1709,
+          "contested": true
+        },
+        {
+          "district": 12,
+          "won_by": "R",
+          "partisan_lean_d": 0.4826,
+          "polsby_popper": 0.0989,
+          "d_votes": 163589,
+          "r_votes": 175352,
+          "total_votes_cast": 338941,
+          "margin_pct": 0.0347,
+          "contested": true
+        },
+        {
+          "district": 13,
+          "won_by": "D",
+          "partisan_lean_d": 0.6909,
+          "polsby_popper": 0.0765,
+          "d_votes": 209901,
+          "r_votes": 93918,
+          "total_votes_cast": 303819,
+          "margin_pct": 0.3818,
+          "contested": true
+        },
+        {
+          "district": 14,
+          "won_by": "D",
+          "partisan_lean_d": 0.7689,
+          "polsby_popper": 0.1138,
+          "d_votes": 251932,
+          "r_votes": 75702,
+          "total_votes_cast": 327634,
+          "margin_pct": 0.5379,
+          "contested": true
+        },
+        {
+          "district": 15,
+          "won_by": "R",
+          "partisan_lean_d": 0.4325,
+          "polsby_popper": 0.1427,
+          "d_votes": 128764,
+          "r_votes": 168960,
+          "total_votes_cast": 297724,
+          "margin_pct": 0.135,
+          "contested": true
+        },
+        {
+          "district": 16,
+          "won_by": "R",
+          "partisan_lean_d": 0.4158,
+          "polsby_popper": 0.1273,
+          "d_votes": 111185,
+          "r_votes": 156192,
+          "total_votes_cast": 284781,
+          "margin_pct": 0.1683,
+          "contested": true
+        },
+        {
+          "district": 17,
+          "won_by": "D",
+          "partisan_lean_d": 0.6031,
+          "polsby_popper": 0.0831,
+          "d_votes": 161393,
+          "r_votes": 106208,
+          "total_votes_cast": 267601,
+          "margin_pct": 0.2062,
+          "contested": true
+        },
+        {
+          "district": 18,
+          "won_by": "R",
+          "partisan_lean_d": 0.3604,
+          "polsby_popper": 0.1702,
+          "d_votes": 122146,
+          "r_votes": 216727,
+          "total_votes_cast": 338873,
+          "margin_pct": 0.2791,
+          "contested": true
+        }
+      ]
     },
     {
       "cycle_year": 2022,
@@ -110,7 +732,196 @@
         "competitive": 5,
         "lean_r": 1,
         "solid_r": 5
-      }
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4513,
+          "polsby_popper": 0.3955,
+          "d_votes": 165809,
+          "r_votes": 201571,
+          "total_votes_cast": 367380,
+          "margin_pct": 0.0973,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.7565,
+          "polsby_popper": 0.4248,
+          "d_votes": 141229,
+          "r_votes": 45454,
+          "total_votes_cast": 186683,
+          "margin_pct": 0.513,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.3243,
+          "d_votes": 251115,
+          "r_votes": 0,
+          "total_votes_cast": 263935,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6129,
+          "polsby_popper": 0.1723,
+          "d_votes": 224799,
+          "r_votes": 141986,
+          "total_votes_cast": 366785,
+          "margin_pct": 0.2258,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6508,
+          "polsby_popper": 0.1894,
+          "d_votes": 205128,
+          "r_votes": 110058,
+          "total_votes_cast": 315186,
+          "margin_pct": 0.3016,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.5831,
+          "polsby_popper": 0.2926,
+          "d_votes": 190386,
+          "r_votes": 136097,
+          "total_votes_cast": 326483,
+          "margin_pct": 0.1663,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.5098,
+          "polsby_popper": 0.4179,
+          "d_votes": 151364,
+          "r_votes": 145527,
+          "total_votes_cast": 296891,
+          "margin_pct": 0.0197,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 0.5122,
+          "polsby_popper": 0.2812,
+          "d_votes": 146956,
+          "r_votes": 139930,
+          "total_votes_cast": 286886,
+          "margin_pct": 0.0245,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "R",
+          "partisan_lean_d": 0.3069,
+          "polsby_popper": 0.2806,
+          "d_votes": 92622,
+          "r_votes": 209185,
+          "total_votes_cast": 301807,
+          "margin_pct": 0.3862,
+          "contested": true
+        },
+        {
+          "district": 10,
+          "won_by": "R",
+          "partisan_lean_d": 0.4617,
+          "polsby_popper": 0.2752,
+          "d_votes": 145215,
+          "r_votes": 169331,
+          "total_votes_cast": 314546,
+          "margin_pct": 0.0767,
+          "contested": true
+        },
+        {
+          "district": 11,
+          "won_by": "R",
+          "partisan_lean_d": 0.3845,
+          "polsby_popper": 0.3732,
+          "d_votes": 121835,
+          "r_votes": 194991,
+          "total_votes_cast": 316826,
+          "margin_pct": 0.2309,
+          "contested": true
+        },
+        {
+          "district": 12,
+          "won_by": "D",
+          "partisan_lean_d": 0.562,
+          "polsby_popper": 0.1807,
+          "d_votes": 184674,
+          "r_votes": 143946,
+          "total_votes_cast": 328620,
+          "margin_pct": 0.1239,
+          "contested": true
+        },
+        {
+          "district": 13,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.3886,
+          "d_votes": 0,
+          "r_votes": 260345,
+          "total_votes_cast": 260345,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 14,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.3033,
+          "d_votes": 0,
+          "r_votes": 230865,
+          "total_votes_cast": 230865,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 15,
+          "won_by": "R",
+          "partisan_lean_d": 0.3006,
+          "polsby_popper": 0.4281,
+          "d_votes": 91729,
+          "r_votes": 213417,
+          "total_votes_cast": 305146,
+          "margin_pct": 0.3988,
+          "contested": true
+        },
+        {
+          "district": 16,
+          "won_by": "R",
+          "partisan_lean_d": 0.4064,
+          "polsby_popper": 0.3218,
+          "d_votes": 130443,
+          "r_votes": 190546,
+          "total_votes_cast": 320989,
+          "margin_pct": 0.1872,
+          "contested": true
+        },
+        {
+          "district": 17,
+          "won_by": "D",
+          "partisan_lean_d": 0.5339,
+          "polsby_popper": 0.2645,
+          "d_votes": 193615,
+          "r_votes": 169013,
+          "total_votes_cast": 362628,
+          "margin_pct": 0.0678,
+          "contested": true
+        }
+      ]
     }
   ]
 }
