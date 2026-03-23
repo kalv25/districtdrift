@@ -285,7 +285,7 @@
         >Wikipedia →</a>
       </div>
       <p class="district-card-note">
-        Demographics &amp; voter registration coming in a future update.
+        Precinct-level results coming in a future update.
       </p>
     </div>
   {/if}
