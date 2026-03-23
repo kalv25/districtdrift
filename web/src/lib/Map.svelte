@@ -3,7 +3,7 @@
   import { tweened } from 'svelte/motion';
   import { cubicInOut } from 'svelte/easing';
   import maplibregl from 'maplibre-gl';
-  import { Protocol } from 'pmtiles';
+  import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
   let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, onDistrictClick }: {
@@ -547,9 +547,30 @@
 
   // ── Map init ─────────────────────────────────────────────────────────────────
 
-  onMount(() => {
+  onMount(async () => {
     protocol = new Protocol();
     maplibregl.addProtocol('pmtiles', protocol.tile.bind(protocol));
+
+    // Pre-load the PMTiles file as a single full fetch to avoid HTTP range
+    // requests, which Cloudflare Pages doesn't serve with proper Content-Length.
+    // The PMTiles library is then served from an in-memory ArrayBuffer.
+    const tilesPath = `/tiles/${stateL}_districts.pmtiles`;
+    try {
+      const resp = await fetch(tilesPath);
+      if (resp.ok) {
+        const buf = await resp.arrayBuffer();
+        // Implement the PMTiles Source interface backed by the in-memory buffer
+        const bufferSource = {
+          getKey: () => tilesPath,
+          getBytes: async (offset: number, length: number) => ({
+            data: buf.slice(offset, offset + length) as ArrayBuffer,
+          }),
+        };
+        protocol.add(new PMTiles(bufferSource as any));
+      }
+    } catch (e) {
+      console.warn('PMTiles preload failed; range requests will be used as fallback:', e);
+    }
 
     map = new maplibregl.Map({
       container,
