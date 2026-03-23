@@ -10,12 +10,11 @@
     totalSeats: number;
   } = $props();
 
-  const W = 248;
-  const barH = 22;
-  const gap = 10;
-  const labelW = 56;
-  const H = (barH + gap) * 2 + gap;
-  const bw = W - labelW;
+  const W = 220;
+  const barH = 20;
+  const labelH = 18;
+  const gap = 8;
+  const H = labelH + barH + gap + labelH + barH;
 
   const vShare = tweened(0, { duration: 400, easing: cubicOut });
   const sShare = tweened(0, { duration: 400, easing: cubicOut });
@@ -30,31 +29,37 @@
   });
 
   function pct(v: number) { return (v * 100).toFixed(1) + '%'; }
+
+  // Row y offsets
+  const row1Label = labelH - 2;
+  const row1Bar = labelH;
+  const row2Label = labelH + barH + gap + labelH - 2;
+  const row2Bar = labelH + barH + gap + labelH;
 </script>
 
-<svg width={W} height={H} role="img" aria-label="Seat and vote share comparison">
+<svg width="95%" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Seat and vote share comparison">
   <!-- Vote share row -->
-  <text x={0} y={gap + barH / 2} dominant-baseline="middle" font-size="10" fill="#666">Votes</text>
-  <rect x={labelW} y={gap} width={bw * $vShare} height={barH} fill="#4a90d9" rx="2" />
-  <rect x={labelW + bw * $vShare} y={gap} width={bw * (1 - $vShare)} height={barH} fill="#e05c5c" rx="2" />
-  <text x={labelW + bw * $vShare / 2} y={gap + barH / 2} dominant-baseline="middle"
+  <text x={0} y={row1Label} font-size="9" fill="#888" font-weight="600" text-transform="uppercase" letter-spacing="0.5">VOTES</text>
+  <rect x={0} y={row1Bar} width={W * $vShare} height={barH} fill="#4a90d9" rx="2" />
+  <rect x={W * $vShare} y={row1Bar} width={W * (1 - $vShare)} height={barH} fill="#e05c5c" rx="2" />
+  <text x={W * $vShare / 2} y={row1Bar + barH / 2} dominant-baseline="middle"
     text-anchor="middle" font-size="9" fill="#fff" font-weight="600">
     {pct($vShare)}
   </text>
-  <text x={labelW + bw * $vShare + bw * (1 - $vShare) / 2} y={gap + barH / 2}
+  <text x={W * $vShare + W * (1 - $vShare) / 2} y={row1Bar + barH / 2}
     dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#fff" font-weight="600">
     {pct(1 - $vShare)}
   </text>
 
   <!-- Seat share row -->
-  <text x={0} y={gap * 2 + barH + barH / 2} dominant-baseline="middle" font-size="10" fill="#666">Seats</text>
-  <rect x={labelW} y={gap * 2 + barH} width={bw * $sShare} height={barH} fill="#2471a3" rx="2" />
-  <rect x={labelW + bw * $sShare} y={gap * 2 + barH} width={bw * (1 - $sShare)} height={barH} fill="#c0392b" rx="2" />
-  <text x={labelW + bw * $sShare / 2} y={gap * 2 + barH + barH / 2} dominant-baseline="middle"
+  <text x={0} y={row2Label} font-size="9" fill="#888" font-weight="600" letter-spacing="0.5">SEATS</text>
+  <rect x={0} y={row2Bar} width={W * $sShare} height={barH} fill="#2471a3" rx="2" />
+  <rect x={W * $sShare} y={row2Bar} width={W * (1 - $sShare)} height={barH} fill="#c0392b" rx="2" />
+  <text x={W * $sShare / 2} y={row2Bar + barH / 2} dominant-baseline="middle"
     text-anchor="middle" font-size="9" fill="#fff" font-weight="600">
     {seatsD}D ({pct($sShare)})
   </text>
-  <text x={labelW + bw * $sShare + bw * (1 - $sShare) / 2} y={gap * 2 + barH + barH / 2}
+  <text x={W * $sShare + W * (1 - $sShare) / 2} y={row2Bar + barH / 2}
     dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#fff" font-weight="600">
     {seatsR}R ({pct(1 - $sShare)})
   </text>

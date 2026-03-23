@@ -63,9 +63,10 @@ cycles (1992/2002/2012/2022) is the core feature no existing site offers.
 |------|---------|
 | `config.py` | Shared constants: state FIPS, cycle years, paths |
 | `download.py` | Downloads shapefiles from NHGIS + election results from RDH |
-| `process.py` | Computes efficiency gap, seat/vote stats; writes `mi_stats.json` |
-| `tile.py` | Runs Tippecanoe to generate `mi_districts.pmtiles` |
+| `process.py` | Computes efficiency gap, seat/vote stats; writes `{state}_stats.json` |
+| `tile.py` | Runs Tippecanoe to generate `{state}_districts.pmtiles` |
 | `export_geo.py` | Exports simplified GeoJSON per cycle for boundary morph animation |
+| `demographics.py` | Fetches NHGIS census data (race, income, education) per district per cycle |
 
 Run order:
 ```
@@ -94,7 +95,10 @@ Outputs (gitignored except web/static files):
 
 ### Key UI features implemented
 - Cycle selector (1992/2002/2012/2022) with year-specific colors and animated dots
-- Play button animates through cycles automatically
+  - Buttons are `flex: 1` — always share available space, never overflow
+  - D/R seat counts shown in side columns when container ≥ 400px; hidden when narrow (container query)
+  - Year font 0.72rem; D/R font 0.6rem; side grid columns 1.4rem
+- Play + layout-toggle buttons float on the map (bottom-left), always reachable regardless of layout
 - Boundary morph animation: district outlines move from previous→new positions
   - Ring alignment optimization (`alignRing`) prevents cross-side morphing artifacts
   - Unchanged districts (e.g. Upper Peninsula) skip animation
@@ -102,11 +106,25 @@ Outputs (gitignored except web/static files):
   - Previous year shown as faded dashed reference lines
 - Year stamp on map morphs through intermediate values (tweened store)
 - Map legend (bottom-right): current year solid line + previous year dashed
-- Two panel positions: side (default) or bottom (with map resize)
-- Panel position persisted in localStorage
+- Two panel layouts: **vertical** (right sidebar, default 330px) and **horizontal** (bottom bar, default 280px)
+  - Layout + dimensions persisted in localStorage
+  - Drag resize handle on each layout's boundary
+  - Vertical min-width: 300px (fits all 4 year buttons)
+- Two always-visible panels: **cycle panel** (state stats) and **district panel**
+  - Shadowed divider between panels
+  - Each panel has horizontal snap cards (iOS-style swipe)
+  - Vertical layout: snap cards stack vertically, fill panel width; charts use `width="95%" viewBox` → responsive
+  - Horizontal layout: district panel cards centered with `justify-content: safe center`
+- Cycle panel snap cards: key stats, seat vs. vote chart, trend chart, EG chart, competitiveness, key events, resources, credits
+  - `SeatVoteChart`: labels above bars, full-width bars
+  - `CompetitivenessChart`: legend moved to HTML flexbox (no SVG text overlap)
+  - All charts: `width="95%"` + `viewBox` for responsive scaling
+- District panel: header shows `D{n} {year}` + party + Ballotpedia link with D/R gradient background
+  - 3 snap cards: Partisan / Race & pop / Income & edu
+  - snap-dl tables: right-aligned values, alternating row shading, ellipsis on long values
 - Key events panel with verified historical events and litigation cases (⚖ prefix)
 - Resources section: further reading links grouped by category
-- Data credits footer: sourced from `mi_stats.json` (data-driven, varies per state)
+- Data credits footer: sourced from `{state}_stats.json` (data-driven, varies per state)
 - State selector in header (currently Michigan only; designed for expansion)
 
 ### Year-specific boundary colors
@@ -135,18 +153,20 @@ districtdrift/
 ├── pipeline/
 │   ├── config.py              ← shared constants
 │   ├── download.py            ← fetch raw data
-│   ├── process.py             ← compute stats, write mi_stats.json
+│   ├── process.py             ← compute stats, write {state}_stats.json
 │   ├── tile.py                ← generate PMTiles
-│   └── export_geo.py          ← export simplified GeoJSON for morph animation
+│   ├── export_geo.py          ← export simplified GeoJSON for morph animation
+│   └── demographics.py        ← fetch NHGIS census demographics per district
 ├── web/
 │   ├── src/
 │   │   ├── routes/+page.svelte  ← main page
 │   │   └── lib/
-│   │       ├── Map.svelte        ← map + animation
-│   │       ├── events.ts         ← historical events data
-│   │       ├── SeatVoteChart.svelte
-│   │       ├── TrendChart.svelte
-│   │       └── EGChart.svelte
+│   │       ├── Map.svelte               ← map + animation
+│   │       ├── events.ts                ← historical events data
+│   │       ├── SeatVoteChart.svelte     ← animated bars: seat vs vote share
+│   │       ├── TrendChart.svelte        ← line chart: D vote/seat share
+│   │       ├── EGChart.svelte           ← bar chart: efficiency gap
+│   │       └── CompetitivenessChart.svelte ← stacked bars: district competitiveness
 │   └── static/
 │       ├── mi_stats.json         ← partisan stats + credits
 │       ├── tiles/                ← PMTiles (gitignored)

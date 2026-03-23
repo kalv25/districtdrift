@@ -1,15 +1,14 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { tweened } from 'svelte/motion';
-  import { cubicInOut } from 'svelte/easing';
   import maplibregl from 'maplibre-gl';
   import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, onDistrictClick, onMapClick }: {
+  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, onDistrictClick, onMapClick }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;
+    panelLeft?: number;
     statePo?: string;
     cycleYears?: number[];
     darkMode?: boolean;
@@ -55,14 +54,6 @@
 
   // Year boundary colors — avoids blue/red (used for party fills)
   // ~40° apart on the wheel: Yellow | Teal | Purple | Pink
-  const YEAR_LINE_COLOR: Record<number, string> = {
-    1992: '#CA8A04',  // yellow-gold  (~43°)
-    2002: '#0D9488',  // teal         (~177°)
-    2012: '#9333EA',  // purple       (~272°)
-    2022: '#DB2777',  // pink         (~328°)
-  };
-  const lineColor = (y: number) => YEAR_LINE_COLOR[y] ?? '#e2e8f0';
-
   // Per-district boundary colors — 20 visually distinct hues, cycle with modulo.
   // Avoids the blue (#4a90d9) and red (#e05c5c) used for party fills.
   const DISTRICT_PALETTE = [
@@ -115,16 +106,6 @@
   let hoveredDistrict = $state<{ district: number | string; won_by: string; x: number; y: number } | null>(null);
 
   // Legend state (reactive so the overlay updates)
-  let legendCurrYear = $state(0);
-  let legendPrevYear = $state<number | null>(null);
-
-  const yearDisplay = tweened(0, { duration: MORPH_MS, easing: cubicInOut });
-  let yearDisplayReady = false;
-  $effect(() => {
-    const y = legendCurrYear;
-    yearDisplay.set(y, yearDisplayReady ? undefined : { duration: 0 });
-    yearDisplayReady = true;
-  });
 
   const geoCache = new Map<number, GeoJSON.FeatureCollection>();
   let computedBounds = $state<maplibregl.LngLatBoundsLike | null>(null);
@@ -456,9 +437,6 @@
     cancelMorph();
     const fromYear = chronoPrevYear(year);
 
-    legendCurrYear = year;
-    legendPrevYear = fromYear;
-
     // Ghost fill → always the chrono-prior year (or hidden if none)
     if (map.getLayer('districts-fill-back')) {
       if (fromYear !== null) {
@@ -507,7 +485,7 @@
       map.fitBounds(computedBounds ?? stateView.bounds, {
         // Canvas always fills the full viewport; use bottom padding to keep
         // the state's lower edge clear of the floating bottom panel.
-        padding: { top: 30, right: 30, bottom: panelBottom > 0 ? panelBottom + 20 : 30, left: 30 },
+        padding: { top: 30, right: 30, bottom: panelBottom > 0 ? panelBottom + 20 : 30, left: panelLeft > 0 ? panelLeft + 20 : 30 },
         duration,
         essential: true,
       });
@@ -588,7 +566,7 @@
       },
       bounds: stateView.bounds,
       fitBoundsOptions: {
-        padding: { top: 30, right: 30, bottom: panelBottom > 0 ? panelBottom + 20 : 30, left: 30 },
+        padding: { top: 30, right: 30, bottom: panelBottom > 0 ? panelBottom + 20 : 30, left: panelLeft > 0 ? panelLeft + 20 : 30 },
       },
     });
 
@@ -786,30 +764,6 @@
     >District {hoveredDistrict.district}</div>
   {/if}
 
-  <div class="map-year-stamp" style="color: {lineColor(legendCurrYear)}">
-    {$yearDisplay ? Math.round($yearDisplay) : ''}
-  </div>
-
-  <div class="map-legend" class:top-left={panelBottom > 0}>
-    <div class="legend-title">District boundaries</div>
-    {#if legendPrevYear !== null}
-      <div class="legend-row">
-        <span class="legend-line dashed" style="--c: {lineColor(legendPrevYear)}"></span>
-        <span class="legend-label dim">{legendPrevYear}</span>
-      </div>
-    {/if}
-    <div class="legend-row">
-      <span class="legend-line solid" style="--c: {lineColor(legendCurrYear)}"></span>
-      <span class="legend-label">{legendCurrYear}</span>
-    </div>
-    {#if swingLegendVisible}
-      <div class="legend-divider"></div>
-      <div class="legend-row">
-        <span class="legend-swing-bar"></span>
-        <span class="legend-label dim" style="font-size:0.68rem">D ← swing → R</span>
-      </div>
-    {/if}
-  </div>
 </div>
 
 <style>
@@ -836,83 +790,6 @@
   .district-tooltip.d { border-left-color: #4a90d9; }
   .district-tooltip.r { border-left-color: #e05c5c; }
 
-  .map-year-stamp {
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 3.5rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    opacity: 0.55;
-    pointer-events: none;
-    user-select: none;
-    line-height: 1;
-  }
-
-  .map-legend {
-    position: absolute;
-    bottom: 2rem;
-    right: 1rem;
-    background: rgba(20, 20, 30, 0.82);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: 0.6rem 0.9rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    pointer-events: none;
-  }
-  .map-legend.top-left {
-    bottom: auto;
-    right: auto;
-    top: 1rem;
-    left: 1rem;
-  }
-
-  .legend-title {
-    font-size: 0.62rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 0.1rem;
-  }
-
-  .legend-row {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .legend-line {
-    display: block;
-    width: 32px;
-    height: 0;
-    flex-shrink: 0;
-  }
-  .legend-line.solid {
-    border-top: 2.5px solid var(--c);
-    box-shadow: 0 0 6px 1px color-mix(in srgb, var(--c) 60%, transparent);
-  }
-  .legend-line.dashed {
-    border-top: 1.5px dashed color-mix(in srgb, var(--c) 45%, transparent);
-  }
-
-  .legend-label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.9);
-    line-height: 1;
-  }
-  .legend-label.dim { color: rgba(255,255,255,0.4); font-weight: 400; }
-
-  .legend-divider {
-    height: 1px;
-    background: rgba(255,255,255,0.1);
-    margin: 0.15rem 0;
-  }
 
   :global(.swing-label) {
     background: none;

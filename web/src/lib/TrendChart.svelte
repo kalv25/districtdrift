@@ -37,7 +37,7 @@
   }
 </script>
 
-<svg width={W} height={H} role="img" aria-label="Vote and seat share trend over cycles">
+<svg width="95%" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Vote and seat share trend over cycles">
   <g transform="translate({margin.left},{margin.top})">
     <!-- Reference lines -->
     {#each [0.4, 0.5, 0.6] as tick}

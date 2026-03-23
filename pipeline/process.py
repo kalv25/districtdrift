@@ -133,16 +133,27 @@ def load_election_results(cycle_year: int, state_po: str) -> pd.DataFrame:
         "REPUBLICAN", "INDEPENDENT-REPUBLICAN",
     })
 
+    # Total votes cast per district (all parties, not just 2-party)
+    total_votes_by_district = state_df.groupby("district")["candidatevotes"].sum().reset_index()
+    total_votes_by_district.columns = ["district", "total_votes_cast"]
+
     def agg_district(grp: pd.DataFrame) -> pd.Series:
         d = grp[grp["party_clean"].isin(DEM_LABELS)]["candidatevotes"].sum()
         r = grp[grp["party_clean"].isin(REP_LABELS)]["candidatevotes"].sum()
         total = d + r
         won_by = "D" if d > r else ("R" if r > d else "tie")
+        contested = bool(d > 0 and r > 0)
+        margin_pct = abs(d - r) / total if (contested and total > 0) else None
         return pd.Series({"d_votes": int(d), "r_votes": int(r),
-                          "total_2party": int(total), "won_by": won_by})
+                          "total_2party": int(total), "won_by": won_by,
+                          "contested": contested, "margin_pct": margin_pct})
 
     results = state_df.groupby("district").apply(agg_district).reset_index()
     results["district"] = pd.to_numeric(results["district"], errors="coerce").astype("Int64")
+    total_votes_by_district["district"] = pd.to_numeric(
+        total_votes_by_district["district"], errors="coerce"
+    ).astype("Int64")
+    results = results.merge(total_votes_by_district, on="district", how="left")
     return results
 
 
@@ -277,6 +288,23 @@ def process_cycle(
 
     gdf["polsby_popper"] = gdf["polsby_popper"].round(4)
     gdf["partisan_lean_d"] = gdf["partisan_lean_d"].astype(float).round(4)
+
+    # Build per-district list for the stats JSON
+    districts = []
+    for _, row in gdf.sort_values("district").iterrows():
+        d = {
+            "district": int(row["district"]) if pd.notna(row.get("district")) else None,
+            "won_by": row.get("won_by", None),
+            "partisan_lean_d": float(row["partisan_lean_d"]) if pd.notna(row.get("partisan_lean_d")) else None,
+            "polsby_popper": float(row["polsby_popper"]) if pd.notna(row.get("polsby_popper")) else None,
+            "d_votes": int(row["d_votes"]) if pd.notna(row.get("d_votes")) else None,
+            "r_votes": int(row["r_votes"]) if pd.notna(row.get("r_votes")) else None,
+            "total_votes_cast": int(row["total_votes_cast"]) if pd.notna(row.get("total_votes_cast")) else None,
+            "margin_pct": round(float(row["margin_pct"]), 4) if pd.notna(row.get("margin_pct")) else None,
+            "contested": bool(row["contested"]) if pd.notna(row.get("contested")) else None,
+        }
+        districts.append(d)
+    cycle_stats["districts"] = districts
 
     return gdf, cycle_stats
 
