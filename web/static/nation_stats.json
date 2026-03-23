@@ -1,0 +1,2504 @@
+{
+  "states": [
+    {
+      "state_po": "AK",
+      "state_name": "Alaska",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 102378,
+          "votes_r": 111849,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2002,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 39357,
+          "votes_r": 169685,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2012,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 82927,
+          "votes_r": 185296,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 128553,
+          "votes_r": 129379,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    },
+    {
+      "state_po": "AL",
+      "state_name": "Alabama",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 7,
+          "seats_d": 4,
+          "seats_r": 3,
+          "votes_d": 895601,
+          "votes_r": 643150,
+          "efficiency_gap": 0.1206,
+          "mean_median_diff": -0.0282,
+          "seat_vote_ratio_d": 0.9818
+        },
+        {
+          "year": 2002,
+          "seats": 7,
+          "seats_d": 2,
+          "seats_r": 5,
+          "votes_d": 507117,
+          "votes_r": 694606,
+          "efficiency_gap": 0.0569,
+          "mean_median_diff": 0.033,
+          "seat_vote_ratio_d": 0.6771
+        },
+        {
+          "year": 2012,
+          "seats": 7,
+          "seats_d": 1,
+          "seats_r": 6,
+          "votes_d": 693498,
+          "votes_r": 1233624,
+          "efficiency_gap": 0.0608,
+          "mean_median_diff": -0.0101,
+          "seat_vote_ratio_d": 0.397
+        },
+        {
+          "year": 2022,
+          "seats": 7,
+          "seats_d": 1,
+          "seats_r": 6,
+          "votes_d": 318540,
+          "votes_r": 942393,
+          "efficiency_gap": -0.1459,
+          "mean_median_diff": -0.0252,
+          "seat_vote_ratio_d": 0.5655
+        }
+      ]
+    },
+    {
+      "state_po": "AR",
+      "state_name": "Arkansas",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 4,
+          "seats_d": 2,
+          "seats_r": 2,
+          "votes_d": 525197,
+          "votes_r": 356900,
+          "efficiency_gap": 0.2111,
+          "mean_median_diff": 0.0089,
+          "seat_vote_ratio_d": 0.8398
+        },
+        {
+          "year": 2002,
+          "seats": 4,
+          "seats_d": 3,
+          "seats_r": 1,
+          "votes_d": 392086,
+          "votes_r": 283739,
+          "efficiency_gap": -0.1303,
+          "mean_median_diff": -0.0685,
+          "seat_vote_ratio_d": 1.2927
+        },
+        {
+          "year": 2012,
+          "seats": 4,
+          "seats_d": 0,
+          "seats_r": 4,
+          "votes_d": 304770,
+          "votes_r": 637591,
+          "efficiency_gap": 0.1468,
+          "mean_median_diff": -0.0937,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 4,
+          "seats_d": 0,
+          "seats_r": 4,
+          "votes_d": 271771,
+          "votes_r": 598000,
+          "efficiency_gap": 0.1249,
+          "mean_median_diff": 0.0055,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    },
+    {
+      "state_po": "AZ",
+      "state_name": "Arizona",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 6,
+          "seats_d": 3,
+          "seats_r": 3,
+          "votes_d": 582317,
+          "votes_r": 740047,
+          "efficiency_gap": -0.0712,
+          "mean_median_diff": 0.0136,
+          "seat_vote_ratio_d": 1.1354
+        },
+        {
+          "year": 2002,
+          "seats": 8,
+          "seats_d": 2,
+          "seats_r": 6,
+          "votes_d": 472135,
+          "votes_r": 681922,
+          "efficiency_gap": 0.1773,
+          "mean_median_diff": 0.0664,
+          "seat_vote_ratio_d": 0.6111
+        },
+        {
+          "year": 2012,
+          "seats": 9,
+          "seats_d": 5,
+          "seats_r": 4,
+          "votes_d": 946994,
+          "votes_r": 1131663,
+          "efficiency_gap": -0.0833,
+          "mean_median_diff": -0.0052,
+          "seat_vote_ratio_d": 1.2194
+        },
+        {
+          "year": 2022,
+          "seats": 9,
+          "seats_d": 3,
+          "seats_r": 6,
+          "votes_d": 1016112,
+          "votes_r": 1324961,
+          "efficiency_gap": 0.1108,
+          "mean_median_diff": -0.0615,
+          "seat_vote_ratio_d": 0.768
+        }
+      ]
+    },
+    {
+      "state_po": "CA",
+      "state_name": "California",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 52,
+          "seats_d": 30,
+          "seats_r": 22,
+          "votes_d": 5446965,
+          "votes_r": 4365155,
+          "efficiency_gap": 0.0649,
+          "mean_median_diff": 0.0322,
+          "seat_vote_ratio_d": 1.0393
+        },
+        {
+          "year": 2002,
+          "seats": 53,
+          "seats_d": 33,
+          "seats_r": 20,
+          "votes_d": 3731081,
+          "votes_r": 3225666,
+          "efficiency_gap": 0.0109,
+          "mean_median_diff": -0.0785,
+          "seat_vote_ratio_d": 1.1609
+        },
+        {
+          "year": 2012,
+          "seats": 53,
+          "seats_d": 38,
+          "seats_r": 15,
+          "votes_d": 7392703,
+          "votes_r": 4530012,
+          "efficiency_gap": 0.0317,
+          "mean_median_diff": -0.0113,
+          "seat_vote_ratio_d": 1.1563
+        },
+        {
+          "year": 2022,
+          "seats": 52,
+          "seats_d": 40,
+          "seats_r": 12,
+          "votes_d": 6743737,
+          "votes_r": 3859666,
+          "efficiency_gap": 0.026,
+          "mean_median_diff": 0.0282,
+          "seat_vote_ratio_d": 1.2095
+        }
+      ]
+    },
+    {
+      "state_po": "CO",
+      "state_name": "Colorado",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 6,
+          "seats_d": 2,
+          "seats_r": 4,
+          "votes_d": 691479,
+          "votes_r": 757666,
+          "efficiency_gap": 0.1226,
+          "mean_median_diff": 0.044,
+          "seat_vote_ratio_d": 0.6986
+        },
+        {
+          "year": 2002,
+          "seats": 7,
+          "seats_d": 2,
+          "seats_r": 5,
+          "votes_d": 589463,
+          "votes_r": 752998,
+          "efficiency_gap": 0.1095,
+          "mean_median_diff": 0.0168,
+          "seat_vote_ratio_d": 0.6507
+        },
+        {
+          "year": 2012,
+          "seats": 7,
+          "seats_d": 3,
+          "seats_r": 4,
+          "votes_d": 1080153,
+          "votes_r": 1143796,
+          "efficiency_gap": -0.0006,
+          "mean_median_diff": -0.0339,
+          "seat_vote_ratio_d": 0.8824
+        },
+        {
+          "year": 2022,
+          "seats": 8,
+          "seats_d": 5,
+          "seats_r": 3,
+          "votes_d": 1365427,
+          "votes_r": 1050960,
+          "efficiency_gap": 0.0193,
+          "mean_median_diff": 0.0257,
+          "seat_vote_ratio_d": 1.1061
+        }
+      ]
+    },
+    {
+      "state_po": "CT",
+      "state_name": "Connecticut",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 6,
+          "seats_d": 2,
+          "seats_r": 4,
+          "votes_d": 501887,
+          "votes_r": 699155,
+          "efficiency_gap": 0.0153,
+          "mean_median_diff": 0.0108,
+          "seat_vote_ratio_d": 0.7977
+        },
+        {
+          "year": 2002,
+          "seats": 5,
+          "seats_d": 2,
+          "seats_r": 3,
+          "votes_d": 509036,
+          "votes_r": 465982,
+          "efficiency_gap": 0.1565,
+          "mean_median_diff": 0.0641,
+          "seat_vote_ratio_d": 0.7662
+        },
+        {
+          "year": 2012,
+          "seats": 5,
+          "seats_d": 5,
+          "seats_r": 0,
+          "votes_d": 884398,
+          "votes_r": 490580,
+          "efficiency_gap": -0.2136,
+          "mean_median_diff": -0.0396,
+          "seat_vote_ratio_d": 1.5547
+        },
+        {
+          "year": 2022,
+          "seats": 5,
+          "seats_d": 5,
+          "seats_r": 0,
+          "votes_d": 712823,
+          "votes_r": 521387,
+          "efficiency_gap": -0.3449,
+          "mean_median_diff": -0.0139,
+          "seat_vote_ratio_d": 1.7314
+        }
+      ]
+    },
+    {
+      "state_po": "DE",
+      "state_name": "Delaware",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 117426,
+          "votes_r": 153037,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2002,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 61011,
+          "votes_r": 164605,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2012,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 249933,
+          "votes_r": 129757,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.5192
+        },
+        {
+          "year": 2022,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 178416,
+          "votes_r": 138201,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.7746
+        }
+      ]
+    },
+    {
+      "state_po": "FL",
+      "state_name": "Florida",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 23,
+          "seats_d": 10,
+          "seats_r": 13,
+          "votes_d": 2256681,
+          "votes_r": 2510726,
+          "efficiency_gap": 0.0227,
+          "mean_median_diff": 0.0326,
+          "seat_vote_ratio_d": 0.9185
+        },
+        {
+          "year": 2002,
+          "seats": 25,
+          "seats_d": 7,
+          "seats_r": 18,
+          "votes_d": 1537126,
+          "votes_r": 2161353,
+          "efficiency_gap": 0.1063,
+          "mean_median_diff": 0.0365,
+          "seat_vote_ratio_d": 0.6737
+        },
+        {
+          "year": 2012,
+          "seats": 27,
+          "seats_d": 10,
+          "seats_r": 17,
+          "votes_d": 3392403,
+          "votes_r": 3826523,
+          "efficiency_gap": 0.1071,
+          "mean_median_diff": 0.048,
+          "seat_vote_ratio_d": 0.7881
+        },
+        {
+          "year": 2022,
+          "seats": 28,
+          "seats_d": 8,
+          "seats_r": 20,
+          "votes_d": 2784549,
+          "votes_r": 4271197,
+          "efficiency_gap": 0.0317,
+          "mean_median_diff": 0.0076,
+          "seat_vote_ratio_d": 0.724
+        }
+      ]
+    },
+    {
+      "state_po": "GA",
+      "state_name": "Georgia",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 11,
+          "seats_d": 7,
+          "seats_r": 4,
+          "votes_d": 1214792,
+          "votes_r": 999182,
+          "efficiency_gap": 0.0099,
+          "mean_median_diff": 0.0011,
+          "seat_vote_ratio_d": 1.1598
+        },
+        {
+          "year": 2002,
+          "seats": 13,
+          "seats_d": 5,
+          "seats_r": 8,
+          "votes_d": 814295,
+          "votes_r": 1104622,
+          "efficiency_gap": 0.0156,
+          "mean_median_diff": 0.0121,
+          "seat_vote_ratio_d": 0.9064
+        },
+        {
+          "year": 2012,
+          "seats": 14,
+          "seats_d": 5,
+          "seats_r": 9,
+          "votes_d": 1448869,
+          "votes_r": 2104098,
+          "efficiency_gap": -0.0665,
+          "mean_median_diff": 0.023,
+          "seat_vote_ratio_d": 0.8758
+        },
+        {
+          "year": 2022,
+          "seats": 14,
+          "seats_d": 3,
+          "seats_r": 11,
+          "votes_d": 1514863,
+          "votes_r": 2044802,
+          "efficiency_gap": 0.1278,
+          "mean_median_diff": 0.0224,
+          "seat_vote_ratio_d": 0.5035
+        }
+      ]
+    },
+    {
+      "state_po": "HI",
+      "state_name": "Hawaii",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 260786,
+          "votes_r": 81645,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.3131
+        },
+        {
+          "year": 2002,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 232344,
+          "votes_r": 116693,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.5022
+        },
+        {
+          "year": 2012,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 285008,
+          "votes_r": 137531,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.4826
+        },
+        {
+          "year": 2022,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 271953,
+          "votes_r": 124091,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.4563
+        }
+      ]
+    },
+    {
+      "state_po": "IA",
+      "state_name": "Iowa",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 5,
+          "seats_d": 1,
+          "seats_r": 4,
+          "votes_d": 492843,
+          "votes_r": 729496,
+          "efficiency_gap": 0.0997,
+          "mean_median_diff": -0.1048,
+          "seat_vote_ratio_d": 0.496
+        },
+        {
+          "year": 2002,
+          "seats": 5,
+          "seats_d": 1,
+          "seats_r": 4,
+          "votes_d": 453550,
+          "votes_r": 546382,
+          "efficiency_gap": 0.1945,
+          "mean_median_diff": 0.0108,
+          "seat_vote_ratio_d": 0.4409
+        },
+        {
+          "year": 2012,
+          "seats": 4,
+          "seats_d": 2,
+          "seats_r": 2,
+          "votes_d": 772387,
+          "votes_r": 726505,
+          "efficiency_gap": 0.0244,
+          "mean_median_diff": 0.0019,
+          "seat_vote_ratio_d": 0.9703
+        },
+        {
+          "year": 2022,
+          "seats": 4,
+          "seats_d": 0,
+          "seats_r": 4,
+          "votes_d": 526460,
+          "votes_r": 677857,
+          "efficiency_gap": 0.3743,
+          "mean_median_diff": -0.0293,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    },
+    {
+      "state_po": "ID",
+      "state_name": "Idaho",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 2,
+          "seats_d": 1,
+          "seats_r": 1,
+          "votes_d": 222435,
+          "votes_r": 230766,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.0187
+        },
+        {
+          "year": 2002,
+          "seats": 2,
+          "seats_d": 0,
+          "seats_r": 2,
+          "votes_d": 138038,
+          "votes_r": 256348,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2012,
+          "seats": 2,
+          "seats_d": 0,
+          "seats_r": 2,
+          "votes_d": 208297,
+          "votes_r": 406814,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 2,
+          "seats_d": 0,
+          "seats_r": 2,
+          "votes_d": 180997,
+          "votes_r": 395351,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    },
+    {
+      "state_po": "IL",
+      "state_name": "Illinois",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 20,
+          "seats_d": 12,
+          "seats_r": 8,
+          "votes_d": 2677685,
+          "votes_r": 2096717,
+          "efficiency_gap": 0.0366,
+          "mean_median_diff": -0.0097,
+          "seat_vote_ratio_d": 1.0698
+        },
+        {
+          "year": 2002,
+          "seats": 19,
+          "seats_d": 9,
+          "seats_r": 10,
+          "votes_d": 1740541,
+          "votes_r": 1657183,
+          "efficiency_gap": 0.0912,
+          "mean_median_diff": 0.0821,
+          "seat_vote_ratio_d": 0.9247
+        },
+        {
+          "year": 2012,
+          "seats": 18,
+          "seats_d": 12,
+          "seats_r": 6,
+          "votes_d": 2743702,
+          "votes_r": 2207818,
+          "efficiency_gap": -0.0232,
+          "mean_median_diff": 0.0205,
+          "seat_vote_ratio_d": 1.2031
+        },
+        {
+          "year": 2022,
+          "seats": 17,
+          "seats_d": 14,
+          "seats_r": 3,
+          "votes_d": 2271361,
+          "votes_r": 1768782,
+          "efficiency_gap": -0.1557,
+          "mean_median_diff": 0.0176,
+          "seat_vote_ratio_d": 1.4648
+        }
+      ]
+    },
+    {
+      "state_po": "IN",
+      "state_name": "Indiana",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 10,
+          "seats_d": 7,
+          "seats_r": 3,
+          "votes_d": 1205869,
+          "votes_r": 998334,
+          "efficiency_gap": -0.09,
+          "mean_median_diff": -0.0294,
+          "seat_vote_ratio_d": 1.2795
+        },
+        {
+          "year": 2002,
+          "seats": 9,
+          "seats_d": 3,
+          "seats_r": 6,
+          "votes_d": 640568,
+          "votes_r": 840694,
+          "efficiency_gap": 0.0557,
+          "mean_median_diff": -0.0357,
+          "seat_vote_ratio_d": 0.7708
+        },
+        {
+          "year": 2012,
+          "seats": 9,
+          "seats_d": 2,
+          "seats_r": 7,
+          "votes_d": 1142554,
+          "votes_r": 1351760,
+          "efficiency_gap": 0.2008,
+          "mean_median_diff": 0.014,
+          "seat_vote_ratio_d": 0.4851
+        },
+        {
+          "year": 2022,
+          "seats": 9,
+          "seats_d": 2,
+          "seats_r": 7,
+          "votes_d": 716348,
+          "votes_r": 1108351,
+          "efficiency_gap": 0.0746,
+          "mean_median_diff": 0.0621,
+          "seat_vote_ratio_d": 0.566
+        }
+      ]
+    },
+    {
+      "state_po": "KS",
+      "state_name": "Kansas",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 4,
+          "seats_d": 2,
+          "seats_r": 2,
+          "votes_d": 488381,
+          "votes_r": 591712,
+          "efficiency_gap": -0.0786,
+          "mean_median_diff": -0.0162,
+          "seat_vote_ratio_d": 1.1058
+        },
+        {
+          "year": 2002,
+          "seats": 4,
+          "seats_d": 1,
+          "seats_r": 3,
+          "votes_d": 259911,
+          "votes_r": 536026,
+          "efficiency_gap": -0.1145,
+          "mean_median_diff": -0.0613,
+          "seat_vote_ratio_d": 0.7656
+        },
+        {
+          "year": 2012,
+          "seats": 4,
+          "seats_d": 0,
+          "seats_r": 4,
+          "votes_d": 195505,
+          "votes_r": 740981,
+          "efficiency_gap": -0.0825,
+          "mean_median_diff": 0.0169,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 4,
+          "seats_d": 1,
+          "seats_r": 3,
+          "votes_d": 425322,
+          "votes_r": 569567,
+          "efficiency_gap": 0.0591,
+          "mean_median_diff": 0.0239,
+          "seat_vote_ratio_d": 0.5848
+        }
+      ]
+    },
+    {
+      "state_po": "KY",
+      "state_name": "Kentucky",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 6,
+          "seats_d": 4,
+          "seats_r": 2,
+          "votes_d": 721747,
+          "votes_r": 638166,
+          "efficiency_gap": -0.1168,
+          "mean_median_diff": -0.0349,
+          "seat_vote_ratio_d": 1.2561
+        },
+        {
+          "year": 2002,
+          "seats": 6,
+          "seats_d": 1,
+          "seats_r": 5,
+          "votes_d": 350924,
+          "votes_r": 693860,
+          "efficiency_gap": 0.0096,
+          "mean_median_diff": -0.0111,
+          "seat_vote_ratio_d": 0.4962
+        },
+        {
+          "year": 2012,
+          "seats": 6,
+          "seats_d": 1,
+          "seats_r": 5,
+          "votes_d": 684744,
+          "votes_r": 1027582,
+          "efficiency_gap": 0.1142,
+          "mean_median_diff": 0.0455,
+          "seat_vote_ratio_d": 0.4168
+        },
+        {
+          "year": 2022,
+          "seats": 6,
+          "seats_d": 1,
+          "seats_r": 5,
+          "votes_d": 490921,
+          "votes_r": 953296,
+          "efficiency_gap": 0.0001,
+          "mean_median_diff": 0.0315,
+          "seat_vote_ratio_d": 0.4903
+        }
+      ]
+    },
+    {
+      "state_po": "LA",
+      "state_name": "Louisiana",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 7,
+          "seats_d": 4,
+          "seats_r": 3,
+          "votes_d": 284913,
+          "votes_r": 398680,
+          "efficiency_gap": 0.0486,
+          "mean_median_diff": -0.3757,
+          "seat_vote_ratio_d": 1.371
+        },
+        {
+          "year": 2002,
+          "seats": 7,
+          "seats_d": 2,
+          "seats_r": 5,
+          "votes_d": 448191,
+          "votes_r": 793667,
+          "efficiency_gap": -0.0013,
+          "mean_median_diff": 0.0965,
+          "seat_vote_ratio_d": 0.7917
+        },
+        {
+          "year": 2012,
+          "seats": 6,
+          "seats_d": 1,
+          "seats_r": 5,
+          "votes_d": 359190,
+          "votes_r": 1143027,
+          "efficiency_gap": -0.2086,
+          "mean_median_diff": 0.1009,
+          "seat_vote_ratio_d": 0.697
+        },
+        {
+          "year": 2022,
+          "seats": 6,
+          "seats_d": 1,
+          "seats_r": 5,
+          "votes_d": 318932,
+          "votes_r": 769690,
+          "efficiency_gap": -0.1024,
+          "mean_median_diff": 0.0208,
+          "seat_vote_ratio_d": 0.5689
+        }
+      ]
+    },
+    {
+      "state_po": "MA",
+      "state_name": "Massachusetts",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 10,
+          "seats_d": 8,
+          "seats_r": 2,
+          "votes_d": 1518208,
+          "votes_r": 856572,
+          "efficiency_gap": 0.0045,
+          "mean_median_diff": -0.0045,
+          "seat_vote_ratio_d": 1.2514
+        },
+        {
+          "year": 2002,
+          "seats": 10,
+          "seats_d": 10,
+          "seats_r": 0,
+          "votes_d": 1528634,
+          "votes_r": 290484,
+          "efficiency_gap": 0.1806,
+          "mean_median_diff": -0.1309,
+          "seat_vote_ratio_d": 1.19
+        },
+        {
+          "year": 2012,
+          "seats": 9,
+          "seats_d": 9,
+          "seats_r": 0,
+          "votes_d": 2080594,
+          "votes_r": 697637,
+          "efficiency_gap": -0.0022,
+          "mean_median_diff": 0.0171,
+          "seat_vote_ratio_d": 1.3353
+        },
+        {
+          "year": 2022,
+          "seats": 9,
+          "seats_d": 9,
+          "seats_r": 0,
+          "votes_d": 1636400,
+          "votes_r": 679661,
+          "efficiency_gap": -0.0869,
+          "mean_median_diff": 0.0691,
+          "seat_vote_ratio_d": 1.4153
+        }
+      ]
+    },
+    {
+      "state_po": "MD",
+      "state_name": "Maryland",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 8,
+          "seats_d": 4,
+          "seats_r": 4,
+          "votes_d": 955952,
+          "votes_r": 849779,
+          "efficiency_gap": 0.1121,
+          "mean_median_diff": 0.0474,
+          "seat_vote_ratio_d": 0.9445
+        },
+        {
+          "year": 2002,
+          "seats": 8,
+          "seats_d": 6,
+          "seats_r": 2,
+          "votes_d": 904250,
+          "votes_r": 752911,
+          "efficiency_gap": -0.123,
+          "mean_median_diff": -0.0363,
+          "seat_vote_ratio_d": 1.3745
+        },
+        {
+          "year": 2012,
+          "seats": 8,
+          "seats_d": 7,
+          "seats_r": 1,
+          "votes_d": 1641730,
+          "votes_r": 858406,
+          "efficiency_gap": -0.0579,
+          "mean_median_diff": -0.0281,
+          "seat_vote_ratio_d": 1.3325
+        },
+        {
+          "year": 2022,
+          "seats": 8,
+          "seats_d": 7,
+          "seats_r": 1,
+          "votes_d": 1291446,
+          "votes_r": 690463,
+          "efficiency_gap": -0.0524,
+          "mean_median_diff": 0.0421,
+          "seat_vote_ratio_d": 1.3428
+        }
+      ]
+    },
+    {
+      "state_po": "ME",
+      "state_name": "Maine",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 2,
+          "seats_d": 1,
+          "seats_r": 1,
+          "votes_d": 363520,
+          "votes_r": 278258,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.8827
+        },
+        {
+          "year": 2002,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 289514,
+          "votes_r": 205780,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.7108
+        },
+        {
+          "year": 2012,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 427819,
+          "votes_r": 265982,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.6217
+        },
+        {
+          "year": 2022,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 384889,
+          "votes_r": 275405,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.7155
+        }
+      ]
+    },
+    {
+      "state_po": "MI",
+      "state_name": "Michigan",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 16,
+          "seats_d": 10,
+          "seats_r": 6,
+          "votes_d": 1913175,
+          "votes_r": 1855241,
+          "efficiency_gap": -0.1134,
+          "mean_median_diff": -0.0363,
+          "seat_vote_ratio_d": 1.2311
+        },
+        {
+          "year": 2002,
+          "seats": 15,
+          "seats_d": 6,
+          "seats_r": 9,
+          "votes_d": 1507174,
+          "votes_r": 1474178,
+          "efficiency_gap": 0.1559,
+          "mean_median_diff": 0.1276,
+          "seat_vote_ratio_d": 0.7912
+        },
+        {
+          "year": 2012,
+          "seats": 14,
+          "seats_d": 5,
+          "seats_r": 9,
+          "votes_d": 2327985,
+          "votes_r": 2086804,
+          "efficiency_gap": 0.2041,
+          "mean_median_diff": 0.0687,
+          "seat_vote_ratio_d": 0.6773
+        },
+        {
+          "year": 2022,
+          "seats": 13,
+          "seats_d": 7,
+          "seats_r": 6,
+          "votes_d": 2184504,
+          "votes_r": 2083361,
+          "efficiency_gap": -0.0015,
+          "mean_median_diff": -0.007,
+          "seat_vote_ratio_d": 1.052
+        }
+      ]
+    },
+    {
+      "state_po": "MN",
+      "state_name": "Minnesota",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 8,
+          "seats_d": 0,
+          "seats_r": 0,
+          "votes_d": 0,
+          "votes_r": 0,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": null
+        },
+        {
+          "year": 2002,
+          "seats": 8,
+          "seats_d": 0,
+          "seats_r": 8,
+          "votes_d": 0,
+          "votes_r": 1029612,
+          "efficiency_gap": -0.5,
+          "mean_median_diff": 0.0,
+          "seat_vote_ratio_d": null
+        },
+        {
+          "year": 2012,
+          "seats": 8,
+          "seats_d": 4,
+          "seats_r": 4,
+          "votes_d": 869789,
+          "votes_r": 1210409,
+          "efficiency_gap": -0.3005,
+          "mean_median_diff": 0.0396,
+          "seat_vote_ratio_d": 1.1958
+        },
+        {
+          "year": 2022,
+          "seats": 8,
+          "seats_d": 4,
+          "seats_r": 4,
+          "votes_d": 778745,
+          "votes_r": 1200855,
+          "efficiency_gap": -0.3337,
+          "mean_median_diff": 0.0554,
+          "seat_vote_ratio_d": 1.271
+        }
+      ]
+    },
+    {
+      "state_po": "MO",
+      "state_name": "Missouri",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 9,
+          "seats_d": 6,
+          "seats_r": 3,
+          "votes_d": 1269486,
+          "votes_r": 1036268,
+          "efficiency_gap": -0.0517,
+          "mean_median_diff": -0.0026,
+          "seat_vote_ratio_d": 1.2109
+        },
+        {
+          "year": 2002,
+          "seats": 9,
+          "seats_d": 4,
+          "seats_r": 5,
+          "votes_d": 829177,
+          "votes_r": 985905,
+          "efficiency_gap": -0.015,
+          "mean_median_diff": 0.104,
+          "seat_vote_ratio_d": 0.9729
+        },
+        {
+          "year": 2012,
+          "seats": 8,
+          "seats_d": 2,
+          "seats_r": 6,
+          "votes_d": 1119554,
+          "votes_r": 1463586,
+          "efficiency_gap": 0.1147,
+          "mean_median_diff": 0.0747,
+          "seat_vote_ratio_d": 0.5768
+        },
+        {
+          "year": 2022,
+          "seats": 8,
+          "seats_d": 2,
+          "seats_r": 6,
+          "votes_d": 794978,
+          "votes_r": 1223617,
+          "efficiency_gap": 0.0699,
+          "mean_median_diff": 0.0866,
+          "seat_vote_ratio_d": 0.6348
+        }
+      ]
+    },
+    {
+      "state_po": "MS",
+      "state_name": "Mississippi",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 5,
+          "seats_d": 5,
+          "seats_r": 0,
+          "votes_d": 669582,
+          "votes_r": 273234,
+          "efficiency_gap": -0.0796,
+          "mean_median_diff": -0.0375,
+          "seat_vote_ratio_d": 1.4081
+        },
+        {
+          "year": 2002,
+          "seats": 4,
+          "seats_d": 2,
+          "seats_r": 2,
+          "votes_d": 320157,
+          "votes_r": 338817,
+          "efficiency_gap": -0.0075,
+          "mean_median_diff": 0.029,
+          "seat_vote_ratio_d": 1.0291
+        },
+        {
+          "year": 2012,
+          "seats": 4,
+          "seats_d": 1,
+          "seats_r": 3,
+          "votes_d": 411398,
+          "votes_r": 703635,
+          "efficiency_gap": -0.0438,
+          "mean_median_diff": -0.0013,
+          "seat_vote_ratio_d": 0.6776
+        },
+        {
+          "year": 2022,
+          "seats": 4,
+          "seats_d": 1,
+          "seats_r": 3,
+          "votes_d": 251202,
+          "votes_r": 454329,
+          "efficiency_gap": -0.0433,
+          "mean_median_diff": 0.0723,
+          "seat_vote_ratio_d": 0.7022
+        }
+      ]
+    },
+    {
+      "state_po": "MT",
+      "state_name": "Montana",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 203711,
+          "votes_r": 189570,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.9306
+        },
+        {
+          "year": 2002,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 108233,
+          "votes_r": 214100,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2012,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 204939,
+          "votes_r": 255468,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 2,
+          "seats_d": 1,
+          "seats_r": 1,
+          "votes_d": 158745,
+          "votes_r": 123102,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.8877
+        }
+      ]
+    },
+    {
+      "state_po": "NC",
+      "state_name": "North Carolina",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 12,
+          "seats_d": 8,
+          "seats_r": 4,
+          "votes_d": 1282474,
+          "votes_r": 1203983,
+          "efficiency_gap": -0.0966,
+          "mean_median_diff": -0.0266,
+          "seat_vote_ratio_d": 1.2925
+        },
+        {
+          "year": 2002,
+          "seats": 13,
+          "seats_d": 6,
+          "seats_r": 7,
+          "votes_d": 970716,
+          "votes_r": 1209033,
+          "efficiency_gap": -0.0662,
+          "mean_median_diff": -0.0134,
+          "seat_vote_ratio_d": 1.0364
+        },
+        {
+          "year": 2012,
+          "seats": 13,
+          "seats_d": 4,
+          "seats_r": 9,
+          "votes_d": 2218357,
+          "votes_r": 2137167,
+          "efficiency_gap": 0.2137,
+          "mean_median_diff": 0.0784,
+          "seat_vote_ratio_d": 0.6041
+        },
+        {
+          "year": 2022,
+          "seats": 14,
+          "seats_d": 7,
+          "seats_r": 7,
+          "votes_d": 1795170,
+          "votes_r": 1956906,
+          "efficiency_gap": -0.0386,
+          "mean_median_diff": -0.0066,
+          "seat_vote_ratio_d": 1.045
+        }
+      ]
+    },
+    {
+      "state_po": "ND",
+      "state_name": "North Dakota",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 169273,
+          "votes_r": 117442,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.6938
+        },
+        {
+          "year": 2002,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 121073,
+          "votes_r": 109957,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.9082
+        },
+        {
+          "year": 2012,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 0,
+          "votes_r": 173585,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": null
+        },
+        {
+          "year": 2022,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 0,
+          "votes_r": 148399,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": null
+        }
+      ]
+    },
+    {
+      "state_po": "NE",
+      "state_name": "Nebraska",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 3,
+          "seats_d": 1,
+          "seats_r": 2,
+          "votes_d": 283278,
+          "votes_r": 427398,
+          "efficiency_gap": -0.0311,
+          "mean_median_diff": -0.0035,
+          "seat_vote_ratio_d": 0.8363
+        },
+        {
+          "year": 2002,
+          "seats": 3,
+          "seats_d": 0,
+          "seats_r": 3,
+          "votes_d": 46843,
+          "votes_r": 386869,
+          "efficiency_gap": -0.284,
+          "mean_median_diff": 0.1142,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2012,
+          "seats": 3,
+          "seats_d": 0,
+          "seats_r": 3,
+          "votes_d": 276239,
+          "votes_r": 496276,
+          "efficiency_gap": 0.2152,
+          "mean_median_diff": 0.0387,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 3,
+          "seats_d": 0,
+          "seats_r": 3,
+          "votes_d": 235572,
+          "votes_r": 414599,
+          "efficiency_gap": 0.2247,
+          "mean_median_diff": -0.0624,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    },
+    {
+      "state_po": "NH",
+      "state_name": "New Hampshire",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 2,
+          "seats_d": 1,
+          "seats_r": 1,
+          "votes_d": 265906,
+          "votes_r": 227062,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.927
+        },
+        {
+          "year": 2002,
+          "seats": 2,
+          "seats_d": 0,
+          "seats_r": 2,
+          "votes_d": 175905,
+          "votes_r": 254797,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2012,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 340925,
+          "votes_r": 311636,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.9141
+        },
+        {
+          "year": 2022,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 339027,
+          "votes_r": 277808,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.8194
+        }
+      ]
+    },
+    {
+      "state_po": "NJ",
+      "state_name": "New Jersey",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 13,
+          "seats_d": 7,
+          "seats_r": 6,
+          "votes_d": 1354915,
+          "votes_r": 1503145,
+          "efficiency_gap": -0.0288,
+          "mean_median_diff": -0.0355,
+          "seat_vote_ratio_d": 1.1358
+        },
+        {
+          "year": 2002,
+          "seats": 13,
+          "seats_d": 7,
+          "seats_r": 6,
+          "votes_d": 1030204,
+          "votes_r": 933964,
+          "efficiency_gap": 0.0995,
+          "mean_median_diff": -0.0571,
+          "seat_vote_ratio_d": 1.0266
+        },
+        {
+          "year": 2012,
+          "seats": 12,
+          "seats_d": 6,
+          "seats_r": 6,
+          "votes_d": 1794301,
+          "votes_r": 1430325,
+          "efficiency_gap": 0.1737,
+          "mean_median_diff": 0.0311,
+          "seat_vote_ratio_d": 0.8986
+        },
+        {
+          "year": 2022,
+          "seats": 12,
+          "seats_d": 7,
+          "seats_r": 5,
+          "votes_d": 1127017,
+          "votes_r": 1000868,
+          "efficiency_gap": -0.1327,
+          "mean_median_diff": -0.1006,
+          "seat_vote_ratio_d": 1.1014
+        }
+      ]
+    },
+    {
+      "state_po": "NM",
+      "state_name": "New Mexico",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 3,
+          "seats_d": 1,
+          "seats_r": 2,
+          "votes_d": 272607,
+          "votes_r": 277833,
+          "efficiency_gap": 0.1682,
+          "mean_median_diff": 0.065,
+          "seat_vote_ratio_d": 0.6731
+        },
+        {
+          "year": 2002,
+          "seats": 3,
+          "seats_d": 1,
+          "seats_r": 2,
+          "votes_d": 262071,
+          "votes_r": 175342,
+          "efficiency_gap": 0.4173,
+          "mean_median_diff": 0.1814,
+          "seat_vote_ratio_d": 0.5564
+        },
+        {
+          "year": 2012,
+          "seats": 3,
+          "seats_d": 2,
+          "seats_r": 1,
+          "votes_d": 422189,
+          "votes_r": 343269,
+          "efficiency_gap": -0.1025,
+          "mean_median_diff": -0.0477,
+          "seat_vote_ratio_d": 1.2087
+        },
+        {
+          "year": 2022,
+          "seats": 3,
+          "seats_d": 3,
+          "seats_r": 0,
+          "votes_d": 387716,
+          "votes_r": 316352,
+          "efficiency_gap": -0.3986,
+          "mean_median_diff": -0.01,
+          "seat_vote_ratio_d": 1.8159
+        }
+      ]
+    },
+    {
+      "state_po": "NV",
+      "state_name": "Nevada",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 2,
+          "seats_d": 1,
+          "seats_r": 1,
+          "votes_d": 245477,
+          "votes_r": 213792,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.9355
+        },
+        {
+          "year": 2002,
+          "seats": 3,
+          "seats_d": 1,
+          "seats_r": 2,
+          "votes_d": 171160,
+          "votes_r": 301100,
+          "efficiency_gap": -0.0196,
+          "mean_median_diff": -0.0098,
+          "seat_vote_ratio_d": 0.9197
+        },
+        {
+          "year": 2012,
+          "seats": 4,
+          "seats_d": 2,
+          "seats_r": 2,
+          "votes_d": 453310,
+          "votes_r": 457239,
+          "efficiency_gap": 0.0649,
+          "mean_median_diff": 0.0128,
+          "seat_vote_ratio_d": 1.0043
+        },
+        {
+          "year": 2022,
+          "seats": 4,
+          "seats_d": 3,
+          "seats_r": 1,
+          "votes_d": 480774,
+          "votes_r": 515535,
+          "efficiency_gap": -0.2309,
+          "mean_median_diff": -0.0319,
+          "seat_vote_ratio_d": 1.5542
+        }
+      ]
+    },
+    {
+      "state_po": "NY",
+      "state_name": "New York",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 31,
+          "seats_d": 19,
+          "seats_r": 12,
+          "votes_d": 2946645,
+          "votes_r": 2371652,
+          "efficiency_gap": 0.0591,
+          "mean_median_diff": 0.0448,
+          "seat_vote_ratio_d": 1.1062
+        },
+        {
+          "year": 2002,
+          "seats": 29,
+          "seats_d": 19,
+          "seats_r": 10,
+          "votes_d": 1777688,
+          "votes_r": 1525771,
+          "efficiency_gap": -0.0029,
+          "mean_median_diff": -0.0708,
+          "seat_vote_ratio_d": 1.2175
+        },
+        {
+          "year": 2012,
+          "seats": 27,
+          "seats_d": 22,
+          "seats_r": 5,
+          "votes_d": 3897953,
+          "votes_r": 1947575,
+          "efficiency_gap": 0.0236,
+          "mean_median_diff": 0.0452,
+          "seat_vote_ratio_d": 1.2219
+        },
+        {
+          "year": 2022,
+          "seats": 26,
+          "seats_d": 18,
+          "seats_r": 8,
+          "votes_d": 3028115,
+          "votes_r": 2233120,
+          "efficiency_gap": 0.028,
+          "mean_median_diff": 0.0522,
+          "seat_vote_ratio_d": 1.2029
+        }
+      ]
+    },
+    {
+      "state_po": "OH",
+      "state_name": "Ohio",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 19,
+          "seats_d": 10,
+          "seats_r": 9,
+          "votes_d": 2198039,
+          "votes_r": 2154080,
+          "efficiency_gap": -0.0112,
+          "mean_median_diff": 0.0066,
+          "seat_vote_ratio_d": 1.0421
+        },
+        {
+          "year": 2002,
+          "seats": 18,
+          "seats_d": 6,
+          "seats_r": 12,
+          "votes_d": 1331614,
+          "votes_r": 1775555,
+          "efficiency_gap": 0.0257,
+          "mean_median_diff": 0.0817,
+          "seat_vote_ratio_d": 0.7778
+        },
+        {
+          "year": 2012,
+          "seats": 16,
+          "seats_d": 4,
+          "seats_r": 12,
+          "votes_d": 2412385,
+          "votes_r": 2620233,
+          "efficiency_gap": 0.2305,
+          "mean_median_diff": 0.0685,
+          "seat_vote_ratio_d": 0.5215
+        },
+        {
+          "year": 2022,
+          "seats": 15,
+          "seats_d": 5,
+          "seats_r": 10,
+          "votes_d": 1790614,
+          "votes_r": 2318993,
+          "efficiency_gap": 0.0499,
+          "mean_median_diff": 0.0582,
+          "seat_vote_ratio_d": 0.765
+        }
+      ]
+    },
+    {
+      "state_po": "OK",
+      "state_name": "Oklahoma",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 6,
+          "seats_d": 4,
+          "seats_r": 2,
+          "votes_d": 764249,
+          "votes_r": 504133,
+          "efficiency_gap": 0.0651,
+          "mean_median_diff": -0.0181,
+          "seat_vote_ratio_d": 1.1064
+        },
+        {
+          "year": 2002,
+          "seats": 5,
+          "seats_d": 1,
+          "seats_r": 4,
+          "votes_d": 391927,
+          "votes_r": 546832,
+          "efficiency_gap": 0.1241,
+          "mean_median_diff": -0.0359,
+          "seat_vote_ratio_d": 0.479
+        },
+        {
+          "year": 2012,
+          "seats": 5,
+          "seats_d": 0,
+          "seats_r": 5,
+          "votes_d": 410324,
+          "votes_r": 856872,
+          "efficiency_gap": 0.1476,
+          "mean_median_diff": -0.0109,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 5,
+          "seats_d": 0,
+          "seats_r": 5,
+          "votes_d": 356988,
+          "votes_r": 760639,
+          "efficiency_gap": 0.1388,
+          "mean_median_diff": -0.0163,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    },
+    {
+      "state_po": "OR",
+      "state_name": "Oregon",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 5,
+          "seats_d": 4,
+          "seats_r": 1,
+          "votes_d": 824796,
+          "votes_r": 553101,
+          "efficiency_gap": -0.1038,
+          "mean_median_diff": -0.0386,
+          "seat_vote_ratio_d": 1.3365
+        },
+        {
+          "year": 2002,
+          "seats": 5,
+          "seats_d": 4,
+          "seats_r": 1,
+          "votes_d": 676920,
+          "votes_r": 528997,
+          "efficiency_gap": -0.1731,
+          "mean_median_diff": -0.0835,
+          "seat_vote_ratio_d": 1.4252
+        },
+        {
+          "year": 2012,
+          "seats": 5,
+          "seats_d": 4,
+          "seats_r": 1,
+          "votes_d": 949660,
+          "votes_r": 687839,
+          "efficiency_gap": -0.1418,
+          "mean_median_diff": -0.0236,
+          "seat_vote_ratio_d": 1.3794
+        },
+        {
+          "year": 2022,
+          "seats": 6,
+          "seats_d": 4,
+          "seats_r": 2,
+          "votes_d": 1012725,
+          "votes_r": 851991,
+          "efficiency_gap": -0.0606,
+          "mean_median_diff": 0.0193,
+          "seat_vote_ratio_d": 1.2275
+        }
+      ]
+    },
+    {
+      "state_po": "PA",
+      "state_name": "Pennsylvania",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 21,
+          "seats_d": 11,
+          "seats_r": 10,
+          "votes_d": 2154372,
+          "votes_r": 2347441,
+          "efficiency_gap": -0.0651,
+          "mean_median_diff": -0.0248,
+          "seat_vote_ratio_d": 1.0946
+        },
+        {
+          "year": 2002,
+          "seats": 19,
+          "seats_d": 7,
+          "seats_r": 12,
+          "votes_d": 1348665,
+          "votes_r": 1859270,
+          "efficiency_gap": -0.0262,
+          "mean_median_diff": 0.0096,
+          "seat_vote_ratio_d": 0.8763
+        },
+        {
+          "year": 2012,
+          "seats": 18,
+          "seats_d": 5,
+          "seats_r": 13,
+          "votes_d": 2793538,
+          "votes_r": 2710070,
+          "efficiency_gap": 0.2376,
+          "mean_median_diff": 0.0765,
+          "seat_vote_ratio_d": 0.5473
+        },
+        {
+          "year": 2022,
+          "seats": 17,
+          "seats_d": 9,
+          "seats_r": 8,
+          "votes_d": 2436919,
+          "votes_r": 2702262,
+          "efficiency_gap": -0.0811,
+          "mean_median_diff": -0.0373,
+          "seat_vote_ratio_d": 1.1165
+        }
+      ]
+    },
+    {
+      "state_po": "RI",
+      "state_name": "Rhode Island",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 2,
+          "seats_d": 1,
+          "seats_r": 1,
+          "votes_d": 192542,
+          "votes_r": 185980,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.983
+        },
+        {
+          "year": 2002,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 224676,
+          "votes_r": 97137,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.4323
+        },
+        {
+          "year": 2012,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 232679,
+          "votes_r": 161926,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.6959
+        },
+        {
+          "year": 2022,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 201750,
+          "votes_r": 150024,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.7436
+        }
+      ]
+    },
+    {
+      "state_po": "SC",
+      "state_name": "South Carolina",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 6,
+          "seats_d": 3,
+          "seats_r": 3,
+          "votes_d": 505887,
+          "votes_r": 581159,
+          "efficiency_gap": -0.0867,
+          "mean_median_diff": -0.0998,
+          "seat_vote_ratio_d": 1.0744
+        },
+        {
+          "year": 2002,
+          "seats": 6,
+          "seats_d": 2,
+          "seats_r": 4,
+          "votes_d": 344972,
+          "votes_r": 569267,
+          "efficiency_gap": -0.0661,
+          "mean_median_diff": 0.0748,
+          "seat_vote_ratio_d": 0.8834
+        },
+        {
+          "year": 2012,
+          "seats": 7,
+          "seats_d": 1,
+          "seats_r": 6,
+          "votes_d": 714191,
+          "votes_r": 1026129,
+          "efficiency_gap": 0.1951,
+          "mean_median_diff": 0.0564,
+          "seat_vote_ratio_d": 0.3481
+        },
+        {
+          "year": 2022,
+          "seats": 7,
+          "seats_d": 1,
+          "seats_r": 6,
+          "votes_d": 517129,
+          "votes_r": 1056078,
+          "efficiency_gap": 0.0234,
+          "mean_median_diff": -0.044,
+          "seat_vote_ratio_d": 0.4346
+        }
+      ]
+    },
+    {
+      "state_po": "SD",
+      "state_name": "South Dakota",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 230070,
+          "votes_r": 89375,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.3885
+        },
+        {
+          "year": 2002,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 153551,
+          "votes_r": 180023,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2012,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 153789,
+          "votes_r": 207640,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 0,
+          "votes_r": 253821,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": null
+        }
+      ]
+    },
+    {
+      "state_po": "TN",
+      "state_name": "Tennessee",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 9,
+          "seats_d": 6,
+          "seats_r": 3,
+          "votes_d": 882973,
+          "votes_r": 737690,
+          "efficiency_gap": -0.0642,
+          "mean_median_diff": -0.0197,
+          "seat_vote_ratio_d": 1.2236
+        },
+        {
+          "year": 2002,
+          "seats": 9,
+          "seats_d": 5,
+          "seats_r": 4,
+          "votes_d": 708375,
+          "votes_r": 770510,
+          "efficiency_gap": -0.0873,
+          "mean_median_diff": -0.0401,
+          "seat_vote_ratio_d": 1.1598
+        },
+        {
+          "year": 2012,
+          "seats": 9,
+          "seats_d": 2,
+          "seats_r": 7,
+          "votes_d": 796513,
+          "votes_r": 1369562,
+          "efficiency_gap": 0.0018,
+          "mean_median_diff": 0.062,
+          "seat_vote_ratio_d": 0.6043
+        },
+        {
+          "year": 2022,
+          "seats": 9,
+          "seats_d": 1,
+          "seats_r": 8,
+          "votes_d": 581902,
+          "votes_r": 1099462,
+          "efficiency_gap": 0.1155,
+          "mean_median_diff": 0.0376,
+          "seat_vote_ratio_d": 0.321
+        }
+      ]
+    },
+    {
+      "state_po": "TX",
+      "state_name": "Texas",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 30,
+          "seats_d": 21,
+          "seats_r": 9,
+          "votes_d": 2806044,
+          "votes_r": 2685973,
+          "efficiency_gap": -0.1293,
+          "mean_median_diff": -0.0604,
+          "seat_vote_ratio_d": 1.37
+        },
+        {
+          "year": 2002,
+          "seats": 32,
+          "seats_d": 17,
+          "seats_r": 15,
+          "votes_d": 1885178,
+          "votes_r": 2290723,
+          "efficiency_gap": -0.0674,
+          "mean_median_diff": -0.0248,
+          "seat_vote_ratio_d": 1.1768
+        },
+        {
+          "year": 2012,
+          "seats": 36,
+          "seats_d": 12,
+          "seats_r": 24,
+          "votes_d": 2949900,
+          "votes_r": 4429270,
+          "efficiency_gap": 0.041,
+          "mean_median_diff": 0.0492,
+          "seat_vote_ratio_d": 0.8338
+        },
+        {
+          "year": 2022,
+          "seats": 38,
+          "seats_d": 14,
+          "seats_r": 24,
+          "votes_d": 2925442,
+          "votes_r": 4409737,
+          "efficiency_gap": -0.0018,
+          "mean_median_diff": 0.049,
+          "seat_vote_ratio_d": 0.9238
+        }
+      ]
+    },
+    {
+      "state_po": "UT",
+      "state_name": "Utah",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 3,
+          "seats_d": 2,
+          "seats_r": 1,
+          "votes_d": 331479,
+          "votes_r": 362363,
+          "efficiency_gap": -0.2148,
+          "mean_median_diff": -0.0405,
+          "seat_vote_ratio_d": 1.3954
+        },
+        {
+          "year": 2002,
+          "seats": 3,
+          "seats_d": 1,
+          "seats_r": 2,
+          "votes_d": 221401,
+          "votes_r": 321986,
+          "efficiency_gap": -0.0898,
+          "mean_median_diff": 0.0168,
+          "seat_vote_ratio_d": 0.8181
+        },
+        {
+          "year": 2012,
+          "seats": 4,
+          "seats_d": 1,
+          "seats_r": 3,
+          "votes_d": 324309,
+          "votes_r": 647873,
+          "efficiency_gap": -0.0785,
+          "mean_median_diff": 0.0322,
+          "seat_vote_ratio_d": 0.7494
+        },
+        {
+          "year": 2022,
+          "seats": 4,
+          "seats_d": 0,
+          "seats_r": 4,
+          "votes_d": 342078,
+          "votes_r": 670924,
+          "efficiency_gap": 0.1754,
+          "mean_median_diff": 0.0002,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    },
+    {
+      "state_po": "VA",
+      "state_name": "Virginia",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 11,
+          "seats_d": 7,
+          "seats_r": 4,
+          "votes_d": 1148570,
+          "votes_r": 1142649,
+          "efficiency_gap": -0.119,
+          "mean_median_diff": -0.0518,
+          "seat_vote_ratio_d": 1.2694
+        },
+        {
+          "year": 2002,
+          "seats": 11,
+          "seats_d": 3,
+          "seats_r": 8,
+          "votes_d": 440478,
+          "votes_r": 955673,
+          "efficiency_gap": -0.1229,
+          "mean_median_diff": 0.0426,
+          "seat_vote_ratio_d": 0.8644
+        },
+        {
+          "year": 2012,
+          "seats": 11,
+          "seats_d": 3,
+          "seats_r": 8,
+          "votes_d": 1806025,
+          "votes_r": 1876761,
+          "efficiency_gap": 0.2166,
+          "mean_median_diff": 0.0632,
+          "seat_vote_ratio_d": 0.5561
+        },
+        {
+          "year": 2022,
+          "seats": 11,
+          "seats_d": 5,
+          "seats_r": 6,
+          "votes_d": 1227307,
+          "votes_r": 1376546,
+          "efficiency_gap": -0.0277,
+          "mean_median_diff": -0.0352,
+          "seat_vote_ratio_d": 0.9644
+        }
+      ]
+    },
+    {
+      "state_po": "VT",
+      "state_name": "Vermont",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 22279,
+          "votes_r": 86901,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2002,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 0,
+          "votes_r": 72813,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": null
+        },
+        {
+          "year": 2012,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 208600,
+          "votes_r": 67543,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.3238
+        },
+        {
+          "year": 2022,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 176494,
+          "votes_r": 78397,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.4442
+        }
+      ]
+    },
+    {
+      "state_po": "WA",
+      "state_name": "Washington",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 9,
+          "seats_d": 8,
+          "seats_r": 1,
+          "votes_d": 1236665,
+          "votes_r": 911913,
+          "efficiency_gap": -0.2355,
+          "mean_median_diff": 0.0182,
+          "seat_vote_ratio_d": 1.5444
+        },
+        {
+          "year": 2002,
+          "seats": 9,
+          "seats_d": 6,
+          "seats_r": 3,
+          "votes_d": 907440,
+          "votes_r": 778922,
+          "efficiency_gap": -0.0969,
+          "mean_median_diff": -0.039,
+          "seat_vote_ratio_d": 1.2389
+        },
+        {
+          "year": 2012,
+          "seats": 10,
+          "seats_d": 6,
+          "seats_r": 4,
+          "votes_d": 1636726,
+          "votes_r": 1369540,
+          "efficiency_gap": -0.0325,
+          "mean_median_diff": -0.0267,
+          "seat_vote_ratio_d": 1.1021
+        },
+        {
+          "year": 2022,
+          "seats": 10,
+          "seats_d": 8,
+          "seats_r": 2,
+          "votes_d": 1751582,
+          "votes_r": 1261961,
+          "efficiency_gap": -0.1591,
+          "mean_median_diff": -0.0111,
+          "seat_vote_ratio_d": 1.3764
+        }
+      ]
+    },
+    {
+      "state_po": "WI",
+      "state_name": "Wisconsin",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 9,
+          "seats_d": 4,
+          "seats_r": 5,
+          "votes_d": 1153862,
+          "votes_r": 1210827,
+          "efficiency_gap": 0.0523,
+          "mean_median_diff": 0.0232,
+          "seat_vote_ratio_d": 0.9108
+        },
+        {
+          "year": 2002,
+          "seats": 8,
+          "seats_d": 4,
+          "seats_r": 4,
+          "votes_d": 676925,
+          "votes_r": 889146,
+          "efficiency_gap": -0.145,
+          "mean_median_diff": -0.0382,
+          "seat_vote_ratio_d": 1.1568
+        },
+        {
+          "year": 2012,
+          "seats": 8,
+          "seats_d": 3,
+          "seats_r": 5,
+          "votes_d": 1445015,
+          "votes_r": 1401995,
+          "efficiency_gap": 0.1479,
+          "mean_median_diff": 0.0699,
+          "seat_vote_ratio_d": 0.7388
+        },
+        {
+          "year": 2022,
+          "seats": 8,
+          "seats_d": 2,
+          "seats_r": 6,
+          "votes_d": 1016250,
+          "votes_r": 1403080,
+          "efficiency_gap": 0.0837,
+          "mean_median_diff": -0.0204,
+          "seat_vote_ratio_d": 0.5952
+        }
+      ]
+    },
+    {
+      "state_po": "WV",
+      "state_name": "West Virginia",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 3,
+          "seats_d": 3,
+          "seats_r": 0,
+          "votes_d": 439191,
+          "votes_r": 123114,
+          "efficiency_gap": 0.0621,
+          "mean_median_diff": 0.0795,
+          "seat_vote_ratio_d": 1.2803
+        },
+        {
+          "year": 2002,
+          "seats": 3,
+          "seats_d": 2,
+          "seats_r": 1,
+          "votes_d": 264124,
+          "votes_r": 135505,
+          "efficiency_gap": 0.2314,
+          "mean_median_diff": -0.0016,
+          "seat_vote_ratio_d": 1.0087
+        },
+        {
+          "year": 2012,
+          "seats": 3,
+          "seats_d": 1,
+          "seats_r": 2,
+          "votes_d": 257101,
+          "votes_r": 384253,
+          "efficiency_gap": -0.0108,
+          "mean_median_diff": 0.0306,
+          "seat_vote_ratio_d": 0.8315
+        },
+        {
+          "year": 2022,
+          "seats": 2,
+          "seats_d": 0,
+          "seats_r": 2,
+          "votes_d": 149706,
+          "votes_r": 312004,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    },
+    {
+      "state_po": "WY",
+      "state_name": "Wyoming",
+      "cycles": [
+        {
+          "year": 1992,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 77418,
+          "votes_r": 113882,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2002,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 65961,
+          "votes_r": 110229,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2012,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 57573,
+          "votes_r": 166452,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2022,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 47250,
+          "votes_r": 132206,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        }
+      ]
+    }
+  ]
+}

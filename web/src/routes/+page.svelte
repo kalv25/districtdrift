@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Map from '$lib/Map.svelte';
+  import NationView from '$lib/NationView.svelte';
   import EGChart from '$lib/EGChart.svelte';
   import SeatVoteChart from '$lib/SeatVoteChart.svelte';
   import TrendChart from '$lib/TrendChart.svelte';
@@ -40,17 +41,26 @@
     NC: { name: 'North Carolina', flag: '◉' },
   };
 
-  let selectedState = $state('MI');
+  // 'nation' = 50-state overview; a postal code = state detail view
+  let viewMode = $state<'nation' | string>('nation');
+  let selectedState = $derived(viewMode === 'nation' ? 'MI' : viewMode);
   let stateMenuOpen = $state(false);
 
   function selectState(po: string) {
-    if (po === selectedState) { stateMenuOpen = false; return; }
-    selectedState = po;
     stateMenuOpen = false;
+    if (viewMode === po) return;
+    viewMode = po;
     manualYear = 2022;
     animTick = CYCLES.indexOf(2022);
     animating = false;
     hoveredYear = null;
+    selectedDistrict = null;
+  }
+
+  function goNation() {
+    viewMode = 'nation';
+    stateMenuOpen = false;
+    selectedDistrict = null;
   }
 
   const CYCLES = [1992, 2002, 2012, 2022];
@@ -194,7 +204,9 @@
 }} />
 
 <svelte:head>
-  <title>District Drift — {STATES[selectedState].name} Congressional Gerrymandering</title>
+  <title>{viewMode === 'nation'
+    ? 'District Drift — US Congressional Gerrymandering'
+    : `District Drift — ${STATES[selectedState]?.name ?? selectedState} Congressional Gerrymandering`}</title>
 </svelte:head>
 
 {#snippet cycleControls()}
@@ -305,48 +317,64 @@
       aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
     >{darkMode ? '☀' : '☽'}</button>
 
-    <div class="state-selector-wrap">
+    <nav class="view-nav">
       <button
-        class="state-selector"
-        class:open={stateMenuOpen}
-        onclick={() => stateMenuOpen = !stateMenuOpen}
-        aria-haspopup="listbox"
-        aria-expanded={stateMenuOpen}
-      >
-        <span class="state-icon">{STATES[selectedState].flag}</span>
-        <span class="state-name">{STATES[selectedState].name}</span>
-        <span class="state-chevron">▾</span>
-      </button>
-      {#if stateMenuOpen}
-        <ul class="state-menu" role="listbox">
-          {#each Object.entries(STATES) as [po, info]}
-            <li role="option" aria-selected={po === selectedState}>
-              <button
-                class:active={po === selectedState}
-                onclick={() => selectState(po)}
-              >{info.name}</button>
-            </li>
-          {/each}
-        </ul>
-      {/if}
-    </div>
+        class="view-btn"
+        class:active={viewMode === 'nation'}
+        onclick={goNation}
+      >All states</button>
+
+      <div class="state-selector-wrap">
+        <button
+          class="state-selector"
+          class:open={stateMenuOpen}
+          class:active={viewMode !== 'nation'}
+          onclick={() => stateMenuOpen = !stateMenuOpen}
+          aria-haspopup="listbox"
+          aria-expanded={stateMenuOpen}
+        >
+          {#if viewMode !== 'nation'}
+            <span class="state-name">{STATES[selectedState]?.name ?? selectedState}</span>
+          {:else}
+            <span class="state-name" style="opacity:0.55">Select state</span>
+          {/if}
+          <span class="state-chevron">▾</span>
+        </button>
+        {#if stateMenuOpen}
+          <ul class="state-menu" role="listbox">
+            {#each Object.entries(STATES) as [po, info]}
+              <li role="option" aria-selected={po === selectedState}>
+                <button
+                  class:active={viewMode === po}
+                  onclick={() => selectState(po)}
+                >{info.name}</button>
+              </li>
+            {/each}
+          </ul>
+        {/if}
+      </div>
+    </nav>
 
   </header>
 
   <main>
     <div class="map-wrap">
-      {#key selectedState}
-        <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} cycleYears={CYCLES} {darkMode} onDistrictClick={(d) => selectedDistrict = d} />
-      {/key}
+      {#if viewMode === 'nation'}
+        <NationView selectedYear={selectedYear} onStateClick={selectState} />
+      {:else}
+        {#key viewMode}
+          <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} cycleYears={CYCLES} {darkMode} onDistrictClick={(d) => selectedDistrict = d} />
+        {/key}
+      {/if}
     </div>
 
-    {#if isBottomPanel && selectedDistrict}
+    {#if viewMode !== 'nation' && isBottomPanel && selectedDistrict}
       <div class="district-float" style="bottom: {mapPanelBottom + 16}px">
         {@render districtCard()}
       </div>
     {/if}
 
-    {#if panelPosition === 'side'}
+    {#if viewMode !== 'nation' && panelPosition === 'side'}
       <aside class="panel side">
         {@render districtCard()}
         <section class="sticky-controls">
@@ -459,7 +487,7 @@
       </aside>
     {/if}
 
-    {#if isBottomPanel}
+    {#if viewMode !== 'nation' && isBottomPanel}
       <div class="panel bottom" class:wide={panelPosition === 'bottom-wide'} bind:this={bottomPanelEl} bind:clientHeight={bottomPanelH}>
 
         <!-- Year controls row -->
@@ -639,6 +667,28 @@
   .tagline { margin: 0; font-size: 0.72rem; opacity: 0.45; letter-spacing: 0.01em; }
   .version { opacity: 0.45; font-size: 0.65rem; margin-left: 0.4rem; }
 
+  .view-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .view-btn {
+    padding: 0.28rem 0.7rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .view-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+  .view-btn.active { background: rgba(255,255,255,0.18); color: #fff; border-color: rgba(255,255,255,0.3); font-weight: 700; }
+
   .state-selector-wrap { position: relative; }
 
   .state-selector {
@@ -656,8 +706,7 @@
     font-family: inherit;
   }
   .state-selector:hover, .state-selector.open { background: rgba(255,255,255,0.14); }
-  .state-icon { font-size: 0.7rem; opacity: 0.6; }
-  .state-name { font-weight: 600; }
+.state-name { font-weight: 600; }
   .state-chevron { font-size: 0.6rem; opacity: 0.4; }
 
   .state-menu {
