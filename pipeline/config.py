@@ -45,6 +45,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "WI": {
+        "name": "Wisconsin",
+        "fips": "55",
+        "crs": "EPSG:3071",   # Wisconsin Transverse Mercator (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 9,
+                "redistricting_controller": "Court-drawn (split government)",
+                "notes": "Governor Tommy Thompson (R) and a divided legislature could not agree on a plan; a three-judge federal panel drew the maps in Prosser v. Elections Board (1992)",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 8,
+                "redistricting_controller": "Republican",
+                "notes": "Governor McCallum (R) signed Republican-drawn maps after Democrats failed to block them; Baumgart v. Wendelberger (W.D. Wis. 2002) approved the plan",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 8,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Walker (R) and Republican legislature drew Act 43; Gill v. Whitford (2018) challenged the state legislative maps (not congressional) but the SCOTUS remanded for lack of standing",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 8,
+                "redistricting_controller": "Court-drawn (governor veto)",
+                "notes": "Governor Evers (D) vetoed Republican legislative maps; the WI Supreme Court drew remedial maps using a 'least change' approach in Johnson v. Wisconsin Elections Commission (2022)",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",

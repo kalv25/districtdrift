@@ -93,6 +93,67 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
   },
 
+  WI: {
+    1992: [
+      {
+        title: 'Wisconsin loses 1 seat',
+        detail: 'The 1990 census reduces Wisconsin\'s congressional delegation from 10 to 9. Governor Tommy Thompson (R) faces a divided legislature with Democrats controlling the Assembly.',
+      },
+      {
+        title: 'Legislature deadlocks; federal court draws maps',
+        detail: 'The Republican-controlled Senate and Democratic-controlled Assembly cannot agree on a redistricting plan. A three-judge federal panel is convened to draw the congressional map.',
+      },
+      {
+        title: '⚖ Prosser v. Elections Board — court-drawn map adopted',
+        detail: 'Filed in the Western District of Wisconsin in 1991. In March 1992, the three-judge panel rejects the competing legislative proposals and adopts its own remedial congressional map. The court-drawn boundaries govern Wisconsin elections for the entire decade.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Wisconsin loses 1 more seat',
+        detail: 'The 2000 census reduces the delegation from 9 to 8. Governor Tommy Thompson has left to become U.S. Secretary of HHS; Republican Scott McCallum becomes governor with a Republican-controlled legislature.',
+      },
+      {
+        title: 'Republicans draw the maps',
+        detail: 'With unified Republican control of government, the legislature passes congressional and state maps in 2001. Democrats challenge the plan in federal court but fail to block it.',
+      },
+      {
+        title: '⚖ Baumgart v. Wendelberger — maps upheld',
+        detail: 'Plaintiffs challenge the Republican-drawn congressional map in the Western District of Wisconsin as a partisan gerrymander and VRA violation. The three-judge panel upholds the plan, finding no constitutional or statutory violation.',
+      },
+    ],
+    2012: [
+      {
+        title: 'Republicans redraw all maps after 2010 sweep',
+        detail: 'Scott Walker wins the governorship and Republicans win supermajorities in both chambers of the legislature in 2010, giving them unified control for redistricting after the 2010 census. The congressional seat count stays at 8.',
+      },
+      {
+        title: 'Act 43 — secretly drafted partisan maps',
+        detail: 'Legislative maps (Act 43) are drafted in secret by a private law firm, with Republican legislators signing confidentiality agreements before viewing them. Congressional maps follow similar lines. Republicans win 5 of 8 seats in 2012 despite a near-even statewide vote.',
+      },
+      {
+        title: '⚖ Gill v. Whitford — partisan gerrymandering reaches SCOTUS',
+        detail: 'Democratic voters file suit in 2015 challenging Wisconsin\'s state legislative maps as an unconstitutional partisan gerrymander using the efficiency gap metric. A three-judge district court rules in plaintiffs\' favor in 2016. The U.S. Supreme Court takes up the case but in June 2018 remands 5–4 on standing grounds, finding plaintiffs must demonstrate district-specific harm. The case returns to the district court without a ruling on the merits.',
+        url: 'https://www.oyez.org/cases/2017/16-1161',
+      },
+    ],
+    2022: [
+      {
+        title: 'Split government — maps go to court again',
+        detail: 'Governor Tony Evers (D) wins re-election in 2018 but faces a Republican legislature. After the 2020 census, the legislature passes new congressional maps that Evers vetoes. The Wisconsin Supreme Court must resolve the impasse.',
+      },
+      {
+        title: '⚖ Johnson v. Wisconsin Elections Commission — "least change" maps',
+        detail: 'The Wisconsin Supreme Court, in a 4–3 ruling, adopts a "least change" approach: modifying the existing districts only as much as required by population equality. This preserves the partisan structure of the 2011 Republican maps, effectively continuing the gerrymander into the decade. Republicans retain a 6–2 congressional advantage despite near-even statewide vote totals.',
+        url: 'https://www.wicourts.gov/sc/opinion/DisplayDocument.pdf?content=html&seqNo=553492',
+      },
+      {
+        title: '⚖ Clarke v. Wisconsin Elections Commission — maps redrawn',
+        detail: 'After the Wisconsin Supreme Court\'s composition shifted to a 4–3 liberal majority following the April 2023 election of Justice Janet Protasiewicz, the court reopens redistricting. In December 2023, it strikes the 2022 legislative maps as unconstitutional gerrymanders and orders new ones — though the congressional boundaries remain unchanged for 2024.',
+      },
+    ],
+  },
+
   NC: {
     1992: [
       {

@@ -39,6 +39,7 @@
   const STATES: Record<string, { name: string; flag: string }> = {
     MI: { name: 'Michigan', flag: '◉' },
     NC: { name: 'North Carolina', flag: '◉' },
+    WI: { name: 'Wisconsin', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view
