@@ -1,0 +1,12 @@
+/tiles/*.pmtiles
+  Content-Type: application/octet-stream
+  Accept-Ranges: bytes
+  Cache-Control: public, max-age=86400
+
+/geo/*.geojson
+  Content-Type: application/geo+json
+  Cache-Control: public, max-age=3600
+
+/*.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600
