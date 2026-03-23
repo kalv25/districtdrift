@@ -1,0 +1,116 @@
+{
+  "state": "Virginia",
+  "fips": "51",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 11,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Douglas Wilder (D) \u2014 the first Black governor of any U.S. state in modern history \u2014 and a Democratic legislature drew the map; VRA required creation of majority-minority districts",
+      "efficiency_gap": -0.119,
+      "mean_median_diff": -0.0518,
+      "seats_d": 7,
+      "seats_r": 4,
+      "votes_d": 1148570,
+      "votes_r": 1142649,
+      "seat_vote_ratio_d": 1.2694,
+      "avg_compactness": 0.1256,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 2,
+        "competitive": 1,
+        "lean_r": 1,
+        "solid_r": 3
+      }
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 11,
+      "redistricting_controller": "Split (Rep governor, split legislature)",
+      "notes": "Governor Gilmore (R) and a split General Assembly (Rep House of Delegates, Dem Senate) negotiated maps; Virginia retained 11 seats",
+      "efficiency_gap": -0.1229,
+      "mean_median_diff": 0.0426,
+      "seats_d": 3,
+      "seats_r": 8,
+      "votes_d": 440478,
+      "votes_r": 955673,
+      "seat_vote_ratio_d": 0.8644,
+      "avg_compactness": 0.1197,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 8
+      }
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 11,
+      "redistricting_controller": "Republican",
+      "notes": "Governor McDonnell (R) signed Republican-drawn maps; the majority-Black 3rd District was packed more densely, cracking adjacent districts to benefit Republicans",
+      "efficiency_gap": 0.2166,
+      "mean_median_diff": 0.0632,
+      "seats_d": 3,
+      "seats_r": 8,
+      "votes_d": 1806025,
+      "votes_r": 1876761,
+      "seat_vote_ratio_d": 0.5561,
+      "avg_compactness": 0.1054,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 4,
+        "solid_r": 3
+      }
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 11,
+      "redistricting_controller": "Court-drawn (commission deadlock)",
+      "notes": "Virginia's new bipartisan redistricting commission (created by Amendment 1 in 2020) deadlocked along party lines; the Virginia Supreme Court drew maps through special masters, producing relatively proportional results",
+      "efficiency_gap": -0.0277,
+      "mean_median_diff": -0.0352,
+      "seats_d": 5,
+      "seats_r": 6,
+      "votes_d": 1227307,
+      "votes_r": 1376546,
+      "seat_vote_ratio_d": 0.9644,
+      "avg_compactness": 0.1685,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 3,
+        "lean_r": 1,
+        "solid_r": 4
+      }
+    }
+  ]
+}

@@ -44,6 +44,7 @@
     PA: { name: 'Pennsylvania', flag: '◉' },
     TX: { name: 'Texas', flag: '◉' },
     OH: { name: 'Ohio', flag: '◉' },
+    VA: { name: 'Virginia', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view

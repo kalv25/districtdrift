@@ -80,6 +80,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "VA": {
+        "name": "Virginia",
+        "fips": "51",
+        "crs": "EPSG:32618",   # UTM Zone 18N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 11,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Douglas Wilder (D) — the first Black governor of any U.S. state in modern history — and a Democratic legislature drew the map; VRA required creation of majority-minority districts",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 11,
+                "redistricting_controller": "Split (Rep governor, split legislature)",
+                "notes": "Governor Gilmore (R) and a split General Assembly (Rep House of Delegates, Dem Senate) negotiated maps; Virginia retained 11 seats",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 11,
+                "redistricting_controller": "Republican",
+                "notes": "Governor McDonnell (R) signed Republican-drawn maps; the majority-Black 3rd District was packed more densely, cracking adjacent districts to benefit Republicans",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 11,
+                "redistricting_controller": "Court-drawn (commission deadlock)",
+                "notes": "Virginia's new bipartisan redistricting commission (created by Amendment 1 in 2020) deadlocked along party lines; the Virginia Supreme Court drew maps through special masters, producing relatively proportional results",
+            },
+        },
+    },
     "OH": {
         "name": "Ohio",
         "fips": "39",
