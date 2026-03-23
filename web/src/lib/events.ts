@@ -692,4 +692,55 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       },
     ],
   },
+  NY: {
+    1992: [
+      {
+        title: 'New York loses 3 seats',
+        detail: 'The 1990 census reduces New York\'s delegation from 34 to 31, forcing a substantial redraw of the congressional map.',
+      },
+      {
+        title: 'Split government produces negotiated incumbent-protection maps',
+        detail: 'Governor Mario Cuomo (D) and a split legislature — Democratic Assembly, Republican Senate — negotiate maps that protect incumbents of both parties rather than maximizing partisan advantage. The resulting delegation is roughly proportional to the heavily Democratic state\'s partisan lean.',
+      },
+    ],
+    2002: [
+      {
+        title: 'New York loses 2 more seats',
+        detail: 'The 2000 census reduces the delegation from 31 to 29. Governor George Pataki (R) and a divided legislature (Democratic Assembly, Republican Senate) must negotiate a new map.',
+      },
+      {
+        title: 'Bipartisan incumbent-protection gerrymander',
+        detail: 'Governor Pataki (R) and the divided legislature produce a bipartisan incumbent-protection gerrymander — both parties protect their incumbents rather than maximizing partisan advantage. The delegation remains roughly proportional to the state\'s partisan composition.',
+      },
+    ],
+    2012: [
+      {
+        title: 'New York loses 2 more seats',
+        detail: 'The 2010 census reduces the delegation from 29 to 27. Governor Andrew Cuomo (D) and a divided legislature (Democratic Assembly, Republican Senate) control redistricting.',
+      },
+      {
+        title: 'Another incumbent-protection plan; Cuomo signs despite veto threat',
+        detail: 'Governor Cuomo threatened to veto any map drawn by the legislature, calling for an independent redistricting commission. The legislature passed a bipartisan incumbent-protection plan anyway, and Cuomo ultimately signed it.',
+      },
+      {
+        title: 'Voters approve independent redistricting commission for future cycles',
+        detail: 'New York voters approve a constitutional amendment in 2014 creating a bipartisan redistricting commission to draw maps after the 2020 census, replacing the legislative process.',
+      },
+    ],
+    2022: [
+      {
+        title: 'Democrats draw aggressive gerrymander',
+        detail: 'After the newly created redistricting commission deadlocked along party lines, the Democratic-controlled legislature drew its own maps targeting 22 of 26 congressional seats for Democrats — an aggressive gerrymander in a state Biden won by 23 points.',
+      },
+      {
+        title: '⚖ Harkenrider v. Hochul — maps struck down by NY Court of Appeals',
+        detail: 'The NY Court of Appeals, the state\'s highest court, strikes down the Democratic congressional maps in April 2022, ruling they violate the 2014 constitutional amendment prohibiting partisan gerrymandering. The court orders a special master to draw replacement maps.',
+        url: 'https://www.nycourts.gov/ctapps/Decisions/2022/Apr22/60opn22-Decision.pdf',
+      },
+      {
+        title: 'Court-appointed special master draws replacement maps',
+        detail: 'Special master Jonathan Cervas draws replacement congressional maps used in the 2022 elections. The court-drawn maps produce a 15–11 Democratic delegation — far fewer seats than Democrats sought, but still reflecting the state\'s Democratic lean.',
+      },
+    ],
+  },
 };

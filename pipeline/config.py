@@ -360,6 +360,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "NY": {
+        "name": "New York",
+        "fips": "36",
+        "crs": "EPSG:32618",   # NAD83 / UTM Zone 18N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 31,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Cuomo (D) and a split legislature (Dem Assembly, Rep Senate) produced negotiated maps; New York lost 3 seats from the 1990 census, shrinking from 34 to 31. Note: NHGIS 103rd Congress shapefile severely incomplete for New York — only 15 of 31 district boundaries are present (districts 8, 12, 14-15, 19-27, 29, 31); predominantly NYC and inner-suburban districts are missing.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 29,
+                "redistricting_controller": "Split (Rep governor, split legislature)",
+                "notes": "Governor Pataki (R) and a divided legislature (Dem Assembly, Rep Senate) negotiated an incumbent-protection gerrymander; New York lost 2 seats from the 2000 census",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 27,
+                "redistricting_controller": "Split (Dem governor, split legislature)",
+                "notes": "Governor Cuomo (D) and a divided legislature drew maps after New York lost 2 seats; Cuomo threatened a veto but signed the bipartisan incumbent-protection plan",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 26,
+                "redistricting_controller": "Court-drawn (Dem gerrymander struck down)",
+                "notes": "Democrats drew an aggressive gerrymander targeting 22 of 26 seats; the NY Court of Appeals struck the maps as violating the 2014 anti-gerrymandering amendment; a court-appointed special master drew replacement maps used in 2022, producing a 15-11 Democratic delegation in a state Biden won by 23 points",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",
