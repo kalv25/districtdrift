@@ -93,6 +93,62 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
   },
 
+  FL: {
+    1992: [
+      {
+        title: 'Florida gains 4 seats — fastest-growing state',
+        detail: 'The 1990 census reflects Florida\'s explosive population growth, expanding the delegation from 19 to 23. Governor Lawton Chiles (D) and a Democratic legislature draw the new map, creating new majority-minority districts under the Voting Rights Act.',
+      },
+      {
+        title: 'New majority-minority districts elected first Black and Hispanic members',
+        detail: 'The 1992 map creates the majority-Black 3rd District (the "Z District," stretching from Jacksonville to Gainesville to Orlando) and expands Hispanic representation in South Florida. Corrine Brown and Alcee Hastings win majority-Black seats; the newly drawn 21st and 18th Districts send Hispanic members from Miami-Dade.',
+      },
+      {
+        title: '⚖ Shaw v. Reno fallout — 3rd District challenged',
+        detail: 'Following the Supreme Court\'s ruling in Shaw v. Reno (1993), the oddly shaped majority-Black 3rd District is challenged as a racial gerrymander. Courts ultimately uphold it after several rounds of litigation, but the district\'s boundaries are modified in subsequent cycles.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Florida gains 2 seats; Republicans take full control',
+        detail: 'The 2000 census gives Florida 25 seats. Governor Jeb Bush (R) and a Republican-controlled legislature have unified control of redistricting for the first time in modern Florida history.',
+      },
+      {
+        title: 'Republicans draw an 18-7 map',
+        detail: 'The Republican-drawn map produces an 18-7 Republican delegation in a state where presidential elections are decided by hundreds of votes. Democrats are packed into a handful of urban and majority-minority districts while Republicans are spread efficiently across the rest of the state.',
+      },
+    ],
+    2012: [
+      {
+        title: 'Florida gains 2 seats; voters pass the Fair Districts Amendment',
+        detail: 'The 2000 census gives Florida 27 seats. In 2010, Florida voters pass Amendment 6 — the Fair Districts Amendment — by 63%, prohibiting the legislature from drawing maps that favor a political party or incumbent. It is the strongest anti-gerrymandering provision in any state constitution at the time.',
+      },
+      {
+        title: 'Republicans draw maps in secret, violating the amendment',
+        detail: 'Despite the Fair Districts Amendment, Republican operatives secretly draft congressional maps under the direction of party consultants, feeding them to legislators as if they were drawn independently. Internal emails later revealed in litigation show the maps were designed to protect Republican incumbents and maximize Republican seats.',
+      },
+      {
+        title: '⚖ League of Women Voters v. Detzner — maps struck',
+        detail: 'The League of Women Voters and other plaintiffs sue under the Fair Districts Amendment. The Florida Supreme Court rules unanimously in July 2015 that eight congressional districts were drawn in violation of the amendment — finding that the legislature was "tainted by unconstitutional intent." The court orders a remedial map, which takes effect for the 2016 elections.',
+        url: 'https://redistrictingdatahub.org/state/florida/',
+      },
+    ],
+    2022: [
+      {
+        title: 'Florida gains 1 seat; DeSantis rejects legislature\'s map',
+        detail: 'The 2020 census gives Florida 28 seats. In an unprecedented move, Governor Ron DeSantis (R) rejects the map passed by the Republican-controlled legislature — which had attempted to preserve the majority-Black 5th District — and submits his own congressional map.',
+      },
+      {
+        title: 'DeSantis map eliminates the majority-Black I-10 corridor district',
+        detail: 'The DeSantis map dismantles the majority-Black 5th District, which had stretched along the I-10 corridor connecting Black communities in Jacksonville and Tallahassee. Under the new map, no district in that region has a Black voting-age majority. Republicans gain 2 additional seats, moving from a 16-11 delegation to an expected 20-8 advantage.',
+      },
+      {
+        title: '⚖ Black Voters Matter v. Byrd — VRA challenge reversed on appeal',
+        detail: 'A coalition of civil rights groups challenges the elimination of the majority-Black district as a violation of VRA Section 2. A federal district court strikes the map in May 2022, finding it likely dilutes Black voting power. However, the 11th Circuit Court of Appeals reverses in September 2022, ruling that the VRA does not require the creation of majority-minority districts under these circumstances. The DeSantis maps are used for the 2022 elections.',
+      },
+    ],
+  },
+
   VA: {
     1992: [
       {

@@ -1,0 +1,116 @@
+{
+  "state": "Florida",
+  "fips": "12",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 23,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Chiles (D) and a Democratic legislature drew maps after the 1990 census gave Florida 4 additional seats; VRA required new majority-minority districts",
+      "efficiency_gap": 0.0049,
+      "mean_median_diff": 0.0134,
+      "seats_d": 10,
+      "seats_r": 12,
+      "votes_d": 2146546,
+      "votes_r": 2352698,
+      "seat_vote_ratio_d": 0.9113,
+      "avg_compactness": 0.0805,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 3,
+        "competitive": 4,
+        "lean_r": 5,
+        "solid_r": 6
+      }
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 25,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Jeb Bush (R) and a Republican-controlled legislature drew maps after Florida gained 2 seats; Republicans won 18 of 25 seats",
+      "efficiency_gap": 0.1063,
+      "mean_median_diff": 0.0365,
+      "seats_d": 7,
+      "seats_r": 18,
+      "votes_d": 1537126,
+      "votes_r": 2161353,
+      "seat_vote_ratio_d": 0.6737,
+      "avg_compactness": 0.068,
+      "competitiveness": {
+        "solid_d": 6,
+        "lean_d": 1,
+        "competitive": 2,
+        "lean_r": 1,
+        "solid_r": 15
+      }
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 27,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Rick Scott (R) and Republican legislature drew maps constrained by the Fair Districts Amendment (Amendment 6, 2010); FL Supreme Court struck the maps in 2015 (LWV v. Detzner) as violating the amendment \u2014 remedial maps used from 2016 onward",
+      "efficiency_gap": 0.1071,
+      "mean_median_diff": 0.048,
+      "seats_d": 10,
+      "seats_r": 17,
+      "votes_d": 3392403,
+      "votes_r": 3826523,
+      "seat_vote_ratio_d": 0.7881,
+      "avg_compactness": 0.0961,
+      "competitiveness": {
+        "solid_d": 7,
+        "lean_d": 1,
+        "competitive": 5,
+        "lean_r": 4,
+        "solid_r": 10
+      }
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 28,
+      "redistricting_controller": "Republican",
+      "notes": "Governor DeSantis (R) rejected the legislature's map and submitted his own, eliminating the majority-Black 5th District (I-10 corridor); a federal court struck it as a VRA violation but the 11th Circuit reversed, allowing the maps to stand for 2022",
+      "efficiency_gap": 0.0317,
+      "mean_median_diff": 0.0076,
+      "seats_d": 8,
+      "seats_r": 20,
+      "votes_d": 2784549,
+      "votes_r": 4271197,
+      "seat_vote_ratio_d": 0.724,
+      "avg_compactness": 0.1571,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 4,
+        "competitive": 3,
+        "lean_r": 3,
+        "solid_r": 16
+      }
+    }
+  ]
+}

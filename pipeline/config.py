@@ -80,6 +80,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "FL": {
+        "name": "Florida",
+        "fips": "12",
+        "crs": "EPSG:32617",   # UTM Zone 17N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 23,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Chiles (D) and a Democratic legislature drew maps after the 1990 census gave Florida 4 additional seats; VRA required new majority-minority districts. Note: NHGIS 103rd Congress shapefile missing boundary for FL-9.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 25,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Jeb Bush (R) and a Republican-controlled legislature drew maps after Florida gained 2 seats; Republicans won 18 of 25 seats",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 27,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Rick Scott (R) and Republican legislature drew maps constrained by the Fair Districts Amendment (Amendment 6, 2010); FL Supreme Court struck the maps in 2015 (LWV v. Detzner) as violating the amendment — remedial maps used from 2016 onward",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 28,
+                "redistricting_controller": "Republican",
+                "notes": "Governor DeSantis (R) rejected the legislature's map and submitted his own, eliminating the majority-Black 5th District (I-10 corridor); a federal court struck it as a VRA violation but the 11th Circuit reversed, allowing the maps to stand for 2022",
+            },
+        },
+    },
     "VA": {
         "name": "Virginia",
         "fips": "51",
