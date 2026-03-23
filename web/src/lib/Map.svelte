@@ -215,27 +215,27 @@
 
   function clearSwingOverlay() {
     if (swingTimeoutId !== null) { clearTimeout(swingTimeoutId); swingTimeoutId = null; }
-    if (!map?.getLayer('mi-swing-fill')) return;
-    map.setPaintProperty('mi-swing-fill', 'fill-opacity', 0);
-    map.setPaintProperty('mi-flip-lines', 'line-opacity', 0);
+    if (!map?.getLayer('swing-fill')) return;
+    map.setPaintProperty('swing-fill', 'fill-opacity', 0);
+    map.setPaintProperty('flip-lines', 'line-opacity', 0);
     swingVisible = false;
   }
 
   function showSwingOverlay(fromFC: GeoJSON.FeatureCollection, toFC: GeoJSON.FeatureCollection) {
     clearSwingOverlay();
     const features = computeSwingFeatures(fromFC, toFC);
-    (map.getSource('mi-swing') as maplibregl.GeoJSONSource).setData({
+    (map.getSource('swing') as maplibregl.GeoJSONSource).setData({
       type: 'FeatureCollection', features,
     });
-    map.setPaintProperty('mi-swing-fill', 'fill-opacity', 1);
+    map.setPaintProperty('swing-fill', 'fill-opacity', 1);
     const hasFlips = features.some(f => f.properties?.flipped);
-    if (hasFlips) map.setPaintProperty('mi-flip-lines', 'line-opacity', 0.9);
+    if (hasFlips) map.setPaintProperty('flip-lines', 'line-opacity', 0.9);
     swingVisible = true;
 
     swingTimeoutId = setTimeout(() => {
-      if (!map?.getLayer('mi-swing-fill')) return;
-      map.setPaintProperty('mi-swing-fill', 'fill-opacity', 0);
-      map.setPaintProperty('mi-flip-lines', 'line-opacity', 0);
+      if (!map?.getLayer('swing-fill')) return;
+      map.setPaintProperty('swing-fill', 'fill-opacity', 0);
+      map.setPaintProperty('flip-lines', 'line-opacity', 0);
       swingVisible = false;
       swingTimeoutId = null;
     }, MORPH_MS + SWING_HOLD_MS);
@@ -300,7 +300,7 @@
 
   function startMorph(pairs: MatchedPair[], onDone: () => void) {
     cancelMorph();
-    const source = map.getSource('mi-draw') as maplibregl.GeoJSONSource;
+    const source = map.getSource('draw') as maplibregl.GeoJSONSource;
     const start  = performance.now();
 
     function frame(now: number) {
@@ -352,12 +352,12 @@
 
     // Show chrono-previous boundaries as dashed reference (always from GeoJSON, not nav history)
     const fromRings = allRings(fromFC).map(r => resample(r, MORPH_N));
-    (map.getSource('mi-prev') as maplibregl.GeoJSONSource).setData(ringsToFC(fromRings));
-    map.setPaintProperty('mi-prev-lines', 'line-color', lineColor(fromYear));
-    map.setLayoutProperty('mi-prev-lines', 'visibility', 'visible');
+    (map.getSource('prev') as maplibregl.GeoJSONSource).setData(ringsToFC(fromRings));
+    map.setPaintProperty('prev-lines', 'line-color', lineColor(fromYear));
+    map.setLayoutProperty('prev-lines', 'visibility', 'visible');
 
-    map.setPaintProperty('mi-draw-lines', 'line-color', lineColor(toYear));
-    map.setPaintProperty('mi-draw-glow',  'line-color', lineColor(toYear));
+    map.setPaintProperty('draw-lines', 'line-color', lineColor(toYear));
+    map.setPaintProperty('draw-glow',  'line-color', lineColor(toYear));
     const pairs = matchDistricts(fromFC, toFC);
 
     showSwingOverlay(fromFC, toFC);
@@ -401,27 +401,27 @@
 
     if (isInitial) {
       // First load: show boundaries immediately, no animation
-      map.setPaintProperty('mi-draw-lines', 'line-color', lineColor(year));
-      map.setPaintProperty('mi-draw-glow',  'line-color', lineColor(year));
+      map.setPaintProperty('draw-lines', 'line-color', lineColor(year));
+      map.setPaintProperty('draw-glow',  'line-color', lineColor(year));
       loadGeo(year).then(fc => {
         if (morphTargetYear !== null && morphTargetYear !== year) return;
         const rings = allRings(fc).map(r => resample(r, MORPH_N));
-        (map.getSource('mi-draw') as maplibregl.GeoJSONSource).setData(ringsToFC(rings));
+        (map.getSource('draw') as maplibregl.GeoJSONSource).setData(ringsToFC(rings));
         currBoundary = rings;
       });
     } else if (prevYear !== year) {
       if (fromYear !== null) {
-        // Animate from chrono-previous cycle — mi-prev-lines set inside transitionBoundary
+        // Animate from chrono-previous cycle — prev-lines set inside transitionBoundary
         transitionBoundary(fromYear, year);
       } else {
         // First cycle year selected (e.g. 1992): no prev, just show directly
-        map.setLayoutProperty('mi-prev-lines', 'visibility', 'none');
-        map.setPaintProperty('mi-draw-lines', 'line-color', lineColor(year));
-        map.setPaintProperty('mi-draw-glow',  'line-color', lineColor(year));
+        map.setLayoutProperty('prev-lines', 'visibility', 'none');
+        map.setPaintProperty('draw-lines', 'line-color', lineColor(year));
+        map.setPaintProperty('draw-glow',  'line-color', lineColor(year));
         loadGeo(year).then(fc => {
           if (morphTargetYear !== null && morphTargetYear !== year) return;
           const rings = allRings(fc).map(r => resample(r, MORPH_N));
-          (map.getSource('mi-draw') as maplibregl.GeoJSONSource).setData(ringsToFC(rings));
+          (map.getSource('draw') as maplibregl.GeoJSONSource).setData(ringsToFC(rings));
           currBoundary = rings;
         });
       }
@@ -480,9 +480,9 @@
       });
 
       const emptyFC: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] };
-      map.addSource('mi-prev', { type: 'geojson', data: emptyFC });
-      map.addSource('mi-draw', { type: 'geojson', data: emptyFC });
-      map.addSource('mi-swing', { type: 'geojson', data: emptyFC });
+      map.addSource('prev', { type: 'geojson', data: emptyFC });
+      map.addSource('draw', { type: 'geojson', data: emptyFC });
+      map.addSource('swing', { type: 'geojson', data: emptyFC });
 
       // 1. Ghost fill (previous year, very faint)
       map.addLayer({
@@ -514,9 +514,9 @@
 
       // 3. Swing overlay fill — colored by partisan swing, shown during transition
       map.addLayer({
-        id: 'mi-swing-fill',
+        id: 'swing-fill',
         type: 'fill',
-        source: 'mi-swing',
+        source: 'swing',
         paint: {
           'fill-color': ['get', 'swing_color'],
           'fill-opacity': 0,
@@ -526,9 +526,9 @@
 
       // 3b. Flip indicators — thick colored outline on districts that changed party
       map.addLayer({
-        id: 'mi-flip-lines',
+        id: 'flip-lines',
         type: 'line',
-        source: 'mi-swing',
+        source: 'swing',
         filter: ['==', ['get', 'flipped'], 1],
         layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: {
@@ -541,9 +541,9 @@
 
       // 4. Previous year boundaries — faded dashed reference
       map.addLayer({
-        id: 'mi-prev-lines',
+        id: 'prev-lines',
         type: 'line',
-        source: 'mi-prev',
+        source: 'prev',
         layout: { visibility: 'none', 'line-cap': 'round', 'line-join': 'round' },
         paint: {
           'line-color': '#888',
@@ -555,9 +555,9 @@
 
       // 4a. Glow halo — wide blurred version of the current boundary
       map.addLayer({
-        id: 'mi-draw-glow',
+        id: 'draw-glow',
         type: 'line',
-        source: 'mi-draw',
+        source: 'draw',
         layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: {
           'line-color': lineColor(selectedYear),
@@ -569,9 +569,9 @@
 
       // 4b. Current year boundaries — solid, animated during transition
       map.addLayer({
-        id: 'mi-draw-lines',
+        id: 'draw-lines',
         type: 'line',
-        source: 'mi-draw',
+        source: 'draw',
         layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: {
           'line-color': lineColor(selectedYear),
