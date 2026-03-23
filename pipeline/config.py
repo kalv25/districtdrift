@@ -465,6 +465,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "AZ": {
+        "name": "Arizona",
+        "fips": "04",
+        "crs": "EPSG:32612",   # NAD83 / UTM Zone 12N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 6,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Symington (R) and a Republican-controlled legislature drew maps after Arizona gained 1 seat from the 1990 census",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 8,
+                "redistricting_controller": "Independent Commission (AIRC)",
+                "notes": "Proposition 106 (2000) created the Arizona Independent Redistricting Commission, removing redistricting from legislative control. Arizona gained 2 seats from the 2000 census. The first AIRC maps were used starting in 2002.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 9,
+                "redistricting_controller": "Independent Commission (AIRC)",
+                "notes": "Arizona gained 1 seat after the 2010 census. The Republican-controlled legislature attempted to remove AIRC chair Colleen Mathis in 2011; the AZ Supreme Court reinstated her. The legislature then sued to abolish the AIRC entirely — Arizona State Legislature v. Arizona Independent Redistricting Commission (2015) — but SCOTUS upheld the commission 5-4.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 9,
+                "redistricting_controller": "Independent Commission (AIRC)",
+                "notes": "The AIRC drew maps for the third time; Arizona retained 9 seats after the 2020 census. Maps produced a competitive delegation in one of the nation's premier swing states, with Democrats and Republicans each winning seats across multiple cycles.",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",

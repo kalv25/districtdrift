@@ -50,6 +50,7 @@
     FL: { name: 'Florida', flag: '◉' },
     IL: { name: 'Illinois', flag: '◉' },
     NY: { name: 'New York', flag: '◉' },
+    AZ: { name: 'Arizona', flag: '◉' },
     NJ: { name: 'New Jersey', flag: '◉' },
   };
 

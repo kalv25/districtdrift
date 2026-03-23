@@ -39,6 +39,7 @@
     FL: { bounds: [[-87.6, 24.4], [-80.0, 31.0]], center: [-83.5, 27.8], zoom: 5.5 },
     IL: { bounds: [[-91.5, 36.9], [-87.0, 42.5]], center: [-89.2, 40.0], zoom: 5.9 },
     NY: { bounds: [[-79.8, 40.5], [-71.8, 45.0]], center: [-75.5, 42.9], zoom: 6.0 },
+    AZ: { bounds: [[-114.8, 31.3], [-109.0, 37.0]], center: [-111.7, 34.3], zoom: 6.0 },
     NJ: { bounds: [[-75.6, 38.9], [-74.0, 41.4]], center: [-74.6, 40.1], zoom: 7.5 },
   };
   const stateView = $derived(STATE_VIEW[statePo] ?? STATE_VIEW['MI']);

@@ -611,6 +611,54 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
   },
 
+  AZ: {
+    1992: [
+      {
+        title: 'Arizona gains 1 congressional seat',
+        detail: 'Arizona gained 1 congressional seat after the 1990 census, reaching 6 districts.',
+      },
+      {
+        title: 'Republican-drawn maps favor GOP',
+        detail: 'Governor Symington (R) and a Republican-controlled legislature drew maps favoring Republicans. Republicans won 5 of 6 seats in a state that leaned reliably Republican at the time.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Arizona gains 2 congressional seats',
+        detail: 'Arizona gained 2 congressional seats after the 2000 census, reaching 8 districts.',
+      },
+      {
+        title: 'Proposition 106 creates the AIRC',
+        detail: 'Proposition 106 (2000), passed by voters, created the Arizona Independent Redistricting Commission — removing redistricting from legislative control. The AIRC drew its first congressional maps, with a bipartisan commission of 2 Democrats, 2 Republicans, and 1 independent chair.',
+      },
+      {
+        title: 'AIRC produces more competitive districts',
+        detail: 'Maps produced more competitive districts than the prior legislative-drawn maps.',
+      },
+    ],
+    2012: [
+      {
+        title: 'Arizona gains 1 seat; legislature attacks AIRC',
+        detail: 'Arizona gained 1 seat after the 2010 census, reaching 9 districts. Governor Brewer (R) and the Republican legislature attempted to remove AIRC chair Colleen Mathis — the AZ Supreme Court reinstated her.',
+      },
+      {
+        title: '⚖ Arizona State Legislature v. Arizona Independent Redistricting Commission (2015)',
+        detail: 'SCOTUS upheld 5-4 that voters can strip redistricting authority from legislatures via ballot initiative. Maps drew legal challenges but produced a competitive 5-4 Republican delegation.',
+        url: 'https://www.supremecourt.gov/opinions/14pdf/13-1314_kjfl.pdf',
+      },
+    ],
+    2022: [
+      {
+        title: 'AIRC draws maps for third cycle',
+        detail: 'Arizona retained 9 seats after the 2020 census; the AIRC drew maps for the third cycle. Maps were drawn to maintain competitive districts in a premier swing state — Biden and Trump each won Arizona in consecutive presidential elections.',
+      },
+      {
+        title: 'Delegation shifts to 6-3 Republican',
+        detail: 'The delegation shifted to 6-3 Republican after the 2022 elections. Arizona\'s AIRC model has become a template for redistricting reform efforts nationally.',
+      },
+    ],
+  },
+
   NC: {
     1992: [
       {

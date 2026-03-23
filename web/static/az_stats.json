@@ -1,0 +1,116 @@
+{
+  "state": "Arizona",
+  "fips": "04",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 6,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Symington (R) and a Republican-controlled legislature drew maps after Arizona gained 1 seat from the 1990 census",
+      "efficiency_gap": -0.0197,
+      "mean_median_diff": 0.0191,
+      "seats_d": 2,
+      "seats_r": 2,
+      "votes_d": 381030,
+      "votes_r": 470104,
+      "seat_vote_ratio_d": 0.7446,
+      "avg_compactness": 0.209,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 2
+      }
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 8,
+      "redistricting_controller": "Independent Commission (AIRC)",
+      "notes": "Proposition 106 (2000) created the Arizona Independent Redistricting Commission, removing redistricting from legislative control. Arizona gained 2 seats from the 2000 census. The first AIRC maps were used starting in 2002.",
+      "efficiency_gap": 0.1773,
+      "mean_median_diff": 0.0664,
+      "seats_d": 2,
+      "seats_r": 6,
+      "votes_d": 472135,
+      "votes_r": 681922,
+      "seat_vote_ratio_d": 0.6111,
+      "avg_compactness": 0.3223,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 5
+      }
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 9,
+      "redistricting_controller": "Independent Commission (AIRC)",
+      "notes": "Arizona gained 1 seat after the 2010 census. The Republican-controlled legislature attempted to remove AIRC chair Colleen Mathis in 2011; the AZ Supreme Court reinstated her. The legislature then sued to abolish the AIRC entirely \u2014 Arizona State Legislature v. Arizona Independent Redistricting Commission (2015) \u2014 but SCOTUS upheld the commission 5-4.",
+      "efficiency_gap": -0.0833,
+      "mean_median_diff": -0.0052,
+      "seats_d": 5,
+      "seats_r": 4,
+      "votes_d": 946994,
+      "votes_r": 1131663,
+      "seat_vote_ratio_d": 1.2194,
+      "avg_compactness": 0.2988,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 4
+      }
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 9,
+      "redistricting_controller": "Independent Commission (AIRC)",
+      "notes": "The AIRC drew maps for the third time; Arizona retained 9 seats after the 2020 census. Maps produced a competitive delegation in one of the nation's premier swing states, with Democrats and Republicans each winning seats across multiple cycles.",
+      "efficiency_gap": 0.1108,
+      "mean_median_diff": -0.0615,
+      "seats_d": 3,
+      "seats_r": 6,
+      "votes_d": 1016112,
+      "votes_r": 1324961,
+      "seat_vote_ratio_d": 0.768,
+      "avg_compactness": 0.2768,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 1,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 3
+      }
+    }
+  ]
+}
