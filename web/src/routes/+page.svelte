@@ -483,7 +483,7 @@
         <details class="events-section about-section">
           <summary>About this project</summary>
           <div class="about-body">
-            <p>District Drift documents how congressional district maps have shaped election outcomes across four redistricting cycles — 1992, 2002, 2012, and 2022.</p>
+            <p>District Drift is an independent project by <a href="https://github.com/kana" target="_blank" rel="noopener">Kana Nadarajan</a> documenting how congressional district maps have shaped election outcomes across four redistricting cycles — 1992, 2002, 2012, and 2022.</p>
             <p>The core metric is the <strong>efficiency gap</strong>: the difference in "wasted" votes between the two parties, expressed as a share of total votes. Wasted votes are all losing-party votes plus any winning-party votes beyond what was needed to win. A large positive gap means Republican maps packed and cracked Democratic voters; a large negative gap means the reverse.</p>
             <p>The 2% threshold is a commonly cited benchmark — gaps below it are considered within the normal range of electoral variation.</p>
             <p>Boundary data comes from <a href="https://www.nhgis.org" target="_blank" rel="noopener">NHGIS</a>; election returns from the <a href="https://electionlab.mit.edu/data" target="_blank" rel="noopener">MIT Election Lab</a>.</p>
@@ -604,9 +604,10 @@
 
   <footer>
     <p>
+      Built by <a href="https://github.com/kana" target="_blank" rel="noopener">Kana Nadarajan</a> ·
       Sources:
-      <a href="https://www.nhgis.org/" target="_blank" rel="noopener">NHGIS</a> (boundaries) ·
-      <a href="https://electionlab.mit.edu/" target="_blank" rel="noopener">MIT Election Lab</a> (returns) ·
+      <a href="https://www.nhgis.org/" target="_blank" rel="noopener">NHGIS</a> ·
+      <a href="https://electionlab.mit.edu/" target="_blank" rel="noopener">MIT Election Lab</a> ·
       <a href="https://redistrictingdatahub.org/" target="_blank" rel="noopener">Redistricting Data Hub</a>
     </p>
   </footer>

@@ -10,7 +10,7 @@
 	<meta name="generator" content="districtdrift {__APP_VERSION__}" />
 
 	<!-- Primary meta -->
-	<meta name="description" content="Three decades of congressional gerrymandering — explore how redistricting shaped partisan outcomes in every state from 1992 to 2022." />
+	<meta name="description" content="Three decades of congressional gerrymandering — explore how redistricting shaped partisan outcomes in every state from 1992 to 2022. An independent project by Kana Nadarajan." />
 
 	<!-- Open Graph -->
 	<meta property="og:type" content="website" />
