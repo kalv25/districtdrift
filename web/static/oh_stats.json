@@ -1,0 +1,116 @@
+{
+  "state": "Ohio",
+  "fips": "39",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 19,
+      "redistricting_controller": "Split (Rep governor, Dem House)",
+      "notes": "Governor Voinovich (R) and a split legislature negotiated maps after Ohio lost 2 seats from the 1990 census",
+      "efficiency_gap": -0.0198,
+      "mean_median_diff": 0.0124,
+      "seats_d": 8,
+      "seats_r": 8,
+      "votes_d": 1793461,
+      "votes_r": 1875048,
+      "seat_vote_ratio_d": 0.8613,
+      "avg_compactness": 0.3057,
+      "competitiveness": {
+        "solid_d": 6,
+        "lean_d": 0,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 7
+      }
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 18,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Taft (R) and a Republican-controlled legislature drew maps after Ohio lost 1 seat",
+      "efficiency_gap": 0.0257,
+      "mean_median_diff": 0.0817,
+      "seats_d": 6,
+      "seats_r": 12,
+      "votes_d": 1331614,
+      "votes_r": 1775555,
+      "seat_vote_ratio_d": 0.7778,
+      "avg_compactness": 0.2226,
+      "competitiveness": {
+        "solid_d": 5,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 11
+      }
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 16,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Kasich (R) and Republican legislature drew maps producing a 12-4 Republican delegation in a presidential swing state; Ohio lost 2 seats from the 2010 census",
+      "efficiency_gap": 0.2305,
+      "mean_median_diff": 0.0685,
+      "seats_d": 4,
+      "seats_r": 12,
+      "votes_d": 2412385,
+      "votes_r": 2620233,
+      "seat_vote_ratio_d": 0.5215,
+      "avg_compactness": 0.1681,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 0,
+        "competitive": 2,
+        "lean_r": 4,
+        "solid_r": 6
+      }
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 15,
+      "redistricting_controller": "Republican",
+      "notes": "The Republican-majority Ohio Redistricting Commission drew maps the Ohio Supreme Court struck twice (Jan and July 2022); the unconstitutional maps were nonetheless used for the 2022 elections after the court missed its own deadlines",
+      "efficiency_gap": 0.0499,
+      "mean_median_diff": 0.0582,
+      "seats_d": 5,
+      "seats_r": 10,
+      "votes_d": 1790614,
+      "votes_r": 2318993,
+      "seat_vote_ratio_d": 0.765,
+      "avg_compactness": 0.2889,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 1,
+        "competitive": 2,
+        "lean_r": 2,
+        "solid_r": 8
+      }
+    }
+  ]
+}

@@ -80,6 +80,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "OH": {
+        "name": "Ohio",
+        "fips": "39",
+        "crs": "EPSG:32617",   # UTM Zone 17N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 19,
+                "redistricting_controller": "Split (Rep governor, Dem House)",
+                "notes": "Governor Voinovich (R) and a split legislature negotiated maps after Ohio lost 2 seats from the 1990 census. Note: NHGIS 103rd Congress shapefile missing district boundaries for OH-3, OH-10, and OH-11.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 18,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Taft (R) and a Republican-controlled legislature drew maps after Ohio lost 1 seat",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 16,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Kasich (R) and Republican legislature drew maps producing a 12-4 Republican delegation in a presidential swing state; Ohio lost 2 seats from the 2010 census",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 15,
+                "redistricting_controller": "Republican",
+                "notes": "The Republican-majority Ohio Redistricting Commission drew maps the Ohio Supreme Court struck twice (Jan and July 2022); the unconstitutional maps were nonetheless used for the 2022 elections after the court missed its own deadlines",
+            },
+        },
+    },
     "TX": {
         "name": "Texas",
         "fips": "48",

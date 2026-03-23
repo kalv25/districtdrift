@@ -43,6 +43,7 @@
     MD: { name: 'Maryland', flag: '◉' },
     PA: { name: 'Pennsylvania', flag: '◉' },
     TX: { name: 'Texas', flag: '◉' },
+    OH: { name: 'Ohio', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view
