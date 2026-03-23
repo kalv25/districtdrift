@@ -40,6 +40,7 @@
     MI: { name: 'Michigan', flag: '◉' },
     NC: { name: 'North Carolina', flag: '◉' },
     WI: { name: 'Wisconsin', flag: '◉' },
+    MD: { name: 'Maryland', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view

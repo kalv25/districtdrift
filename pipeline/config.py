@@ -80,6 +80,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "MD": {
+        "name": "Maryland",
+        "fips": "24",
+        "crs": "EPSG:32618",   # UTM Zone 18N (NAD83) — covers the Chesapeake Bay region
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 8,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Schaefer (D) and a Democratic legislature drew maps preserving 7 of 8 Democratic seats",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 8,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Glendening (D) and Democratic legislature maintained the 7-1 Democratic delegation",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 8,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor O'Malley (D) signed maps that redrew the 6th District — held by Republicans since 1991 — into a heavily Democratic seat by adding Montgomery County suburbs; Benisek v. Lamone challenged the 6th as a partisan gerrymander",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 8,
+                "redistricting_controller": "Democrat (veto override)",
+                "notes": "Republican governor Hogan vetoed the Democratic legislature's maps; the legislature overrode the veto. Szeliga v. Lamone struck the original map as unconstitutional; remedial maps ordered and used in 2022",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",

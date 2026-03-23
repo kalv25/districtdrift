@@ -93,6 +93,54 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
   },
 
+  MD: {
+    1992: [
+      {
+        title: 'Democrats draw incumbent-protection maps',
+        detail: 'Governor William Schaefer (D) and the Democratic-controlled legislature redraw Maryland\'s 8 congressional districts after the 1990 census. Despite Democratic map control, 1992 proves competitive: Republicans win 4 of 8 seats on the strength of suburban gains, including a new open seat.',
+      },
+      {
+        title: 'Maryland\'s only Republican district survives — for now',
+        detail: 'The 6th District in western Maryland remains Republican-leaning, anchored by rural conservative counties. Republican Roscoe Bartlett wins the seat in 1992 and holds it for ten consecutive terms through 2012.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Democrats maintain 7-1 grip',
+        detail: 'Governor Parris Glendening (D) and the Democratic legislature redraw the map after the 2000 census. Maryland\'s seat count stays at 8. The maps preserve the 7-1 Democratic advantage with minimal changes from the prior decade.',
+      },
+    ],
+    2012: [
+      {
+        title: 'O\'Malley targets the only Republican district',
+        detail: 'Governor Martin O\'Malley (D) convenes a special session to redraw the 6th District — the state\'s lone Republican-held seat. The new map strips out rural conservative counties in western Maryland and adds heavily Democratic Montgomery County suburbs, transforming a district Roscoe Bartlett had won by 28 points into one Democrats would carry by 21. Bartlett loses his seat in 2012.',
+      },
+      {
+        title: 'Efficiency gap reaches double digits — favoring Democrats',
+        detail: 'The 2012 maps produce a 7-1 Democratic delegation on a statewide vote that was far closer. Maryland becomes a textbook example of Democratic gerrymandering alongside Republican gerrymanders in Wisconsin and North Carolina.',
+      },
+      {
+        title: '⚖ Benisek v. Lamone — partisan gerrymander claim dismissed',
+        detail: 'Republican voters in the 6th District challenge the O\'Malley redistricting as an unconstitutional partisan gerrymander under the First Amendment. The case works through the courts for nearly a decade. After Rucho v. Common Cause (2019) bars federal courts from adjudicating partisan gerrymandering claims, the case is ultimately dismissed on those grounds in 2020.',
+        url: 'https://www.oyez.org/cases/2018/18-726',
+      },
+    ],
+    2022: [
+      {
+        title: 'Legislature overrides Republican governor\'s veto',
+        detail: 'Republican Governor Larry Hogan vetoes the Democratic legislature\'s congressional maps, calling them "the most extreme partisan gerrymander in the nation." The Democratic supermajority immediately overrides the veto. The maps are designed to flip the 6th District back to deep-blue and pack Republicans into a single district.',
+      },
+      {
+        title: '⚖ Szeliga v. Lamone — maps struck as unconstitutional',
+        detail: 'A group of Republican plaintiffs challenge the maps in Anne Arundel County Circuit Court under the Maryland Constitution. In March 2022, Judge Lynne Battaglia strikes the congressional map as an unconstitutional partisan gerrymander — the first time a Maryland court had done so. The legislature is ordered to draw remedial maps.',
+      },
+      {
+        title: 'Remedial maps drawn; 6th District becomes competitive',
+        detail: 'The legislature passes revised maps in April 2022. The remedial 6th District, while still more Democratic than the pre-2012 version, becomes significantly more competitive. Democrats win the seat in 2022 but by a narrower margin.',
+      },
+    ],
+  },
+
   WI: {
     1992: [
       {
