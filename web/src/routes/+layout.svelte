@@ -1,11 +1,10 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
-
 	let { children } = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/favicon.ico" sizes="any" />
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 	<meta name="version" content={__APP_VERSION__} />
 	<meta name="generator" content="districtdrift {__APP_VERSION__}" />
 
