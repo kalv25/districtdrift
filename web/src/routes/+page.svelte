@@ -954,7 +954,7 @@
             <li>Election results: <strong>MIT Election Lab</strong> US House returns 1976–2024.</li>
             <li>Demographics (population, race, income, education): <strong>US Census Bureau</strong> via NHGIS — 1990 STF1/STF3, 2000 SF1/SF3, and ACS 5-year estimates (2008–2012 and 2018–2022).</li>
             <li>The 1992 cycle (103rd Congress) has known gaps in the NHGIS shapefile for some states — a handful of district boundaries are missing from the source data.</li>
-            <li>Currently covers Michigan. More states are added regularly.</li>
+            <li>Currently covers all 50 states across four redistricting cycles. Select any state from the dropdown to explore its maps.</li>
           </ul>
         </section>
 
