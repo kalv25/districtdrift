@@ -6,12 +6,14 @@
   import { Protocol } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022] }: {
+  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, onDistrictClick }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;
     statePo?: string;
     cycleYears?: number[];
+    darkMode?: boolean;
+    onDistrictClick?: (d: { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number }) => void;
   } = $props();
 
   // Year immediately before `year` in the cycle sequence, or null if it's the first.
@@ -20,13 +22,13 @@
     return idx > 0 ? cycleYears[idx - 1] : null;
   }
 
-  const stateL = statePo.toLowerCase();
+  const stateL = $derived(statePo.toLowerCase());
 
   const STATE_VIEW: Record<string, { bounds: maplibregl.LngLatBoundsLike; center: [number, number]; zoom: number }> = {
     MI: { bounds: [[-90.5, 41.7], [-82.1, 48.3]], center: [-84.5, 44.5], zoom: 5.5 },
     NC: { bounds: [[-84.3, 33.8], [-75.5, 36.6]], center: [-79.9, 35.2], zoom: 6.2 },
   };
-  const stateView = STATE_VIEW[statePo] ?? STATE_VIEW['MI'];
+  const stateView = $derived(STATE_VIEW[statePo] ?? STATE_VIEW['MI']);
 
   const FILL_COLOR = [
     'case',
@@ -68,10 +70,16 @@
   let prevYear: number | null = null;
 
   let morphRafId: number | null = null;
+  let fitDebounceId: ReturnType<typeof setTimeout> | null = null;
+  let resizeObserver: ResizeObserver;
   let morphTargetYear: number | null = null;
   let currBoundary: Ring[] | null = null; // rings currently drawn on screen
   let swingTimeoutId: ReturnType<typeof setTimeout> | null = null;
-  let swingVisible = $state(false);
+  let swingVisible = false;                   // plain — must NOT be $state (read inside $effect via clearSwingOverlay)
+  let swingMarkers: maplibregl.Marker[] = [];
+  let swingLegendVisible = $state(false);    // $state only for the legend template
+
+  let hoveredDistrict = $state<{ district: number | string; won_by: string; x: number; y: number } | null>(null);
 
   // Legend state (reactive so the overlay updates)
   let legendCurrYear = $state(0);
@@ -86,8 +94,22 @@
   });
 
   const geoCache = new Map<number, GeoJSON.FeatureCollection>();
+  let computedBounds = $state<maplibregl.LngLatBoundsLike | null>(null);
 
   // ── Geometry helpers ────────────────────────────────────────────────────────
+
+  function geoToBounds(fc: GeoJSON.FeatureCollection): maplibregl.LngLatBoundsLike {
+    let w = Infinity, s = Infinity, e = -Infinity, n = -Infinity;
+    function scan(c: unknown): void {
+      if (!Array.isArray(c)) return;
+      if (typeof c[0] === 'number') {
+        w = Math.min(w, c[0] as number); e = Math.max(e, c[0] as number);
+        s = Math.min(s, c[1] as number); n = Math.max(n, c[1] as number);
+      } else { c.forEach(scan); }
+    }
+    fc.features.forEach(f => scan((f.geometry as GeoJSON.Polygon).coordinates));
+    return [[w, s], [e, n]];
+  }
 
   async function loadGeo(year: number): Promise<GeoJSON.FeatureCollection> {
     if (geoCache.has(year)) return geoCache.get(year)!;
@@ -95,6 +117,7 @@
     if (!res.ok) throw new Error(`geo load failed: ${res.status}`);
     const fc = await res.json() as GeoJSON.FeatureCollection;
     geoCache.set(year, fc);
+    if (!computedBounds) computedBounds = geoToBounds(fc); // compute once per state mount
     return fc;
   }
 
@@ -159,17 +182,6 @@
 
   // ── Swing coloring ──────────────────────────────────────────────────────────
 
-  // swing > 0: D gained share; swing < 0: R gained share
-  function swingFillColor(swing: number): string {
-    const abs = Math.abs(swing);
-    if (abs < 0.02) return 'rgba(128,128,128,0.04)';
-    const intensity = Math.min(1, abs / 0.15);        // saturates at ±15%
-    const opacity = (0.12 + intensity * 0.48).toFixed(2);
-    return swing > 0
-      ? `rgba(74,144,217,${opacity})`   // D gained: blue
-      : `rgba(224,92,92,${opacity})`;   // R gained: red
-  }
-
   function computeSwingFeatures(
     fromFC: GeoJSON.FeatureCollection,
     toFC: GeoJSON.FeatureCollection,
@@ -199,10 +211,21 @@
       const fromWon = (fromProp?.won_by ?? '') as string;
       const flipped = fromProp !== null && toWon && fromWon && toWon !== fromWon ? 1 : 0;
 
+      const abs = Math.abs(swing);
+      // swing_dir: 1=D gained, -1=R gained, 0=negligible
+      const swing_dir = abs < 0.02 ? 0 : swing > 0 ? 1 : -1;
+
+      const fromPct = fromLean !== null ? Math.round(fromLean * 100) : null;
+      const toPct   = toLean   !== null ? Math.round(toLean   * 100) : null;
+      const swing_label = fromPct !== null && toPct !== null
+        ? `${fromPct}% D → ${toPct}% D` : '';
+
       return {
         type: 'Feature' as const,
         properties: {
-          swing_color: swingFillColor(swing),
+          swing_dir,
+          swing_mag: abs,
+          swing_label,
           flipped,
           flip_color: flipped
             ? (toWon === 'R' ? '#ef4444' : '#3b82f6')
@@ -216,9 +239,16 @@
   function clearSwingOverlay() {
     if (swingTimeoutId !== null) { clearTimeout(swingTimeoutId); swingTimeoutId = null; }
     if (!map?.getLayer('swing-fill')) return;
-    map.setPaintProperty('swing-fill', 'fill-opacity', 0);
-    map.setPaintProperty('flip-lines', 'line-opacity', 0);
+    map.setLayoutProperty('swing-fill', 'visibility', 'none');
+    map.setPaintProperty('swing-fill', 'fill-opacity', 0.65); // reset for next show
+    map.setLayoutProperty('flip-lines', 'visibility', 'none');
+    map.setPaintProperty('flip-lines', 'line-opacity', 1);    // reset for next show
+    for (const m of swingMarkers) m.remove(); // Marker.remove() unregisters from map
+    swingMarkers = [];
+    if (swingVisible && map.getLayer('districts-fill-front'))
+      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
     swingVisible = false;
+    swingLegendVisible = false;
   }
 
   function showSwingOverlay(fromFC: GeoJSON.FeatureCollection, toFC: GeoJSON.FeatureCollection) {
@@ -227,18 +257,62 @@
     (map.getSource('swing') as maplibregl.GeoJSONSource).setData({
       type: 'FeatureCollection', features,
     });
-    map.setPaintProperty('swing-fill', 'fill-opacity', 1);
+
+    // Dim the party fill so swing colors are visible on top
+    if (map.getLayer('districts-fill-front'))
+      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.25);
+    map.setLayoutProperty('swing-fill', 'visibility', 'visible');
     const hasFlips = features.some(f => f.properties?.flipped);
-    if (hasFlips) map.setPaintProperty('flip-lines', 'line-opacity', 0.9);
+    if (hasFlips) map.setLayoutProperty('flip-lines', 'visibility', 'visible');
+
+    // Show labels only for the most informative districts:
+    // all flipped + top swingers by magnitude, capped at 6 total to avoid crowding.
+    const flipped = features.filter(f => f.properties?.flipped === 1);
+    const bigSwing = features
+      .filter(f => f.properties?.flipped !== 1)
+      .sort((a, b) => (b.properties?.swing_mag ?? 0) - (a.properties?.swing_mag ?? 0))
+      .slice(0, Math.max(0, 6 - flipped.length));
+
+    for (const feat of [...flipped, ...bigSwing]) {
+      const label = feat.properties?.swing_label as string | undefined;
+      if (!label) continue;
+      const ring = primaryRing(feat.geometry as GeoJSON.Geometry);
+      const [lng, lat] = centroid(ring);
+      const el = document.createElement('div');
+      el.className = 'swing-label';
+      el.textContent = label;
+      const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+        .setLngLat([lng, lat])
+        .addTo(map);
+      swingMarkers.push(marker);
+    }
+
     swingVisible = true;
+    swingLegendVisible = true;
 
     swingTimeoutId = setTimeout(() => {
-      if (!map?.getLayer('swing-fill')) return;
-      map.setPaintProperty('swing-fill', 'fill-opacity', 0);
-      map.setPaintProperty('flip-lines', 'line-opacity', 0);
-      swingVisible = false;
-      swingTimeoutId = null;
+      ghostSwingOverlay();
     }, MORPH_MS + SWING_HOLD_MS);
+  }
+
+  // Fade the swing overlay to a faint ghost — fills and labels dimmed,
+  // district fill restored. Stays visible until the next year switch.
+  function ghostSwingOverlay() {
+    swingTimeoutId = null;
+    // Fade swing fill to ghost
+    if (map.getLayer('swing-fill'))
+      map.setPaintProperty('swing-fill', 'fill-opacity', 0.13);
+    // Dim flip outlines
+    if (map.getLayer('flip-lines'))
+      map.setPaintProperty('flip-lines', 'line-opacity', 0.25);
+    // Dim labels
+    for (const m of swingMarkers)
+      m.getElement().style.opacity = '0.45';
+    // Restore district fill
+    if (map.getLayer('districts-fill-front'))
+      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
+    swingLegendVisible = false;
+    // swingVisible stays true so clearSwingOverlay knows to restore opacity on next switch
   }
 
   // Rotate `from` so its starting vertex best aligns with `to` (minimises total
@@ -293,13 +367,17 @@
 
   // ── Morph animation ─────────────────────────────────────────────────────────
 
-  function cancelMorph() {
+  function cancelMorphRaf() {
     if (morphRafId !== null) { cancelAnimationFrame(morphRafId); morphRafId = null; }
+  }
+
+  function cancelMorph() {
+    cancelMorphRaf();
     clearSwingOverlay();
   }
 
   function startMorph(pairs: MatchedPair[], onDone: () => void) {
-    cancelMorph();
+    cancelMorphRaf(); // cancel RAF only — don't clear swing overlay
     const source = map.getSource('draw') as maplibregl.GeoJSONSource;
     const start  = performance.now();
 
@@ -392,7 +470,7 @@
     map.setFilter('districts-fill-front', ['==', ['get', 'cycle_year'], year]);
     requestAnimationFrame(() => {
       if (map.getLayer('districts-fill-front'))
-        map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
+        map.setPaintProperty('districts-fill-front', 'fill-opacity', swingVisible ? 0.25 : 0.65);
     });
 
     if (map.getLayer('districts-hover'))
@@ -420,19 +498,49 @@
     prevYear = year;
   }
 
-  // ── Panel resize ─────────────────────────────────────────────────────────────
+  // ── Fit map to state bounds ─────────────────────────────────────────────────
+
+  function fitToState(duration = 700) {
+    if (fitDebounceId !== null) clearTimeout(fitDebounceId);
+    fitDebounceId = setTimeout(() => {
+      fitDebounceId = null;
+      if (!map?.loaded()) return;
+      map.resize();
+      map.fitBounds(computedBounds ?? stateView.bounds, {
+        // Canvas always fills the full viewport; use bottom padding to keep
+        // the state's lower edge clear of the floating bottom panel.
+        padding: { top: 30, right: 30, bottom: panelBottom > 0 ? panelBottom + 20 : 30, left: 30 },
+        duration,
+        essential: true,
+      });
+    }, 20);
+  }
+
+  // Refit once with accurate bounds as soon as the first GeoJSON loads.
+  $effect(() => {
+    const bounds = computedBounds;
+    if (!bounds || !map?.loaded()) return;
+    fitToState(400);
+  });
+
+  // Refit when the panel height changes (canvas size unchanged, padding changes).
+  $effect(() => {
+    const _pb = panelBottom;
+    if (!map?.loaded()) return;
+    fitToState();
+  });
+
+  // ── Basemap theme switching ──────────────────────────────────────────────────
 
   $effect(() => {
-    const pb = panelBottom;
-    if (!map?.loaded()) return;
-    requestAnimationFrame(() => {
-      map.resize();
-      if (pb > 0) {
-        map.fitBounds(stateView.bounds, { padding: 40, duration: 700, essential: true });
-      } else {
-        map.flyTo({ center: stateView.center, zoom: stateView.zoom, duration: 700, essential: true });
-      }
-    });
+    const dark = darkMode;
+    if (!map?.isStyleLoaded()) return;
+    const src = map.getSource('carto-light') as maplibregl.RasterTileSource | undefined;
+    if (!src) return;
+    src.setTiles([dark
+      ? 'https://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png'
+      : 'https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+    ]);
   });
 
   $effect(() => { setYearFilter(selectedYear); });
@@ -450,16 +558,24 @@
         sources: {
           'carto-light': {
             type: 'raster',
-            tiles: ['https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'],
+            tiles: [darkMode
+                ? 'https://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png'
+                : 'https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'],
             tileSize: 256,
             attribution: '© OpenStreetMap contributors © CARTO',
           },
         },
         layers: [{ id: 'basemap', type: 'raster', source: 'carto-light' }],
       },
-      center: stateView.center,
-      zoom: stateView.zoom,
+      bounds: stateView.bounds,
+      fitBoundsOptions: {
+        padding: { top: 30, right: 30, bottom: panelBottom > 0 ? panelBottom + 20 : 30, left: 30 },
+      },
     });
+
+    // Refit whenever the canvas changes size (panel toggle, window resize).
+    resizeObserver = new ResizeObserver(() => fitToState());
+    resizeObserver.observe(container);
 
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
@@ -502,15 +618,22 @@
         },
       });
 
-      // 3. Swing overlay fill — colored by partisan swing, shown during transition
+      // 3. Swing overlay fill — colored by partisan swing, shown during transition.
+      // Visibility is toggled via layout property (setLayoutProperty) rather than fill-opacity,
+      // because MapLibre skips opacity transitions when the map is in idle state.
       map.addLayer({
         id: 'swing-fill',
         type: 'fill',
         source: 'swing',
+        layout: { visibility: 'none' },
         paint: {
-          'fill-color': ['get', 'swing_color'],
-          'fill-opacity': 0,
-          'fill-opacity-transition': { duration: 400, delay: 0 },
+          'fill-color': ['case',
+            ['==', ['get', 'swing_dir'],  1], '#4a90d9',
+            ['==', ['get', 'swing_dir'], -1], '#e05c5c',
+            '#808080',
+          ] as maplibregl.ExpressionSpecification,
+          'fill-opacity': 0.65,
+          'fill-opacity-transition': { duration: 600, delay: 0 },
         },
       });
 
@@ -520,12 +643,11 @@
         type: 'line',
         source: 'swing',
         filter: ['==', ['get', 'flipped'], 1],
-        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        layout: { visibility: 'none', 'line-cap': 'round', 'line-join': 'round' },
         paint: {
           'line-color': ['get', 'flip_color'],
           'line-width': 3.5,
-          'line-opacity': 0,
-          'line-opacity-transition': { duration: 400, delay: 0 },
+          'line-opacity': 1,
         },
       });
 
@@ -591,6 +713,8 @@
         hoveredId = e.features[0].id;
         map.setFeatureState({ source: 'state-districts', sourceLayer: `${stateL}_districts`, id: hoveredId }, { hover: true });
         map.getCanvas().style.cursor = 'pointer';
+        const p = e.features[0].properties;
+        hoveredDistrict = { district: p?.district ?? '?', won_by: p?.won_by ?? '', x: e.point.x, y: e.point.y };
       });
 
       map.on('mouseleave', 'districts-fill-front', () => {
@@ -598,6 +722,18 @@
           map.setFeatureState({ source: 'state-districts', sourceLayer: `${stateL}_districts`, id: hoveredId }, { hover: false });
         hoveredId = undefined;
         map.getCanvas().style.cursor = '';
+        hoveredDistrict = null;
+      });
+
+      map.on('click', 'districts-fill-front', (e) => {
+        if (!e.features?.length) return;
+        const p = e.features[0].properties ?? {};
+        onDistrictClick?.({
+          district: p.district,
+          won_by: p.won_by ?? '',
+          partisan_lean_d: typeof p.partisan_lean_d === 'number' ? p.partisan_lean_d : null,
+          cycle_year: p.cycle_year ?? selectedYear,
+        });
       });
 
       map.once('idle', () => setYearFilter(selectedYear));
@@ -605,6 +741,7 @@
   });
 
   onDestroy(() => {
+    resizeObserver?.disconnect();
     cancelMorph();
     map?.remove();
     if (protocol) maplibregl.removeProtocol('pmtiles');
@@ -614,11 +751,20 @@
 <div class="map-wrap">
   <div bind:this={container} class="map-canvas"></div>
 
+  {#if hoveredDistrict}
+    <div
+      class="district-tooltip"
+      class:d={hoveredDistrict.won_by === 'D'}
+      class:r={hoveredDistrict.won_by === 'R'}
+      style="left:{hoveredDistrict.x + 14}px; top:{hoveredDistrict.y}px"
+    >District {hoveredDistrict.district}</div>
+  {/if}
+
   <div class="map-year-stamp" style="color: {lineColor(legendCurrYear)}">
     {$yearDisplay ? Math.round($yearDisplay) : ''}
   </div>
 
-  <div class="map-legend">
+  <div class="map-legend" class:top-left={panelBottom > 0}>
     <div class="legend-title">District boundaries</div>
     {#if legendPrevYear !== null}
       <div class="legend-row">
@@ -630,7 +776,7 @@
       <span class="legend-line solid" style="--c: {lineColor(legendCurrYear)}"></span>
       <span class="legend-label">{legendCurrYear}</span>
     </div>
-    {#if swingVisible}
+    {#if swingLegendVisible}
       <div class="legend-divider"></div>
       <div class="legend-row">
         <span class="legend-swing-bar"></span>
@@ -643,6 +789,26 @@
 <style>
   .map-wrap   { position: relative; width: 100%; height: 100%; }
   .map-canvas { width: 100%; height: 100%; }
+
+  .district-tooltip {
+    position: absolute;
+    transform: translateY(calc(-100% - 8px));
+    background: rgba(12, 12, 22, 0.9);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    pointer-events: none;
+    white-space: nowrap;
+    border-left: 3px solid rgba(255,255,255,0.25);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    z-index: 20;
+  }
+  .district-tooltip.d { border-left-color: #4a90d9; }
+  .district-tooltip.r { border-left-color: #e05c5c; }
 
   .map-year-stamp {
     position: absolute;
@@ -671,6 +837,12 @@
     flex-direction: column;
     gap: 0.45rem;
     pointer-events: none;
+  }
+  .map-legend.top-left {
+    bottom: auto;
+    right: auto;
+    top: 1rem;
+    left: 1rem;
   }
 
   .legend-title {
@@ -715,6 +887,30 @@
     background: rgba(255,255,255,0.1);
     margin: 0.15rem 0;
   }
+
+  :global(.swing-label) {
+    background: none;
+    color: #111;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1.3;
+    text-shadow:
+      -1px -1px 0 #fff,  1px -1px 0 #fff,
+      -1px  1px 0 #fff,  1px  1px 0 #fff,
+      0 0 6px rgba(255,255,255,0.8);
+  }
+
+  :global([data-theme=dark] .swing-label) {
+    color: #f0f0f0;
+    text-shadow:
+      -1px -1px 0 #000,  1px -1px 0 #000,
+      -1px  1px 0 #000,  1px  1px 0 #000,
+      0 0 6px rgba(0,0,0,0.9);
+  }
+
 
   .legend-swing-bar {
     display: block;

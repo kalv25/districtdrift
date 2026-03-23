@@ -66,21 +66,35 @@
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
 
   let hoveredYear = $state<number | null>(null);
+  type DistrictDetail = { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number };
+  let selectedDistrict = $state<DistrictDetail | null>(null);
   let displayYear = $derived(hoveredYear ?? selectedYear);
   const PANEL_KEY = 'districtdrift.panelPosition';
-  let panelPosition = $state<'side' | 'bottom'>('side');
+  let panelPosition = $state<'side' | 'bottom' | 'bottom-wide'>('side');
+
+  const THEME_KEY = 'districtdrift.theme';
+  let darkMode = $state(false);
+
   onMount(() => {
-    const saved = localStorage.getItem(PANEL_KEY);
-    if (saved === 'bottom' || saved === 'side') panelPosition = saved;
+    const savedPanel = localStorage.getItem(PANEL_KEY);
+    if (savedPanel === 'bottom' || savedPanel === 'side' || savedPanel === 'bottom-wide') panelPosition = savedPanel as typeof panelPosition;
+
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === 'dark' || savedTheme === 'light') darkMode = savedTheme === 'dark';
+    else darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
+
   $effect(() => { localStorage.setItem(PANEL_KEY, panelPosition); });
+  $effect(() => {
+    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
+    localStorage.setItem(THEME_KEY, darkMode ? 'dark' : 'light');
+  });
   let bottomPanelEl = $state<HTMLDivElement | null>(null);
   let bottomPanelH = $state(0);
   // 1.5rem bottom offset of the panel + its height
   const BOTTOM_OFFSET_PX = 24;
-  let mapPanelBottom = $derived(
-    panelPosition === 'bottom' ? bottomPanelH + BOTTOM_OFFSET_PX : 0
-  );
+  const isBottomPanel = $derived(panelPosition === 'bottom' || panelPosition === 'bottom-wide');
+  let mapPanelBottom = $derived(isBottomPanel ? bottomPanelH + BOTTOM_OFFSET_PX : 0);
 
   type CycleStats = {
     cycle_year: number; congress: number; total_seats: number;
@@ -135,6 +149,22 @@
   function voteShare(d: number, r: number): string {
     const total = d + r;
     return total > 0 ? ((d / total) * 100).toFixed(1) + '%' : '—';
+  }
+
+  function ordinal(n: number): string {
+    const v = n % 100;
+    if (v >= 11 && v <= 13) return `${n}th`;
+    switch (n % 10) {
+      case 1: return `${n}st`;
+      case 2: return `${n}nd`;
+      case 3: return `${n}rd`;
+      default: return `${n}th`;
+    }
+  }
+
+  function wikiUrl(state: string, district: number): string {
+    const name = STATES[state]?.name ?? state;
+    return `https://en.wikipedia.org/wiki/${encodeURIComponent(`${name}'s ${ordinal(district)} congressional district`)}`;
   }
 </script>
 
@@ -199,12 +229,53 @@
   {/if}
 {/snippet}
 
+{#snippet districtCard()}
+  {#if selectedDistrict}
+    <div class="district-card" class:d={selectedDistrict.won_by === 'D'} class:r={selectedDistrict.won_by === 'R'}>
+      <div class="district-card-header">
+        <span class="district-card-title">District {selectedDistrict.district}</span>
+        <button class="district-card-close" onclick={() => selectedDistrict = null} aria-label="Close">✕</button>
+      </div>
+      <dl>
+        <dt>Won by</dt>
+        <dd class={selectedDistrict.won_by === 'D' ? 'd' : 'r'}>
+          {selectedDistrict.won_by === 'D' ? 'Democrat' : selectedDistrict.won_by === 'R' ? 'Republican' : '—'}
+        </dd>
+        {#if selectedDistrict.partisan_lean_d !== null}
+          <dt>Partisan lean</dt>
+          <dd>{Math.round(selectedDistrict.partisan_lean_d * 100)}% D</dd>
+        {/if}
+        <dt>Cycle</dt>
+        <dd>{selectedDistrict.cycle_year}</dd>
+      </dl>
+      <div class="district-card-links">
+        <a
+          href={wikiUrl(selectedState, selectedDistrict.district)}
+          target="_blank"
+          rel="noopener"
+          class="district-card-wiki"
+        >Wikipedia →</a>
+      </div>
+      <p class="district-card-note">
+        Demographics &amp; voter registration coming in a future update.
+      </p>
+    </div>
+  {/if}
+{/snippet}
+
 <div class="layout">
   <header>
     <div class="brand">
       <h1>District<span class="accent">Drift</span></h1>
       <p class="tagline">Three decades of congressional redistricting <span class="version">v{__APP_VERSION__}</span></p>
     </div>
+
+    <button
+      class="theme-toggle"
+      onclick={() => darkMode = !darkMode}
+      title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+    >{darkMode ? '☀' : '☽'}</button>
 
     <div class="state-selector-wrap">
       <button
@@ -221,12 +292,12 @@
       {#if stateMenuOpen}
         <ul class="state-menu" role="listbox">
           {#each Object.entries(STATES) as [po, info]}
-            <li
-              role="option"
-              aria-selected={po === selectedState}
-              class:active={po === selectedState}
-              onclick={() => selectState(po)}
-            >{info.name}</li>
+            <li role="option" aria-selected={po === selectedState}>
+              <button
+                class:active={po === selectedState}
+                onclick={() => selectState(po)}
+              >{info.name}</button>
+            </li>
           {/each}
         </ul>
       {/if}
@@ -235,14 +306,21 @@
   </header>
 
   <main>
-    <div class="map-wrap" style:margin-bottom="{mapPanelBottom}px">
+    <div class="map-wrap">
       {#key selectedState}
-        <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} cycleYears={CYCLES} />
+        <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} cycleYears={CYCLES} {darkMode} onDistrictClick={(d) => selectedDistrict = d} />
       {/key}
     </div>
 
+    {#if isBottomPanel && selectedDistrict}
+      <div class="district-float" style="bottom: {mapPanelBottom + 16}px">
+        {@render districtCard()}
+      </div>
+    {/if}
+
     {#if panelPosition === 'side'}
       <aside class="panel side">
+        {@render districtCard()}
         <section class="sticky-controls">
           <div class="sticky-controls-header">
             <h2>Redistricting cycle</h2>
@@ -346,8 +424,8 @@
       </aside>
     {/if}
 
-    {#if panelPosition === 'bottom'}
-      <div class="panel bottom" bind:this={bottomPanelEl} bind:clientHeight={bottomPanelH}>
+    {#if isBottomPanel}
+      <div class="panel bottom" class:wide={panelPosition === 'bottom-wide'} bind:this={bottomPanelEl} bind:clientHeight={bottomPanelH}>
 
         <!-- Year controls row -->
         <div class="bottom-header">
@@ -357,16 +435,23 @@
           {:else}
             <span class="bottom-year">{selectedYear}</span>
           {/if}
-          <button
-            class="panel-toggle-btn"
-            title="Switch to side panel"
-            onclick={() => panelPosition = 'side'}
-          >➡</button>
+          <div class="bottom-header-actions">
+            <button
+              class="panel-toggle-btn"
+              title={panelPosition === 'bottom' ? 'Expand panel' : 'Compact panel'}
+              onclick={() => panelPosition = panelPosition === 'bottom' ? 'bottom-wide' : 'bottom'}
+            >{panelPosition === 'bottom' ? '⬌' : '⬍'}</button>
+            <button
+              class="panel-toggle-btn"
+              title="Switch to side panel"
+              onclick={() => panelPosition = 'side'}
+            >➡</button>
+          </div>
         </div>
 
         <div class="bottom-hr"></div>
 
-        <!-- Two-pane content row -->
+        <!-- Content panes -->
         {#if displayStats}
           <div class="bottom-panes">
 
@@ -406,6 +491,20 @@
               {/if}
             </div>
 
+            {#if panelPosition === 'bottom-wide'}
+              <div class="bottom-pane-divider"></div>
+              <div class="bottom-pane">
+                <p class="bottom-pane-label">Vote vs. seat share</p>
+                <TrendChart cycles={stats} selectedYear={displayYear} />
+              </div>
+              <div class="bottom-pane-divider"></div>
+              <div class="bottom-pane">
+                <p class="bottom-pane-label">Efficiency gap</p>
+                <p class="chart-note">+ favors R &nbsp;·&nbsp; − favors D</p>
+                <EGChart cycles={egCycles} selectedYear={displayYear} />
+              </div>
+            {/if}
+
           </div>
         {/if}
 
@@ -424,7 +523,61 @@
 </div>
 
 <style>
-  :global(body) { margin: 0; font-family: system-ui, sans-serif; background: #f5f5f3; color: #222; }
+  :global(:root) {
+    color-scheme: light;
+    --bg: #f5f5f3;
+    --surface: #fff;
+    --surface-2: #f7f7f7;
+    --border: #e0e0e0;
+    --border-dim: #eee;
+    --text: #222;
+    --text-muted: #666;
+    --text-dim: #999;
+    --text-faint: #bbb;
+    --text-label: #888;
+    --text-soft: #aaa;
+    --text-strong: #333;
+    --text-med: #777;
+    --link: #1a5c9e;
+    --btn-bg: #f5f5f5;
+    --btn-border: #ddd;
+    --btn-color: #333;
+    --btn-hover: #e8e8e8;
+    --shadow-sm: rgba(0,0,0,0.08);
+    --toggle-border: #ddd;
+    --toggle-color: #999;
+    --toggle-hover-bg: #f0f0f0;
+    --toggle-hover-color: #555;
+  }
+
+  :global([data-theme=dark]) {
+    color-scheme: dark;
+    --bg: #0e0e1c;
+    --surface: #181828;
+    --surface-2: #141428;
+    --border: #2e2e48;
+    --border-dim: #242440;
+    --text: #e4e4f0;
+    --text-muted: #8888b0;
+    --text-dim: #6666a0;
+    --text-faint: #505070;
+    --text-label: #7070a0;
+    --text-soft: #6060a0;
+    --text-strong: #c8c8e4;
+    --text-med: #8888b0;
+    --link: #80b8ff;
+    --btn-bg: #1e1e32;
+    --btn-border: #38385a;
+    --btn-color: #c8c8e4;
+    --btn-hover: #282840;
+    --shadow-sm: rgba(0,0,0,0.3);
+    --toggle-border: rgba(255,255,255,0.15);
+    --toggle-color: rgba(255,255,255,0.45);
+    --toggle-hover-bg: rgba(255,255,255,0.08);
+    --toggle-hover-color: rgba(255,255,255,0.85);
+  }
+
+  :global(body) { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); }
 
   .layout { display: flex; flex-direction: column; height: 100vh; }
 
@@ -480,17 +633,23 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     overflow: hidden;
   }
-  .state-menu li {
+  .state-menu li { list-style: none; }
+  .state-menu li button {
+    display: block;
+    width: 100%;
     padding: 0.45rem 1rem;
     font-size: 0.85rem;
     font-weight: 500;
     color: rgba(255,255,255,0.75);
+    background: none;
+    border: none;
+    text-align: left;
     cursor: pointer;
     white-space: nowrap;
     transition: background 0.1s, color 0.1s;
   }
-  .state-menu li:hover { background: rgba(255,255,255,0.1); color: #fff; }
-  .state-menu li.active { color: #fff; font-weight: 700; }
+  .state-menu li button:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .state-menu li button.active { color: #fff; font-weight: 700; }
 
   .sticky-controls-header {
     display: flex;
@@ -502,8 +661,8 @@
 
   .panel-toggle-btn {
     background: transparent;
-    border: 1px solid #ddd;
-    color: #999;
+    border: 1px solid var(--toggle-border);
+    color: var(--toggle-color);
     border-radius: 4px;
     padding: 0.2rem 0.5rem;
     cursor: pointer;
@@ -511,7 +670,7 @@
     line-height: 1;
     transition: background 0.15s, color 0.15s;
   }
-  .panel-toggle-btn:hover { background: #f0f0f0; color: #555; }
+  .panel-toggle-btn:hover { background: var(--toggle-hover-bg); color: var(--toggle-hover-color); }
   .panel.bottom .panel-toggle-btn {
     border-color: rgba(255,255,255,0.2);
     color: rgba(255,255,255,0.5);
@@ -522,14 +681,14 @@
   }
 
   main { flex: 1; display: flex; min-height: 0; position: relative; }
-  .map-wrap { flex: 1; min-width: 0; transition: margin-bottom 0.4s ease; }
+  .map-wrap { flex: 1; min-width: 0; }
 
   /* Side panel */
   aside.panel.side {
     width: 360px;
     flex-shrink: 0;
-    background: #fff;
-    border-left: 1px solid #e0e0e0;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
     overflow-y: auto;
     padding: 1rem;
     display: flex;
@@ -540,11 +699,11 @@
   .sticky-controls {
     position: sticky;
     top: 0;
-    background: #fff;
+    background: var(--surface);
     z-index: 1;
     padding-bottom: 0.5rem;
     margin-bottom: -0.5rem;
-    box-shadow: 0 4px 8px -4px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 8px -4px var(--shadow-sm);
   }
 
   /* Bottom HUD */
@@ -563,6 +722,10 @@
     width: min(780px, calc(100vw - 2rem));
     box-shadow: 0 4px 24px rgba(0,0,0,0.3);
     z-index: 10;
+    transition: width 0.3s ease;
+  }
+  .panel.bottom.wide {
+    width: min(1300px, calc(100vw - 2rem));
   }
 
   .bottom-header {
@@ -596,6 +759,9 @@
     max-height: 180px;
     min-width: 0;
   }
+  .panel.bottom.wide .bottom-pane { max-height: 130px; }
+
+  .bottom-header-actions { display: flex; gap: 0.4rem; align-items: center; }
 
   .bottom-pane-divider {
     width: 1px;
@@ -622,22 +788,22 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #888;
+    color: var(--text-label);
   }
 
   .cycle-buttons { display: flex; gap: 0.35rem; align-items: center; }
 
   button {
     padding: 0.4rem 0.6rem;
-    border: 1px solid #ddd;
-    background: #f5f5f5;
+    border: 1px solid var(--btn-border);
+    background: var(--btn-bg);
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.82rem;
     font-weight: 500;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
     white-space: nowrap;
-    color: #333;
+    color: var(--btn-color);
   }
 
   .year-dot {
@@ -650,14 +816,16 @@
     opacity: 0.6;
     flex-shrink: 0;
   }
-  button:hover { background: #e8e8e8; }
-  button.previewing { background: #f5f5f5; border-color: var(--yc); color: #333; }
+  button:hover { background: var(--btn-hover); }
+  button.previewing { background: var(--btn-bg); border-color: var(--yc); color: var(--btn-color); }
   button.previewing .year-dot { opacity: 1; }
   button.active { background: #1a1a2e; color: #fff; border-color: var(--yc); }
   button.active .year-dot { opacity: 1; }
 
-  .anim-btn { color: #666; border-color: #ccc; background: transparent; }
+  .anim-btn { color: var(--text-muted); border-color: var(--btn-border); background: transparent; }
   .anim-btn.playing { background: #fff8e1; border-color: #f0a500; color: #a06000; }
+
+  :global([data-theme=dark]) .anim-btn.playing { background: rgba(255,200,50,0.12); color: #ffd060; }
 
   /* Bottom panel button overrides (cycle + anim buttons, not tab buttons) */
   .panel.bottom .cycle-buttons button {
@@ -699,7 +867,7 @@
     font-size: 0.78rem;
   }
 
-  dt { color: #666; white-space: nowrap; font-size: 0.76rem; }
+  dt { color: var(--text-muted); white-space: nowrap; font-size: 0.76rem; }
   dd { margin: 0; font-weight: 500; }
   dd.drawn-by { min-height: 2.4em; }
 
@@ -722,7 +890,7 @@
   .panel.bottom .favor-r { color: #ff8888; }
   .panel.bottom .favor-d { color: #80b8ff; }
 
-  .note { margin: 0.5rem 0 0; font-size: 0.72rem; color: #999; line-height: 1.4; min-height: 2.8em; }
+  .note { margin: 0.5rem 0 0; font-size: 0.72rem; color: var(--text-dim); line-height: 1.4; min-height: 2.8em; }
 
   .events-section { border: none; }
   .events-section summary {
@@ -735,7 +903,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #888;
+    color: var(--text-label);
     margin-bottom: 0.4rem;
     user-select: none;
   }
@@ -744,7 +912,7 @@
     content: '▶';
     font-size: 0.55rem;
     transition: transform 0.15s;
-    color: #aaa;
+    color: var(--text-soft);
   }
   .events-section[open] summary::before { transform: rotate(90deg); }
 
@@ -764,26 +932,26 @@
     flex-direction: column;
     gap: 0.15rem;
     padding-left: 0.7rem;
-    border-left: 2px solid #e0e0e0;
+    border-left: 2px solid var(--border);
   }
-  .events li strong { font-size: 0.78rem; color: #333; font-weight: 600; }
-  .events li strong a { color: #1a5c9e; text-decoration: none; }
+  .events li strong { font-size: 0.78rem; color: var(--text-strong); font-weight: 600; }
+  .events li strong a { color: var(--link); text-decoration: none; }
   .events li strong a:hover { text-decoration: underline; }
-  .events li span { font-size: 0.72rem; color: #777; line-height: 1.4; }
+  .events li span { font-size: 0.72rem; color: var(--text-med); line-height: 1.4; }
 
   .data-credits {
     margin-top: 1rem;
     padding: 0.75rem;
-    background: #f7f7f7;
+    background: var(--surface-2);
     border-radius: 6px;
-    border-top: 2px solid #eee;
+    border-top: 2px solid var(--border-dim);
   }
   .credits-heading {
     font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #aaa;
+    color: var(--text-soft);
     margin: 0 0 0.4rem;
   }
   .data-credits ul {
@@ -794,9 +962,9 @@
     flex-direction: column;
     gap: 0.2rem;
   }
-  .data-credits li { font-size: 0.7rem; color: #888; line-height: 1.4; }
-  .data-credits a { color: #666; text-decoration: none; border-bottom: 1px dotted #bbb; }
-  .data-credits a:hover { color: #333; border-bottom-color: #666; }
+  .data-credits li { font-size: 0.7rem; color: var(--text-label); line-height: 1.4; }
+  .data-credits a { color: var(--text-muted); text-decoration: none; border-bottom: 1px dotted var(--text-faint); }
+  .data-credits a:hover { color: var(--text-strong); border-bottom-color: var(--text-muted); }
 
   .resources-section { margin-top: 0.5rem; }
   .resource-heading {
@@ -804,7 +972,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.07em;
-    color: #aaa;
+    color: var(--text-soft);
     margin: 0.75rem 0 0.3rem;
   }
   .resource-heading:first-of-type { margin-top: 0.1rem; }
@@ -821,16 +989,16 @@
     flex-direction: column;
     gap: 0.1rem;
     padding-left: 0.7rem;
-    border-left: 2px solid #e0e0e0;
+    border-left: 2px solid var(--border);
   }
   .resource-list a {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #1a5c9e;
+    color: var(--link);
     text-decoration: none;
   }
   .resource-list a:hover { text-decoration: underline; }
-  .resource-list span { font-size: 0.72rem; color: #777; line-height: 1.4; }
+  .resource-list span { font-size: 0.72rem; color: var(--text-med); line-height: 1.4; }
 
   .legend-items { display: flex; align-items: center; font-size: 0.82rem; }
   .swatch { display: inline-block; width: 13px; height: 13px; border-radius: 2px; margin-right: 4px; }
@@ -838,7 +1006,7 @@
   .swatch.r { background: #e05c5c; }
 
   .chart-section { display: flex; flex-direction: column; gap: 0.2rem; }
-  .chart-note { margin: 0; font-size: 0.7rem; color: #bbb; }
+  .chart-note { margin: 0; font-size: 0.7rem; color: var(--text-faint); }
 
   footer {
     padding: 0.45rem 1.25rem;
@@ -847,4 +1015,89 @@
     font-size: 0.72rem;
   }
   footer a { color: rgba(255,255,255,0.65); }
+
+  .theme-toggle {
+    margin-left: auto;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    border-radius: 20px;
+    padding: 0.25rem 0.65rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    line-height: 1;
+    transition: background 0.15s, color 0.15s;
+  }
+  .theme-toggle:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+  /* District detail card */
+  .district-float {
+    position: absolute;
+    left: 1rem;
+    z-index: 12;
+    pointer-events: auto;
+  }
+
+  .district-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    width: 240px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .district-card.d { border-top-color: #4a90d9; }
+  .district-card.r { border-top-color: #e05c5c; }
+
+  .district-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .district-card-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .district-card-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    line-height: 1;
+  }
+  .district-card-close:hover { background: var(--btn-hover); color: var(--text); }
+
+  .district-card dl {
+    gap: 0.2rem 0.5rem;
+    font-size: 0.78rem;
+  }
+
+  .district-card-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .district-card-wiki {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--link);
+    text-decoration: none;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .district-card-wiki:hover { background: var(--btn-hover); }
+
+  .district-card-note {
+    margin: 0;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+    font-style: italic;
+  }
 </style>
