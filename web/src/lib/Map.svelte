@@ -52,6 +52,9 @@
     animate:  boolean;
   };
 
+  // Swing overlay config
+  const SWING_HOLD_MS = 900;  // extra hold after morph completes before fading out
+
   let container: HTMLDivElement;
   let map: maplibregl.Map;
   let protocol: Protocol;
@@ -60,6 +63,8 @@
   let morphRafId: number | null = null;
   let morphTargetYear: number | null = null;
   let currBoundary: Ring[] | null = null; // rings currently drawn on screen
+  let swingTimeoutId: ReturnType<typeof setTimeout> | null = null;
+  let swingVisible = $state(false);
 
   // Legend state (reactive so the overlay updates)
   let legendCurrYear = $state(0);
@@ -145,6 +150,90 @@
 
   function easeInOut(t: number) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
 
+  // ── Swing coloring ──────────────────────────────────────────────────────────
+
+  // swing > 0: D gained share; swing < 0: R gained share
+  function swingFillColor(swing: number): string {
+    const abs = Math.abs(swing);
+    if (abs < 0.02) return 'rgba(128,128,128,0.04)';
+    const intensity = Math.min(1, abs / 0.15);        // saturates at ±15%
+    const opacity = (0.12 + intensity * 0.48).toFixed(2);
+    return swing > 0
+      ? `rgba(74,144,217,${opacity})`   // D gained: blue
+      : `rgba(224,92,92,${opacity})`;   // R gained: red
+  }
+
+  function computeSwingFeatures(
+    fromFC: GeoJSON.FeatureCollection,
+    toFC: GeoJSON.FeatureCollection,
+  ): GeoJSON.Feature[] {
+    const fromFeats = fromFC.features;
+    const fromCents = fromFeats.map(f => centroid(primaryRing(f.geometry as GeoJSON.Geometry)));
+
+    return toFC.features.map(toFeat => {
+      const toGeom = toFeat.geometry as GeoJSON.Geometry;
+      const tc = centroid(primaryRing(toGeom));
+
+      let bestDist = Infinity, bestFi = -1;
+      for (let fi = 0; fi < fromCents.length; fi++) {
+        const d = Math.hypot(fromCents[fi][0] - tc[0], fromCents[fi][1] - tc[1]);
+        if (d < bestDist) { bestDist = d; bestFi = fi; }
+      }
+
+      const toProp  = toFeat.properties ?? {};
+      const fromProp = bestFi >= 0 && bestDist < MAX_MATCH_DIST
+        ? (fromFeats[bestFi].properties ?? {}) : null;
+
+      const toLean: number | null   = typeof toProp.partisan_lean_d  === 'number' ? toProp.partisan_lean_d  : null;
+      const fromLean: number | null = fromProp && typeof fromProp.partisan_lean_d === 'number' ? fromProp.partisan_lean_d : null;
+      const swing = toLean !== null && fromLean !== null ? toLean - fromLean : 0;
+
+      const toWon   = (toProp.won_by   ?? '') as string;
+      const fromWon = (fromProp?.won_by ?? '') as string;
+      const flipped = fromProp !== null && toWon && fromWon && toWon !== fromWon ? 1 : 0;
+
+      return {
+        type: 'Feature' as const,
+        properties: {
+          swing_color: swingFillColor(swing),
+          flipped,
+          flip_color: flipped
+            ? (toWon === 'R' ? '#ef4444' : '#3b82f6')
+            : '#00000000',
+        },
+        geometry: toGeom,
+      };
+    });
+  }
+
+  function clearSwingOverlay() {
+    if (swingTimeoutId !== null) { clearTimeout(swingTimeoutId); swingTimeoutId = null; }
+    if (!map?.getLayer('mi-swing-fill')) return;
+    map.setPaintProperty('mi-swing-fill', 'fill-opacity', 0);
+    map.setPaintProperty('mi-flip-lines', 'line-opacity', 0);
+    swingVisible = false;
+  }
+
+  function showSwingOverlay(fromFC: GeoJSON.FeatureCollection, toFC: GeoJSON.FeatureCollection) {
+    clearSwingOverlay();
+    const features = computeSwingFeatures(fromFC, toFC);
+    (map.getSource('mi-swing') as maplibregl.GeoJSONSource).setData({
+      type: 'FeatureCollection', features,
+    });
+    map.setPaintProperty('mi-swing-fill', 'fill-opacity', 1);
+    const hasFlips = features.some(f => f.properties?.flipped);
+    if (hasFlips) map.setPaintProperty('mi-flip-lines', 'line-opacity', 0.9);
+    swingVisible = true;
+
+    swingTimeoutId = setTimeout(() => {
+      if (!map?.getLayer('mi-swing-fill')) return;
+      map.setPaintProperty('mi-swing-fill', 'fill-opacity', 0);
+      map.setPaintProperty('mi-flip-lines', 'line-opacity', 0);
+      swingVisible = false;
+      swingTimeoutId = null;
+    }, MORPH_MS + SWING_HOLD_MS);
+  }
+
   // Rotate `from` so its starting vertex best aligns with `to` (minimises total
   // vertex-to-vertex distance). Eliminates cross-side morphing artifacts.
   function alignRing(from: Ring, to: Ring): Ring {
@@ -199,6 +288,7 @@
 
   function cancelMorph() {
     if (morphRafId !== null) { cancelAnimationFrame(morphRafId); morphRafId = null; }
+    clearSwingOverlay();
   }
 
   function startMorph(pairs: MatchedPair[], onDone: () => void) {
@@ -256,6 +346,8 @@
     map.setPaintProperty('mi-draw-lines', 'line-color', lineColor(toYear));
     map.setPaintProperty('mi-draw-glow',  'line-color', lineColor(toYear));
     const pairs = matchDistricts(fromFC, toFC);
+
+    showSwingOverlay(fromFC, toFC);
 
     startMorph(pairs, () => {
       if (morphTargetYear !== toYear) return;
@@ -364,6 +456,7 @@
       const emptyFC: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] };
       map.addSource('mi-prev', { type: 'geojson', data: emptyFC });
       map.addSource('mi-draw', { type: 'geojson', data: emptyFC });
+      map.addSource('mi-swing', { type: 'geojson', data: emptyFC });
 
       // 1. Ghost fill (previous year, very faint)
       map.addLayer({
@@ -393,7 +486,34 @@
         },
       });
 
-      // 3. Previous year boundaries — faded dashed reference
+      // 3. Swing overlay fill — colored by partisan swing, shown during transition
+      map.addLayer({
+        id: 'mi-swing-fill',
+        type: 'fill',
+        source: 'mi-swing',
+        paint: {
+          'fill-color': ['get', 'swing_color'],
+          'fill-opacity': 0,
+          'fill-opacity-transition': { duration: 400, delay: 0 },
+        },
+      });
+
+      // 3b. Flip indicators — thick colored outline on districts that changed party
+      map.addLayer({
+        id: 'mi-flip-lines',
+        type: 'line',
+        source: 'mi-swing',
+        filter: ['==', ['get', 'flipped'], 1],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': ['get', 'flip_color'],
+          'line-width': 3.5,
+          'line-opacity': 0,
+          'line-opacity-transition': { duration: 400, delay: 0 },
+        },
+      });
+
+      // 4. Previous year boundaries — faded dashed reference
       map.addLayer({
         id: 'mi-prev-lines',
         type: 'line',
@@ -494,6 +614,13 @@
       <span class="legend-line solid" style="--c: {lineColor(legendCurrYear)}"></span>
       <span class="legend-label">{legendCurrYear}</span>
     </div>
+    {#if swingVisible}
+      <div class="legend-divider"></div>
+      <div class="legend-row">
+        <span class="legend-swing-bar"></span>
+        <span class="legend-label dim" style="font-size:0.68rem">D ← swing → R</span>
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -566,4 +693,24 @@
     line-height: 1;
   }
   .legend-label.dim { color: rgba(255,255,255,0.4); font-weight: 400; }
+
+  .legend-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 0.15rem 0;
+  }
+
+  .legend-swing-bar {
+    display: block;
+    width: 32px;
+    height: 5px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    background: linear-gradient(
+      to right,
+      rgba(74,144,217,0.7),
+      rgba(128,128,128,0.15),
+      rgba(224,92,92,0.7)
+    );
+  }
 </style>

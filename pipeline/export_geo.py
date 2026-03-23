@@ -47,7 +47,7 @@ def main() -> None:
             continue
 
         gdf = gpd.read_file(src)
-        gdf = gdf[["district", "won_by", "geometry"]].copy()
+        gdf = gdf[["district", "won_by", "partisan_lean_d", "geometry"]].copy()
         gdf.geometry = gdf.geometry.simplify(SIMPLIFY_TOL, preserve_topology=True)
 
         dest = DEST / f"{state_lower}_{year}.geojson"
