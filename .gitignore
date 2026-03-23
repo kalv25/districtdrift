@@ -1,6 +1,8 @@
 data/
-tiles/
+# Exclude root-level tiles dir (tippecanoe workspace) but allow web/static/tiles
+/tiles/
 *.pmtiles
+!web/static/tiles/*.pmtiles
 *.pyc
 __pycache__/
 .env
