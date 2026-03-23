@@ -6,12 +6,19 @@
   import { Protocol } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI' }: {
+  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022] }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;
     statePo?: string;
+    cycleYears?: number[];
   } = $props();
+
+  // Year immediately before `year` in the cycle sequence, or null if it's the first.
+  function chronoPrevYear(year: number): number | null {
+    const idx = cycleYears.indexOf(year);
+    return idx > 0 ? cycleYears[idx - 1] : null;
+  }
 
   const stateL = statePo.toLowerCase();
 
@@ -343,6 +350,12 @@
     }
     if (morphTargetYear !== toYear) return;
 
+    // Show chrono-previous boundaries as dashed reference (always from GeoJSON, not nav history)
+    const fromRings = allRings(fromFC).map(r => resample(r, MORPH_N));
+    (map.getSource('mi-prev') as maplibregl.GeoJSONSource).setData(ringsToFC(fromRings));
+    map.setPaintProperty('mi-prev-lines', 'line-color', lineColor(fromYear));
+    map.setLayoutProperty('mi-prev-lines', 'visibility', 'visible');
+
     map.setPaintProperty('mi-draw-lines', 'line-color', lineColor(toYear));
     map.setPaintProperty('mi-draw-glow',  'line-color', lineColor(toYear));
     const pairs = matchDistricts(fromFC, toFC);
@@ -360,14 +373,19 @@
 
     cancelMorph();
     const isInitial = prevYear === null;
+    const fromYear = chronoPrevYear(year); // always the cycle-prior year, not nav history
 
     legendCurrYear = year;
-    if (!isInitial && prevYear !== year) legendPrevYear = prevYear;
+    legendPrevYear = fromYear;  // legend reflects chrono prev, not nav history
 
-    // Ghost fill → previous year
-    if (!isInitial && prevYear !== year && map.getLayer('districts-fill-back')) {
-      map.setFilter('districts-fill-back', ['==', ['get', 'cycle_year'], prevYear]);
-      map.setPaintProperty('districts-fill-back', 'fill-opacity', 0.14);
+    // Ghost fill → always the cycle-prior year (or hidden if none)
+    if (!isInitial && map.getLayer('districts-fill-back')) {
+      if (fromYear !== null) {
+        map.setFilter('districts-fill-back', ['==', ['get', 'cycle_year'], fromYear]);
+        map.setPaintProperty('districts-fill-back', 'fill-opacity', 0.14);
+      } else {
+        map.setPaintProperty('districts-fill-back', 'fill-opacity', 0);
+      }
     }
 
     // Main fill crossfade
@@ -391,14 +409,22 @@
         (map.getSource('mi-draw') as maplibregl.GeoJSONSource).setData(ringsToFC(rings));
         currBoundary = rings;
       });
-    } else if (prevYear !== null && prevYear !== year) {
-      // Show previous boundaries as faded reference
-      if (currBoundary) {
-        (map.getSource('mi-prev') as maplibregl.GeoJSONSource).setData(ringsToFC(currBoundary));
-        map.setPaintProperty('mi-prev-lines', 'line-color', lineColor(prevYear));
-        map.setLayoutProperty('mi-prev-lines', 'visibility', 'visible');
+    } else if (prevYear !== year) {
+      if (fromYear !== null) {
+        // Animate from chrono-previous cycle — mi-prev-lines set inside transitionBoundary
+        transitionBoundary(fromYear, year);
+      } else {
+        // First cycle year selected (e.g. 1992): no prev, just show directly
+        map.setLayoutProperty('mi-prev-lines', 'visibility', 'none');
+        map.setPaintProperty('mi-draw-lines', 'line-color', lineColor(year));
+        map.setPaintProperty('mi-draw-glow',  'line-color', lineColor(year));
+        loadGeo(year).then(fc => {
+          if (morphTargetYear !== null && morphTargetYear !== year) return;
+          const rings = allRings(fc).map(r => resample(r, MORPH_N));
+          (map.getSource('mi-draw') as maplibregl.GeoJSONSource).setData(ringsToFC(rings));
+          currBoundary = rings;
+        });
       }
-      transitionBoundary(prevYear, year);
     }
 
     prevYear = year;

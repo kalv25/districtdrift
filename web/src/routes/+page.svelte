@@ -237,7 +237,7 @@
   <main>
     <div class="map-wrap" style:margin-bottom="{mapPanelBottom}px">
       {#key selectedState}
-        <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} />
+        <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} cycleYears={CYCLES} />
       {/key}
     </div>
 
