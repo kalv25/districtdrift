@@ -1731,11 +1731,16 @@
     display: flex;
     align-items: center;
   }
-  /* In the pill bar, buttons use natural width instead of flex-grow */
+  /* In the pill bar: break flex circular dependency, fix button size */
+  .nation-cycle-bar .cycle-buttons { width: max-content; }
   .nation-cycle-bar .cycle-buttons button:not(.anim-btn) {
-    flex: 0 0 auto;
-    padding: 0.5rem 0.7rem;
+    flex: none;
+    width: 3.6rem;
+    padding: 0.45rem 0.3rem;
+    grid-template-columns: 1fr;
   }
+  .nation-cycle-bar .btn-d-delta,
+  .nation-cycle-bar .btn-r-delta { display: none; }
 
   .district-card {
     border: 1px solid var(--border);
