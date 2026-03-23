@@ -254,8 +254,6 @@
     map.setPaintProperty('flip-lines', 'line-opacity', 1);    // reset for next show
     for (const m of swingMarkers) m.remove(); // Marker.remove() unregisters from map
     swingMarkers = [];
-    if (swingVisible && map.getLayer('districts-fill-front'))
-      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
     swingVisible = false;
     swingLegendVisible = false;
   }
@@ -267,9 +265,6 @@
       type: 'FeatureCollection', features,
     });
 
-    // Dim the party fill so swing colors are visible on top
-    if (map.getLayer('districts-fill-front'))
-      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.25);
     map.setLayoutProperty('swing-fill', 'visibility', 'visible');
     const hasFlips = features.some(f => f.properties?.flipped);
     if (hasFlips) map.setLayoutProperty('flip-lines', 'visibility', 'visible');
@@ -300,28 +295,8 @@
     swingLegendVisible = true;
 
     swingTimeoutId = setTimeout(() => {
-      ghostSwingOverlay();
+      clearSwingOverlay();
     }, MORPH_MS + SWING_HOLD_MS);
-  }
-
-  // Fade the swing overlay to a faint ghost — fills and labels dimmed,
-  // district fill restored. Stays visible until the next year switch.
-  function ghostSwingOverlay() {
-    swingTimeoutId = null;
-    // Fade swing fill to ghost
-    if (map.getLayer('swing-fill'))
-      map.setPaintProperty('swing-fill', 'fill-opacity', 0.13);
-    // Dim flip outlines
-    if (map.getLayer('flip-lines'))
-      map.setPaintProperty('flip-lines', 'line-opacity', 0.25);
-    // Dim labels
-    for (const m of swingMarkers)
-      m.getElement().style.opacity = '0.45';
-    // Restore district fill
-    if (map.getLayer('districts-fill-front'))
-      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
-    swingLegendVisible = false;
-    // swingVisible stays true so clearSwingOverlay knows to restore opacity on next switch
   }
 
   // Rotate `from` so its starting vertex best aligns with `to` (minimises total
@@ -479,7 +454,7 @@
     map.setFilter('districts-fill-front', ['==', ['get', 'cycle_year'], year]);
     requestAnimationFrame(() => {
       if (map.getLayer('districts-fill-front'))
-        map.setPaintProperty('districts-fill-front', 'fill-opacity', swingVisible ? 0.25 : 0.65);
+        map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
     });
 
     if (map.getLayer('districts-hover'))
