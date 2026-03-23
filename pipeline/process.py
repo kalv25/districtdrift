@@ -122,9 +122,20 @@ def load_election_results(cycle_year: int, state_po: str) -> pd.DataFrame:
 
     state_df["party_clean"] = state_df["party"].str.upper().str.strip()
 
+    # Party labels vary by state and era. Minnesota DFL ran as
+    # "DEMOCRATIC-FARMER-LABOR" (or "DEMOCRATIC-FARM-LABOR"); Minnesota
+    # Republicans ran as "INDEPENDENT-REPUBLICAN" through 1994.
+    DEM_LABELS = frozenset({
+        "DEMOCRAT", "DEMOCRATIC",
+        "DEMOCRATIC-FARMER-LABOR", "DEMOCRATIC-FARM-LABOR",
+    })
+    REP_LABELS = frozenset({
+        "REPUBLICAN", "INDEPENDENT-REPUBLICAN",
+    })
+
     def agg_district(grp: pd.DataFrame) -> pd.Series:
-        d = grp[grp["party_clean"].isin(("DEMOCRAT", "DEMOCRATIC"))]["candidatevotes"].sum()
-        r = grp[grp["party_clean"] == "REPUBLICAN"]["candidatevotes"].sum()
+        d = grp[grp["party_clean"].isin(DEM_LABELS)]["candidatevotes"].sum()
+        r = grp[grp["party_clean"].isin(REP_LABELS)]["candidatevotes"].sum()
         total = d + r
         won_by = "D" if d > r else ("R" if r > d else "tie")
         return pd.Series({"d_votes": int(d), "r_votes": int(r),
@@ -265,7 +276,7 @@ def process_cycle(
     }
 
     gdf["polsby_popper"] = gdf["polsby_popper"].round(4)
-    gdf["partisan_lean_d"] = gdf["partisan_lean_d"].round(4)
+    gdf["partisan_lean_d"] = gdf["partisan_lean_d"].astype(float).round(4)
 
     return gdf, cycle_stats
 

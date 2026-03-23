@@ -535,6 +535,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "MN": {
+        "name": "Minnesota",
+        "fips": "27",
+        "crs": "EPSG:26915",   # NAD83 / UTM Zone 15N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 8,
+                "redistricting_controller": "Court-drawn (split government)",
+                "notes": "Governor Carlson (R) and a DFL-controlled legislature could not agree; a three-judge panel of the MN Supreme Court drew the congressional maps, which were used through the decade. Minnesota retained 8 seats after the 1990 census.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 8,
+                "redistricting_controller": "Court-drawn (split government)",
+                "notes": "Governor Ventura (Reform Party) and a divided legislature deadlocked; the MN Supreme Court again drew congressional maps. Minnesota retained 8 seats after the 2000 census.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 8,
+                "redistricting_controller": "Court-drawn (split government)",
+                "notes": "Governor Dayton (DFL) and a Republican-controlled legislature deadlocked; a special redistricting panel of MN appellate judges drew the maps for the third consecutive cycle. Minnesota retained 8 seats after the 2010 census.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 8,
+                "redistricting_controller": "Court-drawn (split government)",
+                "notes": "Governor Walz (DFL) and a Republican-controlled Senate deadlocked for the fourth consecutive cycle; a special redistricting panel drew maps. Minnesota narrowly retained 8 seats after the 2020 census (it came within ~26 people of losing a seat to New York).",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",

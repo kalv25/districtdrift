@@ -950,4 +950,78 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       },
     ],
   },
+  MN: {
+    1992: [
+      {
+        title: 'Minnesota retained 8 congressional seats after the 1990 census',
+        detail: 'Minnesota retained 8 congressional seats after the 1990 census.',
+      },
+      {
+        title: 'Governor Carlson (R) and the DFL-controlled legislature deadlocked — the MN Supreme Court drew the maps',
+        detail: 'Governor Carlson (R) and the DFL-controlled legislature deadlocked — the MN Supreme Court drew the congressional maps.',
+      },
+      {
+        title: 'Court-drawn maps produced a competitive delegation reflecting Minnesota\'s closely divided politics',
+        detail: 'Court-drawn maps produced a competitive delegation reflecting Minnesota\'s closely divided politics.',
+      },
+      {
+        title: 'Minnesota has used court-drawn congressional maps for every redistricting cycle since 1992',
+        detail: 'Minnesota has used court-drawn congressional maps for every redistricting cycle since 1992 — a streak unmatched by any other state.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Minnesota retained 8 seats after the 2000 census',
+        detail: 'Minnesota retained 8 seats after the 2000 census.',
+      },
+      {
+        title: 'Governor Ventura (Reform/Independence Party) and a divided legislature again deadlocked',
+        detail: 'Governor Ventura (Reform/Independence Party) and a divided legislature again deadlocked on congressional maps.',
+      },
+      {
+        title: 'The MN Supreme Court drew maps for the second consecutive cycle',
+        detail: 'The MN Supreme Court drew congressional maps for the second consecutive cycle.',
+      },
+      {
+        title: 'Maps maintained Minnesota\'s competitive balance; the state was a perennial presidential toss-up',
+        detail: 'Maps maintained Minnesota\'s competitive balance; the state was a perennial presidential toss-up through this era.',
+      },
+    ],
+    2012: [
+      {
+        title: 'Minnesota retained 8 seats after the 2010 census',
+        detail: 'Minnesota retained 8 seats after the 2010 census.',
+      },
+      {
+        title: 'Governor Dayton (DFL) and a Republican-controlled legislature deadlocked for the third consecutive cycle',
+        detail: 'Governor Dayton (DFL) and a Republican-controlled legislature deadlocked for the third consecutive cycle.',
+      },
+      {
+        title: 'A special five-judge redistricting panel drew congressional maps',
+        detail: 'A special five-judge redistricting panel of MN appellate judges drew the congressional maps.',
+      },
+      {
+        title: 'Maps produced a 5-3 DFL delegation in a state Obama won by 7.5 points',
+        detail: 'Maps produced a 5-3 DFL delegation in a state Obama won by 7.5 points.',
+      },
+    ],
+    2022: [
+      {
+        title: 'Minnesota narrowly retained 8 seats after the 2020 census — within ~26 people of losing a seat to New York',
+        detail: 'Minnesota narrowly retained 8 seats after the 2020 census — it came within approximately 26 people of losing a seat to New York.',
+      },
+      {
+        title: 'Governor Walz (DFL) and a Republican-controlled Senate deadlocked for the fourth straight cycle',
+        detail: 'Governor Walz (DFL) and a Republican-controlled Senate deadlocked for the fourth consecutive redistricting cycle.',
+      },
+      {
+        title: 'A special redistricting panel drew maps for the fourth consecutive time — a streak unmatched by any other state',
+        detail: 'A special redistricting panel drew congressional maps for the fourth consecutive time — a streak unmatched by any other state.',
+      },
+      {
+        title: 'Maps produced a competitive 4-4 delegation in a state Biden won by 7 points',
+        detail: 'Maps produced a competitive 4-4 delegation in a state Biden won by 7 points.',
+      },
+    ],
+  },
 };
