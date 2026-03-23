@@ -80,7 +80,7 @@
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
 
   let hoveredYear = $state<number | null>(null);
-  type DistrictDetail = { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number };
+  type DistrictDetail = { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number; x: number; y: number };
   let selectedDistrict = $state<DistrictDetail | null>(null);
   let displayYear = $derived(hoveredYear ?? selectedYear);
   const PANEL_KEY = 'districtdrift.panelPosition';
@@ -115,6 +115,17 @@
   const BOTTOM_OFFSET_PX = 24;
   const isBottomPanel = $derived(panelPosition === 'bottom' || panelPosition === 'bottom-wide');
   let mapPanelBottom = $derived(isBottomPanel ? bottomPanelH + BOTTOM_OFFSET_PX : 0);
+
+  let mapWrapW = $state(0);
+  const CARD_W = 240;
+  const cardLeft = $derived(
+    selectedDistrict
+      ? (mapWrapW > 0 && selectedDistrict.x + CARD_W + 20 > mapWrapW
+        ? selectedDistrict.x - CARD_W - 8
+        : selectedDistrict.x + 12)
+      : 0
+  );
+  const cardTop = $derived(selectedDistrict ? Math.max(8, selectedDistrict.y - 20) : 0);
 
   type Competitiveness = {
     solid_d: number; lean_d: number; competitive: number;
@@ -367,7 +378,7 @@
   </header>
 
   <main>
-    <div class="map-wrap">
+    <div class="map-wrap" bind:clientWidth={mapWrapW}>
       {#if viewMode === 'nation'}
         <NationView selectedYear={selectedYear} onStateClick={selectState} fullDataStates={Object.keys(STATES)} />
         <!-- Floating cycle bar for nation view -->
@@ -376,20 +387,18 @@
         </div>
       {:else}
         {#key viewMode}
-          <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} cycleYears={CYCLES} {darkMode} onDistrictClick={(d) => selectedDistrict = d} />
+          <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} cycleYears={CYCLES} {darkMode} onDistrictClick={(d) => selectedDistrict = d} onMapClick={() => selectedDistrict = null} />
         {/key}
+        {#if selectedDistrict}
+          <div class="district-popup" style="left:{cardLeft}px; top:{cardTop}px">
+            {@render districtCard()}
+          </div>
+        {/if}
       {/if}
     </div>
 
-    {#if viewMode !== 'nation' && isBottomPanel && selectedDistrict}
-      <div class="district-float" style="bottom: {mapPanelBottom + 16}px">
-        {@render districtCard()}
-      </div>
-    {/if}
-
     {#if viewMode !== 'nation' && panelPosition === 'side'}
       <aside class="panel side">
-        {@render districtCard()}
         <section class="sticky-controls">
           <div class="sticky-controls-header">
             <h2>Redistricting cycle</h2>
@@ -797,7 +806,7 @@
   }
 
   main { flex: 1; display: flex; min-height: 0; position: relative; }
-  .map-wrap { flex: 1; min-width: 0; }
+  .map-wrap { flex: 1; min-width: 0; position: relative; }
 
   /* Side panel */
   aside.panel.side {
@@ -1179,9 +1188,8 @@
     align-items: center;
   }
 
-  .district-float {
+  .district-popup {
     position: absolute;
-    left: 1rem;
     z-index: 12;
     pointer-events: auto;
   }

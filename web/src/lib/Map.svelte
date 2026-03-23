@@ -6,14 +6,15 @@
   import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, onDistrictClick }: {
+  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, onDistrictClick, onMapClick }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;
     statePo?: string;
     cycleYears?: number[];
     darkMode?: boolean;
-    onDistrictClick?: (d: { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number }) => void;
+    onDistrictClick?: (d: { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number; x: number; y: number }) => void;
+    onMapClick?: () => void;
   } = $props();
 
   // Year immediately before `year` in the cycle sequence, or null if it's the first.
@@ -749,15 +750,25 @@
         hoveredDistrict = null;
       });
 
+      let clickedDistrict = false;
+
       map.on('click', 'districts-fill-front', (e) => {
         if (!e.features?.length) return;
+        clickedDistrict = true;
         const p = e.features[0].properties ?? {};
         onDistrictClick?.({
           district: p.district,
           won_by: p.won_by ?? '',
           partisan_lean_d: typeof p.partisan_lean_d === 'number' ? p.partisan_lean_d : null,
           cycle_year: p.cycle_year ?? selectedYear,
+          x: e.point.x,
+          y: e.point.y,
         });
+      });
+
+      map.on('click', () => {
+        if (clickedDistrict) { clickedDistrict = false; return; }
+        onMapClick?.();
       });
 
       map.once('idle', () => setYearFilter(selectedYear));
