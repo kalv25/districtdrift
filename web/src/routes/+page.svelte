@@ -101,6 +101,9 @@
   const THEME_KEY = 'districtdrift.theme';
   let darkMode = $state(false);
 
+  const HELP_KEY = 'districtdrift.helpSeen';
+  let helpOpen = $state(false);
+
   const isMobile = () => window.innerWidth < 640;
 
   onMount(() => {
@@ -114,6 +117,12 @@
     const savedTheme = localStorage.getItem(THEME_KEY);
     if (savedTheme === 'dark' || savedTheme === 'light') darkMode = savedTheme === 'dark';
     else darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Auto-show help on first visit
+    if (!localStorage.getItem(HELP_KEY)) {
+      helpOpen = true;
+      localStorage.setItem(HELP_KEY, '1');
+    }
   });
 
   $effect(() => { localStorage.setItem(PANEL_KEY, panelPosition); });
@@ -229,11 +238,14 @@
   }
 </script>
 
-<svelte:window onclick={(e) => {
-  if (stateMenuOpen && !(e.target as Element)?.closest?.('.state-selector-wrap')) {
-    stateMenuOpen = false;
-  }
-}} />
+<svelte:window
+  onclick={(e) => {
+    if (stateMenuOpen && !(e.target as Element)?.closest?.('.state-selector-wrap')) {
+      stateMenuOpen = false;
+    }
+  }}
+  onkeydown={(e) => { if (e.key === 'Escape') helpOpen = false; }}
+/>
 
 <svelte:head>
   <title>{viewMode === 'nation'
@@ -341,6 +353,13 @@
       <h1>District<span class="accent">Drift</span></h1>
       <p class="tagline">Three decades of congressional redistricting <span class="version">v{__APP_VERSION__}</span></p>
     </div>
+
+    <button
+      class="help-btn"
+      onclick={() => helpOpen = true}
+      title="How to use this site"
+      aria-label="Help"
+    >?</button>
 
     <button
       class="theme-toggle"
@@ -637,6 +656,66 @@
     </p>
   </footer>
 </div>
+
+{#if helpOpen}
+  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+  <div class="help-backdrop" onclick={() => helpOpen = false}>
+    <div class="help-modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Help">
+      <div class="help-header">
+        <h2>About District Drift</h2>
+        <button class="help-close" onclick={() => helpOpen = false} aria-label="Close">✕</button>
+      </div>
+      <div class="help-body">
+
+        <section>
+          <h3>What is this?</h3>
+          <p>District Drift is a historical record of congressional gerrymandering in the United States from 1992 to 2022. Every decade after the Census, states redraw their congressional district maps — a process that is often used to give one party a structural advantage. This site lets you explore how those maps changed across four redistricting cycles and what effect they had on election outcomes.</p>
+          <p>Unlike forward-looking redistricting tools, this site is purely retrospective: it asks <em>how have maps been drawn</em>, and <em>who benefited</em>?</p>
+        </section>
+
+        <section>
+          <h3>How to use it</h3>
+          <ul>
+            <li><strong>Select a state</strong> from the dropdown in the header.</li>
+            <li><strong>Choose a cycle</strong> (1992, 2002, 2012, 2022) using the buttons above the map, or press <strong>▶</strong> to animate through all four.</li>
+            <li>When switching cycles, district boundaries <strong>morph</strong> to their new positions. A <strong>swing overlay</strong> shows which districts shifted toward Democrats (blue) or Republicans (red).</li>
+            <li>The <strong>dashed lines</strong> on the map show the previous cycle's boundaries for reference.</li>
+            <li><strong>Click any district</strong> to see its partisan lean and a link to its Wikipedia page.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Understanding the metrics</h3>
+          <dl class="help-metrics">
+            <dt>Efficiency gap</dt>
+            <dd>Measures "wasted votes" — votes cast for a losing candidate, or surplus votes for a winner beyond what was needed. If one party's votes are systematically wasted at a higher rate through packing and cracking, the map favors the other. A value of <span class="r">+5%</span> means Democrats wasted 5 percentage points more of the total vote than Republicans (maps favor Republicans); <span class="d">−5%</span> means the reverse.</dd>
+
+            <dt>Mean–median difference</dt>
+            <dd>Compares the mean Democratic vote share across all districts to the median. When Democratic votes are concentrated into a few lopsided districts (packing), the median falls below the mean — a negative value that indicates Republican-favoring maps. Values near zero suggest a more even distribution.</dd>
+
+            <dt>Seat / vote ratio</dt>
+            <dd>How many seats a party wins relative to its statewide vote share. A ratio of <strong>1.0×</strong> means seats are proportional to votes. Above 1× means the party wins more seats than its vote share would predict; below 1× means fewer. Extreme values in either direction suggest structural bias in the map.</dd>
+
+            <dt>Compactness (Polsby-Popper)</dt>
+            <dd>Measures how compact a district's shape is, from 0 to 1 (a perfect circle = 1). Strangely shaped, elongated districts are sometimes a sign of partisan manipulation — though geography and communities of interest also legitimately produce non-compact shapes.</dd>
+          </dl>
+          <p class="help-note">These metrics can behave counterintuitively when one party wins by very large margins, as landslide victories also waste many votes. Always read them alongside the seat and vote totals.</p>
+        </section>
+
+        <section>
+          <h3>About the data</h3>
+          <ul>
+            <li>District boundaries: <strong>NHGIS</strong> (University of Minnesota), congressional shapefiles from the 103rd–118th Congress.</li>
+            <li>Election results: <strong>MIT Election Lab</strong> US House returns 1976–2024.</li>
+            <li>The 1992 cycle (103rd Congress) has known gaps in the NHGIS shapefile for some states — a handful of district boundaries are missing from the source data.</li>
+            <li>Currently covers 17 states. More states are added regularly.</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </div>
+{/if}
 
 <style>
   :global(:root) {
@@ -1168,6 +1247,22 @@
   }
   footer a { color: rgba(255,255,255,0.65); }
 
+  .help-btn {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    width: 1.75rem;
+    height: 1.75rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1;
+    transition: background 0.15s, color 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .help-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
   .theme-toggle {
     margin-left: auto;
     background: rgba(255,255,255,0.07);
@@ -1181,6 +1276,82 @@
     transition: background 0.15s, color 0.15s;
   }
   .theme-toggle:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+  /* Help modal */
+  .help-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .help-modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 620px;
+    max-height: 88vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  }
+  .help-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .help-header h2 {
+    margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text);
+  }
+  .help-close {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-muted); font-size: 1rem; padding: 0.25rem 0.4rem;
+    border-radius: 4px; transition: background 0.1s;
+  }
+  .help-close:hover { background: var(--surface-2); }
+  .help-body {
+    overflow-y: auto;
+    padding: 1.1rem 1.25rem 1.25rem;
+    display: flex; flex-direction: column; gap: 1.25rem;
+  }
+  .help-body section h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .help-body p, .help-body li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin: 0 0 0.4rem;
+  }
+  .help-body ul {
+    margin: 0; padding-left: 1.2rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .help-metrics {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 0.5rem 0.9rem; margin: 0;
+  }
+  .help-metrics dt {
+    font-size: 0.83rem; font-weight: 600; color: var(--text);
+    padding-top: 0.05rem; white-space: nowrap;
+  }
+  .help-metrics dd {
+    font-size: 0.83rem; line-height: 1.55; color: var(--text-muted); margin: 0;
+  }
+  .help-metrics .d { color: #4a90d9; font-weight: 600; }
+  .help-metrics .r { color: #e05c5c; font-weight: 600; }
+  .help-note {
+    font-size: 0.8rem !important;
+    color: var(--text-muted) !important;
+    font-style: italic;
+    margin-top: 0.5rem !important;
+  }
 
   /* District detail card */
   .nation-cycle-bar {
