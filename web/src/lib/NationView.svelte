@@ -21,14 +21,10 @@
     selectedYear,
     onStateClick,
     fullDataStates = [],
-    animating = false,
-    onToggleAnimation,
   }: {
     selectedYear: number;
     onStateClick: (po: string) => void;
     fullDataStates?: string[];
-    animating?: boolean;
-    onToggleAnimation?: () => void;
   } = $props();
 
   function hasFullData(po: string): boolean {
@@ -341,11 +337,6 @@
         {/each}
       </div>
 
-      {#if onToggleAnimation}
-        <button class="rank-play" class:playing={animating} onclick={onToggleAnimation} title={animating ? 'Pause' : 'Animate cycles'}>
-          {animating ? '⏸ Pause' : '▶ Animate'}
-        </button>
-      {/if}
     </div>
   {/if}
 </div>

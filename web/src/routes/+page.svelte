@@ -372,6 +372,12 @@
         <span class="btn-r-delta">{seatsR != null ? `${seatsR}R` : ''}</span>
       </button>
     {/each}
+    <button
+      class="anim-btn"
+      class:playing={animating}
+      onclick={toggleAnimation}
+      title={animating ? 'Pause animation' : 'Animate through cycles'}
+    >{animating ? '⏸' : '▶'}</button>
   </div>
 {/snippet}
 
@@ -611,7 +617,7 @@
   <main class:ph={panelLayout === 'horizontal'}>
     <div class="map-wrap">
       {#if viewMode === 'nation'}
-        <NationView selectedYear={selectedYear} onStateClick={selectState} fullDataStates={Object.keys(STATES)} {animating} onToggleAnimation={toggleAnimation} />
+        <NationView selectedYear={selectedYear} onStateClick={selectState} fullDataStates={Object.keys(STATES)} />
         <!-- Floating cycle bar for nation view -->
         <div class="nation-cycle-bar">
           {@render cycleControls()}
@@ -626,15 +632,9 @@
         {/key}
       {/if}
 
-      <!-- Floating map controls: play + layout toggle -->
+      <!-- Floating map controls: layout toggle only (play is in cycle controls) -->
       {#if viewMode !== 'nation'}
         <div class="map-float-controls">
-          <button
-            class="map-float-btn anim-btn"
-            class:playing={animating}
-            onclick={toggleAnimation}
-            title={animating ? 'Pause animation' : 'Animate through cycles'}
-          >{animating ? '⏸' : '▶'}</button>
           <button
             class="map-float-btn"
             title={panelLayout === 'vertical' ? 'Switch to bottom panels' : 'Switch to side panels'}
@@ -1730,6 +1730,11 @@
     z-index: 10;
     display: flex;
     align-items: center;
+  }
+  /* In the pill bar, buttons use natural width instead of flex-grow */
+  .nation-cycle-bar .cycle-buttons button:not(.anim-btn) {
+    flex: 0 0 auto;
+    padding: 0.5rem 0.7rem;
   }
 
   .district-card {
