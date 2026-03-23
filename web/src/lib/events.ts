@@ -546,6 +546,71 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
   },
 
+  GA: {
+    1992: [
+      {
+        title: 'Democrats draw majority-Black districts under VRA pressure',
+        detail: 'Governor Zell Miller (D) and a Democratic legislature draw maps after the 1990 census. The Voting Rights Act requires creation of majority-Black districts in Georgia for the first time, producing three majority-Black congressional districts — including the sprawling 11th District stretching from Atlanta\'s suburbs to Savannah. Georgia retains 11 seats.',
+      },
+      {
+        title: 'The "serpentine" 11th District — a target from the start',
+        detail: 'The 11th District winds through 26 counties connecting Black communities in metro Atlanta to Savannah, creating a majority-Black constituency. Critics call it one of the most oddly shaped districts in the country — a direct product of VRA pressure combined with Democratic incumbent protection.',
+      },
+      {
+        title: '⚖ Miller v. Johnson (1995) — 11th District struck as unconstitutional racial gerrymander',
+        detail: 'In a 5–4 ruling, the U.S. Supreme Court strikes down Georgia\'s 11th District, holding that race was the predominant factor in drawing the district and that such race-based line-drawing requires strict scrutiny — which Georgia could not satisfy. The state is required to redraw its maps; remedial maps are enacted in 1995 and again in 1997 under court supervision.',
+        url: 'https://www.oyez.org/cases/1994/94-631',
+      },
+      {
+        title: 'Remedial maps redrawn under court supervision',
+        detail: 'Following Miller v. Johnson, Georgia redraws its congressional map twice in the mid-1990s, reducing the number of majority-Black districts from three to two. The litigation reshapes the delegation mid-decade and sets precedents applied across Southern states facing similar VRA compliance questions.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Georgia gains 2 seats after rapid population growth',
+        detail: 'The 2000 census reflects Georgia\'s booming population, expanding the delegation from 11 to 13. Governor Roy Barnes (D) and a Democratic-controlled legislature draw the new map — the last time Democrats control Georgia redistricting for decades.',
+      },
+      {
+        title: 'Democratic maps fail to hold back the Republican wave',
+        detail: 'Despite controlling the redistricting process, Democrats design maps to protect incumbents and maximize Democratic seats. The strategy backfires: Republicans sweep to a 7–6 congressional majority in 2002 as the state rapidly shifts rightward, foreshadowing the Democratic collapse in Georgia state politics.',
+      },
+      {
+        title: 'Republicans seize full control of state government by 2005',
+        detail: 'The 2002 elections end Democratic dominance of the Georgia legislature. By 2005, Republicans hold the governorship (Sonny Perdue, first Republican governor since Reconstruction), both legislative chambers, and a congressional majority — completing one of the fastest partisan realignments in modern Southern history.',
+      },
+    ],
+    2012: [
+      {
+        title: 'Georgia gains 1 seat; Republicans draw the maps',
+        detail: 'The 2010 census gives Georgia 14 congressional seats. Governor Nathan Deal (R) and a Republican-controlled General Assembly have full control of redistricting for the first time. The resulting maps produce a 9–5 Republican delegation.',
+      },
+      {
+        title: 'VRA Section 5 preclearance required',
+        detail: 'As a covered jurisdiction under the Voting Rights Act, Georgia must obtain DOJ preclearance for any electoral changes. The Obama DOJ preclears the 2011 congressional maps, finding they do not reduce minority voting strength relative to the benchmark plan.',
+      },
+      {
+        title: '⚖ Shelby County v. Holder (2013) — Section 5 gutted',
+        detail: 'The U.S. Supreme Court strikes down the VRA\'s coverage formula in a 5–4 ruling, effectively ending Section 5 preclearance for Georgia and other Southern states. Future redistricting in Georgia will proceed without DOJ advance approval, shifting civil rights enforcement entirely to Section 2 litigation after the fact.',
+        url: 'https://www.oyez.org/cases/2012/12-96',
+      },
+    ],
+    2022: [
+      {
+        title: 'Republicans maintain 9-5 delegation in a purple state',
+        detail: 'Governor Brian Kemp (R) and the Republican legislature draw maps maintaining a 9–5 Republican congressional delegation — despite Georgia being carried by Biden in 2020 and electing two Democratic U.S. Senators in January 2021 runoffs. Analysts find the maps pack Black voters in the Atlanta metro area into fewer districts, diluting their influence in surrounding seats.',
+      },
+      {
+        title: '⚖ Pendergrass v. Raffensperger — VRA Section 2 challenge',
+        detail: 'A coalition of civil rights organizations and voters challenge Georgia\'s congressional map as diluting Black voting strength in violation of VRA Section 2. The federal district court finds the maps likely violate Section 2 by packing Black voters and orders the legislature to draw remedial congressional and state legislative maps adding a second majority-Black congressional district.',
+      },
+      {
+        title: 'Court orders remedial maps for 2024 elections',
+        detail: 'Following the Pendergrass ruling, the Georgia legislature enacts new congressional maps creating an additional majority-Black district in the Atlanta suburbs. The remedial maps are used in the 2024 elections, shifting one seat toward Democrats and producing a 9–5 Republican delegation — unchanged in seat count despite the new district lines.',
+      },
+    ],
+  },
+
   NC: {
     1992: [
       {

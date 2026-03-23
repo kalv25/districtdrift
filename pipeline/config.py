@@ -325,6 +325,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "GA": {
+        "name": "Georgia",
+        "fips": "13",
+        "crs": "EPSG:26916",   # NAD83 / UTM Zone 16N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 11,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Zell Miller (D) and a Democratic legislature drew maps after the 1990 census; VRA required creation of majority-Black districts, producing the serpentine 11th District challenged in Miller v. Johnson (1995), which SCOTUS struck as an unconstitutional racial gerrymander",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 13,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Roy Barnes (D) and a Democratic legislature drew maps after Georgia gained 2 seats from the 2000 census; Democrats attempted to protect incumbents but Republicans swept to a 7-6 majority in 2002 anyway, foreshadowing the state's rightward shift",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 14,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Nathan Deal (R) and a Republican-controlled General Assembly drew maps after Georgia gained 1 seat; maps produced a 9-5 Republican delegation; VRA Section 5 preclearance required DOJ approval",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 14,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Brian Kemp (R) and Republican legislature drew maps maintaining a 9-5 Republican delegation; Pendergrass v. Raffensperger challenged the maps as packing Black voters in violation of VRA Section 2; court ordered remedial maps for 2024 elections",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",

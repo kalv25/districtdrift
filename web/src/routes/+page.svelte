@@ -38,6 +38,7 @@
 
   const STATES: Record<string, { name: string; flag: string }> = {
     MI: { name: 'Michigan', flag: '◉' },
+    GA: { name: 'Georgia', flag: '◉' },
     NC: { name: 'North Carolina', flag: '◉' },
     WI: { name: 'Wisconsin', flag: '◉' },
     MD: { name: 'Maryland', flag: '◉' },
