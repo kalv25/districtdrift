@@ -300,10 +300,7 @@
 
     swingVisible = true;
     swingLegendVisible = true;
-
-    swingTimeoutId = setTimeout(() => {
-      clearSwingOverlay();
-    }, MORPH_MS + SWING_HOLD_MS);
+    // Overlay persists until the next year transition (clearSwingOverlay is called by cancelMorph)
   }
 
   // Rotate `from` so its starting vertex best aligns with `to` (minimises total
@@ -456,13 +453,9 @@
       }
     }
 
-    // Main fill crossfade
-    map.setPaintProperty('districts-fill-front', 'fill-opacity', 0);
+    // Main fill — instant switch, no crossfade
     map.setFilter('districts-fill-front', ['==', ['get', 'cycle_year'], year]);
-    requestAnimationFrame(() => {
-      if (map.getLayer('districts-fill-front'))
-        map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
-    });
+    map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
 
     if (map.getLayer('districts-hover'))
       map.setFilter('districts-hover', ['==', ['get', 'cycle_year'], year]);
@@ -612,7 +605,6 @@
         paint: {
           'fill-color': FILL_COLOR,
           'fill-opacity': 0,
-          'fill-opacity-transition': { duration: fadeDuration, delay: 0 },
         },
       });
 
@@ -626,7 +618,6 @@
         paint: {
           'fill-color': FILL_COLOR,
           'fill-opacity': 0.65,
-          'fill-opacity-transition': { duration: fadeDuration, delay: 0 },
         },
       });
 
@@ -645,7 +636,6 @@
             '#808080',
           ] as maplibregl.ExpressionSpecification,
           'fill-opacity': 0.65,
-          'fill-opacity-transition': { duration: 600, delay: 0 },
         },
       });
 
