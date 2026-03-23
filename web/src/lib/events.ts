@@ -93,6 +93,64 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
   },
 
+  PA: {
+    1992: [
+      {
+        title: 'Pennsylvania loses 2 seats',
+        detail: 'The 1990 census reduces Pennsylvania\'s delegation from 23 to 21, reflecting decades of population loss to Sun Belt states. Democratic governor Bob Casey and a Republican-controlled legislature must negotiate a new map.',
+      },
+      {
+        title: 'Negotiated maps produce proportional results',
+        detail: 'With split control, neither party can impose its preferred map. The resulting compromise produces a delegation that roughly tracks the statewide vote — an unusual outcome for Pennsylvania redistricting.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Pennsylvania loses 2 more seats',
+        detail: 'The 2000 census reduces the delegation from 21 to 19. Governor Tom Ridge leaves to become the first Secretary of Homeland Security; Republican Mark Schweiker takes over and signs the Republican legislature\'s redistricting plan.',
+      },
+      {
+        title: 'Republicans draw an aggressive map',
+        detail: 'The Republican-drawn map concentrates Democratic voters in a handful of districts and gives Republicans an outsized advantage. Republicans win 12 of 19 seats in 2002 despite Pennsylvania being a closely contested presidential state.',
+      },
+      {
+        title: '⚖ Vieth v. Jubelirer — partisan gerrymandering not justiciable',
+        detail: 'Democratic voters challenge the 2001 congressional map as an unconstitutional partisan gerrymander. In a fractured 5–4 decision in 2004, the U.S. Supreme Court rules that partisan gerrymandering claims present a political question beyond federal court review — though Justice Kennedy\'s concurrence leaves open the possibility of a future manageable standard. The ruling stands until Rucho v. Common Cause (2019) closes the door definitively.',
+        url: 'https://www.oyez.org/cases/2003/02-1580',
+      },
+    ],
+    2012: [
+      {
+        title: 'Pennsylvania loses 1 seat',
+        detail: 'The 2010 census reduces the delegation from 19 to 18. Republicans sweep the 2010 midterms, winning the governorship (Tom Corbett) and large majorities in both legislative chambers — giving them unilateral control of redistricting.',
+      },
+      {
+        title: 'The "Goofy Kicking Donald Duck" — most contorted district in the country',
+        detail: 'The Republican-drawn 7th District winds through five counties in suburban Philadelphia with tentacles as narrow as a single block, cracking Democratic communities across multiple districts. The shape — nicknamed after the cartoon characters it resembled — became a national symbol of extreme partisan cartography. Republicans win 13 of 18 seats despite a near-even statewide vote.',
+      },
+      {
+        title: '⚖ League of Women Voters v. Commonwealth — PA Supreme Court strikes maps',
+        detail: 'Filed under the Pennsylvania Constitution\'s free and equal elections clause rather than the federal constitution (sidestepping Vieth v. Jubelirer), the case reaches the PA Supreme Court. In January 2018, the court strikes the 2011 congressional map 5–2 as an unconstitutional partisan gerrymander — a landmark state-court ruling. When the Republican legislature fails to produce an acceptable remedial plan, the court draws its own map, used from the 2018 elections onward.',
+        url: 'https://www.pubintlaw.org/cases-and-projects/league-of-women-voters-of-pa-v-commonwealth-of-pa/',
+      },
+    ],
+    2022: [
+      {
+        title: 'Pennsylvania loses 1 seat',
+        detail: 'The 2020 census reduces the delegation from 18 to 17. Democratic governor Tom Wolf faces a Republican-controlled legislature, setting up another redistricting clash.',
+      },
+      {
+        title: 'Wolf vetoes Republican maps; second straight court intervention',
+        detail: 'The Republican legislature passes a congressional map in January 2022 designed to produce a 11-6 Republican delegation. Wolf vetoes it. Pennsylvania faces its second consecutive decade of court-drawn congressional maps.',
+      },
+      {
+        title: '⚖ Carter v. Chapman — PA Supreme Court draws new map',
+        detail: 'The PA Supreme Court takes jurisdiction and, after receiving competing map submissions, adopts a remedial congressional plan on February 23, 2022. The court-drawn map produces a competitive 9-8 Republican advantage in 2022 — far more proportional than what the Republican legislature proposed.',
+        url: 'https://www.pacourts.us/news-and-statistics/cases-of-public-interest/carter-v-chapman',
+      },
+    ],
+  },
+
   MD: {
     1992: [
       {

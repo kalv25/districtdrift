@@ -29,6 +29,7 @@
     NC: { bounds: [[-84.3, 33.8], [-75.5, 36.6]], center: [-79.9, 35.2], zoom: 6.2 },
     WI: { bounds: [[-92.9, 42.5], [-86.8, 47.1]], center: [-89.8, 44.8], zoom: 5.8 },
     MD: { bounds: [[-79.5, 37.9], [-74.9, 39.8]], center: [-76.8, 38.9], zoom: 6.5 },
+    PA: { bounds: [[-80.5, 39.7], [-74.7, 42.3]], center: [-77.7, 41.0], zoom: 6.0 },
   };
   const stateView = $derived(STATE_VIEW[statePo] ?? STATE_VIEW['MI']);
 

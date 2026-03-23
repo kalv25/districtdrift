@@ -80,6 +80,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "PA": {
+        "name": "Pennsylvania",
+        "fips": "42",
+        "crs": "EPSG:32617",   # UTM Zone 17N (NAD83) — centers on Pennsylvania
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 21,
+                "redistricting_controller": "Split (Dem governor, Rep legislature)",
+                "notes": "Governor Bob Casey (D) and a Republican-controlled legislature negotiated maps; result was roughly proportional. Note: NHGIS 103rd Congress shapefile is missing district boundaries for PA-14 and PA-18.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 19,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Schweiker (R) signed Republican-drawn maps; Vieth v. Jubelirer (2004) challenged them as a partisan gerrymander but SCOTUS ruled 5–4 that such claims were not justiciable",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 18,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Corbett (R) signed maps including the infamous 'Goofy Kicking Donald Duck' 7th District; PA Supreme Court struck maps in 2018 (League of Women Voters v. Commonwealth) and drew its own remedial map used from 2018 onward",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 17,
+                "redistricting_controller": "Court-drawn (governor veto)",
+                "notes": "Governor Wolf (D) vetoed Republican maps; PA Supreme Court drew its own congressional map in February 2022, producing a near-proportional 9-8 delegation",
+            },
+        },
+    },
     "MD": {
         "name": "Maryland",
         "fips": "24",

@@ -41,6 +41,7 @@
     NC: { name: 'North Carolina', flag: '◉' },
     WI: { name: 'Wisconsin', flag: '◉' },
     MD: { name: 'Maryland', flag: '◉' },
+    PA: { name: 'Pennsylvania', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view

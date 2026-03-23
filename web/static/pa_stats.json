@@ -1,0 +1,116 @@
+{
+  "state": "Pennsylvania",
+  "fips": "42",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 21,
+      "redistricting_controller": "Split (Dem governor, Rep legislature)",
+      "notes": "Governor Bob Casey (D) and a Republican-controlled legislature negotiated maps; result was roughly proportional",
+      "efficiency_gap": -0.0874,
+      "mean_median_diff": -0.0332,
+      "seats_d": 10,
+      "seats_r": 9,
+      "votes_d": 1892084,
+      "votes_r": 2132106,
+      "seat_vote_ratio_d": 1.0128,
+      "avg_compactness": 0.2554,
+      "competitiveness": {
+        "solid_d": 6,
+        "lean_d": 0,
+        "competitive": 5,
+        "lean_r": 1,
+        "solid_r": 7
+      }
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 19,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Schweiker (R) signed Republican-drawn maps; Vieth v. Jubelirer (2004) challenged them as a partisan gerrymander but SCOTUS ruled 5\u20134 that such claims were not justiciable",
+      "efficiency_gap": -0.0262,
+      "mean_median_diff": 0.0096,
+      "seats_d": 7,
+      "seats_r": 12,
+      "votes_d": 1348665,
+      "votes_r": 1859270,
+      "seat_vote_ratio_d": 0.8763,
+      "avg_compactness": 0.1859,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 1,
+        "competitive": 3,
+        "lean_r": 1,
+        "solid_r": 10
+      }
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 18,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Corbett (R) signed maps including the infamous 'Goofy Kicking Donald Duck' 7th District; PA Supreme Court struck maps in 2018 (League of Women Voters v. Commonwealth) and drew its own remedial map used from 2018 onward",
+      "efficiency_gap": 0.2376,
+      "mean_median_diff": 0.0765,
+      "seats_d": 5,
+      "seats_r": 13,
+      "votes_d": 2793538,
+      "votes_r": 2710070,
+      "seat_vote_ratio_d": 0.5473,
+      "avg_compactness": 0.1684,
+      "competitiveness": {
+        "solid_d": 5,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 7,
+        "solid_r": 5
+      }
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 17,
+      "redistricting_controller": "Court-drawn (governor veto)",
+      "notes": "Governor Wolf (D) vetoed Republican maps; PA Supreme Court drew its own congressional map in February 2022, producing a near-proportional 9-8 delegation",
+      "efficiency_gap": -0.0811,
+      "mean_median_diff": -0.0373,
+      "seats_d": 9,
+      "seats_r": 8,
+      "votes_d": 2436919,
+      "votes_r": 2702262,
+      "seat_vote_ratio_d": 1.1165,
+      "avg_compactness": 0.3126,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 2,
+        "competitive": 5,
+        "lean_r": 1,
+        "solid_r": 5
+      }
+    }
+  ]
+}
