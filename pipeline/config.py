@@ -80,6 +80,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "TX": {
+        "name": "Texas",
+        "fips": "48",
+        "crs": "EPSG:3083",   # NAD83 / Texas Centric Albers Equal Area
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 30,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Ann Richards (D) and a Democratic legislature drew maps after the 1990 census gave Texas 3 additional seats; VRA required majority-minority districts",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 32,
+                "redistricting_controller": "Court-drawn (legislative deadlock)",
+                "notes": "Legislature deadlocked (Dem House, Rep Senate); a three-judge federal panel drew maps in Balderas v. Texas (2001). Note: Tom DeLay orchestrated a mid-decade Republican redraw in 2003 (LULAC v. Perry) that took effect in 2004 — only the 2002 election used these court-drawn maps",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 36,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Perry (R) and Republican legislature drew maps; VRA Section 5 preclearance denied by D.C. Circuit in Texas v. US (2012). SCOTUS ordered interim maps in Perry v. Perez (2012); court-negotiated maps used through the cycle",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 38,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Abbott (R) and Republican legislature drew maps adding 2 new seats; VRA Section 2 challenges filed in Brooks v. Abbott and related cases over minority representation",
+            },
+        },
+    },
     "PA": {
         "name": "Pennsylvania",
         "fips": "42",

@@ -93,6 +93,77 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
   },
 
+  TX: {
+    1992: [
+      {
+        title: 'Texas gains 3 seats',
+        detail: 'The 1990 census reflects Texas\'s rapid population growth, expanding the delegation from 27 to 30. Governor Ann Richards (D) and the Democratic-controlled legislature draw the new map.',
+      },
+      {
+        title: 'VRA forces majority-minority districts',
+        detail: 'Under the Voting Rights Act, the Justice Department requires Texas to create majority-Black and majority-Hispanic districts. The 1992 map includes new minority-opportunity seats — the 18th (Houston, majority-Black) and the 29th (Houston, majority-Hispanic) — contributing to the first Black and Hispanic members from those areas in decades.',
+      },
+      {
+        title: '⚖ Vera v. Richards — racial gerrymander claims',
+        detail: 'White voters challenge several oddly shaped districts as unconstitutional racial gerrymanders. The Supreme Court rules in Bush v. Vera (1996) that three Texas districts (18th, 29th, 30th) were drawn with race as the predominant factor and must be redrawn. Texas redraws those districts, but the maps survive the decade in modified form.',
+        url: 'https://www.oyez.org/cases/1995/94-805',
+      },
+    ],
+    2002: [
+      {
+        title: 'Texas gains 2 seats',
+        detail: 'The 2000 census gives Texas 32 seats. Rick Perry (R) became governor when George W. Bush left for the presidency in January 2001. The Texas House remained Democratic; the Senate was Republican.',
+      },
+      {
+        title: '⚖ Balderas v. Texas — court draws the map',
+        detail: 'The divided legislature fails to agree on a plan before the deadline. A three-judge federal panel draws its own congressional map in November 2001 — a court-imposed compromise used for the 2002 elections. Democrats hold 17 of 32 seats.',
+      },
+      {
+        title: 'DeLay\'s mid-decade redistricting — unprecedented',
+        detail: 'After Republicans win control of the Texas House in 2002, U.S. House Majority Leader Tom DeLay orchestrates a mid-decade congressional redistricting in 2003 — the first since the 19th century. The new map, designed to maximize Republican seats, takes effect in 2004. Republicans gain 5 seats, producing a 21–11 delegation.',
+      },
+      {
+        title: '⚖ LULAC v. Perry — mid-decade redraw reaches SCOTUS',
+        detail: 'Plaintiffs challenge DeLay\'s 2003 redistricting as an unconstitutional partisan gerrymander and a VRA violation. In League of United Latin American Citizens v. Perry (2006), the Supreme Court rules 5–4 that mid-decade redistricting is not inherently unconstitutional, but strikes District 23 as a VRA violation for diluting Hispanic voting strength. The 2002 election data shown here reflects the original court-drawn map, not the DeLay redraw.',
+        url: 'https://www.oyez.org/cases/2005/05-204',
+      },
+    ],
+    2012: [
+      {
+        title: 'Texas gains 4 seats — largest gain in the country',
+        detail: 'The 2010 census gives Texas 36 seats, the biggest gain of any state. Population growth is driven heavily by Hispanic and Black residents, but Republicans control redistricting under Governor Perry.',
+      },
+      {
+        title: 'Republicans draw maps over DOJ objections',
+        detail: 'The Republican legislature passes maps in June 2011. The DOJ objects under VRA Section 5, arguing the maps dilute minority voting strength despite minority communities driving all of Texas\'s population growth.',
+      },
+      {
+        title: '⚖ Texas v. United States — preclearance denied',
+        detail: 'Texas sues in the D.C. District Court for VRA Section 5 preclearance. In August 2012, the court denies preclearance, finding the maps likely dilute minority representation — the first time a state\'s congressional map had been rejected since the preclearance regime began.',
+        url: 'https://www.justice.gov/crt/redistricting-0',
+      },
+      {
+        title: '⚖ Perry v. Perez — SCOTUS orders interim maps',
+        detail: 'While preclearance litigation continues, the Supreme Court rules unanimously in January 2012 that lower courts must draw interim maps for imminent elections. A court-modified map is used for 2012 elections. After Shelby County v. Holder (2013) struck down the VRA preclearance formula, the legislature\'s original maps — with minor court modifications — are restored for 2014 onward.',
+        url: 'https://www.oyez.org/cases/2011/11-713',
+      },
+    ],
+    2022: [
+      {
+        title: 'Texas gains 2 seats',
+        detail: 'The 2020 census gives Texas 38 seats. Hispanic residents accounted for more than half of Texas\'s population growth in the decade — but Republicans, who control all statewide offices and both legislative chambers, draw the new map.',
+      },
+      {
+        title: 'Republican maps crack growing minority communities',
+        detail: 'The legislature passes maps in October 2021 that increase the number of safe Republican districts from 22 to 25, adding 2 new Republican-leaning seats from the 2 gained from reapportionment. Analysts find the maps significantly underrepresent Hispanic and Black voters relative to their population growth.',
+      },
+      {
+        title: '⚖ Brooks v. Abbott — VRA Section 2 challenge ongoing',
+        detail: 'A coalition of plaintiffs challenges the 2021 maps as a violation of VRA Section 2 for diluting minority voting strength. The case is consolidated with related suits and works through the federal courts. Unlike the 2012 cycle, there is no Section 5 preclearance requirement since Shelby County v. Holder eliminated it in 2013.',
+      },
+    ],
+  },
+
   PA: {
     1992: [
       {
