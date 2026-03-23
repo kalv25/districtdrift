@@ -20,10 +20,16 @@
   let {
     selectedYear,
     onStateClick,
+    fullDataStates = [],
   }: {
     selectedYear: number;
     onStateClick: (po: string) => void;
+    fullDataStates?: string[];
   } = $props();
+
+  function hasFullData(po: string): boolean {
+    return fullDataStates.includes(po);
+  }
 
   // Fetch nation stats and US TopoJSON in parallel on mount
   let nationData = $state<StateData[]>([]);
@@ -59,17 +65,18 @@
     return () => ro.disconnect();
   });
 
+  // AlbersUSA default frame is 960×600; scale and translate to fit container.
   const projection = $derived(
-    geoAlbersUsa().fitSize([svgW, svgH], {
-      type: 'Sphere',
-    } as GeoJSON.GeoJsonObject)
+    geoAlbersUsa()
+      .scale(Math.min(svgW / 960, svgH / 600) * 1000)
+      .translate([svgW / 2, svgH / 2])
   );
   const pathGen = $derived(geoPath(projection));
 
   type StatePath = { po: string; d: string | null };
   const statePaths: StatePath[] = $derived(
     topology
-      ? (topojson.feature(topology, (topology as any).objects.states) as GeoJSON.FeatureCollection)
+      ? (topojson.feature(topology, (topology as any).objects.states) as unknown as GeoJSON.FeatureCollection)
           .features.map(f => ({
             po: fipsToPostal(f.id as string | number),
             d: pathGen(f),
@@ -186,20 +193,22 @@
       {#each statePaths as { po, d }}
         {#if d && po}
           {@const eg = getEg(po)}
+          {@const full = hasFullData(po)}
+          <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
           <path
             {d}
             fill={egColor(eg)}
             stroke="var(--nation-stroke)"
             stroke-width="0.6"
             class="state-path"
-            class:has-data={byPo[po] !== undefined}
+            class:has-full-data={full}
             onmousemove={(e) => handleMouseMove(e, po)}
             onmouseleave={() => hovered = null}
-            onclick={() => po && onStateClick(po)}
-            role="button"
-            tabindex="0"
-            aria-label="{getStateName(po)}"
-            onkeydown={(e) => e.key === 'Enter' && onStateClick(po)}
+            onclick={() => full && onStateClick(po)}
+            role={full ? 'button' : 'img'}
+            tabindex={full ? 0 : undefined}
+            aria-label="{getStateName(po)}{full ? ' — click to explore' : ''}"
+            onkeydown={(e) => full && e.key === 'Enter' && onStateClick(po)}
           />
         {/if}
       {/each}
@@ -208,6 +217,7 @@
     <!-- Tooltip -->
     {#if hovered}
       {@const c = getCycle(hovered.po)}
+      {@const full = hasFullData(hovered.po)}
       <div
         class="map-tooltip"
         style="left:{hovered.x + 14}px; top:{hovered.y}px"
@@ -218,7 +228,12 @@
           <span>{c.seats_d}D / {c.seats_r}R of {c.seats}</span>
           <span>D votes: {voteShareLabel(c)}</span>
         {:else}
-          <span>No data</span>
+          <span>No election data</span>
+        {/if}
+        {#if full}
+          <span class="tooltip-cta">Click to explore districts →</span>
+        {:else}
+          <span class="tooltip-soon">District maps coming soon</span>
         {/if}
       </div>
     {/if}
@@ -282,10 +297,11 @@
     cursor: default;
     transition: opacity 0.15s;
   }
-  .state-path.has-data {
+  .state-path.has-full-data {
     cursor: pointer;
+    stroke-width: 1;
   }
-  .state-path.has-data:hover { opacity: 0.8; }
+  .state-path.has-full-data:hover { opacity: 0.78; }
 
   .map-tooltip {
     position: absolute;
@@ -306,6 +322,8 @@
   }
   .map-tooltip strong { font-size: 0.85rem; margin-bottom: 0.1rem; }
   .map-tooltip span { opacity: 0.8; }
+  .tooltip-cta { opacity: 1; color: #80c8ff; font-weight: 600; margin-top: 0.15rem; }
+  .tooltip-soon { opacity: 0.5; font-style: italic; margin-top: 0.15rem; }
 
   .eg-legend {
     position: absolute;
@@ -393,5 +411,10 @@
     font-size: 0.63rem;
     color: var(--text-dim);
     text-align: center;
+  }
+
+  @media (max-width: 639px) {
+    .rank-panel { display: none; }
+    .eg-legend { bottom: 3.5rem; } /* clear the cycle bar */
   }
 </style>

@@ -86,9 +86,15 @@
   const THEME_KEY = 'districtdrift.theme';
   let darkMode = $state(false);
 
+  const isMobile = () => window.innerWidth < 640;
+
   onMount(() => {
     const savedPanel = localStorage.getItem(PANEL_KEY);
-    if (savedPanel === 'bottom' || savedPanel === 'side' || savedPanel === 'bottom-wide') panelPosition = savedPanel as typeof panelPosition;
+    if (savedPanel === 'bottom' || savedPanel === 'side' || savedPanel === 'bottom-wide') {
+      panelPosition = savedPanel as typeof panelPosition;
+    } else if (isMobile()) {
+      panelPosition = 'bottom'; // default to bottom panel on small screens
+    }
 
     const savedTheme = localStorage.getItem(THEME_KEY);
     if (savedTheme === 'dark' || savedTheme === 'light') darkMode = savedTheme === 'dark';
@@ -360,7 +366,11 @@
   <main>
     <div class="map-wrap">
       {#if viewMode === 'nation'}
-        <NationView selectedYear={selectedYear} onStateClick={selectState} />
+        <NationView selectedYear={selectedYear} onStateClick={selectState} fullDataStates={Object.keys(STATES)} />
+        <!-- Floating cycle bar for nation view -->
+        <div class="nation-cycle-bar">
+          {@render cycleControls()}
+        </div>
       {:else}
         {#key viewMode}
           <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={mapPanelBottom} statePo={selectedState} cycleYears={CYCLES} {darkMode} onDistrictClick={(d) => selectedDistrict = d} />
@@ -469,6 +479,16 @@
             </ul>
           </footer>
         {/if}
+
+        <details class="events-section about-section">
+          <summary>About this project</summary>
+          <div class="about-body">
+            <p>District Drift documents how congressional district maps have shaped election outcomes across four redistricting cycles — 1992, 2002, 2012, and 2022.</p>
+            <p>The core metric is the <strong>efficiency gap</strong>: the difference in "wasted" votes between the two parties, expressed as a share of total votes. Wasted votes are all losing-party votes plus any winning-party votes beyond what was needed to win. A large positive gap means Republican maps packed and cracked Democratic voters; a large negative gap means the reverse.</p>
+            <p>The 2% threshold is a commonly cited benchmark — gaps below it are considered within the normal range of electoral variation.</p>
+            <p>Boundary data comes from <a href="https://www.nhgis.org" target="_blank" rel="noopener">NHGIS</a>; election returns from the <a href="https://electionlab.mit.edu/data" target="_blank" rel="noopener">MIT Election Lab</a>.</p>
+          </div>
+        </details>
 
         <details class="events-section resources-section">
           <summary>Resources</summary>
@@ -1057,6 +1077,22 @@
   .data-credits a { color: var(--text-muted); text-decoration: none; border-bottom: 1px dotted var(--text-faint); }
   .data-credits a:hover { color: var(--text-strong); border-bottom-color: var(--text-muted); }
 
+  .about-section { margin-top: 0.5rem; }
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .about-body p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .about-body strong { color: var(--text-strong); font-weight: 600; }
+  .about-body a { color: var(--link); text-decoration: none; }
+  .about-body a:hover { text-decoration: underline; }
+
   .resources-section { margin-top: 0.5rem; }
   .resource-heading {
     font-size: 0.68rem;
@@ -1122,6 +1158,21 @@
   .theme-toggle:hover { background: rgba(255,255,255,0.14); color: #fff; }
 
   /* District detail card */
+  .nation-cycle-bar {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 0.35rem 0.75rem;
+    box-shadow: 0 2px 12px var(--shadow-sm);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+  }
+
   .district-float {
     position: absolute;
     left: 1rem;
@@ -1190,5 +1241,38 @@
     color: var(--text-dim);
     line-height: 1.4;
     font-style: italic;
+  }
+
+  /* ── Mobile ────────────────────────────────────────────────────────────────── */
+  @media (max-width: 639px) {
+    header {
+      padding: 0.45rem 0.75rem;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .tagline { display: none; }
+    h1 { font-size: 1.1rem; }
+
+    /* Side panel never shown on mobile — handled by JS default, but guard here */
+    aside.panel.side { display: none; }
+
+    /* Bottom panel: full-width, no border-radius on sides */
+    .panel.bottom {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform: none;
+      border-radius: 12px 12px 0 0;
+      width: 100% !important;
+    }
+
+    /* Tighten bottom pane max-height on mobile */
+    .bottom-pane { max-height: 140px; }
+
+    /* Nation cycle bar sits higher to clear the panel */
+    .nation-cycle-bar { bottom: auto; top: 0.5rem; }
+
+    /* Rank panel on nation view: hide on small screens (map is primary) */
+    /* NationView handles this via its own media query in the component */
   }
 </style>
