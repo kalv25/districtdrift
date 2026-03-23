@@ -487,6 +487,7 @@
             <p>The core metric is the <strong>efficiency gap</strong>: the difference in "wasted" votes between the two parties, expressed as a share of total votes. Wasted votes are all losing-party votes plus any winning-party votes beyond what was needed to win. A large positive gap means Republican maps packed and cracked Democratic voters; a large negative gap means the reverse.</p>
             <p>The 2% threshold is a commonly cited benchmark — gaps below it are considered within the normal range of electoral variation.</p>
             <p>Boundary data comes from <a href="https://www.nhgis.org" target="_blank" rel="noopener">NHGIS</a>; election returns from the <a href="https://electionlab.mit.edu/data" target="_blank" rel="noopener">MIT Election Lab</a>.</p>
+            <p class="about-feedback"><a href="https://github.com/kalv25/districtdrift/discussions/1" target="_blank" rel="noopener">Leave feedback →</a></p>
           </div>
         </details>
 
@@ -1093,6 +1094,7 @@
   .about-body strong { color: var(--text-strong); font-weight: 600; }
   .about-body a { color: var(--link); text-decoration: none; }
   .about-body a:hover { text-decoration: underline; }
+  .about-feedback { margin-top: 0.75rem; }
 
   .resources-section { margin-top: 0.5rem; }
   .resource-heading {
