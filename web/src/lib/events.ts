@@ -743,4 +743,54 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       },
     ],
   },
+  CA: {
+    1992: [
+      {
+        title: 'California gains 7 seats — the largest gain of any state',
+        detail: 'The 1990 census increases California\'s congressional delegation from 45 to 52, requiring a complete redraw of the congressional map.',
+      },
+      {
+        title: 'Governor Wilson vetoes Democratic maps; court draws them instead',
+        detail: 'Governor Pete Wilson (R) vetoed the Democratic legislature\'s redistricting plan. Ballot initiatives to establish a redistricting commission (Prop 118/119) failed in 1990. The California Supreme Court appointed special masters who drew the maps used through the cycle.',
+      },
+      {
+        title: 'Court-drawn maps reflect California\'s Democratic lean',
+        detail: 'The special master maps produce a delegation with Democrats winning roughly 65% of seats (30 of 52), broadly proportional to the state\'s partisan composition.',
+      },
+    ],
+    2002: [
+      {
+        title: 'California gains 1 seat to reach 53 districts',
+        detail: 'The 2000 census gives California one additional congressional seat. Governor Gray Davis (D) and a Democratic legislature control redistricting.',
+      },
+      {
+        title: 'Incumbent-protection gerrymander — the \'incumbent protection act of 2001\'',
+        detail: 'Maps were designed to freeze the existing delegation in place, so effectively that zero seats changed party hands in 2002 or 2004. The plan drew criticism from both parties and reformers as a blatant incumbent-protection gerrymander.',
+      },
+      {
+        title: '⚖ Schwarzenegger\'s Proposition 77 redistricting reform fails',
+        detail: 'Governor Schwarzenegger placed Proposition 77 on the November 2005 special election ballot, which would have transferred redistricting authority to a panel of retired judges. Voters rejected it, leaving the incumbent-protection maps in place.',
+      },
+    ],
+    2012: [
+      {
+        title: 'California Citizens Redistricting Commission draws congressional maps for the first time',
+        detail: 'Proposition 11 (2008) created the California Citizens Redistricting Commission (CCRC); Proposition 20 (2010) extended its authority to congressional districts. The CCRC drew maps through an extensive public process, replacing legislative control of redistricting for the first time in decades.',
+      },
+      {
+        title: 'New competitive maps dramatically change the delegation',
+        detail: 'The CCRC maps created several new competitive districts. Multiple incumbents retired or lost in the new landscape. Democrats won 38 of 53 seats; the competitive environment contrasted sharply with the frozen 2002 delegation.',
+      },
+    ],
+    2022: [
+      {
+        title: 'California loses 1 seat — the first population-share decline in state history',
+        detail: 'The 2020 census reduces California\'s congressional delegation from 53 to 52 — the first time in state history the delegation has shrunk. The California Citizens Redistricting Commission again draws the maps.',
+      },
+      {
+        title: 'CCRC maps produce roughly proportional delegation',
+        detail: 'After an extensive public hearing process, the CCRC maps produce a delegation roughly proportional to California\'s partisan composition. Several incumbent vs. incumbent matchups result from the seat reduction.',
+      },
+    ],
+  },
 };

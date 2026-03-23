@@ -395,6 +395,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "CA": {
+        "name": "California",
+        "fips": "06",
+        "crs": "EPSG:3310",   # CA Albers Equal Area
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 52,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Pete Wilson (R) vetoed the Democratic legislature's maps; a special master drew initial maps, then a ballot initiative (Prop 118/119) failed; the CA Supreme Court appointed masters who drew the maps used through the cycle. California gained 7 seats from the 1990 census.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 53,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Gray Davis (D) and a Democratic legislature drew an incumbent-protection gerrymander so effective it produced zero seat changes in 2002 and 2004; California gained 1 seat from the 2000 census. The maps were widely criticized as the 'incumbent protection act of 2001.'",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 53,
+                "redistricting_controller": "Independent Commission (CCRC)",
+                "notes": "Proposition 11 (2008) created the California Citizens Redistricting Commission; Proposition 20 (2010) extended its authority to congressional districts. The CCRC's maps were the first non-legislatively drawn congressional maps in California in decades.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 52,
+                "redistricting_controller": "Independent Commission (CCRC)",
+                "notes": "The California Citizens Redistricting Commission drew maps after California lost 1 seat from the 2020 census — the first loss in state history. The CCRC process involved extensive public hearings; maps produced a delegation roughly proportional to the state's Democratic lean.",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",

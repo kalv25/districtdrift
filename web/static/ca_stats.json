@@ -1,0 +1,116 @@
+{
+  "state": "California",
+  "fips": "06",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 52,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Pete Wilson (R) vetoed the Democratic legislature's maps; a special master drew initial maps, then a ballot initiative (Prop 118/119) failed; the CA Supreme Court appointed masters who drew the maps used through the cycle. California gained 7 seats from the 1990 census.",
+      "efficiency_gap": 0.0649,
+      "mean_median_diff": 0.0322,
+      "seats_d": 30,
+      "seats_r": 22,
+      "votes_d": 5446965,
+      "votes_r": 4365155,
+      "seat_vote_ratio_d": 1.0393,
+      "avg_compactness": 0.2442,
+      "competitiveness": {
+        "solid_d": 22,
+        "lean_d": 3,
+        "competitive": 10,
+        "lean_r": 7,
+        "solid_r": 10
+      }
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 53,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Gray Davis (D) and a Democratic legislature drew an incumbent-protection gerrymander so effective it produced zero seat changes in 2002 and 2004; California gained 1 seat from the 2000 census. The maps were widely criticized as the 'incumbent protection act of 2001.'",
+      "efficiency_gap": 0.0109,
+      "mean_median_diff": -0.0785,
+      "seats_d": 33,
+      "seats_r": 20,
+      "votes_d": 3731081,
+      "votes_r": 3225666,
+      "seat_vote_ratio_d": 1.1609,
+      "avg_compactness": 0.1532,
+      "competitiveness": {
+        "solid_d": 30,
+        "lean_d": 2,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 20
+      }
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 53,
+      "redistricting_controller": "Independent Commission (CCRC)",
+      "notes": "Proposition 11 (2008) created the California Citizens Redistricting Commission; Proposition 20 (2010) extended its authority to congressional districts. The CCRC's maps were the first non-legislatively drawn congressional maps in California in decades.",
+      "efficiency_gap": 0.0317,
+      "mean_median_diff": -0.0113,
+      "seats_d": 38,
+      "seats_r": 15,
+      "votes_d": 7392703,
+      "votes_r": 4530012,
+      "seat_vote_ratio_d": 1.1563,
+      "avg_compactness": 0.1966,
+      "competitiveness": {
+        "solid_d": 28,
+        "lean_d": 5,
+        "competitive": 7,
+        "lean_r": 5,
+        "solid_r": 8
+      }
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 52,
+      "redistricting_controller": "Independent Commission (CCRC)",
+      "notes": "The California Citizens Redistricting Commission drew maps after California lost 1 seat from the 2020 census \u2014 the first loss in state history. The CCRC process involved extensive public hearings; maps produced a delegation roughly proportional to the state's Democratic lean.",
+      "efficiency_gap": 0.026,
+      "mean_median_diff": 0.0282,
+      "seats_d": 40,
+      "seats_r": 12,
+      "votes_d": 6743737,
+      "votes_r": 3859666,
+      "seat_vote_ratio_d": 1.2095,
+      "avg_compactness": 0.1725,
+      "competitiveness": {
+        "solid_d": 28,
+        "lean_d": 7,
+        "competitive": 11,
+        "lean_r": 1,
+        "solid_r": 5
+      }
+    }
+  ]
+}
