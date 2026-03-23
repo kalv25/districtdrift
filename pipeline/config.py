@@ -500,6 +500,41 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "CO": {
+        "name": "Colorado",
+        "fips": "08",
+        "crs": "EPSG:32613",   # NAD83 / UTM Zone 13N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 6,
+                "redistricting_controller": "Split (Dem governor, split legislature)",
+                "notes": "Governor Romer (D) and a split legislature (Dem House, Rep Senate) produced negotiated maps; Colorado retained 6 seats after the 1990 census",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 7,
+                "redistricting_controller": "Court-drawn (legislative deadlock + mid-decade Republican remap struck)",
+                "notes": "Colorado gained 1 seat after the 2000 census. A split legislature deadlocked; a court drew maps for 2002. Republicans won control of the legislature in 2002 and passed new mid-decade maps in 2003. Salazar v. Davidson (Colo. 2003) struck the mid-decade remap as unconstitutional — the court-drawn 2002 maps remained in use for the full cycle.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 7,
+                "redistricting_controller": "Split (Dem governor, split legislature)",
+                "notes": "Governor Hickenlooper (D) and a divided legislature negotiated maps; Colorado retained 7 seats. A split government produced relatively competitive maps.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 8,
+                "redistricting_controller": "Independent Commission (CIRC)",
+                "notes": "Amendment Y (2018) created the Colorado Independent Congressional Redistricting Commission. Colorado gained 1 seat after the 2020 census, reaching 8 districts. The CIRC drew maps through an extensive public process; the CO Supreme Court approved the final maps in November 2021.",
+            },
+        },
+    },
     "NC": {
         "name": "North Carolina",
         "fips": "37",

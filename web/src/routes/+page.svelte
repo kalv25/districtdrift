@@ -52,6 +52,7 @@
     NY: { name: 'New York', flag: '◉' },
     AZ: { name: 'Arizona', flag: '◉' },
     NJ: { name: 'New Jersey', flag: '◉' },
+    CO: { name: 'Colorado', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view

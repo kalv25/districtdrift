@@ -883,4 +883,71 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       },
     ],
   },
+
+  CO: {
+    1992: [
+      {
+        title: 'Colorado retains 6 seats after the 1990 census',
+        detail: 'Colorado retained 6 congressional seats after the 1990 census.',
+      },
+      {
+        title: 'Governor Romer and split legislature negotiate maps',
+        detail: 'Governor Romer (D) and a split legislature (Dem House, Rep Senate) negotiated maps reflecting Colorado\'s competitive partisan balance at the time.',
+      },
+      {
+        title: 'Relatively even delegation in a swing state',
+        detail: 'Colorado was a swing state in the 1990s; maps produced a roughly even delegation.',
+      },
+    ],
+    2002: [
+      {
+        title: 'Colorado gains 1 seat after the 2000 census, reaching 7 districts',
+        detail: 'Colorado gained 1 congressional seat after the 2000 census, reaching 7 districts.',
+      },
+      {
+        title: 'Split legislature deadlocks; court draws maps for 2002',
+        detail: 'A split legislature deadlocked; a court drew maps used for the 2002 elections.',
+      },
+      {
+        title: 'Republicans pass mid-decade remap in 2003',
+        detail: 'Republicans won control of both chambers in 2002 and passed new mid-decade maps in 2003.',
+      },
+      {
+        title: '⚖ Salazar v. Davidson — mid-decade remap struck as unconstitutional',
+        detail: 'The Colorado Supreme Court struck the Republican mid-decade remap as unconstitutional in 2003 — the original court-drawn maps remained for the full cycle.',
+      },
+    ],
+    2012: [
+      {
+        title: 'Colorado retains 7 seats after the 2010 census',
+        detail: 'Colorado retained 7 seats after the 2010 census.',
+      },
+      {
+        title: 'Governor Hickenlooper and divided legislature negotiate competitive maps',
+        detail: 'Governor Hickenlooper (D) and a divided legislature negotiated relatively competitive maps.',
+      },
+      {
+        title: 'Rapidly urbanizing state; suburban Denver districts become battlegrounds',
+        detail: 'Colorado was rapidly urbanizing and trending Democratic; suburban Denver districts became key battlegrounds.',
+      },
+    ],
+    2022: [
+      {
+        title: 'Colorado gains 1 seat after the 2020 census, reaching 8 districts',
+        detail: 'Colorado gained 1 seat after the 2020 census, reaching 8 districts.',
+      },
+      {
+        title: 'Amendment Y (2018) creates the Colorado Independent Congressional Redistricting Commission',
+        detail: 'Amendment Y (2018), passed by 71% of voters, created the Colorado Independent Congressional Redistricting Commission.',
+      },
+      {
+        title: 'CIRC draws maps through extensive public hearings; CO Supreme Court approves in November 2021',
+        detail: 'The CIRC drew maps through extensive public hearings; the CO Supreme Court approved them in November 2021.',
+      },
+      {
+        title: 'Maps produce a competitive 4-4 delegation',
+        detail: 'Maps produced a competitive 4-4 delegation in a state that had shifted toward Democrats.',
+      },
+    ],
+  },
 };
