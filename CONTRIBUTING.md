@@ -58,6 +58,14 @@ npm install
 npm run dev
 ```
 
+## Key UI features
+
+- **State view**: cycle selector (1992/2002/2012/2022), boundary morph animation, panel layouts (sidebar / bottom bar)
+- **Nation view**: all 50 states colored by efficiency gap, seat-change overlays, rankings panel
+- **Floating map controls** (bottom-left): layout toggle · precinct overlay toggle · screenshot download
+- **Screenshot**: the ⬇ button saves the current map as `districtdrift-{state}-{year}.png` with a watermark
+- **Share button**: Web Share API on mobile; clipboard copy on desktop
+
 ## Data sources
 
 - [NHGIS](https://www.nhgis.org/) — congressional district boundaries and census demographics

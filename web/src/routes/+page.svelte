@@ -186,6 +186,7 @@
   let animTick = $state(CYCLES.indexOf(2022));
   let animating = $state(false);
   let showPrecincts = $state(false);
+  let mapComponent: { takeScreenshot: (state: string, year: number) => void } | undefined;
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
 
   let hoveredYear = $state<number | null>(null);
@@ -864,7 +865,7 @@
         </div>
       {:else}
         {#key viewMode}
-          <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={0} panelLeft={0} statePo={selectedState} cycleYears={CYCLES} {darkMode} {showPrecincts} onDistrictClick={(d) => {
+          <Map bind:this={mapComponent} selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={0} panelLeft={0} statePo={selectedState} cycleYears={CYCLES} {darkMode} {showPrecincts} onDistrictClick={(d) => {
               const dn = Number(d.district);
               if (dn !== pinnedDistrict) districtTab = 'partisan';
               pinnedDistrict = dn;
@@ -886,6 +887,11 @@
             title={showPrecincts ? 'Hide precinct vote map' : 'Show precinct vote map'}
             onclick={() => showPrecincts = !showPrecincts}
           >P</button>
+          <button
+            class="map-float-btn"
+            title="Save map as PNG"
+            onclick={() => mapComponent?.takeScreenshot(selectedState, displayYear)}
+          >⬇</button>
         </div>
       {/if}
     </div>

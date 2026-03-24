@@ -698,6 +698,7 @@
       fitBoundsOptions: {
         padding: { top: 30, right: 30, bottom: panelBottom > 0 ? panelBottom + 20 : 30, left: panelLeft > 0 ? panelLeft + 20 : 30 },
       },
+      preserveDrawingBuffer: true,
     });
 
     // Refit whenever the canvas changes size (panel toggle, window resize).
@@ -880,6 +881,52 @@
     map?.remove();
     if (protocol) maplibregl.removeProtocol('pmtiles');
   });
+
+  export function takeScreenshot(statePo: string, year: number) {
+    if (!map) return;
+    // MapLibre preserveDrawingBuffer must be true for canvas capture — it is set in onMount.
+    // Use an offscreen canvas to composite the map with a watermark.
+    const src = map.getCanvas();
+    const out = document.createElement('canvas');
+    out.width  = src.width;
+    out.height = src.height;
+    const ctx = out.getContext('2d')!;
+
+    ctx.drawImage(src, 0, 0);
+
+    // Watermark — bottom-right, semi-transparent
+    const dpr    = window.devicePixelRatio || 1;
+    const pad    = 12 * dpr;
+    const fSize  = 13 * dpr;
+    ctx.font         = `600 ${fSize}px system-ui, sans-serif`;
+    ctx.textBaseline = 'bottom';
+    ctx.textAlign    = 'right';
+
+    const label = `${statePo} · ${year} · districtdrift.org`;
+    const tw    = ctx.measureText(label).width;
+    const x     = out.width  - pad;
+    const y     = out.height - pad;
+
+    // Pill background
+    ctx.fillStyle = 'rgba(0,0,0,0.55)';
+    const bpad = 6 * dpr;
+    ctx.beginPath();
+    ctx.roundRect(x - tw - bpad, y - fSize - bpad, tw + bpad * 2, fSize + bpad * 2, 4 * dpr);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.fillText(label, x, y);
+
+    out.toBlob(blob => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a   = document.createElement('a');
+      a.href     = url;
+      a.download = `districtdrift-${statePo.toLowerCase()}-${year}.png`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  }
 </script>
 
 <div class="map-wrap">
