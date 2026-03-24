@@ -117,6 +117,14 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: '⚖ Hastert v. State Board of Elections — court draws the map',
         detail: 'With the legislature deadlocked, House Speaker Dennis Hastert (R) and other Republican members file suit seeking a court-drawn map favorable to Republicans. A three-judge federal panel draws its own congressional map in October 2001, attempting a neutral compromise. Democrats retain a slight edge, winning 10 of 19 seats in 2002.',
       },
+      {
+        title: 'Court-drawn map preserves Chicago\'s majority-minority seats',
+        detail: 'The court\'s map retains the majority-Black 1st, 2nd, and 7th Districts on Chicago\'s South and West Sides, along with the majority-Hispanic 4th District, satisfying Voting Rights Act requirements. The court-drawn plan is widely viewed as more competitive than either party\'s proposed alternative.',
+      },
+      {
+        title: 'Illinois delegation remains nearly even under neutral map',
+        detail: 'The court-drawn map yields a 10-9 Democratic delegation in 2002 — a near-even split in a state with a genuine Democratic lean at the presidential level. The neutrality of the court-drawn map stands in sharp contrast to the aggressive Democratic gerrymander Illinois would enact the following decade.',
+      },
     ],
     2012: [
       {
@@ -171,6 +179,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Republicans draw an 18-7 map',
         detail: 'The Republican-drawn map produces an 18-7 Republican delegation in a state where presidential elections are decided by hundreds of votes. Democrats are packed into a handful of urban and majority-minority districts while Republicans are spread efficiently across the rest of the state.',
+      },
+      {
+        title: 'Minority districts preserved under VRA — but boundaries shift',
+        detail: 'The Republican-drawn plan preserves majority-Black and majority-Hispanic districts in South Florida and Jacksonville to satisfy the Voting Rights Act, giving it insulation from certain legal challenges. However, the boundaries of surrounding districts are drawn to maximize Republican performance, producing a map where competitive seats are systematically tilted Republican.',
       },
     ],
     2012: [
@@ -228,6 +240,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Republicans gain House seats as Virginia shifts right',
         detail: 'Despite maps drawn under split control, Republicans benefit from broader political trends in Virginia, winning 8 of 11 seats by 2004 as the state swings toward Republicans in congressional races throughout the decade.',
       },
+      {
+        title: 'Northern Virginia\'s rapid growth begins transforming the state\'s partisan geography',
+        detail: 'The 2000 census captures the beginning of Northern Virginia\'s explosive growth driven by the federal contracting and tech economy. Fairfax County alone grows by nearly 150,000 people in the decade. The congressional maps drawn in 2001 do not yet capture this Democratic shift — suburban Northern Virginia seats remain Republican-leaning but begin trending Democratic throughout the cycle.',
+      },
     ],
     2012: [
       {
@@ -266,6 +282,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Negotiated maps produce a competitive delegation',
         detail: 'With neither party holding full control, the resulting maps are a compromise. Democrats hold 11 of 19 seats after the 1992 elections, roughly tracking the statewide vote in a year that favored Democrats nationally.',
       },
+      {
+        title: 'Majority-Black 11th District anchors Cleveland\'s representation',
+        detail: 'The 11th District covering Cleveland\'s East Side is drawn as a majority-Black district, electing Louis Stokes — who had served since 1969. The district anchors Black political representation in northeastern Ohio for the full cycle. Cleveland and Columbus anchor the two major Democratic urban clusters; Cincinnati is less reliably Democratic.',
+      },
     ],
     2002: [
       {
@@ -275,6 +295,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Republicans draw an incumbency-protection map',
         detail: 'The Republican-drawn map is designed to lock in a safe majority. Republicans win 12 of 18 seats in 2002, a 2-to-1 advantage in a state where presidential elections are decided by a few points.',
+      },
+      {
+        title: 'Democrats packed into just 6 districts; suburban cracking weakens swing seats',
+        detail: 'The Republican maps concentrate Democrats into 6 heavily urban districts (Cleveland, Columbus, Dayton, Cincinnati, Akron, Toledo) and crack the suburbs across multiple Republican-leaning districts. The design holds up for the full decade — Republicans retain a 12-6 or 11-7 edge even in strong Democratic years like 2006 and 2008.',
       },
     ],
     2012: [
@@ -389,6 +413,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Negotiated maps produce proportional results',
         detail: 'With split control, neither party can impose its preferred map. The resulting compromise produces a delegation that roughly tracks the statewide vote — an unusual outcome for Pennsylvania redistricting.',
       },
+      {
+        title: 'Philadelphia and Pittsburgh anchor the Democratic base',
+        detail: 'The 1992 map anchors Democratic representation in Philadelphia (1st and 2nd Districts) and Pittsburgh (14th District). Suburban Philadelphia districts are drawn as competitive swing seats. Democrats win 11 of 21 seats in 1992 — roughly proportional to the state\'s partisan balance in a presidential year that favored Clinton.',
+      },
     ],
     2002: [
       {
@@ -447,11 +475,23 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Maryland\'s only Republican district survives — for now',
         detail: 'The 6th District in western Maryland remains Republican-leaning, anchored by rural conservative counties. Republican Roscoe Bartlett wins the seat in 1992 and holds it for ten consecutive terms through 2012.',
       },
+      {
+        title: 'Baltimore\'s majority-Black districts anchor the Democratic base',
+        detail: 'The 2nd, 4th, and 7th Districts in and around Baltimore are drawn to include large African American populations, electing Kweisi Mfume (MD-7, Baltimore City) and other Black Democrats. Mfume leaves in 1996 to lead the NAACP; Elijah Cummings wins the seat and holds it until his death in 2019.',
+      },
     ],
     2002: [
       {
         title: 'Democrats maintain 7-1 grip',
         detail: 'Governor Parris Glendening (D) and the Democratic legislature redraw the map after the 2000 census. Maryland\'s seat count stays at 8. The maps preserve the 7-1 Democratic advantage with minimal changes from the prior decade.',
+      },
+      {
+        title: 'Democrats concentrate Republican voters in the 6th and 1st Districts',
+        detail: 'The Democratic-drawn maps pack Republican-leaning voters into the already-Republican 6th District (western Maryland) and the 1st District (Eastern Shore) — limiting the GOP to two seats and making every other district safely Democratic. The 8th District (Montgomery County suburbs of Washington) trends strongly Democratic as the DC suburb population grows.',
+      },
+      {
+        title: 'Maryland becomes a textbook case of partisan map control without federal VRA conflict',
+        detail: 'Unlike many Southern states where VRA preclearance complicates redistricting, Maryland faces no preclearance requirement. Democrats draw maps entirely on partisan and incumbency grounds, producing a 7-1 delegation that outperforms the state\'s partisan composition — Democrats typically win around 60% of the statewide congressional vote but hold 87.5% of seats.',
       },
     ],
     2012: [
@@ -750,6 +790,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Split government produces negotiated incumbent-protection maps',
         detail: 'Governor Mario Cuomo (D) and a split legislature — Democratic Assembly, Republican Senate — negotiate maps that protect incumbents of both parties rather than maximizing partisan advantage. The resulting delegation is roughly proportional to the heavily Democratic state\'s partisan lean.',
       },
+      {
+        title: 'VRA creates new majority-minority districts in New York City',
+        detail: 'The 1992 maps create new majority-Hispanic districts in the South Bronx and Brooklyn under Voting Rights Act requirements, and preserve majority-Black districts in Harlem and Bedford-Stuyvesant. The resulting delegation includes several firsts: Nydia Velázquez wins the newly drawn 12th District (Brooklyn/Queens) to become the first Puerto Rican woman elected to Congress.',
+      },
     ],
     2002: [
       {
@@ -759,6 +803,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Bipartisan incumbent-protection gerrymander',
         detail: 'Governor Pataki (R) and the divided legislature produce a bipartisan incumbent-protection gerrymander — both parties protect their incumbents rather than maximizing partisan advantage. The delegation remains roughly proportional to the state\'s partisan composition.',
+      },
+      {
+        title: 'Not a single seat changes parties during the entire decade',
+        detail: 'The incumbent-protection maps are so effective that not one of New York\'s 29 congressional districts changes party hands between 2002 and 2010 — despite national waves in 2006 and 2008 that changed outcomes across the country. The frozen delegation stands as one of the most extreme examples of bipartisan incumbency protection in the cycle.',
       },
     ],
     2012: [
@@ -829,6 +877,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'New competitive maps dramatically change the delegation',
         detail: 'The CCRC maps created several new competitive districts. Multiple incumbents retired or lost in the new landscape. Democrats won 38 of 53 seats; the competitive environment contrasted sharply with the frozen 2002 delegation.',
       },
+      {
+        title: 'California also adopts the top-two primary ("jungle primary") in 2012',
+        detail: 'Alongside the new district maps, California\'s Proposition 14 (2010) top-two primary system takes effect for congressional races — the first state to use it for federal elections. Under the new system, all candidates regardless of party compete together, and the top two advance to the general election. This produces several same-party general election matchups and transforms the strategic landscape in safe districts.',
+      },
     ],
     2022: [
       {
@@ -838,6 +890,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'CCRC maps produce roughly proportional delegation',
         detail: 'After an extensive public hearing process, the CCRC maps produce a delegation roughly proportional to California\'s partisan composition. Several incumbent vs. incumbent matchups result from the seat reduction.',
+      },
+      {
+        title: 'Competitive seats emerge in Orange County and the Central Valley',
+        detail: 'The CCRC maps create several genuinely competitive districts — particularly in Orange County (CA-45, CA-47) and the Central Valley (CA-13, CA-22) — that produce some of the most closely watched House races of 2022 and 2024. The commission\'s competitive-district design contrasts with the incumbent-protection maps of the 2002 cycle.',
       },
     ],
   },
@@ -851,6 +907,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democratic tiebreaker selects Democratic plan',
         detail: 'The commission deadlocked along party lines; a Democratic tiebreaker selected the Democratic plan. Maps produced a delegation roughly reflecting New Jersey\'s partisan lean at the time.',
       },
+      {
+        title: 'New Jersey retains 13 seats; suburban Philadelphia and New York City districts are the battlegrounds',
+        detail: 'New Jersey retains all 13 seats after the 1990 census. The delegation includes competitive suburban Philadelphia seats (NJ-3 in Burlington/Camden, NJ-4 in central NJ) and suburban New York City seats (NJ-7, NJ-11 in Morris/Essex) that shift between the parties with national political trends. Democrats win 7 of 13 seats in 1992.',
+      },
     ],
     2002: [
       {
@@ -860,6 +920,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Tiebreaker\'s party affiliation determined the partisan outcome',
         detail: 'The tiebreaker\'s party affiliation determined the partisan outcome — illustrating the limits of \'bipartisan\' commissions where the tiebreaker holds all the power.',
+      },
+      {
+        title: 'Republican maps hold through 2004 but collapse in 2006 wave',
+        detail: 'The Republican-favoring maps produce a 7-6 Republican edge in 2002 and 2004, but the 2006 Democratic wave flips the delegation to 7-6 Democratic as suburban New Jersey moves sharply toward Democrats. The shift foreshadows New Jersey\'s rapid realignment into a consistently blue state.',
       },
     ],
     2012: [
@@ -871,6 +935,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Tiebreaker John Farmer chooses compromise plan',
         detail: 'The bipartisan commission deadlocked; tiebreaker John Farmer, a former state attorney general, chose a compromise plan. Maps produced a near-even 6-6 delegation split in a state with a consistent Democratic lean.',
       },
+      {
+        title: 'Sandy and the suburban shift transform NJ politics during the cycle',
+        detail: 'Superstorm Sandy (October 2012) devastates the Jersey Shore and reshapes the political environment for the 2012 elections. Governor Christie\'s bipartisan response lifts his approval ratings. By the end of the cycle, New Jersey\'s suburban seats accelerate their Democratic trend as college-educated suburban voters shift — a harbinger of national trends.',
+      },
     ],
     2022: [
       {
@@ -880,6 +948,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ Republican challenge to maps fails',
         detail: 'Republican lawmakers challenged the process but courts upheld the maps. Maps produced a 9-3 Democratic delegation in a state Biden won by 16 points.',
+      },
+      {
+        title: 'NJ-7 and NJ-3 remain among the most competitive seats in the country',
+        detail: 'Despite Democratic-favoring maps, the 7th District (central New Jersey) and the redrawn 3rd District (Burlington/Ocean Counties) remain genuinely competitive seats that flip between the parties. NJ-7 is rated one of the top 10 most competitive House districts nationally in both 2022 and 2024.',
       },
     ],
   },
@@ -1041,6 +1113,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democratic legislature draws maps as the state shifts rightward',
         detail: 'Governor Siegelman (D) and a Democratic legislature retain control of redistricting — their last cycle to do so. Alabama retains 7 seats. The delegation runs 5-2 Republican despite Democratic mapmaking, reflecting the state\'s accelerating realignment toward Republicans in federal elections.',
       },
+      {
+        title: 'Single majority-Black district preserved; surrounding seats all Republican',
+        detail: 'The Democratic-drawn maps maintain one majority-Black district (AL-7, Birmingham corridor) as required by the Voting Rights Act. The surrounding six districts are all majority-white and trend Republican. Earl Hilliard loses AL-7 in the 2002 Democratic primary to Artur Davis — an intraparty Black candidate contest that draws national attention — and Davis holds the seat through 2010.',
+      },
     ],
     2012: [
       {
@@ -1071,11 +1147,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Clinton successor draws Democratic maps',
         detail: 'Governor Tucker (D) — who succeeded Bill Clinton upon his election to the presidency — and a Democratic legislature draw maps. Arkansas retains 4 seats after the 1990 census. The maps protect Democratic incumbents in a state trending rightward at the presidential level but still electing Democrats statewide.',
       },
+      {
+        title: 'Arkansas sends an all-Democratic delegation for the last time',
+        detail: 'The 1992 elections produce an all-Democratic 4-0 Arkansas delegation — the last time the state would send an entirely Democratic congressional delegation. The realignment to Republicans accelerates through the 1990s as rural white voters in the Delta and Ozarks shift toward Republicans in federal races even while continuing to elect conservative Democrats at the state level.',
+      },
     ],
     2002: [
       {
         title: 'Split government: Huckabee (R) and Democratic legislature',
         detail: 'Governor Huckabee (R) and a Democratic-controlled General Assembly draw maps after Arkansas retains 4 seats. Democrats hold both chambers and control the process. The maps maintain a 3-1 Democratic delegation heading into 2002.',
+      },
+      {
+        title: 'Arkansas delegation shifts to 3-1 Republican despite Democratic maps',
+        detail: 'Despite Democratic control of redistricting, the Arkansas delegation flips to 3-1 Republican by 2004 as the state\'s congressional realignment outpaces Democratic mapmaking advantages. John Boozman (AR-3, northwest Arkansas/Fort Smith) and Tim Griffin (AR-2, Little Rock) are emblematic of the Republican takeover of formerly Democratic districts.',
       },
     ],
     2012: [
@@ -1093,6 +1177,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'First full Republican redistricting cycle',
         detail: 'Governor Hutchinson (R) and a Republican supermajority legislature draw maps after Arkansas retains 4 seats. Republicans produce maps maintaining a 4-0 delegation in a state Trump won by 28 points in 2020.',
       },
+      {
+        title: 'Little Rock split across districts to dilute urban Democratic vote',
+        detail: 'The Republican maps divide Pulaski County (Little Rock), the state\'s only large urban Democratic stronghold, across multiple congressional districts — preventing its Democratic voters from consolidating into a competitive seat. The strategy is consistent with Republican redistricting approaches in other Southern states with isolated urban Democratic centers.',
+      },
     ],
   },
 
@@ -1101,6 +1189,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Independent governor, Democratic legislature navigate bipartisan commission',
         detail: 'Connecticut uses a bipartisan Reapportionment Commission — equal numbers of Democrats and Republicans plus a tiebreaker. Governor Weicker, elected as an independent in 1990 on the "A Connecticut Party" ticket, oversees the process. Connecticut retains 6 seats after the 1990 census.',
+      },
+      {
+        title: 'Connecticut\'s 5th District (Waterbury/Danbury) is the state\'s premier swing seat',
+        detail: 'The 5th District covering western Connecticut — including the struggling manufacturing cities of Waterbury, New Britain, and the growing suburbs around Danbury — is the most competitive congressional seat in the state throughout the 1990s and 2000s. It changes party control multiple times before Connecticut becomes more reliably Democratic through the 2010s.',
       },
     ],
     2002: [
@@ -1118,11 +1210,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Commission reaches agreement for first time in decades',
         detail: 'Governor Malloy (D) and a narrowly Democratic legislature oversee the commission process. Connecticut retains 5 seats after the 2010 census. The bipartisan commission reaches consensus, agreeing on maps that preserve the 3-2 Democratic advantage.',
       },
+      {
+        title: 'Connecticut trends toward solid Democratic control through the decade',
+        detail: 'Connecticut\'s 5th District — formerly the state\'s swing seat — elects Democrat Elizabeth Esty in 2012 and Democrats hold all 5 seats from 2014 onward. Connecticut\'s shift reflects the national trend of college-educated suburban voters moving toward Democrats; Fairfield County (Greenwich, Stamford, Bridgeport) shifts substantially leftward through the decade.',
+      },
     ],
     2022: [
       {
         title: 'Democrats draw maps maintaining 5-seat delegation',
         detail: 'Governor Lamont (D) and a Democratic legislature draw maps after Connecticut retains 5 seats. Democrats hold all 5 seats going into the cycle; the maps preserve a 4-1 or 3-2 Democratic edge in one of the nation\'s most reliably Democratic states.',
+      },
+      {
+        title: 'Connecticut\'s 5th District remains the only competitive seat',
+        detail: 'The 5th District covering Waterbury, New Britain, and the Naugatuck Valley is redrawn with a slightly more Democratic lean following population shifts toward Bridgeport-area suburbs. Democrats retain all 5 seats in 2022 and 2024, making Connecticut one of the most reliably all-Democratic congressional delegations among states with 5 or more seats.',
       },
     ],
   },
@@ -1133,11 +1233,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democratic legislature uses Reapportionment Commission',
         detail: 'Hawaii\'s Reapportionment Commission — a 9-member body appointed by the legislature and governor — draws all legislative and congressional maps. Governor Waihee (D) and a Democratic legislature oversee the process. Hawaii retains 2 seats. Hawaii has never elected a Republican to Congress since achieving statehood in 1959.',
       },
+      {
+        title: 'HI-1 covers urban Honolulu; HI-2 covers neighbor islands and rural Oahu',
+        detail: 'Hawaii\'s two congressional districts follow the state\'s geographic structure: HI-1 covers the urban core of Honolulu (Waikiki, downtown, Pearl Harbor) on the island of Oahu, while HI-2 covers the outer islands (Maui, Hawaii, Kauai, Molokai) and rural Oahu. HI-1 is the safer Democratic seat; HI-2 is occasionally competitive due to its rural and military-adjacent voter base.',
+      },
     ],
     2002: [
       {
         title: 'Reapportionment Commission draws modest adjustments',
         detail: 'Governor Cayetano (D) and a Democratic legislature oversee the process. Hawaii retains 2 seats after the 2000 census. The maps maintain the two districts: HI-1 (urban Honolulu) and HI-2 (rural Oahu + neighbor islands).',
+      },
+      {
+        title: 'Hawaii\'s Native Hawaiian population raises VRA questions not resolved this cycle',
+        detail: 'Hawaii has the largest Native Hawaiian and Pacific Islander population of any state. Advocates argue that redistricting should consider the concentration of Native Hawaiians in communities like the Waiʻanae Coast (western Oahu) to ensure political representation. The 2002 maps do not address these concerns directly; the issue resurfaces in subsequent redistricting cycles.',
       },
     ],
     2012: [
@@ -1145,11 +1253,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Hawaii retains 2 seats; Democratic dominance continues',
         detail: 'Governor Abercrombie (D) and a Democratic legislature oversee the Reapportionment Commission. Hawaii retains 2 seats after the 2010 census. The state\'s congressional delegation has been entirely Democratic since statehood — one of the longest such streaks nationally.',
       },
+      {
+        title: 'Mazie Hirono becomes the first Asian-American woman elected to the Senate',
+        detail: 'Although a Senate race rather than a congressional redistricting outcome, Mazie Hirono\'s 2012 election to the U.S. Senate — after serving in HI-2 — illustrates the broader pattern of Hawaii\'s diverse representation. Hawaii regularly elects the nation\'s most racially diverse congressional delegation: Asian American, Native Hawaiian, and multiracial members have represented both districts across all four redistricting cycles.',
+      },
     ],
     2022: [
       {
         title: 'Reapportionment Commission draws maps; HI-2 remains a swing district',
         detail: 'Governor Ige (D) and a Democratic legislature oversee the commission. Hawaii retains 2 seats after the 2020 census. HI-2 (rural islands + part of Oahu) is occasionally competitive — Republicans won it briefly in the 2010 wave — making it one of the few Hawaii races with genuine partisan uncertainty.',
+      },
+      {
+        title: 'Hawaii\'s unique political culture produces low-competitiveness races',
+        detail: 'Hawaii\'s congressional races are among the least competitive in the nation by margin — both seats regularly return Democrats by 30+ points. The state\'s low Republican base (among the lowest in the US) and highly unionized workforce in the tourism, construction, and public-sector industries produce a political environment where redistricting has minimal impact on outcomes.',
       },
     ],
   },
@@ -1170,6 +1286,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'LSB draws maps for second cycle; Iowa retains 5 seats',
         detail: 'Iowa retains 5 seats after the 2000 census. Democratic governor Vilsack and a Republican-controlled legislature approve the LSB\'s plan. The process proceeds without litigation — a notable contrast with most other states that cycle.',
       },
+      {
+        title: 'No incumbent addresses or election results considered in the plan',
+        detail: 'Iowa law prohibits the LSB from considering incumbent home addresses, prior election results, or partisan registration data when drawing districts — the strictest such prohibition in any state. The resulting maps sometimes pair incumbents of the same party in the same district, creating competitive primaries that would never occur under partisan-drawn maps.',
+      },
     ],
     2012: [
       {
@@ -1186,6 +1306,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Republican legislature rejects LSB plan, accepts second',
         detail: 'Iowa retains 4 seats after the 2020 census. Republican governor Reynolds and a Republican supermajority legislature reject the LSB\'s first plan and accept the second — which drew a more Republican-leaning 3rd District (Des Moines corridor). Critics argue repeated rejections of LSB plans undermine the system\'s nonpartisan intent.',
       },
+      {
+        title: 'Iowa produces some of the most competitive districts in the country',
+        detail: 'Despite Republican-leaning maps, Iowa\'s LSB-drawn districts remain genuinely competitive by national standards. The 1st District (Cedar Rapids/Iowa City), 2nd District (Davenport/Waterloo), and 3rd District (Des Moines) are all rated as competitive in 2022 and 2024 — a product of Iowa\'s near-even partisan balance and the LSB\'s prohibition on partisan manipulation.',
+      },
     ],
   },
 
@@ -1194,6 +1318,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Legislature draws maps before commission era; split government',
         detail: 'Idaho\'s bipartisan redistricting commission did not exist until 1994. For the 1992 cycle, Governor Andrus (D) and a Republican-controlled legislature drew the maps — Idaho\'s last legislatively drawn congressional plan. Idaho retains 2 seats.',
+      },
+      {
+        title: 'Both Idaho seats are reliably Republican; Boise begins trending Democratic',
+        detail: 'The 1992 maps maintain two reliably Republican seats — the 1st District (western and northern Idaho) and the 2nd District (eastern and southern Idaho). Boise, then a smaller city, is included in the 1st District. Over the following three decades, Boise\'s growth and increasing diversity make the 1st District gradually more competitive, but Republicans retain both seats throughout all cycles.',
       },
     ],
     2002: [
@@ -1211,11 +1339,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Commission draws maps after Idaho retains 2 seats',
         detail: 'Idaho retains 2 seats after the 2010 census. The Citizens\' Commission draws maps preserving the basic east-west split. The Boise metro area continues to trend Democratic, generating pressure to include more of it in the 1st District.',
       },
+      {
+        title: 'Boise\'s growth makes Idaho\'s 1st District increasingly competitive',
+        detail: 'Boise\'s rapid growth — driven by tech industry migration and a booming population — makes Ada County (Boise) increasingly Democratic-leaning through the 2010s. The commission\'s maps preserve the 1st District\'s geographic structure, but Boise\'s shifting demographics make the seat marginally competitive by the end of the decade, though Republicans retain it comfortably.',
+      },
     ],
     2022: [
       {
         title: 'Commission draws maps; VRA advocates raise concerns about Pocatello',
         detail: 'Idaho retains 2 seats after the 2020 census. The Citizens\' Commission draws new maps. Advocates argue the maps dilute the Native American vote in southeastern Idaho (particularly around Fort Hall and Pocatello), though no federal court challenge is ultimately sustained.',
+      },
+      {
+        title: 'Idaho\'s 1st District remains the most competitive in the state despite Republican lean',
+        detail: 'The new maps maintain a 1st District that includes Boise and the growing Treasure Valley corridor (Nampa, Caldwell, Meridian). Republicans retain the seat but by smaller margins than the 2nd District; the Boise metro\'s Democratic trend makes the 1st District a potential competitive seat in future cycles if urban growth continues.',
       },
     ],
   },
@@ -1225,6 +1361,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Split government produces negotiated maps',
         detail: 'Governor Bayh (D) and a split Indiana General Assembly (Democratic House, Republican Senate) draw maps after Indiana retains 10 seats from the 1990 census. The split government produces compromise maps with minimal partisan distortion.',
+      },
+      {
+        title: 'Democrats and Republicans each protect their incumbents',
+        detail: 'The compromise map safeguards all incumbents of both parties. Democrats hold seats anchored in Indianapolis (IN-10) and Gary/Northwest Indiana (IN-1), while Republicans hold the remaining eight districts. The resulting delegation closely tracks Indiana\'s competitive-but-lean-Republican political balance of the early 1990s.',
       },
     ],
     2002: [
@@ -1252,6 +1392,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Republican supermajority maintains 7-2 delegation structure',
         detail: 'Governor Holcomb (R) and a Republican supermajority legislature draw maps after Indiana retains 9 seats. Maps preserve the 7-2 Republican advantage. Democrats challenge maps in state court as an unconstitutional partisan gerrymander but courts uphold the plan.',
       },
+      {
+        title: 'Indianapolis cracking dilutes urban Democratic vote',
+        detail: 'The Republican maps divide Marion County (Indianapolis) across multiple congressional districts, preventing the growing Democratic-majority city from consolidating its vote into an additional congressional seat. The 5th District (suburban Indianapolis), which had briefly gone Democratic in 2018 and 2020, is redrawn to lean more reliably Republican.',
+      },
     ],
   },
 
@@ -1261,17 +1405,29 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democratic governor, Republican legislature split control',
         detail: 'Governor Finney (D) — one of only two women ever to serve as Kansas governor — and a Republican-controlled legislature draw maps after Kansas retains 4 seats from the 1990 census. Split government produces relatively neutral maps.',
       },
+      {
+        title: 'Kansas retains a competitive 3rd District anchored by Kansas City suburbs',
+        detail: 'The 1992 maps preserve a competitive 3rd District (Kansas City\'s Johnson and Wyandotte counties) where Democrat Dennis Moore wins in 1998 and holds it through 2010. The remaining three districts — covering the western plains (KS-1), the Wichita area (KS-4), and the Topeka/Lawrence/eastern Kansas corridor (KS-2) — are reliably Republican.',
+      },
     ],
     2002: [
       {
         title: 'Republican unified control; maps maintain 4-seat delegation',
         detail: 'Governor Graves (R) and a Republican-controlled legislature draw maps after Kansas retains 4 seats. Republicans hold a 3-1 advantage in the delegation, but the 3rd District (Kansas City suburbs) remains competitive.',
       },
+      {
+        title: 'KS-1 is one of the largest congressional districts in the contiguous US',
+        detail: 'The 1st District covering western Kansas — the "Big First" — is one of the largest congressional districts by area in the contiguous United States, spanning more than 60,000 square miles of wheat fields, cattle ranches, and small towns. It is among the most reliably Republican districts in the country, returning Republicans by enormous margins every cycle.',
+      },
     ],
     2012: [
       {
         title: 'Republican supermajority reinforces 4-0 delegation',
         detail: 'Governor Brownback (R) and a Republican supermajority legislature draw maps after Kansas retains 4 seats. The 3rd District (Johnson County suburbs) is redrawn to be more Republican-leaning as the Kansas City suburbs began trending Democratic — an effort to preempt the demographic shift.',
+      },
+      {
+        title: 'Kansas produces one of the cycle\'s most partisan statewide vote-seat mismatches',
+        detail: 'Democrats regularly win 30-35% of the statewide congressional vote in Kansas but hold zero of four seats. The Republican maps concentrate Democratic voters in Johnson County (Kansas City suburbs) and dilute their influence by pairing it with Republican-leaning rural precincts. The 3rd District\'s eventual Democratic trend cannot be fully contained — Democrats win the seat in 2018 despite the unfavorable maps.',
       },
     ],
     2022: [
@@ -1292,17 +1448,29 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democrats draw maps in a still-blue Kentucky',
         detail: 'Governor Jones (D) and a Democratic legislature draw maps after Kentucky retains 6 seats. Kentucky\'s congressional delegation is majority-Democratic heading into the 1990s — the state\'s full shift to Republicans in federal elections is still a decade away.',
       },
+      {
+        title: 'Democrats hold 4 of 6 seats; eastern Kentucky coal country is competitive',
+        detail: 'The Democrat-drawn maps produce a 4-2 Democratic delegation in 1992. Eastern Kentucky\'s coal mining communities — historically the most reliably Democratic region in the South, rooted in the New Deal — return a Democratic incumbent in the 5th District even as the state\'s presidential vote shifts Republican. The unraveling of this Democratic coalition accelerates through the 1990s.',
+      },
     ],
     2002: [
       {
         title: 'Split government in an increasingly competitive state',
         detail: 'Governor Patton (D) and a split legislature (Democratic House, Republican Senate) draw maps after Kentucky retains 6 seats. Negotiated maps split the delegation roughly along incumbent-protection lines.',
       },
+      {
+        title: 'Democrats retain 4 seats but rural eastern Kentucky begins flipping',
+        detail: 'Despite Democrat-drawn maps, Republicans make gains in eastern Kentucky as coal country voters align with Republicans in federal races. By 2010, Republicans have won 5 of 6 seats as the final white working-class Democratic strongholds in Appalachian Kentucky shift away from the party.',
+      },
     ],
     2012: [
       {
         title: 'Split government persists; maps favor incumbents',
         detail: 'Governor Beshear (D) and a split legislature (Democratic House, Republican Senate) draw maps after Kentucky retains 6 seats. Republicans hold the Senate and control the most important chamber for redistricting. Maps produce a 5-1 Republican delegation in a state Romney won by 23 points.',
+      },
+      {
+        title: 'Louisville anchors the single Democratic district',
+        detail: 'The 3rd District (Louisville) is the only safe Democratic seat in Kentucky under both the 2012 and 2022 maps. John Yarmuth holds the seat from 2006 until his retirement in 2022. Louisville\'s congressional seat reflects the urban-rural partisan divide in a state that has become one of the most reliably Republican at the federal level.',
       },
     ],
     2022: [
@@ -1334,11 +1502,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democratic legislature maintains maps; state retains 7 seats',
         detail: 'Governor Foster (R) and a Democratic-controlled legislature draw maps after Louisiana retains 7 seats. Democrats hold both chambers and control the process, maintaining a delegation that mixes majority-Black districts with competitive suburban seats.',
       },
+      {
+        title: 'Louisiana\'s political realignment accelerates during the cycle',
+        detail: 'Despite Democrat-drawn maps, Louisiana\'s congressional delegation shifts markedly rightward over the decade. By 2004, Republicans hold 5 of 7 seats, reflecting the broader white conservative realignment in Deep South states. The 2nd District (New Orleans, majority-Black) and the 5th District (northern Louisiana) are the only seats with Democratic competition.',
+      },
     ],
     2012: [
       {
         title: 'Louisiana loses 1 seat; Republicans take control',
         detail: 'The 2010 census reduces Louisiana\'s delegation from 7 to 6. Republicans win control of the state legislature in the 2010 elections for the first time in modern Louisiana history. Governor Jindal (R) and the new Republican majority draw the maps, producing a 5-1 Republican delegation.',
+      },
+      {
+        title: 'New Orleans\' majority-Black 2nd District preserved under VRA',
+        detail: 'The Republican maps preserve the majority-Black 2nd District anchored in New Orleans, satisfying Voting Rights Act requirements. Cedric Richmond wins the seat in 2010 and holds it through 2021. The remaining five districts are drawn as reliable Republican seats across suburban and rural Louisiana.',
       },
     ],
     2022: [
@@ -1360,11 +1536,23 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Massachusetts loses 1 seat after the 1990 census',
         detail: 'The 1990 census reduces the delegation from 11 to 10. Republican governor Weld and a heavily Democratic legislature must negotiate a new 10-district map. Democrats control the process; the maps are designed to protect all 10 incumbents.',
       },
+      {
+        title: 'Democratic legislature draws maps over Republican governor\'s objections',
+        detail: 'Governor Weld (R) objects to the partisan nature of the Democratic maps but cannot veto them under the legislative redistricting process. Democrats retain control of all 10 seats after the 1992 elections — the first cycle Massachusetts sends an entirely Democratic congressional delegation.',
+      },
+      {
+        title: 'Massachusetts has not sent a Republican to Congress since 1994',
+        detail: 'The last Republican elected to a Massachusetts congressional seat was Peter Blute (MA-3) in 1994, who lost his reelection in 1996. Since 1996, Massachusetts has maintained an entirely Democratic congressional delegation — the longest unbroken Democratic delegation of any state with more than 2 seats.',
+      },
     ],
     2002: [
       {
         title: 'Massachusetts retains 10 seats; split government',
         detail: 'Massachusetts retains 10 seats after the 2000 census. Acting Governor Swift (R) and a heavily Democratic legislature draw maps. The Democratic-controlled legislature drives the process, producing maps that protect all incumbents. Massachusetts has not sent a Republican to Congress since 1994.',
+      },
+      {
+        title: 'Boston-area districts drawn to maximize Democratic performance',
+        detail: 'The 8th, 9th, and 10th Districts in the Boston metropolitan area are redrawn to cluster Democratic voters efficiently. No Republican comes close to winning any of the 10 seats during the decade — the delegation is 10-0 Democratic through every election from 2002 through 2010.',
       },
     ],
     2012: [
@@ -1376,11 +1564,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Maps are uncontested; process is unusually smooth',
         detail: 'The Democratic-controlled process produces relatively uncontroversial maps. No major litigation follows. Massachusetts becomes one of the few states in the 2012 cycle without a redistricting court case.',
       },
+      {
+        title: 'Scott Brown\'s 2010 Senate upset does not affect congressional redistricting',
+        detail: 'Republican Scott Brown\'s January 2010 special election upset victory to fill Ted Kennedy\'s Senate seat creates a national sensation but has no effect on the congressional redistricting process, which is entirely controlled by the Democratic legislature. Brown loses his Senate seat to Elizabeth Warren in November 2012.',
+      },
     ],
     2022: [
       {
         title: 'Massachusetts retains 9 seats; split government again',
         detail: 'Massachusetts retains 9 seats after the 2020 census. Republican governor Baker and a heavily Democratic legislature draw maps. The Democratic legislature controls the process; maps preserve a solidly Democratic delegation in a state Biden won by 33 points.',
+      },
+      {
+        title: 'Maps adjusted to address growing Hispanic communities',
+        detail: 'The 2022 redistricting process includes attention to Massachusetts\'s growing Latino populations in Lawrence, Lowell, and Worcester. The Democratic legislature redesigns district boundaries in the Merrimack Valley and central Massachusetts to reflect demographic changes from the 2020 census, though no seat changes party.',
       },
     ],
   },
@@ -1391,11 +1587,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Bipartisan commission process in a competitive two-district state',
         detail: 'Governor McKernan (R) and a Democratic legislature oversee Maine\'s bipartisan apportionment commission. Maine retains 2 seats. The two districts divide the state between urban southern Maine (ME-1, Portland/Biddeford) and rural northern Maine (ME-2, Augusta/Bangor).',
       },
+      {
+        title: 'Maine adopts congressional district Electoral College allocation in 1972 — first used in 1972',
+        detail: 'Maine is one of only two states to award Electoral College votes by congressional district rather than winner-take-all — a system adopted in 1969 and first used in 1972. The practical effect of the split-allocation system is not realized until ME-2 awards its single electoral vote to Barack Obama in 2008, making the rural northern Maine district a national focus in close presidential elections.',
+      },
     ],
     2002: [
       {
         title: 'Independent governor Angus King oversees redistricting',
         detail: 'Governor King (I) — an independent who won two terms — and a Democratic legislature oversee the redistricting process. Maine retains 2 seats after the 2000 census. Maine\'s bipartisan commission draws maps with minimal controversy. The 2nd District covers nearly 80% of the state\'s land area.',
+      },
+      {
+        title: 'ME-2 is the largest congressional district east of the Mississippi River',
+        detail: 'The 2nd District covering central, western, and northern Maine is the largest congressional district by land area east of the Mississippi — spanning more than 26,000 square miles of forests, potato farms, paper mill towns, and the Canadian border. Its sparse, predominantly white working-class population made it reliably Democratic through the 1990s before shifting sharply toward Republicans.',
       },
     ],
     2012: [
@@ -1413,6 +1617,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democratic governor and legislature draw maps for the first time',
         detail: 'Governor Mills (D) and a Democratic legislature draw maps after Maine retains 2 seats. Maine\'s unique congressional district Electoral College allocation makes ME-2 (rural northern Maine) a perennial presidential battleground — Trump won it in 2016 and 2020, while ME-1 voted for Clinton and Biden by large margins.',
       },
+      {
+        title: 'ME-2 becomes the premier rural-white-working-class battleground in New England',
+        detail: 'Under the 2022 maps, ME-2 represents the most Democratic-accessible rural Republican district in the country — a seat Biden lost by 7 points but where Democrat Jared Golden (a pro-gun, anti-abortion-rights moderate) consistently wins by significant margins. Golden\'s ability to win ME-2 while Maine\'s Electoral College vote goes to Republicans illustrates how candidate quality and incumbency can overcome partisan geography in small states.',
+      },
     ],
   },
 
@@ -1422,11 +1630,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Republican governor, Democratic legislature split control',
         detail: 'Governor Ashcroft (R) and a Democratic-controlled General Assembly draw maps after Missouri retains 9 seats from the 1990 census. Split government produces relatively neutral incumbent-protection maps maintaining the 6-3 Democratic delegation.',
       },
+      {
+        title: 'Missouri elects one of the most competitive delegations of the cycle',
+        detail: 'The negotiated maps reflect Missouri\'s genuinely competitive political balance of the early 1990s — a state that voted for Nixon, Reagan, and Bush at the presidential level while electing Democratic senators and representatives. Democrats win 6 of 9 seats in 1992, but several seats are highly competitive. Missouri loses this competitive balance over the following two decades.',
+      },
     ],
     2002: [
       {
         title: 'Narrowly split government draws maps; Missouri retains 9 seats',
         detail: 'Governor Holden (D) and a narrowly divided legislature draw maps after Missouri retains 9 seats. Democrats held a slim House majority during the redistricting process, but Republicans gained control of the House in the 2002 elections — the cycle\'s maps were drawn by a legislature in transition.',
+      },
+      {
+        title: 'Delegation flips to 5-4 Republican as rural Missouri shifts right',
+        detail: 'Despite maps drawn under partly Democratic control, Missouri\'s rapid rural realignment produces a 5-4 Republican delegation by 2002 — reflecting the same political trend as Tennessee, Arkansas, and other mid-South states where rural white voters shift decisively toward Republicans in federal races.',
       },
     ],
     2012: [
@@ -1443,6 +1659,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Republican supermajority draws maps; Missouri retains 8 seats',
         detail: 'Governor Parson (R) and a Republican supermajority legislature draw maps after Missouri retains 8 seats. Maps maintain a 6-2 Republican advantage. The Kansas City and St. Louis cores remain the two Democratic seats; rural and suburban Missouri is solidly Republican.',
+      },
+      {
+        title: 'St. Louis and Kansas City packed into two safe Democratic districts',
+        detail: 'Republicans draw both urban cores — St. Louis (MO-1, the 1st District) and Kansas City (MO-5, the 5th District) — as safely Democratic districts, wasting Democratic votes and allowing Republicans to run up large margins in the surrounding six districts. The strategy has produced a consistent 6-2 Republican delegation since 2012 despite Missouri\'s ongoing population loss.',
       },
     ],
   },
@@ -1463,17 +1683,29 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Mississippi loses 1 seat after the 2000 census',
         detail: 'The 2000 census reduces the delegation from 5 to 4. Governor Musgrove (D) and a Democratic legislature draw maps. The loss of a seat requires a full reorganization; the 2nd District (majority-Black Delta) is preserved.',
       },
+      {
+        title: 'Bennie Thompson wins the majority-Black 2nd District through the full cycle',
+        detail: 'Bennie Thompson (D), who first won the 2nd District in a 1993 special election, retains the seat through the 2002 redistricting and all subsequent cycles. The 2nd District — covering the Mississippi Delta, the most heavily Black rural region in the country — is one of the most reliably Democratic districts in the South and the only safe Democratic congressional seat in Mississippi.',
+      },
     ],
     2012: [
       {
         title: 'Republican governor, Democratic legislature — last Democratic maps',
         detail: 'Governor Barbour (R) and a Democratic legislature draw maps after Mississippi retains 4 seats. Democrats narrowly hold both chambers for the 2011 redistricting — but Republicans sweep both chambers in the November 2011 elections, ending over a century of Democratic legislative control in Mississippi.',
       },
+      {
+        title: 'Mississippi\'s 3-1 Republican delegation reflects the state\'s complete partisan realignment',
+        detail: 'The maps produce a 3-1 Republican delegation in a state that was 4-1 Democratic in congressional seats as recently as the early 1990s. Mississippi\'s transformation — from the most reliably Democratic white-majority state to the most reliably Republican — is complete by this cycle. Black voters remain majority-Democratic; white voters are overwhelmingly Republican.',
+      },
     ],
     2022: [
       {
         title: 'First Republican redistricting cycle in Mississippi',
         detail: 'Governor Reeves (R) and a Republican supermajority legislature draw maps after Mississippi retains 4 seats. Republicans produce a 3-1 Republican delegation. Black Mississippians — 38% of the population — continue to be represented by a single majority-Black district (MS-2), with critics arguing a second such district is achievable.',
+      },
+      {
+        title: 'VRA Section 2 pressure echoes Allen v. Milligan but courts uphold Mississippi maps',
+        detail: 'Following the Supreme Court\'s 2023 ruling in Allen v. Milligan — which required Alabama to draw a second majority-Black district — civil rights advocates argue Mississippi\'s maps similarly dilute Black voting strength. Mississippi\'s Black population (38%) is even larger than Alabama\'s relative to total population. Litigation proceeds but produces no court-ordered remedial maps before the 2024 elections.',
       },
     ],
   },
@@ -1483,6 +1715,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Montana loses 1 of 2 congressional seats after the 1990 census',
         detail: 'The 1990 census reduces Montana\'s delegation from 2 to 1, making it an at-large state. Montana joins North Dakota, South Dakota, Wyoming, Vermont, Delaware, and Alaska as states with a single at-large representative coterminous with the entire state.',
+      },
+      {
+        title: 'Montana\'s at-large district spans 147,000 square miles',
+        detail: 'As an at-large state, Montana\'s single congressional district encompasses all 147,000 square miles of the state — the largest congressional district by area in the contiguous United States during the 1992–2020 period. Ron Marlenee loses his seat as the two districts merge; Pat Williams (D) wins the at-large seat in 1992 but Republican Rick Hill wins it in 1996, beginning a long stretch of Republican dominance.',
       },
     ],
     2022: [
@@ -1513,6 +1749,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Unicameral legislature draws maps; Nebraska retains 3 seats',
         detail: 'Nebraska retains 3 seats after the 2000 census. Governor Johanns (R) works with the Republican-leaning legislature to draw maps maintaining a 3-0 Republican delegation. The Omaha-based 2nd District is redrawn to absorb more Republican suburban precincts.',
       },
+      {
+        title: 'Nebraska\'s unique Electoral College system makes NE-2 a national target',
+        detail: 'Nebraska\'s congressional district Electoral College allocation — adopted in 1991 alongside Maine — makes the Omaha-based 2nd District one of the most politically significant individual congressional districts in the country during close presidential races. Both parties invest heavily in the district during presidential campaigns, knowing its single Electoral College vote could be decisive.',
+      },
     ],
     2012: [
       {
@@ -1529,6 +1769,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Nebraska retains 3 seats; 2nd District votes for Biden',
         detail: 'Nebraska retains 3 seats after the 2020 census. The Omaha-based 2nd District awards its Electoral College vote to Biden in 2020. Republicans again redraw the district to absorb more Republican-leaning suburbs; the district remains competitive.',
       },
+      {
+        title: 'Republican push to eliminate Nebraska\'s district-level Electoral College allocation',
+        detail: 'After NE-2 awards its Electoral College vote to Biden in 2020, Nebraska Republicans push to eliminate the district-level allocation system and adopt winner-take-all. The change is blocked in the Nebraska unicameral legislature but resurfaces as a priority in subsequent sessions, reflecting the high national stakes of the single Omaha-area electoral vote.',
+      },
     ],
   },
 
@@ -1538,11 +1782,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Republican legislature draws compact maps in a competitive state',
         detail: 'Governor Gregg (R) and a Republican-controlled General Court draw maps after New Hampshire retains 2 seats. New Hampshire\'s massive part-time citizen legislature (one of the largest deliberative bodies in the world) draws relatively simple county-based districts. Both seats are genuinely competitive in this era.',
       },
+      {
+        title: 'NH-1 covers Manchester/Nashua; NH-2 covers Concord and the western and northern regions',
+        detail: 'New Hampshire\'s two districts follow a basic geographic split: NH-1 covers the urban southeastern corridor including Manchester and Nashua (historically mill towns with blue-collar Democratic voters), while NH-2 covers the western and northern regions including Concord, Keene, and the Lakes Region. Both seats swing between parties regularly through all four redistricting cycles.',
+      },
     ],
     2002: [
       {
         title: 'Republican legislature maintains control; New Hampshire retains 2 seats',
         detail: 'Governor Shaheen (D) and a Republican-controlled legislature draw maps after New Hampshire retains 2 seats. The Republican legislature controls the process. New Hampshire\'s two seats split between a Republican-leaning 1st District (Manchester/southern NH) and a more competitive 2nd District (Concord/western NH).',
+      },
+      {
+        title: 'New Hampshire\'s "live free or die" political culture produces genuine swing districts',
+        detail: 'Unlike most states where redistricting produces safe seats for both parties, New Hampshire\'s compact geography and limited population make it nearly impossible to draw districts that reliably favor one party. Both seats change party control multiple times during the cycle — in 1994, 2002, 2006, 2008, and 2010 — making them among the most genuinely competitive seats in the nation.',
       },
     ],
     2012: [
@@ -1550,11 +1802,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Republican supermajority draws maps after 2010 wave',
         detail: 'Governor Lynch (D) and a Republican-controlled General Court — which swept to a supermajority in the 2010 wave — draw maps after New Hampshire retains 2 seats. The Republican legislature controls the process.',
       },
+      {
+        title: 'Both seats flip to Democratic in 2012, back to Republican in 2014',
+        detail: 'New Hampshire\'s two congressional seats flip to Democrats in the 2012 Obama wave election — with Carol Shea-Porter (NH-1) and Annie Kuster (NH-2) both winning — then split in 2014 as Republicans recapture NH-1. The back-and-forth reflects New Hampshire\'s status as one of the nation\'s most genuinely competitive two-seat states.',
+      },
     ],
     2022: [
       {
         title: 'Republican legislature draws new maps; both seats remain competitive',
         detail: 'Governor Sununu (R) and a Republican-controlled General Court draw maps after New Hampshire retains 2 seats. Both districts remain competitive; New Hampshire is one of the nation\'s premier swing states, regularly electing split partisan delegations.',
+      },
+      {
+        title: 'New Hampshire\'s demographics shift toward Democrats as Massachusetts-origin migrants arrive',
+        detail: 'New Hampshire\'s population grows substantially through migration from Massachusetts — a pattern that has gradually shifted the state from a moderate-Republican lean to a genuine tossup. Southern New Hampshire\'s Nashua and Manchester suburbs, in particular, absorb large numbers of Massachusetts transplants who register Democratic. Both congressional seats become marginally more Democratic-leaning through the 2022 cycle.',
       },
     ],
   },
@@ -1565,17 +1825,29 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democratic legislature draws maps; New Mexico retains 3 seats',
         detail: 'Governor King (D) and a Democratic legislature draw maps after New Mexico retains 3 seats from the 1990 census. Maps produce a 2-1 Democratic delegation with a competitive 2nd District (southern NM) that swings between the parties.',
       },
+      {
+        title: 'NM-3 (northern New Mexico) drawn as a majority-Hispanic seat',
+        detail: 'The 3rd District covering northern New Mexico is drawn as a majority-Hispanic district — one of the most reliably Democratic districts in the state, anchored by Santa Fe, Taos, and the largely Native American and Hispanic communities of the Rio Grande corridor. Bill Richardson wins the seat and holds it from 1983 until leaving for the Cabinet in 2002.',
+      },
     ],
     2002: [
       {
         title: 'Libertarian governor Johnson faces Democratic legislature',
         detail: 'Governor Johnson (R), a fiscal conservative with libertarian leanings, faces a Democratic legislature. Democrats control the process and maintain a 2-1 Democratic delegation after New Mexico retains 3 seats.',
       },
+      {
+        title: 'New Mexico\'s 2nd District is the premier battleground seat in the state',
+        detail: 'The 2nd District covering southern New Mexico (Las Cruces, Roswell, Hobbs) is one of the most competitive congressional districts in the Southwest — swinging between the parties multiple times between 1992 and 2022 as the district\'s mix of Hispanic, rural white, and oil-patch communities shifts with national political winds.',
+      },
     ],
     2012: [
       {
         title: 'Republican governor faces Democratic legislature',
         detail: 'Governor Martinez (R) — the first Latina governor in US history — faces a Democratic legislature that controls redistricting. New Mexico retains 3 seats after the 2010 census. Democrats maintain 2 safe Democratic seats and 1 competitive Republican-leaning 2nd District.',
+      },
+      {
+        title: 'New Mexico\'s growing Hispanic majority shapes the delegation',
+        detail: 'New Mexico is the most Hispanic state in the nation by percentage. The 2012 maps reflect a majority-Hispanic population — all three districts have substantial Hispanic populations. Democratic dominance grows through the cycle as Hispanic voter registration and turnout trends Democratic, culminating in New Mexico becoming a reliably blue state by the 2020s.',
       },
     ],
     2022: [
@@ -1596,11 +1868,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Nevada gains 1 seat after the 1990 census',
         detail: 'The 1990 census gives Nevada a second congressional seat, reflecting its rapid population growth. Governor Miller (D) and a Democratic legislature draw the new 2-district map. NV-1 covers urban Las Vegas; NV-2 covers rural Nevada and Reno.',
       },
+      {
+        title: 'Nevada begins rapid transition from Republican to swing state',
+        detail: 'Nevada voted Republican in every presidential election from 1952 through 1992 except 1964. The influx of union workers in the Las Vegas casino and construction industries through the 1980s and 1990s begins a demographic shift toward Democrats. NV-1 (Las Vegas) trends Democratic; NV-2 (rural Nevada) remains reliably Republican for the full cycle.',
+      },
     ],
     2002: [
       {
         title: 'Nevada gains another seat — one of the fastest-growing states in the nation',
         detail: 'Nevada gains a third congressional seat after the 2000 census, reflecting continued explosive growth in the Las Vegas metro. Governor Guinn (R) and a split legislature (Democratic Senate, Republican Assembly) negotiate the new 3-district map. The new NV-3 covers suburban Henderson and Summerlin.',
+      },
+      {
+        title: 'Split government produces a competitive 3-district map',
+        detail: 'The split legislature produces a negotiated map. NV-1 (urban Las Vegas, heavily union) is a safe Democratic seat; NV-2 (northern Nevada and rural areas) is a safe Republican seat; NV-3 (suburban Las Vegas) is drawn as a competitive swing district that changes party control multiple times during the cycle.',
       },
     ],
     2012: [
@@ -1618,6 +1898,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democrats draw aggressive map to protect 3-seat advantage',
         detail: 'Governor Sisolak (D) and a Democratic legislature draw maps after Nevada retains 4 seats. Democrats draw maps protecting all three of their seats; Republicans challenge them in state court. All four districts remain highly competitive — Nevada is one of the nation\'s foremost swing states.',
       },
+      {
+        title: 'Nevada\'s union-driven demographics shape redistricting priorities',
+        detail: 'Nevada\'s congressional districts are heavily shaped by the Las Vegas Culinary Workers Union (UNITE HERE Local 226), one of the most politically powerful local unions in the country. The union\'s membership — predominantly Hispanic, Black, and Asian American — drives Democratic turnout in NV-1 and NV-3, making Nevada one of the most diverse congressional delegations relative to its state population.',
+      },
     ],
   },
 
@@ -1626,6 +1910,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Democrats draw maps in a still-blue Oklahoma',
         detail: 'Governor Walters (D) and a Democratic legislature draw maps after Oklahoma retains 6 seats from the 1990 census. Democrats hold all statewide offices and both legislative chambers. Despite Democratic mapmaking, Republicans begin winning congressional seats as the state\'s rural voters shift right.',
+      },
+      {
+        title: 'Oklahoma\'s 5th District (Oklahoma City) is the premier swing seat',
+        detail: 'The 5th District covering Oklahoma City and surrounding suburbs is drawn as the state\'s most competitive seat in 1992. It switches between the parties multiple times during the decade as Oklahoma City\'s suburban voters shift from moderate Democrats to Republicans. By 1994, Republicans have won 5 of 6 Oklahoma congressional seats — a rapid reversal of the Democratic maps\' intended effect.',
       },
     ],
     2002: [
@@ -1643,11 +1931,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Republican supermajority draws maps; Oklahoma retains 5 seats',
         detail: 'Governor Fallin (R) and a Republican supermajority legislature draw maps after Oklahoma retains 5 seats. Republicans produce a 5-0 delegation. Oklahoma becomes one of the most reliably Republican congressional delegations in the nation.',
       },
+      {
+        title: 'Oklahoma City and Tulsa split across districts to dilute urban Democratic votes',
+        detail: 'Republicans draw maps that divide Oklahoma City across the 3rd, 4th, and 5th Districts — preventing the city\'s growing Democratic and minority voter base from consolidating into a competitive seat. Tulsa is similarly divided between the 1st and 2nd Districts. The result is a 5-0 Republican delegation despite Oklahoma City and Tulsa becoming increasingly diverse.',
+      },
     ],
     2022: [
       {
         title: 'Republican supermajority maintains 5-0 delegation',
         detail: 'Governor Stitt (R) and a Republican supermajority legislature draw maps after Oklahoma retains 5 seats. Maps maintain a 5-0 Republican delegation in a state Trump won by 33 points in 2020.',
+      },
+      {
+        title: 'Tribal sovereignty complicates redistricting after McGirt v. Oklahoma',
+        detail: 'The Supreme Court\'s 2020 McGirt v. Oklahoma ruling — which held that much of eastern Oklahoma remains Indian Country for purposes of federal criminal law — creates novel redistricting questions. The decision does not directly affect congressional district lines, but it raises questions about Native American political representation in eastern Oklahoma\'s 2nd District, which covers most of the Five Civilized Tribes\' treaty territory.',
       },
     ],
   },
@@ -1658,17 +1954,29 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Split government deadlocks; court draws the map',
         detail: 'Governor Roberts (D) and a split legislature (Republican Senate, Democratic House) cannot agree on a congressional map. Oregon retains 5 seats after the 1990 census. A Marion County Circuit Court draws the congressional map for the first time — beginning a streak of court-drawn maps that would span two consecutive cycles.',
       },
+      {
+        title: 'Court-drawn map produces a competitive 4-1 Democratic delegation',
+        detail: 'The court-drawn map produces a 4-1 Democratic delegation as Oregon leans Democratic in the Clinton wave of 1992. The 5th District (Salem/mid-Willamette Valley) is the most competitive seat — a perennial battleground that changes party control multiple times over the following two decades.',
+      },
     ],
     2002: [
       {
         title: 'Split government deadlocks again; court draws maps for second consecutive cycle',
         detail: 'Governor Kitzhaber (D) and a split legislature again fail to agree on a congressional map after Oregon retains 5 seats. A Marion County Circuit Court draws the maps for the second consecutive redistricting cycle — one of only a handful of states in modern history to have court-drawn congressional maps in back-to-back decades.',
       },
+      {
+        title: 'OR-5 (Salem/mid-valley) is the nation\'s most reliably competitive district',
+        detail: 'The court-drawn maps preserve the competitive nature of the 5th District — it changes party hands in 1994, 2000, 2002, 2004, 2006, and 2008, making it one of the most frequently contested seats in the country. Republican Darlene Hooley holds it from 1996 to 2009, then passes it to Democrat Kurt Schrader.',
+      },
     ],
     2012: [
       {
         title: 'Democrats draw maps for first time in decades',
         detail: 'Governor Kitzhaber (D) and a Democratic-controlled legislature draw congressional maps for the first time since the 1980s. Oregon retains 5 seats after the 2010 census. Democrats produce a 4-1 Democratic delegation, drawing the 5th District (Salem/Willamette Valley) as a competitive Democratic-lean seat.',
+      },
+      {
+        title: 'Eastern Oregon\'s 2nd District — the largest by area in the contiguous US',
+        detail: 'The 2nd District covering eastern Oregon is the largest congressional district by land area in the contiguous United States, spanning more than 69,000 square miles — larger than Washington state. Its enormous rural ranching and agricultural expanse is solidly Republican; the district has been held by Republicans continuously since 1994.',
       },
     ],
     2022: [
@@ -1689,11 +1997,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democratic legislature draws maps; Rhode Island retains 2 seats',
         detail: 'Governor Sundlun (D) and a Democratic legislature draw maps after Rhode Island retains 2 seats — though just barely, coming very close to losing one seat in the 1990 reapportionment. Rhode Island uses a bipartisan Reapportionment Commission, but Democrats dominate the process.',
       },
+      {
+        title: 'Rhode Island\'s 1st and 2nd Districts reflect Providence-vs.-suburbs divide',
+        detail: 'RI-1 covers the urban core of Providence, Pawtucket, and the densely populated northeastern cities — the most Democratic part of the state. RI-2 covers the western and southern suburbs of Providence plus the rural southwestern corner — somewhat more competitive but reliably Democratic by the 1990s. Both seats are safely Democratic for the full cycle.',
+      },
     ],
     2002: [
       {
         title: 'Rhode Island retains 2 seats despite declining population',
         detail: 'Governor Almond (R) and a Democratic legislature draw maps after Rhode Island retains 2 seats following the 2000 census, again narrowly avoiding a loss. The maps are drawn primarily to protect incumbents in one of the nation\'s smallest and most reliably Democratic states.',
+      },
+      {
+        title: 'Rhode Island has not sent a Republican to Congress since 1994',
+        detail: 'Ronald Machtley held RI-1 through 1994, when he left to run for governor. Patrick Kennedy (D) won the open seat, beginning a Democratic monopoly on both Rhode Island congressional seats that has continued unbroken. The state\'s strong union tradition, large Catholic and minority populations, and small size make it one of the most reliably Democratic delegations among states with 2 or more seats.',
       },
     ],
     2012: [
@@ -1701,11 +2017,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Independent governor; Democratic legislature draws maps',
         detail: 'Governor Chafee (a former Republican running as an independent) and a Democratic General Assembly draw maps after Rhode Island retains 2 seats following the 2010 census. Rhode Island has not sent a Republican to Congress since 1994.',
       },
+      {
+        title: 'Rhode Island nearly loses a seat again — population declines continue',
+        detail: 'Rhode Island\'s population continues to stagnate relative to the nation, again coming close to losing one of its two congressional seats in the 2010 reapportionment. The state retains both seats but the close call reflects Providence\'s ongoing population loss, high unemployment, and pension crisis that define Rhode Island politics through the decade.',
+      },
     ],
     2022: [
       {
         title: 'Reapportionment Commission draws uncontested maps',
         detail: 'Governor McKee (D) and a Democratic legislature oversee the Reapportionment Commission. Rhode Island retains 2 seats after the 2020 census. Maps are relatively uncontested — both districts are safely Democratic, and no major litigation follows.',
+      },
+      {
+        title: 'Providence\'s growing Hispanic population reshapes RI-1',
+        detail: 'Providence has become one of the most diverse mid-sized cities in New England, with large Hispanic (primarily Dominican and Guatemalan) and Cape Verdean populations. The 2022 maps draw RI-1 to encompass more of Providence\'s diverse communities, though the seat remains safely Democratic. Gabe Amo wins RI-1 in 2023 as the first Black congressperson from Rhode Island.',
       },
     ],
   },
@@ -1716,11 +2040,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'VRA creates South Carolina\'s first majority-Black district since Reconstruction',
         detail: 'Governor Campbell (R) and a Democratic legislature draw maps after South Carolina retains 6 seats. The Voting Rights Act requires creation of a majority-Black congressional district. SC-6 is drawn in the Low Country and Pee Dee regions, producing South Carolina\'s first Black congressman (James Clyburn) since Reconstruction.',
       },
+      {
+        title: 'Jim Clyburn wins the new majority-Black 6th District',
+        detail: 'James Clyburn wins the newly drawn 6th District in 1992, beginning a congressional career that would last more than three decades. The 6th District links African American communities in Columbia, Florence, and the Low Country — a geographic configuration maintained across all subsequent redistricting cycles. South Carolina had gone more than 90 years without Black congressional representation.',
+      },
     ],
     2002: [
       {
         title: 'Republican legislature draws maps as the state shifts',
         detail: 'Governor Hodges (D) faces a Republican-controlled legislature that drives the redistricting process. South Carolina retains 6 seats after the 2000 census. Republicans draw maps producing a 4-2 Republican delegation while preserving the majority-Black 6th District.',
+      },
+      {
+        title: 'South Carolina\'s rapid Republican realignment locks in during this cycle',
+        detail: 'South Carolina is one of the few Southern states where Republicans seized legislative control before the 2010 wave. Republicans win both chambers of the General Assembly in 1994 and maintain that control through all subsequent redistricting cycles. The resulting maps consolidate a 4-2, then 5-1, then 6-1 Republican advantage as the state\'s population grows and Democratic voters are confined to the majority-Black 6th District.',
       },
     ],
     2012: [
@@ -1735,6 +2067,10 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     ],
     2022: [
       {
+        title: 'Republican supermajority draws maps as South Carolina retains 7 seats',
+        detail: 'Governor McMaster (R) and a Republican supermajority legislature draw maps after South Carolina retains 7 congressional seats following the 2020 census. Republicans target a 6-1 delegation — preserving only the majority-Black 6th District (Jim Clyburn) while drawing the remaining six seats to lean Republican.',
+      },
+      {
         title: '⚖ Alexander v. South Carolina State Conference of the NAACP — SCOTUS upholds maps',
         detail: 'Plaintiffs challenge SC-1 (Charleston area) as an unconstitutional racial gerrymander, arguing Republicans cracked the Black community in North Charleston to dilute its voting power. The Supreme Court rules 6-3 in Alexander v. SCSCON (May 2023) that the district is not an unconstitutional racial gerrymander, applying a strong presumption of legislative good faith and holding that plaintiffs did not rebut the presumption that race was not the predominant factor. Justice Jackson\'s dissent accuses the majority of making racial gerrymandering nearly impossible to prove.',
         url: 'https://www.supremecourt.gov/opinions/22pdf/21-1406_g31j.pdf',
@@ -1748,17 +2084,29 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democrats draw maps in a competitive Tennessee',
         detail: 'Governor McWherter (D) and a Democratic legislature draw maps after Tennessee retains 9 seats from the 1990 census. Tennessee is still genuinely competitive at the federal level in the early 1990s — the state elected Democrat Al Gore to the Senate and had a mixed congressional delegation.',
       },
+      {
+        title: 'Maps protect Democratic incumbents while the state begins shifting right',
+        detail: 'The Democrat-drawn maps protect all Democratic incumbents while drawing Memphis (TN-9) and Nashville (TN-5) as safe Democratic anchor seats. The remaining seven districts span the rural and suburban areas of the state. Democrats win 6 of 9 seats in 1992, but the delegation begins eroding toward Republicans in subsequent elections as the state\'s rural white voters realign.',
+      },
     ],
     2002: [
       {
         title: 'Republican governor, Democratic legislature produce split maps',
         detail: 'Governor Sundquist (R) and a Democratic-controlled legislature draw maps after Tennessee retains 9 seats. Democrats hold both chambers and drive the redistricting process, maintaining maps that produce a 5-4 Democratic delegation heading into 2002.',
       },
+      {
+        title: 'Tennessee\'s political realignment accelerates through the decade',
+        detail: 'Despite Democrat-drawn maps designed to protect Democratic incumbents, the Tennessee delegation shifts dramatically through the cycle. By 2008, Republicans have won 7 of 9 seats as rural and small-town Democratic voters fully realign toward Republicans in federal races. Al Gore loses his home state in the 2000 presidential election — the first Democratic presidential candidate to do so in modern history.',
+      },
     ],
     2012: [
       {
         title: 'Republicans sweep to power after 2010 wave',
         detail: 'Governor Haslam (R) and a Republican supermajority legislature — which won both chambers in 2010 for the first time — draw maps after Tennessee retains 9 seats. Republicans draw a 7-2 delegation, packing Democrats into Memphis (TN-9) and Nashville (TN-5).',
+      },
+      {
+        title: 'Two safe Democratic seats reflect Tennessee\'s urban-rural divide',
+        detail: 'The Republican maps concentrate Democratic voters into the Memphis (TN-9) and Nashville (TN-5) districts — both majority-minority, majority-urban seats. Every other district is drawn to lean Republican by comfortable margins. The 5th District (Nashville) elects Jim Cooper, who wins for the final time in 2020 before the district is redrawn in 2022.',
       },
     ],
     2022: [
@@ -1779,11 +2127,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Republican legislature draws maps in a heavily Republican state',
         detail: 'Governor Leavitt (R) and a Republican legislature draw maps after Utah retains 3 seats from the 1990 census. Utah is one of the most Republican states in the nation; maps produce a 3-0 Republican delegation.',
       },
+      {
+        title: 'Salt Lake City\'s 2nd District is Utah\'s sole competitive seat',
+        detail: 'The 2nd District covering Salt Lake City and its immediate suburbs is the only seat with genuine partisan competition during the 1990s. Democrat Bill Orton holds the 3rd District (Utah County/Provo) through 1996 before losing to a Republican — reflecting the state\'s overwhelming tilt toward Republicans. Salt Lake City itself trends Democratic but is not yet large enough to dominate a full congressional district.',
+      },
     ],
     2002: [
       {
         title: 'Utah comes within 857 people of gaining a 4th seat',
         detail: 'Utah retains 3 seats after the 2000 census — but misses gaining a fourth seat by only 857 people. Frustrated Republican leaders press Congress for a remedy; a bill passes the House that would have added one seat to Utah (and one to Washington D.C. to maintain partisan balance) but dies in the Senate.',
+      },
+      {
+        title: 'Census counting controversy — overseas missionaries excluded from Utah\'s count',
+        detail: 'Utah officials argue that the Census Bureau improperly excluded Mormon missionaries serving overseas from Utah\'s population count, which would have given Utah a fourth seat. Federal courts reject the challenge, ruling that the Census Bureau\'s methodology is within its discretion. The episode reflects the political significance of reapportionment arithmetic and the lobbying that surrounds it.',
       },
     ],
     2012: [
@@ -1814,11 +2170,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Redistricting Commission draws maps after Washington gains 1 seat',
         detail: 'Washington\'s nonpartisan Redistricting Commission — created by Initiative 63 in 1983 — draws its second congressional map. The 1990 census gives Washington a ninth seat, reflecting the state\'s rapid growth. The WRC consists of four partisan appointees who must reach consensus; maps go to the legislature only if the commission deadlocks.',
       },
+      {
+        title: 'Commission produces competitive maps in a swing state',
+        detail: 'Washington is a genuine swing state in the early 1990s — it voted for Reagan twice before going for Dukakis in 1988. The commission\'s maps produce a competitive delegation. Democrats win 6 of 9 seats in 1992, but the eastern Washington seats are reliably Republican and several western seats are genuinely competitive.',
+      },
     ],
     2002: [
       {
         title: 'Commission maintains maps after Washington retains 9 seats',
         detail: 'The Washington Redistricting Commission draws maps after Washington retains 9 seats. The WRC produces maps that are competitive and nonpartisan by most measures — frequently cited alongside Iowa and Arizona as models of independent redistricting. No major litigation follows.',
+      },
+      {
+        title: 'Eastern Washington anchors Republican delegation; Seattle corridor trends Democratic',
+        detail: 'The commission\'s 2002 maps reflect Washington\'s geographic partisan divide: the 4th and 5th Districts in eastern Washington (Yakima, Spokane) are safe Republican seats, while the Puget Sound metro districts (1st, 7th, 8th, 9th) range from safe Democratic to competitive. The 8th District in suburban eastern Seattle is among the most competitive districts in the country through the decade.',
       },
     ],
     2012: [
@@ -1849,11 +2213,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: 'Democrats draw maps in a still-blue West Virginia',
         detail: 'Governor Caperton (D) and a Democratic legislature draw maps after West Virginia retains 4 seats from the 1990 census. West Virginia is still reliably Democratic at the congressional level in the early 1990s — a relic of the New Deal coalition among coal mining communities that would gradually erode.',
       },
+      {
+        title: 'Three-seat Democratic delegation reflects the state\'s New Deal heritage',
+        detail: 'West Virginia\'s congressional delegation goes 3-1 Democratic after the 1992 elections. The state\'s coal-country counties in the southern and central coalfields — Kanawha, Logan, McDowell, Wyoming — are among the most reliably Democratic communities in the country in this era, a heritage of the United Mine Workers\' role in building the Democratic Party in the region. This coalition begins its collapse over the following decade.',
+      },
     ],
     2002: [
       {
         title: 'West Virginia loses 1 seat after the 2000 census',
         detail: 'The 2000 census reduces West Virginia\'s delegation from 4 to 3 — the first of two seat losses over the following two decades. Governor Wise (D) and a Democratic legislature draw the new 3-district map, maintaining a 2-1 Democratic delegation.',
+      },
+      {
+        title: 'New 3-district map preserves Democratic incumbents',
+        detail: 'The Democratic-drawn 3-district map is designed to protect all three Democratic incumbents. Nick Joe Rahall (WV-3, southern coalfields) and Alan Mollohan (WV-1, northern panhandle and Wheeling) are safe Democratic incumbents; the 2nd District (Charleston, Martinsburg, eastern panhandle) is the most competitive seat. Democrats maintain a 2-1 delegation through most of the decade.',
       },
     ],
     2012: [
@@ -1863,7 +2235,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       },
       {
         title: 'State\'s congressional delegation flips to all-Republican during the cycle',
-        detail: 'Under Democrat-drawn maps, every single congressional seat in West Virginia flips from Democratic to Republican between 2010 and 2014 — one of the most dramatic delegaion reversals of the era, driven by the collapse of the coal industry and the realignment of white working-class voters.',
+        detail: 'Under Democrat-drawn maps, every single congressional seat in West Virginia flips from Democratic to Republican between 2010 and 2014 — one of the most dramatic delegation reversals of the era, driven by the collapse of the coal industry and the realignment of white working-class voters.',
       },
     ],
     2022: [
