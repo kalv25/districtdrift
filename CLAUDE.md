@@ -2,7 +2,7 @@
 
 **Version:** 2026.3.22
 **Created:** 2026-03-22
-**Last Updated:** 2026-03-25 03:00 UTC
+**Last Updated:** 2026-03-25 04:30 UTC
 
 ## Project overview
 A public-interest website that documents the effects of gerrymandering in the
@@ -72,13 +72,16 @@ cycles (1992/2002/2012/2022) is the core feature no existing site offers.
 | `export_geo.py` | Exports simplified GeoJSON per cycle for boundary morph animation |
 | `demographics.py` | Fetches NHGIS census data (race, income, education) per district per cycle |
 
-Run order:
+Run order (adding a new state):
 ```
-uv run python -m pipeline.download
-uv run python -m pipeline.process
-uv run python -m pipeline.tile
-uv run python -m pipeline.export_geo
+uv run python -m pipeline.download --state XX
+uv run python -m pipeline.process --state XX
+uv run python -m pipeline.tile --state XX
+uv run python -m pipeline.export_geo --state XX
+uv run python -m pipeline.demographics --state XX
 ```
+
+Demographics uses a shared national CSV cache at `data/raw/demographics/national/` — the 4 NHGIS extracts (1990/2000/2012/2022) are downloaded once and reused for every state. If the cache is already populated, `demographics.py` runs offline with no API calls.
 
 Outputs (gitignored except web/static files):
 - `data/raw/` — downloaded shapefiles and CSVs
@@ -114,7 +117,9 @@ Outputs (gitignored except web/static files):
 - SVG zoom/pan: scroll-to-zoom toward cursor, drag to pan
 - **NE** shortcut button zooms to Northeast corridor (12 states, ~90 seats)
 - Rankings panel: all states ranked by EG magnitude with D/R pills
+  - ↑/↓ trend arrow shown next to states whose EG direction changed ≥1% vs prior cycle
 - `Pill.svelte` used inline in rankings panel
+- Hover tooltip shows EG, seats, D vote share, mean-median, seat gap, **and a 4-cycle EG bar sparkline**
 
 #### State view
 - Cycle selector (1992/2002/2012/2022) with year-specific colors and animated dots
@@ -149,7 +154,16 @@ Outputs (gitignored except web/static files):
   - Restored on load (takes priority over localStorage)
 - **⤴ Share** button: uses Web Share API on mobile (native share sheet — email, messages, etc.); falls back to clipboard copy on desktop with "✓ Copied" confirmation
 - Dynamic `<title>`: `District Drift — Michigan, 2022, District 3` (descriptive for shared links)
+- Dynamic `og:title` / `og:description` / `twitter:title` / `twitter:description` per view (nation vs state)
 - State selector opens a **geographic tile-grid modal** (US tile cartogram, 12×7 grid) instead of a long dropdown; hover shows full state name; active state highlighted in blue; ESC or click-outside to close
+
+#### SEO
+- `web/static/sitemap.xml` — lists canonical root URL; referenced in `robots.txt`
+- `web/static/robots.txt` — allows all crawlers + Sitemap pointer
+- `+layout.svelte`: canonical link, `keywords`/`author` meta, `og:locale`, `og:image` (1200×630), `twitter:image`, JSON-LD `WebSite` structured data
+- `web/static/og-image.png` — 1200×630 social preview: nation view at 2022 with choropleth + rankings panel
+  - Regenerate after data updates: `cd web && npm run build && npm run og-image`
+  - Script: `web/scripts/og-image.js` — starts `vite preview`, navigates to `/?v=nation&y=2022`, dismisses help modal, waits for 40+ SVG state paths, screenshots with Playwright/Chromium
 
 #### Help modal
 - Dark navy header (`#1a1a2e`) for visual weight
@@ -187,7 +201,7 @@ All avoid the blue (`#4a90d9`) and red (`#e05c5c`) used for D/R party fills.
 districtdrift/
 ├── CLAUDE.md                  ← this file
 ├── pipeline/
-│   ├── config.py              ← shared constants
+│   ├── config.py              ← shared constants (all 50 states)
 │   ├── download.py            ← fetch raw data
 │   ├── process.py             ← compute stats, write {state}_stats.json
 │   ├── tile.py                ← generate PMTiles
@@ -195,19 +209,27 @@ districtdrift/
 │   └── demographics.py        ← fetch NHGIS census demographics per district
 ├── web/
 │   ├── src/
-│   │   ├── routes/+page.svelte  ← main page
+│   │   ├── routes/
+│   │   │   ├── +layout.svelte           ← global head: SEO meta, OG tags, JSON-LD
+│   │   │   └── +page.svelte             ← main page: layout, state/year/URL state
 │   │   └── lib/
 │   │       ├── Map.svelte               ← map + animation
-│   │       ├── NationView.svelte        ← SVG national map
+│   │       ├── NationView.svelte        ← SVG national map + choropleth + rankings
 │   │       ├── Pill.svelte              ← reusable party pill component
 │   │       ├── Tooltip.svelte           ← hover tooltip (position:fixed)
-│   │       ├── events.ts                ← historical events data
+│   │       ├── events.ts                ← historical events data (44 states)
 │   │       ├── SeatVoteChart.svelte     ← animated bars: seat vs vote share
 │   │       ├── TrendChart.svelte        ← line chart: D vote/seat share
 │   │       ├── EGChart.svelte           ← bar chart: efficiency gap
 │   │       └── CompetitivenessChart.svelte ← stacked bars: district competitiveness
+│   ├── scripts/
+│   │   └── og-image.js        ← Playwright script: screenshots nation view → og-image.png
 │   └── static/
-│       ├── {state}_stats.json    ← partisan stats + credits (all 50 states)
+│       ├── {state}_stats.json    ← partisan stats + demographics (all 50 states)
+│       ├── nation_stats.json     ← aggregated national stats for NationView
+│       ├── og-image.png          ← 1200×630 social preview (regenerate: npm run og-image)
+│       ├── sitemap.xml           ← canonical URL listing for search engines
+│       ├── robots.txt            ← allows all crawlers; references sitemap
 │       ├── tiles/                ← PMTiles (gitignored)
 │       └── geo/                  ← simplified GeoJSON for morphing (gitignored)
 ├── data/                      ← gitignored raw + processed data
@@ -226,5 +248,5 @@ districtdrift/
 6. ~~**Demographics pipeline for all states**~~ ✓ — all 50 states have race/income/education per-district data
 7. ~~**Improve nation view**~~ ✓ — tooltip shows 4-cycle EG sparkline; rank panel shows ↑/↓ trend arrows vs prior cycle
 8. ~~**SEO pass**~~ ✓ — sitemap.xml, canonical URL, JSON-LD, keywords/author meta, dynamic og:title/description per state
-9. **OG social preview image** — create a static `og-image.png` (1200×630) for social sharing; add `og:image` / `twitter:image` tags once image is available
+9. ~~**OG social preview image**~~ ✓ — `og-image.png` (1200×630) auto-generated via Playwright from nation view at 2022; `og:image` + `twitter:image` tags in layout
 10. **Precinct layer** *(next major version)* — raw precinct vote data overlaid on district view; requires RDH shapefiles, join to election results, tippecanoe tiling (~175k precincts nationally)
