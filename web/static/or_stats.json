@@ -1,0 +1,355 @@
+{
+  "state": "Oregon",
+  "fips": "41",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 5,
+      "redistricting_controller": "Court-drawn (split government)",
+      "notes": "Governor Roberts (D) and a split legislature (Rep Senate, Dem House) deadlocked; a Marion County Circuit Court drew congressional maps. Oregon retained 5 seats after the 1990 census.",
+      "efficiency_gap": -0.1038,
+      "mean_median_diff": -0.0386,
+      "seats_d": 4,
+      "seats_r": 1,
+      "votes_d": 824796,
+      "votes_r": 553101,
+      "seat_vote_ratio_d": 1.3365,
+      "avg_compactness": 0.2105,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5203,
+          "polsby_popper": 0.0988,
+          "d_votes": 152917,
+          "r_votes": 140986,
+          "total_votes_cast": 294154,
+          "margin_pct": 0.0406,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3284,
+          "polsby_popper": 0.4313,
+          "d_votes": 90036,
+          "r_votes": 184163,
+          "total_votes_cast": 274478,
+          "margin_pct": 0.3433,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.8055,
+          "polsby_popper": 0.227,
+          "d_votes": 208028,
+          "r_votes": 50235,
+          "total_votes_cast": 269879,
+          "margin_pct": 0.611,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.7143,
+          "polsby_popper": 0.1961,
+          "d_votes": 199372,
+          "r_votes": 79733,
+          "total_votes_cast": 279299,
+          "margin_pct": 0.4287,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6403,
+          "polsby_popper": 0.099,
+          "d_votes": 174443,
+          "r_votes": 97984,
+          "total_votes_cast": 272944,
+          "margin_pct": 0.2807,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 5,
+      "redistricting_controller": "Court-drawn (split government)",
+      "notes": "Governor Kitzhaber (D) and a split legislature again deadlocked; a Marion County Circuit Court drew maps for the second consecutive decade. Oregon retained 5 seats after the 2000 census.",
+      "efficiency_gap": -0.1731,
+      "mean_median_diff": -0.0835,
+      "seats_d": 4,
+      "seats_r": 1,
+      "votes_d": 676920,
+      "votes_r": 528997,
+      "seat_vote_ratio_d": 1.4252,
+      "avg_compactness": 0.2177,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6484,
+          "polsby_popper": 0.1091,
+          "d_votes": 149215,
+          "r_votes": 80917,
+          "total_votes_cast": 238036,
+          "margin_pct": 0.2968,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2639,
+          "polsby_popper": 0.469,
+          "d_votes": 64991,
+          "r_votes": 181295,
+          "total_votes_cast": 252284,
+          "margin_pct": 0.4722,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.714,
+          "polsby_popper": 0.2238,
+          "d_votes": 156851,
+          "r_votes": 62821,
+          "total_votes_cast": 234977,
+          "margin_pct": 0.428,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.65,
+          "polsby_popper": 0.2033,
+          "d_votes": 168150,
+          "r_votes": 90523,
+          "total_votes_cast": 263481,
+          "margin_pct": 0.3001,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.5483,
+          "polsby_popper": 0.0833,
+          "d_votes": 137713,
+          "r_votes": 113441,
+          "total_votes_cast": 251537,
+          "margin_pct": 0.0966,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 5,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Kitzhaber (D) and a Democratic-controlled legislature drew maps for the first time since the 1980s; Oregon retained 5 seats after the 2010 census. Democrats maintained a 4-1 advantage.",
+      "efficiency_gap": -0.1418,
+      "mean_median_diff": -0.0236,
+      "seats_d": 4,
+      "seats_r": 1,
+      "votes_d": 949660,
+      "votes_r": 687839,
+      "seat_vote_ratio_d": 1.3794,
+      "avg_compactness": 0.2347,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6433,
+          "polsby_popper": 0.118,
+          "d_votes": 197845,
+          "r_votes": 109699,
+          "total_votes_cast": 331980,
+          "margin_pct": 0.2866,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2979,
+          "polsby_popper": 0.4882,
+          "d_votes": 96741,
+          "r_votes": 228043,
+          "total_votes_cast": 332255,
+          "margin_pct": 0.4043,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.7903,
+          "polsby_popper": 0.2408,
+          "d_votes": 264979,
+          "r_votes": 70325,
+          "total_votes_cast": 355875,
+          "margin_pct": 0.5805,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6023,
+          "polsby_popper": 0.2364,
+          "d_votes": 212866,
+          "r_votes": 140549,
+          "total_votes_cast": 360088,
+          "margin_pct": 0.2046,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.5601,
+          "polsby_popper": 0.09,
+          "d_votes": 177229,
+          "r_votes": 139223,
+          "total_votes_cast": 327970,
+          "margin_pct": 0.1201,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 6,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Brown (D) and a Democratic legislature drew maps after Oregon gained 1 seat from the 2020 census (5\u21926). Democrats drew an aggressive map targeting 5 of 6 seats; Republicans and independents challenged the maps but they survived court review. A nonpartisan redistricting reform measure narrowly failed at the ballot in 2022.",
+      "efficiency_gap": -0.0606,
+      "mean_median_diff": 0.0193,
+      "seats_d": 4,
+      "seats_r": 2,
+      "votes_d": 1012725,
+      "votes_r": 851991,
+      "seat_vote_ratio_d": 1.2275,
+      "avg_compactness": 0.2693,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6802,
+          "polsby_popper": 0.1272,
+          "d_votes": 210682,
+          "r_votes": 99042,
+          "total_votes_cast": 310243,
+          "margin_pct": 0.3604,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.324,
+          "polsby_popper": 0.4271,
+          "d_votes": 99882,
+          "r_votes": 208369,
+          "total_votes_cast": 308676,
+          "margin_pct": 0.3519,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.7267,
+          "polsby_popper": 0.3475,
+          "d_votes": 212119,
+          "r_votes": 79766,
+          "total_votes_cast": 303334,
+          "margin_pct": 0.4534,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.5399,
+          "polsby_popper": 0.1337,
+          "d_votes": 171372,
+          "r_votes": 146055,
+          "total_votes_cast": 339077,
+          "margin_pct": 0.0798,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4896,
+          "polsby_popper": 0.2083,
+          "d_votes": 171514,
+          "r_votes": 178813,
+          "total_votes_cast": 351233,
+          "margin_pct": 0.0208,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.5126,
+          "polsby_popper": 0.3719,
+          "d_votes": 147156,
+          "r_votes": 139946,
+          "total_votes_cast": 294377,
+          "margin_pct": 0.0251,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

@@ -604,6 +604,321 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    "AL": {
+        "name": "Alabama",
+        "fips": "01",
+        "crs": "EPSG:26916",   # NAD83 / UTM Zone 16N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 7,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Hunt (D) and a Democratic legislature drew maps maintaining 7 seats; VRA required creation of a majority-Black district",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 7,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Siegelman (D) and a Democratic-controlled legislature drew maps; Alabama retained 7 seats after the 2000 census",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 7,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Bentley (R) and a Republican supermajority legislature drew maps after Republicans swept Alabama in 2010; Alabama retained 7 seats. Maps packed Black voters into a single majority-Black district (AL-7), enabling a 6-1 Republican advantage in a state roughly 27% Black.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 7,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Ivey (R) and Republican legislature drew maps keeping one majority-Black district despite Black residents comprising 27% of the population. Allen v. Milligan (2023): SCOTUS ruled 5-4 that the maps violated VRA Section 2 by failing to draw a second district where Black voters could elect a preferred candidate; remedial maps ordered for 2024 produced a second majority-Black seat.",
+            },
+        },
+    },
+    "IN": {
+        "name": "Indiana",
+        "fips": "18",
+        "crs": "EPSG:32616",   # UTM Zone 16N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 10,
+                "redistricting_controller": "Split (Dem governor, split legislature)",
+                "notes": "Governor Bayh (D) and a closely divided legislature drew maps; Indiana retained 10 seats after the 1990 census",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 9,
+                "redistricting_controller": "Split (Dem governor, Rep legislature)",
+                "notes": "Governor O'Bannon (D) and a Republican-controlled General Assembly drew maps after Indiana lost 1 seat from the 2000 census; Republicans held majorities in both chambers",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 9,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Daniels (R) and a Republican supermajority legislature drew maps after Republicans swept Indiana in 2010; Indiana retained 9 seats. Maps produced a 7-2 Republican delegation.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 9,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Holcomb (R) and a Republican supermajority legislature drew maps; Indiana retained 9 seats after the 2020 census. Maps maintained a 7-2 Republican advantage.",
+            },
+        },
+    },
+    "LA": {
+        "name": "Louisiana",
+        "fips": "22",
+        "crs": "EPSG:26915",   # NAD83 / UTM Zone 15N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 7,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Edwards (D) and a Democratic legislature drew maps; Louisiana retained 7 seats. VRA required creation of majority-Black districts. The resulting 4th District (I-49 corridor) was challenged in United States v. Hays (1995) for its unusual shape.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 7,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Foster (R) and a Democratic-controlled legislature drew maps; Louisiana retained 7 seats after the 2000 census",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 6,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Jindal (R) and a legislature newly controlled by Republicans drew maps after Louisiana lost 1 seat from the 2010 census. Republicans passed maps over Democratic objections producing a 5-1 Republican delegation.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 6,
+                "redistricting_controller": "Republican (veto override)",
+                "notes": "Governor Edwards (D) vetoed Republican maps that contained only one majority-Black district despite Black residents comprising 33% of the population; the Republican supermajority legislature overrode the veto. Robinson v. Ardoin: federal court ruled the maps violated VRA Section 2; a remedial map with two majority-Black districts was ordered for 2024.",
+            },
+        },
+    },
+    "MA": {
+        "name": "Massachusetts",
+        "fips": "25",
+        "crs": "EPSG:32619",   # NAD83 / UTM Zone 19N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 10,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Weld (R) and a heavily Democratic legislature drew maps after Massachusetts lost 1 seat from the 1990 census (11→10); the Democratic legislature controlled the process",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 10,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Acting Governor Swift (R) and a heavily Democratic legislature drew maps; Massachusetts retained 10 seats after the 2000 census. The Democratic legislature produced maps preserving all 10 incumbents.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 9,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Patrick (D) and a Democratic legislature drew maps after Massachusetts lost 1 seat from the 2010 census (10→9); the process was relatively uncontroversial as Democrats held all seats",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 9,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Baker (R) and a heavily Democratic legislature drew maps; Massachusetts retained 9 seats after the 2020 census. A bipartisan redistricting committee produced relatively uncontested maps in a solidly Democratic state.",
+            },
+        },
+    },
+    "MO": {
+        "name": "Missouri",
+        "fips": "29",
+        "crs": "EPSG:26915",   # NAD83 / UTM Zone 15N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 9,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Ashcroft (R) and a Democratic-controlled legislature drew maps; Missouri retained 9 seats after the 1990 census",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 9,
+                "redistricting_controller": "Split (Dem governor, split legislature)",
+                "notes": "Governor Holden (D) and a narrowly divided legislature drew maps; Missouri retained 9 seats after the 2000 census. Republicans gained the House majority in 2002; maps were drawn while Democrats still held a narrow edge.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 8,
+                "redistricting_controller": "Split (Dem governor, Rep legislature)",
+                "notes": "Governor Nixon (D) and a Republican-supermajority legislature drew maps after Missouri lost 1 seat from the 2010 census (9→8); Republicans drew maps over Democratic objections producing a 6-2 Republican advantage",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 8,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Parson (R) and a Republican supermajority legislature drew maps; Missouri retained 8 seats. Maps maintained a 6-2 Republican advantage in a state Trump won by 15 points.",
+            },
+        },
+    },
+    "OR": {
+        "name": "Oregon",
+        "fips": "41",
+        "crs": "EPSG:32610",   # NAD83 / UTM Zone 10N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 5,
+                "redistricting_controller": "Court-drawn (split government)",
+                "notes": "Governor Roberts (D) and a split legislature (Rep Senate, Dem House) deadlocked; a Marion County Circuit Court drew congressional maps. Oregon retained 5 seats after the 1990 census.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 5,
+                "redistricting_controller": "Court-drawn (split government)",
+                "notes": "Governor Kitzhaber (D) and a split legislature again deadlocked; a Marion County Circuit Court drew maps for the second consecutive decade. Oregon retained 5 seats after the 2000 census.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 5,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Kitzhaber (D) and a Democratic-controlled legislature drew maps for the first time since the 1980s; Oregon retained 5 seats after the 2010 census. Democrats maintained a 4-1 advantage.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 6,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Brown (D) and a Democratic legislature drew maps after Oregon gained 1 seat from the 2020 census (5→6). Democrats drew an aggressive map targeting 5 of 6 seats; Republicans and independents challenged the maps but they survived court review. A nonpartisan redistricting reform measure narrowly failed at the ballot in 2022.",
+            },
+        },
+    },
+    "SC": {
+        "name": "South Carolina",
+        "fips": "45",
+        "crs": "EPSG:32617",   # UTM Zone 17N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 6,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Campbell (R) and a Democratic-controlled legislature drew maps; South Carolina retained 6 seats. VRA required creation of a majority-Black district (SC-6), producing the first Black congressman from South Carolina since Reconstruction.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 6,
+                "redistricting_controller": "Split (Dem governor, Rep legislature)",
+                "notes": "Governor Hodges (D) and a Republican-controlled legislature drew maps; South Carolina retained 6 seats after the 2000 census. Republicans held both chambers and drove the process.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 7,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Haley (R) and a Republican supermajority legislature drew maps after South Carolina gained 1 seat from the 2010 census (6→7). Republicans drew maps maintaining a 6-1 advantage; the new 7th District (Myrtle Beach) was drawn as a safe Republican seat.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 7,
+                "redistricting_controller": "Republican",
+                "notes": "Governor McMaster (R) and a Republican supermajority legislature drew maps; South Carolina retained 7 seats. Alexander v. South Carolina State Conference of the NAACP: SCOTUS ruled 6-3 in 2023 that the 1st District (Charleston) was not an unconstitutional racial gerrymander despite cracking the Black community in North Charleston, applying a high presumption of legislative good faith.",
+            },
+        },
+    },
+    "TN": {
+        "name": "Tennessee",
+        "fips": "47",
+        "crs": "EPSG:32616",   # UTM Zone 16N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 9,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor McWherter (D) and a Democratic legislature drew maps; Tennessee retained 9 seats after the 1990 census",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 9,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Sundquist (R) and a Democratic-controlled legislature drew maps; Tennessee retained 9 seats after the 2000 census. Democrats held both chambers and controlled the process.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 9,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Haslam (R) and a Republican supermajority legislature drew maps after Republicans swept Tennessee in 2010; Tennessee retained 9 seats. Maps produced a 7-2 Republican delegation.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 9,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Lee (R) and a Republican supermajority legislature drew maps; Tennessee retained 9 seats after the 2020 census. Republicans also controversially redrew state legislative maps in 2023 to split Nashville across three congressional districts, diluting the city's Democratic voting power — a move critics called an unconstitutional partisan gerrymander.",
+            },
+        },
+    },
+    "WA": {
+        "name": "Washington",
+        "fips": "53",
+        "crs": "EPSG:32610",   # NAD83 / UTM Zone 10N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 9,
+                "redistricting_controller": "Independent Commission (WRC)",
+                "notes": "Washington's nonpartisan Redistricting Commission (created by Initiative 63 in 1983) drew maps after Washington gained 1 seat from the 1990 census (8→9). The WRC consists of four partisan appointees who must reach consensus; maps cannot be drawn by the legislature unless the commission deadlocks.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 9,
+                "redistricting_controller": "Independent Commission (WRC)",
+                "notes": "The Washington Redistricting Commission drew maps; Washington retained 9 seats after the 2000 census. The WRC produced maps generally seen as competitive and nonpartisan.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 10,
+                "redistricting_controller": "Independent Commission (WRC)",
+                "notes": "The Washington Redistricting Commission drew maps after Washington gained 1 seat from the 2010 census (9→10). The new 10th District (Tacoma/South Puget Sound) was drawn as a competitive seat; Democrats won it in 2012.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 10,
+                "redistricting_controller": "Independent Commission (WRC)",
+                "notes": "The Washington Redistricting Commission drew maps; Washington retained 10 seats after the 2020 census. A last-minute alteration by the WRC drew controversy — staff made unauthorized changes to the final maps after the commission vote, which the WA Supreme Court struck; the original commission maps were used.",
+            },
+        },
+    },
 }
 
 # NHGIS shapefile IDs needed (de-duplicated across all states)

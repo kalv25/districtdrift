@@ -83,6 +83,15 @@
     NJ: { name: 'New Jersey', flag: '◉' },
     CO: { name: 'Colorado', flag: '◉' },
     MN: { name: 'Minnesota', flag: '◉' },
+    AL: { name: 'Alabama', flag: '◉' },
+    IN: { name: 'Indiana', flag: '◉' },
+    LA: { name: 'Louisiana', flag: '◉' },
+    MA: { name: 'Massachusetts', flag: '◉' },
+    MO: { name: 'Missouri', flag: '◉' },
+    OR: { name: 'Oregon', flag: '◉' },
+    SC: { name: 'South Carolina', flag: '◉' },
+    TN: { name: 'Tennessee', flag: '◉' },
+    WA: { name: 'Washington', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view

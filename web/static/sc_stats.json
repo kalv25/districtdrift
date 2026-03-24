@@ -1,0 +1,410 @@
+{
+  "state": "South Carolina",
+  "fips": "45",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 6,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Campbell (R) and a Democratic-controlled legislature drew maps; South Carolina retained 6 seats. VRA required creation of a majority-Black district (SC-6), producing the first Black congressman from South Carolina since Reconstruction.",
+      "efficiency_gap": -0.0867,
+      "mean_median_diff": -0.0998,
+      "seats_d": 3,
+      "seats_r": 3,
+      "votes_d": 505887,
+      "votes_r": 581159,
+      "seat_vote_ratio_d": 1.0744,
+      "avg_compactness": 0.1367,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3294,
+          "polsby_popper": 0.0163,
+          "d_votes": 59908,
+          "r_votes": 121938,
+          "total_votes_cast": 184549,
+          "margin_pct": 0.3411,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.0175,
+          "d_votes": 0,
+          "r_votes": 148667,
+          "total_votes_cast": 169670,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6116,
+          "polsby_popper": 0.2236,
+          "d_votes": 119119,
+          "r_votes": 75660,
+          "total_votes_cast": 194864,
+          "margin_pct": 0.2231,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.4853,
+          "polsby_popper": 0.2231,
+          "d_votes": 94182,
+          "r_votes": 99879,
+          "total_votes_cast": 198410,
+          "margin_pct": 0.0294,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6125,
+          "polsby_popper": 0.2975,
+          "d_votes": 112031,
+          "r_votes": 70866,
+          "total_votes_cast": 183086,
+          "margin_pct": 0.2251,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6529,
+          "polsby_popper": 0.0422,
+          "d_votes": 120647,
+          "r_votes": 64149,
+          "total_votes_cast": 184871,
+          "margin_pct": 0.3057,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 6,
+      "redistricting_controller": "Split (Dem governor, Rep legislature)",
+      "notes": "Governor Hodges (D) and a Republican-controlled legislature drew maps; South Carolina retained 6 seats after the 2000 census. Republicans held both chambers and drove the process.",
+      "efficiency_gap": -0.0661,
+      "mean_median_diff": 0.0748,
+      "seats_d": 2,
+      "seats_r": 4,
+      "votes_d": 344972,
+      "votes_r": 569267,
+      "seat_vote_ratio_d": 0.8834,
+      "avg_compactness": 0.1471,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.0147,
+          "d_votes": 0,
+          "r_votes": 127562,
+          "total_votes_cast": 142425,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.0098,
+          "d_votes": 0,
+          "r_votes": 144149,
+          "total_votes_cast": 171359,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3178,
+          "polsby_popper": 0.2175,
+          "d_votes": 55743,
+          "r_votes": 119644,
+          "total_votes_cast": 178195,
+          "margin_pct": 0.3643,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.296,
+          "polsby_popper": 0.2721,
+          "d_votes": 51462,
+          "r_votes": 122422,
+          "total_votes_cast": 177417,
+          "margin_pct": 0.4081,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.2587,
+          "d_votes": 121912,
+          "r_votes": 0,
+          "total_votes_cast": 141972,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6762,
+          "polsby_popper": 0.1099,
+          "d_votes": 115855,
+          "r_votes": 55490,
+          "total_votes_cast": 173047,
+          "margin_pct": 0.3523,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 7,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Haley (R) and a Republican supermajority legislature drew maps after South Carolina gained 1 seat from the 2010 census (6\u21927). Republicans drew maps maintaining a 6-1 advantage; the new 7th District (Myrtle Beach) was drawn as a safe Republican seat.",
+      "efficiency_gap": 0.1951,
+      "mean_median_diff": 0.0564,
+      "seats_d": 1,
+      "seats_r": 6,
+      "votes_d": 714191,
+      "votes_r": 1026129,
+      "seat_vote_ratio_d": 0.3481,
+      "avg_compactness": 0.1685,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 2,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.353,
+          "polsby_popper": 0.0026,
+          "d_votes": 98154,
+          "r_votes": 179908,
+          "total_votes_cast": 290013,
+          "margin_pct": 0.294,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.1679,
+          "d_votes": 0,
+          "r_votes": 196116,
+          "total_votes_cast": 203718,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3333,
+          "polsby_popper": 0.3326,
+          "d_votes": 84735,
+          "r_votes": 169512,
+          "total_votes_cast": 254763,
+          "margin_pct": 0.3334,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3268,
+          "polsby_popper": 0.2629,
+          "d_votes": 84087,
+          "r_votes": 173201,
+          "total_votes_cast": 266884,
+          "margin_pct": 0.3464,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4247,
+          "polsby_popper": 0.2125,
+          "d_votes": 113904,
+          "r_votes": 154324,
+          "total_votes_cast": 278003,
+          "margin_pct": 0.1507,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.0336,
+          "d_votes": 218717,
+          "r_votes": 0,
+          "total_votes_cast": 233615,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.4281,
+          "polsby_popper": 0.1676,
+          "d_votes": 114594,
+          "r_votes": 153068,
+          "total_votes_cast": 275738,
+          "margin_pct": 0.1437,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 7,
+      "redistricting_controller": "Republican",
+      "notes": "Governor McMaster (R) and a Republican supermajority legislature drew maps; South Carolina retained 7 seats. Alexander v. South Carolina State Conference of the NAACP: SCOTUS ruled 6-3 in 2023 that the 1st District (Charleston) was not an unconstitutional racial gerrymander despite cracking the Black community in North Charleston, applying a high presumption of legislative good faith.",
+      "efficiency_gap": 0.0234,
+      "mean_median_diff": -0.044,
+      "seats_d": 1,
+      "seats_r": 6,
+      "votes_d": 517129,
+      "votes_r": 1056078,
+      "seat_vote_ratio_d": 0.4346,
+      "avg_compactness": 0.1737,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 5
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4296,
+          "polsby_popper": 0.0035,
+          "d_votes": 115796,
+          "r_votes": 153757,
+          "total_votes_cast": 272681,
+          "margin_pct": 0.1408,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3991,
+          "polsby_popper": 0.1643,
+          "d_votes": 98081,
+          "r_votes": 147699,
+          "total_votes_cast": 246126,
+          "margin_pct": 0.2019,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.3446,
+          "d_votes": 0,
+          "r_votes": 189971,
+          "total_votes_cast": 194569,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.2341,
+          "d_votes": 0,
+          "r_votes": 165607,
+          "total_votes_cast": 182365,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.35,
+          "polsby_popper": 0.2291,
+          "d_votes": 83299,
+          "r_votes": 154725,
+          "total_votes_cast": 241707,
+          "margin_pct": 0.3001,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6211,
+          "polsby_popper": 0.0527,
+          "d_votes": 130923,
+          "r_votes": 79879,
+          "total_votes_cast": 211028,
+          "margin_pct": 0.2421,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.3512,
+          "polsby_popper": 0.1879,
+          "d_votes": 89030,
+          "r_votes": 164440,
+          "total_votes_cast": 253865,
+          "margin_pct": 0.2975,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

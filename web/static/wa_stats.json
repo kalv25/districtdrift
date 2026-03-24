@@ -1,0 +1,542 @@
+{
+  "state": "Washington",
+  "fips": "53",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 9,
+      "redistricting_controller": "Independent Commission (WRC)",
+      "notes": "Washington's nonpartisan Redistricting Commission (created by Initiative 63 in 1983) drew maps after Washington gained 1 seat from the 1990 census (8\u21929). The WRC consists of four partisan appointees who must reach consensus; maps cannot be drawn by the legislature unless the commission deadlocks.",
+      "efficiency_gap": -0.2355,
+      "mean_median_diff": 0.0182,
+      "seats_d": 8,
+      "seats_r": 1,
+      "votes_d": 1236665,
+      "votes_r": 911913,
+      "seat_vote_ratio_d": 1.5444,
+      "avg_compactness": 0.1677,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 4,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5665,
+          "polsby_popper": 0.0507,
+          "d_votes": 148844,
+          "r_votes": 113897,
+          "total_votes_cast": 271274,
+          "margin_pct": 0.133,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5537,
+          "polsby_popper": 0.0443,
+          "d_votes": 133207,
+          "r_votes": 107365,
+          "total_votes_cast": 255920,
+          "margin_pct": 0.1074,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5597,
+          "polsby_popper": 0.1174,
+          "d_votes": 138043,
+          "r_votes": 108583,
+          "total_votes_cast": 246626,
+          "margin_pct": 0.1195,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.5084,
+          "polsby_popper": 0.3229,
+          "d_votes": 106556,
+          "r_votes": 103028,
+          "total_votes_cast": 209584,
+          "margin_pct": 0.0168,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.5518,
+          "polsby_popper": 0.4309,
+          "d_votes": 135965,
+          "r_votes": 110443,
+          "total_votes_cast": 246408,
+          "margin_pct": 0.1036,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6964,
+          "polsby_popper": 0.0565,
+          "d_votes": 152933,
+          "r_votes": 66664,
+          "total_votes_cast": 238162,
+          "margin_pct": 0.3929,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.8043,
+          "polsby_popper": 0.0503,
+          "d_votes": 222604,
+          "r_votes": 54149,
+          "total_votes_cast": 283950,
+          "margin_pct": 0.6087,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.3598,
+          "polsby_popper": 0.3233,
+          "d_votes": 87611,
+          "r_votes": 155874,
+          "total_votes_cast": 258171,
+          "margin_pct": 0.2804,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.5468,
+          "polsby_popper": 0.1133,
+          "d_votes": 110902,
+          "r_votes": 91910,
+          "total_votes_cast": 212919,
+          "margin_pct": 0.0936,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 9,
+      "redistricting_controller": "Independent Commission (WRC)",
+      "notes": "The Washington Redistricting Commission drew maps; Washington retained 9 seats after the 2000 census. The WRC produced maps generally seen as competitive and nonpartisan.",
+      "efficiency_gap": -0.0969,
+      "mean_median_diff": -0.039,
+      "seats_d": 6,
+      "seats_r": 3,
+      "votes_d": 907440,
+      "votes_r": 778922,
+      "seat_vote_ratio_d": 1.2389,
+      "avg_compactness": 0.1579,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 1,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 3
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5739,
+          "polsby_popper": 0.0619,
+          "d_votes": 114087,
+          "r_votes": 84696,
+          "total_votes_cast": 205034,
+          "margin_pct": 0.1479,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5224,
+          "polsby_popper": 0.0446,
+          "d_votes": 101219,
+          "r_votes": 92528,
+          "total_votes_cast": 202150,
+          "margin_pct": 0.0449,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6169,
+          "polsby_popper": 0.1476,
+          "d_votes": 119264,
+          "r_votes": 74065,
+          "total_votes_cast": 193329,
+          "margin_pct": 0.2338,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.331,
+          "polsby_popper": 0.3166,
+          "d_votes": 53572,
+          "r_votes": 108257,
+          "total_votes_cast": 161829,
+          "margin_pct": 0.3379,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.3395,
+          "polsby_popper": 0.3337,
+          "d_votes": 65146,
+          "r_votes": 126757,
+          "total_votes_cast": 202282,
+          "margin_pct": 0.3211,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6719,
+          "polsby_popper": 0.0557,
+          "d_votes": 126116,
+          "r_votes": 61584,
+          "total_votes_cast": 196444,
+          "margin_pct": 0.3438,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.7716,
+          "polsby_popper": 0.0731,
+          "d_votes": 156300,
+          "r_votes": 46256,
+          "total_votes_cast": 211003,
+          "margin_pct": 0.5433,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.3843,
+          "polsby_popper": 0.3061,
+          "d_votes": 75931,
+          "r_votes": 121633,
+          "total_votes_cast": 203335,
+          "margin_pct": 0.2313,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.6027,
+          "polsby_popper": 0.0814,
+          "d_votes": 95805,
+          "r_votes": 63146,
+          "total_votes_cast": 163710,
+          "margin_pct": 0.2055,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 10,
+      "redistricting_controller": "Independent Commission (WRC)",
+      "notes": "The Washington Redistricting Commission drew maps after Washington gained 1 seat from the 2010 census (9\u219210). The new 10th District (Tacoma/South Puget Sound) was drawn as a competitive seat; Democrats won it in 2012.",
+      "efficiency_gap": -0.0325,
+      "mean_median_diff": -0.0267,
+      "seats_d": 6,
+      "seats_r": 4,
+      "votes_d": 1636726,
+      "votes_r": 1369540,
+      "seat_vote_ratio_d": 1.1021,
+      "avg_compactness": 0.1434,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 2,
+        "competitive": 1,
+        "lean_r": 1,
+        "solid_r": 3
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5394,
+          "polsby_popper": 0.1943,
+          "d_votes": 177025,
+          "r_votes": 151187,
+          "total_votes_cast": 328212,
+          "margin_pct": 0.0787,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.6114,
+          "polsby_popper": 0.0115,
+          "d_votes": 184826,
+          "r_votes": 117465,
+          "total_votes_cast": 302291,
+          "margin_pct": 0.2228,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3962,
+          "polsby_popper": 0.1567,
+          "d_votes": 116438,
+          "r_votes": 177446,
+          "total_votes_cast": 293884,
+          "margin_pct": 0.2076,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3378,
+          "polsby_popper": 0.2379,
+          "d_votes": 78940,
+          "r_votes": 154749,
+          "total_votes_cast": 233689,
+          "margin_pct": 0.3244,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.3808,
+          "polsby_popper": 0.4041,
+          "d_votes": 117512,
+          "r_votes": 191066,
+          "total_votes_cast": 308578,
+          "margin_pct": 0.2384,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.59,
+          "polsby_popper": 0.0472,
+          "d_votes": 186661,
+          "r_votes": 129725,
+          "total_votes_cast": 316386,
+          "margin_pct": 0.18,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.7965,
+          "polsby_popper": 0.0572,
+          "d_votes": 298368,
+          "r_votes": 76212,
+          "total_votes_cast": 374580,
+          "margin_pct": 0.5931,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.4035,
+          "polsby_popper": 0.1878,
+          "d_votes": 121886,
+          "r_votes": 180204,
+          "total_votes_cast": 302090,
+          "margin_pct": 0.193,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.7162,
+          "polsby_popper": 0.0714,
+          "d_votes": 192034,
+          "r_votes": 76105,
+          "total_votes_cast": 268139,
+          "margin_pct": 0.4323,
+          "contested": true
+        },
+        {
+          "district": 10,
+          "won_by": "D",
+          "partisan_lean_d": 0.5856,
+          "polsby_popper": 0.0659,
+          "d_votes": 163036,
+          "r_votes": 115381,
+          "total_votes_cast": 278417,
+          "margin_pct": 0.1712,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 10,
+      "redistricting_controller": "Independent Commission (WRC)",
+      "notes": "The Washington Redistricting Commission drew maps; Washington retained 10 seats after the 2020 census. A last-minute alteration by the WRC drew controversy \u2014 staff made unauthorized changes to the final maps after the commission vote, which the WA Supreme Court struck; the original commission maps were used.",
+      "efficiency_gap": -0.1591,
+      "mean_median_diff": -0.0111,
+      "seats_d": 8,
+      "seats_r": 2,
+      "votes_d": 1751582,
+      "votes_r": 1261961,
+      "seat_vote_ratio_d": 1.3764,
+      "avg_compactness": 0.1705,
+      "competitiveness": {
+        "solid_d": 5,
+        "lean_d": 1,
+        "competitive": 2,
+        "lean_r": 1,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6356,
+          "polsby_popper": 0.1291,
+          "d_votes": 181992,
+          "r_votes": 104329,
+          "total_votes_cast": 286684,
+          "margin_pct": 0.2712,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.6018,
+          "polsby_popper": 0.0334,
+          "d_votes": 202980,
+          "r_votes": 134335,
+          "total_votes_cast": 337923,
+          "margin_pct": 0.2035,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5041,
+          "polsby_popper": 0.2277,
+          "d_votes": 160314,
+          "r_votes": 157685,
+          "total_votes_cast": 319759,
+          "margin_pct": 0.0083,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3195,
+          "polsby_popper": 0.2296,
+          "d_votes": 70710,
+          "r_votes": 150619,
+          "total_votes_cast": 226647,
+          "margin_pct": 0.361,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4035,
+          "polsby_popper": 0.5015,
+          "d_votes": 127585,
+          "r_votes": 188648,
+          "total_votes_cast": 317006,
+          "margin_pct": 0.1931,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6007,
+          "polsby_popper": 0.0463,
+          "d_votes": 208710,
+          "r_votes": 138754,
+          "total_votes_cast": 347873,
+          "margin_pct": 0.2013,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.8575,
+          "polsby_popper": 0.0611,
+          "d_votes": 295998,
+          "r_votes": 49207,
+          "total_votes_cast": 346647,
+          "margin_pct": 0.7149,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 0.5344,
+          "polsby_popper": 0.2644,
+          "d_votes": 179003,
+          "r_votes": 155976,
+          "total_votes_cast": 336038,
+          "margin_pct": 0.0687,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.7175,
+          "polsby_popper": 0.1233,
+          "d_votes": 171746,
+          "r_votes": 67631,
+          "total_votes_cast": 239848,
+          "margin_pct": 0.4349,
+          "contested": true
+        },
+        {
+          "district": 10,
+          "won_by": "D",
+          "partisan_lean_d": 0.5706,
+          "polsby_popper": 0.0887,
+          "d_votes": 152544,
+          "r_votes": 114777,
+          "total_votes_cast": 267748,
+          "margin_pct": 0.1413,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

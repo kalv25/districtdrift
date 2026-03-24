@@ -1,0 +1,498 @@
+{
+  "state": "Missouri",
+  "fips": "29",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 9,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Ashcroft (R) and a Democratic-controlled legislature drew maps; Missouri retained 9 seats after the 1990 census",
+      "efficiency_gap": -0.0517,
+      "mean_median_diff": -0.0026,
+      "seats_d": 6,
+      "seats_r": 3,
+      "votes_d": 1269486,
+      "votes_r": 1036268,
+      "seat_vote_ratio_d": 1.2109,
+      "avg_compactness": 0.3227,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 1,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6806,
+          "polsby_popper": 0.2666,
+          "d_votes": 158693,
+          "r_votes": 74482,
+          "total_votes_cast": 233175,
+          "margin_pct": 0.3611,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4855,
+          "polsby_popper": 0.1758,
+          "d_votes": 148729,
+          "r_votes": 157594,
+          "total_votes_cast": 312442,
+          "margin_pct": 0.0289,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6591,
+          "polsby_popper": 0.2685,
+          "d_votes": 174000,
+          "r_votes": 90006,
+          "total_votes_cast": 271834,
+          "margin_pct": 0.3182,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.7038,
+          "polsby_popper": 0.3063,
+          "d_votes": 176977,
+          "r_votes": 74475,
+          "total_votes_cast": 251452,
+          "margin_pct": 0.4076,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6175,
+          "polsby_popper": 0.3572,
+          "d_votes": 151014,
+          "r_votes": 93562,
+          "total_votes_cast": 255312,
+          "margin_pct": 0.2349,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.5545,
+          "polsby_popper": 0.2388,
+          "d_votes": 148887,
+          "r_votes": 119637,
+          "total_votes_cast": 268524,
+          "margin_pct": 0.1089,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.3836,
+          "polsby_popper": 0.5329,
+          "d_votes": 99762,
+          "r_votes": 160303,
+          "total_votes_cast": 260065,
+          "margin_pct": 0.2328,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.3704,
+          "polsby_popper": 0.326,
+          "d_votes": 86730,
+          "r_votes": 147398,
+          "total_votes_cast": 234418,
+          "margin_pct": 0.2591,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.5121,
+          "polsby_popper": 0.432,
+          "d_votes": 124694,
+          "r_votes": 118811,
+          "total_votes_cast": 261335,
+          "margin_pct": 0.0242,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 9,
+      "redistricting_controller": "Split (Dem governor, split legislature)",
+      "notes": "Governor Holden (D) and a narrowly divided legislature drew maps; Missouri retained 9 seats after the 2000 census. Republicans gained the House majority in 2002; maps were drawn while Democrats still held a narrow edge.",
+      "efficiency_gap": -0.015,
+      "mean_median_diff": 0.104,
+      "seats_d": 4,
+      "seats_r": 5,
+      "votes_d": 829177,
+      "votes_r": 985905,
+      "seat_vote_ratio_d": 0.9729,
+      "avg_compactness": 0.273,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 5
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.7213,
+          "polsby_popper": 0.3977,
+          "d_votes": 133946,
+          "r_votes": 51755,
+          "total_votes_cast": 191055,
+          "margin_pct": 0.4426,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3161,
+          "polsby_popper": 0.1501,
+          "d_votes": 77223,
+          "r_votes": 167057,
+          "total_votes_cast": 248828,
+          "margin_pct": 0.3678,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6027,
+          "polsby_popper": 0.2261,
+          "d_votes": 122181,
+          "r_votes": 80551,
+          "total_votes_cast": 206878,
+          "margin_pct": 0.2053,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6881,
+          "polsby_popper": 0.2167,
+          "d_votes": 142204,
+          "r_votes": 64451,
+          "total_votes_cast": 210238,
+          "margin_pct": 0.3762,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6706,
+          "polsby_popper": 0.293,
+          "d_votes": 122645,
+          "r_votes": 60245,
+          "total_votes_cast": 186167,
+          "margin_pct": 0.3412,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.3582,
+          "polsby_popper": 0.2112,
+          "d_votes": 73202,
+          "r_votes": 131151,
+          "total_votes_cast": 208088,
+          "margin_pct": 0.2836,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.2351,
+          "polsby_popper": 0.444,
+          "d_votes": 45964,
+          "r_votes": 149519,
+          "total_votes_cast": 199863,
+          "margin_pct": 0.5297,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.2728,
+          "polsby_popper": 0.2669,
+          "d_votes": 50686,
+          "r_votes": 135144,
+          "total_votes_cast": 188321,
+          "margin_pct": 0.4545,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "R",
+          "partisan_lean_d": 0.2951,
+          "polsby_popper": 0.2512,
+          "d_votes": 61126,
+          "r_votes": 146032,
+          "total_votes_cast": 214125,
+          "margin_pct": 0.4099,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 8,
+      "redistricting_controller": "Split (Dem governor, Rep legislature)",
+      "notes": "Governor Nixon (D) and a Republican-supermajority legislature drew maps after Missouri lost 1 seat from the 2010 census (9\u21928); Republicans drew maps over Democratic objections producing a 6-2 Republican advantage",
+      "efficiency_gap": 0.1147,
+      "mean_median_diff": 0.0747,
+      "seats_d": 2,
+      "seats_r": 6,
+      "votes_d": 1119554,
+      "votes_r": 1463586,
+      "seat_vote_ratio_d": 0.5768,
+      "avg_compactness": 0.2697,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 6
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.815,
+          "polsby_popper": 0.2704,
+          "d_votes": 267927,
+          "r_votes": 60832,
+          "total_votes_cast": 340583,
+          "margin_pct": 0.6299,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3817,
+          "polsby_popper": 0.1985,
+          "d_votes": 146272,
+          "r_votes": 236971,
+          "total_votes_cast": 394448,
+          "margin_pct": 0.2367,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.341,
+          "polsby_popper": 0.2245,
+          "d_votes": 111189,
+          "r_votes": 214843,
+          "total_votes_cast": 338385,
+          "margin_pct": 0.3179,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3705,
+          "polsby_popper": 0.2308,
+          "d_votes": 113120,
+          "r_votes": 192237,
+          "total_votes_cast": 318723,
+          "margin_pct": 0.2591,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6212,
+          "polsby_popper": 0.1944,
+          "d_votes": 200290,
+          "r_votes": 122149,
+          "total_votes_cast": 330942,
+          "margin_pct": 0.2423,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.3334,
+          "polsby_popper": 0.2368,
+          "d_votes": 108503,
+          "r_votes": 216906,
+          "total_votes_cast": 333688,
+          "margin_pct": 0.3331,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.3261,
+          "polsby_popper": 0.4509,
+          "d_votes": 98498,
+          "r_votes": 203565,
+          "total_votes_cast": 318740,
+          "margin_pct": 0.3478,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.2545,
+          "polsby_popper": 0.3516,
+          "d_votes": 73755,
+          "r_votes": 216083,
+          "total_votes_cast": 300391,
+          "margin_pct": 0.4911,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 8,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Parson (R) and a Republican supermajority legislature drew maps; Missouri retained 8 seats. Maps maintained a 6-2 Republican advantage in a state Trump won by 15 points.",
+      "efficiency_gap": 0.0699,
+      "mean_median_diff": 0.0866,
+      "seats_d": 2,
+      "seats_r": 6,
+      "votes_d": 794978,
+      "votes_r": 1223617,
+      "seat_vote_ratio_d": 0.6348,
+      "avg_compactness": 0.3174,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 5
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.7496,
+          "polsby_popper": 0.3089,
+          "d_votes": 160999,
+          "r_votes": 53767,
+          "total_votes_cast": 220958,
+          "margin_pct": 0.4993,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4395,
+          "polsby_popper": 0.2937,
+          "d_votes": 135895,
+          "r_votes": 173277,
+          "total_votes_cast": 315666,
+          "margin_pct": 0.1209,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3489,
+          "polsby_popper": 0.157,
+          "d_votes": 96851,
+          "r_votes": 180746,
+          "total_votes_cast": 277597,
+          "margin_pct": 0.3022,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.2694,
+          "polsby_popper": 0.3031,
+          "d_votes": 67069,
+          "r_votes": 181890,
+          "total_votes_cast": 255079,
+          "margin_pct": 0.4612,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6261,
+          "polsby_popper": 0.3804,
+          "d_votes": 140688,
+          "r_votes": 84008,
+          "total_votes_cast": 230555,
+          "margin_pct": 0.2523,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.281,
+          "polsby_popper": 0.3012,
+          "d_votes": 72253,
+          "r_votes": 184865,
+          "total_votes_cast": 262892,
+          "margin_pct": 0.438,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.2742,
+          "polsby_popper": 0.5274,
+          "d_votes": 67485,
+          "r_votes": 178592,
+          "total_votes_cast": 251947,
+          "margin_pct": 0.4515,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.2237,
+          "polsby_popper": 0.2672,
+          "d_votes": 53738,
+          "r_votes": 186472,
+          "total_votes_cast": 245395,
+          "margin_pct": 0.5526,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

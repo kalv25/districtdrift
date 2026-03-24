@@ -1,0 +1,509 @@
+{
+  "state": "Indiana",
+  "fips": "18",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 10,
+      "redistricting_controller": "Split (Dem governor, split legislature)",
+      "notes": "Governor Bayh (D) and a closely divided legislature drew maps; Indiana retained 10 seats after the 1990 census",
+      "efficiency_gap": -0.0757,
+      "mean_median_diff": -0.0315,
+      "seats_d": 5,
+      "seats_r": 3,
+      "votes_d": 941211,
+      "votes_r": 869186,
+      "seat_vote_ratio_d": 0.9617,
+      "avg_compactness": 0.283,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 2,
+        "competitive": 2,
+        "lean_r": 1,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.591,
+          "polsby_popper": 0.178,
+          "d_votes": 130881,
+          "r_votes": 90593,
+          "total_votes_cast": 229295,
+          "margin_pct": 0.1819,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5745,
+          "polsby_popper": 0.2814,
+          "d_votes": 121269,
+          "r_votes": 89834,
+          "total_votes_cast": 211103,
+          "margin_pct": 0.1489,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6206,
+          "polsby_popper": 0.572,
+          "d_votes": 134907,
+          "r_votes": 82468,
+          "total_votes_cast": 217375,
+          "margin_pct": 0.2412,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4898,
+          "polsby_popper": 0.228,
+          "d_votes": 107973,
+          "r_votes": 112492,
+          "total_votes_cast": 220465,
+          "margin_pct": 0.0205,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.2784,
+          "polsby_popper": 0.1946,
+          "d_votes": 71952,
+          "r_votes": 186499,
+          "total_votes_cast": 258455,
+          "margin_pct": 0.4432,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.4052,
+          "polsby_popper": 0.4353,
+          "d_votes": 88005,
+          "r_votes": 129189,
+          "total_votes_cast": 217194,
+          "margin_pct": 0.1896,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 0.5368,
+          "polsby_popper": 0.2173,
+          "d_votes": 125244,
+          "r_votes": 108054,
+          "total_votes_cast": 238397,
+          "margin_pct": 0.0737,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.6968,
+          "polsby_popper": 0.157,
+          "d_votes": 160980,
+          "r_votes": 70057,
+          "total_votes_cast": 231037,
+          "margin_pct": 0.3935,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 9,
+      "redistricting_controller": "Split (Dem governor, Rep legislature)",
+      "notes": "Governor O'Bannon (D) and a Republican-controlled General Assembly drew maps after Indiana lost 1 seat from the 2000 census; Republicans held majorities in both chambers",
+      "efficiency_gap": 0.0557,
+      "mean_median_diff": -0.0357,
+      "seats_d": 3,
+      "seats_r": 6,
+      "votes_d": 640568,
+      "votes_r": 840694,
+      "seat_vote_ratio_d": 0.7708,
+      "avg_compactness": 0.2669,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 4,
+        "lean_r": 0,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6834,
+          "polsby_popper": 0.4113,
+          "d_votes": 90443,
+          "r_votes": 41909,
+          "total_votes_cast": 135111,
+          "margin_pct": 0.3667,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4757,
+          "polsby_popper": 0.3325,
+          "d_votes": 86253,
+          "r_votes": 95081,
+          "total_votes_cast": 188452,
+          "margin_pct": 0.0487,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.353,
+          "polsby_popper": 0.5163,
+          "d_votes": 50509,
+          "r_votes": 92566,
+          "total_votes_cast": 146606,
+          "margin_pct": 0.294,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.2681,
+          "polsby_popper": 0.1567,
+          "d_votes": 41314,
+          "r_votes": 112760,
+          "total_votes_cast": 158008,
+          "margin_pct": 0.4637,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.2592,
+          "polsby_popper": 0.1645,
+          "d_votes": 45283,
+          "r_votes": 129442,
+          "total_votes_cast": 179855,
+          "margin_pct": 0.4817,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.3503,
+          "polsby_popper": 0.23,
+          "d_votes": 63871,
+          "r_votes": 118436,
+          "total_votes_cast": 185653,
+          "margin_pct": 0.2993,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.5462,
+          "polsby_popper": 0.1837,
+          "d_votes": 77478,
+          "r_votes": 64379,
+          "total_votes_cast": 145840,
+          "margin_pct": 0.0923,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.4729,
+          "polsby_popper": 0.1878,
+          "d_votes": 88763,
+          "r_votes": 98952,
+          "total_votes_cast": 192865,
+          "margin_pct": 0.0543,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.5258,
+          "polsby_popper": 0.2192,
+          "d_votes": 96654,
+          "r_votes": 87169,
+          "total_votes_cast": 188957,
+          "margin_pct": 0.0516,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 9,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Daniels (R) and a Republican supermajority legislature drew maps after Republicans swept Indiana in 2010; Indiana retained 9 seats. Maps produced a 7-2 Republican delegation.",
+      "efficiency_gap": 0.2008,
+      "mean_median_diff": 0.014,
+      "seats_d": 2,
+      "seats_r": 7,
+      "votes_d": 1142554,
+      "votes_r": 1351760,
+      "seat_vote_ratio_d": 0.4851,
+      "avg_compactness": 0.4078,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 2,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6728,
+          "polsby_popper": 0.3643,
+          "d_votes": 187743,
+          "r_votes": 91291,
+          "total_votes_cast": 279034,
+          "margin_pct": 0.3457,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4926,
+          "polsby_popper": 0.4693,
+          "d_votes": 130113,
+          "r_votes": 134033,
+          "total_votes_cast": 273475,
+          "margin_pct": 0.0148,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3296,
+          "polsby_popper": 0.5173,
+          "d_votes": 92363,
+          "r_votes": 187872,
+          "total_votes_cast": 280235,
+          "margin_pct": 0.3408,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3554,
+          "polsby_popper": 0.4238,
+          "d_votes": 93015,
+          "r_votes": 168688,
+          "total_votes_cast": 272268,
+          "margin_pct": 0.2892,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.3918,
+          "polsby_popper": 0.3485,
+          "d_votes": 125347,
+          "r_votes": 194570,
+          "total_votes_cast": 333359,
+          "margin_pct": 0.2164,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.3729,
+          "polsby_popper": 0.4674,
+          "d_votes": 96678,
+          "r_votes": 162613,
+          "total_votes_cast": 275253,
+          "margin_pct": 0.2543,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.6285,
+          "polsby_popper": 0.5119,
+          "d_votes": 162122,
+          "r_votes": 95828,
+          "total_votes_cast": 257950,
+          "margin_pct": 0.257,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.4467,
+          "polsby_popper": 0.2105,
+          "d_votes": 122325,
+          "r_votes": 151533,
+          "total_votes_cast": 283992,
+          "margin_pct": 0.1067,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "R",
+          "partisan_lean_d": 0.4455,
+          "polsby_popper": 0.3571,
+          "d_votes": 132848,
+          "r_votes": 165332,
+          "total_votes_cast": 298180,
+          "margin_pct": 0.1089,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 9,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Holcomb (R) and a Republican supermajority legislature drew maps; Indiana retained 9 seats after the 2020 census. Maps maintained a 7-2 Republican advantage.",
+      "efficiency_gap": 0.0746,
+      "mean_median_diff": 0.0621,
+      "seats_d": 2,
+      "seats_r": 7,
+      "votes_d": 716348,
+      "votes_r": 1108351,
+      "seat_vote_ratio_d": 0.566,
+      "avg_compactness": 0.4538,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 7
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5284,
+          "polsby_popper": 0.3701,
+          "d_votes": 112656,
+          "r_votes": 100542,
+          "total_votes_cast": 213207,
+          "margin_pct": 0.0568,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3342,
+          "polsby_popper": 0.5285,
+          "d_votes": 62891,
+          "r_votes": 125313,
+          "total_votes_cast": 194073,
+          "margin_pct": 0.3317,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3152,
+          "polsby_popper": 0.5291,
+          "d_votes": 60577,
+          "r_votes": 131579,
+          "total_votes_cast": 201542,
+          "margin_pct": 0.3695,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3178,
+          "polsby_popper": 0.4095,
+          "d_votes": 62834,
+          "r_votes": 134864,
+          "total_votes_cast": 197698,
+          "margin_pct": 0.3643,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.3893,
+          "polsby_popper": 0.5584,
+          "d_votes": 93434,
+          "r_votes": 146575,
+          "total_votes_cast": 240009,
+          "margin_pct": 0.2214,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.3247,
+          "polsby_popper": 0.4203,
+          "d_votes": 62838,
+          "r_votes": 130686,
+          "total_votes_cast": 193524,
+          "margin_pct": 0.3506,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.6863,
+          "polsby_popper": 0.7109,
+          "d_votes": 117309,
+          "r_votes": 53631,
+          "total_votes_cast": 175180,
+          "margin_pct": 0.3725,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.3242,
+          "polsby_popper": 0.2126,
+          "d_votes": 68109,
+          "r_votes": 141995,
+          "total_votes_cast": 216040,
+          "margin_pct": 0.3517,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "R",
+          "partisan_lean_d": 0.3459,
+          "polsby_popper": 0.3448,
+          "d_votes": 75700,
+          "r_votes": 143166,
+          "total_votes_cast": 225276,
+          "margin_pct": 0.3083,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

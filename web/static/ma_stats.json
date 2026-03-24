@@ -1,0 +1,542 @@
+{
+  "state": "Massachusetts",
+  "fips": "25",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 10,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Weld (R) and a heavily Democratic legislature drew maps after Massachusetts lost 1 seat from the 1990 census (11\u219210); the Democratic legislature controlled the process",
+      "efficiency_gap": 0.0045,
+      "mean_median_diff": -0.0045,
+      "seats_d": 8,
+      "seats_r": 2,
+      "votes_d": 1518208,
+      "votes_r": 856572,
+      "seat_vote_ratio_d": 1.2514,
+      "avg_compactness": 0.1149,
+      "competitiveness": {
+        "solid_d": 6,
+        "lean_d": 1,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5426,
+          "polsby_popper": 0.2749,
+          "d_votes": 135049,
+          "r_votes": 113828,
+          "total_votes_cast": 254958,
+          "margin_pct": 0.0853,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.6308,
+          "polsby_popper": 0.148,
+          "d_votes": 131215,
+          "r_votes": 76795,
+          "total_votes_cast": 247163,
+          "margin_pct": 0.2616,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.4678,
+          "polsby_popper": 0.0688,
+          "d_votes": 115587,
+          "r_votes": 131473,
+          "total_votes_cast": 260932,
+          "margin_pct": 0.0643,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.721,
+          "polsby_popper": 0.049,
+          "d_votes": 182633,
+          "r_votes": 70665,
+          "total_votes_cast": 269812,
+          "margin_pct": 0.442,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.5818,
+          "polsby_popper": 0.2743,
+          "d_votes": 133844,
+          "r_votes": 96206,
+          "total_votes_cast": 256564,
+          "margin_pct": 0.1636,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.45,
+          "polsby_popper": 0.0631,
+          "d_votes": 130248,
+          "r_votes": 159165,
+          "total_votes_cast": 290312,
+          "margin_pct": 0.0999,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 0.6908,
+          "polsby_popper": 0.1297,
+          "d_votes": 174837,
+          "r_votes": 78262,
+          "total_votes_cast": 281558,
+          "margin_pct": 0.3816,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.0585,
+          "d_votes": 149903,
+          "r_votes": 0,
+          "total_votes_cast": 180484,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.7638,
+          "polsby_popper": 0.0685,
+          "d_votes": 175550,
+          "r_votes": 54291,
+          "total_votes_cast": 253634,
+          "margin_pct": 0.5276,
+          "contested": true
+        },
+        {
+          "district": 10,
+          "won_by": "D",
+          "partisan_lean_d": 0.7139,
+          "polsby_popper": 0.0139,
+          "d_votes": 189342,
+          "r_votes": 75887,
+          "total_votes_cast": 311650,
+          "margin_pct": 0.4278,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 10,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Acting Governor Swift (R) and a heavily Democratic legislature drew maps; Massachusetts retained 10 seats after the 2000 census. The Democratic legislature produced maps preserving all 10 incumbents.",
+      "efficiency_gap": 0.1806,
+      "mean_median_diff": -0.1309,
+      "seats_d": 10,
+      "seats_r": 0,
+      "votes_d": 1528634,
+      "votes_r": 290484,
+      "seat_vote_ratio_d": 1.19,
+      "avg_compactness": 0.1198,
+      "competitiveness": {
+        "solid_d": 10,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.676,
+          "polsby_popper": 0.2733,
+          "d_votes": 137841,
+          "r_votes": 66061,
+          "total_votes_cast": 212216,
+          "margin_pct": 0.352,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.1868,
+          "d_votes": 153387,
+          "r_votes": 0,
+          "total_votes_cast": 208498,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.1063,
+          "d_votes": 155697,
+          "r_votes": 0,
+          "total_votes_cast": 212304,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.0363,
+          "d_votes": 166125,
+          "r_votes": 0,
+          "total_votes_cast": 221209,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6387,
+          "polsby_popper": 0.252,
+          "d_votes": 122562,
+          "r_votes": 69337,
+          "total_votes_cast": 214022,
+          "margin_pct": 0.2774,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6834,
+          "polsby_popper": 0.0339,
+          "d_votes": 162900,
+          "r_votes": 75462,
+          "total_votes_cast": 252867,
+          "margin_pct": 0.3668,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.1333,
+          "d_votes": 170968,
+          "r_votes": 0,
+          "total_votes_cast": 236013,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.0461,
+          "d_votes": 111861,
+          "r_votes": 0,
+          "total_votes_cast": 155304,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.1184,
+          "d_votes": 168055,
+          "r_votes": 0,
+          "total_votes_cast": 235866,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 10,
+          "won_by": "D",
+          "partisan_lean_d": 0.6924,
+          "polsby_popper": 0.0114,
+          "d_votes": 179238,
+          "r_votes": 79624,
+          "total_votes_cast": 272027,
+          "margin_pct": 0.3848,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 9,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Patrick (D) and a Democratic legislature drew maps after Massachusetts lost 1 seat from the 2010 census (10\u21929); the process was relatively uncontroversial as Democrats held all seats",
+      "efficiency_gap": -0.0022,
+      "mean_median_diff": 0.0171,
+      "seats_d": 9,
+      "seats_r": 0,
+      "votes_d": 2080594,
+      "votes_r": 697637,
+      "seat_vote_ratio_d": 1.3353,
+      "avg_compactness": 0.1348,
+      "competitiveness": {
+        "solid_d": 8,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.3107,
+          "d_votes": 261936,
+          "r_votes": 0,
+          "total_votes_cast": 336555,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.2723,
+          "d_votes": 259257,
+          "r_votes": 0,
+          "total_votes_cast": 342736,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6598,
+          "polsby_popper": 0.2274,
+          "d_votes": 212119,
+          "r_votes": 109372,
+          "total_votes_cast": 335111,
+          "margin_pct": 0.3196,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6301,
+          "polsby_popper": 0.1119,
+          "d_votes": 221303,
+          "r_votes": 129936,
+          "total_votes_cast": 373114,
+          "margin_pct": 0.2601,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.7564,
+          "polsby_popper": 0.1532,
+          "d_votes": 257490,
+          "r_votes": 82944,
+          "total_votes_cast": 364201,
+          "margin_pct": 0.5127,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.5061,
+          "polsby_popper": 0.0375,
+          "d_votes": 180942,
+          "r_votes": 176612,
+          "total_votes_cast": 389852,
+          "margin_pct": 0.0121,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.0464,
+          "d_votes": 210794,
+          "r_votes": 0,
+          "total_votes_cast": 285134,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 0.7625,
+          "polsby_popper": 0.0425,
+          "d_votes": 263999,
+          "r_votes": 82242,
+          "total_votes_cast": 371694,
+          "margin_pct": 0.5249,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.6461,
+          "polsby_popper": 0.0114,
+          "d_votes": 212754,
+          "r_votes": 116531,
+          "total_votes_cast": 385799,
+          "margin_pct": 0.2922,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 9,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Baker (R) and a heavily Democratic legislature drew maps; Massachusetts retained 9 seats after the 2020 census. A bipartisan redistricting committee produced relatively uncontested maps in a solidly Democratic state.",
+      "efficiency_gap": -0.0869,
+      "mean_median_diff": 0.0691,
+      "seats_d": 9,
+      "seats_r": 0,
+      "votes_d": 1636400,
+      "votes_r": 679661,
+      "seat_vote_ratio_d": 1.4153,
+      "avg_compactness": 0.1314,
+      "competitiveness": {
+        "solid_d": 8,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6157,
+          "polsby_popper": 0.2796,
+          "d_votes": 157635,
+          "r_votes": 98386,
+          "total_votes_cast": 263651,
+          "margin_pct": 0.2314,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.6627,
+          "polsby_popper": 0.2119,
+          "d_votes": 180639,
+          "r_votes": 91956,
+          "total_votes_cast": 280071,
+          "margin_pct": 0.3253,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6356,
+          "polsby_popper": 0.2237,
+          "d_votes": 154496,
+          "r_votes": 88585,
+          "total_votes_cast": 251389,
+          "margin_pct": 0.2711,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.1236,
+          "d_votes": 201882,
+          "r_votes": 0,
+          "total_votes_cast": 291569,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.7405,
+          "polsby_popper": 0.1645,
+          "d_votes": 203994,
+          "r_votes": 71491,
+          "total_votes_cast": 284881,
+          "margin_pct": 0.481,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6414,
+          "polsby_popper": 0.0577,
+          "d_votes": 198119,
+          "r_votes": 110770,
+          "total_votes_cast": 323032,
+          "margin_pct": 0.2828,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.0571,
+          "d_votes": 151825,
+          "r_votes": 0,
+          "total_votes_cast": 162701,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 0.6982,
+          "polsby_popper": 0.0521,
+          "d_votes": 189987,
+          "r_votes": 82126,
+          "total_votes_cast": 284583,
+          "margin_pct": 0.3964,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.592,
+          "polsby_popper": 0.0122,
+          "d_votes": 197823,
+          "r_votes": 136347,
+          "total_votes_cast": 342455,
+          "margin_pct": 0.184,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

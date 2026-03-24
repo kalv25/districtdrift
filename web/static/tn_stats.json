@@ -1,0 +1,520 @@
+{
+  "state": "Tennessee",
+  "fips": "47",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 9,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor McWherter (D) and a Democratic legislature drew maps; Tennessee retained 9 seats after the 1990 census",
+      "efficiency_gap": -0.0642,
+      "mean_median_diff": -0.0197,
+      "seats_d": 6,
+      "seats_r": 3,
+      "votes_d": 882973,
+      "votes_r": 737690,
+      "seat_vote_ratio_d": 1.2236,
+      "avg_compactness": 0.1743,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 1,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 3
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.294,
+          "polsby_popper": 0.2024,
+          "d_votes": 47809,
+          "r_votes": 114797,
+          "total_votes_cast": 170158,
+          "margin_pct": 0.412,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2628,
+          "polsby_popper": 0.1997,
+          "d_votes": 52887,
+          "r_votes": 148377,
+          "total_votes_cast": 205401,
+          "margin_pct": 0.4745,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.507,
+          "polsby_popper": 0.1036,
+          "d_votes": 105693,
+          "r_votes": 102763,
+          "total_votes_cast": 216533,
+          "margin_pct": 0.0141,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6629,
+          "polsby_popper": 0.0782,
+          "d_votes": 98984,
+          "r_votes": 50340,
+          "total_votes_cast": 154511,
+          "margin_pct": 0.3258,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.7171,
+          "polsby_popper": 0.2001,
+          "d_votes": 125233,
+          "r_votes": 49417,
+          "total_votes_cast": 187590,
+          "margin_pct": 0.4341,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.5821,
+          "polsby_popper": 0.2211,
+          "d_votes": 120177,
+          "r_votes": 86289,
+          "total_votes_cast": 212428,
+          "margin_pct": 0.1641,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.3655,
+          "polsby_popper": 0.1453,
+          "d_votes": 72062,
+          "r_votes": 125101,
+          "total_votes_cast": 202866,
+          "margin_pct": 0.269,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.2592,
+          "d_votes": 136852,
+          "r_votes": 0,
+          "total_votes_cast": 163432,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.6704,
+          "polsby_popper": 0.1588,
+          "d_votes": 123276,
+          "r_votes": 60606,
+          "total_votes_cast": 212755,
+          "margin_pct": 0.3408,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 9,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Sundquist (R) and a Democratic-controlled legislature drew maps; Tennessee retained 9 seats after the 2000 census. Democrats held both chambers and controlled the process.",
+      "efficiency_gap": -0.0873,
+      "mean_median_diff": -0.0401,
+      "seats_d": 5,
+      "seats_r": 4,
+      "votes_d": 708375,
+      "votes_r": 770510,
+      "seat_vote_ratio_d": 1.1598,
+      "avg_compactness": 0.1685,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.2119,
+          "d_votes": 0,
+          "r_votes": 127300,
+          "total_votes_cast": 128886,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2014,
+          "polsby_popper": 0.2828,
+          "d_votes": 37035,
+          "r_votes": 146887,
+          "total_votes_cast": 185981,
+          "margin_pct": 0.5973,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3438,
+          "polsby_popper": 0.0954,
+          "d_votes": 58824,
+          "r_votes": 112254,
+          "total_votes_cast": 173921,
+          "margin_pct": 0.3123,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.5284,
+          "polsby_popper": 0.1272,
+          "d_votes": 95989,
+          "r_votes": 85680,
+          "total_votes_cast": 184300,
+          "margin_pct": 0.0567,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6571,
+          "polsby_popper": 0.166,
+          "d_votes": 108903,
+          "r_votes": 56825,
+          "total_votes_cast": 170886,
+          "margin_pct": 0.3142,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6711,
+          "polsby_popper": 0.1755,
+          "d_votes": 117119,
+          "r_votes": 57397,
+          "total_votes_cast": 177628,
+          "margin_pct": 0.3422,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.2724,
+          "polsby_popper": 0.0803,
+          "d_votes": 51790,
+          "r_votes": 138314,
+          "total_votes_cast": 195558,
+          "margin_pct": 0.4551,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "D",
+          "partisan_lean_d": 0.7198,
+          "polsby_popper": 0.1972,
+          "d_votes": 117811,
+          "r_votes": 45853,
+          "total_votes_cast": 167970,
+          "margin_pct": 0.4397,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.18,
+          "d_votes": 120904,
+          "r_votes": 0,
+          "total_votes_cast": 144260,
+          "margin_pct": null,
+          "contested": false
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 9,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Haslam (R) and a Republican supermajority legislature drew maps after Republicans swept Tennessee in 2010; Tennessee retained 9 seats. Maps produced a 7-2 Republican delegation.",
+      "efficiency_gap": 0.0018,
+      "mean_median_diff": 0.062,
+      "seats_d": 2,
+      "seats_r": 7,
+      "votes_d": 796513,
+      "votes_r": 1369562,
+      "seat_vote_ratio_d": 0.6043,
+      "avg_compactness": 0.2023,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 6
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.2073,
+          "polsby_popper": 0.2265,
+          "d_votes": 47663,
+          "r_votes": 182252,
+          "total_votes_cast": 239672,
+          "margin_pct": 0.5854,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2169,
+          "polsby_popper": 0.1116,
+          "d_votes": 54522,
+          "r_votes": 196894,
+          "total_votes_cast": 264505,
+          "margin_pct": 0.5663,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.366,
+          "polsby_popper": 0.1182,
+          "d_votes": 91094,
+          "r_votes": 157830,
+          "total_votes_cast": 256909,
+          "margin_pct": 0.2681,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.4424,
+          "polsby_popper": 0.1407,
+          "d_votes": 102022,
+          "r_votes": 128568,
+          "total_votes_cast": 230590,
+          "margin_pct": 0.1151,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6656,
+          "polsby_popper": 0.2931,
+          "d_votes": 171621,
+          "r_votes": 86240,
+          "total_votes_cast": 263095,
+          "margin_pct": 0.3311,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.2369,
+          "d_votes": 0,
+          "r_votes": 184383,
+          "total_votes_cast": 241241,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.2524,
+          "polsby_popper": 0.2298,
+          "d_votes": 61679,
+          "r_votes": 182730,
+          "total_votes_cast": 257306,
+          "margin_pct": 0.4953,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.294,
+          "polsby_popper": 0.2635,
+          "d_votes": 79490,
+          "r_votes": 190923,
+          "total_votes_cast": 279422,
+          "margin_pct": 0.4121,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.7593,
+          "polsby_popper": 0.2005,
+          "d_votes": 188422,
+          "r_votes": 59742,
+          "total_votes_cast": 250987,
+          "margin_pct": 0.5185,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 9,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Lee (R) and a Republican supermajority legislature drew maps; Tennessee retained 9 seats after the 2020 census. Republicans also controversially redrew state legislative maps in 2023 to split Nashville across three congressional districts, diluting the city's Democratic voting power \u2014 a move critics called an unconstitutional partisan gerrymander.",
+      "efficiency_gap": 0.1155,
+      "mean_median_diff": 0.0376,
+      "seats_d": 1,
+      "seats_r": 8,
+      "votes_d": 581902,
+      "votes_r": 1099462,
+      "seat_vote_ratio_d": 0.321,
+      "avg_compactness": 0.2042,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 7
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.201,
+          "polsby_popper": 0.2678,
+          "d_votes": 37049,
+          "r_votes": 147241,
+          "total_votes_cast": 188003,
+          "margin_pct": 0.5979,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3209,
+          "polsby_popper": 0.1649,
+          "d_votes": 66673,
+          "r_votes": 141089,
+          "total_votes_cast": 207762,
+          "margin_pct": 0.3582,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3063,
+          "polsby_popper": 0.1533,
+          "d_votes": 60334,
+          "r_votes": 136639,
+          "total_votes_cast": 199830,
+          "margin_pct": 0.3874,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.2673,
+          "polsby_popper": 0.1948,
+          "d_votes": 44648,
+          "r_votes": 122401,
+          "total_votes_cast": 173437,
+          "margin_pct": 0.4655,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4311,
+          "polsby_popper": 0.1314,
+          "d_votes": 93648,
+          "r_votes": 123558,
+          "total_votes_cast": 221275,
+          "margin_pct": 0.1377,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.3367,
+          "polsby_popper": 0.2468,
+          "d_votes": 65675,
+          "r_votes": 129388,
+          "total_votes_cast": 195063,
+          "margin_pct": 0.3266,
+          "contested": true
+        },
+        {
+          "district": 7,
+          "won_by": "R",
+          "partisan_lean_d": 0.3888,
+          "polsby_popper": 0.2666,
+          "d_votes": 68973,
+          "r_votes": 108421,
+          "total_votes_cast": 180822,
+          "margin_pct": 0.2224,
+          "contested": true
+        },
+        {
+          "district": 8,
+          "won_by": "R",
+          "partisan_lean_d": 0.2472,
+          "polsby_popper": 0.2916,
+          "d_votes": 51102,
+          "r_votes": 155602,
+          "total_votes_cast": 210315,
+          "margin_pct": 0.5056,
+          "contested": true
+        },
+        {
+          "district": 9,
+          "won_by": "D",
+          "partisan_lean_d": 0.7276,
+          "polsby_popper": 0.1209,
+          "d_votes": 93800,
+          "r_votes": 35123,
+          "total_votes_cast": 133918,
+          "margin_pct": 0.4551,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}
