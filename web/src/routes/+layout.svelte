@@ -22,10 +22,16 @@
 	<meta property="og:url" content="https://districtdrift.org/" />
 	<meta property="og:locale" content="en_US" />
 
+	<!-- Open Graph image -->
+	<meta property="og:image" content="https://districtdrift.org/og-image.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+
 	<!-- Twitter / X card -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="District Drift — US Congressional Gerrymandering" />
 	<meta name="twitter:description" content="Three decades of congressional gerrymandering — explore how redistricting shaped partisan outcomes in every state from 1992 to 2022." />
+	<meta name="twitter:image" content="https://districtdrift.org/og-image.png" />
 
 	<!-- JSON-LD structured data -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
