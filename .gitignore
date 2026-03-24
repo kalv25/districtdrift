@@ -1,3 +1,4 @@
+CLAUDE.md
 data/
 # Exclude root-level tiles dir (tippecanoe workspace) but allow web/static/tiles
 /tiles/
