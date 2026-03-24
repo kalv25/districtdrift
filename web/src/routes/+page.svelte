@@ -187,6 +187,7 @@
   let animating = $state(false);
   let showPrecincts = $state(false);
   let mapComponent: { takeScreenshot: (state: string, year: number) => void } | undefined;
+  let nationComponent: { takeScreenshot: (year: number) => void } | undefined;
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
 
   let hoveredYear = $state<number | null>(null);
@@ -595,6 +596,11 @@
         >{s === 'fast' ? 'Fast' : s === 'normal' ? 'Med' : 'Slow'}</button>
       {/each}
     </div>
+    <button
+      class="nation-yr-btn nation-screenshot-btn"
+      title="Save map as PNG"
+      onclick={() => nationComponent?.takeScreenshot(selectedYear)}
+    >💾</button>
   </div>
 {/snippet}
 
@@ -867,6 +873,7 @@
     <div class="map-wrap">
       {#if viewMode === 'nation'}
         <NationView
+          bind:this={nationComponent}
           selectedYear={selectedYear}
           onStateClick={selectState}
           fullDataStates={Object.keys(STATES)}
@@ -2447,6 +2454,7 @@
     border-color: var(--btn-border);
   }
   .nation-yr-btn.anim-btn.playing { background: #fff8e1; border-color: #f0a500; color: #a06000; }
+  .nation-screenshot-btn { width: auto; padding: 0.45rem 0.5rem; color: var(--text-muted); }
 
   .nation-speed-group {
     display: flex;

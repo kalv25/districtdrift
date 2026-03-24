@@ -276,6 +276,17 @@
   let _dragStartX = 0, _dragStartY = 0;
   let _dragStartTx = 0, _dragStartTy = 0;
 
+  // Pinch-to-zoom: track active pointers
+  const _activePointers = new Map<number, { x: number; y: number }>();
+  let _pinchDist = 0;
+
+  function _pointerDist(): number {
+    const pts = [..._activePointers.values()];
+    if (pts.length < 2) return 0;
+    const dx = pts[0].x - pts[1].x, dy = pts[0].y - pts[1].y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
   function handleWheel(e: WheelEvent) {
     e.preventDefault();
     neZoomed = false;
@@ -290,6 +301,13 @@
   }
 
   function handlePointerDown(e: PointerEvent) {
+    _activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (_activePointers.size === 2) {
+      // Starting a pinch — capture distance and stop drag
+      _pinchDist = _pointerDist();
+      _dragActive = false;
+      return;
+    }
     if ((e.target as Element).closest('.state-path') && zoomK === 1) return;
     _dragActive  = true;
     _dragMoved   = false;
@@ -301,6 +319,24 @@
   }
 
   function handlePointerMove(e: PointerEvent) {
+    _activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (_activePointers.size === 2 && _pinchDist > 0) {
+      // Pinch zoom
+      const newDist = _pointerDist();
+      const factor  = newDist / _pinchDist;
+      const pts = [..._activePointers.values()];
+      const midX = (pts[0].x + pts[1].x) / 2;
+      const midY = (pts[0].y + pts[1].y) / 2;
+      const rect  = (e.currentTarget as Element).getBoundingClientRect();
+      const mx = midX - rect.left, my = midY - rect.top;
+      const newK = Math.max(1, Math.min(8, zoomK * factor));
+      zoomTx = mx - (newK / zoomK) * (mx - zoomTx);
+      zoomTy = my - (newK / zoomK) * (my - zoomTy);
+      zoomK  = newK;
+      _pinchDist = newDist;
+      neZoomed = false;
+      return;
+    }
     if (!_dragActive) return;
     const dx = e.clientX - _dragStartX;
     const dy = e.clientY - _dragStartY;
@@ -308,7 +344,11 @@
     if (_dragMoved) { zoomTx = _dragStartTx + dx; zoomTy = _dragStartTy + dy; }
   }
 
-  function handlePointerUp() { _dragActive = false; }
+  function handlePointerUp(e: PointerEvent) {
+    _activePointers.delete(e.pointerId);
+    if (_activePointers.size < 2) _pinchDist = 0;
+    _dragActive = false;
+  }
 
   function zoomStep(factor: number) {
     const cx = svgW / 2, cy = svgH / 2;
@@ -421,13 +461,70 @@
     if (curr === null || prev === null) return null;
     return curr - prev;
   }
+
+  // Hovering a rank-panel row highlights that state's tooltip on the map
+  function hoverRankState(po: string) {
+    const sp = statePaths.find(p => p.po === po);
+    if (sp && sp.cx !== null && sp.cy !== null) {
+      hovered = { po, x: sp.cx * zoomK + zoomTx, y: sp.cy * zoomK + zoomTy };
+    }
+  }
+
+  let svgEl = $state<SVGSVGElement | null>(null);
+
+  export function takeScreenshot(year: number) {
+    if (!svgEl) return;
+    const w = svgEl.clientWidth  || svgW;
+    const h = svgEl.clientHeight || svgH;
+    const dpr = window.devicePixelRatio || 1;
+    const xml = new XMLSerializer().serializeToString(svgEl);
+    const blob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' });
+    const url  = URL.createObjectURL(blob);
+    const img  = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width  = w * dpr;
+      canvas.height = h * dpr;
+      const ctx = canvas.getContext('2d')!;
+      ctx.scale(dpr, dpr);
+      ctx.fillStyle = '#1a1a2e';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+
+      // Watermark
+      const fSize = 13 * dpr;
+      ctx.font = `600 ${fSize}px system-ui, sans-serif`;
+      ctx.textBaseline = 'bottom';
+      ctx.textAlign    = 'right';
+      const label = `US ${year} · districtdrift.org`;
+      const tw    = ctx.measureText(label).width;
+      const pad   = 12 * dpr, bpad = 6 * dpr;
+      const x = canvas.width - pad, y = canvas.height - pad;
+      ctx.fillStyle = 'rgba(0,0,0,0.55)';
+      ctx.beginPath();
+      ctx.roundRect(x - tw - bpad, y - fSize - bpad, tw + bpad * 2, fSize + bpad * 2, 4 * dpr);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.fillText(label, x, y);
+
+      canvas.toBlob(b => {
+        if (!b) return;
+        const a = document.createElement('a');
+        a.href     = URL.createObjectURL(b);
+        a.download = `districtdrift-us-${year}.png`;
+        a.click();
+      }, 'image/png');
+    };
+    img.src = url;
+  }
 </script>
 
 <div class="nation-wrap" bind:this={container}>
   {#if loading}
     <div class="loading">Loading map…</div>
   {:else}
-    <svg width={svgW} height={svgH} class="nation-svg"
+    <svg width={svgW} height={svgH} class="nation-svg" bind:this={svgEl}
       onwheel={handleWheel}
       onpointerdown={handlePointerDown}
       onpointermove={handlePointerMove}
@@ -689,6 +786,9 @@
     <!-- Color legend -->
     <div class="eg-legend">
       <div class="legend-gradient"></div>
+      <div class="legend-ticks">
+        <span>−25%</span><span>−15%</span><span>−5%</span><span>0</span><span>+5%</span><span>+15%</span><span>+25%</span>
+      </div>
       <div class="legend-labels">
         <span>D gerrymander</span>
         <span>Neutral</span>
@@ -711,7 +811,8 @@
         {#each ranked.slice(0, 7) as s}
           {@const full = hasFullData(s.po)}
           {@const delta = egDeltaVsPrev(s.po)}
-          <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}>
+          <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}
+            onmouseenter={() => hoverRankState(s.po)} onmouseleave={() => hovered = null}>
             <span class="rank-state">{s.po}</span>
             <span class="rank-name">{s.name}</span>
             {#if delta !== null && Math.abs(delta) >= 0.01}
@@ -729,7 +830,8 @@
         {#each [...ranked].reverse().slice(0, 7) as s}
           {@const full = hasFullData(s.po)}
           {@const delta = egDeltaVsPrev(s.po)}
-          <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}>
+          <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}
+            onmouseenter={() => hoverRankState(s.po)} onmouseleave={() => hovered = null}>
             <span class="rank-state">{s.po}</span>
             <span class="rank-name">{s.name}</span>
             {#if delta !== null && Math.abs(delta) >= 0.01}
@@ -915,6 +1017,14 @@
     height: 10px;
     border-radius: 5px;
     background: linear-gradient(to right, #1960b4, #96c4e8, #b0b8b0, #dc9696, #b41e1e);
+  }
+  .legend-ticks {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 2px;
   }
   .legend-labels {
     display: flex;
