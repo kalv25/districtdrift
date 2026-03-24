@@ -539,9 +539,20 @@
 />
 
 <svelte:head>
-  <title>{viewMode === 'nation'
-    ? `District Drift — All States, ${selectedYear}`
-    : `District Drift — ${STATES[selectedState]?.name ?? selectedState}, ${selectedYear}, District ${pinnedDistrict}`}</title>
+  {#if viewMode === 'nation'}
+    <title>District Drift — All States, {selectedYear}</title>
+    <meta property="og:title" content="District Drift — All States, {selectedYear}" />
+    <meta property="og:description" content="How did redistricting shape US House seats in {selectedYear}? Explore all 50 states ranked by partisan efficiency gap." />
+    <meta name="twitter:title" content="District Drift — All States, {selectedYear}" />
+    <meta name="twitter:description" content="How did redistricting shape US House seats in {selectedYear}? Explore all 50 states ranked by partisan efficiency gap." />
+  {:else}
+    {@const stateName = STATES[selectedState]?.name ?? selectedState}
+    <title>District Drift — {stateName}, {selectedYear}</title>
+    <meta property="og:title" content="District Drift — {stateName} {selectedYear} Congressional Districts" />
+    <meta property="og:description" content="Explore how {selectedYear} redistricting shaped {stateName}'s congressional districts — partisan lean, efficiency gap, and demographic breakdown." />
+    <meta name="twitter:title" content="District Drift — {stateName} {selectedYear}" />
+    <meta name="twitter:description" content="Explore how {selectedYear} redistricting shaped {stateName}'s congressional districts — partisan lean, efficiency gap, and demographic breakdown." />
+  {/if}
 </svelte:head>
 
 {#snippet nationCycleControls()}

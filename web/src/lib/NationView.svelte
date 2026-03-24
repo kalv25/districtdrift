@@ -384,6 +384,29 @@
     const gap = (seatShareD - voteShareD) * 100;
     return (gap >= 0 ? '+' : '') + gap.toFixed(1) + '% seat gap';
   }
+
+  const CYCLE_YEARS = [1992, 2002, 2012, 2022];
+
+  function getCycleHistory(po: string): Array<{ year: number; eg: number | null }> {
+    const s = byPo[po];
+    if (!s) return [];
+    return CYCLE_YEARS.map(year => ({
+      year,
+      eg: s.cycles.find(c => c.year === year)?.efficiency_gap ?? null,
+    }));
+  }
+
+  function egDeltaVsPrev(po: string): number | null {
+    const s = byPo[po];
+    if (!s) return null;
+    const years = CYCLE_YEARS.filter(y => s.cycles.some(c => c.year === y));
+    const idx = years.indexOf(selectedYear);
+    if (idx <= 0) return null;
+    const curr = s.cycles.find(c => c.year === selectedYear)?.efficiency_gap ?? null;
+    const prev = s.cycles.find(c => c.year === years[idx - 1])?.efficiency_gap ?? null;
+    if (curr === null || prev === null) return null;
+    return curr - prev;
+  }
 </script>
 
 <div class="nation-wrap" bind:this={container}>
@@ -584,6 +607,7 @@
       {@const c = getCycle(hovered.po)}
       {@const full = hasFullData(hovered.po)}
       {@const tooltipRight = hovered.x > svgW * 0.65}
+      {@const history = getCycleHistory(hovered.po)}
       <div
         class="map-tooltip"
         class:flip-left={tooltipRight}
@@ -615,6 +639,26 @@
           </span>
         {:else}
           <span>No election data</span>
+        {/if}
+        {#if history.some(h => h.eg !== null)}
+          <div class="tt-trend">
+            {#each history as h}
+              {@const active = h.year === selectedYear}
+              <div class="tt-trend-col" class:active>
+                <div class="tt-trend-bar-wrap">
+                  {#if h.eg !== null}
+                    <div
+                      class="tt-trend-bar"
+                      style="height:{Math.min(28, Math.max(3, Math.abs(h.eg) * 112))}px; background:{egBarColor(h.eg)}"
+                    ></div>
+                  {:else}
+                    <div class="tt-trend-bar tt-trend-bar-none"></div>
+                  {/if}
+                </div>
+                <span class="tt-trend-year">{String(h.year).slice(2)}</span>
+              </div>
+            {/each}
+          </div>
         {/if}
         {#if full}
           <span class="tooltip-cta">Click to explore districts →</span>
@@ -648,9 +692,13 @@
       <div class="rank-list">
         {#each ranked.slice(0, 7) as s}
           {@const full = hasFullData(s.po)}
+          {@const delta = egDeltaVsPrev(s.po)}
           <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}>
             <span class="rank-state">{s.po}</span>
             <span class="rank-name">{s.name}</span>
+            {#if delta !== null && Math.abs(delta) >= 0.01}
+              <span class="rank-delta" class:rank-delta-r={delta > 0} class:rank-delta-d={delta < 0}>{delta > 0 ? '↑' : '↓'}</span>
+            {/if}
             <Pill party="R">{egLabel(s.eg)}</Pill>
           </button>
         {/each}
@@ -662,9 +710,13 @@
       <div class="rank-list">
         {#each [...ranked].reverse().slice(0, 7) as s}
           {@const full = hasFullData(s.po)}
+          {@const delta = egDeltaVsPrev(s.po)}
           <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}>
             <span class="rank-state">{s.po}</span>
             <span class="rank-name">{s.name}</span>
+            {#if delta !== null && Math.abs(delta) >= 0.01}
+              <span class="rank-delta" class:rank-delta-r={delta > 0} class:rank-delta-d={delta < 0}>{delta > 0 ? '↑' : '↓'}</span>
+            {/if}
             <Pill party="D">{egLabel(s.eg)}</Pill>
           </button>
         {/each}
@@ -783,6 +835,38 @@
   .tooltip-cta { color: #80c8ff; font-weight: 600; margin-top: 0.25rem; }
   .tooltip-soon { opacity: 0.45; font-style: italic; margin-top: 0.2rem; }
 
+  .tt-trend {
+    display: flex;
+    gap: 4px;
+    margin-top: 0.35rem;
+    padding-top: 0.3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    align-items: flex-end;
+  }
+  .tt-trend-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    opacity: 0.55;
+  }
+  .tt-trend-col.active { opacity: 1; }
+  .tt-trend-bar-wrap {
+    height: 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+  }
+  .tt-trend-bar {
+    width: 8px;
+    border-radius: 2px 2px 0 0;
+    min-height: 3px;
+  }
+  .tt-trend-bar-none { background: rgba(255,255,255,0.15); height: 2px; width: 8px; }
+  .tt-trend-year { font-size: 0.56rem; color: rgba(255,255,255,0.5); }
+
   /* Legend */
   .eg-legend {
     position: absolute;
@@ -878,6 +962,9 @@
 
   .rank-state { font-size: 0.72rem; font-weight: 700; color: var(--text); width: 1.8em; flex-shrink: 0; }
   .rank-name { font-size: 0.68rem; color: var(--text-muted); flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rank-delta { font-size: 0.68rem; font-weight: 700; flex-shrink: 0; }
+  .rank-delta-r { color: #b91c1c; }
+  .rank-delta-d { color: #1d4ed8; }
   .rank-eg { font-size: 0.68rem; font-weight: 600; flex-shrink: 0; }
   .rank-eg-r { color: #b91c1c; }
   .rank-eg-d { color: #1d4ed8; }
