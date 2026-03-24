@@ -2,7 +2,7 @@
 
 **Version:** 2026.3.22
 **Created:** 2026-03-22
-**Last Updated:** 2026-03-24 23:00 UTC
+**Last Updated:** 2026-03-24 23:15 UTC
 
 ## Project overview
 A public-interest website that documents the effects of gerrymandering in the
@@ -149,7 +149,7 @@ Outputs (gitignored except web/static files):
   - Restored on load (takes priority over localStorage)
 - **⤴ Share** button: uses Web Share API on mobile (native share sheet — email, messages, etc.); falls back to clipboard copy on desktop with "✓ Copied" confirmation
 - Dynamic `<title>`: `District Drift — Michigan, 2022, District 3` (descriptive for shared links)
-- "All 50 states" shown at the bottom of the state dropdown menu (auto-updates: shows "X of 50 states · more coming" when < 50)
+- State selector opens a **geographic tile-grid modal** (US tile cartogram, 12×7 grid) instead of a long dropdown; hover shows full state name; active state highlighted in blue; ESC or click-outside to close
 
 #### Help modal
 - Dark navy header (`#1a1a2e`) for visual weight

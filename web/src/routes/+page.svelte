@@ -121,10 +121,38 @@
   // 'nation' = 50-state overview; a postal code = state detail view
   let viewMode = $state<'nation' | string>('MI');
   let selectedState = $derived(viewMode === 'nation' ? 'MI' : viewMode);
-  let stateMenuOpen = $state(false);
+  let statePickerOpen = $state(false);
+  let hoveredPicker   = $state<string | null>(null);
+
+  // Geographic tile-grid positions (col 1–12, row 1–7).
+  // Layout mirrors the well-known US tile-cartogram used in news/dataviz.
+  const STATE_GRID: Record<string, { col: number; row: number }> = {
+    //                              row 1 — far northeast
+    VT:{col:10,row:1}, ME:{col:11,row:1},
+    //                              row 2 — northern tier
+    WA:{col:1,row:2}, ID:{col:2,row:2}, MT:{col:3,row:2}, ND:{col:4,row:2},
+    MN:{col:5,row:2}, WI:{col:6,row:2}, MI:{col:7,row:2},
+    NY:{col:9,row:2}, NH:{col:10,row:2}, MA:{col:11,row:2},
+    //                              row 3 — upper-mid
+    OR:{col:1,row:3}, NV:{col:2,row:3}, WY:{col:3,row:3}, SD:{col:4,row:3},
+    IA:{col:5,row:3}, IL:{col:6,row:3}, IN:{col:7,row:3}, OH:{col:8,row:3},
+    PA:{col:9,row:3}, NJ:{col:10,row:3}, CT:{col:11,row:3}, RI:{col:12,row:3},
+    //                              row 4 — mid
+    CA:{col:1,row:4}, UT:{col:2,row:4}, CO:{col:3,row:4}, NE:{col:4,row:4},
+    MO:{col:5,row:4}, KY:{col:6,row:4}, WV:{col:7,row:4}, VA:{col:8,row:4},
+    MD:{col:9,row:4}, DE:{col:10,row:4},
+    //                              row 5 — upper south
+    AZ:{col:2,row:5}, NM:{col:3,row:5}, KS:{col:4,row:5}, AR:{col:5,row:5},
+    TN:{col:6,row:5}, NC:{col:7,row:5}, SC:{col:8,row:5},
+    //                              row 6 — deep south
+    TX:{col:3,row:6}, OK:{col:4,row:6}, LA:{col:5,row:6}, MS:{col:6,row:6},
+    AL:{col:7,row:6}, GA:{col:8,row:6}, FL:{col:9,row:6},
+    //                              row 7 — non-contiguous
+    AK:{col:1,row:7}, HI:{col:2,row:7},
+  };
 
   function selectState(po: string) {
-    stateMenuOpen = false;
+    statePickerOpen = false;
     if (viewMode === po) return;
     viewMode = po;
     manualYear = 2022;
@@ -136,7 +164,7 @@
 
   function goNation() {
     viewMode = 'nation';
-    stateMenuOpen = false;
+    statePickerOpen = false;
   }
 
   const CYCLES = [1992, 2002, 2012, 2022];
@@ -506,11 +534,8 @@
 
 <svelte:window
   onclick={(e) => {
-    if (stateMenuOpen && !(e.target as Element)?.closest?.('.state-selector-wrap')) {
-      stateMenuOpen = false;
-    }
   }}
-  onkeydown={(e) => { if (e.key === 'Escape') helpOpen = false; }}
+  onkeydown={(e) => { if (e.key === 'Escape') { helpOpen = false; statePickerOpen = false; } }}
 />
 
 <svelte:head>
@@ -794,36 +819,19 @@
         onclick={goNation}
       >All states</button>
 
-      <div class="state-selector-wrap">
-        <button
-          class="state-selector"
-          class:open={stateMenuOpen}
-          class:active={viewMode !== 'nation'}
-          onclick={() => stateMenuOpen = !stateMenuOpen}
-          aria-haspopup="listbox"
-          aria-expanded={stateMenuOpen}
-        >
-          {#if viewMode !== 'nation'}
-            <span class="state-name">{STATES[selectedState]?.name ?? selectedState}</span>
-          {:else}
-            <span class="state-name" style="opacity:0.55">Select state</span>
-          {/if}
-          <span class="state-chevron">▾</span>
-        </button>
-        {#if stateMenuOpen}
-          <ul class="state-menu" role="listbox">
-            {#each Object.entries(STATES) as [po, info]}
-              <li role="option" aria-selected={po === selectedState}>
-                <button
-                  class:active={viewMode === po}
-                  onclick={() => selectState(po)}
-                >{info.name}</button>
-              </li>
-            {/each}
-            <li class="state-menu-note">{Object.keys(STATES).length === 50 ? 'All 50 states' : `${Object.keys(STATES).length} of 50 states · more coming`}</li>
-          </ul>
+      <button
+        class="state-selector"
+        class:active={viewMode !== 'nation'}
+        onclick={() => statePickerOpen = true}
+        aria-haspopup="dialog"
+      >
+        {#if viewMode !== 'nation'}
+          <span class="state-name">{STATES[selectedState]?.name ?? selectedState}</span>
+        {:else}
+          <span class="state-name" style="opacity:0.55">Select state</span>
         {/if}
-      </div>
+        <span class="state-chevron">▾</span>
+      </button>
     </nav>
 
   </header>
@@ -1166,6 +1174,34 @@
   </footer>
 </div>
 
+{#if statePickerOpen}
+  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+  <div class="help-backdrop" onclick={() => statePickerOpen = false}>
+    <div class="state-picker-modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Select a state">
+      <div class="state-picker-header">
+        <span class="state-picker-title">Select a state</span>
+        <button class="help-close" onclick={() => statePickerOpen = false} aria-label="Close">✕</button>
+      </div>
+      <div class="state-tile-grid">
+        {#each Object.entries(STATES) as [po]}
+          {@const pos = STATE_GRID[po]}
+          {#if pos}
+            <button
+              class="state-tile"
+              class:active={viewMode === po}
+              style="grid-column:{pos.col}; grid-row:{pos.row}"
+              onclick={() => selectState(po)}
+              onmouseenter={() => hoveredPicker = po}
+              onmouseleave={() => hoveredPicker = null}
+            >{po}</button>
+          {/if}
+        {/each}
+      </div>
+      <div class="state-picker-label">{hoveredPicker ? STATES[hoveredPicker]?.name : '\u00A0'}</div>
+    </div>
+  </div>
+{/if}
+
 {#if helpOpen}
   <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
   <div class="help-backdrop" onclick={() => helpOpen = false}>
@@ -1478,18 +1514,6 @@
   .view-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
   .view-btn.active { background: rgba(255,255,255,0.18); color: #fff; border-color: rgba(255,255,255,0.3); font-weight: 700; }
 
-  .state-selector-wrap { position: relative; }
-
-  .state-menu-note {
-    font-size: 0.68rem;
-    color: var(--text-dim);
-    padding: 0.4rem 0.75rem 0.5rem;
-    border-top: 1px solid var(--border-dim);
-    margin-top: 0.2rem;
-    text-align: center;
-    pointer-events: none;
-  }
-
   .state-selector {
     display: flex;
     align-items: center;
@@ -1504,42 +1528,74 @@
     font-size: 0.85rem;
     font-family: inherit;
   }
-  .state-selector:hover, .state-selector.open { background: rgba(255,255,255,0.14); }
-.state-name { font-weight: 600; }
+  .state-selector:hover { background: rgba(255,255,255,0.14); }
+  .state-name { font-weight: 600; }
   .state-chevron { font-size: 0.6rem; opacity: 0.4; }
 
-  .state-menu {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
+  /* ── State tile-grid picker modal ── */
+  .state-picker-modal {
     background: #1a1a2e;
     border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 10px;
-    list-style: none;
-    margin: 0;
-    padding: 0.3rem 0;
-    min-width: 100%;
-    z-index: 100;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-    overflow: hidden;
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem 1rem;
+    width: min(96vw, 540px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   }
-  .state-menu li { list-style: none; }
-  .state-menu li button {
-    display: block;
-    width: 100%;
-    padding: 0.45rem 1rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.75);
-    background: none;
-    border: none;
-    text-align: left;
+  .state-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .state-picker-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.02em;
+  }
+  .state-tile-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 3px;
+    aspect-ratio: 12 / 7;
+  }
+  .state-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: rgba(255,255,255,0.65);
+    font-size: clamp(0.45rem, 1.5vw, 0.72rem);
+    font-weight: 700;
+    font-family: inherit;
     cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.1s, color 0.1s;
+    transition: background 0.1s, color 0.1s, border-color 0.1s;
+    padding: 0;
+    line-height: 1;
   }
-  .state-menu li button:hover { background: rgba(255,255,255,0.1); color: #fff; }
-  .state-menu li button.active { color: #fff; font-weight: 700; }
+  .state-tile:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    border-color: rgba(255,255,255,0.35);
+  }
+  .state-tile.active {
+    background: rgba(99,179,237,0.25);
+    border-color: rgba(99,179,237,0.7);
+    color: #63b3ed;
+  }
+  .state-picker-label {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    margin-top: 0.65rem;
+    min-height: 1.2em;
+    letter-spacing: 0.01em;
+  }
 
   .sticky-controls-header {
     display: flex;
