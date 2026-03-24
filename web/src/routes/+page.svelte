@@ -787,9 +787,9 @@
                 >{info.name}</button>
               </li>
             {/each}
+            <li class="state-menu-note">{Object.keys(STATES).length} of 50 states · more coming</li>
           </ul>
         {/if}
-        <p class="states-note">{Object.keys(STATES).length} of 50 states · more coming</p>
       </div>
     </nav>
 
@@ -989,9 +989,18 @@
             <div class="panel-header" style={`background: linear-gradient(to right, rgba(74,144,217,${alphaD}), rgba(224,92,92,${alphaR})), var(--surface)`}>
               <span class="dc-district-label">D{pinnedDistrict} <span class="dc-district-year">{selectedYear}</span></span>
               {#if pinnedDistData != null}
-                <Pill party={won_by === 'D' ? 'D' : won_by === 'R' ? 'R' : null} solid size="md">
-                  {won_by === 'D' ? 'Democrat' : won_by === 'R' ? 'Republican' : '—'}
-                </Pill>
+                <Tooltip
+                  text={won_by === 'D'
+                    ? `This district returned a Democratic representative in the ${selectedYear} election cycle.`
+                    : won_by === 'R'
+                    ? `This district returned a Republican representative in the ${selectedYear} election cycle.`
+                    : `Election result not available for this district and cycle.`}
+                  placement="center"
+                >
+                  <Pill party={won_by === 'D' ? 'D' : won_by === 'R' ? 'R' : null} solid size="md">
+                    {won_by === 'D' ? 'Democrat' : won_by === 'R' ? 'Republican' : '—'}
+                  </Pill>
+                </Tooltip>
               {/if}
               <a href={ballotpediaUrl(selectedState, pinnedDistrict)} target="_blank" rel="noopener" class="district-card-wiki">Ballotpedia →</a>
             </div>
@@ -1436,14 +1445,16 @@
   .view-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
   .view-btn.active { background: rgba(255,255,255,0.18); color: #fff; border-color: rgba(255,255,255,0.3); font-weight: 700; }
 
-  .state-selector-wrap { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .state-selector-wrap { position: relative; }
 
-  .states-note {
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.35);
-    margin: 0;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
+  .state-menu-note {
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    padding: 0.4rem 0.75rem 0.5rem;
+    border-top: 1px solid var(--border-dim);
+    margin-top: 0.2rem;
+    text-align: center;
+    pointer-events: none;
   }
 
   .state-selector {
