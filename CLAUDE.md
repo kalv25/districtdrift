@@ -2,7 +2,7 @@
 
 **Version:** 2026.3.22
 **Created:** 2026-03-22
-**Last Updated:** 2026-03-24 23:15 UTC
+**Last Updated:** 2026-03-25 03:00 UTC
 
 ## Project overview
 A public-interest website that documents the effects of gerrymandering in the
@@ -222,6 +222,9 @@ districtdrift/
 2. ~~**Nation view**~~ ✓ — NationView.svelte renders all 50 states colored by EG with rankings panel
 3. ~~**Deploy to Cloudflare**~~ ✓ — live at districtdrift.org via Cloudflare Pages (auto-deploys from git)
 4. ~~**Expand to remaining 24 states**~~ ✓ — all 50 states complete
-5. **More states' events data** — events.ts currently covers MI + GA well; expand to remaining 15
-6. **Improve nation view** — better color scale, cycle comparison tooltip on hover
-7. **Precinct layer** *(next major version)* — raw precinct vote data overlaid on district view; requires RDH shapefiles, join to election results, tippecanoe tiling (~175k precincts nationally)
+5. ~~**More states' events data**~~ ✓ — events.ts covers 44 states (all except 6 at-large: AK, DE, ND, SD, VT, WY)
+6. ~~**Demographics pipeline for all states**~~ ✓ — all 50 states have race/income/education per-district data
+7. ~~**Improve nation view**~~ ✓ — tooltip shows 4-cycle EG sparkline; rank panel shows ↑/↓ trend arrows vs prior cycle
+8. ~~**SEO pass**~~ ✓ — sitemap.xml, canonical URL, JSON-LD, keywords/author meta, dynamic og:title/description per state
+9. **OG social preview image** — create a static `og-image.png` (1200×630) for social sharing; add `og:image` / `twitter:image` tags once image is available
+10. **Precinct layer** *(next major version)* — raw precinct vote data overlaid on district view; requires RDH shapefiles, join to election results, tippecanoe tiling (~175k precincts nationally)
