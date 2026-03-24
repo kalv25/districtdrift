@@ -1,5 +1,9 @@
 # districtdrift.org — CLAUDE.md
 
+**Version:** 2026.3.22
+**Created:** 2026-03-22
+**Last Updated:** 2026-03-24
+
 ## Project overview
 A public-interest website that documents the effects of gerrymandering in the
 United States from the 1990s through the present. Viewers can explore changes
