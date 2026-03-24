@@ -1,0 +1,322 @@
+{
+  "state": "Iowa",
+  "fips": "19",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 5,
+      "redistricting_controller": "Nonpartisan (LSB)",
+      "notes": "Iowa uses a unique nonpartisan redistricting process: the Legislative Services Bureau (LSB), a nonpartisan staff office, draws maps following strict criteria (compactness, contiguity, equal population \u2014 no partisan or incumbent data considered). The legislature may accept or reject but cannot amend. Iowa retained 5 seats after the 1990 census; Republican governor Branstad and a split legislature approved the LSB plan.",
+      "efficiency_gap": 0.0997,
+      "mean_median_diff": -0.1048,
+      "seats_d": 1,
+      "seats_r": 4,
+      "votes_d": 492843,
+      "votes_r": 729496,
+      "seat_vote_ratio_d": 0.496,
+      "avg_compactness": 0.4139,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3143,
+          "polsby_popper": 0.4863,
+          "d_votes": 81600,
+          "r_votes": 178042,
+          "total_votes_cast": 261309,
+          "margin_pct": 0.3714,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4944,
+          "polsby_popper": 0.3811,
+          "d_votes": 131570,
+          "r_votes": 134536,
+          "total_votes_cast": 267892,
+          "margin_pct": 0.0111,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.4901,
+          "polsby_popper": 0.306,
+          "d_votes": 121063,
+          "r_votes": 125931,
+          "total_votes_cast": 257276,
+          "margin_pct": 0.0197,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6278,
+          "polsby_popper": 0.3727,
+          "d_votes": 158610,
+          "r_votes": 94045,
+          "total_votes_cast": 257593,
+          "margin_pct": 0.2555,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.5236,
+          "d_votes": 0,
+          "r_votes": 196942,
+          "total_votes_cast": 198366,
+          "margin_pct": null,
+          "contested": false
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 5,
+      "redistricting_controller": "Nonpartisan (LSB)",
+      "notes": "Iowa retained 5 seats after the 2000 census. Democratic governor Vilsack and a Republican-controlled legislature approved the LSB's plan. Iowa's nonpartisan process is widely cited as a model for redistricting reform.",
+      "efficiency_gap": 0.1945,
+      "mean_median_diff": 0.0108,
+      "seats_d": 1,
+      "seats_r": 4,
+      "votes_d": 453550,
+      "votes_r": 546382,
+      "seat_vote_ratio_d": 0.4409,
+      "avg_compactness": 0.346,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 2,
+        "lean_r": 2,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4273,
+          "polsby_popper": 0.3833,
+          "d_votes": 83779,
+          "r_votes": 112280,
+          "total_votes_cast": 196455,
+          "margin_pct": 0.1454,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4671,
+          "polsby_popper": 0.3121,
+          "d_votes": 94767,
+          "r_votes": 108130,
+          "total_votes_cast": 207171,
+          "margin_pct": 0.0659,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5425,
+          "polsby_popper": 0.3665,
+          "d_votes": 115367,
+          "r_votes": 97285,
+          "total_votes_cast": 215985,
+          "margin_pct": 0.085,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.4402,
+          "polsby_popper": 0.3174,
+          "d_votes": 90784,
+          "r_votes": 115430,
+          "total_votes_cast": 210774,
+          "margin_pct": 0.1195,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.3781,
+          "polsby_popper": 0.3507,
+          "d_votes": 68853,
+          "r_votes": 113257,
+          "total_votes_cast": 182237,
+          "margin_pct": 0.2438,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 4,
+      "redistricting_controller": "Nonpartisan (LSB)",
+      "notes": "Iowa lost 1 seat after the 2010 census (5\u21924). Republican governor Branstad and a Republican legislature rejected the first two LSB plans before accepting the third. The accepted plan eliminated the 1st District's liberal college-town base, reshuffling incumbents significantly.",
+      "efficiency_gap": 0.0244,
+      "mean_median_diff": 0.0019,
+      "seats_d": 2,
+      "seats_r": 2,
+      "votes_d": 772387,
+      "votes_r": 726505,
+      "seat_vote_ratio_d": 0.9703,
+      "avg_compactness": 0.3879,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 2,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5779,
+          "polsby_popper": 0.2929,
+          "d_votes": 222422,
+          "r_votes": 162465,
+          "total_votes_cast": 390849,
+          "margin_pct": 0.1558,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5667,
+          "polsby_popper": 0.3442,
+          "d_votes": 211863,
+          "r_votes": 161977,
+          "total_votes_cast": 381275,
+          "margin_pct": 0.1334,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.455,
+          "polsby_popper": 0.4853,
+          "d_votes": 168632,
+          "r_votes": 202000,
+          "total_votes_cast": 386842,
+          "margin_pct": 0.09,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.4586,
+          "polsby_popper": 0.429,
+          "d_votes": 169470,
+          "r_votes": 200063,
+          "total_votes_cast": 377883,
+          "margin_pct": 0.0828,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 4,
+      "redistricting_controller": "Nonpartisan (LSB)",
+      "notes": "Iowa retained 4 seats after the 2020 census. Republican governor Reynolds and a Republican supermajority legislature rejected the LSB's first plan and accepted the second, which created a more Republican-leaning 3rd District (Des Moines area) \u2014 a rare instance of a party exercising leverage within Iowa's nonpartisan framework.",
+      "efficiency_gap": 0.3743,
+      "mean_median_diff": -0.0293,
+      "seats_d": 0,
+      "seats_r": 4,
+      "votes_d": 526460,
+      "votes_r": 677857,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.3327,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.466,
+          "polsby_popper": 0.285,
+          "d_votes": 142173,
+          "r_votes": 162947,
+          "total_votes_cast": 309736,
+          "margin_pct": 0.0681,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4588,
+          "polsby_popper": 0.4188,
+          "d_votes": 145940,
+          "r_votes": 172181,
+          "total_votes_cast": 321507,
+          "margin_pct": 0.0825,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.4965,
+          "polsby_popper": 0.3518,
+          "d_votes": 154117,
+          "r_votes": 156262,
+          "total_votes_cast": 315039,
+          "margin_pct": 0.0069,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3112,
+          "polsby_popper": 0.2753,
+          "d_votes": 84230,
+          "r_votes": 186467,
+          "total_votes_cast": 284134,
+          "margin_pct": 0.3777,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "state": "Nebraska",
+  "fips": "31",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 3,
+      "redistricting_controller": "Republican",
+      "notes": "Nebraska's unicameral, officially nonpartisan legislature drew maps; Nebraska retained 3 seats after the 1990 census. The legislature leans conservative/Republican in practice. Nebraska and Maine are the only states that allocate Electoral College votes by congressional district.",
+      "efficiency_gap": -0.0311,
+      "mean_median_diff": -0.0035,
+      "seats_d": 1,
+      "seats_r": 2,
+      "votes_d": 283278,
+      "votes_r": 427398,
+      "seat_vote_ratio_d": 0.8363,
+      "avg_compactness": 0.3936,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 1,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4029,
+          "polsby_popper": 0.2558,
+          "d_votes": 96309,
+          "r_votes": 142713,
+          "total_votes_cast": 239108,
+          "margin_pct": 0.1941,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5122,
+          "polsby_popper": 0.4293,
+          "d_votes": 119512,
+          "r_votes": 113828,
+          "total_votes_cast": 233372,
+          "margin_pct": 0.0244,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.2831,
+          "polsby_popper": 0.4958,
+          "d_votes": 67457,
+          "r_votes": 170857,
+          "total_votes_cast": 238355,
+          "margin_pct": 0.4339,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 3,
+      "redistricting_controller": "Republican",
+      "notes": "Nebraska's unicameral legislature drew maps; Nebraska retained 3 seats after the 2000 census. Governor Johanns (R) worked with the Republican-leaning legislature to draw maps producing a 3-0 Republican delegation.",
+      "efficiency_gap": -0.284,
+      "mean_median_diff": 0.1142,
+      "seats_d": 0,
+      "seats_r": 3,
+      "votes_d": 46843,
+      "votes_r": 386869,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.3823,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 3
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.2743,
+          "d_votes": 0,
+          "r_votes": 133013,
+          "total_votes_cast": 155844,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3425,
+          "polsby_popper": 0.3562,
+          "d_votes": 46843,
+          "r_votes": 89917,
+          "total_votes_cast": 142014,
+          "margin_pct": 0.315,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.5165,
+          "d_votes": 0,
+          "r_votes": 163939,
+          "total_votes_cast": 175956,
+          "margin_pct": null,
+          "contested": false
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 3,
+      "redistricting_controller": "Republican",
+      "notes": "Nebraska's unicameral legislature drew maps; Nebraska retained 3 seats after the 2010 census. Republicans drew maps maintaining a 3-0 delegation. The 2nd District (Omaha) notably awarded its Electoral College vote to Obama in both 2008 and 2012, making it a target for Republican map-drawers.",
+      "efficiency_gap": 0.2152,
+      "mean_median_diff": 0.0387,
+      "seats_d": 0,
+      "seats_r": 3,
+      "votes_d": 276239,
+      "votes_r": 496276,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.3828,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3171,
+          "polsby_popper": 0.3257,
+          "d_votes": 81206,
+          "r_votes": 174889,
+          "total_votes_cast": 256095,
+          "margin_pct": 0.3658,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.492,
+          "polsby_popper": 0.4444,
+          "d_votes": 129767,
+          "r_votes": 133964,
+          "total_votes_cast": 263731,
+          "margin_pct": 0.0159,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.2583,
+          "polsby_popper": 0.3782,
+          "d_votes": 65266,
+          "r_votes": 187423,
+          "total_votes_cast": 252689,
+          "margin_pct": 0.4834,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 3,
+      "redistricting_controller": "Republican",
+      "notes": "Nebraska's unicameral legislature drew maps; Nebraska retained 3 seats after the 2020 census. Republicans redrew the 2nd District (Omaha) to absorb more Republican-leaning suburban areas after it voted for Biden in 2020; the district nonetheless remained competitive.",
+      "efficiency_gap": 0.2247,
+      "mean_median_diff": -0.0624,
+      "seats_d": 0,
+      "seats_r": 3,
+      "votes_d": 235572,
+      "votes_r": 414599,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.3283,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 1,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4209,
+          "polsby_popper": 0.2554,
+          "d_votes": 93929,
+          "r_votes": 129236,
+          "total_votes_cast": 223165,
+          "margin_pct": 0.1582,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4867,
+          "polsby_popper": 0.4167,
+          "d_votes": 106807,
+          "r_votes": 112663,
+          "total_votes_cast": 219470,
+          "margin_pct": 0.0267,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.1679,
+          "polsby_popper": 0.3128,
+          "d_votes": 34836,
+          "r_votes": 172700,
+          "total_votes_cast": 207536,
+          "margin_pct": 0.6643,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

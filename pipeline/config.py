@@ -919,6 +919,832 @@ STATES: dict[str, dict] = {
             },
         },
     },
+    # -----------------------------------------------------------------------
+    # Batch 3: remaining 24 states (completing all 50)
+    # -----------------------------------------------------------------------
+    "AK": {
+        "name": "Alaska",
+        "fips": "02",
+        "crs": "EPSG:3338",   # NAD83 / Alaska Albers
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "Alaska has elected one at-large representative throughout its statehood. With a single district coterminous with the state, congressional redistricting is not applicable.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "Alaska retained its single at-large seat after the 2020 census. In 2020, Alaska voters approved Measure 2, which instituted nonpartisan top-four primaries and ranked-choice voting for general elections beginning with the 2022 cycle.",
+            },
+        },
+    },
+    "AR": {
+        "name": "Arkansas",
+        "fips": "05",
+        "crs": "EPSG:32615",   # UTM Zone 15N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 4,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Tucker (D) — who succeeded Bill Clinton upon his election to the presidency — and a Democratic legislature drew maps; Arkansas retained 4 seats after the 1990 census",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 4,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Huckabee (R) and a Democratic-controlled legislature drew maps; Arkansas retained 4 seats after the 2000 census. Democrats held both chambers of the General Assembly and controlled the process.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 4,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Beebe (D) and a Democratic legislature drew maps for the last time; Arkansas retained 4 seats. Democrats still held both chambers of the General Assembly for the 2011 redistricting, though Republicans swept state legislative races in the 2012 elections — the first Republican legislative majority since Reconstruction.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 4,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Hutchinson (R) and a Republican supermajority legislature drew maps; Arkansas retained 4 seats after the 2020 census. Republicans produced a 4-0 delegation map in a state Trump won by 28 points.",
+            },
+        },
+    },
+    "CT": {
+        "name": "Connecticut",
+        "fips": "09",
+        "crs": "EPSG:32618",   # UTM Zone 18N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 6,
+                "redistricting_controller": "Bipartisan Commission",
+                "notes": "Connecticut uses a bipartisan Reapportionment Commission (equal D/R members + tiebreaker); if it deadlocks, a special master draws maps. Governor Weicker (A Connecticut Party/independent) and a Democratic legislature oversaw the process; Connecticut retained 6 seats after the 1990 census.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 5,
+                "redistricting_controller": "Bipartisan Commission",
+                "notes": "Connecticut lost 1 seat after the 2000 census (6→5). Governor Rowland (R) and a Democratic legislature oversaw the bipartisan commission process. The commission deadlocked; a Hartford Superior Court judge drew the maps.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 5,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Malloy (D) and a narrowly Democratic legislature drew maps; Connecticut retained 5 seats after the 2010 census. The bipartisan commission reached agreement for the first time in decades.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 5,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Lamont (D) and a Democratic legislature drew maps; Connecticut retained 5 seats after the 2020 census. Democrats held all 5 seats going into the cycle.",
+            },
+        },
+    },
+    "DE": {
+        "name": "Delaware",
+        "fips": "10",
+        "crs": "EPSG:32618",   # UTM Zone 18N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "Delaware has elected one at-large representative throughout its modern history. With a single district coterminous with the state, congressional redistricting is not applicable.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+        },
+    },
+    "HI": {
+        "name": "Hawaii",
+        "fips": "15",
+        "crs": "EPSG:26904",   # NAD83 / UTM Zone 4N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Waihee (D) and a Democratic legislature drew maps; Hawaii retained 2 seats. Hawaii uses a Reapportionment Commission to draw legislative and congressional districts.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Cayetano (D) and a Democratic legislature oversaw the reapportionment commission process; Hawaii retained 2 seats after the 2000 census",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Abercrombie (D) and a Democratic legislature oversaw the process; Hawaii retained 2 seats after the 2010 census. Hawaii has never sent a Republican to Congress since achieving statehood in 1959.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Ige (D) and a Democratic legislature oversaw the reapportionment commission; Hawaii retained 2 seats after the 2020 census",
+            },
+        },
+    },
+    "IA": {
+        "name": "Iowa",
+        "fips": "19",
+        "crs": "EPSG:26915",   # NAD83 / UTM Zone 15N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 5,
+                "redistricting_controller": "Nonpartisan (LSB)",
+                "notes": "Iowa uses a unique nonpartisan redistricting process: the Legislative Services Bureau (LSB), a nonpartisan staff office, draws maps following strict criteria (compactness, contiguity, equal population — no partisan or incumbent data considered). The legislature may accept or reject but cannot amend. Iowa retained 5 seats after the 1990 census; Republican governor Branstad and a split legislature approved the LSB plan.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 5,
+                "redistricting_controller": "Nonpartisan (LSB)",
+                "notes": "Iowa retained 5 seats after the 2000 census. Democratic governor Vilsack and a Republican-controlled legislature approved the LSB's plan. Iowa's nonpartisan process is widely cited as a model for redistricting reform.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 4,
+                "redistricting_controller": "Nonpartisan (LSB)",
+                "notes": "Iowa lost 1 seat after the 2010 census (5→4). Republican governor Branstad and a Republican legislature rejected the first two LSB plans before accepting the third. The accepted plan eliminated the 1st District's liberal college-town base, reshuffling incumbents significantly.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 4,
+                "redistricting_controller": "Nonpartisan (LSB)",
+                "notes": "Iowa retained 4 seats after the 2020 census. Republican governor Reynolds and a Republican supermajority legislature rejected the LSB's first plan and accepted the second, which created a more Republican-leaning 3rd District (Des Moines area) — a rare instance of a party exercising leverage within Iowa's nonpartisan framework.",
+            },
+        },
+    },
+    "ID": {
+        "name": "Idaho",
+        "fips": "16",
+        "crs": "EPSG:32611",   # UTM Zone 11N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 2,
+                "redistricting_controller": "Split (Dem governor, Rep legislature)",
+                "notes": "Governor Andrus (D) and a Republican-controlled legislature drew maps; Idaho retained 2 seats after the 1990 census. Idaho's bipartisan redistricting commission was not created until 1994 (Prop 1), so the legislature drew the 1992 maps.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 2,
+                "redistricting_controller": "Bipartisan Commission (IRC)",
+                "notes": "Idaho's bipartisan Citizens' Commission for Reapportionment (6 members: 3 appointed by each party's legislative leaders) drew maps for the first time after its creation by Proposition 1 (1994). Idaho retained 2 seats after the 2000 census.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 2,
+                "redistricting_controller": "Bipartisan Commission (IRC)",
+                "notes": "The Idaho Citizens' Commission for Reapportionment drew maps; Idaho retained 2 seats after the 2010 census. The commission reached consensus on maps preserving Boise's concentration in the 2nd District.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 2,
+                "redistricting_controller": "Bipartisan Commission (IRC)",
+                "notes": "The Idaho Citizens' Commission for Reapportionment drew maps; Idaho retained 2 seats after the 2020 census. VRA advocates argued the maps diluted the Native American vote in southeastern Idaho (Pocatello area), though no federal challenge was ultimately sustained.",
+            },
+        },
+    },
+    "KS": {
+        "name": "Kansas",
+        "fips": "20",
+        "crs": "EPSG:32614",   # UTM Zone 14N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 4,
+                "redistricting_controller": "Split (Dem governor, Rep legislature)",
+                "notes": "Governor Finney (D) — one of only two women governors in Kansas history — and a Republican-controlled legislature drew maps; Kansas retained 4 seats after the 1990 census. The Republican legislature controlled the process.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 4,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Graves (R) and a Republican-controlled legislature drew maps; Kansas retained 4 seats after the 2000 census. Republicans maintained all 4 seats.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 4,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Brownback (R) and a Republican supermajority legislature drew maps; Kansas retained 4 seats after the 2010 census. Republicans maintained a 4-0 delegation.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 4,
+                "redistricting_controller": "Republican (veto override)",
+                "notes": "Governor Kelly (D) vetoed the Republican legislature's congressional maps, which split the Kansas City metro area to shore up the 3rd District (Wyandotte/Johnson counties) as a safe Republican seat. The Republican supermajority legislature overrode the veto. Democrats subsequently won the 3rd District in 2022 and 2024 anyway.",
+            },
+        },
+    },
+    "KY": {
+        "name": "Kentucky",
+        "fips": "21",
+        "crs": "EPSG:32617",   # UTM Zone 17N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 6,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Jones (D) and a Democratic legislature drew maps; Kentucky retained 6 seats after the 1990 census. Democrats controlled both chambers of the General Assembly.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 6,
+                "redistricting_controller": "Split (Dem governor, split legislature)",
+                "notes": "Governor Patton (D) and a split legislature (Dem House, Rep Senate) drew maps; Kentucky retained 6 seats after the 2000 census. Negotiated maps maintained the partisan status quo.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 6,
+                "redistricting_controller": "Split (Dem governor, split legislature)",
+                "notes": "Governor Beshear (D) and a split legislature (Dem House, Rep Senate) drew maps; Kentucky retained 6 seats after the 2010 census. Republicans held the Senate and were positioned to take the House in subsequent elections.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 6,
+                "redistricting_controller": "Republican (veto override)",
+                "notes": "Governor Beshear (D) vetoed congressional maps drawn by the Republican supermajority General Assembly, which captured both chambers in 2016. The legislature overrode the veto. The resulting maps split Louisville across multiple districts to dilute its Democratic lean, producing a 5-1 Republican delegation.",
+            },
+        },
+    },
+    "ME": {
+        "name": "Maine",
+        "fips": "23",
+        "crs": "EPSG:32619",   # UTM Zone 19N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 2,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor McKernan (R) and a Democratic legislature drew maps; Maine retained 2 seats after the 1990 census. Maine uses a bipartisan apportionment commission whose recommendations the legislature votes on.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 2,
+                "redistricting_controller": "Independent governor, Dem legislature",
+                "notes": "Governor King (I) — an independent who served two terms — and a Democratic legislature drew maps; Maine retained 2 seats after the 2000 census. Maine adopted ranked-choice voting for congressional races via citizen initiative in 2016.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 2,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor LePage (R) and a split legislature drew maps; Maine retained 2 seats after the 2010 census. LePage was one of the most controversial governors in Maine history; redistricting was relatively uncontested given the small delegation.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Mills (D) and a Democratic legislature drew maps; Maine retained 2 seats after the 2020 census. Maine's unique congressional district allocation of Electoral College votes (CD method, same as Nebraska) makes the 2nd District (rural northern Maine) a perennial presidential battleground.",
+            },
+        },
+    },
+    "MS": {
+        "name": "Mississippi",
+        "fips": "28",
+        "crs": "EPSG:26916",   # NAD83 / UTM Zone 16N
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 5,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Fordice (R) — the first Republican governor of Mississippi since Reconstruction — and a Democratic legislature drew maps; Mississippi retained 5 seats. The Democratic legislature controlled the congressional redistricting process.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 4,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Musgrove (D) and a Democratic legislature drew maps after Mississippi lost 1 seat from the 2000 census (5→4). Democrats still controlled both chambers of the legislature.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 4,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Barbour (R) and a Democratic legislature drew maps; Mississippi retained 4 seats after the 2010 census. Democrats narrowly held both legislative chambers for the 2011 redistricting, but Republicans swept both chambers in the November 2011 elections — marking the end of Democratic legislative control in Mississippi.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 4,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Reeves (R) and a Republican supermajority legislature drew maps; Mississippi retained 4 seats after the 2020 census. Maps maintained a 3-1 Republican delegation. VRA advocates noted that Black residents (38% of the population) are represented by only one majority-Black district (MS-2), with little change from the pattern challenged in prior decades.",
+            },
+        },
+    },
+    "MT": {
+        "name": "Montana",
+        "fips": "30",
+        "crs": "EPSG:32612",   # UTM Zone 12N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "Montana lost 1 of its 2 congressional seats after the 1990 census and became an at-large state for the 103rd Congress — the same reapportionment that cost Washington, Massachusetts, and New York seats. With one district covering the entire state, congressional redistricting was not applicable.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "Montana retained its single at-large seat after the 2000 census, coming within a small margin of regaining a second seat",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "Montana retained its single at-large seat after the 2010 census, again narrowly missing a second seat",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 2,
+                "redistricting_controller": "Republican",
+                "notes": "Montana regained a second congressional seat after the 2020 census — its first two-district map since the 1992 reapportionment. Governor Gianforte (R) and a Republican supermajority legislature drew the new 2-district map. Republicans drew the Eastern 2nd District as a safe rural Republican seat and the Western 1st District (Missoula/Helena corridor) as a competitive lean-Republican seat.",
+            },
+        },
+    },
+    "ND": {
+        "name": "North Dakota",
+        "fips": "38",
+        "crs": "EPSG:32614",   # UTM Zone 14N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "North Dakota has elected one at-large representative since losing its second seat after the 1970 census. With a single district coterminous with the state, congressional redistricting is not applicable.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+        },
+    },
+    "NE": {
+        "name": "Nebraska",
+        "fips": "31",
+        "crs": "EPSG:32614",   # UTM Zone 14N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 3,
+                "redistricting_controller": "Republican",
+                "notes": "Nebraska's unicameral, officially nonpartisan legislature drew maps; Nebraska retained 3 seats after the 1990 census. The legislature leans conservative/Republican in practice. Nebraska and Maine are the only states that allocate Electoral College votes by congressional district.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 3,
+                "redistricting_controller": "Republican",
+                "notes": "Nebraska's unicameral legislature drew maps; Nebraska retained 3 seats after the 2000 census. Governor Johanns (R) worked with the Republican-leaning legislature to draw maps producing a 3-0 Republican delegation.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 3,
+                "redistricting_controller": "Republican",
+                "notes": "Nebraska's unicameral legislature drew maps; Nebraska retained 3 seats after the 2010 census. Republicans drew maps maintaining a 3-0 delegation. The 2nd District (Omaha) notably awarded its Electoral College vote to Obama in both 2008 and 2012, making it a target for Republican map-drawers.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 3,
+                "redistricting_controller": "Republican",
+                "notes": "Nebraska's unicameral legislature drew maps; Nebraska retained 3 seats after the 2020 census. Republicans redrew the 2nd District (Omaha) to absorb more Republican-leaning suburban areas after it voted for Biden in 2020; the district nonetheless remained competitive.",
+            },
+        },
+    },
+    "NH": {
+        "name": "New Hampshire",
+        "fips": "33",
+        "crs": "EPSG:32619",   # UTM Zone 19N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 2,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Gregg (R) and a Republican-controlled General Court drew maps; New Hampshire retained 2 seats after the 1990 census. New Hampshire's part-time citizen legislature (one of the largest in the world) drew relatively compact, county-based maps.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 2,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Shaheen (D) and a Republican-controlled legislature drew maps; New Hampshire retained 2 seats after the 2000 census. The Republican legislature controlled the process.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 2,
+                "redistricting_controller": "Split (Dem governor, Rep legislature)",
+                "notes": "Governor Lynch (D) and a Republican-controlled General Court (which swept to a supermajority in 2010) drew maps; New Hampshire retained 2 seats after the 2010 census. The Republican legislature controlled the redistricting process.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 2,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Sununu (R) and a Republican-controlled General Court drew maps; New Hampshire retained 2 seats after the 2020 census. Republicans redrew the 1st District (Manchester/Portsmouth) to be more competitive, producing one safe Republican and one swing seat.",
+            },
+        },
+    },
+    "NM": {
+        "name": "New Mexico",
+        "fips": "35",
+        "crs": "EPSG:32613",   # UTM Zone 13N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 3,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor King (D) and a Democratic legislature drew maps; New Mexico retained 3 seats after the 1990 census. Democrats drew maps producing a 2-1 Democratic delegation.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 3,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Johnson (R) and a Democratic legislature drew maps; New Mexico retained 3 seats after the 2000 census. Democrats controlled the legislature and drew maps that maintained a 2-1 Democratic advantage.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 3,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Martinez (R) and a Democratic legislature drew maps; New Mexico retained 3 seats after the 2010 census. Democrats drew maps maintaining 2 safe Democratic seats and 1 competitive Republican-leaning seat.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 3,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Lujan Grisham (D) and a Democratic legislature drew maps; New Mexico retained 3 seats after the 2020 census. Democrats drew an aggressive map targeting all 3 seats; Republicans challenged the maps in state court but they were ultimately upheld, producing a 3-0 Democratic delegation in 2022.",
+            },
+        },
+    },
+    "NV": {
+        "name": "Nevada",
+        "fips": "32",
+        "crs": "EPSG:32611",   # UTM Zone 11N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Miller (D) and a Democratic-controlled legislature drew maps after Nevada gained 1 seat from the 1990 census (1→2). The new 2nd District covered rural Nevada while the 1st District covered Las Vegas.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 3,
+                "redistricting_controller": "Split (Rep governor, split legislature)",
+                "notes": "Governor Guinn (R) and a split legislature (Dem Senate, Rep Assembly) drew maps after Nevada gained 1 seat from the 2000 census (2→3) — one of the fastest-growing states in the nation. The new 3rd District covered suburban Las Vegas (Henderson/Summerlin).",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 4,
+                "redistricting_controller": "Split (Rep governor, Dem legislature)",
+                "notes": "Governor Sandoval (R) and a Democratic legislature drew maps after Nevada gained 1 seat from the 2010 census (3→4). Democrats drew maps creating a new 4th District (suburban Las Vegas/Henderson) as a competitive Democratic-leaning seat.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 4,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Sisolak (D) and a Democratic legislature drew maps; Nevada retained 4 seats after the 2020 census. Democrats drew an aggressive map to protect all 3 of their seats; Republicans challenged the maps but courts upheld them. All 4 seats remained competitive in 2022.",
+            },
+        },
+    },
+    "OK": {
+        "name": "Oklahoma",
+        "fips": "40",
+        "crs": "EPSG:32614",   # UTM Zone 14N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 6,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Walters (D) and a Democratic legislature drew maps; Oklahoma retained 6 seats after the 1990 census. Democrats controlled both chambers and the governorship for the last time in this redistricting cycle.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 5,
+                "redistricting_controller": "Split (Rep governor, split legislature)",
+                "notes": "Governor Keating (R) and a split legislature (Dem Senate, Rep House) drew maps after Oklahoma lost 1 seat from the 2000 census (6→5). Despite competing interests, maps were enacted producing a 5-0 Republican delegation within a cycle.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 5,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Fallin (R) and a Republican supermajority legislature drew maps; Oklahoma retained 5 seats after the 2010 census. Republicans drew maps maintaining a 5-0 Republican delegation.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 5,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Stitt (R) and a Republican supermajority legislature drew maps; Oklahoma retained 5 seats after the 2020 census. Maps maintained a 5-0 Republican delegation.",
+            },
+        },
+    },
+    "RI": {
+        "name": "Rhode Island",
+        "fips": "44",
+        "crs": "EPSG:32619",   # UTM Zone 19N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Sundlun (D) and a Democratic legislature drew maps; Rhode Island retained 2 seats after the 1990 census. Rhode Island came close to losing a seat to reapportionment.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Almond (R) and a Democratic legislature drew maps; Rhode Island retained 2 seats after the 2000 census, again narrowly. Democrats controlled the General Assembly and drew the maps.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Chafee (I, former Republican) and a Democratic legislature drew maps; Rhode Island retained 2 seats after the 2010 census. Democrats controlled both chambers of the General Assembly.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 2,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor McKee (D) and a Democratic legislature drew maps; Rhode Island retained 2 seats after the 2020 census. Rhode Island uses a Reapportionment Commission; maps were relatively uncontested as Democrats held both seats.",
+            },
+        },
+    },
+    "SD": {
+        "name": "South Dakota",
+        "fips": "46",
+        "crs": "EPSG:32614",   # UTM Zone 14N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "South Dakota has elected one at-large representative since losing its second seat after the 1980 census. With a single district coterminous with the state, congressional redistricting is not applicable.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+        },
+    },
+    "UT": {
+        "name": "Utah",
+        "fips": "49",
+        "crs": "EPSG:32612",   # UTM Zone 12N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 3,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Leavitt (R) and a Republican legislature drew maps; Utah retained 3 seats after the 1990 census. The Republican legislature controlled the process in one of the nation's most Republican states.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 3,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Leavitt (R) and a Republican legislature drew maps; Utah retained 3 seats after the 2000 census. Utah came extremely close to gaining a 4th seat — a dispute that led Congress to pass a bill adding a seat for Utah (which would have also added a Republican seat for a Republican state to offset it), though the bill died in the Senate.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 4,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Herbert (R) and a Republican legislature drew maps after Utah gained 1 seat from the 2010 census (3→4). Republicans drew maps that divided Salt Lake City four ways — splitting the city across all four congressional districts to prevent Utah's only significant urban Democratic base from electing a representative.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 4,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Cox (R) and a Republican legislature drew maps; Utah retained 4 seats after the 2020 census. Republicans maintained the Salt Lake City-splitting strategy from 2012. League of Women Voters v. Utah challenged the maps as an unconstitutional partisan gerrymander under the state constitution; courts upheld the maps.",
+            },
+        },
+    },
+    "VT": {
+        "name": "Vermont",
+        "fips": "50",
+        "crs": "EPSG:32618",   # UTM Zone 18N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "Vermont has elected one at-large representative throughout its modern history. With a single district coterminous with the state, congressional redistricting is not applicable. Vermont's at-large seat was held by Bernie Sanders (I) from 1991 onward.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+        },
+    },
+    "WV": {
+        "name": "West Virginia",
+        "fips": "54",
+        "crs": "EPSG:32617",   # UTM Zone 17N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 4,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Caperton (D) and a Democratic legislature drew maps; West Virginia retained 4 seats after the 1990 census. West Virginia was still a reliably Democratic state at the federal level in the early 1990s.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 3,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Wise (D) and a Democratic legislature drew maps after West Virginia lost 1 seat from the 2000 census (4→3). Democrats still controlled both chambers of the Legislature; the state's shift toward Republicans was accelerating at the presidential level but had not yet reached state offices.",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 3,
+                "redistricting_controller": "Democrat",
+                "notes": "Governor Tomblin (D) and a Democratic legislature drew maps; West Virginia retained 3 seats after the 2010 census. Democrats still held both chambers of the Legislature for the 2011 redistricting, though Republicans swept the Legislature in the 2014 elections — ending over a century of Democratic legislative control.",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 2,
+                "redistricting_controller": "Republican",
+                "notes": "Governor Justice (R, originally elected as a Democrat but switched parties in 2017) and a Republican supermajority legislature drew maps after West Virginia lost 1 seat from the 2020 census (3→2). The state has lost half its congressional delegation since 1990, reflecting decades of population decline. Republicans drew maps pitting two Democratic incumbents (Mooney and Miller) against each other.",
+            },
+        },
+    },
+    "WY": {
+        "name": "Wyoming",
+        "fips": "56",
+        "crs": "EPSG:32613",   # UTM Zone 13N (NAD83)
+        "cycles": {
+            1992: {
+                "congress": 103,
+                "shapefile_id": "us_cd103rd_1990_tl2000",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+                "notes": "Wyoming has elected one at-large representative throughout its modern history. With a single district coterminous with the state, congressional redistricting is not applicable.",
+            },
+            2002: {
+                "congress": 108,
+                "shapefile_id": "us_cd108th_2000_tl2010",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2012: {
+                "congress": 113,
+                "shapefile_id": "us_cd113th_2012_tl2012",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+            2022: {
+                "congress": 118,
+                "shapefile_id": "us_cd118th_2022_tl2022",
+                "seats": 1,
+                "redistricting_controller": "At-large (no redistricting)",
+            },
+        },
+    },
 }
 
 # NHGIS shapefile IDs needed (de-duplicated across all states)

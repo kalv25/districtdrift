@@ -92,6 +92,30 @@
     SC: { name: 'South Carolina', flag: '◉' },
     TN: { name: 'Tennessee', flag: '◉' },
     WA: { name: 'Washington', flag: '◉' },
+    AK: { name: 'Alaska', flag: '◉' },
+    AR: { name: 'Arkansas', flag: '◉' },
+    CT: { name: 'Connecticut', flag: '◉' },
+    DE: { name: 'Delaware', flag: '◉' },
+    HI: { name: 'Hawaii', flag: '◉' },
+    IA: { name: 'Iowa', flag: '◉' },
+    ID: { name: 'Idaho', flag: '◉' },
+    KS: { name: 'Kansas', flag: '◉' },
+    KY: { name: 'Kentucky', flag: '◉' },
+    ME: { name: 'Maine', flag: '◉' },
+    MS: { name: 'Mississippi', flag: '◉' },
+    MT: { name: 'Montana', flag: '◉' },
+    ND: { name: 'North Dakota', flag: '◉' },
+    NE: { name: 'Nebraska', flag: '◉' },
+    NH: { name: 'New Hampshire', flag: '◉' },
+    NM: { name: 'New Mexico', flag: '◉' },
+    NV: { name: 'Nevada', flag: '◉' },
+    OK: { name: 'Oklahoma', flag: '◉' },
+    RI: { name: 'Rhode Island', flag: '◉' },
+    SD: { name: 'South Dakota', flag: '◉' },
+    UT: { name: 'Utah', flag: '◉' },
+    VT: { name: 'Vermont', flag: '◉' },
+    WV: { name: 'West Virginia', flag: '◉' },
+    WY: { name: 'Wyoming', flag: '◉' },
   };
 
   // 'nation' = 50-state overview; a postal code = state detail view
@@ -796,7 +820,7 @@
                 >{info.name}</button>
               </li>
             {/each}
-            <li class="state-menu-note">{Object.keys(STATES).length} of 50 states · more coming</li>
+            <li class="state-menu-note">{Object.keys(STATES).length === 50 ? 'All 50 states' : `${Object.keys(STATES).length} of 50 states · more coming`}</li>
           </ul>
         {/if}
       </div>

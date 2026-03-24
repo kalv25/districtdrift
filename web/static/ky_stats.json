@@ -1,0 +1,388 @@
+{
+  "state": "Kentucky",
+  "fips": "21",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 6,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Jones (D) and a Democratic legislature drew maps; Kentucky retained 6 seats after the 1990 census. Democrats controlled both chambers of the General Assembly.",
+      "efficiency_gap": -0.1168,
+      "mean_median_diff": -0.0349,
+      "seats_d": 4,
+      "seats_r": 2,
+      "votes_d": 721747,
+      "votes_r": 638166,
+      "seat_vote_ratio_d": 1.2561,
+      "avg_compactness": 0.2322,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6074,
+          "polsby_popper": 0.1532,
+          "d_votes": 128524,
+          "r_votes": 83088,
+          "total_votes_cast": 212574,
+          "margin_pct": 0.2147,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.6143,
+          "polsby_popper": 0.184,
+          "d_votes": 126894,
+          "r_votes": 79684,
+          "total_votes_cast": 206578,
+          "margin_pct": 0.2285,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5274,
+          "polsby_popper": 0.2787,
+          "d_votes": 148066,
+          "r_votes": 132689,
+          "total_votes_cast": 280770,
+          "margin_pct": 0.0548,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3836,
+          "polsby_popper": 0.1653,
+          "d_votes": 86890,
+          "r_votes": 139634,
+          "total_votes_cast": 226524,
+          "margin_pct": 0.2328,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4538,
+          "polsby_popper": 0.342,
+          "d_votes": 95760,
+          "r_votes": 115255,
+          "total_votes_cast": 211015,
+          "margin_pct": 0.0924,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.607,
+          "polsby_popper": 0.2701,
+          "d_votes": 135613,
+          "r_votes": 87816,
+          "total_votes_cast": 223450,
+          "margin_pct": 0.2139,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 6,
+      "redistricting_controller": "Split (Dem governor, split legislature)",
+      "notes": "Governor Patton (D) and a split legislature (Dem House, Rep Senate) drew maps; Kentucky retained 6 seats after the 2000 census. Negotiated maps maintained the partisan status quo.",
+      "efficiency_gap": 0.0096,
+      "mean_median_diff": -0.0111,
+      "seats_d": 1,
+      "seats_r": 5,
+      "votes_d": 350924,
+      "votes_r": 693860,
+      "seat_vote_ratio_d": 0.4962,
+      "avg_compactness": 0.2645,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3475,
+          "polsby_popper": 0.1463,
+          "d_votes": 62617,
+          "r_votes": 117600,
+          "total_votes_cast": 180217,
+          "margin_pct": 0.3051,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2952,
+          "polsby_popper": 0.2178,
+          "d_votes": 51431,
+          "r_votes": 122773,
+          "total_votes_cast": 176288,
+          "margin_pct": 0.4095,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.4839,
+          "polsby_popper": 0.4272,
+          "d_votes": 110846,
+          "r_votes": 118228,
+          "total_votes_cast": 229074,
+          "margin_pct": 0.0322,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.5181,
+          "polsby_popper": 0.1753,
+          "d_votes": 87776,
+          "r_votes": 81651,
+          "total_votes_cast": 171735,
+          "margin_pct": 0.0362,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.2171,
+          "polsby_popper": 0.2983,
+          "d_votes": 38254,
+          "r_votes": 137986,
+          "total_votes_cast": 176240,
+          "margin_pct": 0.5659,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.3219,
+          "d_votes": 0,
+          "r_votes": 115622,
+          "total_votes_cast": 160688,
+          "margin_pct": null,
+          "contested": false
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 6,
+      "redistricting_controller": "Split (Dem governor, split legislature)",
+      "notes": "Governor Beshear (D) and a split legislature (Dem House, Rep Senate) drew maps; Kentucky retained 6 seats after the 2010 census. Republicans held the Senate and were positioned to take the House in subsequent elections.",
+      "efficiency_gap": 0.1142,
+      "mean_median_diff": 0.0455,
+      "seats_d": 1,
+      "seats_r": 5,
+      "votes_d": 684744,
+      "votes_r": 1027582,
+      "seat_vote_ratio_d": 0.4168,
+      "avg_compactness": 0.1911,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3037,
+          "polsby_popper": 0.1277,
+          "d_votes": 87199,
+          "r_votes": 199956,
+          "total_votes_cast": 287155,
+          "margin_pct": 0.3927,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3303,
+          "polsby_popper": 0.1158,
+          "d_votes": 89541,
+          "r_votes": 181508,
+          "total_votes_cast": 282267,
+          "margin_pct": 0.3393,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6493,
+          "polsby_popper": 0.3672,
+          "d_votes": 206385,
+          "r_votes": 111452,
+          "total_votes_cast": 322656,
+          "margin_pct": 0.2987,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3602,
+          "polsby_popper": 0.1292,
+          "d_votes": 104734,
+          "r_votes": 186036,
+          "total_votes_cast": 299444,
+          "margin_pct": 0.2796,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.221,
+          "polsby_popper": 0.2387,
+          "d_votes": 55447,
+          "r_votes": 195408,
+          "total_votes_cast": 250855,
+          "margin_pct": 0.5579,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.48,
+          "polsby_popper": 0.168,
+          "d_votes": 141438,
+          "r_votes": 153222,
+          "total_votes_cast": 303000,
+          "margin_pct": 0.04,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 6,
+      "redistricting_controller": "Republican (veto override)",
+      "notes": "Governor Beshear (D) vetoed congressional maps drawn by the Republican supermajority General Assembly, which captured both chambers in 2016. The legislature overrode the veto. The resulting maps split Louisville across multiple districts to dilute its Democratic lean, producing a 5-1 Republican delegation.",
+      "efficiency_gap": 0.0001,
+      "mean_median_diff": 0.0315,
+      "seats_d": 1,
+      "seats_r": 5,
+      "votes_d": 490921,
+      "votes_r": 953296,
+      "seat_vote_ratio_d": 0.4903,
+      "avg_compactness": 0.2398,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 5
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.251,
+          "polsby_popper": 0.0938,
+          "d_votes": 61701,
+          "r_votes": 184157,
+          "total_votes_cast": 245858,
+          "margin_pct": 0.4981,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2814,
+          "polsby_popper": 0.2275,
+          "d_votes": 66769,
+          "r_votes": 170487,
+          "total_votes_cast": 237256,
+          "margin_pct": 0.4372,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.62,
+          "polsby_popper": 0.4296,
+          "d_votes": 160920,
+          "r_votes": 98637,
+          "total_votes_cast": 259587,
+          "margin_pct": 0.24,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3231,
+          "polsby_popper": 0.1516,
+          "d_votes": 79977,
+          "r_votes": 167541,
+          "total_votes_cast": 257629,
+          "margin_pct": 0.3538,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.1783,
+          "polsby_popper": 0.2812,
+          "d_votes": 38549,
+          "r_votes": 177712,
+          "total_votes_cast": 216270,
+          "margin_pct": 0.6435,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.3491,
+          "polsby_popper": 0.2549,
+          "d_votes": 83005,
+          "r_votes": 154762,
+          "total_votes_cast": 246818,
+          "margin_pct": 0.3018,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "state": "Nevada",
+  "fips": "32",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 2,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Miller (D) and a Democratic-controlled legislature drew maps after Nevada gained 1 seat from the 1990 census (1\u21922). The new 2nd District covered rural Nevada while the 1st District covered Las Vegas.",
+      "efficiency_gap": 0.1063,
+      "mean_median_diff": 0.0,
+      "seats_d": 1,
+      "seats_r": 1,
+      "votes_d": 245477,
+      "votes_r": 213792,
+      "seat_vote_ratio_d": 0.9355,
+      "avg_compactness": 0.3835,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6037,
+          "polsby_popper": 0.2165,
+          "d_votes": 128278,
+          "r_votes": 84217,
+          "total_votes_cast": 221488,
+          "margin_pct": 0.2074,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4749,
+          "polsby_popper": 0.5504,
+          "d_votes": 117199,
+          "r_votes": 129575,
+          "total_votes_cast": 270461,
+          "margin_pct": 0.0502,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 3,
+      "redistricting_controller": "Split (Rep governor, split legislature)",
+      "notes": "Governor Guinn (R) and a split legislature (Dem Senate, Rep Assembly) drew maps after Nevada gained 1 seat from the 2000 census (2\u21923) \u2014 one of the fastest-growing states in the nation. The new 3rd District covered suburban Las Vegas (Henderson/Summerlin).",
+      "efficiency_gap": -0.0196,
+      "mean_median_diff": -0.0098,
+      "seats_d": 1,
+      "seats_r": 2,
+      "votes_d": 171160,
+      "votes_r": 301100,
+      "seat_vote_ratio_d": 0.9197,
+      "avg_compactness": 0.2938,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.557,
+          "polsby_popper": 0.214,
+          "d_votes": 64312,
+          "r_votes": 51148,
+          "total_votes_cast": 121516,
+          "margin_pct": 0.114,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2118,
+          "polsby_popper": 0.5229,
+          "d_votes": 40189,
+          "r_votes": 149574,
+          "total_votes_cast": 201343,
+          "margin_pct": 0.5764,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3991,
+          "polsby_popper": 0.1446,
+          "d_votes": 66659,
+          "r_votes": 100378,
+          "total_votes_cast": 178994,
+          "margin_pct": 0.2019,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 4,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Sandoval (R) and a Democratic legislature drew maps after Nevada gained 1 seat from the 2010 census (3\u21924). Democrats drew maps creating a new 4th District (suburban Las Vegas/Henderson) as a competitive Democratic-leaning seat.",
+      "efficiency_gap": 0.0649,
+      "mean_median_diff": 0.0128,
+      "seats_d": 2,
+      "seats_r": 2,
+      "votes_d": 453310,
+      "votes_r": 457239,
+      "seat_vote_ratio_d": 1.0043,
+      "avg_compactness": 0.5228,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6685,
+          "polsby_popper": 0.5798,
+          "d_votes": 113967,
+          "r_votes": 56521,
+          "total_votes_cast": 179278,
+          "margin_pct": 0.337,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3861,
+          "polsby_popper": 0.5808,
+          "d_votes": 102019,
+          "r_votes": 162213,
+          "total_votes_cast": 281449,
+          "margin_pct": 0.2278,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.4598,
+          "polsby_popper": 0.4134,
+          "d_votes": 116823,
+          "r_votes": 137244,
+          "total_votes_cast": 272523,
+          "margin_pct": 0.0804,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.5434,
+          "polsby_popper": 0.517,
+          "d_votes": 120501,
+          "r_votes": 101261,
+          "total_votes_cast": 240492,
+          "margin_pct": 0.0868,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 4,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Sisolak (D) and a Democratic legislature drew maps; Nevada retained 4 seats after the 2020 census. Democrats drew an aggressive map to protect all 3 of their seats; Republicans challenged the maps but courts upheld them. All 4 seats remained competitive in 2022.",
+      "efficiency_gap": -0.2309,
+      "mean_median_diff": -0.0319,
+      "seats_d": 3,
+      "seats_r": 1,
+      "votes_d": 480774,
+      "votes_r": 515535,
+      "seat_vote_ratio_d": 1.5542,
+      "avg_compactness": 0.4407,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 3,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5288,
+          "polsby_popper": 0.4275,
+          "d_votes": 115700,
+          "r_votes": 103115,
+          "total_votes_cast": 224349,
+          "margin_pct": 0.0575,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3876,
+          "polsby_popper": 0.5814,
+          "d_votes": 117371,
+          "r_votes": 185467,
+          "total_votes_cast": 310498,
+          "margin_pct": 0.2249,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5198,
+          "polsby_popper": 0.252,
+          "d_votes": 131086,
+          "r_votes": 121083,
+          "total_votes_cast": 252169,
+          "margin_pct": 0.0397,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.5242,
+          "polsby_popper": 0.5018,
+          "d_votes": 116617,
+          "r_votes": 105870,
+          "total_votes_cast": 222487,
+          "margin_pct": 0.0483,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "state": "Kansas",
+  "fips": "20",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 4,
+      "redistricting_controller": "Split (Dem governor, Rep legislature)",
+      "notes": "Governor Finney (D) \u2014 one of only two women governors in Kansas history \u2014 and a Republican-controlled legislature drew maps; Kansas retained 4 seats after the 1990 census. The Republican legislature controlled the process.",
+      "efficiency_gap": -0.0786,
+      "mean_median_diff": -0.0162,
+      "seats_d": 2,
+      "seats_r": 2,
+      "votes_d": 488381,
+      "votes_r": 591712,
+      "seat_vote_ratio_d": 1.1058,
+      "avg_compactness": 0.3999,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 2,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3002,
+          "polsby_popper": 0.4646,
+          "d_votes": 83620,
+          "r_votes": 194912,
+          "total_votes_cast": 285297,
+          "margin_pct": 0.3996,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.579,
+          "polsby_popper": 0.2453,
+          "d_votes": 151019,
+          "r_votes": 109801,
+          "total_votes_cast": 268806,
+          "margin_pct": 0.158,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3931,
+          "polsby_popper": 0.3766,
+          "d_votes": 110071,
+          "r_votes": 169929,
+          "total_votes_cast": 292791,
+          "margin_pct": 0.2138,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.551,
+          "polsby_popper": 0.5133,
+          "d_votes": 143671,
+          "r_votes": 117070,
+          "total_votes_cast": 278016,
+          "margin_pct": 0.102,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 4,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Graves (R) and a Republican-controlled legislature drew maps; Kansas retained 4 seats after the 2000 census. Republicans maintained all 4 seats.",
+      "efficiency_gap": -0.1145,
+      "mean_median_diff": -0.0613,
+      "seats_d": 1,
+      "seats_r": 3,
+      "votes_d": 259911,
+      "votes_r": 536026,
+      "seat_vote_ratio_d": 0.7656,
+      "avg_compactness": 0.3658,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 3
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.4139,
+          "d_votes": 0,
+          "r_votes": 189976,
+          "total_votes_cast": 208561,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3831,
+          "polsby_popper": 0.2461,
+          "d_votes": 79160,
+          "r_votes": 127477,
+          "total_votes_cast": 210977,
+          "margin_pct": 0.2338,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5169,
+          "polsby_popper": 0.3108,
+          "d_votes": 110095,
+          "r_votes": 102882,
+          "total_votes_cast": 219389,
+          "margin_pct": 0.0339,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3792,
+          "polsby_popper": 0.4924,
+          "d_votes": 70656,
+          "r_votes": 115691,
+          "total_votes_cast": 190963,
+          "margin_pct": 0.2417,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 4,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Brownback (R) and a Republican supermajority legislature drew maps; Kansas retained 4 seats after the 2010 census. Republicans maintained a 4-0 delegation.",
+      "efficiency_gap": -0.0825,
+      "mean_median_diff": 0.0169,
+      "seats_d": 0,
+      "seats_r": 4,
+      "votes_d": 195505,
+      "votes_r": 740981,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.4086,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 3
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.424,
+          "d_votes": 0,
+          "r_votes": 211337,
+          "total_votes_cast": 211337,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4045,
+          "polsby_popper": 0.3499,
+          "d_votes": 113735,
+          "r_votes": 167463,
+          "total_votes_cast": 293718,
+          "margin_pct": 0.1911,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.4573,
+          "d_votes": 0,
+          "r_votes": 201087,
+          "total_votes_cast": 293762,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3367,
+          "polsby_popper": 0.4034,
+          "d_votes": 81770,
+          "r_votes": 161094,
+          "total_votes_cast": 258922,
+          "margin_pct": 0.3266,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 4,
+      "redistricting_controller": "Republican (veto override)",
+      "notes": "Governor Kelly (D) vetoed the Republican legislature's congressional maps, which split the Kansas City metro area to shore up the 3rd District (Wyandotte/Johnson counties) as a safe Republican seat. The Republican supermajority legislature overrode the veto. Democrats subsequently won the 3rd District in 2022 and 2024 anyway.",
+      "efficiency_gap": 0.0591,
+      "mean_median_diff": 0.0239,
+      "seats_d": 1,
+      "seats_r": 3,
+      "votes_d": 425322,
+      "votes_r": 569567,
+      "seat_vote_ratio_d": 0.5848,
+      "avg_compactness": 0.3497,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3233,
+          "polsby_popper": 0.3499,
+          "d_votes": 77092,
+          "r_votes": 161333,
+          "total_votes_cast": 238425,
+          "margin_pct": 0.3533,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4236,
+          "polsby_popper": 0.1519,
+          "d_votes": 98852,
+          "r_votes": 134506,
+          "total_votes_cast": 233358,
+          "margin_pct": 0.1528,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5623,
+          "polsby_popper": 0.4501,
+          "d_votes": 165527,
+          "r_votes": 128839,
+          "total_votes_cast": 301294,
+          "margin_pct": 0.1246,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3666,
+          "polsby_popper": 0.4472,
+          "d_votes": 83851,
+          "r_votes": 144889,
+          "total_votes_cast": 228740,
+          "margin_pct": 0.2668,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

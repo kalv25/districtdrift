@@ -1,0 +1,355 @@
+{
+  "state": "Oklahoma",
+  "fips": "40",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 6,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Walters (D) and a Democratic legislature drew maps; Oklahoma retained 6 seats after the 1990 census. Democrats controlled both chambers and the governorship for the last time in this redistricting cycle.",
+      "efficiency_gap": 0.0651,
+      "mean_median_diff": -0.0181,
+      "seats_d": 4,
+      "seats_r": 2,
+      "votes_d": 764249,
+      "votes_r": 504133,
+      "seat_vote_ratio_d": 1.1064,
+      "avg_compactness": 0.2169,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 1,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4721,
+          "polsby_popper": 0.307,
+          "d_votes": 106619,
+          "r_votes": 119211,
+          "total_votes_cast": 225830,
+          "margin_pct": 0.0558,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5749,
+          "polsby_popper": 0.226,
+          "d_votes": 118542,
+          "r_votes": 87657,
+          "total_votes_cast": 213513,
+          "margin_pct": 0.1498,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.7509,
+          "polsby_popper": 0.1485,
+          "d_votes": 155934,
+          "r_votes": 51725,
+          "total_votes_cast": 207659,
+          "margin_pct": 0.5018,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.7075,
+          "polsby_popper": 0.2126,
+          "d_votes": 140841,
+          "r_votes": 58235,
+          "total_votes_cast": 199076,
+          "margin_pct": 0.4149,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4661,
+          "polsby_popper": 0.1677,
+          "d_votes": 107579,
+          "r_votes": 123237,
+          "total_votes_cast": 230816,
+          "margin_pct": 0.0678,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "D",
+          "partisan_lean_d": 0.6777,
+          "polsby_popper": 0.2398,
+          "d_votes": 134734,
+          "r_votes": 64068,
+          "total_votes_cast": 198802,
+          "margin_pct": 0.3555,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 5,
+      "redistricting_controller": "Split (Rep governor, split legislature)",
+      "notes": "Governor Keating (R) and a split legislature (Dem Senate, Rep House) drew maps after Oklahoma lost 1 seat from the 2000 census (6\u21925). Despite competing interests, maps were enacted producing a 5-0 Republican delegation within a cycle.",
+      "efficiency_gap": 0.1241,
+      "mean_median_diff": -0.0359,
+      "seats_d": 1,
+      "seats_r": 4,
+      "votes_d": 391927,
+      "votes_r": 546832,
+      "seat_vote_ratio_d": 0.479,
+      "avg_compactness": 0.2366,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 1,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4312,
+          "polsby_popper": 0.186,
+          "d_votes": 90649,
+          "r_votes": 119566,
+          "total_votes_cast": 214955,
+          "margin_pct": 0.1376,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.7412,
+          "polsby_popper": 0.2426,
+          "d_votes": 146748,
+          "r_votes": 51234,
+          "total_votes_cast": 197982,
+          "margin_pct": 0.4824,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.2678,
+          "d_votes": 0,
+          "r_votes": 148206,
+          "total_votes_cast": 196090,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.4617,
+          "polsby_popper": 0.2124,
+          "d_votes": 91322,
+          "r_votes": 106452,
+          "total_votes_cast": 197774,
+          "margin_pct": 0.0765,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.3424,
+          "polsby_popper": 0.2739,
+          "d_votes": 63208,
+          "r_votes": 121374,
+          "total_votes_cast": 195051,
+          "margin_pct": 0.3151,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 5,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Fallin (R) and a Republican supermajority legislature drew maps; Oklahoma retained 5 seats after the 2010 census. Republicans drew maps maintaining a 5-0 Republican delegation.",
+      "efficiency_gap": 0.1476,
+      "mean_median_diff": -0.0109,
+      "seats_d": 0,
+      "seats_r": 5,
+      "votes_d": 410324,
+      "votes_r": 856872,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.2509,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3355,
+          "polsby_popper": 0.2061,
+          "d_votes": 91421,
+          "r_votes": 181084,
+          "total_votes_cast": 285312,
+          "margin_pct": 0.329,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4007,
+          "polsby_popper": 0.2623,
+          "d_votes": 96081,
+          "r_votes": 143701,
+          "total_votes_cast": 250612,
+          "margin_pct": 0.1986,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.2095,
+          "polsby_popper": 0.2696,
+          "d_votes": 53472,
+          "r_votes": 201744,
+          "total_votes_cast": 268003,
+          "margin_pct": 0.581,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.289,
+          "polsby_popper": 0.2494,
+          "d_votes": 71846,
+          "r_votes": 176740,
+          "total_votes_cast": 260331,
+          "margin_pct": 0.422,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.3883,
+          "polsby_popper": 0.267,
+          "d_votes": 97504,
+          "r_votes": 153603,
+          "total_votes_cast": 261677,
+          "margin_pct": 0.2234,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 5,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Stitt (R) and a Republican supermajority legislature drew maps; Oklahoma retained 5 seats after the 2020 census. Maps maintained a 5-0 Republican delegation.",
+      "efficiency_gap": 0.1388,
+      "mean_median_diff": -0.0163,
+      "seats_d": 0,
+      "seats_r": 5,
+      "votes_d": 356988,
+      "votes_r": 760639,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.2852,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 5
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3619,
+          "polsby_popper": 0.3274,
+          "d_votes": 80974,
+          "r_votes": 142800,
+          "total_votes_cast": 233495,
+          "margin_pct": 0.2763,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2441,
+          "polsby_popper": 0.2699,
+          "d_votes": 54194,
+          "r_votes": 167843,
+          "total_votes_cast": 231672,
+          "margin_pct": 0.5118,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.2546,
+          "polsby_popper": 0.2347,
+          "d_votes": 50354,
+          "r_votes": 147418,
+          "total_votes_cast": 197772,
+          "margin_pct": 0.4908,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3325,
+          "polsby_popper": 0.2514,
+          "d_votes": 74667,
+          "r_votes": 149879,
+          "total_votes_cast": 224546,
+          "margin_pct": 0.335,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.388,
+          "polsby_popper": 0.3427,
+          "d_votes": 96799,
+          "r_votes": 152699,
+          "total_votes_cast": 258826,
+          "margin_pct": 0.224,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "state": "Rhode Island",
+  "fips": "44",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 2,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Sundlun (D) and a Democratic legislature drew maps; Rhode Island retained 2 seats after the 1990 census. Rhode Island came close to losing a seat to reapportionment.",
+      "efficiency_gap": 0.0036,
+      "mean_median_diff": 0.0,
+      "seats_d": 1,
+      "seats_r": 1,
+      "votes_d": 192542,
+      "votes_r": 185980,
+      "seat_vote_ratio_d": 0.983,
+      "avg_compactness": 0.1356,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.2613,
+          "polsby_popper": 0.0419,
+          "d_votes": 48092,
+          "r_votes": 135982,
+          "total_votes_cast": 194089,
+          "margin_pct": 0.4775,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.7429,
+          "polsby_popper": 0.2292,
+          "d_votes": 144450,
+          "r_votes": 49998,
+          "total_votes_cast": 204413,
+          "margin_pct": 0.4857,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 2,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Almond (R) and a Democratic legislature drew maps; Rhode Island retained 2 seats after the 2000 census, again narrowly. Democrats controlled the General Assembly and drew the maps.",
+      "efficiency_gap": -0.1037,
+      "mean_median_diff": 0.0,
+      "seats_d": 2,
+      "seats_r": 0,
+      "votes_d": 224676,
+      "votes_r": 97137,
+      "seat_vote_ratio_d": 1.4323,
+      "avg_compactness": 0.1048,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6161,
+          "polsby_popper": 0.0334,
+          "d_votes": 95286,
+          "r_votes": 59370,
+          "total_votes_cast": 159133,
+          "margin_pct": 0.2322,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.7741,
+          "polsby_popper": 0.1762,
+          "d_votes": 129390,
+          "r_votes": 37767,
+          "total_votes_cast": 169610,
+          "margin_pct": 0.5481,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 2,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Chafee (I, former Republican) and a Democratic legislature drew maps; Rhode Island retained 2 seats after the 2010 census. Democrats controlled both chambers of the General Assembly.",
+      "efficiency_gap": -0.3207,
+      "mean_median_diff": 0.0,
+      "seats_d": 2,
+      "seats_r": 0,
+      "votes_d": 232679,
+      "votes_r": 161926,
+      "seat_vote_ratio_d": 1.6959,
+      "avg_compactness": 0.1007,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5647,
+          "polsby_popper": 0.0294,
+          "d_votes": 108612,
+          "r_votes": 83737,
+          "total_votes_cast": 205115,
+          "margin_pct": 0.1293,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.6134,
+          "polsby_popper": 0.1721,
+          "d_votes": 124067,
+          "r_votes": 78189,
+          "total_votes_cast": 222660,
+          "margin_pct": 0.2268,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 2,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor McKee (D) and a Democratic legislature drew maps; Rhode Island retained 2 seats after the 2020 census. Rhode Island uses a Reapportionment Commission; maps were relatively uncontested as Democrats held both seats.",
+      "efficiency_gap": -0.353,
+      "mean_median_diff": 0.0,
+      "seats_d": 2,
+      "seats_r": 0,
+      "votes_d": 201750,
+      "votes_r": 150024,
+      "seat_vote_ratio_d": 1.7436,
+      "avg_compactness": 0.1012,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6415,
+          "polsby_popper": 0.0288,
+          "d_votes": 100318,
+          "r_votes": 56055,
+          "total_votes_cast": 156734,
+          "margin_pct": 0.2831,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5191,
+          "polsby_popper": 0.1737,
+          "d_votes": 101432,
+          "r_votes": 93969,
+          "total_votes_cast": 201089,
+          "margin_pct": 0.0382,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "state": "Alaska",
+  "fips": "02",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 1,
+      "redistricting_controller": "At-large (no redistricting)",
+      "notes": "Alaska has elected one at-large representative throughout its statehood. With a single district coterminous with the state, congressional redistricting is not applicable.",
+      "efficiency_gap": 0.4558,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 1,
+      "votes_d": 102378,
+      "votes_r": 111849,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.0027,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 0,
+          "won_by": "R",
+          "partisan_lean_d": 0.4779,
+          "polsby_popper": 0.0027,
+          "d_votes": 102378,
+          "r_votes": 111849,
+          "total_votes_cast": 239116,
+          "margin_pct": 0.0442,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 1,
+      "redistricting_controller": "At-large (no redistricting)",
+      "notes": "",
+      "efficiency_gap": -0.1234,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 1,
+      "votes_d": 39357,
+      "votes_r": 169685,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.004,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 0,
+          "won_by": "R",
+          "partisan_lean_d": 0.1883,
+          "polsby_popper": 0.004,
+          "d_votes": 39357,
+          "r_votes": 169685,
+          "total_votes_cast": 227725,
+          "margin_pct": 0.6235,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 1,
+      "redistricting_controller": "At-large (no redistricting)",
+      "notes": "",
+      "efficiency_gap": 0.1183,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 1,
+      "votes_d": 82927,
+      "votes_r": 185296,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.004,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 0,
+          "won_by": "R",
+          "partisan_lean_d": 0.3092,
+          "polsby_popper": 0.004,
+          "d_votes": 82927,
+          "r_votes": 185296,
+          "total_votes_cast": 289804,
+          "margin_pct": 0.3817,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 1,
+      "redistricting_controller": "At-large (no redistricting)",
+      "notes": "Alaska retained its single at-large seat after the 2020 census. In 2020, Alaska voters approved Measure 2, which instituted nonpartisan top-four primaries and ranked-choice voting for general elections beginning with the 2022 cycle.",
+      "efficiency_gap": 0.4968,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 1,
+      "votes_d": 128553,
+      "votes_r": 129379,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.004,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 0,
+          "won_by": "R",
+          "partisan_lean_d": 0.4984,
+          "polsby_popper": 0.004,
+          "d_votes": 128553,
+          "r_votes": 129379,
+          "total_votes_cast": 263610,
+          "margin_pct": 0.0032,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

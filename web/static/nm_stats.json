@@ -1,0 +1,256 @@
+{
+  "state": "New Mexico",
+  "fips": "35",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 3,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor King (D) and a Democratic legislature drew maps; New Mexico retained 3 seats after the 1990 census. Democrats drew maps producing a 2-1 Democratic delegation.",
+      "efficiency_gap": 0.1682,
+      "mean_median_diff": 0.065,
+      "seats_d": 1,
+      "seats_r": 2,
+      "votes_d": 272607,
+      "votes_r": 277833,
+      "seat_vote_ratio_d": 0.6731,
+      "avg_compactness": 0.3353,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3736,
+          "polsby_popper": 0.3155,
+          "d_votes": 76600,
+          "r_votes": 128426,
+          "total_votes_cast": 205214,
+          "margin_pct": 0.2528,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4355,
+          "polsby_popper": 0.3682,
+          "d_votes": 73157,
+          "r_votes": 94838,
+          "total_votes_cast": 168170,
+          "margin_pct": 0.1291,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6924,
+          "polsby_popper": 0.3223,
+          "d_votes": 122850,
+          "r_votes": 54569,
+          "total_votes_cast": 182217,
+          "margin_pct": 0.3849,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 3,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Johnson (R) and a Democratic legislature drew maps; New Mexico retained 3 seats after the 2000 census. Democrats controlled the legislature and drew maps that maintained a 2-1 Democratic advantage.",
+      "efficiency_gap": 0.4173,
+      "mean_median_diff": 0.1814,
+      "seats_d": 1,
+      "seats_r": 2,
+      "votes_d": 262071,
+      "votes_r": 175342,
+      "seat_vote_ratio_d": 0.5564,
+      "avg_compactness": 0.3518,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 2,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4466,
+          "polsby_popper": 0.2981,
+          "d_votes": 77234,
+          "r_votes": 95711,
+          "total_votes_cast": 172945,
+          "margin_pct": 0.1068,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4374,
+          "polsby_popper": 0.3945,
+          "d_votes": 61916,
+          "r_votes": 79631,
+          "total_votes_cast": 141629,
+          "margin_pct": 0.1252,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.3628,
+          "d_votes": 122921,
+          "r_votes": 0,
+          "total_votes_cast": 122921,
+          "margin_pct": null,
+          "contested": false
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 3,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Martinez (R) and a Democratic legislature drew maps; New Mexico retained 3 seats after the 2010 census. Democrats drew maps maintaining 2 safe Democratic seats and 1 competitive Republican-leaning seat.",
+      "efficiency_gap": -0.1025,
+      "mean_median_diff": -0.0477,
+      "seats_d": 2,
+      "seats_r": 1,
+      "votes_d": 422189,
+      "votes_r": 343269,
+      "seat_vote_ratio_d": 1.2087,
+      "avg_compactness": 0.3493,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 1,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5916,
+          "polsby_popper": 0.2651,
+          "d_votes": 162924,
+          "r_votes": 112473,
+          "total_votes_cast": 275856,
+          "margin_pct": 0.1832,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.409,
+          "polsby_popper": 0.403,
+          "d_votes": 92162,
+          "r_votes": 133180,
+          "total_votes_cast": 225515,
+          "margin_pct": 0.182,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6312,
+          "polsby_popper": 0.3799,
+          "d_votes": 167103,
+          "r_votes": 97616,
+          "total_votes_cast": 264719,
+          "margin_pct": 0.2625,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 3,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Lujan Grisham (D) and a Democratic legislature drew maps; New Mexico retained 3 seats after the 2020 census. Democrats drew an aggressive map targeting all 3 seats; Republicans challenged the maps in state court but they were ultimately upheld, producing a 3-0 Democratic delegation in 2022.",
+      "efficiency_gap": -0.3986,
+      "mean_median_diff": -0.01,
+      "seats_d": 3,
+      "seats_r": 0,
+      "votes_d": 387716,
+      "votes_r": 316352,
+      "seat_vote_ratio_d": 1.8159,
+      "avg_compactness": 0.2894,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 2,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5576,
+          "polsby_popper": 0.3002,
+          "d_votes": 156462,
+          "r_votes": 124151,
+          "total_votes_cast": 280671,
+          "margin_pct": 0.1151,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5036,
+          "polsby_popper": 0.3008,
+          "d_votes": 97037,
+          "r_votes": 95636,
+          "total_votes_cast": 192673,
+          "margin_pct": 0.0073,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5816,
+          "polsby_popper": 0.2671,
+          "d_votes": 134217,
+          "r_votes": 96565,
+          "total_votes_cast": 230782,
+          "margin_pct": 0.1631,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

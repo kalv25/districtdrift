@@ -1,0 +1,300 @@
+{
+  "state": "Arkansas",
+  "fips": "05",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 4,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Tucker (D) \u2014 who succeeded Bill Clinton upon his election to the presidency \u2014 and a Democratic legislature drew maps; Arkansas retained 4 seats after the 1990 census",
+      "efficiency_gap": 0.2111,
+      "mean_median_diff": 0.0089,
+      "seats_d": 2,
+      "seats_r": 2,
+      "votes_d": 525197,
+      "votes_r": 356900,
+      "seat_vote_ratio_d": 0.8398,
+      "avg_compactness": 0.266,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 2,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6983,
+          "polsby_popper": 0.1713,
+          "d_votes": 149558,
+          "r_votes": 64618,
+          "total_votes_cast": 214176,
+          "margin_pct": 0.3966,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.7416,
+          "polsby_popper": 0.2241,
+          "d_votes": 154946,
+          "r_votes": 53978,
+          "total_votes_cast": 208924,
+          "margin_pct": 0.4833,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.4845,
+          "polsby_popper": 0.3494,
+          "d_votes": 117775,
+          "r_votes": 125295,
+          "total_votes_cast": 249494,
+          "margin_pct": 0.0309,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.4766,
+          "polsby_popper": 0.3192,
+          "d_votes": 102918,
+          "r_votes": 113009,
+          "total_votes_cast": 215927,
+          "margin_pct": 0.0467,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 4,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Huckabee (R) and a Democratic-controlled legislature drew maps; Arkansas retained 4 seats after the 2000 census. Democrats held both chambers of the General Assembly and controlled the process.",
+      "efficiency_gap": -0.1303,
+      "mean_median_diff": -0.0685,
+      "seats_d": 3,
+      "seats_r": 1,
+      "votes_d": 392086,
+      "votes_r": 283739,
+      "seat_vote_ratio_d": 1.2927,
+      "avg_compactness": 0.2551,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6684,
+          "polsby_popper": 0.1701,
+          "d_votes": 129701,
+          "r_votes": 64357,
+          "total_votes_cast": 194058,
+          "margin_pct": 0.3367,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.2213,
+          "d_votes": 142752,
+          "r_votes": 0,
+          "total_votes_cast": 153626,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.3685,
+          "d_votes": 0,
+          "r_votes": 141478,
+          "total_votes_cast": 143055,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6056,
+          "polsby_popper": 0.2606,
+          "d_votes": 119633,
+          "r_votes": 77904,
+          "total_votes_cast": 197537,
+          "margin_pct": 0.2112,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 4,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Beebe (D) and a Democratic legislature drew maps for the last time; Arkansas retained 4 seats. Democrats still held both chambers of the General Assembly for the 2011 redistricting, though Republicans swept state legislative races in the 2012 elections \u2014 the first Republican legislative majority since Reconstruction.",
+      "efficiency_gap": 0.1468,
+      "mean_median_diff": -0.0937,
+      "seats_d": 0,
+      "seats_r": 4,
+      "votes_d": 304770,
+      "votes_r": 637591,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.1992,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 2,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.4104,
+          "polsby_popper": 0.1296,
+          "d_votes": 96601,
+          "r_votes": 138800,
+          "total_votes_cast": 246843,
+          "margin_pct": 0.1793,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.417,
+          "polsby_popper": 0.2446,
+          "d_votes": 113156,
+          "r_votes": 158175,
+          "total_votes_cast": 286598,
+          "margin_pct": 0.1659,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.1402,
+          "d_votes": 0,
+          "r_votes": 186467,
+          "total_votes_cast": 245660,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3813,
+          "polsby_popper": 0.2823,
+          "d_votes": 95013,
+          "r_votes": 154149,
+          "total_votes_cast": 258953,
+          "margin_pct": 0.2373,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 4,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Hutchinson (R) and a Republican supermajority legislature drew maps; Arkansas retained 4 seats after the 2020 census. Republicans produced a 4-0 delegation map in a state Trump won by 28 points.",
+      "efficiency_gap": 0.1249,
+      "mean_median_diff": 0.0055,
+      "seats_d": 0,
+      "seats_r": 4,
+      "votes_d": 271771,
+      "votes_r": 598000,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.2708,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 4
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.262,
+          "polsby_popper": 0.1214,
+          "d_votes": 54598,
+          "r_votes": 153774,
+          "total_votes_cast": 208372,
+          "margin_pct": 0.476,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3699,
+          "polsby_popper": 0.2658,
+          "d_votes": 86887,
+          "r_votes": 147975,
+          "total_votes_cast": 246446,
+          "margin_pct": 0.2601,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3406,
+          "polsby_popper": 0.4325,
+          "d_votes": 73541,
+          "r_votes": 142401,
+          "total_votes_cast": 223588,
+          "margin_pct": 0.3189,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.2695,
+          "polsby_popper": 0.2633,
+          "d_votes": 56745,
+          "r_votes": 153850,
+          "total_votes_cast": 216696,
+          "margin_pct": 0.4611,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

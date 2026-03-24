@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 
 import geopandas as gpd
+import pyogrio
 
 from .config import PROCESSED_DIR, get_state
 
@@ -46,6 +47,7 @@ def main() -> None:
             print(f"  SKIP {year}: {src} not found — run pipeline.process first.")
             continue
 
+        pyogrio.set_gdal_config_options({"OGR_GEOJSON_MAX_OBJ_SIZE": "0"})
         gdf = gpd.read_file(src)
         gdf = gdf[["district", "won_by", "partisan_lean_d", "geometry"]].copy()
         gdf.geometry = gdf.geometry.simplify(SIMPLIFY_TOL, preserve_topology=True)

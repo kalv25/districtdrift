@@ -1,0 +1,212 @@
+{
+  "state": "Maine",
+  "fips": "23",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 2,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor McKernan (R) and a Democratic legislature drew maps; Maine retained 2 seats after the 1990 census. Maine uses a bipartisan apportionment commission whose recommendations the legislature votes on.",
+      "efficiency_gap": 0.0751,
+      "mean_median_diff": 0.0,
+      "seats_d": 1,
+      "seats_r": 1,
+      "votes_d": 363520,
+      "votes_r": 278258,
+      "seat_vote_ratio_d": 0.8827,
+      "avg_compactness": 0.0265,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6501,
+          "polsby_popper": 0.0093,
+          "d_votes": 232696,
+          "r_votes": 125236,
+          "total_votes_cast": 358148,
+          "margin_pct": 0.3002,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4609,
+          "polsby_popper": 0.0438,
+          "d_votes": 130824,
+          "r_votes": 153022,
+          "total_votes_cast": 311433,
+          "margin_pct": 0.0782,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 2,
+      "redistricting_controller": "Independent governor, Dem legislature",
+      "notes": "Governor King (I) \u2014 an independent who served two terms \u2014 and a Democratic legislature drew maps; Maine retained 2 seats after the 2000 census. Maine adopted ranked-choice voting for congressional races via citizen initiative in 2016.",
+      "efficiency_gap": -0.3309,
+      "mean_median_diff": 0.0,
+      "seats_d": 2,
+      "seats_r": 0,
+      "votes_d": 289514,
+      "votes_r": 205780,
+      "seat_vote_ratio_d": 1.7108,
+      "avg_compactness": 0.0225,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6381,
+          "polsby_popper": 0.0076,
+          "d_votes": 172646,
+          "r_votes": 97931,
+          "total_votes_cast": 270577,
+          "margin_pct": 0.2761,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5201,
+          "polsby_popper": 0.0374,
+          "d_votes": 116868,
+          "r_votes": 107849,
+          "total_votes_cast": 224717,
+          "margin_pct": 0.0401,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 2,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor LePage (R) and a split legislature drew maps; Maine retained 2 seats after the 2010 census. LePage was one of the most controversial governors in Maine history; redistricting was relatively uncontested given the small delegation.",
+      "efficiency_gap": -0.2667,
+      "mean_median_diff": 0.0,
+      "seats_d": 2,
+      "seats_r": 0,
+      "votes_d": 427819,
+      "votes_r": 265982,
+      "seat_vote_ratio_d": 1.6217,
+      "avg_compactness": 0.0228,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6479,
+          "polsby_popper": 0.007,
+          "d_votes": 236363,
+          "r_votes": 128440,
+          "total_votes_cast": 380715,
+          "margin_pct": 0.2958,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5819,
+          "polsby_popper": 0.0386,
+          "d_votes": 191456,
+          "r_votes": 137542,
+          "total_votes_cast": 343908,
+          "margin_pct": 0.1639,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 2,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Mills (D) and a Democratic legislature drew maps; Maine retained 2 seats after the 2020 census. Maine's unique congressional district allocation of Electoral College votes (CD method, same as Nebraska) makes the 2nd District (rural northern Maine) a perennial presidential battleground.",
+      "efficiency_gap": -0.3342,
+      "mean_median_diff": 0.0,
+      "seats_d": 2,
+      "seats_r": 0,
+      "votes_d": 384889,
+      "votes_r": 275405,
+      "seat_vote_ratio_d": 1.7155,
+      "avg_compactness": 0.0225,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6296,
+          "polsby_popper": 0.0069,
+          "d_votes": 219753,
+          "r_votes": 129263,
+          "total_votes_cast": 358138,
+          "margin_pct": 0.2593,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5305,
+          "polsby_popper": 0.0381,
+          "d_votes": 165136,
+          "r_votes": 146142,
+          "total_votes_cast": 656104,
+          "margin_pct": 0.061,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

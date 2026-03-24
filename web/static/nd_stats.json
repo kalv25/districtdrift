@@ -1,0 +1,168 @@
+{
+  "state": "North Dakota",
+  "fips": "38",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 1,
+      "redistricting_controller": "At-large (no redistricting)",
+      "notes": "North Dakota has elected one at-large representative since losing its second seat after the 1970 census. With a single district coterminous with the state, congressional redistricting is not applicable.",
+      "efficiency_gap": -0.3192,
+      "mean_median_diff": 0.0,
+      "seats_d": 1,
+      "seats_r": 0,
+      "votes_d": 169273,
+      "votes_r": 117442,
+      "seat_vote_ratio_d": 1.6938,
+      "avg_compactness": 0.5156,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 0,
+          "won_by": "D",
+          "partisan_lean_d": 0.5904,
+          "polsby_popper": 0.5156,
+          "d_votes": 169273,
+          "r_votes": 117442,
+          "total_votes_cast": 297898,
+          "margin_pct": 0.1808,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 1,
+      "redistricting_controller": "At-large (no redistricting)",
+      "notes": "",
+      "efficiency_gap": -0.4519,
+      "mean_median_diff": 0.0,
+      "seats_d": 1,
+      "seats_r": 0,
+      "votes_d": 121073,
+      "votes_r": 109957,
+      "seat_vote_ratio_d": 1.9082,
+      "avg_compactness": 0.5141,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 0,
+          "won_by": "D",
+          "partisan_lean_d": 0.5241,
+          "polsby_popper": 0.5141,
+          "d_votes": 121073,
+          "r_votes": 109957,
+          "total_votes_cast": 231030,
+          "margin_pct": 0.0481,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 1,
+      "redistricting_controller": "At-large (no redistricting)",
+      "notes": "",
+      "efficiency_gap": -0.5,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 1,
+      "votes_d": 0,
+      "votes_r": 173585,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.5144,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 0,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.5144,
+          "d_votes": 0,
+          "r_votes": 173585,
+          "total_votes_cast": 316224,
+          "margin_pct": null,
+          "contested": false
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 1,
+      "redistricting_controller": "At-large (no redistricting)",
+      "notes": "",
+      "efficiency_gap": -0.5,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 1,
+      "votes_d": 0,
+      "votes_r": 148399,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.5142,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 0,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.5142,
+          "d_votes": 0,
+          "r_votes": 148399,
+          "total_votes_cast": 238586,
+          "margin_pct": null,
+          "contested": false
+        }
+      ]
+    }
+  ]
+}

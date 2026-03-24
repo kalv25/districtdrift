@@ -2,7 +2,7 @@
 
 **Version:** 2026.3.22
 **Created:** 2026-03-22
-**Last Updated:** 2026-03-24 22:30 UTC
+**Last Updated:** 2026-03-24 23:00 UTC
 
 ## Project overview
 A public-interest website that documents the effects of gerrymandering in the
@@ -10,7 +10,7 @@ United States from the 1990s through the present. Viewers can explore changes
 at every level: national, state, congressional district, and precinct.
 
 Domain: districtdrift.org (.org signals nonprofit/public interest)
-Status: 26 states fully implemented with per-district data. Nation view live.
+Status: 50 states fully implemented with per-district data. Nation view live.
 Version: CalVer — `YYYY.M.D` format (e.g. `2026.3.22`). Set in `web/package.json` and `pyproject.toml`; injected into the frontend via `vite.config.ts` as `__APP_VERSION__`; displayed in the header tagline and stamped into `<meta name="version">` via `+layout.svelte`.
 
 ---
@@ -60,7 +60,7 @@ cycles (1992/2002/2012/2022) is the core feature no existing site offers.
 
 ---
 
-## Current state — 26 states complete
+## Current state — 50 states complete (all states)
 
 ### Pipeline (`pipeline/`)
 | File | Purpose |
@@ -149,7 +149,7 @@ Outputs (gitignored except web/static files):
   - Restored on load (takes priority over localStorage)
 - **⤴ Share** button: uses Web Share API on mobile (native share sheet — email, messages, etc.); falls back to clipboard copy on desktop with "✓ Copied" confirmation
 - Dynamic `<title>`: `District Drift — Michigan, 2022, District 3` (descriptive for shared links)
-- "17 of 50 states · more coming" note at the bottom of the state dropdown menu (auto-updates from `STATES` object count)
+- "All 50 states" shown at the bottom of the state dropdown menu (auto-updates: shows "X of 50 states · more coming" when < 50)
 
 #### Help modal
 - Dark navy header (`#1a1a2e`) for visual weight
@@ -207,7 +207,7 @@ districtdrift/
 │   │       ├── EGChart.svelte           ← bar chart: efficiency gap
 │   │       └── CompetitivenessChart.svelte ← stacked bars: district competitiveness
 │   └── static/
-│       ├── {state}_stats.json    ← partisan stats + credits (26 states)
+│       ├── {state}_stats.json    ← partisan stats + credits (all 50 states)
 │       ├── tiles/                ← PMTiles (gitignored)
 │       └── geo/                  ← simplified GeoJSON for morphing (gitignored)
 ├── data/                      ← gitignored raw + processed data
@@ -218,10 +218,10 @@ districtdrift/
 ---
 
 ## Next steps (in priority order)
-1. ~~**Add a second state**~~ ✓ — 26 states fully implemented with per-district data
+1. ~~**Add a second state**~~ ✓ — 50 states fully implemented with per-district data
 2. ~~**Nation view**~~ ✓ — NationView.svelte renders all 50 states colored by EG with rankings panel
 3. ~~**Deploy to Cloudflare**~~ ✓ — live at districtdrift.org via Cloudflare Pages (auto-deploys from git)
-4. **Expand to remaining 24 states** — run pipeline for each; copy stats JSON + PMTiles to web/static
+4. ~~**Expand to remaining 24 states**~~ ✓ — all 50 states complete
 5. **More states' events data** — events.ts currently covers MI + GA well; expand to remaining 15
 6. **Improve nation view** — better color scale, cycle comparison tooltip on hover
 7. **Precinct layer** *(next major version)* — raw precinct vote data overlaid on district view; requires RDH shapefiles, join to election results, tippecanoe tiling (~175k precincts nationally)

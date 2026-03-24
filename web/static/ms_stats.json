@@ -1,0 +1,311 @@
+{
+  "state": "Mississippi",
+  "fips": "28",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 5,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Fordice (R) \u2014 the first Republican governor of Mississippi since Reconstruction \u2014 and a Democratic legislature drew maps; Mississippi retained 5 seats. The Democratic legislature controlled the congressional redistricting process.",
+      "efficiency_gap": -0.0796,
+      "mean_median_diff": -0.0375,
+      "seats_d": 5,
+      "seats_r": 0,
+      "votes_d": 669582,
+      "votes_r": 273234,
+      "seat_vote_ratio_d": 1.4081,
+      "avg_compactness": 0.1745,
+      "competitiveness": {
+        "solid_d": 4,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.5946,
+          "polsby_popper": 0.225,
+          "d_votes": 121664,
+          "r_votes": 82952,
+          "total_votes_cast": 204616,
+          "margin_pct": 0.1892,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.7638,
+          "polsby_popper": 0.0877,
+          "d_votes": 133361,
+          "r_votes": 41248,
+          "total_votes_cast": 174609,
+          "margin_pct": 0.5275,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.812,
+          "polsby_popper": 0.2045,
+          "d_votes": 162864,
+          "r_votes": 37710,
+          "total_votes_cast": 200574,
+          "margin_pct": 0.624,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.7497,
+          "polsby_popper": 0.2173,
+          "d_votes": 130927,
+          "r_votes": 43705,
+          "total_votes_cast": 194544,
+          "margin_pct": 0.4995,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.6411,
+          "polsby_popper": 0.1382,
+          "d_votes": 120766,
+          "r_votes": 67619,
+          "total_votes_cast": 191058,
+          "margin_pct": 0.2821,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 4,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Musgrove (D) and a Democratic legislature drew maps after Mississippi lost 1 seat from the 2000 census (5\u21924). Democrats still controlled both chambers of the legislature.",
+      "efficiency_gap": -0.0075,
+      "mean_median_diff": 0.029,
+      "seats_d": 2,
+      "seats_r": 2,
+      "votes_d": 320157,
+      "votes_r": 338817,
+      "seat_vote_ratio_d": 1.0291,
+      "avg_compactness": 0.1912,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.253,
+          "polsby_popper": 0.379,
+          "d_votes": 32318,
+          "r_votes": 95404,
+          "total_votes_cast": 133567,
+          "margin_pct": 0.4939,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5633,
+          "polsby_popper": 0.1218,
+          "d_votes": 89913,
+          "r_votes": 69711,
+          "total_votes_cast": 163050,
+          "margin_pct": 0.1266,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.3535,
+          "polsby_popper": 0.1511,
+          "d_votes": 76184,
+          "r_votes": 139329,
+          "total_votes_cast": 219151,
+          "margin_pct": 0.293,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.7798,
+          "polsby_popper": 0.113,
+          "d_votes": 121742,
+          "r_votes": 34373,
+          "total_votes_cast": 161868,
+          "margin_pct": 0.5596,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 4,
+      "redistricting_controller": "Split (Rep governor, Dem legislature)",
+      "notes": "Governor Barbour (R) and a Democratic legislature drew maps; Mississippi retained 4 seats after the 2010 census. Democrats narrowly held both legislative chambers for the 2011 redistricting, but Republicans swept both chambers in the November 2011 elections \u2014 marking the end of Democratic legislative control in Mississippi.",
+      "efficiency_gap": -0.0438,
+      "mean_median_diff": -0.0013,
+      "seats_d": 1,
+      "seats_r": 3,
+      "votes_d": 411398,
+      "votes_r": 703635,
+      "seat_vote_ratio_d": 0.6776,
+      "avg_compactness": 0.1936,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 3
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3792,
+          "polsby_popper": 0.3408,
+          "d_votes": 114076,
+          "r_votes": 186760,
+          "total_votes_cast": 309177,
+          "margin_pct": 0.2416,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.6843,
+          "polsby_popper": 0.1487,
+          "d_votes": 214978,
+          "r_votes": 99160,
+          "total_votes_cast": 320244,
+          "margin_pct": 0.3687,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.0,
+          "polsby_popper": 0.1629,
+          "d_votes": 0,
+          "r_votes": 234717,
+          "total_votes_cast": 293322,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3103,
+          "polsby_popper": 0.1218,
+          "d_votes": 82344,
+          "r_votes": 182998,
+          "total_votes_cast": 285432,
+          "margin_pct": 0.3793,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 4,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Reeves (R) and a Republican supermajority legislature drew maps; Mississippi retained 4 seats after the 2020 census. Maps maintained a 3-1 Republican delegation. VRA advocates noted that Black residents (38% of the population) are represented by only one majority-Black district (MS-2), with little change from the pattern challenged in prior decades.",
+      "efficiency_gap": -0.0433,
+      "mean_median_diff": 0.0723,
+      "seats_d": 1,
+      "seats_r": 3,
+      "votes_d": 251202,
+      "votes_r": 454329,
+      "seat_vote_ratio_d": 0.7022,
+      "avg_compactness": 0.2317,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 3
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.2703,
+          "polsby_popper": 0.3797,
+          "d_votes": 45238,
+          "r_votes": 122151,
+          "total_votes_cast": 167389,
+          "margin_pct": 0.4595,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.601,
+          "polsby_popper": 0.1281,
+          "d_votes": 108285,
+          "r_votes": 71884,
+          "total_votes_cast": 180169,
+          "margin_pct": 0.202,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "R",
+          "partisan_lean_d": 0.2926,
+          "polsby_popper": 0.2447,
+          "d_votes": 54803,
+          "r_votes": 132481,
+          "total_votes_cast": 187284,
+          "margin_pct": 0.4148,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.2512,
+          "polsby_popper": 0.1742,
+          "d_votes": 42876,
+          "r_votes": 127813,
+          "total_votes_cast": 174258,
+          "margin_pct": 0.4976,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

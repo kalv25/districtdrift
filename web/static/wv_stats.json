@@ -1,0 +1,245 @@
+{
+  "state": "West Virginia",
+  "fips": "54",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 4,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Caperton (D) and a Democratic legislature drew maps; West Virginia retained 4 seats after the 1990 census. West Virginia was still a reliably Democratic state at the federal level in the early 1990s.",
+      "efficiency_gap": 0.0621,
+      "mean_median_diff": 0.0795,
+      "seats_d": 3,
+      "seats_r": 0,
+      "votes_d": 439191,
+      "votes_r": 123114,
+      "seat_vote_ratio_d": 0.9602,
+      "avg_compactness": 0.1466,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.1523,
+          "d_votes": 172924,
+          "r_votes": 0,
+          "total_votes_cast": 172924,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.709,
+          "polsby_popper": 0.1108,
+          "d_votes": 143988,
+          "r_votes": 59102,
+          "total_votes_cast": 203090,
+          "margin_pct": 0.418,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6564,
+          "polsby_popper": 0.1767,
+          "d_votes": 122279,
+          "r_votes": 64012,
+          "total_votes_cast": 186291,
+          "margin_pct": 0.3128,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 3,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Wise (D) and a Democratic legislature drew maps after West Virginia lost 1 seat from the 2000 census (4\u21923). Democrats still controlled both chambers of the Legislature; the state's shift toward Republicans was accelerating at the presidential level but had not yet reached state offices.",
+      "efficiency_gap": 0.2314,
+      "mean_median_diff": -0.0016,
+      "seats_d": 2,
+      "seats_r": 1,
+      "votes_d": 264124,
+      "votes_r": 135505,
+      "seat_vote_ratio_d": 1.0087,
+      "avg_compactness": 0.1498,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 1.0,
+          "polsby_popper": 0.1394,
+          "d_votes": 110941,
+          "r_votes": 0,
+          "total_votes_cast": 111261,
+          "margin_pct": null,
+          "contested": false
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3996,
+          "polsby_popper": 0.0955,
+          "d_votes": 65400,
+          "r_votes": 98276,
+          "total_votes_cast": 163676,
+          "margin_pct": 0.2009,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.7022,
+          "polsby_popper": 0.2143,
+          "d_votes": 87783,
+          "r_votes": 37229,
+          "total_votes_cast": 125012,
+          "margin_pct": 0.4044,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 3,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Tomblin (D) and a Democratic legislature drew maps; West Virginia retained 3 seats after the 2010 census. Democrats still held both chambers of the Legislature for the 2011 redistricting, though Republicans swept the Legislature in the 2014 elections \u2014 ending over a century of Democratic legislative control.",
+      "efficiency_gap": -0.0108,
+      "mean_median_diff": 0.0306,
+      "seats_d": 1,
+      "seats_r": 2,
+      "votes_d": 257101,
+      "votes_r": 384253,
+      "seat_vote_ratio_d": 0.8315,
+      "avg_compactness": 0.138,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3752,
+          "polsby_popper": 0.1395,
+          "d_votes": 80342,
+          "r_votes": 133809,
+          "total_votes_cast": 214151,
+          "margin_pct": 0.2497,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3023,
+          "polsby_popper": 0.0953,
+          "d_votes": 68560,
+          "r_votes": 158206,
+          "total_votes_cast": 226766,
+          "margin_pct": 0.3953,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5398,
+          "polsby_popper": 0.1792,
+          "d_votes": 108199,
+          "r_votes": 92238,
+          "total_votes_cast": 200437,
+          "margin_pct": 0.0796,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 2,
+      "redistricting_controller": "Republican",
+      "notes": "Governor Justice (R, originally elected as a Democrat but switched parties in 2017) and a Republican supermajority legislature drew maps after West Virginia lost 1 seat from the 2020 census (3\u21922). The state has lost half its congressional delegation since 1990, reflecting decades of population decline. Republicans drew maps pitting two Democratic incumbents (Mooney and Miller) against each other.",
+      "efficiency_gap": 0.1485,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 2,
+      "votes_d": 149706,
+      "votes_r": 312004,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.1885,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3016,
+          "polsby_popper": 0.2477,
+          "d_votes": 65428,
+          "r_votes": 151511,
+          "total_votes_cast": 227196,
+          "margin_pct": 0.3968,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3443,
+          "polsby_popper": 0.1293,
+          "d_votes": 84278,
+          "r_votes": 160493,
+          "total_votes_cast": 244886,
+          "margin_pct": 0.3114,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}

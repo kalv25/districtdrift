@@ -1,0 +1,366 @@
+{
+  "state": "Connecticut",
+  "fips": "09",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 6,
+      "redistricting_controller": "Bipartisan Commission",
+      "notes": "Connecticut uses a bipartisan Reapportionment Commission (equal D/R members + tiebreaker); if it deadlocks, a special master draws maps. Governor Weicker (A Connecticut Party/independent) and a Democratic legislature oversaw the process; Connecticut retained 6 seats after the 1990 census.",
+      "efficiency_gap": 0.0153,
+      "mean_median_diff": 0.0108,
+      "seats_d": 2,
+      "seats_r": 4,
+      "votes_d": 501887,
+      "votes_r": 699155,
+      "seat_vote_ratio_d": 0.7977,
+      "avg_compactness": 0.2123,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 1,
+        "competitive": 0,
+        "lean_r": 2,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6004,
+          "polsby_popper": 0.359,
+          "d_votes": 112838,
+          "r_votes": 75113,
+          "total_votes_cast": 245430,
+          "margin_pct": 0.2007,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4106,
+          "polsby_popper": 0.1737,
+          "d_votes": 83197,
+          "r_votes": 119416,
+          "total_votes_cast": 242707,
+          "margin_pct": 0.1788,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5687,
+          "polsby_popper": 0.1425,
+          "d_votes": 112022,
+          "r_votes": 84952,
+          "total_votes_cast": 247531,
+          "margin_pct": 0.1374,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.2841,
+          "polsby_popper": 0.0738,
+          "d_votes": 58666,
+          "r_votes": 147816,
+          "total_votes_cast": 219615,
+          "margin_pct": 0.4318,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4162,
+          "polsby_popper": 0.1924,
+          "d_votes": 74791,
+          "r_votes": 104891,
+          "total_votes_cast": 240283,
+          "margin_pct": 0.1675,
+          "contested": true
+        },
+        {
+          "district": 6,
+          "won_by": "R",
+          "partisan_lean_d": 0.2656,
+          "polsby_popper": 0.3321,
+          "d_votes": 60373,
+          "r_votes": 166967,
+          "total_votes_cast": 239597,
+          "margin_pct": 0.4689,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 5,
+      "redistricting_controller": "Bipartisan Commission",
+      "notes": "Connecticut lost 1 seat after the 2000 census (6\u21925). Governor Rowland (R) and a Democratic legislature oversaw the bipartisan commission process. The commission deadlocked; a Hartford Superior Court judge drew the maps.",
+      "efficiency_gap": 0.1565,
+      "mean_median_diff": 0.0641,
+      "seats_d": 2,
+      "seats_r": 3,
+      "votes_d": 509036,
+      "votes_r": 465982,
+      "seat_vote_ratio_d": 0.7662,
+      "avg_compactness": 0.1387,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 0,
+        "competitive": 1,
+        "lean_r": 1,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6679,
+          "polsby_popper": 0.157,
+          "d_votes": 134698,
+          "r_votes": 66968,
+          "total_votes_cast": 201688,
+          "margin_pct": 0.3359,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.4591,
+          "polsby_popper": 0.1399,
+          "d_votes": 99674,
+          "r_votes": 117434,
+          "total_votes_cast": 217108,
+          "margin_pct": 0.0818,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.6894,
+          "polsby_popper": 0.0956,
+          "d_votes": 121557,
+          "r_votes": 54757,
+          "total_votes_cast": 185364,
+          "margin_pct": 0.3789,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "R",
+          "partisan_lean_d": 0.3557,
+          "polsby_popper": 0.0769,
+          "d_votes": 62491,
+          "r_votes": 113197,
+          "total_votes_cast": 175695,
+          "margin_pct": 0.2886,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "R",
+          "partisan_lean_d": 0.4437,
+          "polsby_popper": 0.2242,
+          "d_votes": 90616,
+          "r_votes": 113626,
+          "total_votes_cast": 209454,
+          "margin_pct": 0.1127,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 5,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Malloy (D) and a narrowly Democratic legislature drew maps; Connecticut retained 5 seats after the 2010 census. The bipartisan commission reached agreement for the first time in decades.",
+      "efficiency_gap": -0.2136,
+      "mean_median_diff": -0.0396,
+      "seats_d": 5,
+      "seats_r": 0,
+      "votes_d": 884398,
+      "votes_r": 490580,
+      "seat_vote_ratio_d": 1.5547,
+      "avg_compactness": 0.144,
+      "competitiveness": {
+        "solid_d": 3,
+        "lean_d": 1,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.7008,
+          "polsby_popper": 0.1757,
+          "d_votes": 192840,
+          "r_votes": 82321,
+          "total_votes_cast": 297061,
+          "margin_pct": 0.4017,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.6826,
+          "polsby_popper": 0.1443,
+          "d_votes": 189444,
+          "r_votes": 88103,
+          "total_votes_cast": 298960,
+          "margin_pct": 0.3651,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.7278,
+          "polsby_popper": 0.0985,
+          "d_votes": 197163,
+          "r_votes": 73726,
+          "total_votes_cast": 291300,
+          "margin_pct": 0.4557,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.5875,
+          "polsby_popper": 0.0757,
+          "d_votes": 167320,
+          "r_votes": 117503,
+          "total_votes_cast": 293432,
+          "margin_pct": 0.1749,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.5163,
+          "polsby_popper": 0.2258,
+          "d_votes": 137631,
+          "r_votes": 128927,
+          "total_votes_cast": 284757,
+          "margin_pct": 0.0327,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 5,
+      "redistricting_controller": "Democrat",
+      "notes": "Governor Lamont (D) and a Democratic legislature drew maps; Connecticut retained 5 seats after the 2020 census. Democrats held all 5 seats going into the cycle.",
+      "efficiency_gap": -0.3449,
+      "mean_median_diff": -0.0139,
+      "seats_d": 5,
+      "seats_r": 0,
+      "votes_d": 712823,
+      "votes_r": 521387,
+      "seat_vote_ratio_d": 1.7314,
+      "avg_compactness": 0.1642,
+      "competitiveness": {
+        "solid_d": 2,
+        "lean_d": 2,
+        "competitive": 1,
+        "lean_r": 0,
+        "solid_r": 0
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6129,
+          "polsby_popper": 0.1689,
+          "d_votes": 144873,
+          "r_votes": 91506,
+          "total_votes_cast": 243913,
+          "margin_pct": 0.2258,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "D",
+          "partisan_lean_d": 0.5917,
+          "polsby_popper": 0.1894,
+          "d_votes": 165946,
+          "r_votes": 114506,
+          "total_votes_cast": 285031,
+          "margin_pct": 0.1834,
+          "contested": true
+        },
+        {
+          "district": 3,
+          "won_by": "D",
+          "partisan_lean_d": 0.5829,
+          "polsby_popper": 0.1439,
+          "d_votes": 137924,
+          "r_votes": 98704,
+          "total_votes_cast": 242651,
+          "margin_pct": 0.1657,
+          "contested": true
+        },
+        {
+          "district": 4,
+          "won_by": "D",
+          "partisan_lean_d": 0.6005,
+          "polsby_popper": 0.0883,
+          "d_votes": 140262,
+          "r_votes": 93329,
+          "total_votes_cast": 236084,
+          "margin_pct": 0.2009,
+          "contested": true
+        },
+        {
+          "district": 5,
+          "won_by": "D",
+          "partisan_lean_d": 0.501,
+          "polsby_popper": 0.2304,
+          "d_votes": 123818,
+          "r_votes": 123342,
+          "total_votes_cast": 253672,
+          "margin_pct": 0.0019,
+          "contested": true
+        },
+        {
+          "district": null,
+          "won_by": NaN,
+          "partisan_lean_d": null,
+          "polsby_popper": 0.0362,
+          "d_votes": null,
+          "r_votes": null,
+          "total_votes_cast": null,
+          "margin_pct": null,
+          "contested": null
+        }
+      ]
+    }
+  ]
+}

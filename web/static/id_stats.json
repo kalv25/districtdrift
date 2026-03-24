@@ -1,0 +1,212 @@
+{
+  "state": "Idaho",
+  "fips": "16",
+  "credits": [
+    {
+      "label": "Redistricting Data Hub",
+      "url": "https://redistrictingdatahub.org",
+      "note": "precinct election results & shapefiles"
+    },
+    {
+      "label": "NHGIS",
+      "url": "https://www.nhgis.org",
+      "note": "congressional district boundaries"
+    },
+    {
+      "label": "MIT Election Lab",
+      "url": "https://electionlab.mit.edu/data",
+      "note": "US House election returns 1976\u20132024"
+    },
+    {
+      "label": "US Census TIGER",
+      "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "note": "base geography"
+    }
+  ],
+  "cycles": [
+    {
+      "cycle_year": 1992,
+      "congress": 103,
+      "total_seats": 2,
+      "redistricting_controller": "Split (Dem governor, Rep legislature)",
+      "notes": "Governor Andrus (D) and a Republican-controlled legislature drew maps; Idaho retained 2 seats after the 1990 census. Idaho's bipartisan redistricting commission was not created until 1994 (Prop 1), so the legislature drew the 1992 maps.",
+      "efficiency_gap": -0.0302,
+      "mean_median_diff": 0.0,
+      "seats_d": 1,
+      "seats_r": 1,
+      "votes_d": 222435,
+      "votes_r": 230766,
+      "seat_vote_ratio_d": 1.0187,
+      "avg_compactness": 0.2623,
+      "competitiveness": {
+        "solid_d": 1,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 1
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "D",
+          "partisan_lean_d": 0.6078,
+          "polsby_popper": 0.1921,
+          "d_votes": 140985,
+          "r_votes": 90983,
+          "total_votes_cast": 242890,
+          "margin_pct": 0.2156,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3682,
+          "polsby_popper": 0.3324,
+          "d_votes": 81450,
+          "r_votes": 139783,
+          "total_votes_cast": 229957,
+          "margin_pct": 0.2637,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2002,
+      "congress": 108,
+      "total_seats": 2,
+      "redistricting_controller": "Bipartisan Commission (IRC)",
+      "notes": "Idaho's bipartisan Citizens' Commission for Reapportionment (6 members: 3 appointed by each party's legislative leaders) drew maps for the first time after its creation by Proposition 1 (1994). Idaho retained 2 seats after the 2000 census.",
+      "efficiency_gap": 0.2,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 2,
+      "votes_d": 138038,
+      "votes_r": 256348,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.2606,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3993,
+          "polsby_popper": 0.1909,
+          "d_votes": 80269,
+          "r_votes": 120743,
+          "total_votes_cast": 206141,
+          "margin_pct": 0.2014,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.2987,
+          "polsby_popper": 0.3303,
+          "d_votes": 57769,
+          "r_votes": 135605,
+          "total_votes_cast": 198882,
+          "margin_pct": 0.4025,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2012,
+      "congress": 113,
+      "total_seats": 2,
+      "redistricting_controller": "Bipartisan Commission (IRC)",
+      "notes": "The Idaho Citizens' Commission for Reapportionment drew maps; Idaho retained 2 seats after the 2010 census. The commission reached consensus on maps preserving Boise's concentration in the 2nd District.",
+      "efficiency_gap": 0.1773,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 2,
+      "votes_d": 208297,
+      "votes_r": 406814,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.2543,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.3283,
+          "polsby_popper": 0.1865,
+          "d_votes": 97450,
+          "r_votes": 199402,
+          "total_votes_cast": 316724,
+          "margin_pct": 0.3434,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3483,
+          "polsby_popper": 0.3221,
+          "d_votes": 110847,
+          "r_votes": 207412,
+          "total_votes_cast": 318494,
+          "margin_pct": 0.3034,
+          "contested": true
+        }
+      ]
+    },
+    {
+      "cycle_year": 2022,
+      "congress": 118,
+      "total_seats": 2,
+      "redistricting_controller": "Bipartisan Commission (IRC)",
+      "notes": "The Idaho Citizens' Commission for Reapportionment drew maps; Idaho retained 2 seats after the 2020 census. VRA advocates argued the maps diluted the Native American vote in southeastern Idaho (Pocatello area), though no federal challenge was ultimately sustained.",
+      "efficiency_gap": 0.1281,
+      "mean_median_diff": 0.0,
+      "seats_d": 0,
+      "seats_r": 2,
+      "votes_d": 180997,
+      "votes_r": 395351,
+      "seat_vote_ratio_d": null,
+      "avg_compactness": 0.2524,
+      "competitiveness": {
+        "solid_d": 0,
+        "lean_d": 0,
+        "competitive": 0,
+        "lean_r": 0,
+        "solid_r": 2
+      },
+      "districts": [
+        {
+          "district": 1,
+          "won_by": "R",
+          "partisan_lean_d": 0.2696,
+          "polsby_popper": 0.1856,
+          "d_votes": 82261,
+          "r_votes": 222901,
+          "total_votes_cast": 312442,
+          "margin_pct": 0.4609,
+          "contested": true
+        },
+        {
+          "district": 2,
+          "won_by": "R",
+          "partisan_lean_d": 0.3641,
+          "polsby_popper": 0.3192,
+          "d_votes": 98736,
+          "r_votes": 172450,
+          "total_votes_cast": 271186,
+          "margin_pct": 0.2718,
+          "contested": true
+        }
+      ]
+    }
+  ]
+}
