@@ -564,13 +564,13 @@
         class="nation-yr-btn"
         class:active={selectedYear === year}
         onclick={() => { manualYear = year; stopAnimation(); }}
-      >{year}</button>
+      >{year}{year === Math.max(...CYCLES) ? ' ★' : ''}</button>
     {/each}
     <button
       class="nation-yr-btn anim-btn"
       class:playing={animating}
       onclick={toggleAnimation}
-      title={animating ? 'Pause' : 'Animate'}
+      title={animating ? 'Pause' : selectedYear === Math.max(...CYCLES) ? 'Animate from 1992 (2022 is the latest cycle)' : 'Animate through cycles'}
     >{animating ? '⏹' : '▶'}</button>
     <div class="nation-speed-group" role="group" aria-label="Animation speed">
       {#each (['fast', 'normal', 'slow'] as const) as s}
@@ -611,7 +611,7 @@
         onclick={() => { manualYear = year; stopAnimation(); }}
       >
         <span class="btn-d-delta">{seatsD != null ? `${seatsD}D` : ''}</span>
-        <span class="btn-year">{year}</span>
+        <span class="btn-year">{year}{year === Math.max(...CYCLES) ? ' ★' : ''}</span>
         <span class="btn-r-delta">{seatsR != null ? `${seatsR}R` : ''}</span>
       </button>
     {/each}
@@ -619,7 +619,7 @@
       class="anim-btn"
       class:playing={animating}
       onclick={toggleAnimation}
-      title={animating ? 'Pause animation' : 'Animate through cycles'}
+      title={animating ? 'Pause animation' : selectedYear === Math.max(...CYCLES) ? 'Animate from 1992 (2022 is the latest cycle)' : 'Animate through cycles'}
     >{animating ? '⏹' : '▶'}</button>
   </div>
 {/snippet}
@@ -1235,7 +1235,7 @@
         <button class="help-close" onclick={() => helpOpen = false} aria-label="Close">✕</button>
       </div>
       <div class="help-hook">
-        <p>Every ten years, after the Census, state legislatures redraw the lines of congressional districts. It's one of the most consequential — and least scrutinized — acts in American democracy.</p>
+        <p>Every ten years, after the Census, state legislatures redraw the lines of congressional districts — one of the most consequential and least scrutinized acts in American democracy. Occasionally states redraw mid-decade too: Texas famously did so in 2003 under Tom DeLay to lock in a Republican majority.</p>
         <p>District Drift is a retrospective: <em>how have those lines been drawn since 1992, and who benefited?</em> Both parties have gerrymandered. This site shows all of it.</p>
       </div>
 
