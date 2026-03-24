@@ -1223,6 +1223,7 @@
       <a href="https://www.nhgis.org/" target="_blank" rel="noopener">NHGIS</a> ·
       <a href="https://electionlab.mit.edu/" target="_blank" rel="noopener">MIT Election Lab</a> ·
       <a href="https://redistrictingdatahub.org/" target="_blank" rel="noopener">Redistricting Data Hub</a> ·
+      <a href="https://github.com/kalv25/districtdrift" target="_blank" rel="noopener">GitHub</a> ·
       <a href="https://github.com/kalv25/districtdrift/discussions/1" target="_blank" rel="noopener">Leave feedback</a>
     </p>
   </footer>
