@@ -224,36 +224,46 @@
   const MIN_PANEL_W = 300;
   const MAX_PANEL_W = 480;
 
-  function startPanelResize(e: MouseEvent) {
+  function startPanelResize(e: MouseEvent | TouchEvent) {
     e.preventDefault();
-    const startY = e.clientY;
+    const startY = e instanceof TouchEvent ? e.touches[0].clientY : e.clientY;
     const startH = panelH;
-    function onMove(ev: MouseEvent) {
-      panelH = Math.max(MIN_PANEL_H, Math.min(MAX_PANEL_H, startH - (ev.clientY - startY)));
+    function onMove(ev: MouseEvent | TouchEvent) {
+      const y = ev instanceof TouchEvent ? ev.touches[0].clientY : ev.clientY;
+      panelH = Math.max(MIN_PANEL_H, Math.min(MAX_PANEL_H, startH - (y - startY)));
     }
     function onUp() {
-      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mousemove', onMove as EventListener);
       window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchmove', onMove as EventListener);
+      window.removeEventListener('touchend', onUp);
       localStorage.setItem(PANEL_H_KEY, String(panelH));
     }
-    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mousemove', onMove as EventListener);
     window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchmove', onMove as EventListener, { passive: false });
+    window.addEventListener('touchend', onUp);
   }
 
-  function startPanelWidthResize(e: MouseEvent) {
+  function startPanelWidthResize(e: MouseEvent | TouchEvent) {
     e.preventDefault();
-    const startX = e.clientX;
+    const startX = e instanceof TouchEvent ? e.touches[0].clientX : e.clientX;
     const startW = panelW;
-    function onMove(ev: MouseEvent) {
-      panelW = Math.max(MIN_PANEL_W, Math.min(MAX_PANEL_W, startW - (ev.clientX - startX)));
+    function onMove(ev: MouseEvent | TouchEvent) {
+      const x = ev instanceof TouchEvent ? ev.touches[0].clientX : ev.clientX;
+      panelW = Math.max(MIN_PANEL_W, Math.min(MAX_PANEL_W, startW - (x - startX)));
     }
     function onUp() {
-      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mousemove', onMove as EventListener);
       window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchmove', onMove as EventListener);
+      window.removeEventListener('touchend', onUp);
       localStorage.setItem(PANEL_W_KEY, String(panelW));
     }
-    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mousemove', onMove as EventListener);
     window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchmove', onMove as EventListener, { passive: false });
+    window.addEventListener('touchend', onUp);
   }
 
   const THEME_KEY = 'districtdrift.theme';
@@ -880,18 +890,27 @@
             class="map-float-btn"
             title={panelLayout === 'vertical' ? 'Switch to bottom panels' : 'Switch to side panels'}
             onclick={() => panelLayout = panelLayout === 'vertical' ? 'horizontal' : 'vertical'}
-          >{panelLayout === 'vertical' ? '⬇' : '➡'}</button>
+          >
+            <span class="float-icon">{panelLayout === 'vertical' ? '⬇' : '➡'}</span>
+            <span class="float-label">Layout</span>
+          </button>
           <button
             class="map-float-btn"
             class:active={showPrecincts}
             title={showPrecincts ? 'Hide precinct vote map' : 'Show precinct vote map'}
             onclick={() => showPrecincts = !showPrecincts}
-          >P</button>
+          >
+            <span class="float-icon">P</span>
+            <span class="float-label">Precincts</span>
+          </button>
           <button
             class="map-float-btn"
             title="Save map as PNG"
             onclick={() => mapComponent?.takeScreenshot(selectedState, displayYear)}
-          >⬇</button>
+          >
+            <span class="float-icon">💾</span>
+            <span class="float-label">Save</span>
+          </button>
         </div>
       {/if}
     </div>
@@ -905,10 +924,10 @@
       >
         {#if panelLayout === 'horizontal'}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
-          <div class="panel-resize-handle panel-resize-h" onmousedown={startPanelResize}></div>
+          <div class="panel-resize-handle panel-resize-h" onmousedown={startPanelResize} ontouchstart={startPanelResize}></div>
         {:else}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
-          <div class="panel-resize-handle panel-resize-v" onmousedown={startPanelWidthResize}></div>
+          <div class="panel-resize-handle panel-resize-v" onmousedown={startPanelWidthResize} ontouchstart={startPanelWidthResize}></div>
         {/if}
 
         <!-- Panel 1: State -->
@@ -1217,6 +1236,9 @@
               onclick={() => selectState(po)}
               onmouseenter={() => hoveredPicker = po}
               onmouseleave={() => hoveredPicker = null}
+              onfocus={() => hoveredPicker = po}
+              onblur={() => hoveredPicker = null}
+              ontouchstart={() => hoveredPicker = po}
             >{po}</button>
           {/if}
         {/each}
@@ -1639,20 +1661,24 @@
     z-index: 10;
   }
   .map-float-btn {
-    width: 32px;
-    height: 32px;
+    min-width: 44px;
+    min-height: 44px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 6px;
     color: var(--text-muted);
-    font-size: 0.8rem;
     cursor: pointer;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+    padding: 0 6px;
   }
+  .float-icon { font-size: 0.85rem; line-height: 1; }
+  .float-label { font-size: 0.52rem; letter-spacing: 0.02em; opacity: 0.7; text-transform: uppercase; }
   .map-float-btn:hover { background: var(--surface-2); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
   .map-float-btn.playing { color: var(--accent, #4a90d9); }
   .map-float-btn.active { color: var(--accent, #4a90d9); background: var(--surface-2); }

@@ -354,6 +354,20 @@
     hovered = { po, x: e.offsetX, y: e.offsetY };
   }
 
+  // On touch devices, first tap shows the tooltip; the CTA button (or a second tap) navigates.
+  function handleTap(e: MouseEvent, po: string, full: boolean) {
+    if (!full) return;
+    // If tooltip already open for this state, navigate
+    if (hovered?.po === po) {
+      hovered = null;
+      onStateClick(po);
+      return;
+    }
+    // Otherwise show the tooltip at the tap position
+    const rect = (e.currentTarget as SVGElement).closest('svg')?.getBoundingClientRect();
+    hovered = { po, x: e.clientX - (rect?.left ?? 0), y: e.clientY - (rect?.top ?? 0) };
+  }
+
   // ── Rank list ─────────────────────────────────────────────────────────────────
 
   const ranked = $derived(
@@ -453,7 +467,7 @@
             class:has-full-data={full}
             onmousemove={(e) => handleMouseMove(e, po)}
             onmouseleave={() => hovered = null}
-            onclick={() => { if (_dragMoved) { _dragMoved = false; return; } full && onStateClick(po); }}
+            onclick={(e) => { if (_dragMoved) { _dragMoved = false; return; } handleTap(e, po, full); }}
             role={full ? 'button' : 'img'}
             tabindex={full ? 0 : undefined}
             aria-label="{getStateName(po)}{full ? ' — click to explore' : ''}"
@@ -613,7 +627,10 @@
         class:flip-left={tooltipRight}
         style="left:{hovered.x + (tooltipRight ? -14 : 14)}px; top:{hovered.y}px"
       >
-        <strong>{getStateName(hovered.po)}</strong>
+        <div class="tt-header">
+          <strong>{getStateName(hovered.po)}</strong>
+          <button class="tt-close" onclick={() => hovered = null} aria-label="Close">✕</button>
+        </div>
         {#if c}
           <span class="tt-row">
             <span class="tt-label">Efficiency gap</span>
@@ -661,7 +678,8 @@
           </div>
         {/if}
         {#if full}
-          <span class="tooltip-cta">Click to explore districts →</span>
+          {@const po = hovered.po}
+          <button class="tooltip-cta" onclick={() => { hovered = null; onStateClick(po); }}>Explore districts →</button>
         {:else}
           <span class="tooltip-soon">District maps coming soon</span>
         {/if}
@@ -828,11 +846,24 @@
     gap: 0.15rem;
   }
   .map-tooltip.flip-left { transform: translateX(-100%) translateY(calc(-100% - 8px)); }
-  .map-tooltip strong { font-size: 0.82rem; margin-bottom: 0.2rem; }
+  .tt-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.2rem; }
+  .tt-header strong { font-size: 0.82rem; }
+  .tt-close {
+    background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer;
+    font-size: 0.7rem; padding: 0 0 0 4px; line-height: 1; flex-shrink: 0;
+  }
+  .tt-close:hover { color: #fff; }
   .tt-row { display: flex; gap: 0.5rem; justify-content: space-between; }
   .tt-label { opacity: 0.6; }
   .tt-val { font-weight: 600; }
-  .tooltip-cta { color: #80c8ff; font-weight: 600; margin-top: 0.25rem; }
+  .tooltip-cta {
+    display: block; width: 100%; margin-top: 0.35rem;
+    background: rgba(128,200,255,0.12); border: 1px solid rgba(128,200,255,0.3);
+    border-radius: 4px; padding: 0.3rem 0.5rem;
+    color: #80c8ff; font-weight: 600; font-size: 0.7rem; text-align: center;
+    cursor: pointer;
+  }
+  .tooltip-cta:hover { background: rgba(128,200,255,0.22); }
   .tooltip-soon { opacity: 0.45; font-style: italic; margin-top: 0.2rem; }
 
   .tt-trend {

@@ -32,9 +32,18 @@
   }
 
   function hide() { visible = false; }
+
+  function toggle(e: Event) {
+    e.stopPropagation();
+    visible ? hide() : show();
+  }
+
+  function onDocClick() { hide(); }
 </script>
 
-<span class="tt-wrap" bind:this={wrapEl} onmouseenter={show} onmouseleave={hide}>
+<svelte:document onclick={visible ? onDocClick : undefined} />
+
+<span class="tt-wrap" bind:this={wrapEl} onmouseenter={show} onmouseleave={hide} onclick={toggle}>
   {@render children?.()}
   {#if visible}
     <span class="tt-box tt-{placement}" role="tooltip" style={fixedStyle}>
@@ -49,6 +58,7 @@
     position: relative;
     display: inline-flex;
     align-items: center;
+    cursor: help;
   }
 
   .tt-box {
