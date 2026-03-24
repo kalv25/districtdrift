@@ -3,6 +3,13 @@
   import { geoAlbersUsa, geoPath, geoCentroid } from 'd3-geo';
   import * as topojson from 'topojson-client';
   import type { Topology } from 'topojson-specification';
+  import { tweened } from 'svelte/motion';
+  import { linear } from 'svelte/easing';
+  import Pill from './Pill.svelte';
+
+  // Total duration for the wipe to sweep across the full map width
+  // Each state blends over ±BLEND px of wipe travel (wider = softer per-state fade)
+  const BLEND = 120;
 
   type CycleStat = {
     year: number;
@@ -21,10 +28,14 @@
     selectedYear,
     onStateClick,
     fullDataStates = [],
+    wipeDuration = 4500,
+    showEgLabels = false,
   }: {
     selectedYear: number;
     onStateClick: (po: string) => void;
     fullDataStates?: string[];
+    wipeDuration?: number;
+    showEgLabels?: boolean;
   } = $props();
 
   function hasFullData(po: string): boolean {
@@ -132,6 +143,32 @@
     return `rgb(${r},${g},${b})`;
   }
 
+  // ── EG overlay ────────────────────────────────────────────────────────────────
+  const EG_RANGE = 0.25; // ±25% = max font size + max arrow size
+
+  function egBarColor(eg: number | null): string {
+    if (eg === null) return '#999';
+    if (eg >  0.02) return '#c0392b';
+    if (eg < -0.02) return '#2471a3';
+    return '#777';
+  }
+
+  function parseRgb(s: string): [number, number, number] {
+    const m = s.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    if (m) return [+m[1], +m[2], +m[3]];
+    const h = s.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
+    if (h) return [parseInt(h[1],16), parseInt(h[2],16), parseInt(h[3],16)];
+    return [200, 200, 200];
+  }
+
+  function lerpColor(a: string, b: string, t: number): string {
+    if (t <= 0) return a;
+    if (t >= 1) return b;
+    const [r1,g1,b1] = parseRgb(a);
+    const [r2,g2,b2] = parseRgb(b);
+    return `rgb(${Math.round(r1+(r2-r1)*t)},${Math.round(g1+(g2-g1)*t)},${Math.round(b1+(b2-b1)*t)})`;
+  }
+
   // ── State data lookup ─────────────────────────────────────────────────────────
 
   const byPo = $derived(Object.fromEntries(nationData.map(s => [s.state_po, s])));
@@ -158,6 +195,156 @@
     }
     return { d, r, total };
   })());
+
+  // ── Wipe animation ────────────────────────────────────────────────────────
+
+  // Starts "complete" so initial load shows current year instantly (no wipe).
+  const wipeX = tweened(99999, { duration: 0 });
+  let _prevYear = selectedYear; // plain var — not $state, avoids tracking loop
+  let prevEgMap    = $state<Record<string, number | null>>({});
+  let prevSeatsMap = $state<Record<string, { d: number; r: number } | null>>({});
+  let wipeFromYear = $state<number | null>(null);
+
+  $effect(() => {
+    if (selectedYear !== _prevYear && nationData.length > 0) {
+      const snap: Record<string, number | null> = {};
+      const snapSeats: Record<string, { d: number; r: number } | null> = {};
+      for (const s of nationData) {
+        const c = s.cycles.find(c => c.year === _prevYear);
+        snap[s.state_po]      = c?.efficiency_gap ?? null;
+        snapSeats[s.state_po] = c ? { d: c.seats_d, r: c.seats_r } : null;
+      }
+      prevEgMap    = snap;
+      prevSeatsMap = snapSeats;
+      const goingBackward = selectedYear < _prevYear;
+      const fromYear = _prevYear;
+      _prevYear = selectedYear;
+
+      if (goingBackward) {
+        // Wrap-around or manual back-jump: instant update, no wipe
+        wipeFromYear = null;
+        wipeX.set(99999, { duration: 0 });
+      } else {
+        wipeFromYear = fromYear; // badge shows "fromYear → selectedYear"
+        // Start exactly at the leftmost state centroid, end at the rightmost
+        const cxVals = statePaths.map(p => p.cx).filter((v): v is number => v !== null);
+        const start = (cxVals.length ? Math.min(...cxVals) : 0) - BLEND;
+        const end   = (cxVals.length ? Math.max(...cxVals) : svgW) + BLEND;
+        wipeX.set(start, { duration: 0 });
+        requestAnimationFrame(() => wipeX.set(end, { duration: wipeDuration, easing: linear }));
+      }
+    }
+  });
+
+  // ── Pill stagger offsets (greedy left-to-right collision avoidance) ──────────
+  // Pre-computes a per-state Y offset so adjacent pills don't stack on top of each other.
+  // Each state tries 0, then −1 step, then +1 step (up before down).
+  const pillYOffsets = $derived((() => {
+    const result: Record<string, number> = {};
+    if (!showEgLabels || wipeFromYear === null) return result;
+    const EST_W = 82;  // generous pill width estimate
+    const EST_H = 20;  // pill height estimate
+    const STEP  = EST_H * 1.15;
+    const placed: Array<{ cx: number; cy: number }> = [];
+    const eligible = [...statePaths]
+      .filter(p => p.po && p.cx !== null && p.cy !== null && p.area > 900)
+      .sort((a, b) => (a.cx ?? 0) - (b.cx ?? 0));
+    for (const s of eligible) {
+      const scx = s.cx!;
+      const scy = s.cy!;
+      let chosen = 0;
+      for (const off of [0, -STEP, STEP, -STEP * 2, STEP * 2]) {
+        const pillCy = scy + off;
+        const overlaps = placed.some(p =>
+          Math.abs(p.cx - scx) < EST_W && Math.abs(p.cy - pillCy) < EST_H
+        );
+        if (!overlaps) { chosen = off; break; }
+      }
+      placed.push({ cx: scx, cy: scy + chosen });
+      result[s.po!] = chosen;
+    }
+    return result;
+  })());
+
+  // ── Zoom / pan ────────────────────────────────────────────────────────────
+  let zoomK  = $state(1);
+  let zoomTx = $state(0);
+  let zoomTy = $state(0);
+
+  let _dragActive = false;
+  let _dragMoved  = false;
+  let _dragStartX = 0, _dragStartY = 0;
+  let _dragStartTx = 0, _dragStartTy = 0;
+
+  function handleWheel(e: WheelEvent) {
+    e.preventDefault();
+    neZoomed = false;
+    const rect = (e.currentTarget as SVGElement).getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const factor = e.deltaY < 0 ? 1.3 : 1 / 1.3;
+    const newK = Math.max(1, Math.min(8, zoomK * factor));
+    zoomTx = mx - (newK / zoomK) * (mx - zoomTx);
+    zoomTy = my - (newK / zoomK) * (my - zoomTy);
+    zoomK  = newK;
+  }
+
+  function handlePointerDown(e: PointerEvent) {
+    if ((e.target as Element).closest('.state-path') && zoomK === 1) return;
+    _dragActive  = true;
+    _dragMoved   = false;
+    _dragStartX  = e.clientX;
+    _dragStartY  = e.clientY;
+    _dragStartTx = zoomTx;
+    _dragStartTy = zoomTy;
+    (e.currentTarget as Element).setPointerCapture(e.pointerId);
+  }
+
+  function handlePointerMove(e: PointerEvent) {
+    if (!_dragActive) return;
+    const dx = e.clientX - _dragStartX;
+    const dy = e.clientY - _dragStartY;
+    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) _dragMoved = true;
+    if (_dragMoved) { zoomTx = _dragStartTx + dx; zoomTy = _dragStartTy + dy; }
+  }
+
+  function handlePointerUp() { _dragActive = false; }
+
+  function zoomStep(factor: number) {
+    const cx = svgW / 2, cy = svgH / 2;
+    const newK = Math.max(1, Math.min(8, zoomK * factor));
+    if (newK === 1) { zoomK = 1; zoomTx = 0; zoomTy = 0; return; }
+    zoomTx = cx - (newK / zoomK) * (cx - zoomTx);
+    zoomTy = cy - (newK / zoomK) * (cy - zoomTy);
+    zoomK  = newK;
+  }
+
+  function resetZoom() { zoomK = 1; zoomTx = 0; zoomTy = 0; neZoomed = false; }
+
+  // NE corridor zoom — computes bounding box of NE state centroids at runtime
+  // so it adapts to any SVG size.
+  let neZoomed = $state(false);
+  const NE_STATES = ['ME','NH','VT','MA','RI','CT','NY','NJ','DE','MD','PA','DC'];
+
+  function zoomToNE() {
+    if (neZoomed) { resetZoom(); return; }
+    const pts = statePaths.filter(p => p.po && NE_STATES.includes(p.po) && p.cx !== null && p.cy !== null);
+    if (pts.length === 0) return;
+    const xs = pts.map(p => p.cx!);
+    const ys = pts.map(p => p.cy!);
+    const minX = Math.min(...xs), maxX = Math.max(...xs);
+    const minY = Math.min(...ys), maxY = Math.max(...ys);
+    const pad  = 40;
+    const regionW = maxX - minX + pad * 2;
+    const regionH = maxY - minY + pad * 2;
+    const k = Math.min(6, Math.max(2.5, Math.min(svgW / regionW, svgH / regionH) * 0.82));
+    const cx = (minX + maxX) / 2;
+    const cy = (minY + maxY) / 2;
+    zoomK  = k;
+    zoomTx = svgW / 2 - k * cx;
+    zoomTy = svgH / 2 - k * cy;
+    neZoomed = true;
+  }
 
   // ── Tooltip ───────────────────────────────────────────────────────────────────
 
@@ -203,23 +390,47 @@
   {#if loading}
     <div class="loading">Loading map…</div>
   {:else}
-    <svg width={svgW} height={svgH} class="nation-svg">
-      <!-- State fills -->
+    <svg width={svgW} height={svgH} class="nation-svg"
+      onwheel={handleWheel}
+      onpointerdown={handlePointerDown}
+      onpointermove={handlePointerMove}
+      onpointerup={handlePointerUp}
+      style:cursor={_dragActive && _dragMoved ? 'grabbing' : zoomK > 1 ? 'grab' : 'default'}
+    >
+      <defs>
+        <linearGradient id="nv-line-fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+          <stop offset="10%"  stop-color="white" stop-opacity="0.6"/>
+          <stop offset="90%"  stop-color="white" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="white" stop-opacity="0"/>
+        </linearGradient>
+        <!-- Clip the wipe line to land masses only -->
+        <clipPath id="nv-states-clip">
+          {#each statePaths as { d }}
+            {#if d}<path {d}/>{/if}
+          {/each}
+        </clipPath>
+      </defs>
+
+      <g transform="translate({zoomTx} {zoomTy}) scale({zoomK})">
+      <!-- Single layer: fill lerped per-state based on wipe position vs centroid x -->
       {#each statePaths as { po, d, cx, cy, area }}
         {#if d && po}
           {@const eg = getEg(po)}
           {@const full = hasFullData(po)}
+          {@const localT = Math.max(0, Math.min(1, ($wipeX - (cx ?? 0) + BLEND) / (2 * BLEND)))}
+          {@const fill = lerpColor(egColor(prevEgMap[po] ?? null), egColor(eg), localT)}
           <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
           <path
             {d}
-            fill={egColor(eg)}
+            style="fill:{fill}"
             stroke="var(--nation-stroke)"
             stroke-width="0.6"
             class="state-path"
             class:has-full-data={full}
             onmousemove={(e) => handleMouseMove(e, po)}
             onmouseleave={() => hovered = null}
-            onclick={() => full && onStateClick(po)}
+            onclick={() => { if (_dragMoved) { _dragMoved = false; return; } full && onStateClick(po); }}
             role={full ? 'button' : 'img'}
             tabindex={full ? 0 : undefined}
             aria-label="{getStateName(po)}{full ? ' — click to explore' : ''}"
@@ -228,9 +439,9 @@
         {/if}
       {/each}
 
-      <!-- State abbreviation labels (only for states large enough) -->
+      <!-- State abbreviation labels (only for states large enough; hidden when delta overlay is active) -->
       {#each statePaths as { po, cx, cy, area }}
-        {#if po && cx !== null && cy !== null && area > 400}
+        {#if po && cx !== null && cy !== null && area > 400 && !(showEgLabels && wipeFromYear !== null && getEg(po) !== null && (prevEgMap[po] ?? null) !== null)}
           <text
             x={cx}
             y={cy}
@@ -244,7 +455,129 @@
           >{po}</text>
         {/if}
       {/each}
+
+      <!-- EG prev→current size contrast + arrow overlay — Slow mode -->
+      {#if showEgLabels && wipeFromYear !== null}
+        {#each statePaths as { po, cx, cy, area }}
+          {#if po && cx !== null && cy !== null && area > 900}
+            {@const currEg = getEg(po)}
+            {@const prevEg = prevEgMap[po] ?? null}
+            {#if currEg !== null && prevEg !== null}
+              {@const localT    = Math.max(0, Math.min(1, ($wipeX - cx + BLEND) / (2 * BLEND)))}
+              {@const egChange  = currEg - prevEg}
+              <!-- Seat change (primary): compare curr cycle seats to prev cycle seats -->
+              {@const currCycle = nationData.find(s => s.state_po === po)?.cycles.find(c => c.year === selectedYear)}
+              {@const prevSeats = prevSeatsMap[po] ?? null}
+              {@const seatDeltaD = (currCycle && prevSeats) ? currCycle.seats_d - prevSeats.d : null}
+              {@const seatDeltaR = (currCycle && prevSeats) ? currCycle.seats_r - prevSeats.r : null}
+              <!-- Net partisan seat swing: +N means R gained, -N means D gained -->
+              {@const seatNet   = (seatDeltaD !== null && seatDeltaR !== null) ? seatDeltaR - seatDeltaD : null}
+              <!-- Primary label: seat change if non-zero; fallback to EG delta -->
+              {@const useSeat   = seatNet !== null && seatNet !== 0}
+              {@const deltaStr  = useSeat
+                ? (seatNet! > 0 ? `+${seatNet}R` : `${seatNet}D`)
+                : (egChange >= 0 ? '+' : '') + (egChange * 100).toFixed(1) + '%'}
+              <!-- Direction and color based on source: seat swing or EG -->
+              {@const netUp     = useSeat ? seatNet! > 0 : egChange > 0.02}
+              {@const netDown   = useSeat ? seatNet! < 0 : egChange < -0.02}
+              {@const arChar    = netUp ? '↑' : netDown ? '↓' : '→'}
+              {@const color     = netUp ? '#c0392b' : netDown ? '#2471a3' : '#555'}
+              {@const arFS      = area > 2000 ? 22 : area > 800 ? 16 : 12}
+              {@const lblFS     = area > 2000 ? 9 : area > 800 ? 7 : 6}
+              {@const egFS      = lblFS * 0.85}
+              {@const labelTxt  = `${po} ${deltaStr}`}
+              {@const egStr     = (egChange >= 0 ? '+' : '') + (egChange * 100).toFixed(1) + '%'}
+              <!-- Pill dimensions — widen to fit subtle EG suffix when seat change is primary -->
+              {@const pH        = 5}
+              {@const pV        = 3}
+              {@const arCharW   = arFS * 0.72}
+              {@const lblW      = labelTxt.length * lblFS * 0.64}
+              {@const egSuffixW = useSeat ? (egStr.length * egFS * 0.62 + 4) : 0}
+              {@const pillW     = pH + arCharW + 3 + lblW + egSuffixW + pH}
+              {@const pillH     = Math.max(arFS, lblFS) + pV * 2}
+              <!-- Placement: base offset from stagger pass + nudge toward map interior for edge states -->
+              {@const staggerOff = pillYOffsets[po] ?? 0}
+              {@const edgeNudge  = cy < svgH * 0.35 ? pillH * 0.5
+                                 : cy > svgH * 0.65 ? -pillH * 0.5 : 0}
+              {@const pillCy    = cy + staggerOff + edgeNudge}
+              {@const pillX     = cx - pillW / 2}
+              {@const pillY     = pillCy - pillH / 2}
+              {@const arCharX   = pillX + pH + arCharW / 2}
+              {@const labelX    = pillX + pH + arCharW + 3}
+              {@const egX       = labelX + lblW + 4}
+
+              <!-- Pill background -->
+              <rect
+                x={pillX} y={pillY} width={pillW} height={pillH}
+                fill="rgba(255,255,255,0.9)" rx={pillH / 2}
+                stroke="rgba(0,0,0,0.09)" stroke-width="0.5"
+                opacity={localT} pointer-events="none"
+              />
+              <!-- Arrow character -->
+              <text x={arCharX} y={pillCy}
+                text-anchor="middle" dominant-baseline="middle"
+                font-size={arFS} font-weight="900"
+                fill={color} opacity={localT} pointer-events="none"
+              >{arChar}</text>
+              <!-- Primary: state abbrev + seat/EG delta -->
+              <text x={labelX} y={pillCy}
+                text-anchor="start" dominant-baseline="middle"
+                font-size={lblFS} font-weight="700"
+                fill={color} opacity={localT} pointer-events="none"
+              >{labelTxt}</text>
+              <!-- Subtle EG delta suffix — only when seat change is primary -->
+              {#if useSeat}
+                <text x={egX} y={pillCy}
+                  text-anchor="start" dominant-baseline="middle"
+                  font-size={egFS} font-weight="400"
+                  fill={color} opacity={localT * 0.65} pointer-events="none"
+                >{egStr}</text>
+              {/if}
+            {/if}
+          {/if}
+        {/each}
+      {/if}
+
+      <!-- Wipe line clipped to state land masses only -->
+      {#if wipeFromYear !== null && $wipeX > 5 && $wipeX < svgW - 5}
+        <rect x={$wipeX - 1} y={0} width={2} height={svgH}
+          fill="url(#nv-line-fade)"
+          clip-path="url(#nv-states-clip)"
+          pointer-events="none"/>
+      {/if}
+      </g>
     </svg>
+
+    <!-- Zoom controls -->
+    <div class="zoom-controls">
+      <button class="zoom-btn" onclick={() => zoomStep(1.5)} title="Zoom in" aria-label="Zoom in">+</button>
+      <button class="zoom-btn" onclick={() => zoomStep(1/1.5)} title="Zoom out" aria-label="Zoom out">−</button>
+      <button
+        class="zoom-btn zoom-ne"
+        class:active={neZoomed}
+        onclick={zoomToNE}
+        title="Northeast corridor — 12 small states pack ~90 congressional seats into a densely contested region"
+        aria-label="Zoom to Northeast"
+      >NE</button>
+      {#if zoomK > 1}
+        <button class="zoom-btn zoom-reset" onclick={resetZoom} title="Reset zoom" aria-label="Reset zoom">⊡</button>
+      {/if}
+    </div>
+
+    {#if neZoomed}
+      <div class="ne-note">
+        Northeast corridor — 12 states, ~90 seats, the most geographically compressed congressional battleground in the US
+      </div>
+    {/if}
+
+    <!-- Year transition badge: shown while wipe is crossing the map -->
+    {#if wipeFromYear !== null && $wipeX > 5 && $wipeX < svgW - 5}
+      <div class="wipe-year-badge">
+        <span class="wby-from">{wipeFromYear}</span>
+        <span class="wby-arrow">→</span>
+        <span class="wby-to">{selectedYear}</span>
+      </div>
+    {/if}
 
     <!-- Tooltip -->
     {#if hovered}
@@ -318,7 +651,7 @@
           <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}>
             <span class="rank-state">{s.po}</span>
             <span class="rank-name">{s.name}</span>
-            <span class="rank-eg rank-eg-r">{egLabel(s.eg)}</span>
+            <Pill party="R">{egLabel(s.eg)}</Pill>
           </button>
         {/each}
       </div>
@@ -332,7 +665,7 @@
           <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}>
             <span class="rank-state">{s.po}</span>
             <span class="rank-name">{s.name}</span>
-            <span class="rank-eg rank-eg-d">{egLabel(s.eg)}</span>
+            <Pill party="D">{egLabel(s.eg)}</Pill>
           </button>
         {/each}
       </div>
@@ -349,6 +682,50 @@
     overflow: hidden;
   }
 
+  /* Theme-aware stroke colors for the year badge */
+  :global(:root) {
+    --wby-from-stroke: rgba(0,0,0,0.28);
+    --wby-to-stroke:   rgba(0,0,0,0.82);
+    --wby-arrow-color: rgba(0,0,0,0.28);
+  }
+  :global([data-theme=dark]) {
+    --wby-from-stroke: rgba(255,255,255,0.28);
+    --wby-to-stroke:   rgba(255,255,255,0.88);
+    --wby-arrow-color: rgba(255,255,255,0.28);
+  }
+
+  .wipe-year-badge {
+    position: absolute;
+    top: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: system-ui, -apple-system, sans-serif;
+    letter-spacing: 0.03em;
+  }
+  .wby-from {
+    font-size: 3.6rem;
+    font-weight: 800;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--wby-from-stroke);
+  }
+  .wby-arrow {
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--wby-arrow-color);
+    align-self: center;
+  }
+  .wby-to {
+    font-size: 3.6rem;
+    font-weight: 800;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--wby-to-stroke);
+  }
+
   .loading {
     display: flex;
     align-items: center;
@@ -360,7 +737,7 @@
 
   .nation-svg { display: block; }
 
-  :global(:root) { --nation-stroke: rgba(255,255,255,0.6); }
+  :global(:root)            { --nation-stroke: rgba(255,255,255,0.6); }
   :global([data-theme=dark]) { --nation-stroke: rgba(0,0,0,0.4); }
 
   .state-path {
@@ -526,6 +903,53 @@
   }
   .rank-play:hover { background: var(--btn-hover); color: var(--text); }
   .rank-play.playing { color: #f0a500; border-color: #f0a500; }
+
+  .zoom-controls {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    z-index: 10;
+  }
+  .zoom-btn {
+    width: 26px;
+    height: 26px;
+    border: 1px solid rgba(0,0,0,0.18);
+    border-radius: 5px;
+    background: rgba(255,255,255,0.92);
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+  .zoom-btn:hover { background: #fff; border-color: rgba(0,0,0,0.3); }
+  .zoom-reset { font-size: 12px; }
+  .zoom-ne { font-size: 10px; font-weight: 700; letter-spacing: 0.02em; }
+  .zoom-ne.active { background: #2471a3; color: #fff; border-color: #1a5276; }
+  .zoom-ne.active:hover { background: #1a5276; }
+
+  .ne-note {
+    position: absolute;
+    bottom: 2.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 99px;
+    padding: 3px 12px;
+    font-size: 0.7rem;
+    color: #444;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
 
   @media (max-width: 639px) {
     .rank-panel { display: none; }

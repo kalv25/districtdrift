@@ -7,6 +7,35 @@
   import TrendChart from '$lib/TrendChart.svelte';
   import { CYCLE_EVENTS } from '$lib/events';
   import CompetitivenessChart from '$lib/CompetitivenessChart.svelte';
+  import Pill from '$lib/Pill.svelte';
+  import Tooltip from '$lib/Tooltip.svelte';
+
+  function drawnByTooltip(controller: string): { title: string; text: string } {
+    if (/commission/i.test(controller))
+      return {
+        title: 'Independent / bipartisan commission',
+        text:  'These lines were drawn by a body insulated from direct party control. Commission-drawn maps tend to produce lower efficiency gaps and fewer legal challenges.',
+      };
+    if (/court/i.test(controller))
+      return {
+        title: 'Court-ordered map',
+        text:  'A federal or state court intervened — typically after a legal challenge to a gerrymandered map — and imposed or approved these district lines.',
+      };
+    if (/republican/i.test(controller))
+      return {
+        title: 'Republican-controlled legislature',
+        text:  'The party that controls redistricting can draw boundaries to maximize its seat advantage. Republican control here means the GOP had significant influence over where district lines were placed.',
+      };
+    if (/democrat/i.test(controller))
+      return {
+        title: 'Democratic-controlled legislature',
+        text:  'The party that controls redistricting can draw boundaries to maximize its seat advantage. Democratic control here means the party had significant influence over where district lines were placed.',
+      };
+    return {
+      title: controller,
+      text:  'The body responsible for drawing congressional district lines for this cycle.',
+    };
+  }
 
   type Resource = { label: string; url: string; description: string; };
   const RESOURCES: { heading: string; links: Resource[] }[] = [
@@ -81,7 +110,14 @@
   const YEAR_COLOR: Record<number, string> = {
     1992: '#CA8A04', 2002: '#0D9488', 2012: '#9333EA', 2022: '#DB2777',
   };
-  const ANIM_INTERVAL_MS = 2400;
+  const SPEED_SETTINGS = {
+    fast:   { interval: 3500,  wipe: 1500 },
+    normal: { interval: 8000,  wipe: 4500 },
+    slow:   { interval: 16000, wipe: 9000 },
+  } as const;
+  let animSpeed = $state<'fast' | 'normal' | 'slow'>('normal');
+  const animIntervalMs = $derived(SPEED_SETTINGS[animSpeed].interval);
+  const animWipeMs     = $derived(SPEED_SETTINGS[animSpeed].wipe);
   const FADE_MS = 450;
 
   // manualYear: user's explicit selection; animTick: index cycled by animation
@@ -112,6 +148,7 @@
   }
   let districtTab = $state<'partisan' | 'race' | 'income'>('partisan');
   let displayYear = $derived(hoveredYear ?? selectedYear);
+  const VIEW_KEY = 'districtdrift.viewMode';
   const PANEL_KEY = 'districtdrift.panelLayout';
   let panelLayout = $state<'vertical' | 'horizontal'>('horizontal');
   const PANEL_H_KEY = 'districtdrift.panelH';
@@ -163,6 +200,7 @@
 
   const HELP_KEY = 'districtdrift.helpSeen';
   let helpOpen = $state(false);
+  let helpTab = $state<'nation' | 'state' | 'metrics' | 'data'>('nation');
 
   const isMobile = () => window.innerWidth < 640;
 
@@ -184,6 +222,24 @@
     systemDark = mq.matches;
     mq.addEventListener('change', e => { systemDark = e.matches; });
 
+    // URL params take priority over localStorage for view restoration
+    const urlParams = new URLSearchParams(window.location.search);
+    const pv = urlParams.get('v');
+    const py = urlParams.get('y');
+    const pd = urlParams.get('d');
+    const pl = urlParams.get('layout');
+    if (pv === 'nation') viewMode = 'nation';
+    else if (pv && pv in STATES) viewMode = pv;
+    else {
+      const savedView = localStorage.getItem(VIEW_KEY);
+      if (savedView === 'nation') viewMode = 'nation';
+      else if (savedView && savedView in STATES) viewMode = savedView;
+    }
+    if (py && CYCLES.includes(Number(py))) manualYear = Number(py);
+    if (pd && Number(pd) >= 1) pinnedDistrict = Number(pd);
+    if (pl === 'v') panelLayout = 'vertical';
+    else if (pl === 'h') panelLayout = 'horizontal';
+
     // Auto-show help on first visit
     if (!localStorage.getItem(HELP_KEY)) {
       helpOpen = true;
@@ -191,7 +247,31 @@
     }
   });
 
+  $effect(() => { localStorage.setItem(VIEW_KEY, viewMode); });
   $effect(() => { localStorage.setItem(PANEL_KEY, panelLayout); });
+
+  // Keep URL in sync so the current view is always shareable
+  $effect(() => {
+    const p = new URLSearchParams();
+    p.set('v', viewMode);
+    p.set('y', String(selectedYear));
+    if (viewMode !== 'nation') p.set('d', String(pinnedDistrict));
+    p.set('layout', panelLayout === 'vertical' ? 'v' : 'h');
+    history.replaceState({}, '', `${window.location.pathname}?${p}`);
+  });
+
+  let shareCopied = $state(false);
+  async function copyShareLink() {
+    const url = window.location.href;
+    if (navigator.share) {
+      try { await navigator.share({ title: document.title, url }); return; }
+      catch {} // user cancelled
+    }
+    navigator.clipboard.writeText(url).then(() => {
+      shareCopied = true;
+      setTimeout(() => { shareCopied = false; }, 2000);
+    });
+  }
   $effect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
     localStorage.setItem(THEME_KEY, theme);
@@ -259,6 +339,54 @@
     .map(s => ({ cycle_year: s.cycle_year, competitiveness: s.competitiveness }))
   );
 
+  // Snap card pagination
+  let stateCardsEl = $state<HTMLElement | null>(null);
+  let stateCardIdx  = $state(0);
+  let distCardsEl  = $state<HTMLElement | null>(null);
+  let distCardIdx   = $state(0);
+
+  const stateCardLabels = $derived(
+    displayStats ? [
+      'Stats',
+      'Seats',
+      'Trend',
+      'Eff. gap',
+      ...(competCycles.length ? ['Compete.'] : []),
+      ...(CYCLE_EVENTS[selectedState]?.[displayYear]?.length ? ['Events'] : []),
+      ...(credits.length ? ['Credits'] : []),
+    ] : []
+  );
+
+  $effect(() => {
+    // Reset snap positions when state/year/layout changes
+    selectedState; selectedYear; panelLayout;
+    stateCardIdx = 0;
+    distCardIdx  = 0;
+  });
+
+  function onStateScroll(e: Event) {
+    const el = e.target as HTMLElement;
+    stateCardIdx = panelLayout === 'vertical'
+      ? Math.round(el.scrollTop  / el.clientHeight)
+      : Math.round(el.scrollLeft / el.clientWidth);
+  }
+  function onDistScroll(e: Event) {
+    const el = e.target as HTMLElement;
+    distCardIdx = panelLayout === 'vertical'
+      ? Math.round(el.scrollTop  / el.clientHeight)
+      : Math.round(el.scrollLeft / el.clientWidth);
+  }
+
+  function jumpToCard(el: HTMLElement | null, idx: number) {
+    if (!el) return;
+    const cards = Array.from(el.querySelectorAll<HTMLElement>(':scope > .snap-card'));
+    const card = cards[idx];
+    if (!card) return;
+    const cr = el.getBoundingClientRect();
+    const r  = card.getBoundingClientRect();
+    el.scrollBy({ top: r.top - cr.top, left: r.left - cr.left, behavior: 'smooth' });
+  }
+
   async function loadStats(po: string) {
     const res = await fetch(`/${po.toLowerCase()}_stats.json?v=${__APP_VERSION__}`);
     const data = await res.json();
@@ -276,14 +404,31 @@
   $effect(() => {
     if (_animId) { clearInterval(_animId); _animId = null; }
     if (!animating) return;
-    _animId = window.setInterval(() => { animTick = (animTick + 1) % CYCLES.length; }, ANIM_INTERVAL_MS);
+    _animId = window.setInterval(() => {
+      const next = animTick + 1;
+      if (next >= CYCLES.length) {
+        // Reached 2022 — auto-stop
+        animating = false;
+        manualYear = CYCLES[CYCLES.length - 1];
+      } else {
+        animTick = next;
+      }
+    }, animIntervalMs);
     return () => { if (_animId) { clearInterval(_animId); _animId = null; } };
   });
 
   function stopAnimation() { if (animating) { manualYear = selectedYear; animating = false; } }
   function toggleAnimation() {
-    if (animating) { stopAnimation(); }
-    else { animTick = CYCLES.indexOf(manualYear); animating = true; hoveredYear = null; }
+    if (animating) { stopAnimation(); return; }
+    // Always start from 1992→2002.
+    // Step 1: snap selectedYear to 1992 so NationView records _prevYear=1992.
+    manualYear = 1992;
+    hoveredYear = null;
+    // Step 2: after reactive flush, start animating from 2002 so the wipe fires immediately.
+    requestAnimationFrame(() => {
+      animTick = CYCLES.indexOf(2002);
+      animating = true;
+    });
   }
 
   function egLabel(eg: number): string {
@@ -337,9 +482,36 @@
 
 <svelte:head>
   <title>{viewMode === 'nation'
-    ? 'District Drift — US Congressional Gerrymandering'
-    : `District Drift — ${STATES[selectedState]?.name ?? selectedState} Congressional Gerrymandering`}</title>
+    ? `District Drift — All States, ${selectedYear}`
+    : `District Drift — ${STATES[selectedState]?.name ?? selectedState}, ${selectedYear}, District ${pinnedDistrict}`}</title>
 </svelte:head>
+
+{#snippet nationCycleControls()}
+  <div class="nation-btns" role="group" aria-label="Select redistricting cycle">
+    {#each CYCLES as year}
+      <button
+        class="nation-yr-btn"
+        class:active={selectedYear === year}
+        onclick={() => { manualYear = year; stopAnimation(); }}
+      >{year}</button>
+    {/each}
+    <button
+      class="nation-yr-btn anim-btn"
+      class:playing={animating}
+      onclick={toggleAnimation}
+      title={animating ? 'Pause' : 'Animate'}
+    >{animating ? '⏹' : '▶'}</button>
+    <div class="nation-speed-group" role="group" aria-label="Animation speed">
+      {#each (['fast', 'normal', 'slow'] as const) as s}
+        <button
+          class="nation-speed-btn"
+          class:active={animSpeed === s}
+          onclick={() => animSpeed = s}
+        >{s === 'fast' ? 'Fast' : s === 'normal' ? 'Med' : 'Slow'}</button>
+      {/each}
+    </div>
+  </div>
+{/snippet}
 
 {#snippet cycleControls()}
   <div
@@ -377,7 +549,7 @@
       class:playing={animating}
       onclick={toggleAnimation}
       title={animating ? 'Pause animation' : 'Animate through cycles'}
-    >{animating ? '⏸' : '▶'}</button>
+    >{animating ? '⏹' : '▶'}</button>
   </div>
 {/snippet}
 
@@ -562,8 +734,16 @@
     </div>
 
     <button
+      class="share-btn"
+      class:copied={shareCopied}
+      onclick={copyShareLink}
+      title="Share this view"
+      aria-label="Share"
+    >{shareCopied ? '✓ Copied' : '⤴ Share'}</button>
+
+    <button
       class="help-btn"
-      onclick={() => helpOpen = true}
+      onclick={() => { helpOpen = true; helpTab = 'nation'; }}
       title="How to use this site"
       aria-label="Help"
     >?</button>
@@ -609,6 +789,7 @@
             {/each}
           </ul>
         {/if}
+        <p class="states-note">{Object.keys(STATES).length} of 50 states · more coming</p>
       </div>
     </nav>
 
@@ -617,10 +798,16 @@
   <main class:ph={panelLayout === 'horizontal'}>
     <div class="map-wrap">
       {#if viewMode === 'nation'}
-        <NationView selectedYear={selectedYear} onStateClick={selectState} fullDataStates={Object.keys(STATES)} />
+        <NationView
+          selectedYear={selectedYear}
+          onStateClick={selectState}
+          fullDataStates={Object.keys(STATES)}
+          wipeDuration={animWipeMs}
+          showEgLabels={animSpeed === 'slow'}
+        />
         <!-- Floating cycle bar for nation view -->
         <div class="nation-cycle-bar">
-          {@render cycleControls()}
+          {@render nationCycleControls()}
         </div>
       {:else}
         {#key viewMode}
@@ -666,7 +853,15 @@
           </div>
 
           {#if displayStats}
-            <div class="snap-cards snap-cards-state">
+            {#if stateCardLabels.length > 1}
+              <nav class="snap-nav" aria-label="Panel sections">
+                {#each stateCardLabels as label, i}
+                  <button class="snap-nav-btn" class:active={i === stateCardIdx}
+                    onclick={() => jumpToCard(stateCardsEl, i)}>{label}</button>
+                {/each}
+              </nav>
+            {/if}
+            <div class="snap-cards snap-cards-state" bind:this={stateCardsEl} onscroll={onStateScroll}>
               <!-- Card: Key stats -->
               <div class="snap-card">
                 <p class="snap-card-title">
@@ -674,15 +869,34 @@
                   {#if hoveredYear}<span class="preview-badge">preview</span>{/if}
                 </p>
                 <dl class="snap-dl">
-                  <dt>Drawn by</dt><dd class="drawn-by">{displayStats.redistricting_controller}</dd>
+                  <dt>Drawn by</dt>
+                  <dd>
+                    {#if displayStats.redistricting_controller}
+                      {@const dbt = drawnByTooltip(displayStats.redistricting_controller)}
+                      <Tooltip title={dbt.title} text={dbt.text} placement="left">
+                        <Pill
+                          party={/rep|republican/i.test(displayStats.redistricting_controller) ? 'R' : /dem|democrat/i.test(displayStats.redistricting_controller) ? 'D' : null}
+                          solid={/rep|republican|dem|democrat/i.test(displayStats.redistricting_controller)}
+                        >{displayStats.redistricting_controller}</Pill>
+                      </Tooltip>
+                    {/if}
+                  </dd>
                   <dt>Seats</dt>
                   <dd><span class="d">{displayStats.seats_d}D</span> / <span class="r">{displayStats.seats_r}R</span> <span class="muted">of {displayStats.total_seats}</span></dd>
                   <dt>D votes</dt><dd>{(displayStats.votes_d * 100).toFixed(1)}%</dd>
                   <dt>R votes</dt><dd>{(displayStats.votes_r * 100).toFixed(1)}%</dd>
                   {#if displayStats.efficiency_gap !== null}
                     <dt>Eff. gap</dt>
-                    <dd class={displayStats.efficiency_gap > 0 ? 'favor-r' : 'favor-d'}>
-                      {displayStats.efficiency_gap > 0 ? '+' : ''}{(displayStats.efficiency_gap * 100).toFixed(1)}% {displayStats.efficiency_gap > 0 ? '→ R' : '→ D'}
+                    <dd>
+                      <Tooltip
+                        title="Efficiency gap"
+                        text="Measures wasted votes — votes cast for the losing party, or surplus votes beyond what the winning party needed. A positive value means Republican votes were used more efficiently, indicating a potential R-favoring gerrymander. Values above ±8% are generally considered significant."
+                        placement="left"
+                      >
+                        <Pill party={displayStats.efficiency_gap > 0.02 ? 'R' : displayStats.efficiency_gap < -0.02 ? 'D' : null}>
+                          {displayStats.efficiency_gap > 0 ? '+' : ''}{(displayStats.efficiency_gap * 100).toFixed(1)}% {displayStats.efficiency_gap > 0.02 ? '→R' : displayStats.efficiency_gap < -0.02 ? '→D' : '≈0'}
+                        </Pill>
+                      </Tooltip>
                     </dd>
                   {/if}
                   {#if displayStats.avg_compactness !== null}
@@ -775,7 +989,9 @@
             <div class="panel-header" style={`background: linear-gradient(to right, rgba(74,144,217,${alphaD}), rgba(224,92,92,${alphaR})), var(--surface)`}>
               <span class="dc-district-label">D{pinnedDistrict} <span class="dc-district-year">{selectedYear}</span></span>
               {#if pinnedDistData != null}
-                <span class="dp-won-by {won_by === 'D' ? 'd' : won_by === 'R' ? 'r' : ''}">{won_by === 'D' ? 'Democrat' : won_by === 'R' ? 'Republican' : '—'}</span>
+                <Pill party={won_by === 'D' ? 'D' : won_by === 'R' ? 'R' : null} solid size="md">
+                  {won_by === 'D' ? 'Democrat' : won_by === 'R' ? 'Republican' : '—'}
+                </Pill>
               {/if}
               <a href={ballotpediaUrl(selectedState, pinnedDistrict)} target="_blank" rel="noopener" class="district-card-wiki">Ballotpedia →</a>
             </div>
@@ -783,7 +999,13 @@
             {#if pinnedDistData == null}
               <p class="dc-pending" style="padding: 0.5rem 0.75rem">D{pinnedDistrict} did not exist in {selectedYear}.</p>
             {:else}
-              <div class="snap-cards snap-cards-district">
+              <nav class="snap-nav" aria-label="District sections">
+                {#each ['Partisan', 'Race & pop', 'Income & edu'] as label, i}
+                  <button class="snap-nav-btn" class:active={i === distCardIdx}
+                    onclick={() => jumpToCard(distCardsEl, i)}>{label}</button>
+                {/each}
+              </nav>
+              <div class="snap-cards snap-cards-district" bind:this={distCardsEl} onscroll={onDistScroll}>
                 <!-- Card: Partisan -->
                 <div class="snap-card">
                   <p class="snap-card-title">Partisan</p>
@@ -910,53 +1132,207 @@
         <h2>About District Drift</h2>
         <button class="help-close" onclick={() => helpOpen = false} aria-label="Close">✕</button>
       </div>
+      <div class="help-hook">
+        <p>Every ten years, after the Census, state legislatures redraw the lines of congressional districts. It's one of the most consequential — and least scrutinized — acts in American democracy.</p>
+        <p>District Drift is a retrospective: <em>how have those lines been drawn since 1992, and who benefited?</em> Both parties have gerrymandered. This site shows all of it.</p>
+      </div>
+
+      <nav class="help-tabs" role="tablist">
+        <button role="tab" aria-selected={helpTab === 'nation'} class:active={helpTab === 'nation'} onclick={() => helpTab = 'nation'}>
+          <span class="tab-icon">🗺</span> Nation view
+        </button>
+        <button role="tab" aria-selected={helpTab === 'state'} class:active={helpTab === 'state'} onclick={() => helpTab = 'state'}>
+          <span class="tab-icon">🏛</span> State view
+        </button>
+        <button role="tab" aria-selected={helpTab === 'metrics'} class:active={helpTab === 'metrics'} onclick={() => helpTab = 'metrics'}>
+          <span class="tab-icon">📊</span> Metrics
+        </button>
+        <button role="tab" aria-selected={helpTab === 'data'} class:active={helpTab === 'data'} onclick={() => helpTab = 'data'}>
+          <span class="tab-icon">🗃</span> Data
+        </button>
+      </nav>
+
       <div class="help-body">
 
+        {#if helpTab === 'nation'}
         <section>
-          <h3>What is this?</h3>
-          <p>District Drift is a historical record of congressional gerrymandering in the United States from 1992 to 2022. Every decade after the Census, states redraw their congressional district maps — a process that is often used to give one party a structural advantage. This site lets you explore how those maps changed across four redistricting cycles and what effect they had on election outcomes.</p>
-          <p>Unlike forward-looking redistricting tools, this site is purely retrospective: it asks <em>how have maps been drawn</em>, and <em>who benefited</em>?</p>
+          <div class="help-steps">
+            <div class="help-step">
+              <span class="step-num">1</span>
+              <div>The <strong>opening map</strong> shows all 50 states shaded by their efficiency gap — how structurally biased each state's map was in the selected cycle.</div>
+            </div>
+            <div class="help-step">
+              <span class="step-num">2</span>
+              <div>Step through cycles using the year buttons, or press <strong>▶</strong> to animate 1992 → 2022. As each new cycle arrives, pill overlays appear showing how congressional seats shifted — <Pill party="R">+2R</Pill> means two new Republican seats, <Pill party="D">−1D</Pill> means one fewer Democratic seat.</div>
+            </div>
+            <div class="help-step">
+              <span class="step-num">3</span>
+              <div>The <strong>NE</strong> button zooms into the Northeast corridor — 12 densely packed states holding ~90 seats, the most compressed congressional battleground in the US.</div>
+            </div>
+            <div class="help-step">
+              <span class="step-num">4</span>
+              <div>The <strong>Rankings</strong> panel on the right ranks every state by efficiency gap magnitude, so you can quickly find the most and least gerrymandered maps.</div>
+            </div>
+          </div>
         </section>
+        {/if}
 
+        {#if helpTab === 'state'}
         <section>
-          <h3>How to use it</h3>
-          <ul>
-            <li><strong>Select a state</strong> from the dropdown in the header.</li>
-            <li><strong>Choose a cycle</strong> (1992, 2002, 2012, 2022) using the buttons above the map, or press <strong>▶</strong> to animate through all four.</li>
-            <li>When switching cycles, district boundaries <strong>morph</strong> to their new positions. A <strong>swing overlay</strong> shows which districts shifted toward Democrats (blue) or Republicans (red).</li>
-            <li>The <strong>dashed lines</strong> on the map show the previous cycle's boundaries for reference.</li>
-            <li><strong>Click any district</strong> to pin a detail card. The card stays pinned as you change cycles — use it to track how a district's partisan lean, racial composition, income, and education changed across redistricting cycles. Each value shows the previous cycle's figure for comparison.</li>
-          </ul>
+          <div class="help-steps">
+            <div class="help-step">
+              <span class="step-num">1</span>
+              <div><strong>Select a state</strong> from the dropdown in the header to dive into its district map. All 50 states are available across four redistricting cycles: 1992, 2002, 2012, and 2022.</div>
+            </div>
+            <div class="help-step">
+              <span class="step-num">2</span>
+              <div>Switch cycles to watch district boundaries <strong>morph</strong> to their new positions. A brief <strong>swing overlay</strong> shows which districts shifted toward <span class="help-d">Democrats</span> or <span class="help-r">Republicans</span>. Dashed lines remain as a ghost of the previous map.</div>
+            </div>
+            <div class="help-step">
+              <span class="step-num">3</span>
+              <div><strong>Click any district</strong> to pin a detail card. It stays locked as you step through cycles — compare partisan lean, racial composition, income, and education across every map redraw for that district.</div>
+            </div>
+            <div class="help-step">
+              <span class="step-num">4</span>
+              <div>Use <strong>⤴ Share</strong> in the header to share the current view — opens your device's share options (email, messages, etc.) or copies the link directly. State, year, district, and panel layout are all encoded in the URL.</div>
+            </div>
+          </div>
         </section>
+        {/if}
 
+        {#if helpTab === 'metrics'}
         <section>
-          <h3>Understanding the metrics</h3>
           <dl class="help-metrics">
-            <dt>Efficiency gap</dt>
-            <dd>Measures "wasted votes" — votes cast for a losing candidate, or surplus votes for a winner beyond what was needed. If one party's votes are systematically wasted at a higher rate through packing and cracking, the map favors the other. A value of <span class="r">+5%</span> means Democrats wasted 5 percentage points more of the total vote than Republicans (maps favor Republicans); <span class="d">−5%</span> means the reverse.</dd>
-
-            <dt>Mean–median difference</dt>
-            <dd>Compares the mean Democratic vote share across all districts to the median. When Democratic votes are concentrated into a few lopsided districts (packing), the median falls below the mean — a negative value that indicates Republican-favoring maps. Values near zero suggest a more even distribution.</dd>
-
-            <dt>Seat / vote ratio</dt>
-            <dd>How many seats a party wins relative to its statewide vote share. A ratio of <strong>1.0×</strong> means seats are proportional to votes. Above 1× means the party wins more seats than its vote share would predict; below 1× means fewer. Extreme values in either direction suggest structural bias in the map.</dd>
-
-            <dt>Compactness (Polsby-Popper)</dt>
-            <dd>Measures how compact a district's shape is, from 0 to 1 (a perfect circle = 1). Strangely shaped, elongated districts are sometimes a sign of partisan manipulation — though geography and communities of interest also legitimately produce non-compact shapes.</dd>
+            <div class="help-metric-row">
+              <dt>Efficiency gap</dt>
+              <dd>Counts "wasted votes" — votes for a losing candidate, or surplus votes beyond what a winner needed. When one party's votes are systematically wasted through <em>packing</em> (concentrating opponents into a few safe seats) and <em>cracking</em> (diluting them across many losing ones), the map structurally favors the other. <span class="help-r-val">+5%</span> means Democrats wasted 5 pp more (map favors Republicans); <span class="help-d-val">−5%</span> means the reverse.</dd>
+            </div>
+            <div class="help-metric-row">
+              <dt>Mean–median difference</dt>
+              <dd>Compares the average Democratic district vote share to the median. Packing concentrates Democratic votes into a few blowout districts, pushing the median below the mean — a negative value signals a Republican-favoring map. Near zero suggests more even distribution.</dd>
+            </div>
+            <div class="help-metric-row">
+              <dt>Seat / vote ratio</dt>
+              <dd>Seats won relative to statewide vote share. <strong>1.0×</strong> is proportional. Above 1× means a party wins more seats than its votes would predict; below 1× means fewer. Both parties can exceed 1× — one state's gerrymander doesn't cancel another's.</dd>
+            </div>
+            <div class="help-metric-row">
+              <dt>Compactness (Polsby-Popper)</dt>
+              <dd>Shape regularity on a 0–1 scale (circle = 1). Bizarrely shaped districts can signal packing and cracking — though geography and communities of interest also produce non-compact shapes legitimately.</dd>
+            </div>
           </dl>
-          <p class="help-note">These metrics can behave counterintuitively when one party wins by very large margins, as landslide victories also waste many votes. Always read them alongside the seat and vote totals.</p>
-        </section>
 
-        <section>
-          <h3>About the data</h3>
-          <ul>
-            <li>District boundaries: <strong>NHGIS</strong> (University of Minnesota), congressional shapefiles from the 103rd–118th Congress.</li>
-            <li>Election results: <strong>MIT Election Lab</strong> US House returns 1976–2024.</li>
-            <li>Demographics (population, race, income, education): <strong>US Census Bureau</strong> via NHGIS — 1990 STF1/STF3, 2000 SF1/SF3, and ACS 5-year estimates (2008–2012 and 2018–2022).</li>
-            <li>The 1992 cycle (103rd Congress) has known gaps in the NHGIS shapefile for some states — a handful of district boundaries are missing from the source data.</li>
-            <li>Currently covers all 50 states across four redistricting cycles. Select any state from the dropdown to explore its maps.</li>
-          </ul>
+          <figure class="help-diagram-wrap">
+            <svg viewBox="0 0 540 190" class="help-diagram" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing packing and cracking gerrymandering techniques">
+              <defs>
+                <clipPath id="lc1"><rect x="30" y="46" width="150" height="16" rx="3"/></clipPath>
+                <clipPath id="lc2"><rect x="30" y="70" width="150" height="16" rx="3"/></clipPath>
+                <clipPath id="lc3"><rect x="30" y="94" width="150" height="16" rx="3"/></clipPath>
+                <clipPath id="lc4"><rect x="30" y="118" width="150" height="16" rx="3"/></clipPath>
+                <clipPath id="rc1"><rect x="315" y="46" width="150" height="16" rx="3"/></clipPath>
+                <clipPath id="rc2"><rect x="315" y="70" width="150" height="16" rx="3"/></clipPath>
+                <clipPath id="rc3"><rect x="315" y="94" width="150" height="16" rx="3"/></clipPath>
+                <clipPath id="rc4"><rect x="315" y="118" width="150" height="16" rx="3"/></clipPath>
+              </defs>
+
+              <!-- ── PACKING ─────────────────────────────────── -->
+              <rect x="1" y="1" width="253" height="185" rx="7" fill="var(--surface-2)" stroke="var(--border)" stroke-width="1"/>
+              <text x="127" y="19" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text-strong)" letter-spacing=".06em">PACKING</text>
+              <text x="127" y="31" text-anchor="middle" font-size="8.5" fill="var(--text-dim)">D voters crammed into one seat</text>
+
+              <!-- 50% marker -->
+              <line x1="105" y1="42" x2="105" y2="137" stroke="var(--text-faint)" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="105" y="142" text-anchor="middle" font-size="7" fill="var(--text-faint)">50%</text>
+
+              <!-- D1: 90% D -->
+              <text x="27" y="58" text-anchor="end" font-size="8.5" fill="var(--text-dim)">D1</text>
+              <rect x="30" y="46" width="150" height="16" rx="3" fill="rgba(192,57,43,0.1)"/>
+              <rect x="30" y="46" width="135" height="16" clip-path="url(#lc1)" fill="rgba(36,113,163,0.55)"/>
+              <text x="185" y="58" font-size="8" fill="var(--text-muted)">90%</text>
+              <text x="212" y="58" font-size="9" font-weight="700" fill="#2471a3">D ✓</text>
+
+              <!-- D2: 37% D -->
+              <text x="27" y="82" text-anchor="end" font-size="8.5" fill="var(--text-dim)">D2</text>
+              <rect x="30" y="70" width="150" height="16" rx="3" fill="rgba(192,57,43,0.1)"/>
+              <rect x="30" y="70" width="56" height="16" clip-path="url(#lc2)" fill="rgba(36,113,163,0.35)"/>
+              <text x="185" y="82" font-size="8" fill="var(--text-muted)">37%</text>
+              <text x="212" y="82" font-size="9" font-weight="700" fill="#c0392b">R ✓</text>
+
+              <!-- D3: 37% D -->
+              <text x="27" y="106" text-anchor="end" font-size="8.5" fill="var(--text-dim)">D3</text>
+              <rect x="30" y="94" width="150" height="16" rx="3" fill="rgba(192,57,43,0.1)"/>
+              <rect x="30" y="94" width="56" height="16" clip-path="url(#lc3)" fill="rgba(36,113,163,0.35)"/>
+              <text x="185" y="106" font-size="8" fill="var(--text-muted)">37%</text>
+              <text x="212" y="106" font-size="9" font-weight="700" fill="#c0392b">R ✓</text>
+
+              <!-- D4: 37% D -->
+              <text x="27" y="130" text-anchor="end" font-size="8.5" fill="var(--text-dim)">D4</text>
+              <rect x="30" y="118" width="150" height="16" rx="3" fill="rgba(192,57,43,0.1)"/>
+              <rect x="30" y="118" width="56" height="16" clip-path="url(#lc4)" fill="rgba(36,113,163,0.35)"/>
+              <text x="185" y="130" font-size="8" fill="var(--text-muted)">37%</text>
+              <text x="212" y="130" font-size="9" font-weight="700" fill="#c0392b">R ✓</text>
+
+              <!-- Summary -->
+              <text x="127" y="161" text-anchor="middle" font-size="8.5" fill="var(--text-muted)">~50% D votes</text>
+              <text x="127" y="176" text-anchor="middle" font-size="10" font-weight="700" fill="#c0392b">1 of 4 seats (25%)</text>
+
+              <!-- ── CRACKING ─────────────────────────────────── -->
+              <rect x="287" y="1" width="253" height="185" rx="7" fill="var(--surface-2)" stroke="var(--border)" stroke-width="1"/>
+              <text x="413" y="19" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text-strong)" letter-spacing=".06em">CRACKING</text>
+              <text x="413" y="31" text-anchor="middle" font-size="8.5" fill="var(--text-dim)">D voters diluted — never a majority</text>
+
+              <!-- 50% marker -->
+              <line x1="390" y1="42" x2="390" y2="137" stroke="var(--text-faint)" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="390" y="142" text-anchor="middle" font-size="7" fill="var(--text-faint)">50%</text>
+
+              <!-- D1: 49% D -->
+              <text x="312" y="58" text-anchor="end" font-size="8.5" fill="var(--text-dim)">D1</text>
+              <rect x="315" y="46" width="150" height="16" rx="3" fill="rgba(192,57,43,0.1)"/>
+              <rect x="315" y="46" width="73" height="16" clip-path="url(#rc1)" fill="rgba(36,113,163,0.45)"/>
+              <text x="470" y="58" font-size="8" fill="var(--text-muted)">49%</text>
+              <text x="497" y="58" font-size="9" font-weight="700" fill="#c0392b">R ✓</text>
+
+              <!-- D2: 49% D -->
+              <text x="312" y="82" text-anchor="end" font-size="8.5" fill="var(--text-dim)">D2</text>
+              <rect x="315" y="70" width="150" height="16" rx="3" fill="rgba(192,57,43,0.1)"/>
+              <rect x="315" y="70" width="73" height="16" clip-path="url(#rc2)" fill="rgba(36,113,163,0.45)"/>
+              <text x="470" y="82" font-size="8" fill="var(--text-muted)">49%</text>
+              <text x="497" y="82" font-size="9" font-weight="700" fill="#c0392b">R ✓</text>
+
+              <!-- D3: 49% D -->
+              <text x="312" y="106" text-anchor="end" font-size="8.5" fill="var(--text-dim)">D3</text>
+              <rect x="315" y="94" width="150" height="16" rx="3" fill="rgba(192,57,43,0.1)"/>
+              <rect x="315" y="94" width="73" height="16" clip-path="url(#rc3)" fill="rgba(36,113,163,0.45)"/>
+              <text x="470" y="106" font-size="8" fill="var(--text-muted)">49%</text>
+              <text x="497" y="106" font-size="9" font-weight="700" fill="#c0392b">R ✓</text>
+
+              <!-- D4: 49% D -->
+              <text x="312" y="130" text-anchor="end" font-size="8.5" fill="var(--text-dim)">D4</text>
+              <rect x="315" y="118" width="150" height="16" rx="3" fill="rgba(192,57,43,0.1)"/>
+              <rect x="315" y="118" width="73" height="16" clip-path="url(#rc4)" fill="rgba(36,113,163,0.45)"/>
+              <text x="470" y="130" font-size="8" fill="var(--text-muted)">49%</text>
+              <text x="497" y="130" font-size="9" font-weight="700" fill="#c0392b">R ✓</text>
+
+              <!-- Summary -->
+              <text x="413" y="161" text-anchor="middle" font-size="8.5" fill="var(--text-muted)">49% D votes</text>
+              <text x="413" y="176" text-anchor="middle" font-size="10" font-weight="700" fill="#c0392b">0 of 4 seats (0%)</text>
+            </svg>
+            <figcaption class="help-diagram-caption">Hypothetical 4-district state. Both methods give R most seats despite near-even vote share — through opposite techniques.</figcaption>
+          </figure>
+
+          <p class="help-note">These metrics can behave counterintuitively in landslide states, where dominant parties also "waste" many votes. Always read them alongside seat and vote totals.</p>
         </section>
+        {/if}
+
+        {#if helpTab === 'data'}
+        <section>
+          <div class="help-sources">
+            <div class="help-source-row"><span class="source-label">Boundaries</span><span>NHGIS (U of Minnesota) — 103rd–118th Congress shapefiles</span></div>
+            <div class="help-source-row"><span class="source-label">Elections</span><span>MIT Election Lab — US House returns 1976–2024</span></div>
+            <div class="help-source-row"><span class="source-label">Demographics</span><span>US Census via NHGIS — 1990 STF1/3, 2000 SF1/3, ACS 2008–12 and 2018–22</span></div>
+            <div class="help-source-row help-note-row"><span>The 1992 cycle has known boundary gaps in the NHGIS source data for some states.</span></div>
+          </div>
+        </section>
+        {/if}
 
       </div>
     </div>
@@ -1060,7 +1436,15 @@
   .view-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
   .view-btn.active { background: rgba(255,255,255,0.18); color: #fff; border-color: rgba(255,255,255,0.3); font-weight: 700; }
 
-  .state-selector-wrap { position: relative; }
+  .state-selector-wrap { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+
+  .states-note {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.35);
+    margin: 0;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
 
   .state-selector {
     display: flex;
@@ -1322,6 +1706,38 @@
 
   .snap-legend { font-size: 0.72rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.1rem; }
   .snap-credits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+
+  .snap-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px 4px;
+    padding: 5px 0.5rem 4px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border-dim);
+  }
+  .snap-nav-btn {
+    font-size: 0.67rem;
+    padding: 2px 8px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+    white-space: nowrap;
+    line-height: 1.6;
+  }
+  .snap-nav-btn:hover {
+    background: var(--surface-2);
+    color: var(--text);
+    border-color: var(--text-dim);
+  }
+  .snap-nav-btn.active {
+    background: var(--text-muted);
+    color: var(--surface);
+    border-color: var(--text-muted);
+  }
   .snap-credits li { font-size: 0.68rem; color: var(--text-muted); line-height: 1.4; }
   .snap-credits a { color: var(--link); text-decoration: none; }
   .snap-events { padding-left: 0; list-style: none; margin: 0; }
@@ -1604,6 +2020,24 @@
   }
   footer a { color: rgba(255,255,255,0.65); }
 
+  .share-btn {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    border-radius: 99px;
+    padding: 0 0.65rem;
+    height: 1.75rem;
+    cursor: pointer;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    display: flex; align-items: center; gap: 0.25rem;
+    white-space: nowrap;
+  }
+  .share-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+  .share-btn.copied { background: rgba(60,180,100,0.25); border-color: rgba(60,180,100,0.5); color: #7effa0; }
+
   .help-btn {
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.12);
@@ -1651,75 +2085,170 @@
   .help-modal {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
     width: 100%;
-    max-width: 620px;
-    max-height: 88vh;
+    max-width: 640px;
+    max-height: 90vh;
     display: flex; flex-direction: column;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.35);
   }
   .help-header {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 1.25rem 0.75rem;
-    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 1.25rem 0.85rem;
+    background: #1a1a2e;
+    border-radius: 12px 12px 0 0;
     flex-shrink: 0;
   }
   .help-header h2 {
-    margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text);
+    margin: 0; font-size: 1.05rem; font-weight: 700; color: #fff;
   }
   .help-close {
     background: none; border: none; cursor: pointer;
-    color: var(--text-muted); font-size: 1rem; padding: 0.25rem 0.4rem;
-    border-radius: 4px; transition: background 0.1s;
+    color: rgba(255,255,255,0.55); font-size: 1rem; padding: 0.25rem 0.4rem;
+    border-radius: 4px; transition: background 0.1s, color 0.1s;
   }
-  .help-close:hover { background: var(--surface-2); }
-  .help-body {
-    overflow-y: auto;
-    padding: 1.1rem 1.25rem 1.25rem;
-    display: flex; flex-direction: column; gap: 1.25rem;
+  .help-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  /* Hook intro */
+  .help-hook {
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+    padding: 0.85rem 1.4rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    flex-shrink: 0;
   }
-  .help-body section h3 {
-    margin: 0 0 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .help-body p, .help-body li {
-    font-size: 0.88rem;
+  .help-hook p {
+    margin: 0;
+    font-size: 0.87rem;
     line-height: 1.6;
     color: var(--text);
-    margin: 0 0 0.4rem;
   }
-  .help-body ul {
-    margin: 0; padding-left: 1.2rem;
-    display: flex; flex-direction: column; gap: 0.3rem;
+  .help-hook em { font-style: italic; color: var(--text-strong); }
+
+  /* Tab nav */
+  .help-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    padding: 0 0.75rem;
+    gap: 0;
   }
+  .help-tabs button {
+    background: none; border: none; cursor: pointer;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.8rem; font-weight: 500;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.12s, border-color 0.12s;
+    display: flex; align-items: center; gap: 0.35rem;
+    white-space: nowrap;
+  }
+  .help-tabs button:hover { color: var(--text); }
+  .help-tabs button.active {
+    color: var(--text-strong);
+    border-bottom-color: var(--text-strong);
+    font-weight: 600;
+  }
+  .tab-icon { font-size: 0.9rem; }
+
+  .help-body {
+    overflow-y: auto;
+    padding: 1.25rem 1.4rem 1.5rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+
+  .help-body section { display: contents; }
+
+  /* Numbered steps */
+  .help-steps {
+    display: flex; flex-direction: column; gap: 0.65rem;
+  }
+  .help-step {
+    display: flex; gap: 0.7rem; align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 1.35rem; height: 1.35rem;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 0.1rem;
+  }
+  .help-step div {
+    font-size: 0.87rem;
+    line-height: 1.58;
+    color: var(--text);
+  }
+  .help-step div strong { color: var(--text-strong); }
+  .help-d { color: #2471a3; font-weight: 600; }
+  .help-r { color: #c0392b; font-weight: 600; }
+
+  /* Metrics */
   .help-metrics {
-    display: grid; grid-template-columns: auto 1fr;
-    gap: 0.5rem 0.9rem; margin: 0;
+    display: flex; flex-direction: column; gap: 0.75rem; margin: 0;
   }
+  .help-metric-row { display: flex; flex-direction: column; gap: 0.15rem; }
   .help-metrics dt {
-    font-size: 0.83rem; font-weight: 600; color: var(--text);
-    padding-top: 0.05rem; white-space: nowrap;
+    font-size: 0.84rem; font-weight: 700; color: var(--text-strong);
   }
   .help-metrics dd {
     font-size: 0.83rem; line-height: 1.55; color: var(--text-muted); margin: 0;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--border);
   }
-  .help-metrics .d { color: #4a90d9; font-weight: 600; }
-  .help-metrics .r { color: #e05c5c; font-weight: 600; }
+  .help-r-val { color: #c0392b; font-weight: 600; }
+  .help-d-val { color: #2471a3; font-weight: 600; }
   .help-note {
-    font-size: 0.8rem !important;
-    color: var(--text-muted) !important;
+    font-size: 0.79rem;
+    color: var(--text-dim);
     font-style: italic;
-    margin-top: 0.5rem !important;
+    margin-top: 0.25rem;
+  }
+
+  /* Packing/cracking diagram */
+  .help-diagram-wrap {
+    margin: 0;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .help-diagram {
+    width: 100%; height: auto;
+    display: block;
+  }
+  .help-diagram-caption {
+    font-size: 0.77rem;
+    color: var(--text-dim);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* Data sources */
+  .help-sources {
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .help-source-row {
+    display: flex; gap: 0.6rem;
+    font-size: 0.83rem; line-height: 1.5; color: var(--text);
+  }
+  .source-label {
+    flex-shrink: 0;
+    min-width: 6rem;
+    font-weight: 600;
+    color: var(--text-strong);
+  }
+  .help-note-row {
+    color: var(--text-dim);
+    font-size: 0.79rem;
+    font-style: italic;
+    padding-top: 0.1rem;
   }
 
   /* District detail card */
   .nation-cycle-bar {
     position: absolute;
-    bottom: 2rem;
+    bottom: 3.75rem;
     left: 50%;
     transform: translateX(-50%);
     background: var(--surface);
@@ -1731,16 +2260,65 @@
     display: flex;
     align-items: center;
   }
-  /* In the pill bar: break flex circular dependency, fix button size */
-  .nation-cycle-bar .cycle-buttons { width: max-content; }
-  .nation-cycle-bar .cycle-buttons button:not(.anim-btn) {
+  /* Nation cycle bar — standalone simple buttons */
+  .nation-btns {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .nation-yr-btn {
     flex: none;
     width: 3.6rem;
     padding: 0.45rem 0.3rem;
-    grid-template-columns: 1fr;
+    border-radius: 6px;
+    border: 1px solid rgba(128,128,128,0.2);
+    background: transparent;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--btn-color);
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    text-align: center;
   }
-  .nation-cycle-bar .btn-d-delta,
-  .nation-cycle-bar .btn-r-delta { display: none; }
+  .nation-yr-btn:hover { background: var(--btn-hover); }
+  .nation-yr-btn.active {
+    border-color: rgba(80,80,80,0.5);
+    box-shadow: 0 0 0 1.5px rgba(80,80,80,0.3), 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .nation-yr-btn.anim-btn {
+    width: auto;
+    padding: 0.45rem 0.5rem;
+    color: var(--text-muted);
+    border-color: var(--btn-border);
+  }
+  .nation-yr-btn.anim-btn.playing { background: #fff8e1; border-color: #f0a500; color: #a06000; }
+
+  .nation-speed-group {
+    display: flex;
+    gap: 2px;
+    margin-left: 0.2rem;
+    padding-left: 0.35rem;
+    border-left: 1px solid var(--border);
+  }
+  .nation-speed-btn {
+    flex: none;
+    padding: 0.3rem 0.45rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background: transparent;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+  }
+  .nation-speed-btn:hover { background: var(--btn-hover); color: var(--text); }
+  .nation-speed-btn.active {
+    background: var(--btn-hover);
+    border-color: var(--border);
+    color: var(--text);
+  }
 
   .district-card {
     border: 1px solid var(--border);
