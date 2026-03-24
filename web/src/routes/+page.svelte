@@ -277,6 +277,12 @@
 
   const isMobile = () => window.innerWidth < 640;
 
+  // Lock body scroll when any modal is open (prevents background scroll on mobile)
+  $effect(() => {
+    document.body.style.overflow = (helpOpen || statePickerOpen) ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  });
+
   onMount(() => {
     const savedPanel = localStorage.getItem(PANEL_KEY);
     if (savedPanel === 'vertical' || savedPanel === 'horizontal') {
@@ -437,18 +443,16 @@
     distCardIdx  = 0;
   });
 
-  function onStateScroll(e: Event) {
-    const el = e.target as HTMLElement;
-    stateCardIdx = panelLayout === 'vertical'
+  function snapIdx(el: HTMLElement): number {
+    return panelLayout === 'vertical'
       ? Math.round(el.scrollTop  / el.clientHeight)
       : Math.round(el.scrollLeft / el.clientWidth);
   }
-  function onDistScroll(e: Event) {
-    const el = e.target as HTMLElement;
-    distCardIdx = panelLayout === 'vertical'
-      ? Math.round(el.scrollTop  / el.clientHeight)
-      : Math.round(el.scrollLeft / el.clientWidth);
-  }
+  function onStateScroll(e: Event) { stateCardIdx = snapIdx(e.target as HTMLElement); }
+  function onDistScroll(e: Event)  { distCardIdx  = snapIdx(e.target as HTMLElement); }
+  // scrollend fires after snap animation settles — keeps pill in sync on touch
+  function onStateScrollEnd(e: Event) { stateCardIdx = snapIdx(e.target as HTMLElement); }
+  function onDistScrollEnd(e: Event)  { distCardIdx  = snapIdx(e.target as HTMLElement); }
 
   function jumpToCard(el: HTMLElement | null, idx: number) {
     if (!el) return;
@@ -945,7 +949,7 @@
                 {/each}
               </nav>
             {/if}
-            <div class="snap-cards snap-cards-state" bind:this={stateCardsEl} onscroll={onStateScroll}>
+            <div class="snap-cards snap-cards-state" bind:this={stateCardsEl} onscroll={onStateScroll} onscrollend={onStateScrollEnd}>
               <!-- Card: Key stats -->
               <div class="snap-card">
                 <p class="snap-card-title">
@@ -1098,7 +1102,7 @@
                     onclick={() => jumpToCard(distCardsEl, i)}>{label}</button>
                 {/each}
               </nav>
-              <div class="snap-cards snap-cards-district" bind:this={distCardsEl} onscroll={onDistScroll}>
+              <div class="snap-cards snap-cards-district" bind:this={distCardsEl} onscroll={onDistScroll} onscrollend={onDistScrollEnd}>
                 <!-- Card: Partisan -->
                 <div class="snap-card">
                   <p class="snap-card-title">Partisan</p>
@@ -1576,7 +1580,7 @@
   }
   .state-selector:hover { background: rgba(255,255,255,0.14); }
   .state-name { font-weight: 600; }
-  .state-chevron { font-size: 0.6rem; opacity: 0.4; }
+  .state-chevron { font-size: 0.65rem; opacity: 0.4; }
 
   /* ── State tile-grid picker modal ── */
   .state-picker-modal {
@@ -1678,7 +1682,7 @@
     padding: 0 6px;
   }
   .float-icon { font-size: 0.85rem; line-height: 1; }
-  .float-label { font-size: 0.52rem; letter-spacing: 0.02em; opacity: 0.7; text-transform: uppercase; }
+  .float-label { font-size: 0.6rem; letter-spacing: 0.02em; opacity: 0.7; text-transform: uppercase; }
   .map-float-btn:hover { background: var(--surface-2); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
   .map-float-btn.playing { color: var(--accent, #4a90d9); }
   .map-float-btn.active { color: var(--accent, #4a90d9); background: var(--surface-2); }
@@ -1828,7 +1832,7 @@
     overflow: hidden;
   }
   .snap-card-title {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.07em;
@@ -1868,8 +1872,8 @@
     border-bottom: 1px solid var(--border-dim);
   }
   .snap-nav-btn {
-    font-size: 0.67rem;
-    padding: 2px 8px;
+    font-size: 0.72rem;
+    padding: 5px 10px;
     border-radius: 99px;
     border: 1px solid var(--border);
     background: none;
@@ -1962,7 +1966,7 @@
   .cycle-buttons button:not(.anim-btn).previewing { border-color: rgba(100,100,100,0.45); }
 
   .btn-d-delta {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     font-weight: 800;
     color: #1d4ed8;
     text-align: left;
@@ -1971,7 +1975,7 @@
     text-shadow: 0 0 6px rgba(255,255,255,0.7), 0 1px 2px rgba(0,0,0,0.3);
   }
   .btn-r-delta {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     font-weight: 800;
     color: #b91c1c;
     text-align: right;
@@ -2537,7 +2541,7 @@
     flex-shrink: 0;
   }
   .dc-district-year {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     font-weight: 400;
     opacity: 0.7;
     margin-left: 0.2em;
