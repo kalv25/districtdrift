@@ -25,7 +25,7 @@ RAW = Path(RAW_DIR)
 ELECTIONS_CSV = RAW / "elections" / MIT_ELECTIONS_FILENAME
 DEST = Path(__file__).parent.parent / "web" / "static" / "nation_stats.json"
 
-CYCLE_YEARS = [1992, 2002, 2012, 2022]
+CYCLE_YEARS = [1992, 2002, 2012, 2022, 2024]
 EG_MIN_SEATS = 3   # skip EG for states with fewer districts
 
 # Full state name lookup
@@ -120,9 +120,12 @@ def main() -> None:
 
     nation: dict[str, list] = {}   # po → list of cycle dicts
 
+    # Non-voting delegates (DC) appear in election data but are not states
+    NON_STATES = {"DC"}
+
     for year in CYCLE_YEARS:
         year_df = df[df["year"] == year]
-        states_in_year = sorted(year_df["state_po"].unique())
+        states_in_year = sorted(po for po in year_df["state_po"].unique() if po not in NON_STATES)
         print(f"\n[{year}] — {len(states_in_year)} states")
 
         for po in states_in_year:

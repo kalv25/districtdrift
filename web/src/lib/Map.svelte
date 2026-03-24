@@ -4,7 +4,7 @@
   import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, showPrecincts = false, onDistrictClick, onMapClick }: {
+  let { selectedYear = 2024, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022, 2024], darkMode = false, showPrecincts = false, onDistrictClick, onMapClick }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;

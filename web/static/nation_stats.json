@@ -47,6 +47,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 156245,
+          "votes_r": 159550,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
         }
       ]
     },
@@ -97,6 +108,17 @@
           "efficiency_gap": -0.1459,
           "mean_median_diff": -0.0252,
           "seat_vote_ratio_d": 0.5655
+        },
+        {
+          "year": 2024,
+          "seats": 7,
+          "seats_d": 2,
+          "seats_r": 5,
+          "votes_d": 518197,
+          "votes_r": 1508754,
+          "efficiency_gap": -0.2761,
+          "mean_median_diff": 0.0268,
+          "seat_vote_ratio_d": 1.1176
         }
       ]
     },
@@ -146,6 +168,17 @@
           "votes_r": 598000,
           "efficiency_gap": 0.1249,
           "mean_median_diff": 0.0055,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 4,
+          "seats_d": 0,
+          "seats_r": 4,
+          "votes_d": 358749,
+          "votes_r": 764367,
+          "efficiency_gap": 0.1388,
+          "mean_median_diff": 0.0138,
           "seat_vote_ratio_d": 0.0
         }
       ]
@@ -197,6 +230,17 @@
           "efficiency_gap": 0.1108,
           "mean_median_diff": -0.0615,
           "seat_vote_ratio_d": 0.768
+        },
+        {
+          "year": 2024,
+          "seats": 9,
+          "seats_d": 3,
+          "seats_r": 6,
+          "votes_d": 1551107,
+          "votes_r": 1581784,
+          "efficiency_gap": 0.2676,
+          "mean_median_diff": 0.0597,
+          "seat_vote_ratio_d": 0.6733
         }
       ]
     },
@@ -247,6 +291,17 @@
           "efficiency_gap": 0.026,
           "mean_median_diff": 0.0282,
           "seat_vote_ratio_d": 1.2095
+        },
+        {
+          "year": 2024,
+          "seats": 52,
+          "seats_d": 43,
+          "seats_r": 9,
+          "votes_d": 9138709,
+          "votes_r": 5928084,
+          "efficiency_gap": -0.0925,
+          "mean_median_diff": -0.0153,
+          "seat_vote_ratio_d": 1.3633
         }
       ]
     },
@@ -297,6 +352,17 @@
           "efficiency_gap": 0.0193,
           "mean_median_diff": 0.0257,
           "seat_vote_ratio_d": 1.1061
+        },
+        {
+          "year": 2024,
+          "seats": 8,
+          "seats_d": 4,
+          "seats_r": 4,
+          "votes_d": 1667301,
+          "votes_r": 1306086,
+          "efficiency_gap": 0.1201,
+          "mean_median_diff": 0.0275,
+          "seat_vote_ratio_d": 0.8917
         }
       ]
     },
@@ -347,6 +413,17 @@
           "efficiency_gap": -0.3449,
           "mean_median_diff": -0.0139,
           "seat_vote_ratio_d": 1.7314
+        },
+        {
+          "year": 2024,
+          "seats": 5,
+          "seats_d": 5,
+          "seats_r": 0,
+          "votes_d": 981762,
+          "votes_r": 683089,
+          "efficiency_gap": -0.3206,
+          "mean_median_diff": -0.0077,
+          "seat_vote_ratio_d": 1.6958
         }
       ]
     },
@@ -397,6 +474,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 1.7746
+        },
+        {
+          "year": 2024,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 287830,
+          "votes_r": 209606,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.7282
         }
       ]
     },
@@ -447,6 +535,17 @@
           "efficiency_gap": 0.0317,
           "mean_median_diff": 0.0076,
           "seat_vote_ratio_d": 0.724
+        },
+        {
+          "year": 2024,
+          "seats": 28,
+          "seats_d": 8,
+          "seats_r": 20,
+          "votes_d": 4214785,
+          "votes_r": 5975435,
+          "efficiency_gap": 0.0993,
+          "mean_median_diff": 0.0422,
+          "seat_vote_ratio_d": 0.6908
         }
       ]
     },
@@ -497,6 +596,17 @@
           "efficiency_gap": 0.1278,
           "mean_median_diff": 0.0224,
           "seat_vote_ratio_d": 0.5035
+        },
+        {
+          "year": 2024,
+          "seats": 14,
+          "seats_d": 3,
+          "seats_r": 11,
+          "votes_d": 2029666,
+          "votes_r": 2702118,
+          "efficiency_gap": 0.1313,
+          "mean_median_diff": 0.0362,
+          "seat_vote_ratio_d": 0.4996
         }
       ]
     },
@@ -547,6 +657,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 1.4563
+        },
+        {
+          "year": 2024,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 330488,
+          "votes_r": 139844,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.4231
         }
       ]
     },
@@ -597,6 +718,17 @@
           "efficiency_gap": 0.3743,
           "mean_median_diff": -0.0293,
           "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 4,
+          "seats_d": 0,
+          "seats_r": 4,
+          "votes_d": 696033,
+          "votes_r": 904563,
+          "efficiency_gap": 0.3697,
+          "mean_median_diff": -0.0188,
+          "seat_vote_ratio_d": 0.0
         }
       ]
     },
@@ -644,6 +776,17 @@
           "seats_r": 2,
           "votes_d": 180997,
           "votes_r": 395351,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 2,
+          "seats_d": 0,
+          "seats_r": 2,
+          "votes_d": 244885,
+          "votes_r": 581168,
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 0.0
@@ -697,6 +840,17 @@
           "efficiency_gap": -0.1557,
           "mean_median_diff": 0.0176,
           "seat_vote_ratio_d": 1.4648
+        },
+        {
+          "year": 2024,
+          "seats": 17,
+          "seats_d": 14,
+          "seats_r": 3,
+          "votes_d": 2829169,
+          "votes_r": 2517389,
+          "efficiency_gap": -0.257,
+          "mean_median_diff": -0.0442,
+          "seat_vote_ratio_d": 1.5563
         }
       ]
     },
@@ -747,6 +901,17 @@
           "efficiency_gap": 0.0746,
           "mean_median_diff": 0.0621,
           "seat_vote_ratio_d": 0.566
+        },
+        {
+          "year": 2024,
+          "seats": 9,
+          "seats_d": 2,
+          "seats_r": 7,
+          "votes_d": 1103484,
+          "votes_r": 1668618,
+          "efficiency_gap": 0.0861,
+          "mean_median_diff": 0.0653,
+          "seat_vote_ratio_d": 0.5583
         }
       ]
     },
@@ -797,6 +962,17 @@
           "efficiency_gap": 0.0591,
           "mean_median_diff": 0.0239,
           "seat_vote_ratio_d": 0.5848
+        },
+        {
+          "year": 2024,
+          "seats": 4,
+          "seats_d": 1,
+          "seats_r": 3,
+          "votes_d": 526153,
+          "votes_r": 749375,
+          "efficiency_gap": 0.0291,
+          "mean_median_diff": 0.0286,
+          "seat_vote_ratio_d": 0.6061
         }
       ]
     },
@@ -847,6 +1023,17 @@
           "efficiency_gap": 0.0001,
           "mean_median_diff": 0.0315,
           "seat_vote_ratio_d": 0.4903
+        },
+        {
+          "year": 2024,
+          "seats": 6,
+          "seats_d": 1,
+          "seats_r": 5,
+          "votes_d": 511998,
+          "votes_r": 1392354,
+          "efficiency_gap": -0.1344,
+          "mean_median_diff": -0.0091,
+          "seat_vote_ratio_d": 0.6199
         }
       ]
     },
@@ -897,6 +1084,17 @@
           "efficiency_gap": -0.1024,
           "mean_median_diff": 0.0208,
           "seat_vote_ratio_d": 0.5689
+        },
+        {
+          "year": 2024,
+          "seats": 6,
+          "seats_d": 2,
+          "seats_r": 4,
+          "votes_d": 563945,
+          "votes_r": 1248101,
+          "efficiency_gap": -0.2072,
+          "mean_median_diff": 0.0552,
+          "seat_vote_ratio_d": 1.0711
         }
       ]
     },
@@ -947,6 +1145,17 @@
           "efficiency_gap": -0.0869,
           "mean_median_diff": 0.0691,
           "seat_vote_ratio_d": 1.4153
+        },
+        {
+          "year": 2024,
+          "seats": 9,
+          "seats_d": 9,
+          "seats_r": 0,
+          "votes_d": 2386143,
+          "votes_r": 304460,
+          "efficiency_gap": 0.2737,
+          "mean_median_diff": -0.081,
+          "seat_vote_ratio_d": 1.1276
         }
       ]
     },
@@ -997,6 +1206,17 @@
           "efficiency_gap": -0.0524,
           "mean_median_diff": 0.0421,
           "seat_vote_ratio_d": 1.3428
+        },
+        {
+          "year": 2024,
+          "seats": 8,
+          "seats_d": 6,
+          "seats_r": 2,
+          "votes_d": 1639619,
+          "votes_r": 1017654,
+          "efficiency_gap": -0.0577,
+          "mean_median_diff": -0.0562,
+          "seat_vote_ratio_d": 1.2155
         }
       ]
     },
@@ -1047,6 +1267,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 1.7155
+        },
+        {
+          "year": 2024,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 446949,
+          "votes_r": 349294,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.7815
         }
       ]
     },
@@ -1097,6 +1328,17 @@
           "efficiency_gap": -0.0015,
           "mean_median_diff": -0.007,
           "seat_vote_ratio_d": 1.052
+        },
+        {
+          "year": 2024,
+          "seats": 13,
+          "seats_d": 6,
+          "seats_r": 7,
+          "votes_d": 2634228,
+          "votes_r": 2702653,
+          "efficiency_gap": 0.0487,
+          "mean_median_diff": 0.0219,
+          "seat_vote_ratio_d": 0.9351
         }
       ]
     },
@@ -1147,6 +1389,17 @@
           "efficiency_gap": -0.3337,
           "mean_median_diff": 0.0554,
           "seat_vote_ratio_d": 1.271
+        },
+        {
+          "year": 2024,
+          "seats": 8,
+          "seats_d": 3,
+          "seats_r": 5,
+          "votes_d": 735619,
+          "votes_r": 1550499,
+          "efficiency_gap": -0.3442,
+          "mean_median_diff": 0.2493,
+          "seat_vote_ratio_d": 1.1654
         }
       ]
     },
@@ -1197,6 +1450,17 @@
           "efficiency_gap": 0.0699,
           "mean_median_diff": 0.0866,
           "seat_vote_ratio_d": 0.6348
+        },
+        {
+          "year": 2024,
+          "seats": 8,
+          "seats_d": 2,
+          "seats_r": 6,
+          "votes_d": 1125671,
+          "votes_r": 1711050,
+          "efficiency_gap": 0.0784,
+          "mean_median_diff": 0.0881,
+          "seat_vote_ratio_d": 0.63
         }
       ]
     },
@@ -1247,6 +1511,17 @@
           "efficiency_gap": -0.0433,
           "mean_median_diff": 0.0723,
           "seat_vote_ratio_d": 0.7022
+        },
+        {
+          "year": 2024,
+          "seats": 4,
+          "seats_d": 1,
+          "seats_r": 3,
+          "votes_d": 350353,
+          "votes_r": 812799,
+          "efficiency_gap": -0.1442,
+          "mean_median_diff": 0.0144,
+          "seat_vote_ratio_d": 0.83
         }
       ]
     },
@@ -1297,6 +1572,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 0.8877
+        },
+        {
+          "year": 2024,
+          "seats": 2,
+          "seats_d": 0,
+          "seats_r": 2,
+          "votes_d": 237496,
+          "votes_r": 350361,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
         }
       ]
     },
@@ -1347,6 +1633,17 @@
           "efficiency_gap": -0.0386,
           "mean_median_diff": -0.0066,
           "seat_vote_ratio_d": 1.045
+        },
+        {
+          "year": 2024,
+          "seats": 14,
+          "seats_d": 4,
+          "seats_r": 10,
+          "votes_d": 2194238,
+          "votes_r": 2889999,
+          "efficiency_gap": 0.0614,
+          "mean_median_diff": -0.0175,
+          "seat_vote_ratio_d": 0.662
         }
       ]
     },
@@ -1394,6 +1691,17 @@
           "seats_r": 1,
           "votes_d": 0,
           "votes_r": 148399,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": null
+        },
+        {
+          "year": 2024,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 0,
+          "votes_r": 249101,
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": null
@@ -1447,6 +1755,17 @@
           "efficiency_gap": 0.2247,
           "mean_median_diff": -0.0624,
           "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 3,
+          "seats_d": 0,
+          "seats_r": 3,
+          "votes_d": 338154,
+          "votes_r": 591238,
+          "efficiency_gap": 0.2277,
+          "mean_median_diff": -0.0371,
+          "seat_vote_ratio_d": 0.0
         }
       ]
     },
@@ -1497,6 +1816,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 1.8194
+        },
+        {
+          "year": 2024,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 430218,
+          "votes_r": 373746,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.8687
         }
       ]
     },
@@ -1547,6 +1877,17 @@
           "efficiency_gap": -0.1327,
           "mean_median_diff": -0.1006,
           "seat_vote_ratio_d": 1.1014
+        },
+        {
+          "year": 2024,
+          "seats": 12,
+          "seats_d": 9,
+          "seats_r": 3,
+          "votes_d": 1945568,
+          "votes_r": 1605522,
+          "efficiency_gap": -0.1559,
+          "mean_median_diff": -0.02,
+          "seat_vote_ratio_d": 1.3689
         }
       ]
     },
@@ -1597,6 +1938,17 @@
           "efficiency_gap": -0.3986,
           "mean_median_diff": -0.01,
           "seat_vote_ratio_d": 1.8159
+        },
+        {
+          "year": 2024,
+          "seats": 3,
+          "seats_d": 3,
+          "seats_r": 0,
+          "votes_d": 493722,
+          "votes_r": 402776,
+          "efficiency_gap": -0.3986,
+          "mean_median_diff": -0.0137,
+          "seat_vote_ratio_d": 1.8158
         }
       ]
     },
@@ -1647,6 +1999,17 @@
           "efficiency_gap": -0.2309,
           "mean_median_diff": -0.0319,
           "seat_vote_ratio_d": 1.5542
+        },
+        {
+          "year": 2024,
+          "seats": 4,
+          "seats_d": 3,
+          "seats_r": 1,
+          "votes_d": 534115,
+          "votes_r": 692714,
+          "efficiency_gap": -0.45,
+          "mean_median_diff": -0.1278,
+          "seat_vote_ratio_d": 1.7227
         }
       ]
     },
@@ -1697,6 +2060,17 @@
           "efficiency_gap": 0.028,
           "mean_median_diff": 0.0522,
           "seat_vote_ratio_d": 1.2029
+        },
+        {
+          "year": 2024,
+          "seats": 26,
+          "seats_d": 19,
+          "seats_r": 7,
+          "votes_d": 4330117,
+          "votes_r": 2878543,
+          "efficiency_gap": 0.0182,
+          "mean_median_diff": 0.0006,
+          "seat_vote_ratio_d": 1.2166
         }
       ]
     },
@@ -1747,6 +2121,17 @@
           "efficiency_gap": 0.0499,
           "mean_median_diff": 0.0582,
           "seat_vote_ratio_d": 0.765
+        },
+        {
+          "year": 2024,
+          "seats": 15,
+          "seats_d": 5,
+          "seats_r": 10,
+          "votes_d": 2382078,
+          "votes_r": 3104290,
+          "efficiency_gap": 0.0444,
+          "mean_median_diff": 0.0358,
+          "seat_vote_ratio_d": 0.7677
         }
       ]
     },
@@ -1796,6 +2181,17 @@
           "votes_r": 760639,
           "efficiency_gap": 0.1388,
           "mean_median_diff": -0.0163,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 5,
+          "seats_d": 0,
+          "seats_r": 5,
+          "votes_d": 397856,
+          "votes_r": 834554,
+          "efficiency_gap": 0.1457,
+          "mean_median_diff": -0.0456,
           "seat_vote_ratio_d": 0.0
         }
       ]
@@ -1847,6 +2243,17 @@
           "efficiency_gap": -0.0606,
           "mean_median_diff": 0.0193,
           "seat_vote_ratio_d": 1.2275
+        },
+        {
+          "year": 2024,
+          "seats": 6,
+          "seats_d": 5,
+          "seats_r": 1,
+          "votes_d": 1151394,
+          "votes_r": 912337,
+          "efficiency_gap": -0.2194,
+          "mean_median_diff": 0.0237,
+          "seat_vote_ratio_d": 1.4936
         }
       ]
     },
@@ -1897,6 +2304,17 @@
           "efficiency_gap": -0.0811,
           "mean_median_diff": -0.0373,
           "seat_vote_ratio_d": 1.1165
+        },
+        {
+          "year": 2024,
+          "seats": 17,
+          "seats_d": 8,
+          "seats_r": 9,
+          "votes_d": 3338371,
+          "votes_r": 3285450,
+          "efficiency_gap": 0.0622,
+          "mean_median_diff": 0.0318,
+          "seat_vote_ratio_d": 0.9337
         }
       ]
     },
@@ -1947,6 +2365,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 1.7436
+        },
+        {
+          "year": 2024,
+          "seats": 2,
+          "seats_d": 2,
+          "seats_r": 0,
+          "votes_d": 292791,
+          "votes_r": 180123,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.6152
         }
       ]
     },
@@ -1997,6 +2426,17 @@
           "efficiency_gap": 0.0234,
           "mean_median_diff": -0.044,
           "seat_vote_ratio_d": 0.4346
+        },
+        {
+          "year": 2024,
+          "seats": 7,
+          "seats_d": 1,
+          "seats_r": 6,
+          "votes_d": 964448,
+          "votes_r": 1475329,
+          "efficiency_gap": 0.1699,
+          "mean_median_diff": 0.0157,
+          "seat_vote_ratio_d": 0.3614
         }
       ]
     },
@@ -2047,6 +2487,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": null
+        },
+        {
+          "year": 2024,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 117818,
+          "votes_r": 303630,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
         }
       ]
     },
@@ -2097,6 +2548,17 @@
           "efficiency_gap": 0.1155,
           "mean_median_diff": 0.0376,
           "seat_vote_ratio_d": 0.321
+        },
+        {
+          "year": 2024,
+          "seats": 9,
+          "seats_d": 1,
+          "seats_r": 8,
+          "votes_d": 977870,
+          "votes_r": 1884691,
+          "efficiency_gap": 0.1074,
+          "mean_median_diff": 0.0484,
+          "seat_vote_ratio_d": 0.3253
         }
       ]
     },
@@ -2147,6 +2609,17 @@
           "efficiency_gap": -0.0018,
           "mean_median_diff": 0.049,
           "seat_vote_ratio_d": 0.9238
+        },
+        {
+          "year": 2024,
+          "seats": 38,
+          "seats_d": 14,
+          "seats_r": 24,
+          "votes_d": 4310913,
+          "votes_r": 6024598,
+          "efficiency_gap": 0.0547,
+          "mean_median_diff": 0.0769,
+          "seat_vote_ratio_d": 0.8833
         }
       ]
     },
@@ -2196,6 +2669,17 @@
           "votes_r": 670924,
           "efficiency_gap": 0.1754,
           "mean_median_diff": 0.0002,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 4,
+          "seats_d": 0,
+          "seats_r": 4,
+          "votes_d": 471051,
+          "votes_r": 909332,
+          "efficiency_gap": 0.1825,
+          "mean_median_diff": 0.0052,
           "seat_vote_ratio_d": 0.0
         }
       ]
@@ -2247,6 +2731,17 @@
           "efficiency_gap": -0.0277,
           "mean_median_diff": -0.0352,
           "seat_vote_ratio_d": 0.9644
+        },
+        {
+          "year": 2024,
+          "seats": 11,
+          "seats_d": 5,
+          "seats_r": 6,
+          "votes_d": 2000329,
+          "votes_r": 2108450,
+          "efficiency_gap": 0.0102,
+          "mean_median_diff": -0.0211,
+          "seat_vote_ratio_d": 0.9337
         }
       ]
     },
@@ -2297,6 +2792,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 1.4442
+        },
+        {
+          "year": 2024,
+          "seats": 1,
+          "seats_d": 1,
+          "seats_r": 0,
+          "votes_d": 218398,
+          "votes_r": 0,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 1.0
         }
       ]
     },
@@ -2347,6 +2853,17 @@
           "efficiency_gap": -0.1591,
           "mean_median_diff": -0.0111,
           "seat_vote_ratio_d": 1.3764
+        },
+        {
+          "year": 2024,
+          "seats": 10,
+          "seats_d": 8,
+          "seats_r": 2,
+          "votes_d": 2155907,
+          "votes_r": 1592599,
+          "efficiency_gap": -0.1666,
+          "mean_median_diff": -0.0052,
+          "seat_vote_ratio_d": 1.391
         }
       ]
     },
@@ -2397,6 +2914,17 @@
           "efficiency_gap": 0.0837,
           "mean_median_diff": -0.0204,
           "seat_vote_ratio_d": 0.5952
+        },
+        {
+          "year": 2024,
+          "seats": 8,
+          "seats_d": 2,
+          "seats_r": 6,
+          "votes_d": 1603350,
+          "votes_r": 1701860,
+          "efficiency_gap": 0.2337,
+          "mean_median_diff": 0.055,
+          "seat_vote_ratio_d": 0.5154
         }
       ]
     },
@@ -2447,6 +2975,17 @@
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 2,
+          "seats_d": 0,
+          "seats_r": 2,
+          "votes_d": 200813,
+          "votes_r": 496681,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
         }
       ]
     },
@@ -2494,6 +3033,17 @@
           "seats_r": 1,
           "votes_d": 47250,
           "votes_r": 132206,
+          "efficiency_gap": null,
+          "mean_median_diff": null,
+          "seat_vote_ratio_d": 0.0
+        },
+        {
+          "year": 2024,
+          "seats": 1,
+          "seats_d": 0,
+          "seats_r": 1,
+          "votes_d": 60778,
+          "votes_r": 184680,
           "efficiency_gap": null,
           "mean_median_diff": null,
           "seat_vote_ratio_d": 0.0

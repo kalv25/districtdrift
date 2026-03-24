@@ -439,7 +439,7 @@
     return (gap >= 0 ? '+' : '') + gap.toFixed(1) + '% seat gap';
   }
 
-  const CYCLE_YEARS = [1992, 2002, 2012, 2022];
+  const CYCLE_YEARS = [1992, 2002, 2012, 2022, 2024];
 
   function getCycleHistory(po: string): Array<{ year: number; eg: number | null }> {
     const s = byPo[po];

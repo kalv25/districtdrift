@@ -155,8 +155,8 @@
     statePickerOpen = false;
     if (viewMode === po) return;
     viewMode = po;
-    manualYear = 2022;
-    animTick = CYCLES.indexOf(2022);
+    manualYear = 2024;
+    animTick = CYCLES.indexOf(2024);
     animating = false;
     hoveredYear = null;
     pinnedDistrict = 1;
@@ -167,9 +167,9 @@
     statePickerOpen = false;
   }
 
-  const CYCLES = [1992, 2002, 2012, 2022];
+  const CYCLES = [1992, 2002, 2012, 2022, 2024];
   const YEAR_COLOR: Record<number, string> = {
-    1992: '#CA8A04', 2002: '#0D9488', 2012: '#9333EA', 2022: '#DB2777',
+    1992: '#CA8A04', 2002: '#0D9488', 2012: '#9333EA', 2022: '#DB2777', 2024: '#EA580C',
   };
   const SPEED_SETTINGS = {
     fast:   { interval: 3500,  wipe: 1500 },
@@ -182,8 +182,8 @@
   const FADE_MS = 450;
 
   // manualYear: user's explicit selection; animTick: index cycled by animation
-  let manualYear = $state(2022);
-  let animTick = $state(CYCLES.indexOf(2022));
+  let manualYear = $state(2024);
+  let animTick = $state(CYCLES.indexOf(2024));
   let animating = $state(false);
   let showPrecincts = $state(false);
   let mapComponent: { takeScreenshot: (state: string, year: number) => void } | undefined;
@@ -485,7 +485,7 @@
     _animId = window.setInterval(() => {
       const next = animTick + 1;
       if (next >= CYCLES.length) {
-        // Reached 2022 — auto-stop
+        // Reached last cycle — auto-stop
         animating = false;
         manualYear = CYCLES[CYCLES.length - 1];
       } else {
@@ -585,7 +585,7 @@
       class="nation-yr-btn anim-btn"
       class:playing={animating}
       onclick={toggleAnimation}
-      title={animating ? 'Pause' : selectedYear === Math.max(...CYCLES) ? 'Animate from 1992 (2022 is the latest cycle)' : 'Animate through cycles'}
+      title={animating ? 'Pause' : selectedYear === Math.max(...CYCLES) ? 'Animate from 1992 (2024 is the latest cycle)' : 'Animate through cycles'}
     >{animating ? '⏹' : '▶'}</button>
     <div class="nation-speed-group" role="group" aria-label="Animation speed">
       {#each (['fast', 'normal', 'slow'] as const) as s}
@@ -639,7 +639,7 @@
       class="anim-btn"
       class:playing={animating}
       onclick={toggleAnimation}
-      title={animating ? 'Pause animation' : selectedYear === Math.max(...CYCLES) ? 'Animate from 1992 (2022 is the latest cycle)' : 'Animate through cycles'}
+      title={animating ? 'Pause animation' : selectedYear === Math.max(...CYCLES) ? 'Animate from 1992 (2024 is the latest cycle)' : 'Animate through cycles'}
     >{animating ? '⏹' : '▶'}</button>
   </div>
 {/snippet}
@@ -1299,7 +1299,7 @@
             </div>
             <div class="help-step">
               <span class="step-num">2</span>
-              <div>Step through cycles using the year buttons, or press <strong>▶</strong> to animate 1992 → 2022. As each new cycle arrives, pill overlays appear showing how congressional seats shifted — <Pill party="R">+2R</Pill> means two new Republican seats, <Pill party="D">−1D</Pill> means one fewer Democratic seat.</div>
+              <div>Step through cycles using the year buttons, or press <strong>▶</strong> to animate 1992 → 2024. As each new cycle arrives, pill overlays appear showing how congressional seats shifted — <Pill party="R">+2R</Pill> means two new Republican seats, <Pill party="D">−1D</Pill> means one fewer Democratic seat.</div>
             </div>
             <div class="help-step">
               <span class="step-num">3</span>
@@ -1318,7 +1318,7 @@
           <div class="help-steps">
             <div class="help-step">
               <span class="step-num">1</span>
-              <div><strong>Select a state</strong> from the dropdown in the header to dive into its district map. All 50 states are available across four redistricting cycles: 1992, 2002, 2012, and 2022.</div>
+              <div><strong>Select a state</strong> from the dropdown in the header to dive into its district map. All 50 states are available across five cycles: 1992, 2002, 2012, 2022, and 2024.</div>
             </div>
             <div class="help-step">
               <span class="step-num">2</span>
