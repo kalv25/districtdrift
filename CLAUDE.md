@@ -137,6 +137,7 @@ Outputs (gitignored except web/static files):
   - snap-dl tables: right-aligned values, alternating row shading, ellipsis on long values
   - "Drawn by" field wrapped in `Tooltip` (explains who controlled redistricting)
   - "Eff. gap" field wrapped in `Tooltip` (explains the metric)
+  - Party pill (Democrat/Republican) wrapped in `Tooltip` (explains the election result for that cycle)
 - `Tooltip.svelte`: uses `position:fixed` + `getBoundingClientRect()` to escape `overflow:hidden` panel clipping
 
 #### Sharing + navigation
@@ -144,7 +145,7 @@ Outputs (gitignored except web/static files):
   - Restored on load (takes priority over localStorage)
 - **⤴ Share** button: uses Web Share API on mobile (native share sheet — email, messages, etc.); falls back to clipboard copy on desktop with "✓ Copied" confirmation
 - Dynamic `<title>`: `District Drift — Michigan, 2022, District 3` (descriptive for shared links)
-- "17 of 50 states · more coming" note below state selector (auto-updates from `STATES` object count)
+- "17 of 50 states · more coming" note at the bottom of the state dropdown menu (auto-updates from `STATES` object count)
 
 #### Help modal
 - Dark navy header (`#1a1a2e`) for visual weight
