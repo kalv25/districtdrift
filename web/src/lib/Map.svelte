@@ -4,7 +4,7 @@
   import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, onDistrictClick, onMapClick }: {
+  let { selectedYear = 2022, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022], darkMode = false, showPrecincts = false, onDistrictClick, onMapClick }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;
@@ -12,6 +12,7 @@
     statePo?: string;
     cycleYears?: number[];
     darkMode?: boolean;
+    showPrecincts?: boolean;
     onDistrictClick?: (d: { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number; x: number; y: number }) => void;
     onMapClick?: () => void;
   } = $props();
@@ -104,6 +105,11 @@
   let swingLegendVisible = $state(false);    // $state only for the legend template
 
   let hoveredDistrict = $state<{ district: number | string; won_by: string; x: number; y: number } | null>(null);
+  let hoveredPrecinct = $state<{ pct_d: number | null; d_votes: number; r_votes: number; x: number; y: number } | null>(null);
+
+  // Precinct layer state — plain vars (not $state) to avoid tracking loops
+  let precinctSourceLoaded = false;
+  let precinctSourceState = stateL; // track which state's precincts are loaded
 
   // Legend state (reactive so the overlay updates)
 
@@ -521,6 +527,130 @@
 
   $effect(() => { setYearFilter(selectedYear); });
 
+  // ── Precinct layer ──────────────────────────────────────────────────────────
+
+  const PRECINCT_FILL_COLOR: maplibregl.ExpressionSpecification = [
+    'interpolate', ['linear'],
+    ['coalesce', ['get', 'pct_d'], 0.5],
+    0.0,  '#b91c1c',  // strong R — deep red
+    0.40, '#f87171',  // lean R
+    0.50, '#d1d5db',  // toss-up — neutral gray
+    0.60, '#93c5fd',  // lean D
+    1.0,  '#1d4ed8',  // strong D — deep blue
+  ] as maplibregl.ExpressionSpecification;
+
+  async function loadPrecinctSource(): Promise<void> {
+    if (!map?.isStyleLoaded()) return;
+    const tilesPath = `/tiles/${stateL}_precincts.pmtiles`;
+
+    // Check the file exists (HEAD request) before adding the source
+    try {
+      const check = await fetch(tilesPath, { method: 'HEAD' });
+      if (!check.ok) {
+        console.info(`Precinct tiles not found for ${stateL} — skipping.`);
+        return;
+      }
+    } catch { return; }
+
+    // Use HTTP range requests (not ArrayBuffer preload) for precinct files —
+    // they can be large (5–20 MB) and are only needed when explicitly toggled.
+    if (!map.getSource('state-precincts')) {
+      map.addSource('state-precincts', {
+        type: 'vector',
+        url: `pmtiles://${tilesPath}`,
+      });
+
+      const layerName = `${stateL}_precincts`;
+
+      // Precinct fill — sits between district fill and boundary layers
+      map.addLayer({
+        id: 'precincts-fill',
+        type: 'fill',
+        source: 'state-precincts',
+        'source-layer': layerName,
+        filter: ['==', ['get', 'cycle_year'], selectedYear],
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-color': PRECINCT_FILL_COLOR,
+          'fill-opacity': 0.82,
+        },
+      }, 'swing-fill'); // insert below swing overlay
+
+      // Thin precinct boundary lines for context
+      map.addLayer({
+        id: 'precincts-lines',
+        type: 'line',
+        source: 'state-precincts',
+        'source-layer': layerName,
+        filter: ['==', ['get', 'cycle_year'], selectedYear],
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': 'rgba(0,0,0,0.12)',
+          'line-width': 0.4,
+        },
+      }, 'swing-fill');
+
+      // Precinct hover
+      map.on('mousemove', 'precincts-fill', (e) => {
+        if (!e.features?.length) return;
+        const p = e.features[0].properties;
+        map.getCanvas().style.cursor = 'crosshair';
+        hoveredPrecinct = {
+          pct_d: typeof p?.pct_d === 'number' ? p.pct_d : null,
+          d_votes: p?.d_votes ?? 0,
+          r_votes: p?.r_votes ?? 0,
+          x: e.point.x,
+          y: e.point.y,
+        };
+      });
+      map.on('mouseleave', 'precincts-fill', () => {
+        map.getCanvas().style.cursor = '';
+        hoveredPrecinct = null;
+      });
+    }
+
+    precinctSourceLoaded = true;
+    precinctSourceState = stateL;
+  }
+
+  // Show/hide precinct layer and dim district fill when active
+  $effect(() => {
+    const show = showPrecincts;
+    if (!map?.isStyleLoaded()) return;
+
+    // Reset if state changed since precincts were loaded
+    if (precinctSourceLoaded && precinctSourceState !== stateL) {
+      precinctSourceLoaded = false;
+    }
+
+    if (show) {
+      if (!precinctSourceLoaded) {
+        loadPrecinctSource();
+        return;
+      }
+      if (map.getLayer('precincts-fill')) {
+        map.setLayoutProperty('precincts-fill', 'visibility', 'visible');
+        map.setLayoutProperty('precincts-lines', 'visibility', 'visible');
+        map.setFilter('precincts-fill', ['==', ['get', 'cycle_year'], selectedYear]);
+        map.setFilter('precincts-lines', ['==', ['get', 'cycle_year'], selectedYear]);
+        // Dim district fill so precinct coloring reads clearly
+        map.setPaintProperty('districts-fill-front', 'fill-opacity', 0);
+        map.setPaintProperty('districts-fill-back', 'fill-opacity', 0);
+      }
+    } else {
+      if (map.getLayer('precincts-fill')) {
+        map.setLayoutProperty('precincts-fill', 'visibility', 'none');
+        map.setLayoutProperty('precincts-lines', 'visibility', 'none');
+      }
+      hoveredPrecinct = null;
+      // Restore district fill opacity
+      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
+      const fromYear = chronoPrevYear(selectedYear);
+      if (fromYear !== null)
+        map.setPaintProperty('districts-fill-back', 'fill-opacity', 0.14);
+    }
+  });
+
   // ── Map init ─────────────────────────────────────────────────────────────────
 
   onMount(async () => {
@@ -755,13 +885,38 @@
 <div class="map-wrap">
   <div bind:this={container} class="map-canvas"></div>
 
-  {#if hoveredDistrict}
+  {#if hoveredDistrict && !showPrecincts}
     <div
       class="district-tooltip"
       class:d={hoveredDistrict.won_by === 'D'}
       class:r={hoveredDistrict.won_by === 'R'}
       style="left:{hoveredDistrict.x + 14}px; top:{hoveredDistrict.y}px"
     >District {hoveredDistrict.district}</div>
+  {/if}
+
+  {#if hoveredPrecinct && showPrecincts}
+    {@const pct = hoveredPrecinct.pct_d}
+    {@const tooltipRight = hoveredPrecinct.x > 500}
+    <div
+      class="precinct-tooltip"
+      style="left:{hoveredPrecinct.x + (tooltipRight ? -10 : 14)}px; top:{hoveredPrecinct.y}px; {tooltipRight ? 'transform:translateX(-100%) translateY(calc(-100% - 8px))' : 'transform:translateY(calc(-100% - 8px))'}"
+    >
+      {#if pct !== null}
+        <span class="pt-pct" class:pt-d={pct > 0.5} class:pt-r={pct <= 0.5}>
+          {pct > 0.5 ? 'D' : 'R'} +{Math.round(Math.abs(pct - 0.5) * 200)}%
+        </span>
+      {/if}
+      <span class="pt-votes">{hoveredPrecinct.d_votes.toLocaleString()}D / {hoveredPrecinct.r_votes.toLocaleString()}R</span>
+    </div>
+  {/if}
+
+  {#if showPrecincts}
+    <div class="precinct-legend">
+      <div class="precinct-legend-bar"></div>
+      <div class="precinct-legend-labels">
+        <span>R</span><span>Neutral</span><span>D</span>
+      </div>
+    </div>
   {/if}
 
 </div>
@@ -789,6 +944,52 @@
   }
   .district-tooltip.d { border-left-color: #4a90d9; }
   .district-tooltip.r { border-left-color: #e05c5c; }
+
+  .precinct-tooltip {
+    position: absolute;
+    background: rgba(12, 12, 22, 0.92);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .pt-pct { font-weight: 700; font-size: 0.8rem; }
+  .pt-pct.pt-d { color: #93c5fd; }
+  .pt-pct.pt-r { color: #fca5a5; }
+  .pt-votes { opacity: 0.65; font-size: 0.68rem; }
+
+  .precinct-legend {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    pointer-events: none;
+  }
+  .precinct-legend-bar {
+    width: 180px;
+    height: 9px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #b91c1c, #f87171, #d1d5db, #93c5fd, #1d4ed8);
+  }
+  .precinct-legend-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 180px;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+  }
 
 
   :global(.swing-label) {

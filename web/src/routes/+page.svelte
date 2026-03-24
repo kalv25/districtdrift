@@ -185,6 +185,7 @@
   let manualYear = $state(2022);
   let animTick = $state(CYCLES.indexOf(2022));
   let animating = $state(false);
+  let showPrecincts = $state(false);
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
 
   let hoveredYear = $state<number | null>(null);
@@ -863,7 +864,7 @@
         </div>
       {:else}
         {#key viewMode}
-          <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={0} panelLeft={0} statePo={selectedState} cycleYears={CYCLES} {darkMode} onDistrictClick={(d) => {
+          <Map selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={0} panelLeft={0} statePo={selectedState} cycleYears={CYCLES} {darkMode} {showPrecincts} onDistrictClick={(d) => {
               const dn = Number(d.district);
               if (dn !== pinnedDistrict) districtTab = 'partisan';
               pinnedDistrict = dn;
@@ -871,7 +872,7 @@
         {/key}
       {/if}
 
-      <!-- Floating map controls: layout toggle only (play is in cycle controls) -->
+      <!-- Floating map controls: layout toggle + precinct toggle -->
       {#if viewMode !== 'nation'}
         <div class="map-float-controls">
           <button
@@ -879,6 +880,12 @@
             title={panelLayout === 'vertical' ? 'Switch to bottom panels' : 'Switch to side panels'}
             onclick={() => panelLayout = panelLayout === 'vertical' ? 'horizontal' : 'vertical'}
           >{panelLayout === 'vertical' ? '⬇' : '➡'}</button>
+          <button
+            class="map-float-btn"
+            class:active={showPrecincts}
+            title={showPrecincts ? 'Hide precinct vote map' : 'Show precinct vote map'}
+            onclick={() => showPrecincts = !showPrecincts}
+          >P</button>
         </div>
       {/if}
     </div>
@@ -1642,6 +1649,7 @@
   }
   .map-float-btn:hover { background: var(--surface-2); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
   .map-float-btn.playing { color: var(--accent, #4a90d9); }
+  .map-float-btn.active { color: var(--accent, #4a90d9); background: var(--surface-2); }
 
   main { flex: 1; display: flex; flex-direction: row; min-height: 0; }
   main.ph { flex-direction: column; }
