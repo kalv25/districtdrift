@@ -8,6 +8,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 			const token = (data.get('cf-turnstile-response') as string) || '';
 			const state = (data.get('state') as string) || '';
+			const year = (data.get('year') as string) || '';
 			const role = (data.get('role') as string) || '';
 			const message = (data.get('message') as string) || '';
 			const email = (data.get('email') as string) || '';
@@ -40,7 +41,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 			// Build plain-text email body
 			const lines = [
-				state ? `State visited: ${state}` : null,
+				state ? `State visited: ${state}${year ? ` (${year})` : ''}` : null,
 				`Role: ${role || 'Not specified'}`,
 				'',
 				message,

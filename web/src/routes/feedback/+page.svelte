@@ -1,5 +1,10 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	const SITE_KEY = '0x4AAAAAACvo9eAug0OpeMuc';
+
+	const prefillState = $page.url.searchParams.get('state') ?? '';
+	const prefillYear = $page.url.searchParams.get('year') ?? '';
 
 	const STATES = [
 		'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
@@ -69,12 +74,13 @@
 			</div>
 		{:else}
 			<form onsubmit={handleSubmit}>
+				{#if prefillYear}<input type="hidden" name="year" value={prefillYear} />{/if}
 				<div class="field">
 					<label for="state">State visited <span class="optional">optional</span></label>
 					<select id="state" name="state">
 						<option value="">— select a state —</option>
 						{#each STATES as s}
-							<option value={s}>{s}</option>
+							<option value={s} selected={s === prefillState}>{s}</option>
 						{/each}
 					</select>
 				</div>
