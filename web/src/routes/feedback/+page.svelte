@@ -99,7 +99,7 @@
 					<input type="email" id="email" name="email" placeholder="you@example.com" />
 				</div>
 
-				<div class="cf-turnstile" data-sitekey={SITE_KEY}></div>
+				<div class="cf-turnstile" data-sitekey={SITE_KEY} data-appearance="interaction-only"></div>
 
 				{#if error}
 					<p class="error-msg">{error}</p>
