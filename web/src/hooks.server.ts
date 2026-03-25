@@ -1,4 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	if (event.url.pathname === '/feedback-submit' && event.request.method === 'POST') {
@@ -18,8 +19,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 				});
 			}
 
-			const env = event.platform?.env;
-			if (!env?.TURNSTILE_SECRET_KEY || !env?.RESEND_API_KEY) {
+			const turnstileSecret = env.TURNSTILE_SECRET_KEY;
+			const resendKey = env.RESEND_API_KEY;
+			if (!turnstileSecret || !resendKey) {
 				return new Response(JSON.stringify({ error: 'Server configuration error.' }), {
 					status: 500,
 					headers: { 'Content-Type': 'application/json' }
@@ -30,7 +32,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			const tv = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: token })
+				body: JSON.stringify({ secret: turnstileSecret, response: token })
 			});
 			const tvData = (await tv.json()) as { success: boolean };
 			if (!tvData.success) {
@@ -53,7 +55,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${env.RESEND_API_KEY}`
+					Authorization: `Bearer ${resendKey}`
 				},
 				body: JSON.stringify({
 					from: 'feedback@districtdrift.org',
