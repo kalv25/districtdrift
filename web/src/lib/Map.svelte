@@ -753,7 +753,8 @@
     resizeObserver = new ResizeObserver(() => fitToState());
     resizeObserver.observe(container);
 
-    map.addControl(new maplibregl.NavigationControl(), 'top-right');
+    if (!window.matchMedia('(max-width: 640px)').matches)
+      map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
     map.on('load', () => {
       map.addSource('state-districts', {

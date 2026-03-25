@@ -2945,8 +2945,8 @@
       color: #fff;
     }
 
-    /* Map fills the full main area — panels overlay it */
-    main { position: relative; flex-direction: row; }
+    /* Map fills the full main area */
+    main { flex-direction: row; }
     .map-wrap { flex: 1; }
 
     /* Hide all floating map controls on mobile (replaced by chrome + layer toggle) */
@@ -2957,45 +2957,55 @@
     /* State floating cycle bar: hidden on mobile (shown in chrome above) */
     .state-cycle-bar { display: none; }
 
-    /* Panel as translucent overlay bottom sheet */
+    /* Panel: floating translucent card fixed to viewport bottom */
     .panel-group {
-      position: absolute !important;
-      bottom: 0 !important; left: 0 !important; right: 0 !important;
-      width: 100% !important;
+      position: fixed !important;
+      bottom: 0.75rem !important;
+      left: 0.75rem !important;
+      right: 0.75rem !important;
+      width: auto !important;
       height: auto !important;
-      max-height: 48vh !important;
-      overflow-y: hidden !important;
+      max-height: 42vh !important;
+      overflow: hidden !important;
       flex-direction: column !important;
-      border-left-width: 0 !important;
-      border-top-width: 1px !important;
+      border: none !important;
       background: var(--surface-tl) !important;
       backdrop-filter: blur(14px) !important;
       -webkit-backdrop-filter: blur(14px) !important;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.22) !important;
       z-index: 25 !important;
-      border-radius: 12px 12px 0 0;
+      border-radius: 12px !important;
       transform: translateY(0);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .panel-group.panel-closed {
-      transform: translateY(105%);
+      transform: translateY(calc(100% + 1rem));
       pointer-events: none;
     }
     /* Hide divider between state and district panels on mobile */
     .panel-group .panel-divider { display: none !important; }
     /* Hide district panel on mobile — state panel only */
     .panel-district { display: none !important; }
-    .panel { flex: none !important; max-height: none !important; overflow: visible !important; }
+    /* State panel fills the group and clips overflow */
+    .panel-state.panel { flex: 1 !important; min-height: 0 !important; max-height: none !important; overflow: hidden !important; }
     .panel-resize-handle { display: none !important; }
 
     /* Hide in-panel snap nav — external section nav row serves this role */
     .snap-nav { display: none !important; }
 
-    /* Cards fill full panel width so snapping shows one at a time */
-    .snap-cards-state .snap-card { width: 100%; }
-    .snap-cards-state { padding: 0.5rem; }
-
-    /* Panel header bar (district panel) — also hidden above, but just in case */
-    .panel-header { border-radius: 12px 12px 0 0; }
+    /* Snap cards: horizontal snap, fill panel height so card content can scroll */
+    .snap-cards-state {
+      padding: 0.5rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      height: 100%;
+    }
+    .snap-cards-state .snap-card {
+      width: 100%;
+      flex-shrink: 0;
+      overflow-y: auto;
+      max-height: none;
+    }
 
     /* Cycle buttons: hide seat counts */
     .btn-d-delta, .btn-r-delta { display: none !important; }
