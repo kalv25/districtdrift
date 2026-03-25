@@ -1604,7 +1604,7 @@
     color-scheme: light;
     --bg: #f5f5f3;
     --surface: #fff;
-    --surface-tl: rgba(255, 255, 255, 0.93);
+    --surface-tl: rgba(255, 255, 255, 0.86);
     --surface-2: #f7f7f7;
     --border: #e0e0e0;
     --border-dim: #eee;
@@ -1632,7 +1632,7 @@
     color-scheme: dark;
     --bg: #0e0e1c;
     --surface: #181828;
-    --surface-tl: rgba(24, 24, 40, 0.93);
+    --surface-tl: rgba(24, 24, 40, 0.86);
     --surface-2: #141428;
     --border: #2e2e48;
     --border-dim: #242440;
@@ -2960,7 +2960,7 @@
     /* Panel: floating translucent card fixed to viewport bottom */
     .panel-group {
       position: fixed !important;
-      bottom: 0.75rem !important;
+      bottom: 2.5rem !important;
       left: 0.75rem !important;
       right: 0.75rem !important;
       width: auto !important;
@@ -2972,14 +2972,20 @@
       background: var(--surface-tl) !important;
       backdrop-filter: blur(14px) !important;
       -webkit-backdrop-filter: blur(14px) !important;
-      box-shadow: 0 4px 28px rgba(0,0,0,0.22) !important;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.18) !important;
       z-index: 25 !important;
       border-radius: 12px !important;
+      mask-image: linear-gradient(to right, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent),
+                  linear-gradient(to bottom, transparent, black 0.75rem, black calc(100% - 0.75rem), transparent);
+      mask-composite: intersect;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent),
+                          linear-gradient(to bottom, transparent, black 0.75rem, black calc(100% - 0.75rem), transparent);
+      -webkit-mask-composite: source-in;
       transform: translateY(0);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .panel-group.panel-closed {
-      transform: translateY(calc(100% + 1rem));
+      transform: translateY(calc(100% + 3rem));
       pointer-events: none;
     }
     /* Hide divider between state and district panels on mobile */
