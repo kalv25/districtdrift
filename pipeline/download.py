@@ -262,17 +262,22 @@ def download_mit_elections() -> None:
 RDH_LIST_URL = "https://redistrictingdatahub.org/wp-json/download/list"
 RAW_PRECINCTS = RAW / "precincts"
 
-# VEST cycle years and the election-year keywords to search for each
-_VEST_CYCLES: dict[int, str] = {
-    2012: "2012",
-    2022: "2022",
+# Redistricting cycle → ordered list of election years to try (best → fallback).
+# Mirrors CYCLE_TO_ELEC_YEARS in precinct.py.
+_VEST_FALLBACKS: dict[int, list[str]] = {
+    2012: ["2012", "2014", "2016"],
+    2022: ["2022", "2020"],
 }
 
 
 def _rdh_find_vest(
     username: str, password: str, state_name: str, elec_year: str
 ) -> str | None:
-    """Return the download URL for a state's VEST precinct shapefile, or None."""
+    """Return the download URL for a VEST SHP matching state + year, or None.
+
+    Dataset titles follow: "VEST {year} {State} precinct and election results"
+    Keywords are AND-matched against title+format (case-insensitive).
+    """
     import io as _io
     import pandas as _pd
 
@@ -281,51 +286,59 @@ def _rdh_find_vest(
         "password": password,
         "format": "csv",
         "states": state_name.lower(),
-        "keywords": f"election results, precinct, {elec_year}, shp",
+        "keywords": f"VEST {elec_year}",
     }
     resp = requests.get(RDH_LIST_URL, params=params, timeout=30)
     resp.raise_for_status()
     df = _pd.read_csv(_io.StringIO(resp.content.decode("utf-8")))
     if df.empty or "URL" not in df.columns:
         return None
-    # Prefer files whose title contains the election year to avoid wrong-year matches
-    if "Title" in df.columns:
-        title_col = df["Title"].astype(str)
-    elif "title" in df.columns:
-        title_col = df["title"].astype(str)
-    else:
-        title_col = _pd.Series([""] * len(df), dtype=str)
-    matches = df[title_col.str.contains(elec_year, na=False)]
-    row = matches.iloc[0] if not matches.empty else df.iloc[0]
-    return str(row["URL"])
+    # Keep only SHP rows
+    fmt_col = df["Format"].astype(str) if "Format" in df.columns else _pd.Series([""] * len(df), dtype=str)
+    shp = df[fmt_col.str.upper() == "SHP"]
+    if shp.empty:
+        return None
+    return str(shp.iloc[0]["URL"])
 
 
 def download_rdh_precincts(
     username: str, password: str, states_to_download: dict[str, dict[str, object]]
 ) -> None:
-    """Download RDH VEST precinct shapefiles for all requested states × cycles."""
+    """Download RDH VEST precinct shapefiles for all requested states × cycles.
+
+    Tries each election year in _VEST_FALLBACKS order and stops at the first
+    year found in the RDH catalog (e.g. 2022 → fall back to 2020 if unavailable).
+    """
     RAW_PRECINCTS.mkdir(parents=True, exist_ok=True)
     for state_key, state_cfg in states_to_download.items():
         state_name = str(state_cfg["name"])
         state_dir = RAW_PRECINCTS / state_key.lower()
         state_dir.mkdir(exist_ok=True)
-        for cycle_year, elec_year in _VEST_CYCLES.items():
+        for cycle_year, elec_years in _VEST_FALLBACKS.items():
             dest = state_dir / f"{cycle_year}.zip"
             if dest.exists():
                 print(f"  {state_key} {cycle_year} VEST already present, skipping.")
                 continue
-            print(f"  Looking up {state_name} {cycle_year} VEST shapefile...")
-            url = _rdh_find_vest(username, password, state_name, elec_year)
-            if url is None:
-                print(f"  WARNING: no VEST shapefile found for {state_name} {cycle_year}.")
+            url: str | None = None
+            found_year: str | None = None
+            for elec_year in elec_years:
+                print(f"  Looking up {state_name} VEST {elec_year}...")
+                url = _rdh_find_vest(username, password, state_name, elec_year)
+                if url:
+                    found_year = elec_year
+                    break
+            if url is None or found_year is None:
+                print(f"  WARNING: no VEST shapefile found for {state_name} (tried {elec_years}).")
                 continue
-            # Re-request with clean credentials (strip any embedded params from URL)
+            if found_year != str(elec_years[0]):
+                print(f"  NOTE: using {found_year} as fallback for {cycle_year} cycle.")
+            # Strip any embedded params; re-issue with clean credentials + datasetid
             base = url.split("?")[0]
             dataset_id = url.split("datasetid=")[-1].split("&")[0] if "datasetid=" in url else ""
             dl_params: dict[str, str] = {"username": username, "password": password}
             if dataset_id:
                 dl_params["datasetid"] = dataset_id
-            print(f"  Downloading {state_name} {cycle_year} VEST...")
+            print(f"  Downloading {state_name} {cycle_year} VEST (election year {found_year})...")
             resp = requests.get(base, params=dl_params, timeout=120)
             resp.raise_for_status()
             with open(dest, "wb") as fh:
