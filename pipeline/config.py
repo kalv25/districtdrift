@@ -426,8 +426,8 @@ STATES: dict[str, dict[str, Any]] = {
                 "notes": "Governor Brian Kemp (R) and Republican legislature drew maps maintaining a 9-5 Republican delegation; Pendergrass v. Raffensperger challenged the maps as packing Black voters in violation of VRA Section 2; court ordered remedial maps for 2024 elections",
             },
             2024: {
-                "congress": 118,
-                "shapefile_id": "us_cd118th_2022_tl2022",
+                "congress": 119,
+                "shapefile_id": "us_cd119th_2024_tl2024",
                 "seats": 14,
                 "redistricting_controller": "Republican",
                 "notes": "2024 elections held under court-ordered remedial maps in Pendergrass v. Raffensperger; a second majority-Black district (GA-6, redrawn) was required, shifting one seat from Republican to Democratic",
@@ -719,8 +719,8 @@ STATES: dict[str, dict[str, Any]] = {
                 "notes": "Harper v. Hall: NC Supreme Court struck maps, then reversed after court composition changed; new maps enacted 2023",
             },
             2024: {
-                "congress": 118,
-                "shapefile_id": "us_cd118th_2022_tl2022",
+                "congress": 119,
+                "shapefile_id": "us_cd119th_2024_tl2024",
                 "seats": 14,
                 "redistricting_controller": "Republican",
                 "notes": "2024 elections held under new maps redrawn by the Republican legislature in 2023 after the NC Supreme Court reversed its own decision in Harper v. Hall; the new maps were significantly more Republican-favorable, producing an 11-3 Republican delegation",
@@ -761,8 +761,8 @@ STATES: dict[str, dict[str, Any]] = {
                 "notes": "Governor Ivey (R) and Republican legislature drew maps keeping one majority-Black district despite Black residents comprising 27% of the population. Allen v. Milligan (2023): SCOTUS ruled 5-4 that the maps violated VRA Section 2 by failing to draw a second district where Black voters could elect a preferred candidate; remedial maps ordered for 2024 produced a second majority-Black seat.",
             },
             2024: {
-                "congress": 118,
-                "shapefile_id": "us_cd118th_2022_tl2022",
+                "congress": 119,
+                "shapefile_id": "us_cd119th_2024_tl2024",
                 "seats": 7,
                 "redistricting_controller": "Republican",
                 "notes": "2024 elections held under VRA remedial maps ordered by federal court in Allen v. Milligan (2023); a second majority-Black district was drawn, producing a 6-1 Republican delegation with 2 majority-Black seats",
@@ -845,8 +845,8 @@ STATES: dict[str, dict[str, Any]] = {
                 "notes": "Governor Edwards (D) vetoed Republican maps that contained only one majority-Black district despite Black residents comprising 33% of the population; the Republican supermajority legislature overrode the veto. Robinson v. Ardoin: federal court ruled the maps violated VRA Section 2; a remedial map with two majority-Black districts was ordered for 2024.",
             },
             2024: {
-                "congress": 118,
-                "shapefile_id": "us_cd118th_2022_tl2022",
+                "congress": 119,
+                "shapefile_id": "us_cd119th_2024_tl2024",
                 "seats": 6,
                 "redistricting_controller": "Republican (veto override)",
                 "notes": "2024 elections held under court-ordered remedial maps in Robinson v. Ardoin; a second majority-Black district was drawn along the Mississippi River corridor, producing a 5-1 Republican delegation with 2 majority-Black seats",

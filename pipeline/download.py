@@ -174,6 +174,39 @@ def download_nhgis_boundaries(api_key: str, shapefile_ids: list[str]) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Census TIGER — congressional district boundaries (congress ≥ 119)
+# NHGIS lags on new Congress shapefiles; TIGER is available immediately.
+# ---------------------------------------------------------------------------
+
+# Map congress number → Census TIGER ZIP URL.
+# Add new entries here as each new Congress is certified.
+_TIGER_CD_URLS: dict[int, str] = {
+    119: "https://www2.census.gov/geo/tiger/TIGER2024/CD/tl_2024_us_cd119.zip",
+}
+
+
+def download_tiger_boundaries(congress_numbers: list[int]) -> None:
+    """Download Census TIGER congressional district shapefiles."""
+    BOUNDARIES_DIR.mkdir(parents=True, exist_ok=True)
+    for congress in congress_numbers:
+        dst_dir = BOUNDARIES_DIR / f"cd{congress}"
+        if dst_dir.exists():
+            print(f"  cd{congress} already present, skipping.")
+            continue
+        url = _TIGER_CD_URLS.get(congress)
+        if url is None:
+            print(f"  WARNING: no Census TIGER URL configured for congress {congress}.")
+            continue
+        print(f"  Downloading cd{congress} from Census TIGER...")
+        resp = requests.get(url, stream=True, timeout=120)
+        resp.raise_for_status()
+        dst_dir.mkdir()
+        with zipfile.ZipFile(io.BytesIO(resp.content)) as zf:
+            zf.extractall(dst_dir)
+        print(f"  Extracted cd{congress} → {dst_dir}")
+
+
+# ---------------------------------------------------------------------------
 # MIT Election Lab — US House returns 1976–2024
 # ---------------------------------------------------------------------------
 
@@ -236,33 +269,49 @@ def main() -> None:
     else:
         states_to_download = STATES
 
-    # Collect unique shapefile IDs across all requested states
-    shapefile_ids = list({
+    # Collect unique shapefile IDs and congress numbers across all requested states
+    all_shapefile_ids = {
         meta["shapefile_id"]
         for state in states_to_download.values()
         for meta in state["cycles"].values()
-    })
+    }
+    all_congress_numbers = {
+        meta["congress"]
+        for state in states_to_download.values()
+        for meta in state["cycles"].values()
+    }
+
+    # Route: congress ≥ 119 → Census TIGER; older → NHGIS
+    tiger_congresses = sorted(c for c in all_congress_numbers if c >= 119)
+    nhgis_ids = [sid for sid in all_shapefile_ids
+                 if (_congress_from_shapefile_id(sid) or 0) < 119]
 
     state_names = ", ".join(s["name"] for s in states_to_download.values())
     print(f"=== Downloading redistricting data ({state_names}) ===\n")
 
-    # --- Congressional district boundaries (NHGIS) ---
-    load_dotenv()
-    api_key = os.getenv("NHGIS_API_KEY", "").strip()
-    if not api_key:
-        print(
-            "ERROR: Set NHGIS_API_KEY environment variable.\n"
-            "  Get a free key at https://account.ipums.org/api_keys\n"
-            "  Then run: NHGIS_API_KEY=your_key python -m pipeline.download"
-        )
-        sys.exit(1)
+    # --- Congressional district boundaries (NHGIS, congress ≤ 118) ---
+    if nhgis_ids:
+        load_dotenv()
+        api_key = os.getenv("NHGIS_API_KEY", "").strip()
+        if not api_key:
+            print(
+                "ERROR: Set NHGIS_API_KEY environment variable.\n"
+                "  Get a free key at https://account.ipums.org/api_keys\n"
+                "  Then run: NHGIS_API_KEY=your_key python -m pipeline.download"
+            )
+            sys.exit(1)
+        print(f"  API key loaded: {len(api_key)} chars, starts with '{api_key[:4]}...'")
+        print(f"[1/3] Congressional district boundaries (NHGIS) — {len(nhgis_ids)} shapefiles...")
+        download_nhgis_boundaries(api_key, nhgis_ids)
 
-    print(f"  API key loaded: {len(api_key)} chars, starts with '{api_key[:4]}...'")
-    print(f"[1/2] Congressional district boundaries (NHGIS) — {len(shapefile_ids)} shapefiles...")
-    download_nhgis_boundaries(api_key, shapefile_ids)
+    # --- Congressional district boundaries (Census TIGER, congress ≥ 119) ---
+    if tiger_congresses:
+        step = "2" if nhgis_ids else "1"
+        print(f"\n[{step}/3] Congressional district boundaries (Census TIGER) — congress {tiger_congresses}...")
+        download_tiger_boundaries(tiger_congresses)
 
     # --- Election returns (MIT Election Lab) ---
-    print("\n[2/2] US House election returns (MIT Election Lab)...")
+    print("\n[3/3] US House election returns (MIT Election Lab)...")
     download_mit_elections()
 
     print("\nAll downloads complete.")
