@@ -543,17 +543,25 @@
     if (!map?.isStyleLoaded()) return;
     const tilesPath = `/tiles/${stateL}_precincts.pmtiles`;
 
-    // Check the file exists (HEAD request) before adding the source
+    // Preload as ArrayBuffer — Cloudflare Pages doesn't serve range requests
+    // with proper Content-Length, so pmtiles:// URL alone won't work.
+    // Fetch the full file on first toggle and serve it from memory.
     try {
-      const check = await fetch(tilesPath, { method: 'HEAD' });
-      if (!check.ok) {
+      const resp = await fetch(tilesPath);
+      if (!resp.ok) {
         console.info(`Precinct tiles not found for ${stateL} — skipping.`);
         return;
       }
+      const buf = await resp.arrayBuffer();
+      const bufferSource = {
+        getKey: () => tilesPath,
+        getBytes: async (offset: number, length: number) => ({
+          data: buf.slice(offset, offset + length) as ArrayBuffer,
+        }),
+      };
+      protocol.add(new PMTiles(bufferSource as any));
     } catch { return; }
 
-    // Use HTTP range requests (not ArrayBuffer preload) for precinct files —
-    // they can be large (5–20 MB) and are only needed when explicitly toggled.
     if (!map.getSource('state-precincts')) {
       map.addSource('state-precincts', {
         type: 'vector',
