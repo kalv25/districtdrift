@@ -666,33 +666,34 @@
               {@const labelX    = pillX + pH + arCharW + 3}
               {@const egX       = labelX + lblW + 4}
 
-              <!-- Pill background -->
-              <rect
-                x={pillX} y={pillY} width={pillW} height={pillH}
-                fill="rgba(255,255,255,0.9)" rx={pillH / 2}
-                stroke="rgba(0,0,0,0.09)" stroke-width="0.5"
-                opacity={localT} pointer-events="none"
-              />
-              <!-- Arrow character -->
-              <text x={arCharX} y={pillCy}
-                text-anchor="middle" dominant-baseline="middle"
-                font-size={arFS} font-weight="900"
-                fill={color} opacity={localT} pointer-events="none"
-              >{arChar}</text>
-              <!-- Primary: state abbrev + seat/EG delta -->
-              <text x={labelX} y={pillCy}
-                text-anchor="start" dominant-baseline="middle"
-                font-size={lblFS} font-weight="700"
-                fill={color} opacity={localT} pointer-events="none"
-              >{labelTxt}</text>
-              <!-- Subtle EG delta suffix — only when seat change is primary -->
-              {#if useSeat}
-                <text x={egX} y={pillCy}
+              <g opacity={localT} pointer-events="none">
+                <!-- Pill background -->
+                <rect
+                  x={pillX} y={pillY} width={pillW} height={pillH}
+                  fill="rgba(255,255,255,0.97)" rx={pillH / 2}
+                  stroke="rgba(0,0,0,0.12)" stroke-width="0.5"
+                />
+                <!-- Arrow character -->
+                <text x={arCharX} y={pillCy}
+                  text-anchor="middle" dominant-baseline="middle"
+                  font-size={arFS} font-weight="900"
+                  fill={color}
+                >{arChar}</text>
+                <!-- Primary: state abbrev + seat/EG delta -->
+                <text x={labelX} y={pillCy}
                   text-anchor="start" dominant-baseline="middle"
-                  font-size={egFS} font-weight="400"
-                  fill={color} opacity={localT * 0.65} pointer-events="none"
-                >{egStr}</text>
-              {/if}
+                  font-size={lblFS} font-weight="700"
+                  fill={color}
+                >{labelTxt}</text>
+                <!-- Subtle EG delta suffix — only when seat change is primary -->
+                {#if useSeat}
+                  <text x={egX} y={pillCy}
+                    text-anchor="start" dominant-baseline="middle"
+                    font-size={egFS} font-weight="400"
+                    fill={color} opacity="0.65"
+                  >{egStr}</text>
+                {/if}
+              </g>
             {/if}
           {/if}
         {/each}
