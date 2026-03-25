@@ -200,7 +200,7 @@
     const prev = sorted[sorted.length - 2];
     if (!latest) return 1;
     if (!prev) return latest.districts[0]?.district ?? 1;
-    const prevMap = new Map(prev.districts.map((d: any) => [d.district, d]));
+    const prevMap: globalThis.Map<number, any> = new globalThis.Map(prev.districts.map((d: any): [number, any] => [d.district, d]));
     let best = latest.districts[0]?.district ?? 1;
     let bestDelta = 0;
     for (const d of latest.districts) {
@@ -494,7 +494,7 @@
   $effect(() => { loadStats(selectedState); });
 
   // animTick is the only thing that changes in the interval — avoids writing $state from async
-  let _animId: ReturnType<typeof setInterval> | null = null;
+  let _animId: number | null = null;
   $effect(() => {
     if (_animId) { clearInterval(_animId); _animId = null; }
     if (!animating) return;
@@ -702,7 +702,7 @@
     {@const won_by = pinnedDistData?.won_by ?? ''}
     {@const hasDemog = pinnedDistData?.population != null}
     {@const leanDelta = (pinnedDistData?.partisan_lean_d ?? null) != null && (prevDistData?.partisan_lean_d ?? null) != null
-      ? pinnedDistData!.partisan_lean_d - prevDistData!.partisan_lean_d : null}
+      ? pinnedDistData!.partisan_lean_d! - prevDistData!.partisan_lean_d! : null}
     {@const cardAlphaD = leanDelta != null && leanDelta > 0 ? Math.min(leanDelta * 3.0, 0.32) : 0.04}
     {@const cardAlphaR = leanDelta != null && leanDelta < 0 ? Math.min(-leanDelta * 3.0, 0.32) : 0.04}
     <div class="district-card" class:d={won_by === 'D'} class:r={won_by === 'R'}

@@ -699,7 +699,7 @@
         padding: { top: 30, right: 30, bottom: panelBottom > 0 ? panelBottom + 20 : 30, left: panelLeft > 0 ? panelLeft + 20 : 30 },
       },
       preserveDrawingBuffer: true,
-    });
+    } as maplibregl.MapOptions & { preserveDrawingBuffer: boolean });
 
     // Refit whenever the canvas changes size (panel toggle, window resize).
     resizeObserver = new ResizeObserver(() => fitToState());

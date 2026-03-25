@@ -40,7 +40,7 @@
 <svg width="95%" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Seat and vote share comparison">
   <title>Seat and vote share comparison</title>
   <!-- Vote share row -->
-  <text x={0} y={row1Label} font-size="9" fill="#888" font-weight="600" text-transform="uppercase" letter-spacing="0.5">VOTES</text>
+  <text x={0} y={row1Label} font-size="9" fill="#888" font-weight="600" style="text-transform: uppercase" letter-spacing="0.5">VOTES</text>
   <rect x={0} y={row1Bar} width={W * $vShare} height={barH} fill="#4a90d9" rx="2" />
   <rect x={W * $vShare} y={row1Bar} width={W * (1 - $vShare)} height={barH} fill="#e05c5c" rx="2" />
   <text x={W * $vShare / 2} y={row1Bar + barH / 2} dominant-baseline="middle"

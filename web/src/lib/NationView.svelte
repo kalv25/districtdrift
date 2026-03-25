@@ -187,6 +187,8 @@
     return byPo[po]?.cycles.find(c => c.year === selectedYear) ?? null;
   }
 
+  const CYCLE_YEARS = [1992, 2002, 2012, 2022, 2024];
+
   // ── National totals ───────────────────────────────────────────────────────────
 
   const nationalTotals = $derived((() => {
@@ -492,8 +494,6 @@
     const gap = (seatShareD - voteShareD) * 100;
     return (gap >= 0 ? '+' : '') + gap.toFixed(1) + '% seat gap';
   }
-
-  const CYCLE_YEARS = [1992, 2002, 2012, 2022, 2024];
 
   function getCycleHistory(po: string): Array<{ year: number; eg: number | null }> {
     const s = byPo[po];
