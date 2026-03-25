@@ -227,7 +227,7 @@ def process_cycle(
 
     gdf = gdf.merge(results, on="district", how="left")
 
-    print(f"  Computing compactness scores...")
+    print("  Computing compactness scores...")
     gdf_proj = gdf.to_crs(state_crs)
     gdf["polsby_popper"] = gdf_proj.geometry.apply(
         lambda geom: (4 * math.pi * geom.area) / (geom.length ** 2)

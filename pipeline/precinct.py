@@ -190,7 +190,7 @@ def run_tippecanoe_precincts(input_path: Path, output_path: Path, layer_name: st
         f"--layer={layer_name}",
         str(input_path),
     ]
-    print(f"  Running tippecanoe...")
+    print("  Running tippecanoe...")
     result = subprocess.run(cmd, capture_output=False)
     if result.returncode != 0:
         print(f"ERROR: tippecanoe failed (exit {result.returncode})")

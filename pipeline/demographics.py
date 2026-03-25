@@ -494,7 +494,7 @@ def parse_edu_1990(df: pd.DataFrame) -> pd.Series:
     cols_needed = [f"{code}{str(i).zfill(3)}" for i in range(1, 8)]
     present = [c for c in cols_needed if c in df.columns]
     if not present:
-        print(f"    WARNING: no E33 columns found.")
+        print("    WARNING: no E33 columns found.")
         return pd.Series([None] * len(df), index=df.index)
 
     def row_to_edu(row: pd.Series) -> float | None:
@@ -767,7 +767,7 @@ def load_and_filter_csv_df(df: pd.DataFrame, state_fips: str) -> pd.DataFrame:
     # Prefer STATEA (NHGIS FIPS column) over STATE (name) over STATEFP
     state_col = col_map.get("STATEA") or col_map.get("STATEFP") or col_map.get("STATE")
     if state_col is None:
-        print(f"    WARNING: no state column found. Filtering skipped.")
+        print("    WARNING: no state column found. Filtering skipped.")
         return df
     return cast(pd.DataFrame, df[df[state_col].astype(str).str.zfill(2) == state_fips.zfill(2)].copy())
 
@@ -893,7 +893,8 @@ def main() -> None:
             )
         except (SystemExit, Exception) as exc:
             print(f"  ERROR fetching demographics for {cycle_year}: {exc}")
-            import traceback; traceback.print_exc()
+            import traceback
+            traceback.print_exc()
             continue
 
         # Compute cycle-level aggregates

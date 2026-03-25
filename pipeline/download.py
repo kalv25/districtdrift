@@ -20,15 +20,12 @@ import os
 import re
 import sys
 import time
-from typing import Any
-
-from dotenv import load_dotenv
-
-load_dotenv()
 import zipfile
 from pathlib import Path
+from typing import Any
 
 import requests
+from dotenv import load_dotenv
 
 from .config import (
     MIT_ELECTIONS_DOI,
@@ -162,7 +159,7 @@ def download_nhgis_boundaries(api_key: str, shapefile_ids: list[str]) -> None:
     extract_id = submit_nhgis_extract(api_key, shapefile_ids)
     download_url = wait_for_nhgis_extract(api_key, extract_id)
 
-    print(f"  Downloading boundaries ZIP from NHGIS...")
+    print("  Downloading boundaries ZIP from NHGIS...")
     resp = requests.get(download_url, headers=_nhgis_headers(api_key),
                         stream=True, timeout=120)
     resp.raise_for_status()
@@ -203,7 +200,7 @@ def download_mit_elections() -> None:
     ELECTIONS_DIR.mkdir(parents=True, exist_ok=True)
     dest = ELECTIONS_DIR / MIT_ELECTIONS_FILENAME
     if dest.exists():
-        print(f"  MIT elections CSV already present, skipping.")
+        print("  MIT elections CSV already present, skipping.")
         return
 
     print(f"  Looking up {MIT_ELECTIONS_FILENAME} in Harvard Dataverse...")
@@ -250,6 +247,7 @@ def main() -> None:
     print(f"=== Downloading redistricting data ({state_names}) ===\n")
 
     # --- Congressional district boundaries (NHGIS) ---
+    load_dotenv()
     api_key = os.getenv("NHGIS_API_KEY", "").strip()
     if not api_key:
         print(
