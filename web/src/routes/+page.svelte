@@ -464,6 +464,13 @@
   function onStateScrollEnd(e: Event) { stateCardIdx = snapIdx(e.target as HTMLElement); }
   function onDistScrollEnd(e: Event)  { distCardIdx  = snapIdx(e.target as HTMLElement); }
 
+  function snapKeydown(e: KeyboardEvent, el: HTMLElement | null, idx: number, count: number) {
+    const fwd  = panelLayout === 'vertical' ? ['ArrowDown', 'ArrowRight'] : ['ArrowRight'];
+    const back = panelLayout === 'vertical' ? ['ArrowUp',   'ArrowLeft']  : ['ArrowLeft'];
+    if (fwd.includes(e.key) && idx < count - 1)  { e.preventDefault(); jumpToCard(el, idx + 1); }
+    if (back.includes(e.key) && idx > 0)          { e.preventDefault(); jumpToCard(el, idx - 1); }
+  }
+
   function jumpToCard(el: HTMLElement | null, idx: number) {
     if (!el) return;
     const cards = Array.from(el.querySelectorAll<HTMLElement>(':scope > .snap-card'));
@@ -972,7 +979,9 @@
                 {/each}
               </nav>
             {/if}
-            <div class="snap-cards snap-cards-state" bind:this={stateCardsEl} onscroll={onStateScroll} onscrollend={onStateScrollEnd}>
+            <div class="snap-cards snap-cards-state" bind:this={stateCardsEl} onscroll={onStateScroll} onscrollend={onStateScrollEnd}
+              tabindex="0" role="region" aria-label="State statistics"
+              onkeydown={(e) => snapKeydown(e, stateCardsEl, stateCardIdx, stateCardLabels.length)}>
               <!-- Card: Key stats -->
               <div class="snap-card">
                 <p class="snap-card-title">
@@ -1125,7 +1134,9 @@
                     onclick={() => jumpToCard(distCardsEl, i)}>{label}</button>
                 {/each}
               </nav>
-              <div class="snap-cards snap-cards-district" bind:this={distCardsEl} onscroll={onDistScroll} onscrollend={onDistScrollEnd}>
+              <div class="snap-cards snap-cards-district" bind:this={distCardsEl} onscroll={onDistScroll} onscrollend={onDistScrollEnd}
+                tabindex="0" role="region" aria-label="District details"
+                onkeydown={(e) => snapKeydown(e, distCardsEl, distCardIdx, 3)}>
                 <!-- Card: Partisan -->
                 <div class="snap-card">
                   <p class="snap-card-title">Partisan</p>

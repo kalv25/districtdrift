@@ -649,6 +649,17 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         detail: 'Following the Pendergrass ruling, the Georgia legislature enacts new congressional maps creating an additional majority-Black district in the Atlanta suburbs. The remedial maps are used in the 2024 elections, shifting one seat toward Democrats and producing a 9–5 Republican delegation — unchanged in seat count despite the new district lines.',
       },
     ],
+    2024: [
+      {
+        title: 'Lucy McBath wins redrawn CD-6 under Pendergrass remedial maps',
+        detail: 'Under remedial maps enacted December 2023 (court-approved December 28) in Pendergrass v. Raffensperger (N.D. Ga.), CD-6 is redrawn as a majority-Black district anchored in Cobb, Douglas, Fayette, and Fulton counties west/southwest of Atlanta. Lucy McBath (D) wins the redrawn seat; the overall 9R-5D delegation is unchanged in total count.',
+        url: 'https://redistricting.lls.edu/case/pendergrass-v-raffensperger/',
+      },
+      {
+        title: 'CD-7 dismantlement challenged; 11th Circuit appeal pending',
+        detail: 'The legislature\'s remedial maps dismantled the existing CD-7 (Gwinnett County), a coalition minority opportunity district east of Atlanta, arguing the two changes balanced each other. Plaintiffs contend that trading one majority-minority district for another is itself a VRA violation. The 11th Circuit Court of Appeals heard argument in early 2025; a ruling could affect Georgia\'s maps for 2026.',
+      },
+    ],
   },
 
   AZ: {
@@ -777,6 +788,16 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: 'Harper reversed; aggressive new maps enacted for 2024',
         detail: 'After Republicans gain a supermajority and the NC Supreme Court\'s composition shifts, the court reverses Harper v. Hall in April 2023. New, heavily Republican-leaning congressional maps are enacted and used in the 2024 elections, producing a 10–4 Republican delegation.',
+      },
+    ],
+    2024: [
+      {
+        title: 'Republicans win 10 of 14 seats under SB 757',
+        detail: 'The SB 757 partisan remap (signed October 2023) produces a 10R-4D delegation as designed. Five newly drawn Republican seats are won by new members: Tim Moore, Addison McDowell, Mark Harris, Pat Harrigan, and Brad Knott. The only competitive race is CD-1, where incumbent Don Davis (D) narrowly survives 49.5%–47.9% against Republican Laurie Buckhout.',
+      },
+      {
+        title: 'NC swings from 7-7 to 10-4 in a single election',
+        detail: 'The shift from the 2022 result (7D-7R under court-ordered fair maps) to 2024 (4D-10R under the SB 757 remap) is a net 6-seat partisan swing — the single largest congressional gerrymander payoff of the 2024 cycle. Federal litigation challenging SB 757 continues but faces high hurdles after Rucho v. Common Cause (2019) foreclosed federal partisan gerrymandering claims, and the NC Supreme Court has already barred the state constitutional path.',
       },
     ],
   },
@@ -1137,6 +1158,16 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
         title: '⚖ Allen v. Milligan — SCOTUS orders second majority-Black district',
         detail: 'In a landmark 5-4 ruling (June 8, 2023), Chief Justice Roberts joined the liberal justices to hold that Alabama\'s maps likely violate Section 2 of the Voting Rights Act. The Court rejects Alabama\'s argument that race-neutral redistricting criteria should presumptively control, reaffirming the Gingles framework for vote-dilution claims. Remedial maps for 2024 create a second majority-Black district in the southwestern "Black Belt" region, producing a 2-5 Democratic-Republican split.',
         url: 'https://www.supremecourt.gov/opinions/22pdf/21-1086_1co6.pdf',
+      },
+    ],
+    2024: [
+      {
+        title: 'Remedial CD-2 enacted; court orders Remedial Plan 3 for 2024 only',
+        detail: 'Following Allen v. Milligan, the three-judge panel in Milligan v. Allen (N.D. Ala.) rejected the legislature\'s non-compliant remedial attempt and on October 5, 2023 ordered Remedial Plan 3 — drawn by a special master — for use in the 2024 election only. CD-2, previously a majority-white Republican seat covering the Black Belt counties and the Mobile corridor, was redrawn to approximately 49% Black voting-age population.',
+      },
+      {
+        title: 'Shomari Figures wins CD-2; Alabama elects two Black members simultaneously for the first time',
+        detail: 'Democrat Shomari Figures wins the remedially redrawn CD-2 with ~54.5% of the vote, defeating Republican Caroleene Dobson. Combined with Terri Sewell\'s continued hold on CD-7, Alabama sends two Black representatives to Congress simultaneously for the first time — the first since 2008 that Alabama elected two Democrats to Congress. The remedial map was ordered for 2024 only; the Alabama congressional map for 2026 remains unresolved.',
       },
     ],
   },
@@ -1524,8 +1555,19 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       },
       {
         title: '⚖ Robinson v. Ardoin — VRA orders second majority-Black district',
-        detail: 'A federal district court rules in Robinson v. Ardoin that Louisiana\'s maps likely violate Section 2 of the Voting Rights Act by failing to draw a second majority-Black district. Following Allen v. Milligan (2023), the court orders Louisiana to redraw its maps. Remedial maps for 2024 create a second majority-Black district in the Baton Rouge–New Orleans corridor, producing a 2-4 Democratic-Republican split.',
+        detail: 'A federal district court rules in Robinson v. Ardoin that Louisiana\'s maps likely violate Section 2 of the Voting Rights Act by failing to draw a second majority-Black district. Following Allen v. Milligan (2023), the court orders Louisiana to redraw its maps. Remedial maps for 2024 create a second majority-Black district in the Shreveport–Baton Rouge corridor, producing a 2-4 Democratic-Republican split.',
         url: 'https://www.naacpldf.org/case-issue/robinson-v-ardoin/',
+      },
+    ],
+    2024: [
+      {
+        title: 'Cleo Fields returns to Congress in newly drawn CD-6',
+        detail: 'The Louisiana legislature passes SB 8 (signed January 2024) under court deadline, creating a second majority-Black district — CD-6 — running from Shreveport through Alexandria and Lafayette to Baton Rouge. Cleo Fields (D) wins the seat, returning to Congress three decades after his earlier term (1993–1997), which was itself won in a VRA-mandated majority-Black district that was subsequently dismantled by litigation. Louisiana\'s delegation becomes 2D-4R.',
+      },
+      {
+        title: '⚖ Louisiana v. Callais — SCOTUS weighs whether VRA compliance violates the 14th Amendment',
+        detail: 'White voters file Callais v. Landry arguing SB 8 is an unconstitutional racial gerrymander under the Equal Protection Clause. The Supreme Court accepts Louisiana v. Callais (No. 24-109) and on June 27, 2025 orders reargument, signaling the justices are divided over whether creating majority-minority districts to satisfy VRA Section 2 can itself violate the Constitution. Louisiana\'s 2026 congressional map remains uncertain pending a final ruling.',
+        url: 'https://www.scotusblog.com/case-files/cases/louisiana-v-callais/',
       },
     ],
   },

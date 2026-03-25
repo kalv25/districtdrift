@@ -12,7 +12,7 @@ import { chromium } from 'playwright';
 import { spawn } from 'child_process';
 
 const PORT = 4174; // use a non-default port to avoid conflicts with running dev servers
-const URL  = `http://localhost:${PORT}/?v=nation&y=2022`;
+const URL  = `http://localhost:${PORT}/?v=nation&y=2024`;
 const OUT  = 'static/og-image.png';
 const W    = 1200;
 const H    = 630;
