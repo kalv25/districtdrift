@@ -83,7 +83,7 @@ def detect_vote_columns(
     Falls back through election years within the cycle.
     """
     elec_years = CYCLE_TO_ELEC_YEARS.get(cycle_year, ["22"])
-    offices = ["USH", "GOV", "USS", "PRES"]
+    offices = ["USH", "GOV", "USS", "PRES", "PRE"]
 
     for yr in elec_years:
         for office in offices:
