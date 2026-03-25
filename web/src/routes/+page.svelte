@@ -832,19 +832,19 @@
     </div>
 
     <button
+      class="help-btn"
+      onclick={() => { helpOpen = true; helpTab = 'nation'; }}
+      title="How to use this site"
+      aria-label="Help"
+    >?</button>
+
+    <button
       class="share-btn"
       class:copied={shareCopied}
       onclick={copyShareLink}
       title="Share this view"
       aria-label="Share"
     >{shareCopied ? '✓ Copied' : '⤴ Share'}</button>
-
-    <button
-      class="help-btn"
-      onclick={() => { helpOpen = true; helpTab = 'nation'; }}
-      title="How to use this site"
-      aria-label="Help"
-    >?</button>
 
     <div class="theme-toggle" role="group" aria-label="Color theme">
       <button class:active={theme === 'light'} onclick={() => theme = 'light'} title="Light mode" aria-label="Light mode">☀</button>
@@ -1234,9 +1234,9 @@
       <a href="https://github.com/kalv25/districtdrift" target="_blank" rel="noopener">GitHub</a> ·
       <a href="https://github.com/kalv25/districtdrift/discussions/1" target="_blank" rel="noopener">Leave feedback</a>
     </p>
-    <p class="footer-updated">
+    <span class="footer-updated">
       Updated {new Date(__BUILD_DATE__).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
-    </p>
+    </span>
   </footer>
 </div>
 
@@ -2198,13 +2198,22 @@
   .chart-note { margin: 0; font-size: 0.7rem; color: var(--text-faint); }
 
   footer {
+    position: relative;
     padding: 0.45rem 1.25rem;
     background: #1a1a2e;
     color: rgba(255,255,255,0.45);
     font-size: 0.72rem;
   }
   footer a { color: rgba(255,255,255,0.65); }
-  .footer-updated { opacity: 0.35; font-size: 0.65rem; margin: 0.15rem 0 0; }
+  .footer-updated {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.3;
+    font-size: 0.65rem;
+    white-space: nowrap;
+  }
 
   .share-btn {
     background: rgba(255,255,255,0.07);
