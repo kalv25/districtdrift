@@ -190,6 +190,9 @@
   let showDeltas = $state(true);
   let panelOpen = $state(true);
   let isMobileState = $state(false);
+  let mobileLayer = $state<'districts' | 'precincts' | 'none'>('districts');
+  let mobileSectionIdx = $state<number | null>(null);
+  const showDistrictsFills = $derived(!isMobileState || mobileLayer !== 'none');
   let mapComponent: { takeScreenshot: (state: string, year: number) => void } | undefined;
   let nationComponent: { takeScreenshot: (year: number) => void } | undefined;
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
@@ -289,6 +292,18 @@
   });
 
   const isMobile = () => isMobileState;
+
+  // Mobile: sync layer toggle → showPrecincts
+  $effect(() => {
+    if (!isMobileState) return;
+    showPrecincts = mobileLayer === 'precincts';
+  });
+
+  // Mobile: auto-scroll panel to selected section
+  $effect(() => {
+    if (!isMobileState || mobileSectionIdx === null) return;
+    jumpToCard(stateCardsEl, mobileSectionIdx);
+  });
 
   // Lock body scroll when any modal is open (prevents background scroll on mobile)
   $effect(() => {
@@ -919,6 +934,30 @@
 
   </header>
 
+  {#if isMobileState && viewMode !== 'nation'}
+    <div class="mobile-chrome">
+      <div class="mobile-year-bar">
+        {@render cycleControls()}
+      </div>
+      <div class="mobile-nav-row">
+        <div class="mobile-layer-toggle" role="group" aria-label="Map layer">
+          <button class:active={mobileLayer === 'districts'} onclick={() => mobileLayer = 'districts'}>Districts</button>
+          <button class:active={mobileLayer === 'precincts'} onclick={() => mobileLayer = 'precincts'}>Demo</button>
+          <button class:active={mobileLayer === 'none'} onclick={() => mobileLayer = 'none'}>—</button>
+        </div>
+        <div class="mobile-section-scroll" role="group" aria-label="View section">
+          {#each stateCardLabels as label, i}
+            <button
+              class="mobile-sec-btn"
+              class:active={mobileSectionIdx === i}
+              onclick={() => { mobileSectionIdx = mobileSectionIdx === i ? null : i; }}
+            >{label}</button>
+          {/each}
+        </div>
+      </div>
+    </div>
+  {/if}
+
   <main class:ph={panelLayout === 'horizontal'}>
     <div class="map-wrap">
       {#if viewMode === 'nation'}
@@ -937,7 +976,7 @@
         </div>
       {:else}
         {#key viewMode}
-          <Map bind:this={mapComponent} selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={0} panelLeft={0} statePo={selectedState} cycleYears={CYCLES} {darkMode} {showPrecincts} onPrecinctLoadingChange={(v) => precinctLoading = v} onDistrictClick={(d) => {
+          <Map bind:this={mapComponent} selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={0} panelLeft={0} statePo={selectedState} cycleYears={CYCLES} {darkMode} {showPrecincts} showDistricts={showDistrictsFills} onPrecinctLoadingChange={(v) => precinctLoading = v} onDistrictClick={(d) => {
               const dn = Number(d.district);
               if (dn !== pinnedDistrict) districtTab = 'partisan';
               pinnedDistrict = dn;
@@ -1005,7 +1044,7 @@
         class="panel-group"
         class:vertical={panelLayout === 'vertical'}
         class:horizontal={panelLayout === 'horizontal'}
-        class:panel-closed={isMobileState && !panelOpen}
+        class:panel-closed={isMobileState && mobileSectionIdx === null}
         style={isMobileState ? '' : (panelLayout === 'horizontal' ? `height: ${panelH}px` : `width: ${panelW}px`)}
       >
         {#if panelLayout === 'horizontal'}
@@ -1014,12 +1053,6 @@
         {:else}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
           <div class="panel-resize-handle panel-resize-v" onmousedown={startPanelWidthResize} ontouchstart={startPanelWidthResize}></div>
-        {/if}
-
-        {#if isMobileState}
-          <div class="mobile-cycle-bar">
-            {@render cycleControls()}
-          </div>
         {/if}
 
         <!-- Panel 1: State -->
@@ -1571,6 +1604,7 @@
     color-scheme: light;
     --bg: #f5f5f3;
     --surface: #fff;
+    --surface-tl: rgba(255, 255, 255, 0.93);
     --surface-2: #f7f7f7;
     --border: #e0e0e0;
     --border-dim: #eee;
@@ -1598,6 +1632,7 @@
     color-scheme: dark;
     --bg: #0e0e1c;
     --surface: #181828;
+    --surface-tl: rgba(24, 24, 40, 0.93);
     --surface-2: #141428;
     --border: #2e2e48;
     --border-dim: #242440;
@@ -2836,24 +2871,108 @@
     .view-btn { flex: none; }
     .state-selector { flex: 1; justify-content: center; }
 
+    /* Mobile chrome: year bar + nav row, stacks between header and map */
+    .mobile-chrome {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .mobile-year-bar {
+      padding: 0.35rem 0.5rem 0.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.5rem;
+    }
+
+    /* Layer toggle: compact 3-button segmented control */
+    .mobile-layer-toggle {
+      display: flex;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .mobile-layer-toggle button {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 0.3rem 0.5rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    .mobile-layer-toggle button:last-child { border-right: none; }
+    .mobile-layer-toggle button.active {
+      background: var(--text);
+      color: var(--surface);
+    }
+
+    /* Section scroll: horizontally scrollable pill nav */
+    .mobile-section-scroll {
+      display: flex;
+      gap: 0.3rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      flex: 1;
+      min-width: 0;
+    }
+    .mobile-section-scroll::-webkit-scrollbar { display: none; }
+    .mobile-sec-btn {
+      flex-shrink: 0;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 0.25rem 0.55rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .mobile-sec-btn.active {
+      background: #4a90d9;
+      border-color: #4a90d9;
+      color: #fff;
+    }
+
     /* Map fills the full main area — panels overlay it */
     main { position: relative; flex-direction: row; }
     .map-wrap { flex: 1; }
 
-    /* Panel as overlay bottom sheet */
+    /* Hide all floating map controls on mobile (replaced by chrome + layer toggle) */
+    .map-float-controls { display: none !important; }
+
+    /* Nation cycle bar: top of map on mobile */
+    .nation-cycle-bar { bottom: auto; top: 0.5rem; }
+    /* State floating cycle bar: hidden on mobile (shown in chrome above) */
+    .state-cycle-bar { display: none; }
+
+    /* Panel as translucent overlay bottom sheet */
     .panel-group {
       position: absolute !important;
       bottom: 0 !important; left: 0 !important; right: 0 !important;
       width: 100% !important;
       height: auto !important;
-      max-height: 62vh !important;
-      overflow-y: auto !important;
+      max-height: 48vh !important;
+      overflow-y: hidden !important;
       flex-direction: column !important;
       border-left-width: 0 !important;
       border-top-width: 1px !important;
-      background: var(--surface) !important;
-      backdrop-filter: blur(10px) !important;
+      background: var(--surface-tl) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
       z-index: 25 !important;
+      border-radius: 12px 12px 0 0;
       transform: translateY(0);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -2861,23 +2980,24 @@
       transform: translateY(105%);
       pointer-events: none;
     }
-    .panel-group .panel-divider { height: 1px !important; width: 100% !important; box-shadow: none !important; }
-    .panel { flex: none !important; max-height: none !important; }
-    /* Resize handles not useful on touch — remove them */
+    /* Hide divider between state and district panels on mobile */
+    .panel-group .panel-divider { display: none !important; }
+    /* Hide district panel on mobile — state panel only */
+    .panel-district { display: none !important; }
+    .panel { flex: none !important; max-height: none !important; overflow: visible !important; }
     .panel-resize-handle { display: none !important; }
 
-    /* Hide floating cycle bar on mobile — shown inside panel instead */
-    .state-cycle-bar { display: none; }
-    /* Nation cycle bar: top of map on mobile */
-    .nation-cycle-bar { bottom: auto; top: 0.5rem; }
-    /* Mobile cycle controls embedded at top of panel */
-    .mobile-cycle-bar {
-      padding: 0.5rem 0.75rem 0.3rem;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
+    /* Hide in-panel snap nav — external section nav row serves this role */
+    .snap-nav { display: none !important; }
 
-    /* Cycle buttons: hide seat counts at mobile width (too small to read) */
+    /* Cards fill full panel width so snapping shows one at a time */
+    .snap-cards-state .snap-card { width: 100%; }
+    .snap-cards-state { padding: 0.5rem; }
+
+    /* Panel header bar (district panel) — also hidden above, but just in case */
+    .panel-header { border-radius: 12px 12px 0 0; }
+
+    /* Cycle buttons: hide seat counts */
     .btn-d-delta, .btn-r-delta { display: none !important; }
     .cycle-buttons button:not(.anim-btn) { grid-template-columns: 1fr !important; }
   }

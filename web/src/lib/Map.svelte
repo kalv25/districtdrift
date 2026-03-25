@@ -4,7 +4,7 @@
   import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2024, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022, 2024], darkMode = false, showPrecincts = false, onDistrictClick, onMapClick, onPrecinctLoadingChange }: {
+  let { selectedYear = 2024, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022, 2024], darkMode = false, showPrecincts = false, showDistricts = true, onDistrictClick, onMapClick, onPrecinctLoadingChange }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;
@@ -13,6 +13,7 @@
     cycleYears?: number[];
     darkMode?: boolean;
     showPrecincts?: boolean;
+    showDistricts?: boolean;
     onDistrictClick?: (d: { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number; x: number; y: number }) => void;
     onMapClick?: () => void;
     onPrecinctLoadingChange?: (loading: boolean) => void;
@@ -655,6 +656,7 @@
   // Show/hide precinct layer and dim district fill when active
   $effect(() => {
     const show = showPrecincts;
+    const showD = showDistricts;
     if (!map?.isStyleLoaded()) return;
 
     // Reset if state changed since precincts were loaded
@@ -684,11 +686,16 @@
         map.setLayoutProperty('precincts-lines', 'visibility', 'none');
       }
       hoveredPrecinct = null;
-      // Restore district fill opacity
-      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0.65);
+      // Restore district fill opacity (respect showDistricts)
+      map.setPaintProperty('districts-fill-front', 'fill-opacity', showD ? 0.65 : 0);
       const fromYear = chronoPrevYear(selectedYear);
       if (fromYear !== null)
-        map.setPaintProperty('districts-fill-back', 'fill-opacity', 0.14);
+        map.setPaintProperty('districts-fill-back', 'fill-opacity', showD ? 0.14 : 0);
+    }
+    // Hide boundary lines when districts are toggled off
+    for (const id of ['draw-glow', 'draw-lines']) {
+      if (map.getLayer(id))
+        map.setLayoutProperty(id, 'visibility', showD ? 'visible' : 'none');
     }
   });
 
