@@ -6,6 +6,8 @@
 	const prefillState = $page.url.searchParams.get('state') ?? '';
 	const prefillYear = $page.url.searchParams.get('year') ?? '';
 
+	const prefillMessage = `What I noticed:\n\nMy feedback or question:\n`;
+
 	const STATES = [
 		'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
 		'Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa',
@@ -28,6 +30,7 @@
 	let submitting = $state(false);
 	let success = $state(false);
 	let error = $state('');
+	let messageValue = $state(prefillMessage);
 
 	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
@@ -97,7 +100,7 @@
 
 				<div class="field">
 					<label for="message">Message <span class="required">*</span></label>
-					<textarea id="message" name="message" rows="5" required placeholder="What's on your mind?"></textarea>
+					<textarea id="message" name="message" rows="6" required bind:value={messageValue}></textarea>
 				</div>
 
 				<div class="field">
