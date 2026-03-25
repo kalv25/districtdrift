@@ -1991,6 +1991,14 @@
     overflow: hidden;
     text-shadow: 0 0 6px rgba(255,255,255,0.7), 0 1px 2px rgba(0,0,0,0.3);
   }
+  :global([data-theme=dark]) .btn-d-delta {
+    color: #93c5fd;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+  }
+  :global([data-theme=dark]) .btn-r-delta {
+    color: #fca5a5;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+  }
   .btn-year {
     text-align: center;
     font-size: 0.72rem;
