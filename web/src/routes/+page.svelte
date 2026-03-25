@@ -574,18 +574,28 @@
 
 <svelte:head>
   {#if viewMode === 'nation'}
+    {@const nationDesc = `How did redistricting shape US House seats in ${selectedYear}? Explore all 50 states ranked by efficiency gap, seat share, and partisan lean.`}
+    {@const nationUrl = `https://districtdrift.org/?v=nation&y=${selectedYear}`}
     <title>District Drift — All States, {selectedYear}</title>
+    <link rel="canonical" href={nationUrl} />
+    <meta name="description" content={nationDesc} />
     <meta property="og:title" content="District Drift — All States, {selectedYear}" />
-    <meta property="og:description" content="How did redistricting shape US House seats in {selectedYear}? Explore all 50 states ranked by partisan efficiency gap." />
+    <meta property="og:description" content={nationDesc} />
+    <meta property="og:url" content={nationUrl} />
     <meta name="twitter:title" content="District Drift — All States, {selectedYear}" />
-    <meta name="twitter:description" content="How did redistricting shape US House seats in {selectedYear}? Explore all 50 states ranked by partisan efficiency gap." />
+    <meta name="twitter:description" content={nationDesc} />
   {:else}
     {@const stateName = STATES[selectedState]?.name ?? selectedState}
+    {@const stateDesc = `How did ${selectedYear} redistricting shape ${stateName}'s congressional districts? Explore efficiency gap, seat/vote splits, precinct maps, and district demographics.`}
+    {@const stateUrl = `https://districtdrift.org/?v=${selectedState.toLowerCase()}&y=${selectedYear}`}
     <title>District Drift — {stateName}, {selectedYear}</title>
+    <link rel="canonical" href={stateUrl} />
+    <meta name="description" content={stateDesc} />
     <meta property="og:title" content="District Drift — {stateName} {selectedYear} Congressional Districts" />
-    <meta property="og:description" content="Explore how {selectedYear} redistricting shaped {stateName}'s congressional districts — partisan lean, efficiency gap, and demographic breakdown." />
+    <meta property="og:description" content={stateDesc} />
+    <meta property="og:url" content={stateUrl} />
     <meta name="twitter:title" content="District Drift — {stateName} {selectedYear}" />
-    <meta name="twitter:description" content="Explore how {selectedYear} redistricting shaped {stateName}'s congressional districts — partisan lean, efficiency gap, and demographic breakdown." />
+    <meta name="twitter:description" content={stateDesc} />
   {/if}
 </svelte:head>
 
