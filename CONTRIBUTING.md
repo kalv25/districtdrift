@@ -36,19 +36,16 @@ districtdrift/
 Requires Python 3.12+, [uv](https://github.com/astral-sh/uv), and [Tippecanoe](https://github.com/felt/tippecanoe).
 
 ```bash
-cp .env.example .env        # add your NHGIS API key
-uv run python -m pipeline.download
-uv run python -m pipeline.process
-uv run python -m pipeline.tile
-uv run python -m pipeline.export_geo
+cp .env.example .env        # add NHGIS_API_KEY + RDH_USERNAME + RDH_PASSWORD
+uv run python -m pipeline.download --state MI
+uv run python -m pipeline.process --state MI
+uv run python -m pipeline.tile --state MI
+uv run python -m pipeline.export_geo --state MI
 uv run python -m pipeline.demographics --state MI
-```
-
-For precinct tiles (requires free RDH VEST download):
-```bash
-# Place RDH VEST ZIP at data/raw/precincts/mi/2022.zip
 uv run python -m pipeline.precinct --state MI
 ```
+
+Omit `--state` from `download` to fetch all 50 states at once. `demographics` requires `NHGIS_API_KEY`; RDH steps require `RDH_USERNAME` + `RDH_PASSWORD` (free account at redistrictingdatahub.org) and are skipped gracefully if credentials are absent.
 
 ## Running the frontend
 
