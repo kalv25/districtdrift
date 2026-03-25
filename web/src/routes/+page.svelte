@@ -1322,7 +1322,7 @@
             </div>
             <div class="help-step">
               <span class="step-num">2</span>
-              <div>Step through cycles using the year buttons, or press <strong>▶</strong> to animate 1992 → 2024. As each new cycle arrives, pill overlays appear showing how congressional seats shifted — <Pill party="R">+2R</Pill> means two new Republican seats, <Pill party="D">−1D</Pill> means one fewer Democratic seat.</div>
+              <div>Step through cycles using the year buttons, or press <strong>▶</strong> to animate 1992 → 2024. Pill overlays show how congressional seats shifted vs. the previous cycle — <Pill party="R">+2R</Pill> means two new Republican seats, <Pill party="D">−1D</Pill> means one fewer Democratic seat. Pills are always visible at rest; use the <strong>Δ</strong> button to toggle them off.</div>
             </div>
             <div class="help-step">
               <span class="step-num">3</span>
