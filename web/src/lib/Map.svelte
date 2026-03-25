@@ -460,13 +460,13 @@
     if (map.getLayer('districts-hover'))
       map.setFilter('districts-hover', ['==', ['get', 'cycle_year'], year]);
 
-    // prevYear starts null, so prevYear !== year is true on initial load too —
-    // no special-casing needed; initial load with a chrono-prev gets full context.
     if (prevYear !== year) {
-      if (fromYear !== null) {
+      if (prevYear !== null && fromYear !== null) {
+        // User changed year: animate the transition and show the swing overlay
         transitionBoundary(fromYear, year);
       } else {
-        // First cycle year (e.g. 1992): no previous context to show
+        // Initial render (prevYear === null) or first cycle year (fromYear === null):
+        // draw boundaries statically — no swing overlay, so party fill is visible immediately
         map.setLayoutProperty('prev-lines', 'visibility', 'none');
         loadGeo(year).then(fc => {
           if (morphTargetYear !== null && morphTargetYear !== year) return;
