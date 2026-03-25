@@ -1466,6 +1466,9 @@
             <div class="help-source-row"><span class="source-label">Elections</span><span>MIT Election Lab — US House returns 1976–2024</span></div>
             <div class="help-source-row"><span class="source-label">Demographics</span><span>US Census via NHGIS — 1990 STF1/3, 2000 SF1/3, ACS 2008–12 and 2018–22</span></div>
             <div class="help-source-row help-note-row"><span>The 1992 cycle has known boundary gaps in the NHGIS source data for some states.</span></div>
+            <div class="help-source-row help-note-row help-note-2024">
+              <span><strong>About the 2024 cycle:</strong> The 2024 elections used the same 118th Congress district maps as 2022 — no new redistricting occurred between cycles. Election results are actual 2024 House race outcomes. District demographics (race, income, education) reflect the 2020 Census, identical to the 2022 data. Four states (AL, GA, LA, NC) used court-ordered remedial maps in 2024 due to VRA litigation; their cycle notes describe the changes.</span>
+            </div>
           </div>
         </section>
         {/if}
@@ -2414,6 +2417,18 @@
     font-size: 0.79rem;
     font-style: italic;
     padding-top: 0.1rem;
+  }
+  .help-note-2024 {
+    font-style: normal;
+    margin-top: 0.4rem;
+    padding: 0.6rem 0.75rem;
+    background: rgba(234, 88, 12, 0.08);
+    border-left: 3px solid #EA580C;
+    border-radius: 0 6px 6px 0;
+    color: var(--text);
+  }
+  :global([data-theme=dark]) .help-note-2024 {
+    background: rgba(234, 88, 12, 0.12);
   }
 
   /* District detail card */

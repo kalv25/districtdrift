@@ -1,6 +1,6 @@
 # District Drift
 
-**Three decades of congressional gerrymandering — explore how redistricting shaped partisan outcomes in every US state from 1992 to 2022.**
+**Three decades of congressional gerrymandering — explore how redistricting shaped partisan outcomes in every US state from 1992 to 2024.**
 
 🌐 **Live site: [districtdrift.org](https://districtdrift.org)**
 
@@ -12,7 +12,7 @@
 
 ## What it is
 
-District Drift is a free, nonpartisan, public-interest website that documents the history of congressional redistricting in the United States across four cycles: 1992, 2002, 2012, and 2022.
+District Drift is a free, nonpartisan, public-interest website that documents the history of congressional redistricting in the United States across five cycles: 1992, 2002, 2012, 2022, and 2024.
 
 It is **backward-looking** — a historical record for the general public, journalists, and educators showing how congressional maps have been drawn and who benefited. Both parties have gerrymandered; this site shows all of it.
 

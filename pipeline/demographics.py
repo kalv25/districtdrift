@@ -62,6 +62,13 @@ CYCLE_SOURCES: dict[int, dict] = {
         "socioeconomic": ("2018_2022_ACS5a", ["B19013", "B15003"], "cd118th", True),
         "income_source": "ACS 2018–2022 5-year",
     },
+    # 2024 uses the same 118th Congress boundaries as 2022, so the same
+    # ACS 2018–2022 census data applies (no newer district-level tabulation exists).
+    2024: {
+        "race": ("2018_2022_ACS5a", "B03002", "cd118th", True),
+        "socioeconomic": ("2018_2022_ACS5a", ["B19013", "B15003"], "cd118th", True),
+        "income_source": "ACS 2018–2022 5-year (2020 census boundaries)",
+    },
 }
 
 NHGIS_API_BASE_URL = NHGIS_API_BASE

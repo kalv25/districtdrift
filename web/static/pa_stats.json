@@ -55,7 +55,16 @@
           "r_votes": 35419,
           "total_votes_cast": 185591,
           "margin_pct": 0.6183,
-          "contested": true
+          "contested": true,
+          "population": 565842,
+          "pct_white": 0.3603,
+          "pct_black": 0.5146,
+          "pct_hispanic": 0.0988,
+          "pct_asian": 0.0232,
+          "pct_other": 0.0032,
+          "median_income": 20372,
+          "pct_bachelors_plus": 0.1037,
+          "pop_deviation_pct": 0.0001
         },
         {
           "district": 2,
@@ -66,7 +75,16 @@
           "r_votes": 47906,
           "total_votes_cast": 213927,
           "margin_pct": 0.5486,
-          "contested": true
+          "contested": true,
+          "population": 565650,
+          "pct_white": 0.3413,
+          "pct_black": 0.6182,
+          "pct_hispanic": 0.0157,
+          "pct_asian": 0.0212,
+          "pct_other": 0.0037,
+          "median_income": 24880,
+          "pct_bachelors_plus": 0.2192,
+          "pop_deviation_pct": -0.0003
         },
         {
           "district": 3,
@@ -77,7 +95,16 @@
           "r_votes": 86787,
           "total_votes_cast": 221971,
           "margin_pct": 0.2024,
-          "contested": true
+          "contested": true,
+          "population": 565866,
+          "pct_white": 0.873,
+          "pct_black": 0.0463,
+          "pct_hispanic": 0.0469,
+          "pct_asian": 0.0314,
+          "pct_other": 0.0023,
+          "median_income": 29157,
+          "pct_bachelors_plus": 0.1269,
+          "pop_deviation_pct": 0.0001
         },
         {
           "district": 4,
@@ -88,7 +115,16 @@
           "r_votes": 48484,
           "total_votes_cast": 237922,
           "margin_pct": 0.5877,
-          "contested": true
+          "contested": true,
+          "population": 565792,
+          "pct_white": 0.959,
+          "pct_black": 0.0315,
+          "pct_hispanic": 0.0047,
+          "pct_asian": 0.0035,
+          "pct_other": 0.0014,
+          "median_income": 26792,
+          "pct_bachelors_plus": 0.1532,
+          "pop_deviation_pct": -0.0
         },
         {
           "district": 5,
@@ -99,7 +135,16 @@
           "r_votes": 188911,
           "total_votes_cast": 188911,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 565813,
+          "pct_white": 0.9736,
+          "pct_black": 0.0094,
+          "pct_hispanic": 0.0061,
+          "pct_asian": 0.0091,
+          "pct_other": 0.0018,
+          "median_income": 23934,
+          "pct_bachelors_plus": 0.1525,
+          "pop_deviation_pct": 0.0
         },
         {
           "district": 6,
@@ -110,7 +155,16 @@
           "r_votes": 99694,
           "total_votes_cast": 208006,
           "margin_pct": 0.0414,
-          "contested": true
+          "contested": true,
+          "population": 565760,
+          "pct_white": 0.9372,
+          "pct_black": 0.023,
+          "pct_hispanic": 0.0333,
+          "pct_asian": 0.0054,
+          "pct_other": 0.0012,
+          "median_income": 28766,
+          "pct_bachelors_plus": 0.1261,
+          "pop_deviation_pct": -0.0001
         },
         {
           "district": 7,
@@ -121,7 +175,16 @@
           "r_votes": 180648,
           "total_votes_cast": 273898,
           "margin_pct": 0.327,
-          "contested": true
+          "contested": true,
+          "population": 565746,
+          "pct_white": 0.9313,
+          "pct_black": 0.0378,
+          "pct_hispanic": 0.0094,
+          "pct_asian": 0.0203,
+          "pct_other": 0.0013,
+          "median_income": 41710,
+          "pct_bachelors_plus": 0.3103,
+          "pop_deviation_pct": -0.0001
         },
         {
           "district": 8,
@@ -132,7 +195,16 @@
           "r_votes": 129593,
           "total_votes_cast": 249538,
           "margin_pct": 0.0636,
-          "contested": true
+          "contested": true,
+          "population": 565787,
+          "pct_white": 0.9392,
+          "pct_black": 0.0276,
+          "pct_hispanic": 0.0162,
+          "pct_asian": 0.0156,
+          "pct_other": 0.0015,
+          "median_income": 43483,
+          "pct_bachelors_plus": 0.2511,
+          "pop_deviation_pct": -0.0
         },
         {
           "district": 9,
@@ -143,7 +215,16 @@
           "r_votes": 182406,
           "total_votes_cast": 182406,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 565803,
+          "pct_white": 0.98,
+          "pct_black": 0.0115,
+          "pct_hispanic": 0.0044,
+          "pct_asian": 0.0028,
+          "pct_other": 0.0013,
+          "median_income": 24309,
+          "pct_bachelors_plus": 0.0999,
+          "pop_deviation_pct": 0.0
         },
         {
           "district": 10,
@@ -154,7 +235,16 @@
           "r_votes": 189414,
           "total_votes_cast": 209548,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 565681,
+          "pct_white": 0.9751,
+          "pct_black": 0.0107,
+          "pct_hispanic": 0.0077,
+          "pct_asian": 0.0048,
+          "pct_other": 0.0017,
+          "median_income": 25648,
+          "pct_bachelors_plus": 0.139,
+          "pop_deviation_pct": -0.0002
         },
         {
           "district": 11,
@@ -165,7 +255,16 @@
           "r_votes": 68112,
           "total_votes_cast": 206987,
           "margin_pct": 0.3419,
-          "contested": true
+          "contested": true,
+          "population": 565913,
+          "pct_white": 0.9785,
+          "pct_black": 0.009,
+          "pct_hispanic": 0.0073,
+          "pct_asian": 0.0042,
+          "pct_other": 0.0009,
+          "median_income": 24310,
+          "pct_bachelors_plus": 0.1267,
+          "pop_deviation_pct": 0.0002
         },
         {
           "district": 12,
@@ -176,7 +275,16 @@
           "r_votes": 0,
           "total_votes_cast": 166916,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 565794,
+          "pct_white": 0.9797,
+          "pct_black": 0.0128,
+          "pct_hispanic": 0.0038,
+          "pct_asian": 0.0026,
+          "pct_other": 0.0011,
+          "median_income": 22024,
+          "pct_bachelors_plus": 0.1076,
+          "pop_deviation_pct": 0.0
         },
         {
           "district": 13,
@@ -187,7 +295,16 @@
           "r_votes": 126312,
           "total_votes_cast": 253997,
           "margin_pct": 0.0054,
-          "contested": true
+          "contested": true,
+          "population": 565793,
+          "pct_white": 0.9021,
+          "pct_black": 0.0596,
+          "pct_hispanic": 0.0121,
+          "pct_asian": 0.0248,
+          "pct_other": 0.0014,
+          "median_income": 44764,
+          "pct_bachelors_plus": 0.3349,
+          "pop_deviation_pct": 0.0
         },
         {
           "district": 15,
@@ -198,7 +315,16 @@
           "r_votes": 99520,
           "total_votes_cast": 213324,
           "margin_pct": 0.0564,
-          "contested": true
+          "contested": true,
+          "population": 565810,
+          "pct_white": 0.9201,
+          "pct_black": 0.0198,
+          "pct_hispanic": 0.0473,
+          "pct_asian": 0.0112,
+          "pct_other": 0.0016,
+          "median_income": 33049,
+          "pct_bachelors_plus": 0.1823,
+          "pop_deviation_pct": 0.0
         },
         {
           "district": 16,
@@ -209,7 +335,16 @@
           "r_votes": 137823,
           "total_votes_cast": 212564,
           "margin_pct": 0.2968,
-          "contested": true
+          "contested": true,
+          "population": 565835,
+          "pct_white": 0.8993,
+          "pct_black": 0.05,
+          "pct_hispanic": 0.0384,
+          "pct_asian": 0.0106,
+          "pct_other": 0.0018,
+          "median_income": 37553,
+          "pct_bachelors_plus": 0.2433,
+          "pop_deviation_pct": 0.0001
         },
         {
           "district": 17,
@@ -220,7 +355,16 @@
           "r_votes": 150158,
           "total_votes_cast": 216039,
           "margin_pct": 0.3901,
-          "contested": true
+          "contested": true,
+          "population": 565742,
+          "pct_white": 0.9044,
+          "pct_black": 0.0652,
+          "pct_hispanic": 0.0188,
+          "pct_asian": 0.01,
+          "pct_other": 0.0017,
+          "median_income": 31841,
+          "pct_bachelors_plus": 0.1634,
+          "pop_deviation_pct": -0.0001
         },
         {
           "district": 19,
@@ -231,7 +375,16 @@
           "r_votes": 98599,
           "total_votes_cast": 217587,
           "margin_pct": 0.1373,
-          "contested": true
+          "contested": true,
+          "population": 565831,
+          "pct_white": 0.9529,
+          "pct_black": 0.0251,
+          "pct_hispanic": 0.0132,
+          "pct_asian": 0.0072,
+          "pct_other": 0.0016,
+          "median_income": 32424,
+          "pct_bachelors_plus": 0.1602,
+          "pop_deviation_pct": 0.0001
         },
         {
           "district": 20,
@@ -242,7 +395,16 @@
           "r_votes": 111591,
           "total_votes_cast": 226489,
           "margin_pct": 0.0146,
-          "contested": true
+          "contested": true,
+          "population": 565815,
+          "pct_white": 0.9576,
+          "pct_black": 0.0314,
+          "pct_hispanic": 0.0051,
+          "pct_asian": 0.0045,
+          "pct_other": 0.0014,
+          "median_income": 26294,
+          "pct_bachelors_plus": 0.1724,
+          "pop_deviation_pct": 0.0
         },
         {
           "district": 21,
@@ -253,9 +415,30 @@
           "r_votes": 150729,
           "total_votes_cast": 221531,
           "margin_pct": 0.3608,
-          "contested": true
+          "contested": true,
+          "population": 565802,
+          "pct_white": 0.948,
+          "pct_black": 0.038,
+          "pct_hispanic": 0.0079,
+          "pct_asian": 0.0042,
+          "pct_other": 0.0019,
+          "median_income": 25845,
+          "pct_bachelors_plus": 0.1461,
+          "pop_deviation_pct": 0.0
         }
-      ]
+      ],
+      "demographics": {
+        "total_population": 11881643,
+        "ideal_district_pop": 565793,
+        "pct_white": 0.8772,
+        "pct_black": 0.0903,
+        "pct_hispanic": 0.0196,
+        "pct_asian": 0.0113,
+        "pct_other": 0.0018,
+        "median_income": 29567,
+        "pct_bachelors_plus": 0.1788,
+        "income_source": "1990 Census STF3 (income in 1989)"
+      }
     },
     {
       "cycle_year": 2002,
@@ -288,7 +471,16 @@
           "r_votes": 17444,
           "total_votes_cast": 140090,
           "margin_pct": 0.7481,
-          "contested": true
+          "contested": true,
+          "population": 646331,
+          "pct_white": 0.3314,
+          "pct_black": 0.4485,
+          "pct_hispanic": 0.1497,
+          "pct_asian": 0.0483,
+          "pct_other": 0.022,
+          "median_income": 28295,
+          "pct_bachelors_plus": 3.0916,
+          "pop_deviation_pct": -0.0001
         },
         {
           "district": 2,
@@ -299,7 +491,16 @@
           "r_votes": 20988,
           "total_votes_cast": 171611,
           "margin_pct": 0.7554,
-          "contested": true
+          "contested": true,
+          "population": 646361,
+          "pct_white": 0.2978,
+          "pct_black": 0.6079,
+          "pct_hispanic": 0.0301,
+          "pct_asian": 0.0436,
+          "pct_other": 0.0206,
+          "median_income": 30626,
+          "pct_bachelors_plus": 7.7865,
+          "pop_deviation_pct": -0.0
         },
         {
           "district": 3,
@@ -310,7 +511,16 @@
           "r_votes": 116763,
           "total_votes_cast": 150329,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 646364,
+          "pct_white": 0.9374,
+          "pct_black": 0.0347,
+          "pct_hispanic": 0.0127,
+          "pct_asian": 0.0051,
+          "pct_other": 0.01,
+          "median_income": 35876,
+          "pct_bachelors_plus": 11.5829,
+          "pop_deviation_pct": -0.0
         },
         {
           "district": 4,
@@ -321,7 +531,16 @@
           "r_votes": 130534,
           "total_votes_cast": 202218,
           "margin_pct": 0.2911,
-          "contested": true
+          "contested": true,
+          "population": 646476,
+          "pct_white": 0.9427,
+          "pct_black": 0.0336,
+          "pct_hispanic": 0.0063,
+          "pct_asian": 0.0092,
+          "pct_other": 0.0083,
+          "median_income": 43628,
+          "pct_bachelors_plus": 20.6975,
+          "pop_deviation_pct": 0.0002
         },
         {
           "district": 5,
@@ -332,7 +551,16 @@
           "r_votes": 124942,
           "total_votes_cast": 143211,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 646371,
+          "pct_white": 0.9605,
+          "pct_black": 0.0129,
+          "pct_hispanic": 0.008,
+          "pct_asian": 0.0109,
+          "pct_other": 0.0077,
+          "median_income": 33320,
+          "pct_bachelors_plus": 14.0306,
+          "pop_deviation_pct": 0.0
         },
         {
           "district": 6,
@@ -343,7 +571,16 @@
           "r_votes": 103648,
           "total_votes_cast": 201791,
           "margin_pct": 0.0274,
-          "contested": true
+          "contested": true,
+          "population": 646483,
+          "pct_white": 0.8657,
+          "pct_black": 0.0666,
+          "pct_hispanic": 0.0349,
+          "pct_asian": 0.0203,
+          "pct_other": 0.0125,
+          "median_income": 55615,
+          "pct_bachelors_plus": 22.8026,
+          "pop_deviation_pct": 0.0002
         },
         {
           "district": 7,
@@ -354,7 +591,16 @@
           "r_votes": 146296,
           "total_votes_cast": 221351,
           "margin_pct": 0.3218,
-          "contested": true
+          "contested": true,
+          "population": 646530,
+          "pct_white": 0.8841,
+          "pct_black": 0.0545,
+          "pct_hispanic": 0.0133,
+          "pct_asian": 0.0371,
+          "pct_other": 0.011,
+          "median_income": 56154,
+          "pct_bachelors_plus": 25.0809,
+          "pop_deviation_pct": 0.0002
         },
         {
           "district": 8,
@@ -365,7 +611,16 @@
           "r_votes": 127475,
           "total_votes_cast": 203687,
           "margin_pct": 0.2519,
-          "contested": true
+          "contested": true,
+          "population": 646340,
+          "pct_white": 0.9077,
+          "pct_black": 0.0342,
+          "pct_hispanic": 0.0234,
+          "pct_asian": 0.024,
+          "pct_other": 0.0106,
+          "median_income": 59184,
+          "pct_bachelors_plus": 28.8186,
+          "pop_deviation_pct": -0.0
         },
         {
           "district": 9,
@@ -376,7 +631,16 @@
           "r_votes": 124184,
           "total_votes_cast": 174849,
           "margin_pct": 0.4213,
-          "contested": true
+          "contested": true,
+          "population": 645612,
+          "pct_white": 0.9643,
+          "pct_black": 0.0159,
+          "pct_hispanic": 0.009,
+          "pct_asian": 0.0038,
+          "pct_other": 0.007,
+          "median_income": 34850,
+          "pct_bachelors_plus": 8.0748,
+          "pop_deviation_pct": -0.0012
         },
         {
           "district": 10,
@@ -387,7 +651,16 @@
           "r_votes": 152017,
           "total_votes_cast": 164159,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 646537,
+          "pct_white": 0.9545,
+          "pct_black": 0.0186,
+          "pct_hispanic": 0.0135,
+          "pct_asian": 0.0051,
+          "pct_other": 0.0083,
+          "median_income": 35984,
+          "pct_bachelors_plus": 10.666,
+          "pop_deviation_pct": 0.0003
         },
         {
           "district": 11,
@@ -398,7 +671,16 @@
           "r_votes": 71543,
           "total_votes_cast": 168615,
           "margin_pct": 0.1344,
-          "contested": true
+          "contested": true,
+          "population": 646209,
+          "pct_white": 0.9332,
+          "pct_black": 0.0249,
+          "pct_hispanic": 0.0254,
+          "pct_asian": 0.0072,
+          "pct_other": 0.0093,
+          "median_income": 34979,
+          "pct_bachelors_plus": 9.6532,
+          "pop_deviation_pct": -0.0003
         },
         {
           "district": 12,
@@ -409,7 +691,16 @@
           "r_votes": 44818,
           "total_votes_cast": 169028,
           "margin_pct": 0.4697,
-          "contested": true
+          "contested": true,
+          "population": 646079,
+          "pct_white": 0.9494,
+          "pct_black": 0.0329,
+          "pct_hispanic": 0.0058,
+          "pct_asian": 0.0031,
+          "pct_other": 0.0087,
+          "median_income": 30614,
+          "pct_bachelors_plus": 7.2024,
+          "pop_deviation_pct": -0.0005
         },
         {
           "district": 13,
@@ -420,7 +711,16 @@
           "r_votes": 100295,
           "total_votes_cast": 211867,
           "margin_pct": 0.0367,
-          "contested": true
+          "contested": true,
+          "population": 646167,
+          "pct_white": 0.8563,
+          "pct_black": 0.0594,
+          "pct_hispanic": 0.031,
+          "pct_asian": 0.0408,
+          "pct_other": 0.0125,
+          "median_income": 49311,
+          "pct_bachelors_plus": 16.3304,
+          "pop_deviation_pct": -0.0003
         },
         {
           "district": 14,
@@ -431,7 +731,16 @@
           "r_votes": 0,
           "total_votes_cast": 123412,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 646196,
+          "pct_white": 0.7293,
+          "pct_black": 0.2251,
+          "pct_hispanic": 0.0107,
+          "pct_asian": 0.017,
+          "pct_other": 0.0179,
+          "median_income": 30140,
+          "pct_bachelors_plus": 14.3227,
+          "pop_deviation_pct": -0.0003
         },
         {
           "district": 15,
@@ -442,7 +751,16 @@
           "r_votes": 98493,
           "total_votes_cast": 171713,
           "margin_pct": 0.1472,
-          "contested": true
+          "contested": true,
+          "population": 646495,
+          "pct_white": 0.864,
+          "pct_black": 0.0284,
+          "pct_hispanic": 0.0786,
+          "pct_asian": 0.0172,
+          "pct_other": 0.0119,
+          "median_income": 45419,
+          "pct_bachelors_plus": 11.3155,
+          "pop_deviation_pct": 0.0002
         },
         {
           "district": 16,
@@ -453,7 +771,16 @@
           "r_votes": 119046,
           "total_votes_cast": 134597,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 646156,
+          "pct_white": 0.8426,
+          "pct_black": 0.0401,
+          "pct_hispanic": 0.0922,
+          "pct_asian": 0.0139,
+          "pct_other": 0.0112,
+          "median_income": 45941,
+          "pct_bachelors_plus": 9.4342,
+          "pop_deviation_pct": -0.0003
         },
         {
           "district": 17,
@@ -464,7 +791,16 @@
           "r_votes": 97802,
           "total_votes_cast": 201291,
           "margin_pct": 0.0282,
-          "contested": true
+          "contested": true,
+          "population": 646465,
+          "pct_white": 0.8732,
+          "pct_black": 0.0729,
+          "pct_hispanic": 0.0321,
+          "pct_asian": 0.0112,
+          "pct_other": 0.0105,
+          "median_income": 40334,
+          "pct_bachelors_plus": 9.4393,
+          "pop_deviation_pct": 0.0001
         },
         {
           "district": 18,
@@ -475,7 +811,16 @@
           "r_votes": 119885,
           "total_votes_cast": 199349,
           "margin_pct": 0.2028,
-          "contested": true
+          "contested": true,
+          "population": 646817,
+          "pct_white": 0.9536,
+          "pct_black": 0.0198,
+          "pct_hispanic": 0.0061,
+          "pct_asian": 0.0129,
+          "pct_other": 0.0075,
+          "median_income": 44864,
+          "pct_bachelors_plus": 20.7715,
+          "pop_deviation_pct": 0.0007
         },
         {
           "district": 19,
@@ -486,9 +831,30 @@
           "r_votes": 143097,
           "total_votes_cast": 157145,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 647065,
+          "pct_white": 0.9221,
+          "pct_black": 0.0295,
+          "pct_hispanic": 0.0266,
+          "pct_asian": 0.0111,
+          "pct_other": 0.0108,
+          "median_income": 45363,
+          "pct_bachelors_plus": 13.8825,
+          "pop_deviation_pct": 0.0011
         }
-      ]
+      ],
+      "demographics": {
+        "total_population": 12281054,
+        "ideal_district_pop": 646371,
+        "pct_white": 0.8405,
+        "pct_black": 0.0979,
+        "pct_hispanic": 0.0321,
+        "pct_asian": 0.018,
+        "pct_other": 0.0115,
+        "median_income": 41079,
+        "pct_bachelors_plus": 13.9476,
+        "income_source": "2000 Census SF3a (income in 1999)"
+      }
     },
     {
       "cycle_year": 2012,
@@ -521,7 +887,16 @@
           "r_votes": 41708,
           "total_votes_cast": 277102,
           "margin_pct": 0.699,
-          "contested": true
+          "contested": true,
+          "population": 696631,
+          "pct_white": 0.4179,
+          "pct_black": 0.3415,
+          "pct_hispanic": 0.1531,
+          "pct_asian": 0.0665,
+          "pct_other": 0.021,
+          "median_income": 39888,
+          "pct_bachelors_plus": 0.227,
+          "pop_deviation_pct": -0.0126
         },
         {
           "district": 2,
@@ -532,7 +907,16 @@
           "r_votes": 33381,
           "total_votes_cast": 356386,
           "margin_pct": 0.8101,
-          "contested": true
+          "contested": true,
+          "population": 709625,
+          "pct_white": 0.2884,
+          "pct_black": 0.5879,
+          "pct_hispanic": 0.0551,
+          "pct_asian": 0.0454,
+          "pct_other": 0.0232,
+          "median_income": 36527,
+          "pct_bachelors_plus": 0.3122,
+          "pop_deviation_pct": 0.0058
         },
         {
           "district": 3,
@@ -543,7 +927,16 @@
           "r_votes": 165826,
           "total_votes_cast": 302514,
           "margin_pct": 0.1446,
-          "contested": true
+          "contested": true,
+          "population": 704426,
+          "pct_white": 0.9142,
+          "pct_black": 0.0437,
+          "pct_hispanic": 0.0185,
+          "pct_asian": 0.0082,
+          "pct_other": 0.0155,
+          "median_income": 46462,
+          "pct_bachelors_plus": 0.2238,
+          "pop_deviation_pct": -0.0016
         },
         {
           "district": 4,
@@ -554,7 +947,16 @@
           "r_votes": 181603,
           "total_votes_cast": 303980,
           "margin_pct": 0.2689,
-          "contested": true
+          "contested": true,
+          "population": 705898,
+          "pct_white": 0.8306,
+          "pct_black": 0.0717,
+          "pct_hispanic": 0.059,
+          "pct_asian": 0.0179,
+          "pct_other": 0.0209,
+          "median_income": 57876,
+          "pct_bachelors_plus": 0.2406,
+          "pop_deviation_pct": 0.0005
         },
         {
           "district": 5,
@@ -565,7 +967,16 @@
           "r_votes": 177740,
           "total_votes_cast": 282465,
           "margin_pct": 0.2585,
-          "contested": true
+          "contested": true,
+          "population": 705633,
+          "pct_white": 0.9349,
+          "pct_black": 0.0212,
+          "pct_hispanic": 0.0163,
+          "pct_asian": 0.0155,
+          "pct_other": 0.0121,
+          "median_income": 44647,
+          "pct_bachelors_plus": 0.2118,
+          "pop_deviation_pct": 0.0001
         },
         {
           "district": 6,
@@ -576,7 +987,16 @@
           "r_votes": 191725,
           "total_votes_cast": 335528,
           "margin_pct": 0.1428,
-          "contested": true
+          "contested": true,
+          "population": 704962,
+          "pct_white": 0.8582,
+          "pct_black": 0.0412,
+          "pct_hispanic": 0.0468,
+          "pct_asian": 0.0384,
+          "pct_other": 0.0154,
+          "median_income": 73720,
+          "pct_bachelors_plus": 0.4026,
+          "pop_deviation_pct": -0.0008
         },
         {
           "district": 7,
@@ -587,7 +1007,16 @@
           "r_votes": 209942,
           "total_votes_cast": 353451,
           "margin_pct": 0.188,
-          "contested": true
+          "contested": true,
+          "population": 707000,
+          "pct_white": 0.8694,
+          "pct_black": 0.05,
+          "pct_hispanic": 0.0279,
+          "pct_asian": 0.038,
+          "pct_other": 0.0147,
+          "median_income": 79297,
+          "pct_bachelors_plus": 0.4027,
+          "pop_deviation_pct": 0.0021
         },
         {
           "district": 8,
@@ -598,7 +1027,16 @@
           "r_votes": 199379,
           "total_votes_cast": 352238,
           "margin_pct": 0.1321,
-          "contested": true
+          "contested": true,
+          "population": 705845,
+          "pct_white": 0.8683,
+          "pct_black": 0.0341,
+          "pct_hispanic": 0.0411,
+          "pct_asian": 0.0423,
+          "pct_other": 0.0142,
+          "median_income": 77226,
+          "pct_bachelors_plus": 0.3502,
+          "pop_deviation_pct": 0.0004
         },
         {
           "district": 9,
@@ -609,7 +1047,16 @@
           "r_votes": 169177,
           "total_votes_cast": 274305,
           "margin_pct": 0.2335,
-          "contested": true
+          "contested": true,
+          "population": 704950,
+          "pct_white": 0.9348,
+          "pct_black": 0.0289,
+          "pct_hispanic": 0.0175,
+          "pct_asian": 0.0064,
+          "pct_other": 0.0124,
+          "median_income": 43459,
+          "pct_bachelors_plus": 0.1668,
+          "pop_deviation_pct": -0.0008
         },
         {
           "district": 10,
@@ -620,7 +1067,16 @@
           "r_votes": 179563,
           "total_votes_cast": 273790,
           "margin_pct": 0.3117,
-          "contested": true
+          "contested": true,
+          "population": 706290,
+          "pct_white": 0.9148,
+          "pct_black": 0.029,
+          "pct_hispanic": 0.0346,
+          "pct_asian": 0.0077,
+          "pct_other": 0.0139,
+          "median_income": 48196,
+          "pct_bachelors_plus": 0.1965,
+          "pop_deviation_pct": 0.0011
         },
         {
           "district": 11,
@@ -631,7 +1087,16 @@
           "r_votes": 166967,
           "total_votes_cast": 285198,
           "margin_pct": 0.1709,
-          "contested": true
+          "contested": true,
+          "population": 702715,
+          "pct_white": 0.8789,
+          "pct_black": 0.0459,
+          "pct_hispanic": 0.0458,
+          "pct_asian": 0.014,
+          "pct_other": 0.0154,
+          "median_income": 50005,
+          "pct_bachelors_plus": 0.2175,
+          "pop_deviation_pct": -0.004
         },
         {
           "district": 12,
@@ -642,7 +1107,16 @@
           "r_votes": 175352,
           "total_votes_cast": 338941,
           "margin_pct": 0.0347,
-          "contested": true
+          "contested": true,
+          "population": 705147,
+          "pct_white": 0.9314,
+          "pct_black": 0.0298,
+          "pct_hispanic": 0.0112,
+          "pct_asian": 0.0137,
+          "pct_other": 0.014,
+          "median_income": 53840,
+          "pct_bachelors_plus": 0.2915,
+          "pop_deviation_pct": -0.0005
         },
         {
           "district": 13,
@@ -653,7 +1127,16 @@
           "r_votes": 93918,
           "total_votes_cast": 303819,
           "margin_pct": 0.3818,
-          "contested": true
+          "contested": true,
+          "population": 710789,
+          "pct_white": 0.6181,
+          "pct_black": 0.173,
+          "pct_hispanic": 0.1032,
+          "pct_asian": 0.0824,
+          "pct_other": 0.0233,
+          "median_income": 56446,
+          "pct_bachelors_plus": 0.315,
+          "pop_deviation_pct": 0.0074
         },
         {
           "district": 14,
@@ -664,7 +1147,16 @@
           "r_votes": 75702,
           "total_votes_cast": 327634,
           "margin_pct": 0.5379,
-          "contested": true
+          "contested": true,
+          "population": 706629,
+          "pct_white": 0.7141,
+          "pct_black": 0.2125,
+          "pct_hispanic": 0.0188,
+          "pct_asian": 0.0265,
+          "pct_other": 0.0281,
+          "median_income": 39836,
+          "pct_bachelors_plus": 0.281,
+          "pop_deviation_pct": 0.0016
         },
         {
           "district": 15,
@@ -675,7 +1167,16 @@
           "r_votes": 168960,
           "total_votes_cast": 297724,
           "margin_pct": 0.135,
-          "contested": true
+          "contested": true,
+          "population": 707666,
+          "pct_white": 0.7925,
+          "pct_black": 0.0359,
+          "pct_hispanic": 0.1303,
+          "pct_asian": 0.0249,
+          "pct_other": 0.0164,
+          "median_income": 57378,
+          "pct_bachelors_plus": 0.2702,
+          "pop_deviation_pct": 0.003
         },
         {
           "district": 16,
@@ -686,7 +1187,16 @@
           "r_votes": 156192,
           "total_votes_cast": 284781,
           "margin_pct": 0.1683,
-          "contested": true
+          "contested": true,
+          "population": 705171,
+          "pct_white": 0.7455,
+          "pct_black": 0.0551,
+          "pct_hispanic": 0.1626,
+          "pct_asian": 0.0186,
+          "pct_other": 0.0181,
+          "median_income": 53252,
+          "pct_bachelors_plus": 0.2366,
+          "pop_deviation_pct": -0.0005
         },
         {
           "district": 17,
@@ -697,7 +1207,16 @@
           "r_votes": 106208,
           "total_votes_cast": 267601,
           "margin_pct": 0.2062,
-          "contested": true
+          "contested": true,
+          "population": 703678,
+          "pct_white": 0.845,
+          "pct_black": 0.0512,
+          "pct_hispanic": 0.0712,
+          "pct_asian": 0.0155,
+          "pct_other": 0.017,
+          "median_income": 47750,
+          "pct_bachelors_plus": 0.1968,
+          "pop_deviation_pct": -0.0026
         },
         {
           "district": 18,
@@ -708,9 +1227,30 @@
           "r_votes": 216727,
           "total_votes_cast": 338873,
           "margin_pct": 0.2791,
-          "contested": true
+          "contested": true,
+          "population": 706534,
+          "pct_white": 0.9363,
+          "pct_black": 0.0227,
+          "pct_hispanic": 0.0111,
+          "pct_asian": 0.0168,
+          "pct_other": 0.0131,
+          "median_income": 57756,
+          "pct_bachelors_plus": 0.3212,
+          "pop_deviation_pct": 0.0014
         }
-      ]
+      ],
+      "demographics": {
+        "total_population": 12699589,
+        "ideal_district_pop": 705533,
+        "pct_white": 0.7941,
+        "pct_black": 0.1042,
+        "pct_hispanic": 0.0569,
+        "pct_asian": 0.0277,
+        "pct_other": 0.0172,
+        "median_income": 53531,
+        "pct_bachelors_plus": 0.2703,
+        "income_source": "ACS 2008\u20132012 5-year"
+      }
     },
     {
       "cycle_year": 2022,
@@ -743,7 +1283,16 @@
           "r_votes": 201571,
           "total_votes_cast": 367380,
           "margin_pct": 0.0973,
-          "contested": true
+          "contested": true,
+          "population": 763498,
+          "pct_white": 0.8072,
+          "pct_black": 0.0367,
+          "pct_hispanic": 0.0599,
+          "pct_asian": 0.0593,
+          "pct_other": 0.0369,
+          "median_income": 106744,
+          "pct_bachelors_plus": 0.4321,
+          "pop_deviation_pct": -0.0007
         },
         {
           "district": 2,
@@ -754,7 +1303,16 @@
           "r_votes": 45454,
           "total_votes_cast": 186683,
           "margin_pct": 0.513,
-          "contested": true
+          "contested": true,
+          "population": 762893,
+          "pct_white": 0.369,
+          "pct_black": 0.2316,
+          "pct_hispanic": 0.2654,
+          "pct_asian": 0.092,
+          "pct_other": 0.0419,
+          "median_income": 56537,
+          "pct_bachelors_plus": 0.2682,
+          "pop_deviation_pct": -0.0015
         },
         {
           "district": 3,
@@ -765,7 +1323,16 @@
           "r_votes": 0,
           "total_votes_cast": 263935,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 756676,
+          "pct_white": 0.3108,
+          "pct_black": 0.5273,
+          "pct_hispanic": 0.0571,
+          "pct_asian": 0.0604,
+          "pct_other": 0.0444,
+          "median_income": 59056,
+          "pct_bachelors_plus": 0.4149,
+          "pop_deviation_pct": -0.0097
         },
         {
           "district": 4,
@@ -776,7 +1343,16 @@
           "r_votes": 141986,
           "total_votes_cast": 366785,
           "margin_pct": 0.2258,
-          "contested": true
+          "contested": true,
+          "population": 764402,
+          "pct_white": 0.7745,
+          "pct_black": 0.0779,
+          "pct_hispanic": 0.0545,
+          "pct_asian": 0.0578,
+          "pct_other": 0.0353,
+          "median_income": 103961,
+          "pct_bachelors_plus": 0.4765,
+          "pop_deviation_pct": 0.0004
         },
         {
           "district": 5,
@@ -787,7 +1363,16 @@
           "r_votes": 110058,
           "total_votes_cast": 315186,
           "margin_pct": 0.3016,
-          "contested": true
+          "contested": true,
+          "population": 763043,
+          "pct_white": 0.5948,
+          "pct_black": 0.2439,
+          "pct_hispanic": 0.0558,
+          "pct_asian": 0.066,
+          "pct_other": 0.0395,
+          "median_income": 83666,
+          "pct_bachelors_plus": 0.4122,
+          "pop_deviation_pct": -0.0013
         },
         {
           "district": 6,
@@ -798,7 +1383,16 @@
           "r_votes": 136097,
           "total_votes_cast": 326483,
           "margin_pct": 0.1663,
-          "contested": true
+          "contested": true,
+          "population": 766664,
+          "pct_white": 0.7052,
+          "pct_black": 0.0521,
+          "pct_hispanic": 0.1605,
+          "pct_asian": 0.0486,
+          "pct_other": 0.0335,
+          "median_income": 100086,
+          "pct_bachelors_plus": 0.4771,
+          "pop_deviation_pct": 0.0034
         },
         {
           "district": 7,
@@ -809,7 +1403,16 @@
           "r_votes": 145527,
           "total_votes_cast": 296891,
           "margin_pct": 0.0197,
-          "contested": true
+          "contested": true,
+          "population": 766617,
+          "pct_white": 0.6896,
+          "pct_black": 0.0517,
+          "pct_hispanic": 0.1997,
+          "pct_asian": 0.029,
+          "pct_other": 0.03,
+          "median_income": 76812,
+          "pct_bachelors_plus": 0.3105,
+          "pop_deviation_pct": 0.0033
         },
         {
           "district": 8,
@@ -820,7 +1423,16 @@
           "r_votes": 139930,
           "total_votes_cast": 286886,
           "margin_pct": 0.0245,
-          "contested": true
+          "contested": true,
+          "population": 764480,
+          "pct_white": 0.7511,
+          "pct_black": 0.0577,
+          "pct_hispanic": 0.1384,
+          "pct_asian": 0.019,
+          "pct_other": 0.0339,
+          "median_income": 65239,
+          "pct_bachelors_plus": 0.2643,
+          "pop_deviation_pct": 0.0005
         },
         {
           "district": 9,
@@ -831,7 +1443,16 @@
           "r_votes": 209185,
           "total_votes_cast": 301807,
           "margin_pct": 0.3862,
-          "contested": true
+          "contested": true,
+          "population": 765339,
+          "pct_white": 0.8854,
+          "pct_black": 0.0234,
+          "pct_hispanic": 0.0582,
+          "pct_asian": 0.0088,
+          "pct_other": 0.0243,
+          "median_income": 65625,
+          "pct_bachelors_plus": 0.222,
+          "pop_deviation_pct": 0.0017
         },
         {
           "district": 10,
@@ -842,7 +1463,16 @@
           "r_votes": 169331,
           "total_votes_cast": 314546,
           "margin_pct": 0.0767,
-          "contested": true
+          "contested": true,
+          "population": 766732,
+          "pct_white": 0.7275,
+          "pct_black": 0.1007,
+          "pct_hispanic": 0.0921,
+          "pct_asian": 0.0427,
+          "pct_other": 0.037,
+          "median_income": 76477,
+          "pct_bachelors_plus": 0.3318,
+          "pop_deviation_pct": 0.0035
         },
         {
           "district": 11,
@@ -853,7 +1483,16 @@
           "r_votes": 194991,
           "total_votes_cast": 316826,
           "margin_pct": 0.2309,
-          "contested": true
+          "contested": true,
+          "population": 765641,
+          "pct_white": 0.8237,
+          "pct_black": 0.0323,
+          "pct_hispanic": 0.0939,
+          "pct_asian": 0.0205,
+          "pct_other": 0.0296,
+          "median_income": 81948,
+          "pct_bachelors_plus": 0.2941,
+          "pop_deviation_pct": 0.0021
         },
         {
           "district": 12,
@@ -864,7 +1503,16 @@
           "r_votes": 143946,
           "total_votes_cast": 328620,
           "margin_pct": 0.1239,
-          "contested": true
+          "contested": true,
+          "population": 763762,
+          "pct_white": 0.7441,
+          "pct_black": 0.1499,
+          "pct_hispanic": 0.0258,
+          "pct_asian": 0.0393,
+          "pct_other": 0.0409,
+          "median_income": 66676,
+          "pct_bachelors_plus": 0.3973,
+          "pop_deviation_pct": -0.0004
         },
         {
           "district": 13,
@@ -875,7 +1523,16 @@
           "r_votes": 260345,
           "total_votes_cast": 260345,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 765340,
+          "pct_white": 0.9072,
+          "pct_black": 0.0228,
+          "pct_hispanic": 0.0355,
+          "pct_asian": 0.0066,
+          "pct_other": 0.0278,
+          "median_income": 65012,
+          "pct_bachelors_plus": 0.2113,
+          "pop_deviation_pct": 0.0017
         },
         {
           "district": 14,
@@ -886,7 +1543,16 @@
           "r_votes": 230865,
           "total_votes_cast": 230865,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 763254,
+          "pct_white": 0.9166,
+          "pct_black": 0.0299,
+          "pct_hispanic": 0.0147,
+          "pct_asian": 0.0075,
+          "pct_other": 0.0313,
+          "median_income": 64549,
+          "pct_bachelors_plus": 0.2613,
+          "pop_deviation_pct": -0.0011
         },
         {
           "district": 15,
@@ -897,7 +1563,16 @@
           "r_votes": 213417,
           "total_votes_cast": 305146,
           "margin_pct": 0.3988,
-          "contested": true
+          "contested": true,
+          "population": 765029,
+          "pct_white": 0.918,
+          "pct_black": 0.0194,
+          "pct_hispanic": 0.0218,
+          "pct_asian": 0.0175,
+          "pct_other": 0.0233,
+          "median_income": 61122,
+          "pct_bachelors_plus": 0.2445,
+          "pop_deviation_pct": 0.0013
         },
         {
           "district": 16,
@@ -908,7 +1583,16 @@
           "r_votes": 190546,
           "total_votes_cast": 320989,
           "margin_pct": 0.1872,
-          "contested": true
+          "contested": true,
+          "population": 765331,
+          "pct_white": 0.8868,
+          "pct_black": 0.0406,
+          "pct_hispanic": 0.0271,
+          "pct_asian": 0.0124,
+          "pct_other": 0.033,
+          "median_income": 63947,
+          "pct_bachelors_plus": 0.2895,
+          "pop_deviation_pct": 0.0016
         },
         {
           "district": 17,
@@ -919,16 +1603,37 @@
           "r_votes": 169013,
           "total_votes_cast": 362628,
           "margin_pct": 0.0678,
-          "contested": true
+          "contested": true,
+          "population": 760507,
+          "pct_white": 0.8408,
+          "pct_black": 0.0711,
+          "pct_hispanic": 0.0196,
+          "pct_asian": 0.031,
+          "pct_other": 0.0375,
+          "median_income": 78954,
+          "pct_bachelors_plus": 0.4333,
+          "pop_deviation_pct": -0.0047
         }
-      ]
+      ],
+      "demographics": {
+        "total_population": 12989208,
+        "ideal_district_pop": 764071,
+        "pct_white": 0.7446,
+        "pct_black": 0.1038,
+        "pct_hispanic": 0.0812,
+        "pct_asian": 0.0363,
+        "pct_other": 0.0341,
+        "median_income": 75083,
+        "pct_bachelors_plus": 0.3376,
+        "income_source": "ACS 2018\u20132022 5-year"
+      }
     },
     {
       "cycle_year": 2024,
       "congress": 118,
       "total_seats": 17,
       "redistricting_controller": "Court-drawn (governor veto)",
-      "notes": "2024 elections used the same 118th Congress maps drawn after the 2020 census",
+      "notes": "2024 election results shown with 118th Congress boundaries (same maps as 2022 \u2014 no redistricting between cycles). Demographics reflect the 2020 Census.",
       "efficiency_gap": 0.0622,
       "mean_median_diff": 0.0318,
       "seats_d": 8,
@@ -954,7 +1659,16 @@
           "r_votes": 261390,
           "total_votes_cast": 463432,
           "margin_pct": 0.1281,
-          "contested": true
+          "contested": true,
+          "population": 763498,
+          "pct_white": 0.8072,
+          "pct_black": 0.0367,
+          "pct_hispanic": 0.0599,
+          "pct_asian": 0.0593,
+          "pct_other": 0.0369,
+          "median_income": 106744,
+          "pct_bachelors_plus": 0.4321,
+          "pop_deviation_pct": -0.0007
         },
         {
           "district": 2,
@@ -965,7 +1679,16 @@
           "r_votes": 77355,
           "total_votes_cast": 271046,
           "margin_pct": 0.4292,
-          "contested": true
+          "contested": true,
+          "population": 762893,
+          "pct_white": 0.369,
+          "pct_black": 0.2316,
+          "pct_hispanic": 0.2654,
+          "pct_asian": 0.092,
+          "pct_other": 0.0419,
+          "median_income": 56537,
+          "pct_bachelors_plus": 0.2682,
+          "pop_deviation_pct": -0.0015
         },
         {
           "district": 3,
@@ -976,7 +1699,16 @@
           "r_votes": 0,
           "total_votes_cast": 340223,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 756676,
+          "pct_white": 0.3108,
+          "pct_black": 0.5273,
+          "pct_hispanic": 0.0571,
+          "pct_asian": 0.0604,
+          "pct_other": 0.0444,
+          "median_income": 59056,
+          "pct_bachelors_plus": 0.4149,
+          "pop_deviation_pct": -0.0097
         },
         {
           "district": 4,
@@ -987,7 +1719,16 @@
           "r_votes": 186457,
           "total_votes_cast": 455523,
           "margin_pct": 0.1813,
-          "contested": true
+          "contested": true,
+          "population": 764402,
+          "pct_white": 0.7745,
+          "pct_black": 0.0779,
+          "pct_hispanic": 0.0545,
+          "pct_asian": 0.0578,
+          "pct_other": 0.0353,
+          "median_income": 103961,
+          "pct_bachelors_plus": 0.4765,
+          "pop_deviation_pct": 0.0004
         },
         {
           "district": 5,
@@ -998,7 +1739,16 @@
           "r_votes": 142355,
           "total_votes_cast": 410109,
           "margin_pct": 0.3058,
-          "contested": true
+          "contested": true,
+          "population": 763043,
+          "pct_white": 0.5948,
+          "pct_black": 0.2439,
+          "pct_hispanic": 0.0558,
+          "pct_asian": 0.066,
+          "pct_other": 0.0395,
+          "median_income": 83666,
+          "pct_bachelors_plus": 0.4122,
+          "pop_deviation_pct": -0.0013
         },
         {
           "district": 6,
@@ -1009,7 +1759,16 @@
           "r_votes": 183638,
           "total_votes_cast": 419263,
           "margin_pct": 0.124,
-          "contested": true
+          "contested": true,
+          "population": 766664,
+          "pct_white": 0.7052,
+          "pct_black": 0.0521,
+          "pct_hispanic": 0.1605,
+          "pct_asian": 0.0486,
+          "pct_other": 0.0335,
+          "median_income": 100086,
+          "pct_bachelors_plus": 0.4771,
+          "pop_deviation_pct": 0.0034
         },
         {
           "district": 7,
@@ -1020,7 +1779,16 @@
           "r_votes": 203688,
           "total_votes_cast": 403314,
           "margin_pct": 0.0101,
-          "contested": true
+          "contested": true,
+          "population": 766617,
+          "pct_white": 0.6896,
+          "pct_black": 0.0517,
+          "pct_hispanic": 0.1997,
+          "pct_asian": 0.029,
+          "pct_other": 0.03,
+          "median_income": 76812,
+          "pct_bachelors_plus": 0.3105,
+          "pop_deviation_pct": 0.0033
         },
         {
           "district": 8,
@@ -1031,7 +1799,16 @@
           "r_votes": 0,
           "total_votes_cast": 189411,
           "margin_pct": null,
-          "contested": false
+          "contested": false,
+          "population": 764480,
+          "pct_white": 0.7511,
+          "pct_black": 0.0577,
+          "pct_hispanic": 0.1384,
+          "pct_asian": 0.019,
+          "pct_other": 0.0339,
+          "median_income": 65239,
+          "pct_bachelors_plus": 0.2643,
+          "pop_deviation_pct": 0.0005
         },
         {
           "district": 9,
@@ -1042,7 +1819,16 @@
           "r_votes": 276212,
           "total_votes_cast": 391735,
           "margin_pct": 0.4102,
-          "contested": true
+          "contested": true,
+          "population": 765339,
+          "pct_white": 0.8854,
+          "pct_black": 0.0234,
+          "pct_hispanic": 0.0582,
+          "pct_asian": 0.0088,
+          "pct_other": 0.0243,
+          "median_income": 65625,
+          "pct_bachelors_plus": 0.222,
+          "pop_deviation_pct": 0.0017
         },
         {
           "district": 10,
@@ -1053,7 +1839,16 @@
           "r_votes": 205567,
           "total_votes_cast": 406001,
           "margin_pct": 0.0126,
-          "contested": true
+          "contested": true,
+          "population": 766732,
+          "pct_white": 0.7275,
+          "pct_black": 0.1007,
+          "pct_hispanic": 0.0921,
+          "pct_asian": 0.0427,
+          "pct_other": 0.037,
+          "median_income": 76477,
+          "pct_bachelors_plus": 0.3318,
+          "pop_deviation_pct": 0.0035
         },
         {
           "district": 11,
@@ -1064,7 +1859,16 @@
           "r_votes": 253672,
           "total_votes_cast": 403313,
           "margin_pct": 0.2579,
-          "contested": true
+          "contested": true,
+          "population": 765641,
+          "pct_white": 0.8237,
+          "pct_black": 0.0323,
+          "pct_hispanic": 0.0939,
+          "pct_asian": 0.0205,
+          "pct_other": 0.0296,
+          "median_income": 81948,
+          "pct_bachelors_plus": 0.2941,
+          "pop_deviation_pct": 0.0021
         },
         {
           "district": 12,
@@ -1075,7 +1879,16 @@
           "r_votes": 181426,
           "total_votes_cast": 416228,
           "margin_pct": 0.1282,
-          "contested": true
+          "contested": true,
+          "population": 763762,
+          "pct_white": 0.7441,
+          "pct_black": 0.1499,
+          "pct_hispanic": 0.0258,
+          "pct_asian": 0.0393,
+          "pct_other": 0.0409,
+          "median_income": 66676,
+          "pct_bachelors_plus": 0.3973,
+          "pop_deviation_pct": -0.0004
         },
         {
           "district": 13,
@@ -1086,7 +1899,16 @@
           "r_votes": 301460,
           "total_votes_cast": 406283,
           "margin_pct": 0.484,
-          "contested": true
+          "contested": true,
+          "population": 765340,
+          "pct_white": 0.9072,
+          "pct_black": 0.0228,
+          "pct_hispanic": 0.0355,
+          "pct_asian": 0.0066,
+          "pct_other": 0.0278,
+          "median_income": 65012,
+          "pct_bachelors_plus": 0.2113,
+          "pop_deviation_pct": 0.0017
         },
         {
           "district": 14,
@@ -1097,7 +1919,16 @@
           "r_votes": 268380,
           "total_votes_cast": 403135,
           "margin_pct": 0.3315,
-          "contested": true
+          "contested": true,
+          "population": 763254,
+          "pct_white": 0.9166,
+          "pct_black": 0.0299,
+          "pct_hispanic": 0.0147,
+          "pct_asian": 0.0075,
+          "pct_other": 0.0313,
+          "median_income": 64549,
+          "pct_bachelors_plus": 0.2613,
+          "pop_deviation_pct": -0.0011
         },
         {
           "district": 15,
@@ -1108,7 +1939,16 @@
           "r_votes": 279027,
           "total_votes_cast": 390435,
           "margin_pct": 0.4293,
-          "contested": true
+          "contested": true,
+          "population": 765029,
+          "pct_white": 0.918,
+          "pct_black": 0.0194,
+          "pct_hispanic": 0.0218,
+          "pct_asian": 0.0175,
+          "pct_other": 0.0233,
+          "median_income": 61122,
+          "pct_bachelors_plus": 0.2445,
+          "pop_deviation_pct": 0.0013
         },
         {
           "district": 16,
@@ -1119,7 +1959,16 @@
           "r_votes": 256923,
           "total_votes_cast": 403632,
           "margin_pct": 0.2731,
-          "contested": true
+          "contested": true,
+          "population": 765331,
+          "pct_white": 0.8868,
+          "pct_black": 0.0406,
+          "pct_hispanic": 0.0271,
+          "pct_asian": 0.0124,
+          "pct_other": 0.033,
+          "median_income": 63947,
+          "pct_bachelors_plus": 0.2895,
+          "pop_deviation_pct": 0.0016
         },
         {
           "district": 17,
@@ -1130,9 +1979,30 @@
           "r_votes": 207900,
           "total_votes_cast": 450738,
           "margin_pct": 0.0775,
-          "contested": true
+          "contested": true,
+          "population": 760507,
+          "pct_white": 0.8408,
+          "pct_black": 0.0711,
+          "pct_hispanic": 0.0196,
+          "pct_asian": 0.031,
+          "pct_other": 0.0375,
+          "median_income": 78954,
+          "pct_bachelors_plus": 0.4333,
+          "pop_deviation_pct": -0.0047
         }
-      ]
+      ],
+      "demographics": {
+        "total_population": 12989208,
+        "ideal_district_pop": 764071,
+        "pct_white": 0.7446,
+        "pct_black": 0.1038,
+        "pct_hispanic": 0.0812,
+        "pct_asian": 0.0363,
+        "pct_other": 0.0341,
+        "median_income": 75083,
+        "pct_bachelors_plus": 0.3376,
+        "income_source": "ACS 2018\u20132022 5-year (2020 census boundaries)"
+      }
     }
   ]
 }

@@ -2,7 +2,7 @@
 
 ## Project overview
 
-[districtdrift.org](https://districtdrift.org) is a free, nonpartisan website documenting the history of congressional gerrymandering in the United States from 1992 to 2022. It is built for the general public, journalists, and educators.
+[districtdrift.org](https://districtdrift.org) is a free, nonpartisan website documenting the history of congressional gerrymandering in the United States from 1992 to 2024. It is built for the general public, journalists, and educators.
 
 ## Stack
 
@@ -60,7 +60,7 @@ npm run dev
 
 ## Key UI features
 
-- **State view**: cycle selector (1992/2002/2012/2022), boundary morph animation, panel layouts (sidebar / bottom bar)
+- **State view**: cycle selector (1992/2002/2012/2022/2024), boundary morph animation, panel layouts (sidebar / bottom bar)
 - **Nation view**: all 50 states colored by efficiency gap, seat-change overlays, rankings panel
 - **Floating map controls** (bottom-left): layout toggle · precinct overlay toggle · screenshot download
 - **Screenshot**: the ⬇ button saves the current map as `districtdrift-{state}-{year}.png` with a watermark
