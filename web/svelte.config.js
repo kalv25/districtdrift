@@ -8,7 +8,7 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter({
 			// Only route /feedback through the Cloudflare Worker; everything else is static.
-			routes: { include: ['/feedback'], exclude: ['/*'] }
+			routes: { include: ['/feedback', '/feedback-submit'], exclude: ['/*'] }
 		})
 	},
 	vitePlugin: {
