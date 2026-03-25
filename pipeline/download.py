@@ -280,12 +280,14 @@ _VEST_FALLBACKS: dict[int, list[str]] = {
 
 
 def _rdh_find_vest(
-    username: str, password: str, state_name: str, elec_year: str
+    username: str, password: str, state_name: str, elec_year: str,
+    retries: int = 3
 ) -> str | None:
     """Return the download URL for a VEST SHP matching state + year, or None.
 
     Dataset titles follow: "VEST {year} {State} precinct and election results"
     Keywords are AND-matched against title+format (case-insensitive).
+    Retries on network errors with exponential backoff.
     """
     import io as _io
     import pandas as _pd
@@ -297,17 +299,24 @@ def _rdh_find_vest(
         "states": state_name.lower(),
         "keywords": f"VEST {elec_year}",
     }
-    resp = requests.get(RDH_LIST_URL, params=params, timeout=30)
-    resp.raise_for_status()
-    df = _pd.read_csv(_io.StringIO(resp.content.decode("utf-8")))
-    if df.empty or "URL" not in df.columns:
-        return None
-    # Keep only SHP rows
-    fmt_col = df["Format"].astype(str) if "Format" in df.columns else _pd.Series([""] * len(df), dtype=str)
-    shp = df[fmt_col.str.upper() == "SHP"]
-    if shp.empty:
-        return None
-    return str(shp.iloc[0]["URL"])
+    for attempt in range(retries):
+        try:
+            resp = requests.get(RDH_LIST_URL, params=params, timeout=60)
+            resp.raise_for_status()
+            df = _pd.read_csv(_io.StringIO(resp.content.decode("utf-8")))
+            if df.empty or "URL" not in df.columns:
+                return None
+            fmt_col = df["Format"].astype(str) if "Format" in df.columns else _pd.Series([""] * len(df), dtype=str)
+            shp = df[fmt_col.str.upper() == "SHP"]
+            return str(shp.iloc[0]["URL"]) if not shp.empty else None
+        except requests.exceptions.RequestException as exc:
+            if attempt < retries - 1:
+                wait = 10 * (attempt + 1)
+                print(f"    Retry {attempt + 1}/{retries - 1} after {wait}s ({exc})")
+                time.sleep(wait)
+            else:
+                raise
+    return None
 
 
 def download_rdh_precincts(
@@ -328,31 +337,33 @@ def download_rdh_precincts(
             if dest.exists():
                 print(f"  {state_key} {cycle_year} VEST already present, skipping.")
                 continue
-            url: str | None = None
-            found_year: str | None = None
-            for elec_year in elec_years:
-                print(f"  Looking up {state_name} VEST {elec_year}...")
-                url = _rdh_find_vest(username, password, state_name, elec_year)
-                if url:
-                    found_year = elec_year
-                    break
-            if url is None or found_year is None:
-                print(f"  WARNING: no VEST shapefile found for {state_name} (tried {elec_years}).")
-                continue
-            if found_year != str(elec_years[0]):
-                print(f"  NOTE: using {found_year} as fallback for {cycle_year} cycle.")
-            # Strip any embedded params; re-issue with clean credentials + datasetid
-            base = url.split("?")[0]
-            dataset_id = url.split("datasetid=")[-1].split("&")[0] if "datasetid=" in url else ""
-            dl_params: dict[str, str] = {"username": username, "password": password}
-            if dataset_id:
-                dl_params["datasetid"] = dataset_id
-            print(f"  Downloading {state_name} {cycle_year} VEST (election year {found_year})...")
-            resp = requests.get(base, params=dl_params, timeout=120)
-            resp.raise_for_status()
-            with open(dest, "wb") as fh:
-                fh.write(resp.content)
-            print(f"  Saved to {dest}")
+            try:
+                url: str | None = None
+                found_year: str | None = None
+                for elec_year in elec_years:
+                    print(f"  Looking up {state_name} VEST {elec_year}...")
+                    url = _rdh_find_vest(username, password, state_name, elec_year)
+                    if url:
+                        found_year = elec_year
+                        break
+                if url is None or found_year is None:
+                    print(f"  WARNING: no VEST shapefile found for {state_name} (tried {elec_years}).")
+                    continue
+                if found_year != str(elec_years[0]):
+                    print(f"  NOTE: using {found_year} as fallback for {cycle_year} cycle.")
+                base = url.split("?")[0]
+                dataset_id = url.split("datasetid=")[-1].split("&")[0] if "datasetid=" in url else ""
+                dl_params: dict[str, str] = {"username": username, "password": password}
+                if dataset_id:
+                    dl_params["datasetid"] = dataset_id
+                print(f"  Downloading {state_name} {cycle_year} VEST (election year {found_year})...")
+                resp = requests.get(base, params=dl_params, timeout=180)
+                resp.raise_for_status()
+                with open(dest, "wb") as fh:
+                    fh.write(resp.content)
+                print(f"  Saved to {dest}")
+            except requests.exceptions.RequestException as exc:
+                print(f"  ERROR downloading {state_name} {cycle_year} VEST: {exc} — skipping.")
 
 
 # ---------------------------------------------------------------------------
