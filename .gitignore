@@ -1,6 +1,9 @@
 CLAUDE.md
 FEEDBACK.md
 WORK_LOG.md
+PROJECT_SCOPE.md
+scripts/update_work_log.py
+scripts/init_project_logs.py
 .claude/
 data/
 # Exclude root-level tiles dir (tippecanoe workspace) but allow web/static/tiles
