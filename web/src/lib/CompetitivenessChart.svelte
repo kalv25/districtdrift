@@ -41,6 +41,7 @@
 </script>
 
 <svg width="95%" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="District competitiveness by cycle">
+  <title>District competitiveness by cycle</title>
   {#each cycles as c, i}
     {@const y = i * (ROW_H + ROW_GAP)}
     {@const active = c.cycle_year === selectedYear}

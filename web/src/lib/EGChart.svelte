@@ -42,6 +42,7 @@
 </script>
 
 <svg width="95%" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Efficiency gap by cycle">
+  <title>Efficiency gap by cycle</title>
   <g transform="translate({margin.left},{margin.top})">
     <!-- Y axis ticks -->
     {#each yTicks as tick}

@@ -276,6 +276,14 @@
   const HELP_KEY = 'districtdrift.helpSeen';
   let helpOpen = $state(false);
   let helpTab = $state<'nation' | 'state' | 'metrics' | 'data'>('nation');
+  let statePickerGridEl = $state<HTMLElement | null>(null);
+
+  $effect(() => {
+    if (statePickerOpen && statePickerGridEl) {
+      const first = statePickerGridEl.querySelector<HTMLButtonElement>('button.state-tile');
+      first?.focus();
+    }
+  });
 
   const isMobile = () => window.innerWidth < 640;
 
@@ -1241,14 +1249,16 @@
 </div>
 
 {#if statePickerOpen}
-  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-  <div class="help-backdrop" onclick={() => statePickerOpen = false}>
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="help-backdrop" onclick={() => statePickerOpen = false}
+    role="button" tabindex="-1" aria-label="Close"
+    onkeydown={(e) => e.key === 'Enter' && (statePickerOpen = false)}>
     <div class="state-picker-modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Select a state">
       <div class="state-picker-header">
         <span class="state-picker-title">Select a state</span>
         <button class="help-close" onclick={() => statePickerOpen = false} aria-label="Close">✕</button>
       </div>
-      <div class="state-tile-grid">
+      <div class="state-tile-grid" bind:this={statePickerGridEl}>
         {#each Object.entries(STATES) as [po]}
           {@const pos = STATE_GRID[po]}
           {#if pos}
@@ -1272,8 +1282,10 @@
 {/if}
 
 {#if helpOpen}
-  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-  <div class="help-backdrop" onclick={() => helpOpen = false}>
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="help-backdrop" onclick={() => helpOpen = false}
+    role="button" tabindex="-1" aria-label="Close"
+    onkeydown={(e) => e.key === 'Enter' && (helpOpen = false)}>
     <div class="help-modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Help">
       <div class="help-header">
         <h2>About District Drift</h2>
@@ -1746,13 +1758,13 @@
     justify-content: center;
   }
   .panel-resize-h {
-    top: -4px; left: 0; right: 0;
-    height: 8px;
+    top: -22px; left: 0; right: 0;
+    height: 44px;
     cursor: ns-resize;
   }
   .panel-resize-v {
-    left: -4px; top: 0; bottom: 0;
-    width: 8px;
+    left: -22px; top: 0; bottom: 0;
+    width: 44px;
     cursor: ew-resize;
   }
   .panel-resize-handle::before {
@@ -1952,6 +1964,7 @@
     color: var(--btn-color);
   }
   button:hover { background: var(--btn-hover); }
+  button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
   /* Cycle buttons keep their inline gradient on hover — don't override */
   .cycle-buttons button:not(.anim-btn):hover { background: unset; }
 
@@ -2201,7 +2214,7 @@
     position: relative;
     padding: 0.45rem 1.25rem;
     background: #1a1a2e;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.6);
     font-size: 0.72rem;
   }
   footer a { color: rgba(255,255,255,0.65); }
@@ -2210,9 +2223,12 @@
     right: 1.25rem;
     top: 50%;
     transform: translateY(-50%);
-    opacity: 0.3;
+    opacity: 0.5;
     font-size: 0.65rem;
     white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .footer-updated { position: static; transform: none; display: block; text-align: right; margin-top: 0.25rem; }
   }
 
   .share-btn {

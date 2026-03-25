@@ -38,6 +38,7 @@
 </script>
 
 <svg width="95%" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Seat and vote share comparison">
+  <title>Seat and vote share comparison</title>
   <!-- Vote share row -->
   <text x={0} y={row1Label} font-size="9" fill="#888" font-weight="600" text-transform="uppercase" letter-spacing="0.5">VOTES</text>
   <rect x={0} y={row1Bar} width={W * $vShare} height={barH} fill="#4a90d9" rx="2" />

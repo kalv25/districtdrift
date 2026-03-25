@@ -823,7 +823,7 @@
     </div>
 
     <!-- Rank panel -->
-    <div class="rank-panel">
+    <div class="rank-panel" role="region" aria-label="States ranked by efficiency gap">
       <p class="rank-heading">National — {selectedYear}</p>
       <div class="national-totals">
         <span class="nt-d">{nationalTotals.d}D</span>
@@ -948,6 +948,7 @@
     stroke-width: 1;
   }
   .state-path.has-full-data:hover { opacity: 0.75; }
+  .state-path.has-full-data:focus-visible { outline: none; filter: drop-shadow(0 0 3px #80b8ff); }
 
   .state-label {
     font-family: inherit;
@@ -977,7 +978,7 @@
   .tt-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.2rem; }
   .tt-header strong { font-size: 0.82rem; }
   .tt-close {
-    background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer;
+    background: none; border: none; color: rgba(255,255,255,0.75); cursor: pointer;
     font-size: 0.7rem; padding: 0 0 0 4px; line-height: 1; flex-shrink: 0;
   }
   .tt-close:hover { color: #fff; }
@@ -1122,7 +1123,7 @@
     font-family: inherit;
     width: 100%;
     cursor: default;
-    opacity: 0.55;
+    opacity: 0.7;
   }
   .rank-row.rank-clickable { cursor: pointer; opacity: 1; }
   .rank-row.rank-clickable:hover { background: var(--btn-hover); }
@@ -1208,5 +1209,7 @@
   @media (max-width: 639px) {
     .rank-panel { display: none; }
     .eg-legend { bottom: 3.5rem; }
+    .zoom-controls { bottom: 1rem; right: 0.5rem; }
+    .zoom-btn { width: 36px; height: 36px; }
   }
 </style>
