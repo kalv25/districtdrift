@@ -256,31 +256,65 @@
   });
 
   // ── Pill stagger offsets (greedy left-to-right collision avoidance) ──────────
-  // Pre-computes a per-state Y offset so adjacent pills don't stack on top of each other.
-  // Each state tries 0, then −1 step, then +1 step (up before down).
+  // Pre-computes per-state Y offsets using actual pill widths + edge-to-edge X comparison.
   const pillYOffsets = $derived((() => {
     const result: Record<string, number> = {};
     const pillsActive = showEgLabels && (wipeFromYear !== null || (showDeltas && staticPrevYear !== null));
     if (!pillsActive) return result;
-    const EST_W = 82;  // generous pill width estimate
-    const EST_H = 20;  // pill height estimate
-    const STEP  = EST_H * 1.15;
-    const placed: Array<{ cx: number; cy: number }> = [];
+    const EST_H = 22;
+    const STEP  = EST_H * 1.3;
+    const GAP   = 5; // min horizontal gap between pills
+
+    // Estimate pill pixel width for a state given its area and cycle data
+    function approxPillW(po: string, area: number): number {
+      const arFS  = area > 2000 ? 22 : area > 800 ? 16 : 12;
+      const lblFS = area > 2000 ? 9  : area > 800 ? 7  : 6;
+      const egFS  = lblFS * 0.85;
+      const pH    = 5;
+      const currEg   = getEg(po);
+      const prevEg   = wipeFromYear !== null ? (prevEgMap[po] ?? null) : (staticPrevData[po]?.eg ?? null);
+      if (currEg === null || prevEg === null) return 0;
+      const currCycle  = nationData.find(s => s.state_po === po)?.cycles.find(c => c.year === selectedYear);
+      const prevSeatsE = wipeFromYear !== null
+        ? (prevSeatsMap[po] ?? null)
+        : (staticPrevData[po] ? { d: staticPrevData[po]!.d, r: staticPrevData[po]!.r } : null);
+      let useSeat = false;
+      let deltaStr = '';
+      if (currCycle && prevSeatsE) {
+        const seatNet = (currCycle.seats_r - prevSeatsE.r) - (currCycle.seats_d - prevSeatsE.d);
+        if (seatNet !== 0) { useSeat = true; deltaStr = seatNet > 0 ? `+${seatNet}R` : `${seatNet}D`; }
+      }
+      if (!useSeat) {
+        const egChange = currEg - prevEg;
+        deltaStr = (egChange >= 0 ? '+' : '') + (egChange * 100).toFixed(1) + '%';
+      }
+      const egChange   = currEg - prevEg;
+      const egStr      = (egChange >= 0 ? '+' : '') + (egChange * 100).toFixed(1) + '%';
+      const arCharW    = arFS * 0.72;
+      const lblW       = (`${po} ${deltaStr}`).length * lblFS * 0.64;
+      const egSuffixW  = useSeat ? (egStr.length * egFS * 0.62 + 4) : 0;
+      return pH + arCharW + 3 + lblW + egSuffixW + pH;
+    }
+
+    const placed: Array<{ lx: number; rx: number; cy: number }> = [];
     const eligible = [...statePaths]
       .filter(p => p.po && p.cx !== null && p.cy !== null && p.area > 900)
       .sort((a, b) => (a.cx ?? 0) - (b.cx ?? 0));
     for (const s of eligible) {
       const scx = s.cx!;
       const scy = s.cy!;
+      const pw  = approxPillW(s.po!, s.area);
+      if (pw === 0) continue;
+      const halfW = pw / 2 + GAP;
       let chosen = 0;
-      for (const off of [0, -STEP, STEP, -STEP * 2, STEP * 2]) {
+      for (const off of [0, -STEP, STEP, -STEP * 2, STEP * 2, -STEP * 3, STEP * 3]) {
         const pillCy = scy + off;
         const overlaps = placed.some(p =>
-          Math.abs(p.cx - scx) < EST_W && Math.abs(p.cy - pillCy) < EST_H
+          (scx - halfW) < p.rx && (scx + halfW) > p.lx && Math.abs(p.cy - pillCy) < EST_H
         );
         if (!overlaps) { chosen = off; break; }
       }
-      placed.push({ cx: scx, cy: scy + chosen });
+      placed.push({ lx: scx - halfW, rx: scx + halfW, cy: scy + chosen });
       result[s.po!] = chosen;
     }
     return result;
@@ -641,7 +675,7 @@
               {@const netUp     = useSeat ? seatNet! > 0 : egChange > 0.02}
               {@const netDown   = useSeat ? seatNet! < 0 : egChange < -0.02}
               {@const arChar    = netUp ? '↑' : netDown ? '↓' : '→'}
-              {@const color     = netUp ? '#c0392b' : netDown ? '#2471a3' : '#555'}
+              {@const color     = netUp ? '#ff8a8a' : netDown ? '#7ec8f5' : '#ccc'}
               {@const arFS      = area > 2000 ? 22 : area > 800 ? 16 : 12}
               {@const lblFS     = area > 2000 ? 9 : area > 800 ? 7 : 6}
               {@const egFS      = lblFS * 0.85}
@@ -670,8 +704,8 @@
                 <!-- Pill background -->
                 <rect
                   x={pillX} y={pillY} width={pillW} height={pillH}
-                  fill="rgba(255,255,255,0.97)" rx={pillH / 2}
-                  stroke="rgba(0,0,0,0.12)" stroke-width="0.5"
+                  fill="rgba(12,16,36,0.91)" rx={pillH / 2}
+                  stroke="rgba(255,255,255,0.1)" stroke-width="0.5"
                 />
                 <!-- Arrow character -->
                 <text x={arCharX} y={pillCy}
