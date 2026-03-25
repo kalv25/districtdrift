@@ -327,7 +327,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ League of Women Voters v. Ohio Redistricting Commission — maps struck twice',
         detail: 'The Ohio Supreme Court strikes the congressional map as an unconstitutional partisan gerrymander under the Ohio Constitution in January 2022, then strikes the remedial map again in July 2022. The commission repeatedly passes maps that the court rejects. After the court misses its own deadlines amid political standoff, the unconstitutional maps are nonetheless used for the November 2022 elections — a striking breakdown of judicial enforcement.',
-        url: 'https://www.aclu.org/cases/league-of-women-voters-of-ohio-v-ohio-redistricting-commission',
+        url: 'https://www.aclu.org/cases/league-women-voters-ohio-v-ohio-redistricting-commission',
       },
     ],
   },
@@ -379,7 +379,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ Texas v. United States — preclearance denied',
         detail: 'Texas sues in the D.C. District Court for VRA Section 5 preclearance. In August 2012, the court denies preclearance, finding the maps likely dilute minority representation — the first time a state\'s congressional map had been rejected since the preclearance regime began.',
-        url: 'https://www.justice.gov/crt/redistricting-0',
+        url: 'https://www.justice.gov/crt/voting-section',
       },
       {
         title: '⚖ Perry v. Perez — SCOTUS orders interim maps',
@@ -445,7 +445,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ League of Women Voters v. Commonwealth — PA Supreme Court strikes maps',
         detail: 'Filed under the Pennsylvania Constitution\'s free and equal elections clause rather than the federal constitution (sidestepping Vieth v. Jubelirer), the case reaches the PA Supreme Court. In January 2018, the court strikes the 2011 congressional map 5–2 as an unconstitutional partisan gerrymander — a landmark state-court ruling. When the Republican legislature fails to produce an acceptable remedial plan, the court draws its own map, used from the 2018 elections onward.',
-        url: 'https://www.pubintlaw.org/cases-and-projects/league-of-women-voters-of-pa-v-commonwealth-of-pa/',
+        url: 'https://www.pubintlaw.org/cases-and-projects/redistricting/',
       },
     ],
     2022: [
@@ -460,7 +460,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ Carter v. Chapman — PA Supreme Court draws new map',
         detail: 'The PA Supreme Court takes jurisdiction and, after receiving competing map submissions, adopts a remedial congressional plan on February 23, 2022. The court-drawn map produces a competitive 9-8 Republican advantage in 2022 — far more proportional than what the Republican legislature proposed.',
-        url: 'https://www.pacourts.us/news-and-statistics/cases-of-public-interest/carter-v-chapman',
+        url: 'https://redistricting.lls.edu/case/carter-v-chapman/',
       },
     ],
   },
@@ -695,7 +695,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ Arizona State Legislature v. Arizona Independent Redistricting Commission (2015)',
         detail: 'SCOTUS upheld 5-4 that voters can strip redistricting authority from legislatures via ballot initiative. Maps drew legal challenges but produced a competitive 5-4 Republican delegation.',
-        url: 'https://www.supremecourt.gov/opinions/14pdf/13-1314_kjfl.pdf',
+        url: 'https://www.oyez.org/cases/2014/13-1314',
       },
     ],
     2022: [
@@ -2115,7 +2115,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ Alexander v. South Carolina State Conference of the NAACP — SCOTUS upholds maps',
         detail: 'Plaintiffs challenge SC-1 (Charleston area) as an unconstitutional racial gerrymander, arguing Republicans cracked the Black community in North Charleston to dilute its voting power. The Supreme Court rules 6-3 in Alexander v. SCSCON (May 2023) that the district is not an unconstitutional racial gerrymander, applying a strong presumption of legislative good faith and holding that plaintiffs did not rebut the presumption that race was not the predominant factor. Justice Jackson\'s dissent accuses the majority of making racial gerrymandering nearly impossible to prove.',
-        url: 'https://www.supremecourt.gov/opinions/22pdf/21-1406_g31j.pdf',
+        url: 'https://www.oyez.org/cases/2023/21-1406',
       },
     ],
   },

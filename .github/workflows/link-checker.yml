@@ -1,0 +1,32 @@
+name: Link Checker
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'   # Every Monday at 9am UTC
+  workflow_dispatch:        # Allow manual trigger from GitHub UI
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install httpx
+
+      - name: Run link checker
+        run: python scripts/check_links.py
+
+      - name: Update GitHub issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: python scripts/report_links.py
