@@ -87,7 +87,11 @@ def submit_nhgis_extract(api_key: str, shapefile_ids: list[str]) -> str:
 
 
 def wait_for_nhgis_extract(api_key: str, extract_id: str, poll_seconds: int = 15) -> str:
-    """Poll until the extract is ready. Returns the download URL."""
+    """Poll until the extract is ready. Returns the download URL.
+
+    NHGIS API v2 status flow: queued → running → published → completed
+    Download URL is in downloadLinks.gisData.url (v2 camelCase).
+    """
     url = _nhgis_url(f"/extracts/{extract_id}")
     print(f"  Waiting for extract #{extract_id} to complete", end="", flush=True)
     while True:
@@ -97,9 +101,14 @@ def wait_for_nhgis_extract(api_key: str, extract_id: str, poll_seconds: int = 15
         status = data["status"]
         if status == "completed":
             print(" done.")
-            return data["download_links"]["gis_data"]
-        elif status == "failed":
-            print(f"\nExtract failed: {data}")
+            # v2 API: downloadLinks.gisData.url
+            gis = data.get("downloadLinks", {}).get("gisData", {})
+            download_url = gis.get("url") if isinstance(gis, dict) else None
+            if not download_url:
+                raise RuntimeError(f"Extract #{extract_id} completed but no gisData URL found: {data}")
+            return str(download_url)
+        elif status in ("failed", "expired"):
+            print(f"\nExtract {status}: {data}")
             sys.exit(1)
         print(".", end="", flush=True)
         time.sleep(poll_seconds)
