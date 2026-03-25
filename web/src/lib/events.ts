@@ -1669,42 +1669,58 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
   MO: {
     1992: [
       {
-        title: 'Republican governor, Democratic legislature split control',
-        detail: 'Governor Ashcroft (R) and a Democratic-controlled General Assembly draw maps after Missouri retains 9 seats from the 1990 census. Split government produces relatively neutral incumbent-protection maps maintaining the 6-3 Democratic delegation.',
+        title: 'Split government: Republican governor, Democratic legislature',
+        detail: 'Governor John Ashcroft (R) and a Democratic-controlled General Assembly share redistricting authority after Missouri retains 9 seats from the 1990 census. Democrats hold the pen in the legislature, producing maps that protect incumbents of both parties rather than maximizing partisan advantage.',
       },
       {
-        title: 'Missouri elects one of the most competitive delegations of the cycle',
-        detail: 'The negotiated maps reflect Missouri\'s genuinely competitive political balance of the early 1990s — a state that voted for Nixon, Reagan, and Bush at the presidential level while electing Democratic senators and representatives. Democrats win 6 of 9 seats in 1992, but several seats are highly competitive. Missouri loses this competitive balance over the following two decades.',
+        title: 'VRA preserves majority-Black MO-1 in St. Louis',
+        detail: 'The Voting Rights Act requires Missouri to maintain a majority-Black congressional district anchored in St. Louis city and northern St. Louis County. MO-1 elects William Lacy Clay Sr. (D), who has held the seat since 1969. This district configuration — a Black-majority St. Louis seat — is preserved unchanged in every subsequent redistricting cycle.',
+      },
+      {
+        title: 'Democrats win 6 of 9 seats in competitive cycle',
+        detail: 'Missouri\'s maps produce a 6D–3R delegation in 1992 in a state that voted for Bill Clinton — its last Democratic presidential vote until 2024. Several seats are genuinely competitive. Jim Talent (R) flips a suburban St. Louis seat by defeating Democratic incumbent Joan Kelly Horn. Missouri\'s competitive congressional balance erodes rapidly over the following decade as rural voters shift toward Republicans.',
       },
     ],
     2002: [
       {
-        title: 'Narrowly split government draws maps; Missouri retains 9 seats',
-        detail: 'Governor Holden (D) and a narrowly divided legislature draw maps after Missouri retains 9 seats. Democrats held a slim House majority during the redistricting process, but Republicans gained control of the House in the 2002 elections — the cycle\'s maps were drawn by a legislature in transition.',
+        title: 'Republican legislature, Democratic governor; Missouri retains 9 seats',
+        detail: 'Governor Bob Holden (D), who narrowly won the 2000 election, faces a Republican-controlled General Assembly during redistricting. Missouri retains 9 seats after the 2000 census. With no seat to eliminate, the map largely protects incumbents of both parties. Holden signs HB 1000 on June 1, 2001.',
       },
       {
-        title: 'Delegation flips to 5-4 Republican as rural Missouri shifts right',
-        detail: 'Despite maps drawn under partly Democratic control, Missouri\'s rapid rural realignment produces a 5-4 Republican delegation by 2002 — reflecting the same political trend as Tennessee, Arkansas, and other mid-South states where rural white voters shift decisively toward Republicans in federal races.',
+        title: 'Delegation shifts 5-4 Republican as rural Missouri completes its realignment',
+        detail: 'Despite maps drawn without a strong partisan gerrymander, Missouri\'s 2002 elections produce a 5D–4R delegation as rural white voters complete a rapid shift toward Republicans. Democrats retain St. Louis (Clay Jr., who succeeded his father in 2001), Kansas City (Karen McCarthy), and a handful of rural seats held by Blue Dog Democrats including Ike Skelton (MO-4). House Minority Leader Dick Gephardt (MO-3) represents St. Louis County.',
+      },
+      {
+        title: 'Missouri\'s competitive window closes',
+        detail: 'Missouri\'s congressional maps for 2002–2010 reflect a state in political transition. The Democratic delegation depends increasingly on incumbency advantage as the underlying partisan lean of rural districts shifts right. By 2010 Republicans hold 6 of 9 seats even before the post-census redistricting — making Missouri\'s 2010 remap a formality rather than a cause of Republican dominance.',
       },
     ],
     2012: [
       {
-        title: 'Missouri loses 1 seat after the 2010 census',
-        detail: 'The 2010 census reduces Missouri\'s delegation from 9 to 8. Republican supermajorities win both chambers in the 2010 wave. Governor Nixon (D) faces a Republican legislature with veto-override capability.',
+        title: 'Missouri loses 1 seat; Nixon veto overridden in four days',
+        detail: 'The 2010 census reduces Missouri from 9 to 8 congressional seats. Republicans control both chambers with veto-override majorities after their 2010 wave. Governor Jay Nixon (D) vetoes the Republican congressional map on April 30, 2011. The legislature overrides his veto on May 4, 2011 — just four days later — enacting the map without his consent.',
       },
       {
-        title: 'Republican legislature draws a 6-2 map; governor signs',
-        detail: 'Republicans draw maps producing a 6-2 Republican delegation in a state Obama lost by 10 points in 2012. Democrats are packed into the St. Louis-area 1st District and the Kansas City-area 5th District.',
+        title: 'Republicans eliminate MO-9 and force out Rep. Carnahan',
+        detail: 'The map eliminates the 9th district (northeast and central Missouri, including Columbia), absorbing its territory into the 6th and redrawn 3rd districts. More significantly, Republicans redraw MO-3 in St. Louis to push Democratic Rep. Russ Carnahan into a primary against William Lacy Clay Jr. in the majority-Black MO-1 — a race Carnahan could not win. Carnahan declines to run; a Democratic seat disappears without a single vote cast against him.',
+      },
+      {
+        title: '⚖ Partisan challenge fails; 6-2 Republican map stands',
+        detail: 'Opponents file suit in Missouri\'s 19th Judicial Circuit Court on September 23, 2011, alleging partisan gerrymandering and violations of the Missouri Constitution\'s compactness requirements. The challenge fails and the map stands. Missouri produces a 6R–2D delegation from 2012 onward — St. Louis (Clay Jr.) and Kansas City (Emanuel Cleaver) are the only Democratic seats — a ratio that holds unchanged through 2024.',
       },
     ],
     2022: [
       {
-        title: 'Republican supermajority draws maps; Missouri retains 8 seats',
-        detail: 'Governor Parson (R) and a Republican supermajority legislature draw maps after Missouri retains 8 seats. Maps maintain a 6-2 Republican advantage. The Kansas City and St. Louis cores remain the two Democratic seats; rural and suburban Missouri is solidly Republican.',
+        title: 'Republican supermajority deadlocked for months over 7-1 vs. 6-2 map',
+        detail: 'Missouri is the last state in the nation to enact its 2022 congressional map. A bloc of hard-line Senate Republicans (the "Conservative Caucus") pushes to crack Kansas City\'s MO-5 and create a 7R–1D map. Moderate Republicans, concerned about VRA exposure and incumbent safety, defend the existing 6R–2D framework. Democrats are unified in opposition to any urban cracking. The House passes a 6R–2D map twice before the Senate finally agrees.',
       },
       {
-        title: 'St. Louis and Kansas City packed into two safe Democratic districts',
-        detail: 'Republicans draw both urban cores — St. Louis (MO-1, the 1st District) and Kansas City (MO-5, the 5th District) — as safely Democratic districts, wasting Democratic votes and allowing Republicans to run up large margins in the surrounding six districts. The strategy has produced a consistent 6-2 Republican delegation since 2012 despite Missouri\'s ongoing population loss.',
+        title: 'HB 2909 signed; 6-2 map preserved; St. Louis and KC packed',
+        detail: 'Governor Mike Parson (R) signs HB 2909 on May 18, 2022 — months after every other state. Republicans preserve the 6R–2D delegation by packing Democrats into MO-1 (St. Louis, majority-Black VRA district) and MO-5 (Kansas City). Cori Bush (D) wins MO-1, having defeated longtime incumbent William Lacy Clay Jr. in the 2020 Democratic primary. Emanuel Cleaver (D) retains MO-5.',
+      },
+      {
+        title: '⚖ 2025: Republicans redraw maps mid-decade to target Kansas City',
+        detail: 'In August 2025, under pressure from national Republican allies, Governor Mike Kehoe calls a special session. The legislature passes HB 1 (the "Missouri First Map"), signed September 28, 2025, dismantling MO-5 and splitting Jackson County among three districts. Critics note the new boundary runs along Troost Avenue — a century-old racial dividing line in Kansas City. A state constitutional challenge is rejected by the Missouri Supreme Court on March 24, 2026. A referendum effort to overturn the map qualifies for the November 2026 ballot.',
       },
     ],
   },
@@ -1907,42 +1923,42 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
   NV: {
     1992: [
       {
-        title: 'Nevada gains 1 seat after the 1990 census',
-        detail: 'The 1990 census gives Nevada a second congressional seat, reflecting its rapid population growth. Governor Miller (D) and a Democratic legislature draw the new 2-district map. NV-1 covers urban Las Vegas; NV-2 covers rural Nevada and Reno.',
+        title: 'Nevada gains a second seat; split legislature negotiates bipartisan map',
+        detail: 'The 1990 census gives Nevada a second congressional seat, reflecting explosive Las Vegas growth. Governor Miller (D) and a split legislature — Democratic Assembly, Republican Senate — negotiate a bipartisan 2-district map. NV-1 covers urban Las Vegas (held by Democrat James Bilbray); NV-2 covers rural Nevada and Reno (held by Republican Barbara Vucanovich).',
       },
       {
         title: 'Nevada begins rapid transition from Republican to swing state',
-        detail: 'Nevada voted Republican in every presidential election from 1952 through 1992 except 1964. The influx of union workers in the Las Vegas casino and construction industries through the 1980s and 1990s begins a demographic shift toward Democrats. NV-1 (Las Vegas) trends Democratic; NV-2 (rural Nevada) remains reliably Republican for the full cycle.',
+        detail: 'Nevada voted Republican in every presidential election from 1952 through 1992 except 1964. The influx of union workers in the Las Vegas casino and hospitality industries — organized by UNITE HERE Local 226, the Culinary Workers — begins a demographic shift toward Democrats. NV-1 trends increasingly Democratic; in 1994 Republican John Ensign defeats Bilbray by just 1,436 votes, reflecting the district\'s competitiveness throughout the decade.',
       },
     ],
     2002: [
       {
-        title: 'Nevada gains another seat — one of the fastest-growing states in the nation',
-        detail: 'Nevada gains a third congressional seat after the 2000 census, reflecting continued explosive growth in the Las Vegas metro. Governor Guinn (R) and a split legislature (Democratic Senate, Republican Assembly) negotiate the new 3-district map. The new NV-3 covers suburban Henderson and Summerlin.',
+        title: 'Nevada gains a third seat; split government draws bipartisan incumbent-protection map',
+        detail: 'Nevada gains a third congressional seat after the 2000 census. Governor Guinn (R) and a split legislature (Republican Senate, Democratic Assembly) enact maps through a June 2001 special session. The new NV-3 covers suburban Henderson and southern Clark County. Scholars describe the map as a bipartisan incumbent gerrymander — each party\'s existing members are protected, and NV-3 is deliberately drawn as a competitive swing district.',
       },
       {
-        title: 'Split government produces a competitive 3-district map',
-        detail: 'The split legislature produces a negotiated map. NV-1 (urban Las Vegas, heavily union) is a safe Democratic seat; NV-2 (northern Nevada and rural areas) is a safe Republican seat; NV-3 (suburban Las Vegas) is drawn as a competitive swing district that changes party control multiple times during the cycle.',
+        title: 'NV-3 (suburban Las Vegas) becomes one of the nation\'s most contested seats',
+        detail: 'The new suburban 3rd District swings between parties throughout the decade. Republican Jon Porter wins in 2002 and holds it through 2008, when Democrat Dina Titus defeats him. Republican Joe Heck wins it back in 2010. The seat reflects Las Vegas\'s rapidly growing, ethnically diverse suburban belt — competitive in ways that Nevada\'s older urban-rural split was not.',
       },
     ],
     2012: [
       {
-        title: 'Nevada gains a fourth seat — the fastest-growing state of the decade',
-        detail: 'Nevada gains a fourth congressional seat after the 2010 census, one of only a handful of states to gain multiple seats across two consecutive censuses. Governor Sandoval (R) and a Democratic legislature draw the new 4-district map.',
+        title: 'Nevada gains a fourth seat; Sandoval vetoes Democratic maps — court draws lines',
+        detail: 'Nevada gains its fourth congressional seat after the 2010 census. Democrats control the legislature and pass congressional and legislative maps, but Republican Governor Sandoval vetoes both, accusing Democrats of violating the VRA. With no agreed plan, a state court appoints three Special Masters to draw the congressional map. The court-drawn map produces a 2-2 delegation — NV-4 (north Clark County) leans Democratic, while NV-3 (suburban Las Vegas) remains fiercely competitive.',
       },
       {
-        title: 'Democrats draw a map targeting 3 of 4 seats',
-        detail: 'The Democratic-controlled legislature draws maps creating a new NV-4 (suburban Las Vegas/Henderson) as a Democratic-leaning seat. Democrats immediately win NV-4 in 2012, achieving a 3-1 Democratic delegation. Republicans challenge the maps but courts uphold them.',
+        title: 'Steven Horsford (D) wins NV-4 — Nevada\'s first Black congressman',
+        detail: 'The new court-drawn NV-4 stretches across northern Clark County\'s working-class neighborhoods and rural central Nevada. Democrat Steven Horsford wins in 2012, becoming Nevada\'s first Black member of Congress. NV-4 quickly establishes itself as a genuine swing seat: Republican Cresent Hardy defeats Horsford in 2014, Democrat Ruben Kihuen flips it back in 2016, and Horsford returns in 2018 and holds it through the decade.',
       },
     ],
     2022: [
       {
-        title: 'Democrats draw aggressive map to protect 3-seat advantage',
-        detail: 'Governor Sisolak (D) and a Democratic legislature draw maps after Nevada retains 4 seats. Democrats draw maps protecting all three of their seats; Republicans challenge them in state court. All four districts remain highly competitive — Nevada is one of the nation\'s foremost swing states.',
+        title: 'First Democratic trifecta: aggressive map shifts all three Clark County seats toward Democrats',
+        detail: 'Nevada retains 4 seats. Governor Sisolak (D) and a Democratic legislature draw the first aggressively partisan map in Nevada\'s modern history. Democrats move Democratic-leaning voters out of the safe NV-1 (Las Vegas core) into competitive NV-3 and NV-4, flipping NV-3\'s presidential lean from Biden+0.2 to Biden+6.6 and NV-4 from Biden+3.9 to Biden+8.3. Republicans file Koenig v. Nevada challenging the maps; a judge dismisses the suit with prejudice in June 2022.',
       },
       {
-        title: 'Nevada\'s union-driven demographics shape redistricting priorities',
-        detail: 'Nevada\'s congressional districts are heavily shaped by the Las Vegas Culinary Workers Union (UNITE HERE Local 226), one of the most politically powerful local unions in the country. The union\'s membership — predominantly Hispanic, Black, and Asian American — drives Democratic turnout in NV-1 and NV-3, making Nevada one of the most diverse congressional delegations relative to its state population.',
+        title: 'Latino community split: cohesion in NV-1 sacrificed for suburban Democratic margins',
+        detail: 'The maps draw criticism from Las Vegas\'s Latino community: predominantly Hispanic, working-class precincts in north and east Las Vegas are redistricted out of NV-1 and into NV-3 and NV-4 to shore up suburban Democratic margins. Critics argue the strategy dilutes Latino political cohesion for partisan gain — a tension between VRA community-of-interest principles and Democratic incumbent protection that echoes similar controversies in Texas and California.',
       },
     ],
   },
@@ -1993,42 +2009,47 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
   OR: {
     1992: [
       {
-        title: 'Split government deadlocks; court draws the map',
-        detail: 'Governor Roberts (D) and a split legislature (Republican Senate, Democratic House) cannot agree on a congressional map. Oregon retains 5 seats after the 1990 census. A Marion County Circuit Court draws the congressional map for the first time — beginning a streak of court-drawn maps that would span two consecutive cycles.',
+        title: 'Split legislature deadlocks; Secretary of State draws the map',
+        detail: 'Oregon retains 5 seats after the 1990 census. Governor Roberts (D) and a split legislature (Republican Senate, Democratic House) cannot agree. Under a constitutional fallback, Secretary of State Phil Keisling (D) draws congressional maps from scratch, appointing a politically balanced citizen advisory committee. It is the first time Oregon\'s congressional lines are drawn by an executive officer rather than the legislature.',
       },
       {
-        title: 'Court-drawn map produces a competitive 4-1 Democratic delegation',
-        detail: 'The court-drawn map produces a 4-1 Democratic delegation as Oregon leans Democratic in the Clinton wave of 1992. The 5th District (Salem/mid-Willamette Valley) is the most competitive seat — a perennial battleground that changes party control multiple times over the following two decades.',
+        title: '4-1 Democratic delegation; OR-5 (Salem) emerges as the perennial swing seat',
+        detail: 'Oregon goes 4-1 Democratic in 1992 on the Clinton wave. The 5th District (Salem/mid-Willamette Valley) — a mix of the state capital, agricultural communities, and suburban growth — becomes a perennial battleground that changes party control multiple times over the following two decades.',
       },
     ],
     2002: [
       {
-        title: 'Split government deadlocks again; court draws maps for second consecutive cycle',
-        detail: 'Governor Kitzhaber (D) and a split legislature again fail to agree on a congressional map after Oregon retains 5 seats. A Marion County Circuit Court draws the maps for the second consecutive redistricting cycle — one of only a handful of states in modern history to have court-drawn congressional maps in back-to-back decades.',
+        title: 'Kitzhaber vetoes Republican maps; Multnomah County court draws second consecutive cycle',
+        detail: 'Oregon retains 5 seats after the 2000 census. Republicans control both chambers and pass SB 500, but Governor Kitzhaber (D) vetoes it. With no agreed plan, a Multnomah County Circuit Court draws the congressional maps — the second consecutive redistricting cycle with court-drawn lines, one of only a handful of such streaks in modern U.S. history.',
       },
       {
-        title: 'OR-5 (Salem/mid-valley) is the nation\'s most reliably competitive district',
-        detail: 'The court-drawn maps preserve the competitive nature of the 5th District — it changes party hands in 1994, 2000, 2002, 2004, 2006, and 2008, making it one of the most frequently contested seats in the country. Republican Darlene Hooley holds it from 1996 to 2009, then passes it to Democrat Kurt Schrader.',
+        title: 'OR-5 is one of the nation\'s most contested districts for a decade',
+        detail: 'The court-drawn 5th District changes party hands repeatedly: Democrat Les AuCoin loses in 1994, Republican Jim Bunn is unseated in 1996 by Democrat Darlene Hooley, who holds it until 2009. Democrat Kurt Schrader wins in 2008. The seat\'s extreme competitiveness reflects the Willamette Valley\'s blend of Salem suburbanites, agricultural workers, and small-city Democrats.',
       },
     ],
     2012: [
       {
-        title: 'Democrats draw maps for first time in decades',
-        detail: 'Governor Kitzhaber (D) and a Democratic-controlled legislature draw congressional maps for the first time since the 1980s. Oregon retains 5 seats after the 2010 census. Democrats produce a 4-1 Democratic delegation, drawing the 5th District (Salem/Willamette Valley) as a competitive Democratic-lean seat.',
+        title: 'Rare bipartisan outcome: tied House forces genuine compromise',
+        detail: 'Oregon retains 5 seats. The House is tied 30-30 between parties after the 2010 elections. Governor Kitzhaber (D) signals he will veto any partisan plan, creating strong incentive for agreement. The result is a genuine bipartisan compromise — passed 47-10 in the House and 27-3 in the Senate — and the first Oregon redistricting in modern history with no subsequent court challenge.',
       },
       {
-        title: 'Eastern Oregon\'s 2nd District — the largest by area in the contiguous US',
-        detail: 'The 2nd District covering eastern Oregon is the largest congressional district by land area in the contiguous United States, spanning more than 69,000 square miles — larger than Washington state. Its enormous rural ranching and agricultural expanse is solidly Republican; the district has been held by Republicans continuously since 1994.',
+        title: 'Eastern Oregon\'s 2nd District — largest by area in the contiguous US',
+        detail: 'The 2nd District spanning eastern Oregon covers more than 69,000 square miles — larger than Washington state — of high desert, ranching country, and Cascade foothills. Reliably Republican since 1994, it anchors the GOP\'s one House seat in Oregon. Greg Walden (R) holds it from 1999 through 2021; Cliff Bentz (R) succeeds him.',
       },
     ],
     2022: [
       {
-        title: 'Oregon gains 1 seat; Democrats draw aggressive 5-1 map',
-        detail: 'Oregon gains a sixth congressional seat after the 2020 census — its first new seat since the 1980s. Governor Brown (D) and a Democratic legislature draw maps targeting 5 of 6 seats. The new OR-6 is drawn as a competitive Democratic-lean district covering the Salem–Willamette Valley corridor.',
+        title: 'Oregon gains 6th seat; Republicans walk out, then return; maps pass',
+        detail: 'Oregon gains its first new congressional seat since the 1980s. Governor Brown (D) and a Democratic trifecta target a 5-1 map. On September 25, 2021, all but one House Republican boycott the special session, denying the two-thirds quorum required by the Oregon Constitution. After two days, 16 of 23 House Republicans return; the congressional map (SB 881) passes 33-16 in the House and 18-6 in the Senate. Brown signs it the same day.',
       },
       {
-        title: 'Nonpartisan reform measure narrowly fails',
-        detail: 'Measure 113 — a ballot initiative to create an independent redistricting commission — fails narrowly in 2022, leaving Oregon\'s legislature in control of redistricting for future cycles. Oregon is one of the few states to put redistricting reform directly to voters and reject it.',
+        title: '⚖ Clarno v. Fagan — court upholds maps; OR-5 flips Republican',
+        detail: 'Former Republican Secretary of State Bev Clarno and former House Speaker Larry Campbell challenge the maps as an unconstitutional partisan gerrymander. A five-judge Special Judicial Panel upholds them in November 2021, finding the maps were drawn on neutral criteria, not partisan purpose. The new OR-6 (Willamette Valley/Salem corridor) is won narrowly by Democrat Andrea Salinas. Meanwhile OR-5 is substantially redrawn — incumbent Kurt Schrader loses the Democratic primary to a progressive, and Republican Lori Chavez-DeRemer wins the general, producing a 4D-2R delegation.',
+        url: 'https://www.democracydocket.com/cases/oregon-congressional-redistricting-challenge-gop/',
+      },
+      {
+        title: 'Ballot Measure 113: walkout penalty, not redistricting reform',
+        detail: 'In response to repeated Republican quorum-denial walkouts, Oregon voters pass Ballot Measure 113 in 2022, barring any legislator who accumulates 10 or more unexcused absences in a session from running for re-election in the following election. It is an anti-walkout measure, not an independent redistricting commission — Oregon remains legislatively controlled for future cycles.',
       },
     ],
   },
@@ -2080,41 +2101,43 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
     1992: [
       {
         title: 'VRA creates South Carolina\'s first majority-Black district since Reconstruction',
-        detail: 'Governor Campbell (R) and a Democratic legislature draw maps after South Carolina retains 6 seats. The Voting Rights Act requires creation of a majority-Black congressional district. SC-6 is drawn in the Low Country and Pee Dee regions, producing South Carolina\'s first Black congressman (James Clyburn) since Reconstruction.',
+        detail: 'Governor Campbell (R) and a Democratic legislature draw maps after South Carolina retains 6 seats. Under VRA Section 5 preclearance, the DOJ requires a majority-Black congressional district. SC-6 is drawn linking Black communities in Columbia, Florence, and the Low Country — a sprawling configuration spanning parts of 16 counties. South Carolina had been without Black congressional representation for 90 years.',
       },
       {
-        title: 'Jim Clyburn wins the new majority-Black 6th District',
-        detail: 'James Clyburn wins the newly drawn 6th District in 1992, beginning a congressional career that would last more than three decades. The 6th District links African American communities in Columbia, Florence, and the Low Country — a geographic configuration maintained across all subsequent redistricting cycles. South Carolina had gone more than 90 years without Black congressional representation.',
+        title: 'Jim Clyburn wins SC-6; delegation splits 3-3',
+        detail: 'James Clyburn wins the newly drawn 6th District in 1992 with 65% of the vote — South Carolina\'s first Black congressman since 1897. The 1992 elections produce a 3R-3D delegation. By concentrating Black Democratic voters into SC-6, the new map bleaches adjacent districts and accelerates Republican gains: the surrounding seats trend increasingly Republican through the decade.',
       },
     ],
     2002: [
       {
-        title: 'Republican legislature draws maps as the state shifts',
-        detail: 'Governor Hodges (D) faces a Republican-controlled legislature that drives the redistricting process. South Carolina retains 6 seats after the 2000 census. Republicans draw maps producing a 4-2 Republican delegation while preserving the majority-Black 6th District.',
+        title: '⚖ Hodges vetoes Republican maps; federal court draws SC\'s congressional lines',
+        detail: 'South Carolina retains 6 seats. The Republican-controlled legislature passes a redistricting plan, but Governor Hodges (D) vetoes it, creating a deadlock. Unable to override the veto, the legislature fails to enact a map. A three-judge federal panel in Colleton County Council v. McConnell (201 F.Supp.2d 618) steps in and draws the congressional map in March 2002 — binding it to VRA compliance and noting that voting in South Carolina remains "racially polarized to a very high degree."',
+        url: 'https://redistricting.lls.edu/state/south-carolina/',
       },
       {
-        title: 'South Carolina\'s rapid Republican realignment locks in during this cycle',
-        detail: 'South Carolina is one of the few Southern states where Republicans seized legislative control before the 2010 wave. Republicans win both chambers of the General Assembly in 1994 and maintain that control through all subsequent redistricting cycles. The resulting maps consolidate a 4-2, then 5-1, then 6-1 Republican advantage as the state\'s population grows and Democratic voters are confined to the majority-Black 6th District.',
+        title: 'Court-drawn maps consolidate a 4-2 Republican delegation',
+        detail: 'The court-drawn 2002 map produces a 4R-2D delegation as South Carolina\'s Republican realignment accelerates. Democrats retain SC-5 (John Spratt) and the majority-Black SC-6 (Jim Clyburn). Republicans hold all four other seats as the state increasingly mirrors other Deep South states in its partisan alignment. Republicans win both chambers of the General Assembly in 1994 and never lose them again.',
       },
     ],
     2012: [
       {
-        title: 'South Carolina gains 1 seat after the 2010 census',
-        detail: 'The 2010 census gives South Carolina a 7th congressional seat, reflecting its rapid population growth. Governor Haley (R) and a Republican supermajority legislature draw the new map.',
+        title: 'SC gains 7th seat; Republican supermajority draws the map',
+        detail: 'South Carolina gains a 7th congressional seat after the 2010 census, reflecting rapid population growth. Governor Haley (R) and a Republican supermajority legislature draw the new map, signed August 1, 2011. The new SC-7 covers the Myrtle Beach/Grand Strand coast and Horry County. Republicans immediately win it, producing a 6-1 delegation — Jim Clyburn\'s majority-Black SC-6 as the lone Democratic seat.',
       },
       {
-        title: 'Republicans draw 7th District as safe Republican seat',
-        detail: 'The new SC-7 covers the Myrtle Beach coast and Horry County — among the fastest-growing areas in the state and reliably Republican. Maps produce a 6-1 Republican delegation; the lone Democratic seat (SC-6) is the majority-Black Low Country district held by Jim Clyburn.',
+        title: '⚖ Backus v. South Carolina — Republican maps upheld',
+        detail: 'Democratic voters challenge the 2012 congressional and state legislative maps as an unlawful racial gerrymander under the Equal Protection Clause and VRA. The federal district court upholds the maps, finding the legislature adhered to race-neutral principles. The U.S. Supreme Court summarily affirms without oral argument in October 2012 (133 S.Ct. 156). Plaintiffs later argue the decision should be reconsidered after Shelby County v. Holder (2013) invalidated Section 5, but no relief is granted.',
+        url: 'https://redistricting.lls.edu/state/south-carolina/',
       },
     ],
     2022: [
       {
-        title: 'Republican supermajority draws maps as South Carolina retains 7 seats',
-        detail: 'Governor McMaster (R) and a Republican supermajority legislature draw maps after South Carolina retains 7 congressional seats following the 2020 census. Republicans target a 6-1 delegation — preserving only the majority-Black 6th District (Jim Clyburn) while drawing the remaining six seats to lean Republican.',
+        title: 'Republicans crack 30,000+ Black Charlestonians out of SC-1',
+        detail: 'Governor McMaster (R) and a Republican supermajority legislature draw maps retaining 7 seats. In SC-1 (Charleston), Republicans remove over 30,000 Black residents — 62% of voters transferred out of the district are Black — packing them into Clyburn\'s SC-6 and replacing them with Republican-leaning Midlands territory nearly 100 miles away. The legislature sets an explicit target of 17% Black Voting Age Population for SC-1, a detail documented in court filings.',
       },
       {
-        title: '⚖ Alexander v. South Carolina State Conference of the NAACP — SCOTUS upholds maps',
-        detail: 'Plaintiffs challenge SC-1 (Charleston area) as an unconstitutional racial gerrymander, arguing Republicans cracked the Black community in North Charleston to dilute its voting power. The Supreme Court rules 6-3 in Alexander v. SCSCON (May 2023) that the district is not an unconstitutional racial gerrymander, applying a strong presumption of legislative good faith and holding that plaintiffs did not rebut the presumption that race was not the predominant factor. Justice Jackson\'s dissent accuses the majority of making racial gerrymandering nearly impossible to prove.',
+        title: '⚖ Alexander v. South Carolina NAACP — district court strikes SC-1; SCOTUS reverses 6-3',
+        detail: 'The NAACP LDF and ACLU challenge SC-1 as an unconstitutional racial gerrymander. In January 2023 a three-judge federal panel unanimously strikes down SC-1, ordering a redraw. The Supreme Court stays the order and reverses 6-3 in May 2024: writing for the majority, Justice Alito holds plaintiffs failed to show race (rather than partisan intent) predominated. Because partisan gerrymandering is non-justiciable under Rucho v. Common Cause, states can invoke partisan motive as a near-complete defense to racial gerrymandering claims. Justice Sotomayor\'s dissent calls the decision a roadmap for laundering racial gerrymandering as partisan politics.',
         url: 'https://www.oyez.org/cases/2023/21-1406',
       },
     ],
@@ -2123,42 +2146,43 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
   TN: {
     1992: [
       {
-        title: 'Democrats draw maps in a competitive Tennessee',
-        detail: 'Governor McWherter (D) and a Democratic legislature draw maps after Tennessee retains 9 seats from the 1990 census. Tennessee is still genuinely competitive at the federal level in the early 1990s — the state elected Democrat Al Gore to the Senate and had a mixed congressional delegation.',
+        title: 'Democrats draw maps in a competitive Tennessee; 6-3 delegation',
+        detail: 'Governor McWherter (D) and a Democratic trifecta draw maps after Tennessee retains 9 seats. Tennessee is still genuinely competitive federally — Al Gore sits in the Senate, and Democrats hold a 6-3 House delegation after 1992. TN-9 (Memphis) is a majority-Black district held by Harold Ford Sr. since 1975. VRA compliance shapes the West Tennessee lines, following a 1980s federal court ruling that earlier maps diluted Black voting strength.',
       },
       {
-        title: 'Maps protect Democratic incumbents while the state begins shifting right',
-        detail: 'The Democrat-drawn maps protect all Democratic incumbents while drawing Memphis (TN-9) and Nashville (TN-5) as safe Democratic anchor seats. The remaining seven districts span the rural and suburban areas of the state. Democrats win 6 of 9 seats in 1992, but the delegation begins eroding toward Republicans in subsequent elections as the state\'s rural white voters realign.',
+        title: 'Rural realignment begins eroding Democratic maps',
+        detail: 'Despite a 6-3 Democratic delegation in 1992, the maps cannot hold back Tennessee\'s rural realignment. Democratic incumbents in conservative-leaning districts face mounting pressure as rural white voters shift toward Republicans in federal races through the decade. Al Gore loses his home state in the 2000 presidential election — the first Democrat since the Civil War era to lose Tennessee — signaling how complete the realignment has become.',
       },
     ],
     2002: [
       {
-        title: 'Republican governor, Democratic legislature produce split maps',
-        detail: 'Governor Sundquist (R) and a Democratic-controlled legislature draw maps after Tennessee retains 9 seats. Democrats hold both chambers and drive the redistricting process, maintaining maps that produce a 5-4 Democratic delegation heading into 2002.',
+        title: 'Democratic legislature draws maps under Republican governor Sundquist',
+        detail: 'Tennessee retains 9 seats. Governor Sundquist (R) and a Democratic-controlled legislature share control — Democrats hold both chambers and drive the process. The resulting maps are designed to protect Democratic incumbents, packing heavy Republican suburbs of Nashville and Memphis into single safe Republican districts. Democrat Lincoln Davis flips TN-4 in 2002, producing a 5D-4R delegation.',
       },
       {
-        title: 'Tennessee\'s political realignment accelerates through the decade',
-        detail: 'Despite Democrat-drawn maps designed to protect Democratic incumbents, the Tennessee delegation shifts dramatically through the cycle. By 2008, Republicans have won 7 of 9 seats as rural and small-town Democratic voters fully realign toward Republicans in federal races. Al Gore loses his home state in the 2000 presidential election — the first Democratic presidential candidate to do so in modern history.',
+        title: 'Democratic maps cannot stop the realignment — delegation flips 7-2 Republican by 2008',
+        detail: 'Despite drawing maps to protect their incumbents, Tennessee Democrats are overwhelmed by rural realignment. By 2008, Republicans have won 7 of 9 seats as rural and small-town voters complete their shift. Harold Ford Jr. (TN-9/Memphis) holds the majority-Black seat; Jim Cooper (TN-5/Nashville) holds the urban seat — the last two Democratic strongholds as the rest of the state turns solidly Republican.',
       },
     ],
     2012: [
       {
-        title: 'Republicans sweep to power after 2010 wave',
-        detail: 'Governor Haslam (R) and a Republican supermajority legislature — which won both chambers in 2010 for the first time — draw maps after Tennessee retains 9 seats. Republicans draw a 7-2 delegation, packing Democrats into Memphis (TN-9) and Nashville (TN-5).',
+        title: 'Republicans claim first trifecta; 7-2 map drawn in 9 days',
+        detail: 'Governor Haslam (R) and a Republican supermajority — winning both chambers in 2010 for the first time — draw maps after Tennessee retains 9 seats. Maps were unveiled January 4–6, 2012, passed January 13, and signed January 26. The speed left essentially no public input window; PolitiFact rated the Senate speaker\'s claim of "the most transparent redistricting in Tennessee history" as false. Republicans draw a 7-2 map, packing Democrats into Memphis (TN-9, Steve Cohen) and Nashville (TN-5, Jim Cooper).',
       },
       {
-        title: 'Two safe Democratic seats reflect Tennessee\'s urban-rural divide',
-        detail: 'The Republican maps concentrate Democratic voters into the Memphis (TN-9) and Nashville (TN-5) districts — both majority-minority, majority-urban seats. Every other district is drawn to lean Republican by comfortable margins. The 5th District (Nashville) elects Jim Cooper, who wins for the final time in 2020 before the district is redrawn in 2022.',
+        title: 'Nashville and Memphis isolated as urban islands in a Republican sea',
+        detail: 'The 2012 maps concentrate Nashville\'s 600,000+ residents into a single district (TN-5) and Memphis\'s Black community into TN-9 — both represented by Democrats, both surrounded on all sides by safe Republican districts. Every other district is drawn to lean Republican by 20+ points. Cooper and Cohen win comfortably for a decade under maps that offer no competitive seat outside the two urban cores.',
       },
     ],
     2022: [
       {
-        title: 'Republican supermajority maintains 7-2 delegation',
-        detail: 'Governor Lee (R) and a Republican supermajority legislature draw maps after Tennessee retains 9 seats. Maps maintain a 7-2 Republican advantage. Memphis and Nashville remain the two Democratic seats.',
+        title: 'Nashville cracked three ways: Davidson County split across TN-5, TN-6, and TN-7',
+        detail: 'Governor Lee (R) and a Republican supermajority pass maps on January 24, 2022. The defining act: Nashville\'s Davidson County (715,000 residents, historically one district) is split across three congressional districts. Black voting-age population in Nashville falls to 11.8%, 8.6%, and 15.5% across the three districts — none large enough to constitute a meaningful voting bloc. Jim Cooper announces his retirement the day after the map passes, saying he had "explored every possible way, including lawsuits" to stop it. Republican Andy Ogles wins the new TN-5; the 2022 elections produce an 8R-1D delegation.',
       },
       {
-        title: 'Republicans subsequently split Nashville across 3 congressional districts',
-        detail: 'In 2023 — after the cycle\'s congressional maps were already in place — Republican legislators redrew state legislative district lines to split Nashville\'s core across three different congressional districts (TN-5, TN-6, and TN-7), dispersing the city\'s Democratic voters into Republican-leaning surrounding areas. Critics called it the most aggressive mid-decade urban gerrymander in modern Tennessee history.',
+        title: '⚖ Tennessee NAACP v. Lee — racial gerrymander claims dismissed',
+        detail: 'The Tennessee NAACP, Equity Alliance, and allied groups sue in August 2023 alleging Nashville\'s cracking and a Shelby County state Senate map constitute unconstitutional racial gerrymanders. A three-judge federal panel dismisses the congressional claim in August 2024 — holding that while the facts are "consistent with a racial gerrymander," they are equally consistent with a partisan one. Under Alexander v. SC NAACP (2024), plaintiffs must affirmatively prove racial rather than partisan predominance; they cannot meet the burden and the case is dismissed with prejudice in September 2024. The expulsion of Black state legislators Justin Jones (Nashville) and Justin Pearson (Memphis) in April 2023 — made possible by the Republicans\' redistricting-secured supermajority — drew national attention to the structural consequences of Tennessee\'s maps.',
+        url: 'https://www.democracydocket.com/cases/tennessee-congressional-and-state-senate-redistricting-challenge/',
       },
     ],
   },
@@ -2209,42 +2233,42 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
   WA: {
     1992: [
       {
-        title: 'Redistricting Commission draws maps after Washington gains 1 seat',
-        detail: 'Washington\'s nonpartisan Redistricting Commission — created by Initiative 63 in 1983 — draws its second congressional map. The 1990 census gives Washington a ninth seat, reflecting the state\'s rapid growth. The WRC consists of four partisan appointees who must reach consensus; maps go to the legislature only if the commission deadlocks.',
+        title: 'Bipartisan Redistricting Commission draws first map after Washington gains 9th seat',
+        detail: 'Washington\'s bipartisan Redistricting Commission — created by constitutional amendment in 1983, first used in 1991 — draws maps after the 1990 census gives Washington a 9th seat. Four members are appointed by the majority and minority caucus leaders of each legislative chamber; three of four must agree on a final plan. A fifth nonvoting chair facilitates but does not cast a deciding vote. The first cycle goes smoothly — plans filed January 1, 1992, with no court challenges.',
       },
       {
-        title: 'Commission produces competitive maps in a swing state',
-        detail: 'Washington is a genuine swing state in the early 1990s — it voted for Reagan twice before going for Dukakis in 1988. The commission\'s maps produce a competitive delegation. Democrats win 6 of 9 seats in 1992, but the eastern Washington seats are reliably Republican and several western seats are genuinely competitive.',
+        title: 'Clinton wave produces an 8-1 Democratic delegation; eastern WA anchors Republican minority',
+        detail: 'Washington goes 8D-1R in the 1992 Clinton wave — only Jennifer Dunn (R-8, Eastside King County) holds a Republican seat. The commission\'s bipartisan maps provide no protection against wave elections; Jay Inslee (D-4) and Maria Cantwell (D-1) both lose in the 1994 Republican wave. Eastern Washington (4th and 5th Districts) anchors the Republican delegation and remains safe Republican through all subsequent cycles.',
       },
     ],
     2002: [
       {
-        title: 'Commission maintains maps after Washington retains 9 seats',
-        detail: 'The Washington Redistricting Commission draws maps after Washington retains 9 seats. The WRC produces maps that are competitive and nonpartisan by most measures — frequently cited alongside Iowa and Arizona as models of independent redistricting. No major litigation follows.',
+        title: 'Commission misses statutory deadline; governor grants retroactive extension',
+        detail: 'Washington retains 9 seats. The commission faces internal disagreements and misses its statutory filing deadline, but ultimately adopts maps in late 2001 and early 2002. Governor Locke signs legislation retroactively extending the deadline at the request of the Attorney General. The legislature makes minor amendments with a two-thirds vote. No court challenges follow, and the maps produce a 6D-3R delegation.',
       },
       {
-        title: 'Eastern Washington anchors Republican delegation; Seattle corridor trends Democratic',
-        detail: 'The commission\'s 2002 maps reflect Washington\'s geographic partisan divide: the 4th and 5th Districts in eastern Washington (Yakima, Spokane) are safe Republican seats, while the Puget Sound metro districts (1st, 7th, 8th, 9th) range from safe Democratic to competitive. The 8th District in suburban eastern Seattle is among the most competitive districts in the country through the decade.',
+        title: 'WA-8 (Eastside suburbs) becomes one of the most competitive districts in the country',
+        detail: 'The commission\'s 2002 maps preserve WA-8 (suburban east Seattle — Bellevue, Kirkland, Sammamish) as the state\'s premier swing seat. Republican Dave Reichert (King County Sheriff) wins it narrowly in 2004 and holds it by thin margins through 2012. The district reflects the political evolution of Seattle\'s Eastside: historically Republican, trending competitive as educated suburban voters shift toward Democrats through the 2000s.',
       },
     ],
     2012: [
       {
-        title: 'Washington gains a 10th seat after the 2010 census',
-        detail: 'The 2010 census gives Washington a tenth congressional seat. The Redistricting Commission draws the new map.',
+        title: 'Washington gains a 10th seat; WA-8 redistricting makes it safer for Reichert',
+        detail: 'The 2010 census gives Washington a 10th congressional seat. The commission adopts maps two hours before its January 1, 2012 deadline. The new WA-10 centers on Thurston County (Olympia) and south Pierce County — Democrat Denny Heck wins it immediately. The 2012 remapping also reshapes WA-8, adding conservative Chelan and Kittitas counties east of the Cascades; Reichert\'s average winning margin rises from 52% to 61%, shielding him from competitive pressure until he retires in 2018.',
       },
       {
-        title: 'New 10th District (Tacoma/South Puget Sound) is drawn as a competitive seat',
-        detail: 'The WRC draws a new 10th District centered on Tacoma and the South Puget Sound corridor. Designed to be competitive, Democrats win it immediately in 2012. Washington\'s independent commission is widely praised for producing maps that reflect the political geography of the state without extreme partisan manipulation.',
+        title: 'Bipartisan commission — not independent — limits but doesn\'t eliminate partisan outcomes',
+        detail: 'Washington\'s commission is frequently cited alongside Iowa and Arizona as a model for redistricting reform, but scholars note a key distinction: it is bipartisan (party-aligned appointees who negotiate), not independent (neutral commissioners). FiveThirtyEight analysis finds Washington\'s maps less fair than those drawn by truly independent commissions (Arizona, California, Colorado, Michigan). A 6D-4R delegation results from the new 10-seat map.',
       },
     ],
     2022: [
       {
-        title: 'Washington retains 10 seats; commission draws maps',
-        detail: 'Washington retains 10 seats after the 2020 census. The Redistricting Commission draws new maps through an extensive public process.',
+        title: 'Commission votes 32 seconds before midnight; misses transmission deadline; Supreme Court accepts maps',
+        detail: 'Washington retains 10 seats. After months of closed-door negotiations criticized for lack of transparency, the commission votes on final maps at 11:59:28 p.m. on November 15, 2021 — 32 seconds before the constitutional deadline — using maps the public had no chance to review. The commission then misses the statutory transmission deadline, sending the maps to the Washington Supreme Court. On December 3, 2021, the court rules the commission "substantially complied" with its mandate and accepts the maps. The legislature approves a final amended version 88-7 in the House on February 8, 2022.',
       },
       {
-        title: 'Staff makes unauthorized post-vote changes; WA Supreme Court strikes them',
-        detail: 'A last-minute controversy erupts when commission staff make unauthorized alterations to the final maps after the commission\'s formal vote — changing district lines without commissioner approval. The Washington Supreme Court strikes the alterations and orders the original commission-approved maps to be used. The episode highlights procedural risks in redistricting commissions but ultimately affirms the commission\'s authority.',
+        title: 'WA-3 produces one of 2022\'s biggest upsets; delegation reaches 8-2',
+        detail: 'The commission\'s maps preserve WA-3 (southwest Washington/Clark County) as a swing district. When Trump endorses Joe Kent over six-term Republican Jaime Herrera Beutler (who voted to impeach Trump), Kent defeats her in the primary. Democrat Marie Gluesenkamp Perez — a small-business auto-shop owner — then defeats Kent by ~2,600 votes (~50.1%), one of the closest races in the country and a result FiveThirtyEight had given a 2-in-100 chance. Washington\'s 2022 delegation reaches 8D-2R; Republicans retain only WA-4 (Dan Newhouse) and WA-5 (Cathy McMorris Rodgers).',
       },
     ],
   },
