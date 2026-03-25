@@ -379,7 +379,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ Texas v. United States — preclearance denied',
         detail: 'Texas sues in the D.C. District Court for VRA Section 5 preclearance. In August 2012, the court denies preclearance, finding the maps likely dilute minority representation — the first time a state\'s congressional map had been rejected since the preclearance regime began.',
-        url: 'https://www.justice.gov/crt/voting-section',
+        url: 'https://www.justice.gov/crt/about/vot/redistricting.php',
       },
       {
         title: '⚖ Perry v. Perez — SCOTUS orders interim maps',
@@ -445,7 +445,7 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
       {
         title: '⚖ League of Women Voters v. Commonwealth — PA Supreme Court strikes maps',
         detail: 'Filed under the Pennsylvania Constitution\'s free and equal elections clause rather than the federal constitution (sidestepping Vieth v. Jubelirer), the case reaches the PA Supreme Court. In January 2018, the court strikes the 2011 congressional map 5–2 as an unconstitutional partisan gerrymander — a landmark state-court ruling. When the Republican legislature fails to produce an acceptable remedial plan, the court draws its own map, used from the 2018 elections onward.',
-        url: 'https://www.pubintlaw.org/cases-and-projects/redistricting/',
+        url: 'https://pubintlaw.org/cases-and-projects/pennsylvania-redistricting/',
       },
     ],
     2022: [

@@ -51,7 +51,7 @@
     {
       heading: 'Research & litigation',
       links: [
-        { label: 'Brennan Center for Justice', url: 'https://www.brennancenter.org/redistricting', description: 'Policy analysis and litigation tracking on redistricting and gerrymandering.' },
+        { label: 'Brennan Center for Justice', url: 'https://www.brennancenter.org/our-work/research-reports/gerrymandering-explained', description: 'Policy analysis and litigation tracking on redistricting and gerrymandering.' },
         { label: 'All About Redistricting', url: 'https://redistricting.lls.edu', description: 'Loyola Law School\'s state-by-state legal database of redistricting cases.' },
         { label: 'Ballotpedia — Redistricting', url: 'https://ballotpedia.org/Redistricting', description: 'Cycle-by-cycle summaries of redistricting processes in every state.' },
       ],
