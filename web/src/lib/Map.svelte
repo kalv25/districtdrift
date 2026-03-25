@@ -112,6 +112,15 @@
   let precinctSourceLoaded = false;
   let precinctSourceState = stateL; // track which state's precincts are loaded
 
+  // Precinct data is only available for these cycle years
+  const PRECINCT_CYCLE_YEARS = [2012, 2022];
+  // Map selected year to the nearest available precinct cycle year (≤ selected)
+  function precinctYear(year: number): number {
+    const available = PRECINCT_CYCLE_YEARS.filter(y => y <= year);
+    return available.length > 0 ? Math.max(...available) : PRECINCT_CYCLE_YEARS[0];
+  }
+  let precinctDisplayYear = $state(precinctYear(selectedYear));
+
   // Legend state (reactive so the overlay updates)
 
   const geoCache = new Map<number, GeoJSON.FeatureCollection>();
@@ -575,6 +584,7 @@
       });
 
       const layerName = `${stateL}_precincts`;
+      const initYear = precinctYear(selectedYear);
 
       // Precinct fill — sits between district fill and boundary layers
       map.addLayer({
@@ -582,7 +592,7 @@
         type: 'fill',
         source: 'state-precincts',
         'source-layer': layerName,
-        filter: ['==', ['get', 'cycle_year'], selectedYear],
+        filter: ['==', ['get', 'cycle_year'], initYear],
         layout: { visibility: 'none' },
         paint: {
           'fill-color': PRECINCT_FILL_COLOR,
@@ -596,7 +606,7 @@
         type: 'line',
         source: 'state-precincts',
         'source-layer': layerName,
-        filter: ['==', ['get', 'cycle_year'], selectedYear],
+        filter: ['==', ['get', 'cycle_year'], initYear],
         layout: { visibility: 'none' },
         paint: {
           'line-color': 'rgba(0,0,0,0.12)',
@@ -644,10 +654,12 @@
         return;
       }
       if (map.getLayer('precincts-fill')) {
+        const pYear = precinctYear(selectedYear);
+        precinctDisplayYear = pYear;
         map.setLayoutProperty('precincts-fill', 'visibility', 'visible');
         map.setLayoutProperty('precincts-lines', 'visibility', 'visible');
-        map.setFilter('precincts-fill', ['==', ['get', 'cycle_year'], selectedYear]);
-        map.setFilter('precincts-lines', ['==', ['get', 'cycle_year'], selectedYear]);
+        map.setFilter('precincts-fill', ['==', ['get', 'cycle_year'], pYear]);
+        map.setFilter('precincts-lines', ['==', ['get', 'cycle_year'], pYear]);
         // Dim district fill so precinct coloring reads clearly
         map.setPaintProperty('districts-fill-front', 'fill-opacity', 0);
         map.setPaintProperty('districts-fill-back', 'fill-opacity', 0);
@@ -978,6 +990,9 @@
       <div class="precinct-legend-labels">
         <span>R</span><span>Neutral</span><span>D</span>
       </div>
+      {#if precinctDisplayYear !== selectedYear}
+        <div class="precinct-legend-note">Precinct data: {precinctDisplayYear}</div>
+      {/if}
     </div>
   {/if}
 
@@ -1051,6 +1066,13 @@
     width: 180px;
     font-size: 0.62rem;
     color: var(--text-muted);
+  }
+  .precinct-legend-note {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    text-align: center;
+    margin-top: 0.2rem;
   }
 
 
