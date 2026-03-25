@@ -4,7 +4,7 @@
   import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  let { selectedYear = 2024, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022, 2024], darkMode = false, showPrecincts = false, onDistrictClick, onMapClick }: {
+  let { selectedYear = 2024, fadeDuration = 450, panelBottom = 0, panelLeft = 0, statePo = 'MI', cycleYears = [1992, 2002, 2012, 2022, 2024], darkMode = false, showPrecincts = false, onDistrictClick, onMapClick, onPrecinctLoadingChange }: {
     selectedYear?: number;
     fadeDuration?: number;
     panelBottom?: number;
@@ -15,6 +15,7 @@
     showPrecincts?: boolean;
     onDistrictClick?: (d: { district: number; won_by: string; partisan_lean_d: number | null; cycle_year: number; x: number; y: number }) => void;
     onMapClick?: () => void;
+    onPrecinctLoadingChange?: (loading: boolean) => void;
   } = $props();
 
   // Year immediately before `year` in the cycle sequence, or null if it's the first.
@@ -546,10 +547,12 @@
     // Preload as ArrayBuffer — Cloudflare Pages doesn't serve range requests
     // with proper Content-Length, so pmtiles:// URL alone won't work.
     // Fetch the full file on first toggle and serve it from memory.
+    onPrecinctLoadingChange?.(true);
     try {
       const resp = await fetch(tilesPath);
       if (!resp.ok) {
         console.info(`Precinct tiles not found for ${stateL} — skipping.`);
+        onPrecinctLoadingChange?.(false);
         return;
       }
       const buf = await resp.arrayBuffer();
@@ -560,7 +563,10 @@
         }),
       };
       protocol.add(new PMTiles(bufferSource as any));
-    } catch { return; }
+    } catch {
+      onPrecinctLoadingChange?.(false);
+      return;
+    }
 
     if (!map.getSource('state-precincts')) {
       map.addSource('state-precincts', {
@@ -619,6 +625,7 @@
 
     precinctSourceLoaded = true;
     precinctSourceState = stateL;
+    onPrecinctLoadingChange?.(false);
   }
 
   // Show/hide precinct layer and dim district fill when active

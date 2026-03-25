@@ -186,6 +186,7 @@
   let animTick = $state(CYCLES.indexOf(2024));
   let animating = $state(false);
   let showPrecincts = $state(false);
+  let precinctLoading = $state(false);
   let showDeltas = $state(true);
   let mapComponent: { takeScreenshot: (state: string, year: number) => void } | undefined;
   let nationComponent: { takeScreenshot: (year: number) => void } | undefined;
@@ -844,6 +845,15 @@
     <div class="brand">
       <h1>District<span class="accent">Drift</span></h1>
       <p class="tagline">Three decades of congressional redistricting <span class="version">v{__APP_VERSION__}</span></p>
+      <div class="brand-popup" role="tooltip">
+        <strong>What's inside</strong>
+        <ul>
+          <li>50 states · 5 redistricting cycles · 1992–2024</li>
+          <li>Per-district election results &amp; census demographics</li>
+          <li>Precinct vote maps for all 50 states (2012 &amp; 2022)</li>
+          <li>Efficiency gap, mean-median difference &amp; competitiveness</li>
+        </ul>
+      </div>
     </div>
 
     <button
@@ -909,7 +919,7 @@
         </div>
       {:else}
         {#key viewMode}
-          <Map bind:this={mapComponent} selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={0} panelLeft={0} statePo={selectedState} cycleYears={CYCLES} {darkMode} {showPrecincts} onDistrictClick={(d) => {
+          <Map bind:this={mapComponent} selectedYear={displayYear} fadeDuration={FADE_MS} panelBottom={0} panelLeft={0} statePo={selectedState} cycleYears={CYCLES} {darkMode} {showPrecincts} onPrecinctLoadingChange={(v) => precinctLoading = v} onDistrictClick={(d) => {
               const dn = Number(d.district);
               if (dn !== pinnedDistrict) districtTab = 'partisan';
               pinnedDistrict = dn;
@@ -930,12 +940,15 @@
           </button>
           <button
             class="map-float-btn"
-            class:active={showPrecincts}
-            title={showPrecincts ? 'Hide precinct vote map' : 'Show precinct vote map'}
-            onclick={() => showPrecincts = !showPrecincts}
+            class:active={showPrecincts && !precinctLoading}
+            class:loading={precinctLoading}
+            disabled={precinctLoading}
+            title={precinctLoading ? 'Loading precinct data…' : showPrecincts ? 'Hide precinct vote map' : 'Show precinct vote map'}
+            onclick={() => { if (!precinctLoading) showPrecincts = !showPrecincts; }}
           >
-            <span class="float-icon">P</span>
-            <span class="float-label">Precincts</span>
+            <span class="float-icon precinct-icon" class:spinning={precinctLoading}>P</span>
+            <span class="float-label">{precinctLoading ? 'Loading…' : 'Precincts'}</span>
+            {#if precinctLoading}<span class="precinct-load-bar"></span>{/if}
           </button>
           <button
             class="map-float-btn"
@@ -1032,7 +1045,7 @@
 
               <!-- Card: Seat vs. vote -->
               <div class="snap-card">
-                <p class="snap-card-title">Seat vs. vote share</p>
+                <p class="snap-card-title">Seat vs. vote share <Tooltip text="Compares seats won vs. votes cast for each party. If one party wins 60% of seats with only 50% of votes, the map may be structurally tilted." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                 <SeatVoteChart
                   seatsD={displayStats.seats_d}
                   seatsR={displayStats.seats_r}
@@ -1044,14 +1057,14 @@
 
               <!-- Card: Trend -->
               <div class="snap-card">
-                <p class="snap-card-title">Vote vs. seat share</p>
+                <p class="snap-card-title">Vote vs. seat share <Tooltip text="Tracks Democratic vote share (solid line) and seat share (dashed line) across all cycles. A persistent gap between the two lines suggests a structural partisan advantage built into the map." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                 <p class="snap-card-note">— votes &nbsp;·&nbsp; – – seats</p>
                 <TrendChart cycles={stats} selectedYear={displayYear} />
               </div>
 
               <!-- Card: Efficiency gap -->
               <div class="snap-card">
-                <p class="snap-card-title">Efficiency gap</p>
+                <p class="snap-card-title">Efficiency gap <Tooltip text="Measures partisan bias by counting 'wasted votes' — votes cast for a losing candidate, or surplus votes beyond what a winner needed. A positive value means Republican votes were used more efficiently. Values above ±8% are generally considered significant." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                 <p class="snap-card-note">+ favors R &nbsp;·&nbsp; − favors D</p>
                 <EGChart cycles={egCycles} selectedYear={displayYear} />
               </div>
@@ -1059,7 +1072,7 @@
               {#if competCycles.length}
                 <!-- Card: Competitiveness -->
                 <div class="snap-card">
-                  <p class="snap-card-title">District competitiveness</p>
+                  <p class="snap-card-title">District competitiveness <Tooltip text="Shows how many districts were safe (won by >10%), leaning, or competitive for each party. Heavy clustering of safe districts is a hallmark of packing — concentrating one party's voters to waste their votes." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                   <CompetitivenessChart cycles={competCycles} selectedYear={displayYear} />
                 </div>
               {/if}
@@ -1139,7 +1152,7 @@
                 onkeydown={(e) => snapKeydown(e, distCardsEl, distCardIdx, 3)}>
                 <!-- Card: Partisan -->
                 <div class="snap-card">
-                  <p class="snap-card-title">Partisan</p>
+                  <p class="snap-card-title">Partisan <Tooltip text="Election results and partisan lean for this district. 'Lean' is the two-party Democratic vote share from US House elections in this cycle. 'Margin' is the winning candidate's margin of victory." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                   <dl class="snap-dl">
                     {#if pinnedDistData.partisan_lean_d !== null}
                       {@const prev = prevDistData?.partisan_lean_d}
@@ -1167,7 +1180,7 @@
 
                 <!-- Card: Race & pop -->
                 <div class="snap-card">
-                  <p class="snap-card-title">Race &amp; pop</p>
+                  <p class="snap-card-title">Race &amp; pop <Tooltip text="Racial and ethnic composition and total population for this district, from the decennial census closest to this redistricting cycle. Arrows show change from the previous cycle." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                   {#if hasDemog}
                     <dl class="snap-dl">
                       {#if pinnedDistData.population != null}
@@ -1213,7 +1226,7 @@
 
                 <!-- Card: Income & edu -->
                 <div class="snap-card">
-                  <p class="snap-card-title">Income &amp; edu</p>
+                  <p class="snap-card-title">Income &amp; edu <Tooltip text="Median household income and educational attainment for this district, from the decennial census closest to this redistricting cycle. Arrows show change from the previous cycle." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                   {#if hasDemog && (pinnedDistData.median_income != null || pinnedDistData.pct_bachelors_plus != null)}
                     <dl class="snap-dl">
                       {#if pinnedDistData.median_income != null}
@@ -1581,11 +1594,32 @@
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
-  .brand { display: flex; flex-direction: column; gap: 0.05rem; }
+  .brand { display: flex; flex-direction: column; gap: 0.05rem; position: relative; cursor: default; }
   h1 { margin: 0; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
   .accent { color: #e05c5c; }
   .tagline { margin: 0; font-size: 0.72rem; opacity: 0.45; letter-spacing: 0.01em; }
   .version { opacity: 0.45; font-size: 0.65rem; margin-left: 0.4rem; }
+
+  .brand-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: 0;
+    z-index: 200;
+    background: #1a1a2e;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    min-width: 260px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.78rem;
+    pointer-events: none;
+  }
+  .brand-popup strong { display: block; margin-bottom: 0.4rem; font-size: 0.8rem; color: #fff; }
+  .brand-popup ul { margin: 0; padding: 0 0 0 1.1rem; display: flex; flex-direction: column; gap: 0.25rem; }
+  .brand-popup li { opacity: 0.8; line-height: 1.35; }
+  .brand:hover .brand-popup { display: block; }
 
   .view-nav {
     display: flex;
@@ -1731,6 +1765,24 @@
   .map-float-btn:hover { background: var(--surface-2); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
   .map-float-btn.playing { color: var(--accent, #4a90d9); }
   .map-float-btn.active { color: var(--accent, #4a90d9); background: var(--surface-2); }
+  .map-float-btn.loading { opacity: 0.75; cursor: wait; overflow: hidden; }
+  .precinct-load-bar {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: rgba(74,144,217,0.25);
+    overflow: hidden;
+  }
+  .precinct-load-bar::after {
+    content: ''; position: absolute; top: 0; bottom: 0;
+    width: 45%; background: #4a90d9;
+    animation: precinct-slide 1.1s ease-in-out infinite;
+  }
+  @keyframes precinct-slide {
+    0% { left: -45%; } 100% { left: 100%; }
+  }
+  @keyframes precinct-pulse {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+  }
+  .precinct-icon.spinning { animation: precinct-pulse 1.1s ease-in-out infinite; }
 
   main { flex: 1; display: flex; flex-direction: row; min-height: 0; }
   main.ph { flex-direction: column; }
@@ -1885,7 +1937,22 @@
     margin: 0;
     flex-shrink: 0;
     line-height: 1.3;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
   }
+  .info-icon {
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.4;
+    cursor: help;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+  .info-icon:hover { opacity: 0.85; }
   .snap-card-note {
     font-size: 0.68rem;
     color: var(--text-dim);
