@@ -635,6 +635,20 @@
 
     precinctSourceLoaded = true;
     precinctSourceState = stateL;
+
+    // The $effect that called us already returned early (async gap), so it
+    // won't re-run to apply visibility. Do it directly here instead.
+    if (showPrecincts && map.getLayer('precincts-fill')) {
+      const pYear = precinctYear(selectedYear);
+      precinctDisplayYear = pYear;
+      map.setLayoutProperty('precincts-fill', 'visibility', 'visible');
+      map.setLayoutProperty('precincts-lines', 'visibility', 'visible');
+      map.setFilter('precincts-fill', ['==', ['get', 'cycle_year'], pYear]);
+      map.setFilter('precincts-lines', ['==', ['get', 'cycle_year'], pYear]);
+      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0);
+      map.setPaintProperty('districts-fill-back', 'fill-opacity', 0);
+    }
+
     onPrecinctLoadingChange?.(false);
   }
 
