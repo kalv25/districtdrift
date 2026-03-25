@@ -339,8 +339,10 @@ def export_cycle(gdf: gpd.GeoDataFrame, cycle_year: int, state_lower: str) -> Pa
 # ---------------------------------------------------------------------------
 
 CREDITS = [
+    {"label": "VEST — Voting and Election Science Team", "url": "https://election.lab.ufl.edu/precinct-data/",
+     "note": "precinct-level election results (Univ. of Florida)"},
     {"label": "Redistricting Data Hub", "url": "https://redistrictingdatahub.org",
-     "note": "precinct election results & shapefiles"},
+     "note": "VEST data hosting & shapefiles"},
     {"label": "NHGIS", "url": "https://www.nhgis.org",
      "note": "congressional district boundaries"},
     {"label": "MIT Election Lab", "url": "https://electionlab.mit.edu/data",
