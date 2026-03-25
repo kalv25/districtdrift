@@ -495,6 +495,12 @@
     if (back.includes(e.key) && idx > 0)          { e.preventDefault(); jumpToCard(el, idx - 1); }
   }
 
+  function centerNavBtn(btn: HTMLElement) {
+    const row = btn.parentElement;
+    if (!row) return;
+    row.scrollTo({ left: btn.offsetLeft - row.clientWidth / 2 + btn.offsetWidth / 2, behavior: 'smooth' });
+  }
+
   function jumpToCard(el: HTMLElement | null, idx: number) {
     if (!el) return;
     const cards = Array.from(el.querySelectorAll<HTMLElement>(':scope > .snap-card'));
@@ -950,7 +956,7 @@
             <button
               class="mobile-sec-btn"
               class:active={mobileSectionIdx === i}
-              onclick={() => { mobileSectionIdx = mobileSectionIdx === i ? null : i; }}
+              onclick={(e) => { mobileSectionIdx = mobileSectionIdx === i ? null : i; centerNavBtn(e.currentTarget); }}
             >{label}</button>
           {/each}
         </div>
