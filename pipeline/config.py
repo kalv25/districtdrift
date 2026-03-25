@@ -2113,7 +2113,7 @@ NHGIS_API_VERSION = "2"
 # Raw and processed data directories (relative to repo root)
 RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
-TILES_DIR = "tiles"
+TILES_DIR = "web/static/tiles"
 
 
 def get_state(state_po: str) -> dict[str, Any]:
