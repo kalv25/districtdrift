@@ -1016,6 +1016,12 @@
           <div class="panel-resize-handle panel-resize-v" onmousedown={startPanelWidthResize} ontouchstart={startPanelWidthResize}></div>
         {/if}
 
+        {#if isMobileState}
+          <div class="mobile-cycle-bar">
+            {@render cycleControls()}
+          </div>
+        {/if}
+
         <!-- Panel 1: State -->
         <aside class="panel panel-state">
           {#if displayStats}
@@ -2860,14 +2866,16 @@
     /* Resize handles not useful on touch — remove them */
     .panel-resize-handle { display: none !important; }
 
-    /* Cycle bar: ensure it stays above panel overlay and fits screen */
-    .state-cycle-bar {
-      z-index: 26;
-      max-width: calc(100vw - 5.5rem); /* leave room for float controls on left */
-      bottom: 3rem;
-    }
+    /* Hide floating cycle bar on mobile — shown inside panel instead */
+    .state-cycle-bar { display: none; }
     /* Nation cycle bar: top of map on mobile */
     .nation-cycle-bar { bottom: auto; top: 0.5rem; }
+    /* Mobile cycle controls embedded at top of panel */
+    .mobile-cycle-bar {
+      padding: 0.5rem 0.75rem 0.3rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
 
     /* Cycle buttons: hide seat counts at mobile width (too small to read) */
     .btn-d-delta, .btn-r-delta { display: none !important; }
