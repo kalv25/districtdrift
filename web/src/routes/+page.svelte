@@ -188,6 +188,8 @@
   let showPrecincts = $state(false);
   let precinctLoading = $state(false);
   let showDeltas = $state(true);
+  let panelOpen = $state(true);
+  let isMobileState = $state(false);
   let mapComponent: { takeScreenshot: (state: string, year: number) => void } | undefined;
   let nationComponent: { takeScreenshot: (year: number) => void } | undefined;
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
@@ -286,7 +288,7 @@
     }
   });
 
-  const isMobile = () => window.innerWidth < 640;
+  const isMobile = () => isMobileState;
 
   // Lock body scroll when any modal is open (prevents background scroll on mobile)
   $effect(() => {
@@ -295,6 +297,10 @@
   });
 
   onMount(() => {
+    const updateMobile = () => { isMobileState = window.innerWidth < 640; };
+    updateMobile();
+    window.addEventListener('resize', updateMobile);
+
     const savedPanel = localStorage.getItem(PANEL_KEY);
     if (savedPanel === 'vertical' || savedPanel === 'horizontal') {
       panelLayout = savedPanel as typeof panelLayout;
@@ -335,6 +341,8 @@
       helpOpen = true;
       localStorage.setItem(HELP_KEY, '1');
     }
+
+    return () => window.removeEventListener('resize', updateMobile);
   });
 
   $effect(() => { localStorage.setItem(VIEW_KEY, viewMode); });
@@ -955,11 +963,18 @@
         <div class="map-float-controls">
           <button
             class="map-float-btn"
-            title={panelLayout === 'vertical' ? 'Switch to bottom panels' : 'Switch to side panels'}
-            onclick={() => panelLayout = panelLayout === 'vertical' ? 'horizontal' : 'vertical'}
+            title={isMobileState
+              ? (panelOpen ? 'Hide stats panel' : 'Show stats panel')
+              : (panelLayout === 'vertical' ? 'Switch to bottom panels' : 'Switch to side panels')}
+            onclick={() => {
+              if (isMobileState) panelOpen = !panelOpen;
+              else panelLayout = panelLayout === 'vertical' ? 'horizontal' : 'vertical';
+            }}
           >
-            <span class="float-icon">{panelLayout === 'vertical' ? '⬇' : '➡'}</span>
-            <span class="float-label">Layout</span>
+            <span class="float-icon">
+              {#if isMobileState}{panelOpen ? '▾' : '▴'}{:else}{panelLayout === 'vertical' ? '⬇' : '➡'}{/if}
+            </span>
+            <span class="float-label">{isMobileState ? 'Stats' : 'Layout'}</span>
           </button>
           <button
             class="map-float-btn"
@@ -990,7 +1005,8 @@
         class="panel-group"
         class:vertical={panelLayout === 'vertical'}
         class:horizontal={panelLayout === 'horizontal'}
-        style={panelLayout === 'horizontal' ? `height: ${panelH}px` : `width: ${panelW}px`}
+        class:panel-closed={isMobileState && !panelOpen}
+        style={isMobileState ? '' : (panelLayout === 'horizontal' ? `height: ${panelH}px` : `width: ${panelW}px`)}
       >
         {#if panelLayout === 'horizontal'}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -2804,26 +2820,57 @@
   }
 
   /* ── Mobile ────────────────────────────────────────────────────────────────── */
-  @media (max-width: 639px) {
-    header {
-      padding: 0.45rem 0.75rem;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
+  @media (max-width: 640px) {
+    /* Header: wrap to two rows — brand top, nav bottom */
+    header { padding: 0.45rem 0.75rem; gap: 0.5rem; flex-wrap: wrap; }
     .tagline { display: none; }
     h1 { font-size: 1.1rem; }
+    /* Nav fills second row so All States + state selector are always reachable */
+    .view-nav { order: 10; width: 100%; gap: 0.4rem; }
+    .view-btn { flex: none; }
+    .state-selector { flex: 1; justify-content: center; }
 
-    /* Nation cycle bar sits higher to clear the panel */
+    /* Map fills the full main area — panels overlay it */
+    main { position: relative; flex-direction: row; }
+    .map-wrap { flex: 1; }
+
+    /* Panel as overlay bottom sheet */
+    .panel-group {
+      position: absolute !important;
+      bottom: 0 !important; left: 0 !important; right: 0 !important;
+      width: 100% !important;
+      height: auto !important;
+      max-height: 62vh !important;
+      overflow-y: auto !important;
+      flex-direction: column !important;
+      border-left-width: 0 !important;
+      border-top-width: 1px !important;
+      background: var(--surface) !important;
+      backdrop-filter: blur(10px) !important;
+      z-index: 25 !important;
+      transform: translateY(0);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .panel-group.panel-closed {
+      transform: translateY(105%);
+      pointer-events: none;
+    }
+    .panel-group .panel-divider { height: 1px !important; width: 100% !important; box-shadow: none !important; }
+    .panel { flex: none !important; max-height: none !important; }
+    /* Resize handles not useful on touch — remove them */
+    .panel-resize-handle { display: none !important; }
+
+    /* Cycle bar: ensure it stays above panel overlay and fits screen */
+    .state-cycle-bar {
+      z-index: 26;
+      max-width: calc(100vw - 5.5rem); /* leave room for float controls on left */
+      bottom: 3rem;
+    }
+    /* Nation cycle bar: top of map on mobile */
     .nation-cycle-bar { bottom: auto; top: 0.5rem; }
 
-    /* Rank panel on nation view: hide on small screens (map is primary) */
-    /* NationView handles this via its own media query in the component */
-  }
-
-  @media (max-width: 640px) {
-    main { flex-direction: column !important; }
-    .panel-group { flex-direction: column !important; width: 100% !important; height: auto !important; border-left-width: 0 !important; border-top-width: 1px !important; }
-    .panel-group .panel-divider { height: 1px !important; width: 100% !important; }
-    .panel { flex: none !important; max-height: 300px; }
+    /* Cycle buttons: hide seat counts at mobile width (too small to read) */
+    .btn-d-delta, .btn-r-delta { display: none !important; }
+    .cycle-buttons button:not(.anim-btn) { grid-template-columns: 1fr !important; }
   }
 </style>
