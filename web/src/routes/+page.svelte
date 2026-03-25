@@ -927,6 +927,14 @@
         {/key}
       {/if}
 
+      <!-- Precinct loading toast -->
+      {#if precinctLoading}
+        <div class="precinct-toast">
+          <span class="precinct-toast-spinner"></span>
+          Loading precinct data…
+        </div>
+      {/if}
+
       <!-- Floating map controls: layout toggle + precinct toggle -->
       {#if viewMode !== 'nation'}
         <div class="map-float-controls">
@@ -1744,6 +1752,7 @@
     z-index: 10;
   }
   .map-float-btn {
+    position: relative;
     min-width: 44px;
     min-height: 44px;
     display: flex;
@@ -1783,6 +1792,36 @@
     0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
   }
   .precinct-icon.spinning { animation: precinct-pulse 1.1s ease-in-out infinite; }
+
+  .precinct-toast {
+    position: absolute;
+    top: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(12, 12, 22, 0.88);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.4rem 0.85rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .precinct-toast-spinner {
+    width: 12px; height: 12px;
+    border: 2px solid rgba(255,255,255,0.25);
+    border-top-color: #4a90d9;
+    border-radius: 50%;
+    animation: precinct-spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes precinct-spin { to { transform: rotate(360deg); } }
 
   main { flex: 1; display: flex; flex-direction: row; min-height: 0; }
   main.ph { flex-direction: column; }
