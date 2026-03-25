@@ -281,37 +281,30 @@ def main() -> None:
         for meta in state["cycles"].values()
     }
 
-    # Route: congress ≥ 119 → Census TIGER; older → NHGIS
-    tiger_congresses = sorted(c for c in all_congress_numbers if c >= 119)
-    nhgis_ids = [sid for sid in all_shapefile_ids
-                 if (_congress_from_shapefile_id(sid) or 0) < 119]
+    # All shapefile IDs go through NHGIS (catalog includes congress 119+).
+    # Census TIGER fallback (download_tiger_boundaries) is available for any
+    # future congress not yet published on NHGIS.
+    nhgis_ids = list(all_shapefile_ids)
 
     state_names = ", ".join(s["name"] for s in states_to_download.values())
     print(f"=== Downloading redistricting data ({state_names}) ===\n")
 
-    # --- Congressional district boundaries (NHGIS, congress ≤ 118) ---
-    if nhgis_ids:
-        load_dotenv()
-        api_key = os.getenv("NHGIS_API_KEY", "").strip()
-        if not api_key:
-            print(
-                "ERROR: Set NHGIS_API_KEY environment variable.\n"
-                "  Get a free key at https://account.ipums.org/api_keys\n"
-                "  Then run: NHGIS_API_KEY=your_key python -m pipeline.download"
-            )
-            sys.exit(1)
-        print(f"  API key loaded: {len(api_key)} chars, starts with '{api_key[:4]}...'")
-        print(f"[1/3] Congressional district boundaries (NHGIS) — {len(nhgis_ids)} shapefiles...")
-        download_nhgis_boundaries(api_key, nhgis_ids)
-
-    # --- Congressional district boundaries (Census TIGER, congress ≥ 119) ---
-    if tiger_congresses:
-        step = "2" if nhgis_ids else "1"
-        print(f"\n[{step}/3] Congressional district boundaries (Census TIGER) — congress {tiger_congresses}...")
-        download_tiger_boundaries(tiger_congresses)
+    # --- Congressional district boundaries (NHGIS) ---
+    load_dotenv()
+    api_key = os.getenv("NHGIS_API_KEY", "").strip()
+    if not api_key:
+        print(
+            "ERROR: Set NHGIS_API_KEY environment variable.\n"
+            "  Get a free key at https://account.ipums.org/api_keys\n"
+            "  Then run: NHGIS_API_KEY=your_key python -m pipeline.download"
+        )
+        sys.exit(1)
+    print(f"  API key loaded: {len(api_key)} chars, starts with '{api_key[:4]}...'")
+    print(f"[1/2] Congressional district boundaries (NHGIS) — {len(nhgis_ids)} shapefiles...")
+    download_nhgis_boundaries(api_key, nhgis_ids)
 
     # --- Election returns (MIT Election Lab) ---
-    print("\n[3/3] US House election returns (MIT Election Lab)...")
+    print("\n[2/2] US House election returns (MIT Election Lab)...")
     download_mit_elections()
 
     print("\nAll downloads complete.")
