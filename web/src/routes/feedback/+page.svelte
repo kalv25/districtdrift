@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-
 	const SITE_KEY = '0x4AAAAAACvo9eAug0OpeMuc';
 
 	const STATES = [
@@ -25,6 +23,29 @@
 	let submitting = $state(false);
 	let success = $state(false);
 	let error = $state('');
+
+	async function handleSubmit(e: SubmitEvent) {
+		e.preventDefault();
+		submitting = true;
+		error = '';
+		try {
+			const form = e.target as HTMLFormElement;
+			const res = await fetch('/feedback-submit', {
+				method: 'POST',
+				body: new FormData(form)
+			});
+			const json = await res.json() as { success?: boolean; error?: string };
+			if (json.success) {
+				success = true;
+			} else {
+				error = json.error ?? 'Something went wrong.';
+			}
+		} catch {
+			error = 'Could not reach the server. Please try again.';
+		} finally {
+			submitting = false;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -47,23 +68,7 @@
 				<strong>Thank you!</strong> Your feedback has been sent.
 			</div>
 		{:else}
-			<form
-				method="POST"
-				use:enhance={() => {
-					submitting = true;
-					error = '';
-					return async ({ result, update }) => {
-						submitting = false;
-						if (result.type === 'success') {
-							success = true;
-						} else if (result.type === 'failure') {
-							error = (result.data as { error?: string })?.error ?? 'Something went wrong.';
-						} else {
-							await update();
-						}
-					};
-				}}
-			>
+			<form onsubmit={handleSubmit}>
 				<div class="field">
 					<label for="state">State visited <span class="optional">optional</span></label>
 					<select id="state" name="state">
