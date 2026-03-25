@@ -21,6 +21,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from typing import Any
 
 from .config import PROCESSED_DIR, TILES_DIR, get_state
 
@@ -43,9 +44,9 @@ def check_tippecanoe() -> None:
     print(f"  tippecanoe: {result.stdout.strip() or result.stderr.strip()}")
 
 
-def merge_geojsons(state_lower: str, cycles: dict) -> dict:
+def merge_geojsons(state_lower: str, cycles: dict[str, Any]) -> dict[str, Any]:
     """Merge all per-cycle GeoJSON files into a single FeatureCollection."""
-    merged = {"type": "FeatureCollection", "features": []}
+    merged: dict[str, Any] = {"type": "FeatureCollection", "features": []}
     for cycle_year in sorted(cycles.keys()):
         src = PROCESSED / f"{state_lower}_districts_{cycle_year}.geojson"
         if not src.exists():

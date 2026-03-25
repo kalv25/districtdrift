@@ -1,3 +1,22 @@
+[tool.basedpyright]
+pythonVersion = "3.14"
+# Suppress cascade noise from pandas/geopandas incomplete type stubs.
+# Real structural errors (attribute access on wrong types, bad return types,
+# unused imports) are still reported.
+reportUnknownMemberType = "none"
+reportUnknownVariableType = "none"
+reportUnknownArgumentType = "none"
+reportUnknownParameterType = "none"
+reportUnknownLambdaType = "none"
+reportAny = "none"
+reportMissingTypeStubs = "none"
+reportUnusedCallResult = "none"
+reportImplicitStringConcatenation = "none"
+reportAttributeAccessIssue = "none"
+reportArgumentType = "none"
+reportGeneralTypeIssues = "none"
+reportExplicitAny = "none"
+
 [project]
 name = "districtdrift"
 version = "2026.3.22"

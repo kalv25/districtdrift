@@ -24,6 +24,7 @@ import sys
 import time
 import zipfile
 from pathlib import Path
+from typing import Any, cast
 
 import pandas as pd
 import requests
@@ -40,7 +41,7 @@ from .config import NHGIS_API_BASE, NHGIS_API_VERSION, PROCESSED_DIR
 #   "race"  → (dataset_name, table_code, geog_level, is_acs)
 #   "socioeconomic" → (dataset_name, [income_table, edu_table], geog_level, is_acs)
 #   "income_source" → human-readable label for the income data source
-CYCLE_SOURCES: dict[int, dict] = {
+CYCLE_SOURCES: dict[int, dict[str, Any]] = {
     1992: {
         "race": ("1990_STF1", "NP10", "cd103rd", False),
         "socioeconomic": ("1990_STF3", ["NP80A", "NP57"], "cd103rd", False),
@@ -82,7 +83,7 @@ PROCESSED = Path(PROCESSED_DIR)
 # NHGIS API helpers
 # ---------------------------------------------------------------------------
 
-def _headers(api_key: str) -> dict:
+def _headers(api_key: str) -> dict[str, str]:
     return {"Authorization": api_key}
 
 
@@ -98,7 +99,7 @@ def submit_tabular_extract(
     is_acs: bool,
 ) -> str:
     """Submit an NHGIS tabular data extract. Returns the extract number."""
-    ds_payload: dict = {
+    ds_payload: dict[str, Any] = {
         "data_tables": table_codes,
         "geog_levels": [geog_level],
     }
@@ -106,7 +107,7 @@ def submit_tabular_extract(
         # ACS datasets have multiple file types and require breakdown specification
         ds_payload["breakdown_values"] = ["bs32.ge00"]  # Total area
 
-    base_payload: dict = {
+    base_payload: dict[str, Any] = {
         "datasets": {dataset_name: ds_payload},
         "data_format": "csv_header",
     }
@@ -127,7 +128,7 @@ def submit_tabular_extract(
     return str(extract_num)
 
 
-def wait_for_tabular_extract(api_key: str, extract_num: str, poll_seconds: int = 15) -> dict:
+def wait_for_tabular_extract(api_key: str, extract_num: str, poll_seconds: int = 15) -> dict[str, Any]:
     """Poll until extract is complete. Returns the full extract status dict.
 
     NHGIS status transitions:
@@ -156,7 +157,7 @@ def wait_for_tabular_extract(api_key: str, extract_num: str, poll_seconds: int =
         time.sleep(poll_seconds)
 
 
-def download_extract_csv(api_key: str, extract_data: dict, dest_dir: Path) -> list[Path]:
+def download_extract_csv(api_key: str, extract_data: dict[str, Any], dest_dir: Path) -> list[Path]:
     """Download the tabular CSV from a completed extract. Returns list of CSV paths."""
     download_links = extract_data.get("download_links", {})
 
@@ -283,7 +284,7 @@ def parse_race_1990(df: pd.DataFrame) -> pd.DataFrame:
         print(f"    WARNING: no columns with prefix '{code}' found. Columns: {list(df.columns[:20])}")
         return pd.DataFrame()
 
-    def row_to_race(row):
+    def row_to_race(row: pd.Series) -> pd.Series:
         try:
             nh_white = float(row.get(f"{code}001", 0) or 0)
             nh_black = float(row.get(f"{code}002", 0) or 0)
@@ -323,7 +324,7 @@ def parse_race_1990(df: pd.DataFrame) -> pd.DataFrame:
             "pct_other":    round(other / total, 6),
         })
 
-    return df.apply(row_to_race, axis=1)
+    return cast(pd.DataFrame, df.apply(row_to_race, axis=1))
 
 
 def parse_race_2000(df: pd.DataFrame) -> pd.DataFrame:
@@ -351,7 +352,7 @@ def parse_race_2000(df: pd.DataFrame) -> pd.DataFrame:
         print(f"    WARNING: no columns with prefix '{code}'. Columns: {list(df.columns[:20])}")
         return pd.DataFrame()
 
-    def row_to_race(row):
+    def row_to_race(row: pd.Series) -> pd.Series:
         try:
             nh = [float(row.get(f"{code}{str(i).zfill(3)}", 0) or 0) for i in range(1, 8)]
             h  = [float(row.get(f"{code}{str(i).zfill(3)}", 0) or 0) for i in range(8, 15)]
@@ -385,7 +386,7 @@ def parse_race_2000(df: pd.DataFrame) -> pd.DataFrame:
             "pct_other":    round(other / total, 6),
         })
 
-    return df.apply(row_to_race, axis=1)
+    return cast(pd.DataFrame, df.apply(row_to_race, axis=1))
 
 
 def parse_race_acs(df: pd.DataFrame, nhgis_code: str) -> pd.DataFrame:
@@ -417,9 +418,9 @@ def parse_race_acs(df: pd.DataFrame, nhgis_code: str) -> pd.DataFrame:
     """
     # ACS estimate columns use {code}E{num} format (e.g. QSYE001, AQNOE001)
     code = nhgis_code
-    def _v(row, n): return float(row.get(f"{code}E{str(n).zfill(3)}", 0) or 0)
+    def _v(row: pd.Series, n: int) -> float: return float(row.get(f"{code}E{str(n).zfill(3)}", 0) or 0)
 
-    def row_to_race(row):
+    def row_to_race(row: pd.Series) -> pd.Series:
         try:
             total     = _v(row, 1)
             nh_white  = _v(row, 3)
@@ -459,7 +460,7 @@ def parse_race_acs(df: pd.DataFrame, nhgis_code: str) -> pd.DataFrame:
             "pct_other":    round(other / total, 6),
         })
 
-    return df.apply(row_to_race, axis=1)
+    return cast(pd.DataFrame, df.apply(row_to_race, axis=1))
 
 
 # ---------------------------------------------------------------------------
@@ -473,7 +474,7 @@ def parse_income_1990(df: pd.DataFrame) -> pd.Series:
     if col not in df.columns:
         print(f"    WARNING: column {col} not found. Cols: {list(df.columns[:20])}")
         return pd.Series([None] * len(df), index=df.index)
-    return df[col].apply(lambda v: int(v) if pd.notna(v) and str(v).strip() not in ("", "0", "-") else None)
+    return cast(pd.Series, df[col].apply(lambda v: int(v) if pd.notna(v) and str(v).strip() not in ("", "0", "-") else None))
 
 
 def parse_edu_1990(df: pd.DataFrame) -> pd.Series:
@@ -496,7 +497,7 @@ def parse_edu_1990(df: pd.DataFrame) -> pd.Series:
         print(f"    WARNING: no E33 columns found.")
         return pd.Series([None] * len(df), index=df.index)
 
-    def row_to_edu(row):
+    def row_to_edu(row: pd.Series) -> float | None:
         vals = [float(row.get(c, 0) or 0) for c in cols_needed]
         total = sum(vals)
         if total == 0:
@@ -504,7 +505,7 @@ def parse_edu_1990(df: pd.DataFrame) -> pd.Series:
         bachelors_plus = vals[5] + vals[6]  # indices 5,6 = bachelor + grad
         return round(bachelors_plus / total, 6)
 
-    return df.apply(row_to_edu, axis=1)
+    return cast(pd.Series, df.apply(row_to_edu, axis=1))
 
 
 def parse_income_2000(df: pd.DataFrame) -> pd.Series:
@@ -514,7 +515,7 @@ def parse_income_2000(df: pd.DataFrame) -> pd.Series:
     if col not in df.columns:
         print(f"    WARNING: column {col} not found. Cols: {list(df.columns[:20])}")
         return pd.Series([None] * len(df), index=df.index)
-    return df[col].apply(lambda v: int(v) if pd.notna(v) and str(v).strip() not in ("", "0", "-") else None)
+    return cast(pd.Series, df[col].apply(lambda v: int(v) if pd.notna(v) and str(v).strip() not in ("", "0", "-") else None))
 
 
 def parse_edu_2000(df: pd.DataFrame) -> pd.Series:
@@ -533,7 +534,7 @@ def parse_edu_2000(df: pd.DataFrame) -> pd.Series:
     total_m_col = f"{code}001"
     total_f_col = f"{code}018"
 
-    def row_to_edu(row):
+    def row_to_edu(row: pd.Series) -> float | None:
         total_m = float(row.get(total_m_col, 0) or 0)
         total_f = float(row.get(total_f_col, 0) or 0)
         total = total_m + total_f
@@ -542,7 +543,7 @@ def parse_edu_2000(df: pd.DataFrame) -> pd.Series:
         bach = sum(float(row.get(c, 0) or 0) for c in bach_cols)
         return round(bach / total, 6)
 
-    return df.apply(row_to_edu, axis=1)
+    return cast(pd.Series, df.apply(row_to_edu, axis=1))
 
 
 def parse_income_acs(df: pd.DataFrame, nhgis_code: str) -> pd.Series:
@@ -551,7 +552,7 @@ def parse_income_acs(df: pd.DataFrame, nhgis_code: str) -> pd.Series:
     if col not in df.columns:
         print(f"    WARNING: column {col} not found. Cols: {list(df.columns[:20])}")
         return pd.Series([None] * len(df), index=df.index)
-    return df[col].apply(lambda v: int(float(v)) if pd.notna(v) and str(v).strip() not in ("", "0", "-", "-666666666") else None)
+    return cast(pd.Series, df[col].apply(lambda v: int(float(v)) if pd.notna(v) and str(v).strip() not in ("", "0", "-", "-666666666") else None))
 
 
 def parse_edu_acs(df: pd.DataFrame, nhgis_code: str) -> pd.Series:
@@ -570,14 +571,14 @@ def parse_edu_acs(df: pd.DataFrame, nhgis_code: str) -> pd.Series:
     total_col = f"{code}E001"
     bach_cols = [f"{code}E{str(i).zfill(3)}" for i in [22, 23, 24, 25]]
 
-    def row_to_edu(row):
+    def row_to_edu(row: pd.Series) -> float | None:
         total = float(row.get(total_col, 0) or 0)
         if total == 0:
             return None
         bach = sum(float(row.get(c, 0) or 0) for c in bach_cols)
         return round(bach / total, 6)
 
-    return df.apply(row_to_edu, axis=1)
+    return cast(pd.Series, df.apply(row_to_edu, axis=1))
 
 
 # ---------------------------------------------------------------------------
@@ -598,7 +599,7 @@ def load_and_filter_csv(csv_path: Path, state_fips: str) -> pd.DataFrame:
 
     # NHGIS state FIPS is zero-padded 2 digits
     df = df[df[state_col].astype(str).str.zfill(2) == state_fips.zfill(2)].copy()
-    return df
+    return cast(pd.DataFrame, df)
 
 
 def extract_cd_number(df: pd.DataFrame, congress: int | None = None) -> pd.Series:
@@ -607,7 +608,7 @@ def extract_cd_number(df: pd.DataFrame, congress: int | None = None) -> pd.Serie
     if cd_col is None:
         print(f"    WARNING: cannot find CD column. Cols: {list(df.columns[:20])}")
         return pd.Series([None] * len(df), index=df.index)
-    return pd.to_numeric(df[cd_col], errors="coerce").astype("Int64")
+    return cast(pd.Series, pd.to_numeric(df[cd_col], errors="coerce").astype("Int64"))
 
 
 # ---------------------------------------------------------------------------
@@ -619,7 +620,7 @@ def build_demographics_for_cycle(
     state_fips: str,
     api_key: str,
     cache_dir: Path,
-) -> dict:
+) -> dict[int, dict[str, Any]]:
     """Download (or use cached) NHGIS data for one cycle. Returns dict keyed by district number."""
     sources = CYCLE_SOURCES[cycle_year]
     race_ds, race_table, race_geog, race_is_acs = sources["race"]
@@ -627,8 +628,6 @@ def build_demographics_for_cycle(
 
     # --------------- Submit / retrieve race extract ---------------
     race_cache = cache_dir / f"{cycle_year}_race_{race_ds}.csv"
-    soc_cache_income = cache_dir / f"{cycle_year}_soc_income_{soc_ds}.csv"
-    soc_cache_edu = cache_dir / f"{cycle_year}_soc_edu_{soc_ds}.csv"
 
     # If same dataset for race and soc, combine into one extract
     same_ds = (race_ds == soc_ds)
@@ -740,7 +739,7 @@ def build_demographics_for_cycle(
     # --------------- Merge and build district dict ---------------
     merged = race_df.merge(soc_df, on="_district", how="outer")
 
-    district_data: dict[int, dict] = {}
+    district_data: dict[int, dict[str, Any]] = {}
     for _, row in merged.iterrows():
         d = int(row["_district"])
         pop = row.get("population")
@@ -770,7 +769,7 @@ def load_and_filter_csv_df(df: pd.DataFrame, state_fips: str) -> pd.DataFrame:
     if state_col is None:
         print(f"    WARNING: no state column found. Filtering skipped.")
         return df
-    return df[df[state_col].astype(str).str.zfill(2) == state_fips.zfill(2)].copy()
+    return cast(pd.DataFrame, df[df[state_col].astype(str).str.zfill(2) == state_fips.zfill(2)].copy())
 
 
 # ---------------------------------------------------------------------------
@@ -778,10 +777,10 @@ def load_and_filter_csv_df(df: pd.DataFrame, state_fips: str) -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 
 def compute_cycle_demographics(
-    district_data: dict[int, dict],
+    district_data: dict[int, dict[str, Any]],
     total_seats: int,
     income_source: str,
-) -> dict:
+) -> dict[str, Any]:
     """Compute state-level demographic aggregates from district-level data."""
     pops = [d["population"] for d in district_data.values() if d.get("population") is not None]
     total_pop = sum(pops) if pops else None
@@ -822,7 +821,7 @@ def compute_cycle_demographics(
 # Population deviation (ideal district population)
 # ---------------------------------------------------------------------------
 
-def add_pop_deviation(district_data: dict[int, dict], ideal_pop: int | None) -> None:
+def add_pop_deviation(district_data: dict[int, dict[str, Any]], ideal_pop: int | None) -> None:
     """Add pop_deviation_pct to each district in-place."""
     if ideal_pop is None or ideal_pop == 0:
         return
@@ -855,7 +854,6 @@ def main() -> None:
         sys.exit(1)
 
     state_fips = state_cfg["fips"]
-    cycles = state_cfg["cycles"]
 
     api_key = os.getenv("NHGIS_API_KEY", "").strip()
     if not api_key:

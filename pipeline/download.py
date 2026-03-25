@@ -20,6 +20,7 @@ import os
 import re
 import sys
 import time
+from typing import Any
 
 from dotenv import load_dotenv
 
@@ -30,7 +31,6 @@ from pathlib import Path
 import requests
 
 from .config import (
-    ALL_SHAPEFILE_IDS,
     MIT_ELECTIONS_DOI,
     MIT_ELECTIONS_FILENAME,
     NHGIS_API_BASE,
@@ -48,7 +48,7 @@ ELECTIONS_DIR = RAW / "elections"
 # NHGIS / IPUMS API — congressional district boundaries
 # ---------------------------------------------------------------------------
 
-def _nhgis_headers(api_key: str) -> dict:
+def _nhgis_headers(api_key: str) -> dict[str, str]:
     return {"Authorization": api_key}
 
 
@@ -56,7 +56,7 @@ def _nhgis_url(path: str) -> str:
     return f"{NHGIS_API_BASE}{path}?product=nhgis&version={NHGIS_API_VERSION}"
 
 
-def list_nhgis_shapefiles(api_key: str) -> list[dict]:
+def list_nhgis_shapefiles(api_key: str) -> list[dict[str, Any]]:
     """Return the NHGIS shapefile catalog so you can verify shapefile IDs."""
     url = f"{NHGIS_API_BASE}/metadata/nhgis/shapefiles?version={NHGIS_API_VERSION}"
     resp = requests.get(url, headers=_nhgis_headers(api_key), timeout=30)

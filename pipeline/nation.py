@@ -14,8 +14,8 @@ Usage:
 import io
 import json
 import math
-import sys
 from pathlib import Path
+from typing import Any, cast
 
 import pandas as pd
 
@@ -66,7 +66,7 @@ def load_elections() -> pd.DataFrame:
     ].copy()
     df["party_clean"] = df["party"].str.upper().str.strip()
     df["district"] = pd.to_numeric(df["district"], errors="coerce")
-    return df
+    return cast(pd.DataFrame, df)
 
 
 # ---------------------------------------------------------------------------
@@ -99,7 +99,7 @@ def compute_efficiency_gap(results: pd.DataFrame) -> float | None:
             wasted_r += r - threshold
             wasted_d += d
         total += t
-    return (wasted_d - wasted_r) / total if total else None
+    return float((wasted_d - wasted_r) / total) if total else None
 
 
 def compute_mean_median(results: pd.DataFrame) -> float | None:
@@ -118,7 +118,7 @@ def main() -> None:
     print("Loading MIT election data…")
     df = load_elections()
 
-    nation: dict[str, list] = {}   # po → list of cycle dicts
+    nation: dict[str, list[Any]] = {}   # po → list of cycle dicts
 
     # Non-voting delegates (DC) appear in election data but are not states
     NON_STATES = {"DC"}

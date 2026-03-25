@@ -25,14 +25,12 @@ Getting the input data:
 """
 
 import argparse
-import json
-import os
-import re
 import subprocess
 import sys
 import tempfile
 import zipfile
 from pathlib import Path
+from typing import cast
 
 import geopandas as gpd
 
@@ -102,7 +100,7 @@ def detect_vote_columns(
 # Shapefile processing
 # ---------------------------------------------------------------------------
 
-def process_vest_zip(zip_path: Path, cycle_year: int, state_po: str) -> gpd.GeoDataFrame | None:
+def process_vest_zip(zip_path: Path, cycle_year: int, _state_po: str) -> gpd.GeoDataFrame | None:
     """Read a RDH VEST ZIP, extract votes, return a tiled-ready GeoDataFrame."""
     print(f"  Reading {zip_path.name}...")
 
@@ -166,7 +164,7 @@ def process_vest_zip(zip_path: Path, cycle_year: int, state_po: str) -> gpd.GeoD
     gdf = gdf[gdf["total_votes"] > 0].copy()
 
     print(f"    Kept {len(gdf)} precincts with valid geometry and votes")
-    return gdf
+    return cast(gpd.GeoDataFrame, gdf)
 
 
 # ---------------------------------------------------------------------------

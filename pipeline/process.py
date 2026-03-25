@@ -33,6 +33,7 @@ import math
 import re as _re
 import sys
 from pathlib import Path
+from typing import Any, cast
 
 import geopandas as gpd
 import pandas as pd
@@ -49,7 +50,7 @@ ELECTIONS_CSV = RAW / "elections" / MIT_ELECTIONS_FILENAME
 # Load and filter data
 # ---------------------------------------------------------------------------
 
-def load_district_boundaries(cycle_year: int, state_fips: str, cycles: dict) -> gpd.GeoDataFrame:
+def load_district_boundaries(cycle_year: int, state_fips: str, cycles: dict[str, Any]) -> gpd.GeoDataFrame:
     """Load NHGIS shapefile and filter to the given state's districts."""
     congress = cycles[cycle_year]["congress"]
     shp_dir = BOUNDARIES_DIR / f"cd{congress}"
@@ -87,7 +88,7 @@ def load_district_boundaries(cycle_year: int, state_fips: str, cycles: dict) -> 
 
     state_gdf["cycle_year"] = cycle_year
     state_gdf["congress"] = congress
-    return state_gdf
+    return cast(gpd.GeoDataFrame, state_gdf)
 
 
 def load_election_results(cycle_year: int, state_po: str) -> pd.DataFrame:
@@ -188,7 +189,7 @@ def compute_efficiency_gap(results: pd.DataFrame) -> float:
 
     if total == 0:
         return 0.0
-    return (wasted_d - wasted_r) / total
+    return float((wasted_d - wasted_r) / total)
 
 
 def compute_mean_median(results: pd.DataFrame) -> float:
@@ -215,8 +216,8 @@ def process_cycle(
     state_fips: str,
     state_po: str,
     state_crs: str,
-    cycles: dict,
-) -> tuple[gpd.GeoDataFrame, dict]:
+    cycles: dict[str, Any],
+) -> tuple[gpd.GeoDataFrame, dict[str, Any]]:
     """Process one redistricting cycle. Returns (GeoDataFrame, cycle_stats_dict)."""
     print(f"  Loading {cycle_year} boundaries...")
     gdf = load_district_boundaries(cycle_year, state_fips, cycles)
@@ -306,7 +307,7 @@ def process_cycle(
         districts.append(d)
     cycle_stats["districts"] = districts
 
-    return gdf, cycle_stats
+    return cast(gpd.GeoDataFrame, gdf), cycle_stats
 
 
 # ---------------------------------------------------------------------------

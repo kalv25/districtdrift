@@ -11,7 +11,11 @@ Each state entry contains:
              notes (optional)      : litigation / special circumstances
 """
 
-STATES: dict[str, dict] = {
+from __future__ import annotations
+
+from typing import Any
+
+STATES: dict[str, dict[str, Any]] = {
     "MI": {
         "name": "Michigan",
         "fips": "26",
@@ -2112,7 +2116,7 @@ PROCESSED_DIR = "data/processed"
 TILES_DIR = "tiles"
 
 
-def get_state(state_po: str) -> dict:
+def get_state(state_po: str) -> dict[str, Any]:
     """Return state config for the given postal abbreviation (e.g. 'MI', 'NC')."""
     key = state_po.upper()
     if key not in STATES:
