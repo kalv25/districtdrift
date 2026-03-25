@@ -9,8 +9,13 @@ Data sources:
      Public, no key required.
      Dataset: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IG0UN2
 
+  3. Precinct-level VEST shapefiles — Redistricting Data Hub (RDH)
+     Requires RDH account with "API Download user" role.
+     Set RDH_USERNAME and RDH_PASSWORD in .env (see .env.example)
+     Docs: https://github.com/nonpartisan-redistricting-datahub/api
+
 Usage:
-  uv run python -m pipeline.download          # downloads boundaries for all configured states
+  uv run python -m pipeline.download          # downloads all data for all configured states
   uv run python -m pipeline.download --state NC
 """
 
@@ -249,6 +254,86 @@ def download_mit_elections() -> None:
 
 
 # ---------------------------------------------------------------------------
+# RDH (Redistricting Data Hub) — VEST precinct shapefiles
+# Auth: username + password as query params on every request (WordPress API).
+# Requires the "API Download user" role — request at info@redistrictingdatahub.org
+# ---------------------------------------------------------------------------
+
+RDH_LIST_URL = "https://redistrictingdatahub.org/wp-json/download/list"
+RAW_PRECINCTS = RAW / "precincts"
+
+# VEST cycle years and the election-year keywords to search for each
+_VEST_CYCLES: dict[int, str] = {
+    2012: "2012",
+    2022: "2022",
+}
+
+
+def _rdh_find_vest(
+    username: str, password: str, state_name: str, elec_year: str
+) -> str | None:
+    """Return the download URL for a state's VEST precinct shapefile, or None."""
+    import io as _io
+    import pandas as _pd
+
+    params = {
+        "username": username,
+        "password": password,
+        "format": "csv",
+        "states": state_name.lower(),
+        "keywords": f"election results, precinct, {elec_year}, shp",
+    }
+    resp = requests.get(RDH_LIST_URL, params=params, timeout=30)
+    resp.raise_for_status()
+    df = _pd.read_csv(_io.StringIO(resp.content.decode("utf-8")))
+    if df.empty or "URL" not in df.columns:
+        return None
+    # Prefer files whose title contains the election year to avoid wrong-year matches
+    if "Title" in df.columns:
+        title_col = df["Title"].astype(str)
+    elif "title" in df.columns:
+        title_col = df["title"].astype(str)
+    else:
+        title_col = _pd.Series([""] * len(df), dtype=str)
+    matches = df[title_col.str.contains(elec_year, na=False)]
+    row = matches.iloc[0] if not matches.empty else df.iloc[0]
+    return str(row["URL"])
+
+
+def download_rdh_precincts(
+    username: str, password: str, states_to_download: dict[str, dict[str, object]]
+) -> None:
+    """Download RDH VEST precinct shapefiles for all requested states × cycles."""
+    RAW_PRECINCTS.mkdir(parents=True, exist_ok=True)
+    for state_key, state_cfg in states_to_download.items():
+        state_name = str(state_cfg["name"])
+        state_dir = RAW_PRECINCTS / state_key.lower()
+        state_dir.mkdir(exist_ok=True)
+        for cycle_year, elec_year in _VEST_CYCLES.items():
+            dest = state_dir / f"{cycle_year}.zip"
+            if dest.exists():
+                print(f"  {state_key} {cycle_year} VEST already present, skipping.")
+                continue
+            print(f"  Looking up {state_name} {cycle_year} VEST shapefile...")
+            url = _rdh_find_vest(username, password, state_name, elec_year)
+            if url is None:
+                print(f"  WARNING: no VEST shapefile found for {state_name} {cycle_year}.")
+                continue
+            # Re-request with clean credentials (strip any embedded params from URL)
+            base = url.split("?")[0]
+            dataset_id = url.split("datasetid=")[-1].split("&")[0] if "datasetid=" in url else ""
+            dl_params: dict[str, str] = {"username": username, "password": password}
+            if dataset_id:
+                dl_params["datasetid"] = dataset_id
+            print(f"  Downloading {state_name} {cycle_year} VEST...")
+            resp = requests.get(base, params=dl_params, timeout=120)
+            resp.raise_for_status()
+            with open(dest, "wb") as fh:
+                fh.write(resp.content)
+            print(f"  Saved to {dest}")
+
+
+# ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
 
@@ -272,11 +357,6 @@ def main() -> None:
     # Collect unique shapefile IDs and congress numbers across all requested states
     all_shapefile_ids = {
         meta["shapefile_id"]
-        for state in states_to_download.values()
-        for meta in state["cycles"].values()
-    }
-    all_congress_numbers = {
-        meta["congress"]
         for state in states_to_download.values()
         for meta in state["cycles"].values()
     }
@@ -304,8 +384,17 @@ def main() -> None:
     download_nhgis_boundaries(api_key, nhgis_ids)
 
     # --- Election returns (MIT Election Lab) ---
-    print("\n[2/2] US House election returns (MIT Election Lab)...")
+    print("\n[2/3] US House election returns (MIT Election Lab)...")
     download_mit_elections()
+
+    # --- Precinct shapefiles (RDH VEST) ---
+    rdh_username = os.getenv("RDH_USERNAME", "").strip()
+    rdh_password = os.getenv("RDH_PASSWORD", "").strip()
+    if rdh_username and rdh_password:
+        print("\n[3/3] Precinct shapefiles (RDH VEST)...")
+        download_rdh_precincts(rdh_username, rdh_password, states_to_download)
+    else:
+        print("\n[3/3] Precinct shapefiles (RDH VEST) — skipped (set RDH_USERNAME and RDH_PASSWORD in .env)")
 
     print("\nAll downloads complete.")
     print(f"  Boundaries : {BOUNDARIES_DIR}")
