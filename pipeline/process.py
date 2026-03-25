@@ -290,12 +290,14 @@ def process_cycle(
     gdf["polsby_popper"] = gdf["polsby_popper"].round(4)
     gdf["partisan_lean_d"] = gdf["partisan_lean_d"].astype(float).round(4)
 
-    # Build per-district list for the stats JSON
+    # Build per-district list for the stats JSON (skip rows with no district number)
     districts = []
     for _, row in gdf.sort_values("district").iterrows():
+        if pd.isna(row.get("district")):
+            continue
         d = {
-            "district": int(row["district"]) if pd.notna(row.get("district")) else None,
-            "won_by": row.get("won_by", None),
+            "district": int(row["district"]),
+            "won_by": row.get("won_by") if pd.notna(row.get("won_by")) else None,
             "partisan_lean_d": float(row["partisan_lean_d"]) if pd.notna(row.get("partisan_lean_d")) else None,
             "polsby_popper": float(row["polsby_popper"]) if pd.notna(row.get("polsby_popper")) else None,
             "d_votes": int(row["d_votes"]) if pd.notna(row.get("d_votes")) else None,
@@ -388,7 +390,7 @@ def main() -> None:
     PROCESSED.mkdir(parents=True, exist_ok=True)
     stats_path = PROCESSED / f"{state_lower}_stats.json"
     with open(stats_path, "w") as fh:
-        json.dump(all_stats, fh, indent=2)
+        json.dump(all_stats, fh, indent=2, allow_nan=False)
     print(f"\nWrote {stats_path}")
     print("Processing complete.")
 

@@ -576,7 +576,7 @@
         },
         {
           "district": null,
-          "won_by": NaN,
+          "won_by": null,
           "partisan_lean_d": null,
           "polsby_popper": 0.0362,
           "d_votes": null,
@@ -732,7 +732,7 @@
         },
         {
           "district": null,
-          "won_by": NaN,
+          "won_by": null,
           "partisan_lean_d": null,
           "polsby_popper": 0.0362,
           "d_votes": null,
