@@ -8,5 +8,6 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	define: {
 		__APP_VERSION__: JSON.stringify(version),
+		__BUILD_DATE__: JSON.stringify(new Date().toISOString()),
 	},
 });

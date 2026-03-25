@@ -1226,6 +1226,9 @@
       <a href="https://github.com/kalv25/districtdrift" target="_blank" rel="noopener">GitHub</a> ·
       <a href="https://github.com/kalv25/districtdrift/discussions/1" target="_blank" rel="noopener">Leave feedback</a>
     </p>
+    <p class="footer-updated">
+      Updated {new Date(__BUILD_DATE__).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
+    </p>
   </footer>
 </div>
 
@@ -2193,6 +2196,7 @@
     font-size: 0.72rem;
   }
   footer a { color: rgba(255,255,255,0.65); }
+  .footer-updated { opacity: 0.35; font-size: 0.65rem; margin: 0.15rem 0 0; }
 
   .share-btn {
     background: rgba(255,255,255,0.07);
