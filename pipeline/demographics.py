@@ -84,11 +84,11 @@ PROCESSED = Path(PROCESSED_DIR)
 # ---------------------------------------------------------------------------
 
 def _headers(api_key: str) -> dict[str, str]:
-    return {"Authorization": api_key}
+    return {"Authorization": f"Bearer {api_key}"}
 
 
 def _nhgis_url(path: str) -> str:
-    return f"{NHGIS_API_BASE_URL}{path}?product=nhgis&version={VERSION}"
+    return f"{NHGIS_API_BASE_URL}{path}?collection=nhgis&version={VERSION}"
 
 
 def submit_tabular_extract(

@@ -46,16 +46,16 @@ ELECTIONS_DIR = RAW / "elections"
 # ---------------------------------------------------------------------------
 
 def _nhgis_headers(api_key: str) -> dict[str, str]:
-    return {"Authorization": api_key}
+    return {"Authorization": f"Bearer {api_key}"}
 
 
 def _nhgis_url(path: str) -> str:
-    return f"{NHGIS_API_BASE}{path}?product=nhgis&version={NHGIS_API_VERSION}"
+    return f"{NHGIS_API_BASE}{path}?collection=nhgis&version={NHGIS_API_VERSION}"
 
 
 def list_nhgis_shapefiles(api_key: str) -> list[dict[str, Any]]:
     """Return the NHGIS shapefile catalog so you can verify shapefile IDs."""
-    url = f"{NHGIS_API_BASE}/metadata/nhgis/shapefiles?version={NHGIS_API_VERSION}"
+    url = f"{NHGIS_API_BASE}/metadata/nhgis/shapefiles?collection=nhgis&version={NHGIS_API_VERSION}"
     resp = requests.get(url, headers=_nhgis_headers(api_key), timeout=30)
     resp.raise_for_status()
     return resp.json()

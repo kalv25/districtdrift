@@ -2108,7 +2108,7 @@ MIT_ELECTIONS_FILENAME = "1976-2024-house.tab"
 
 # NHGIS IPUMS API
 NHGIS_API_BASE = "https://api.ipums.org"
-NHGIS_API_VERSION = "v1"
+NHGIS_API_VERSION = "2"
 
 # Raw and processed data directories (relative to repo root)
 RAW_DIR = "data/raw"
