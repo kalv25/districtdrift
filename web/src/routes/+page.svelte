@@ -925,6 +925,11 @@
               pinnedDistrict = dn;
             }} onMapClick={() => { pinnedDistrict = computeDefaultDistrict(stats); districtTab = 'partisan'; }} />
         {/key}
+
+        <!-- Floating cycle bar for state view -->
+        <div class="state-cycle-bar">
+          {@render cycleControls()}
+        </div>
       {/if}
 
       <!-- Precinct loading toast -->
@@ -987,10 +992,6 @@
 
         <!-- Panel 1: State -->
         <aside class="panel panel-state">
-          <div class="panel-header">
-            {@render cycleControls()}
-          </div>
-
           {#if displayStats}
             {#if stateCardLabels.length > 1}
               <nav class="snap-nav" aria-label="Panel sections">
@@ -1917,7 +1918,6 @@
     box-sizing: border-box;
     background: var(--surface);
   }
-  .panel-header .cycle-buttons { flex: 1; }
 
   /* Shared snap card scroll container */
   .snap-cards {
@@ -2599,6 +2599,21 @@
     z-index: 10;
     display: flex;
     align-items: center;
+  }
+  .state-cycle-bar {
+    position: absolute;
+    bottom: 3.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 0.35rem 0.75rem;
+    box-shadow: 0 2px 12px var(--shadow-sm);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
   }
   /* Nation cycle bar — standalone simple buttons */
   .nation-btns {
