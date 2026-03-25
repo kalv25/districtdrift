@@ -1175,42 +1175,58 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
   AR: {
     1992: [
       {
-        title: 'Clinton successor draws Democratic maps',
-        detail: 'Governor Tucker (D) — who succeeded Bill Clinton upon his election to the presidency — and a Democratic legislature draw maps. Arkansas retains 4 seats after the 1990 census. The maps protect Democratic incumbents in a state trending rightward at the presidential level but still electing Democrats statewide.',
+        title: 'Clinton signs congressional maps before leaving for the White House',
+        detail: 'Governor Bill Clinton (D) signs Act 1220 — the congressional redistricting plan — on April 10, 1991, months before his presidential campaign gains momentum. Arkansas retains 4 seats after the 1990 census. Democrats hold overwhelming legislative majorities and draw maps designed to protect incumbents across a state that remains politically competitive at the congressional level despite shifting rightward in presidential races.',
       },
       {
-        title: 'Arkansas sends an all-Democratic delegation for the last time',
-        detail: 'The 1992 elections produce an all-Democratic 4-0 Arkansas delegation — the last time the state would send an entirely Democratic congressional delegation. The realignment to Republicans accelerates through the 1990s as rural white voters in the Delta and Ozarks shift toward Republicans in federal races even while continuing to elect conservative Democrats at the state level.',
+        title: '⚖ Turner v. Arkansas: VRA challenge rejected; no majority-Black district drawn',
+        detail: 'The NAACP argues the maps violate the Voting Rights Act by failing to create a majority-Black congressional district despite Arkansas\'s large Black population concentrated in the Delta region. The U.S. District Court upholds the plan in Turner v. Arkansas (784 F. Supp. 553), and the Supreme Court affirms (504 U.S. 952, 1992). No majority-minority congressional district is created — a pattern that persists through every subsequent cycle.',
+      },
+      {
+        title: 'Republicans flip two seats; delegation splits 2-2',
+        detail: 'The 1992 elections produce a 2D–2R Arkansas delegation, not the clean Democratic sweep the maps were meant to protect. Jay Dickey (R) defeats scandal-weakened Democrat Bill McCuen to win AR-4, and Tim Hutchinson (R) wins the open AR-3 after GOP stalwart John Paul Hammerschmidt retires. Democrats retain AR-1 (Blanche Lambert Lincoln) and AR-2 (Ray Thornton). The competitive equilibrium will not last — Republicans continue gaining ground through the decade.',
       },
     ],
     2002: [
       {
-        title: 'Split government: Huckabee (R) and Democratic legislature',
-        detail: 'Governor Huckabee (R) and a Democratic-controlled General Assembly draw maps after Arkansas retains 4 seats. Democrats hold both chambers and control the process. The maps maintain a 3-1 Democratic delegation heading into 2002.',
+        title: 'Democratic legislature draws maps; Huckabee lets bill pass without signature',
+        detail: 'Democrats still control both chambers of the Arkansas General Assembly in 2001. Governor Mike Huckabee (R) neither signs nor vetoes the congressional map — Senate Bill 552 becomes law on April 20, 2001 by operation of law. With no seat to eliminate, Democrats draw a plan aimed at protecting the existing delegation. The NAACP again presses for a majority-Black district in the Delta; legislators decline.',
       },
       {
-        title: 'Arkansas delegation shifts to 3-1 Republican despite Democratic maps',
-        detail: 'Despite Democratic control of redistricting, the Arkansas delegation flips to 3-1 Republican by 2004 as the state\'s congressional realignment outpaces Democratic mapmaking advantages. John Boozman (AR-3, northwest Arkansas/Fort Smith) and Tim Griffin (AR-2, Little Rock) are emblematic of the Republican takeover of formerly Democratic districts.',
+        title: 'Democrats hold 3-1 delegation — for now',
+        detail: 'The 2002 elections produce a 3D–1R Arkansas delegation. Democrats retain AR-1 (Marion Berry), AR-2 (Vic Snyder), and AR-4 (Mike Ross), while John Boozman (R) holds AR-3 unopposed after winning a 2001 special election. The map works as intended — but only briefly. Rural realignment accelerates: by 2010, Republicans hold all four seats.',
+      },
+      {
+        title: 'Blue Dog era: Democrats hold seats through incumbency, not partisanship',
+        detail: 'Arkansas\'s three Democratic incumbents — Berry, Snyder, and Ross — survive the decade as self-styled fiscal conservatives ("Blue Dogs") who carefully distance themselves from national Democratic leadership. Their survival reflects incumbency advantage more than Democratic strength: the underlying districts are already voting Republican in presidential races. When they retire or lose in 2010–2012, Republicans sweep immediately.',
       },
     ],
     2012: [
       {
-        title: 'Last Democratic maps — drawn just before the party loses the legislature',
-        detail: 'Governor Beebe (D) and a Democratic legislature draw maps for what would be their final redistricting cycle. Democrats still hold both chambers of the General Assembly for the 2011 redistricting — but Republicans sweep the legislature in the 2012 elections, ending Democratic legislative control for the first time since Reconstruction.',
+        title: 'Democrats draw the "Fayetteville Finger" map — then lose everything',
+        detail: 'Governor Mike Beebe (D) signs HB 1836 on April 14, 2011. Democrats still control both chambers in 2011 and design a map with a narrow geographic extension — nicknamed the "Fayetteville Finger" by critics — intended to move the liberal University of Arkansas city into a friendlier district. Republicans cry partisan gerrymander; the final enacted map pulls back from the most egregious version. The legislature passes it 64–28 largely along party lines.',
       },
       {
-        title: 'Delegation flips to 4-0 Republican',
-        detail: 'Despite drawing the maps, Democrats lose all four congressional seats in the 2012 and 2014 elections as the state\'s rapid rightward shift in federal races overwhelms any mapmaking advantage.',
+        title: 'Democrats swept out; 4-0 Republican delegation for the first time since Reconstruction',
+        detail: 'The Democratic redistricting strategy backfires completely. In 2012 and 2014, Republicans win all four Arkansas congressional seats — the first time since Reconstruction that Democrats hold zero seats. Mike Ross retires rather than face the new map\'s headwinds. Tom Cotton (R) wins the open AR-4. Republicans also sweep the Arkansas legislature in November 2012, ending over 130 years of Democratic legislative control.',
+      },
+      {
+        title: 'Arkansas\'s congressional realignment is complete',
+        detail: 'By 2014 Arkansas is fully Republican at the federal level: 4-0 House delegation, two Republican senators, Republican governor. The transformation from a state that sent a 3-1 Democratic delegation as recently as 2003 to a 4-0 Republican one took just a decade. The pattern — rural and small-town white voters completing a shift that began in the Reagan era — mirrors Tennessee, Kentucky, and West Virginia.',
       },
     ],
     2022: [
       {
-        title: 'First full Republican redistricting cycle',
-        detail: 'Governor Hutchinson (R) and a Republican supermajority legislature draw maps after Arkansas retains 4 seats. Republicans produce maps maintaining a 4-0 delegation in a state Trump won by 28 points in 2020.',
+        title: 'First full Republican redistricting; Hutchinson lets map take effect without signature',
+        detail: 'Governor Asa Hutchinson (R) and a Republican supermajority legislature draw Arkansas\'s first entirely Republican-controlled congressional map. The legislature approves the map on October 7, 2021; Hutchinson announces he will not sign it, allowing it to take effect automatically on January 14, 2022. Arkansas retains 4 seats after the 2020 census.',
       },
       {
-        title: 'Little Rock split across districts to dilute urban Democratic vote',
-        detail: 'The Republican maps divide Pulaski County (Little Rock), the state\'s only large urban Democratic stronghold, across multiple congressional districts — preventing its Democratic voters from consolidating into a competitive seat. The strategy is consistent with Republican redistricting approaches in other Southern states with isolated urban Democratic centers.',
+        title: 'Pulaski County (Little Rock) cracked across three districts',
+        detail: 'The map splits Pulaski County — home to Little Rock and roughly 35–40% Black, the state\'s strongest Democratic bloc — among three congressional districts (AR-1, AR-2, and AR-4). Approximately 23,000 predominantly Black voters are moved out of AR-2. Critics call it deliberate racial cracking to dilute Black political power; Republicans say the maps comply with the VRA. The 4R–0D delegation is unchanged.',
+      },
+      {
+        title: '⚖ Section 2 challenges dismissed; racial gerrymander suit fails',
+        detail: 'Two federal lawsuits allege VRA Section 2 violations. Simpson v. Thurston is dismissed — the 8th Circuit rules on November 20, 2023 that private parties cannot sue under Section 2 (only the U.S. Attorney General can). A separate NAACP Legal Defense Fund case brought by the Christian Ministerial Alliance on 14th and 15th Amendment grounds survives longer, but a three-judge federal panel grants the state summary judgment in June 2025. The 2021 map remains in effect.',
       },
     ],
   },
@@ -1390,42 +1406,58 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
   IN: {
     1992: [
       {
-        title: 'Split government produces negotiated maps',
-        detail: 'Governor Bayh (D) and a split Indiana General Assembly (Democratic House, Republican Senate) draw maps after Indiana retains 10 seats from the 1990 census. The split government produces compromise maps with minimal partisan distortion.',
+        title: 'Split government forces compromise; Indiana retains 10 seats',
+        detail: 'Governor Evan Bayh (D) and a split Indiana General Assembly — Democratic House, Republican Senate — draw maps after Indiana retains 10 seats from the 1990 census. Neither party can pass a partisan plan alone; the result is a bipartisan incumbent-protection map. The backup redistricting commission (a legislative fallback for deadlocks) is not needed — the legislature passes the plan directly.',
       },
       {
-        title: 'Democrats and Republicans each protect their incumbents',
-        detail: 'The compromise map safeguards all incumbents of both parties. Democrats hold seats anchored in Indianapolis (IN-10) and Gary/Northwest Indiana (IN-1), while Republicans hold the remaining eight districts. The resulting delegation closely tracks Indiana\'s competitive-but-lean-Republican political balance of the early 1990s.',
+        title: 'Democrats win 7 of 10 seats in a genuinely competitive Indiana',
+        detail: 'The 1992 elections produce a 7D–3R delegation — a striking reminder of how competitive Indiana was before its rightward shift. Democrats hold Gary/Northwest Indiana (IN-1), Indianapolis (IN-7), and five additional districts. Republicans hold only three seats. The competitive equilibrium erodes quickly: by 1994, Republicans win the House majority nationally and begin flipping Indiana districts.',
+      },
+      {
+        title: 'The last Democratic majority in Indiana\'s delegation',
+        detail: 'The 7D–3R outcome is the last time Democrats hold a majority of Indiana\'s congressional seats. By 1995, the 1994 wave has already flipped the delegation to 6R–4D. Indiana\'s congressional delegation continues shifting right through the 1990s and 2000s, mirroring the state\'s presidential transformation from competitive to reliably Republican.',
       },
     ],
     2002: [
       {
-        title: 'Indiana loses 1 seat after the 2000 census',
-        detail: 'The 2000 census reduces Indiana\'s delegation from 10 to 9, requiring elimination of one district. Governor O\'Bannon (D) must sign maps drawn by a Republican-controlled General Assembly.',
+        title: 'Indiana loses 1 seat; backup commission draws congressional map',
+        detail: 'The 2000 census reduces Indiana from 10 to 9 congressional seats. Governor Frank O\'Bannon (D) and a split legislature (D House, R Senate) again face divided government. This time the legislature deadlocks on congressional lines and the backup redistricting commission — five members drawn from legislative leaders plus a gubernatorial appointee — enacts the congressional map on May 10, 2001.',
       },
       {
-        title: 'Republican legislature draws maps over Democratic governor\'s signature',
-        detail: 'Republicans hold majorities in both chambers of the Indiana General Assembly and draw maps producing a 7-2 Republican delegation. Governor O\'Bannon signs the plan, having limited leverage against the Republican-controlled legislature.',
+        title: 'Democrats lose the 2nd District; delegation shifts 6R-3D',
+        detail: 'The 2002 elections produce a 6R–3D result after Tim Roemer (D) retires from IN-2 and Republican Chris Chocola wins the open seat. Democrats retain IN-1 (Visclosky, Gary), IN-7 (Julia Carson, Indianapolis), and one additional district. The 6–3 ratio holds for a decade until Republicans use their 2010 trifecta to push to 7–2.',
+      },
+      {
+        title: 'Mike Pence enters Congress; Indiana\'s partisan shift accelerates',
+        detail: 'Mike Pence (R), first elected to IN-6 in 2000 under the 2001 map, becomes a leading conservative voice in the House. Indiana\'s rural and suburban districts continue shifting Republican through the decade as the state\'s presidential vote stabilizes firmly in the Republican column. By 2010, Republicans hold 6 of 9 Indiana seats even before the upcoming redistricting.',
       },
     ],
     2012: [
       {
-        title: 'Republican supermajority draws maps after 2010 sweep',
-        detail: 'Governor Daniels (R) and a Republican supermajority legislature draw maps after Indiana retains 9 seats. Republicans won supermajorities in both chambers in the 2010 elections. The resulting maps pack Democrats into the Indianapolis-based 7th District (André Carson) and the Bloomington/Gary-influenced 1st District.',
+        title: 'Republicans draw maps in secret; 7-2 gerrymander signed',
+        detail: 'Governor Mitch Daniels (R) signs HB 1602 on May 10, 2011. Republicans control both chambers with supermajorities after the 2010 wave and draw the maps entirely behind closed doors as part of the national Project REDMAP strategy. Thomas Hofeller, the chief Republican redistricting strategist, consults on the Indiana maps. A decade later, participants still refused to discuss publicly how the lines were drawn (Indiana Citizen, 2021: "The Room Where It Happened").',
       },
       {
-        title: 'Maps produce a 7-2 Republican delegation',
-        detail: 'The Republican-drawn maps yield a 7-2 delegation in a state Obama lost by 10 points in 2012. The two Democratic seats (IN-1 in Gary/Northwest Indiana and IN-7 in Indianapolis) are safe minority-coalition districts.',
+        title: '7-2 Republican delegation locked in',
+        detail: 'The Republican maps convert a 6R–3D delegation into a 7R–2D delegation designed to be durable for the decade. Democrats are consolidated into IN-1 (Gary/Northwest Indiana, Visclosky) and IN-7 (Indianapolis, André Carson, who succeeded his grandmother Julia Carson). Republicans win 7 seats in 2012 despite the state voting for Obama in 2008. No court challenges are filed.',
+      },
+      {
+        title: 'Joe Donnelly exits for the Senate; IN-2 becomes safe Republican',
+        detail: 'The new maps redraw IN-2 to make it safely Republican, pushing Donnelly toward a Senate run (he defeats Richard Mourdock in 2012). IN-9 is also redrawn to strengthen Republican Todd Young. The 7–2 split holds unchanged through the 2020 elections, making Indiana one of the most durable partisan gerrymanders in the Midwest.',
       },
     ],
     2022: [
       {
-        title: 'Republican supermajority maintains 7-2 delegation structure',
-        detail: 'Governor Holcomb (R) and a Republican supermajority legislature draw maps after Indiana retains 9 seats. Maps preserve the 7-2 Republican advantage. Democrats challenge maps in state court as an unconstitutional partisan gerrymander but courts uphold the plan.',
+        title: 'Republican supermajority passes HB 1581; Holcomb signs',
+        detail: 'Governor Eric Holcomb (R) signs HB 1581 on October 4, 2021. Republicans hold supermajorities in both chambers and draw maps preserving the 7R–2D structure. The key change: IN-5 (suburban Indianapolis) has northern Marion County precincts shifted into the adjacent Democratic IN-7, making IN-5 safer for Republican incumbent Victoria Spartz (first elected 2020 in a competitive race). No court challenges are filed.',
       },
       {
-        title: 'Indianapolis cracking dilutes urban Democratic vote',
-        detail: 'The Republican maps divide Marion County (Indianapolis) across multiple congressional districts, preventing the growing Democratic-majority city from consolidating its vote into an additional congressional seat. The 5th District (suburban Indianapolis), which had briefly gone Democratic in 2018 and 2020, is redrawn to lean more reliably Republican.',
+        title: '7-2 map preserved; Indianapolis cracking continues',
+        detail: 'The maps divide Marion County (Indianapolis) across multiple districts, preventing the growing Democratic city from consolidating into an additional seat. Democrats retain only IN-1 (Frank Mrvan, Gary) and IN-7 (André Carson, Indianapolis). Republicans win all seven other seats in 2022, including two new open-seat winners: Rudy Yakym (IN-2, replacing Jackie Walorski who died in a car crash) and Erin Houchin (IN-9, replacing retiring Trey Hollingsworth).',
+      },
+      {
+        title: '2025: Mid-decade redistricting attempt blocked by state Senate',
+        detail: 'Under pressure from the Trump White House in late 2025, Indiana House Republicans pass a new mid-decade congressional map designed to crack Indianapolis and achieve a 9R–0D sweep. In a rare break with national Republican pressure, the Indiana Senate rejects the bill — blocking the mid-decade remap. The 2021 maps remain in force for the 2026 elections, preserving IN-1 and IN-7 as the state\'s two Democratic seats.',
       },
     ],
   },
@@ -1476,42 +1508,58 @@ export const CYCLE_EVENTS: Record<string, Record<number, CycleEvent[]>> = {
   KY: {
     1992: [
       {
-        title: 'Democrats draw maps in a still-blue Kentucky',
-        detail: 'Governor Jones (D) and a Democratic legislature draw maps after Kentucky retains 6 seats. Kentucky\'s congressional delegation is majority-Democratic heading into the 1990s — the state\'s full shift to Republicans in federal elections is still a decade away.',
+        title: 'Kentucky loses 1 seat; the Perkins dynasty ends',
+        detail: 'The 1990 census reduces Kentucky from 7 to 6 congressional seats. The eliminated district is the 7th — the eastern Appalachian coal-country seat held by Carl D. Perkins from 1949 until his death in 1984 and then by his son Chris Perkins through 1993. Chris Perkins declines to seek election in the redrawn 5th district; the seat that anchored New Deal Democratic politics in Appalachian Kentucky disappears. Governor Brereton Jones (D) and a full Democratic trifecta draw the maps.',
       },
       {
-        title: 'Democrats hold 4 of 6 seats; eastern Kentucky coal country is competitive',
-        detail: 'The Democrat-drawn maps produce a 4-2 Democratic delegation in 1992. Eastern Kentucky\'s coal mining communities — historically the most reliably Democratic region in the South, rooted in the New Deal — return a Democratic incumbent in the 5th District even as the state\'s presidential vote shifts Republican. The unraveling of this Democratic coalition accelerates through the 1990s.',
+        title: 'Democrats win 4 of 6 seats; 6th District flips',
+        detail: 'The Democratic-drawn maps produce a 4D–2R result in 1992. Democrats pick up the newly redrawn 6th district (Lexington) when Scotty Baesler wins the open seat left by retiring Republican Larry Hopkins. Hal Rogers (R) retains the 5th (eastern Kentucky, now incorporating former 7th district territory). Carroll Hubbard (D-1st) is defeated in his own primary over the House banking scandal — Tom Barlow wins the seat instead.',
+      },
+      {
+        title: 'The last genuinely Democratic Kentucky delegation',
+        detail: 'The 4D–2R outcome of 1992 is the high-water mark of modern Democratic congressional strength in Kentucky. By 1994, Democrats have already lost seats as rural white voters accelerate their shift toward Republicans. The coal-country and farm-belt districts that once formed the backbone of New Deal Democratic politics in the South begin voting Republican in federal races even as they continue electing conservative Democrats at the state level — a split that will fully collapse by 2010.',
       },
     ],
     2002: [
       {
-        title: 'Split government in an increasingly competitive state',
-        detail: 'Governor Patton (D) and a split legislature (Democratic House, Republican Senate) draw maps after Kentucky retains 6 seats. Negotiated maps split the delegation roughly along incumbent-protection lines.',
+        title: 'Split legislature produces bipartisan incumbent-protection map',
+        detail: 'Governor Paul Patton (D) and a split legislature — Democratic House, Republican Senate (Republicans flipped the Senate in 1999 when two Democratic senators switched parties) — enact HB 1 on January 31, 2002. With no seat to eliminate and split control, all six incumbents are protected. The map passes without controversy and is not challenged in court.',
       },
       {
-        title: 'Democrats retain 4 seats but rural eastern Kentucky begins flipping',
-        detail: 'Despite Democrat-drawn maps, Republicans make gains in eastern Kentucky as coal country voters align with Republicans in federal races. By 2010, Republicans have won 5 of 6 seats as the final white working-class Democratic strongholds in Appalachian Kentucky shift away from the party.',
+        title: 'Delegation already 5-1 Republican despite Democratic maps',
+        detail: 'The 2002 elections produce a 5R–1D result as Democratic incumbents fall through the 1994 and 1996 waves before redistricting can help. Only Ken Lucas (D) survives in KY-4 (Northern Kentucky), winning 51%–49% over Geoff Davis. Ernie Fletcher (R) wins KY-6 (Lexington), then runs for governor in 2003 — becoming the first Republican governor of Kentucky in over three decades.',
+      },
+      {
+        title: 'Ken Lucas holds the last Democratic seat — then retires',
+        detail: 'Ken Lucas (D, KY-4) honored a self-imposed three-term pledge and did not seek re-election in 2004. Nick Clooney (father of actor George Clooney) loses the open seat to Republican Geoff Davis 55%–45%. Kentucky briefly has a 6-0 Republican congressional delegation. John Yarmuth (D) then flips KY-3 (Louisville) in 2006, restoring a single Democratic seat that holds through the next two redistricting cycles.',
       },
     ],
     2012: [
       {
-        title: 'Split government persists; maps favor incumbents',
-        detail: 'Governor Beshear (D) and a split legislature (Democratic House, Republican Senate) draw maps after Kentucky retains 6 seats. Republicans hold the Senate and control the most important chamber for redistricting. Maps produce a 5-1 Republican delegation in a state Romney won by 23 points.',
+        title: 'Beshear vetoes bipartisan incumbent map; Democrats join override',
+        detail: 'Governor Steve Beshear (D) vetoes HB 302, the Republican-drawn congressional map, on February 10, 2012. In a striking move, both the Republican Senate and the Democratic-controlled House override the veto — because the map is essentially a bipartisan incumbent-protection plan that strengthens all six incumbents regardless of party. The state legislative maps, drawn separately, are struck down by the Kentucky Supreme Court in Fischer v. Grimes (Feb. 24, 2012) for violating equal population rules; the congressional map is unaffected.',
       },
       {
-        title: 'Louisville anchors the single Democratic district',
-        detail: 'The 3rd District (Louisville) is the only safe Democratic seat in Kentucky under both the 2012 and 2022 maps. John Yarmuth holds the seat from 2006 until his retirement in 2022. Louisville\'s congressional seat reflects the urban-rural partisan divide in a state that has become one of the most reliably Republican at the federal level.',
+        title: 'Map\'s "protection" fails; Ben Chandler loses',
+        detail: 'The redistricting was designed to bolster all incumbents, including Democrat Ben Chandler (KY-6, Lexington). It was not enough: Republican Andy Barr defeats Chandler 50.6%–46.7% in 2012, in a presidential year that swings heavily Republican in Kentucky. The loss leaves John Yarmuth (D-3rd, Louisville) as the sole Democratic House member from Kentucky — a ratio of 5R/1D that holds unchanged through the 2024 elections.',
+      },
+      {
+        title: 'Louisville is the only Democratic anchor',
+        detail: 'The 3rd District (Louisville / Jefferson County) becomes the only reliable Democratic seat in Kentucky, held by John Yarmuth from 2006 until his retirement in 2022. Louisville\'s political isolation — a blue urban island in a state that votes Republican by 25+ points at the presidential level — means the city\'s congressional representation depends entirely on holding the one district drawn around its core.',
       },
     ],
     2022: [
       {
-        title: 'Republicans seize full control and override Democratic governor',
-        detail: 'Republicans won the Kentucky House in 2016, giving them full legislative control. Governor Beshear (D) vetoes congressional maps drawn by the Republican supermajority General Assembly, which split Louisville across multiple districts to dilute its Democratic lean. The legislature overrides the veto.',
+        title: 'Republican supermajority draws map; veto overridden the same day',
+        detail: 'Republicans, who won the Kentucky House in 2016 to complete a supermajority trifecta, pass Senate Bill 3. Governor Andy Beshear (D) vetoes it on January 19, 2022, calling it an unconstitutional partisan gerrymander drawn "behind closed doors." The legislature overrides the veto the very next day, January 20. The map moves Frankfort (the state capital, a Democratic-leaning city) from the competitive KY-6 into the safely Republican KY-1, further entrenching Andy Barr (R) in the Lexington-based 6th.',
       },
       {
-        title: 'Louisville split across three districts',
-        detail: 'The Republican maps divide Louisville — Kentucky\'s only large urban center and a reliably Democratic city — across the 2nd, 3rd, and 4th congressional districts. The 3rd District (which had elected a Democrat since 1974) is redrawn to include Republican-leaning suburbs. Democrats retain the Louisville core but lose influence in surrounding suburbs.',
+        title: 'Louisville preserved; 5-1 map locked in by design',
+        detail: 'Republicans chose not to crack Louisville\'s Jefferson County — preserving KY-3 as a safe Democratic seat. The calculus: cracking Louisville would create competitive districts that could be won by Democrats in wave years, while a 5R/1D map is essentially permanent. Morgan McGarvey (D) wins the 3rd after Yarmuth retires in 2022. Andy Barr wins KY-6 with 63% under the safer new lines.',
+      },
+      {
+        title: '⚖ Graham v. Adams: Kentucky Supreme Court upholds maps',
+        detail: 'The Kentucky Democratic Party files Graham v. Adams in Franklin Circuit Court the same day as the veto override, arguing the maps violate the Kentucky Constitution\'s guarantee against unconstitutional partisan gerrymandering. A notable first: the Kentucky Supreme Court rules on December 14, 2023 that state courts can hear partisan gerrymandering claims under Kentucky\'s constitution — unlike the federal courts after Rucho v. Common Cause (2019). However, the court upholds these specific maps, finding the gerrymandering insufficient to cross the constitutional threshold.',
       },
     ],
   },
