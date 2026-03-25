@@ -1,5 +1,5 @@
 import { fail } from '@sveltejs/kit';
-import { TURNSTILE_SECRET_KEY, RESEND_API_KEY } from '$env/static/private';
+import { TURNSTILE_SECRET_KEY, RESEND_API_KEY } from '$env/dynamic/private';
 
 export const prerender = false;
 
