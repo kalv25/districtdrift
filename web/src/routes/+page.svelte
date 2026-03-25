@@ -186,6 +186,7 @@
   let animTick = $state(CYCLES.indexOf(2024));
   let animating = $state(false);
   let showPrecincts = $state(false);
+  let showDeltas = $state(true);
   let mapComponent: { takeScreenshot: (state: string, year: number) => void } | undefined;
   let nationComponent: { takeScreenshot: (year: number) => void } | undefined;
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
@@ -597,6 +598,12 @@
       {/each}
     </div>
     <button
+      class="nation-yr-btn nation-delta-btn"
+      class:active={showDeltas}
+      title={showDeltas ? 'Hide seat-change deltas' : 'Show seat-change deltas vs previous cycle'}
+      onclick={() => showDeltas = !showDeltas}
+    >Δ</button>
+    <button
       class="nation-yr-btn nation-screenshot-btn"
       title="Save map as PNG"
       onclick={() => nationComponent?.takeScreenshot(selectedYear)}
@@ -878,7 +885,8 @@
           onStateClick={selectState}
           fullDataStates={Object.keys(STATES)}
           wipeDuration={animWipeMs}
-          showEgLabels={animSpeed === 'slow'}
+          showEgLabels={true}
+          bind:showDeltas
         />
         <!-- Floating cycle bar for nation view -->
         <div class="nation-cycle-bar">
@@ -2482,6 +2490,9 @@
     border-color: var(--btn-border);
   }
   .nation-yr-btn.anim-btn.playing { background: #fff8e1; border-color: #f0a500; color: #a06000; }
+  .nation-delta-btn { width: auto; padding: 0.45rem 0.55rem; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+  .nation-delta-btn.active { color: #4a90d9; border-color: rgba(74,144,217,0.4); background: rgba(74,144,217,0.08); }
+  :global([data-theme=dark]) .nation-delta-btn.active { color: #60a5fa; border-color: rgba(96,165,250,0.35); background: rgba(96,165,250,0.1); }
   .nation-screenshot-btn { width: auto; padding: 0.45rem 0.5rem; color: var(--text-muted); }
 
   .nation-speed-group {

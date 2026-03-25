@@ -30,12 +30,14 @@
     fullDataStates = [],
     wipeDuration = 4500,
     showEgLabels = false,
+    showDeltas = $bindable(true),
   }: {
     selectedYear: number;
     onStateClick: (po: string) => void;
     fullDataStates?: string[];
     wipeDuration?: number;
     showEgLabels?: boolean;
+    showDeltas?: boolean;
   } = $props();
 
   function hasFullData(po: string): boolean {
@@ -196,6 +198,23 @@
     return { d, r, total };
   })());
 
+  // ── Static delta display (at-rest, no animation) ─────────────────────────
+
+  const staticPrevYear = $derived((() => {
+    const idx = CYCLE_YEARS.indexOf(selectedYear);
+    return idx > 0 ? CYCLE_YEARS[idx - 1] : null;
+  })());
+
+  const staticPrevData = $derived((() => {
+    const result: Record<string, { d: number; r: number; eg: number | null } | null> = {};
+    if (!showDeltas || staticPrevYear === null) return result;
+    for (const s of nationData) {
+      const c = s.cycles.find(cy => cy.year === staticPrevYear);
+      result[s.state_po] = c ? { d: c.seats_d, r: c.seats_r, eg: c.efficiency_gap ?? null } : null;
+    }
+    return result;
+  })());
+
   // ── Wipe animation ────────────────────────────────────────────────────────
 
   // Starts "complete" so initial load shows current year instantly (no wipe).
@@ -241,7 +260,8 @@
   // Each state tries 0, then −1 step, then +1 step (up before down).
   const pillYOffsets = $derived((() => {
     const result: Record<string, number> = {};
-    if (!showEgLabels || wipeFromYear === null) return result;
+    const pillsActive = showEgLabels && (wipeFromYear !== null || (showDeltas && staticPrevYear !== null));
+    if (!pillsActive) return result;
     const EST_W = 82;  // generous pill width estimate
     const EST_H = 20;  // pill height estimate
     const STEP  = EST_H * 1.15;
@@ -575,7 +595,8 @@
 
       <!-- State abbreviation labels (only for states large enough; hidden when delta overlay is active) -->
       {#each statePaths as { po, cx, cy, area }}
-        {#if po && cx !== null && cy !== null && area > 400 && !(showEgLabels && wipeFromYear !== null && getEg(po) !== null && (prevEgMap[po] ?? null) !== null)}
+        {@const hasStaticPill = showEgLabels && showDeltas && wipeFromYear === null && staticPrevYear !== null && getEg(po) !== null && (staticPrevData[po] ?? null) !== null}
+        {#if po && cx !== null && cy !== null && area > 400 && !(showEgLabels && wipeFromYear !== null && getEg(po) !== null && (prevEgMap[po] ?? null) !== null) && !hasStaticPill}
           <text
             x={cx}
             y={cy}
@@ -590,18 +611,23 @@
         {/if}
       {/each}
 
-      <!-- EG prev→current size contrast + arrow overlay — Slow mode -->
-      {#if showEgLabels && wipeFromYear !== null}
+      <!-- EG prev→current size contrast + arrow overlay — animated and static -->
+      {#if showEgLabels && (wipeFromYear !== null || (showDeltas && staticPrevYear !== null))}
         {#each statePaths as { po, cx, cy, area }}
           {#if po && cx !== null && cy !== null && area > 900}
-            {@const currEg = getEg(po)}
-            {@const prevEg = prevEgMap[po] ?? null}
+            {@const currEg    = getEg(po)}
+            {@const isAnimating = wipeFromYear !== null}
+            {@const prevEg    = isAnimating ? (prevEgMap[po] ?? null) : (staticPrevData[po]?.eg ?? null)}
             {#if currEg !== null && prevEg !== null}
-              {@const localT    = Math.max(0, Math.min(1, ($wipeX - cx + BLEND) / (2 * BLEND)))}
+              {@const localT    = isAnimating
+                ? Math.max(0, Math.min(1, ($wipeX - cx + BLEND) / (2 * BLEND)))
+                : 0.42}
               {@const egChange  = currEg - prevEg}
               <!-- Seat change (primary): compare curr cycle seats to prev cycle seats -->
               {@const currCycle = nationData.find(s => s.state_po === po)?.cycles.find(c => c.year === selectedYear)}
-              {@const prevSeats = prevSeatsMap[po] ?? null}
+              {@const prevSeats = isAnimating
+                ? (prevSeatsMap[po] ?? null)
+                : (staticPrevData[po] ? { d: staticPrevData[po]!.d, r: staticPrevData[po]!.r } : null)}
               {@const seatDeltaD = (currCycle && prevSeats) ? currCycle.seats_d - prevSeats.d : null}
               {@const seatDeltaR = (currCycle && prevSeats) ? currCycle.seats_r - prevSeats.r : null}
               <!-- Net partisan seat swing: +N means R gained, -N means D gained -->
