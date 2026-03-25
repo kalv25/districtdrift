@@ -21,15 +21,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 			// Try both $env/dynamic/private and platform.env (Cloudflare Pages)
 			const platformEnv = event.platform?.env as Record<string, string> | undefined;
-			const turnstileSecret = env.TURNSTILE_SECRET_KEY || platformEnv?.TURNSTILE_SECRET_KEY;
-			const resendKey = env.RESEND_API_KEY || platformEnv?.RESEND_API_KEY;
-			if (!turnstileSecret || !resendKey) {
-				console.error('Missing env vars. dynamic/private:', !!env.TURNSTILE_SECRET_KEY, !!env.RESEND_API_KEY, 'platform.env:', !!platformEnv?.TURNSTILE_SECRET_KEY, !!platformEnv?.RESEND_API_KEY);
-				return new Response(JSON.stringify({ error: 'Server configuration error.' }), {
-					status: 500,
-					headers: { 'Content-Type': 'application/json' }
-				});
-			}
+			const turnstileSecret = env.TURNSTILE_SECRET_KEY || platformEnv?.TURNSTILE_SECRET_KEY || '';
+			const resendKey = env.RESEND_API_KEY || platformEnv?.RESEND_API_KEY || '';
 
 			// Validate Turnstile token
 			const tv = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
