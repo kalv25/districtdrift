@@ -9,7 +9,12 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
-		// interface Platform {}
+		interface Platform {
+			env: {
+				TURNSTILE_SECRET_KEY: string;
+				RESEND_API_KEY: string;
+			};
+		}
 	}
 }
 

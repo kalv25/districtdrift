@@ -1,10 +1,11 @@
 import { fail } from '@sveltejs/kit';
-import { TURNSTILE_SECRET_KEY, RESEND_API_KEY } from '$env/dynamic/private';
 
 export const prerender = false;
 
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ request, platform }) => {
+		const TURNSTILE_SECRET_KEY = platform?.env?.TURNSTILE_SECRET_KEY ?? '';
+		const RESEND_API_KEY = platform?.env?.RESEND_API_KEY ?? '';
 		const data = await request.formData();
 
 		const token = data.get('cf-turnstile-response') as string;
