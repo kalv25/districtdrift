@@ -621,7 +621,7 @@
             {#if currEg !== null && prevEg !== null}
               {@const localT    = isAnimating
                 ? Math.max(0, Math.min(1, ($wipeX - cx + BLEND) / (2 * BLEND)))
-                : 0.42}
+                : 0.82}
               {@const egChange  = currEg - prevEg}
               <!-- Seat change (primary): compare curr cycle seats to prev cycle seats -->
               {@const currCycle = nationData.find(s => s.state_po === po)?.cycles.find(c => c.year === selectedYear)}
