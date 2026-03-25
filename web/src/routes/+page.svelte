@@ -1251,7 +1251,7 @@
       <a href="https://electionlab.mit.edu/" target="_blank" rel="noopener">MIT Election Lab</a> ·
       <a href="https://redistrictingdatahub.org/" target="_blank" rel="noopener">Redistricting Data Hub</a> ·
       <a href="https://github.com/kalv25/districtdrift" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="https://github.com/kalv25/districtdrift/discussions/1" target="_blank" rel="noopener">Leave feedback</a>
+      <a href="/feedback">Leave feedback</a>
     </p>
     <span class="footer-updated">
       Updated {new Date(__BUILD_DATE__).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
