@@ -7,7 +7,7 @@
 ## Stack
 
 - **Frontend:** SvelteKit (static output) + MapLibre GL JS + D3.js
-- **Tiles:** PMTiles via Cloudflare R2
+- **Tiles:** PMTiles committed to `web/static/tiles/` and served via Cloudflare Pages (district tiles ~1–4 MB; precinct tiles ~0.4–21 MB, max-zoom 12)
 - **Pipeline:** Python + GeoPandas + Tippecanoe
 - **Hosting:** Cloudflare Pages
 
@@ -59,7 +59,10 @@ npm run dev
 
 - **State view**: cycle selector (1992/2002/2012/2022/2024), boundary morph animation, panel layouts (sidebar / bottom bar)
 - **Nation view**: all 50 states colored by efficiency gap, seat-change overlays, rankings panel
-- **Floating map controls** (bottom-left): layout toggle · precinct overlay toggle · screenshot download
+- **Floating map controls** (bottom-left): layout toggle · precinct overlay (P) · screenshot download
+  - Precinct toggle shows a loading toast while the PMTiles file downloads; falls back to nearest available cycle year (2024 → 2022)
+- **ⓘ info icons**: hover any panel card title for a plain-English description of that metric
+- **Brand popup**: hover the site name in the header for a data summary
 - **Screenshot**: the ⬇ button saves the current map as `districtdrift-{state}-{year}.png` with a watermark
 - **Share button**: Web Share API on mobile; clipboard copy on desktop
 
