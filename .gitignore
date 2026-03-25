@@ -1,5 +1,6 @@
 CLAUDE.md
 FEEDBACK.md
+WORK_LOG.md
 .claude/
 data/
 # Exclude root-level tiles dir (tippecanoe workspace) but allow web/static/tiles
