@@ -504,6 +504,31 @@
   let hovered = $state<{ po: string; x: number; y: number } | null>(null);
   let showRankings = $state(false);
 
+  // ── Bottom-sheet drag for rank panel (mobile) ─────────────────────────────
+  let _sheetTouchY = 0;
+  let _sheetDragged = false;
+
+  function sheetTouchStart(e: TouchEvent) {
+    _sheetTouchY = e.touches[0].clientY;
+    _sheetDragged = false;
+  }
+  function sheetTouchMove(e: TouchEvent) {
+    if (Math.abs(e.touches[0].clientY - _sheetTouchY) > 6) {
+      _sheetDragged = true;
+      e.stopPropagation();
+    }
+  }
+  function sheetTouchEnd(e: TouchEvent) {
+    const dy = e.changedTouches[0].clientY - _sheetTouchY;
+    e.stopPropagation();
+    if (!_sheetDragged) {
+      showRankings = !showRankings;
+    } else {
+      if (dy < -40) showRankings = true;
+      if (dy >  40) showRankings = false;
+    }
+  }
+
   function handleMouseMove(e: MouseEvent, po: string) {
     hovered = { po, x: e.offsetX, y: e.offsetY };
   }
@@ -918,54 +943,62 @@
     <!-- Rank panel with toggle button embedded at top -->
     <div id="rank-panel" class="rank-panel" class:rank-panel-open={showRankings}
       role="region" aria-label="States ranked by efficiency gap">
-      <button class="mobile-rank-btn" onclick={() => showRankings = !showRankings}
-        aria-expanded={showRankings}>
-        Rankings {showRankings ? '▾' : '▴'}
-      </button>
-      <p class="rank-heading">National — {selectedYear}</p>
-      <div class="national-totals">
-        <span class="nt-d">{nationalTotals.d}D</span>
-        <span class="nt-sep">/</span>
-        <span class="nt-r">{nationalTotals.r}R</span>
-        <span class="nt-of">of {nationalTotals.total}</span>
+      <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+      <!-- Drag handle: tap or swipe to open/close on mobile -->
+      <div class="sheet-handle"
+        ontouchstart={sheetTouchStart}
+        ontouchmove={sheetTouchMove}
+        ontouchend={sheetTouchEnd}
+        onclick={() => showRankings = !showRankings}
+        role="button" tabindex="0" aria-label={showRankings ? 'Close rankings' : 'Open rankings'}
+        onkeydown={(e) => e.key === 'Enter' && (showRankings = !showRankings)}>
+        <span class="sheet-handle-bar"></span>
       </div>
+      <div class="rank-content">
+        <p class="rank-heading">National — {selectedYear}</p>
+        <div class="national-totals">
+          <span class="nt-d">{nationalTotals.d}D</span>
+          <span class="nt-sep">/</span>
+          <span class="nt-r">{nationalTotals.r}R</span>
+          <span class="nt-of">of {nationalTotals.total}</span>
+        </div>
 
-      <div class="rank-section-label r-label">Most R-favoring</div>
-      <div class="rank-list">
-        {#each ranked.slice(0, 7) as s}
-          {@const full = hasFullData(s.po)}
-          {@const delta = egDeltaVsPrev(s.po)}
-          <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}
-            onmouseenter={() => hoverRankState(s.po)} onmouseleave={() => hovered = null}>
-            <span class="rank-state">{s.po}</span>
-            <span class="rank-name">{s.name}</span>
-            {#if delta !== null && Math.abs(delta) >= 0.01}
-              <span class="rank-delta" class:rank-delta-r={delta > 0} class:rank-delta-d={delta < 0}>{delta > 0 ? '↑' : '↓'}</span>
-            {/if}
-            <Pill party="R">{egLabel(s.eg)}</Pill>
-          </button>
-        {/each}
+        <div class="rank-section-label r-label">Most R-favoring</div>
+        <div class="rank-list">
+          {#each ranked.slice(0, 7) as s}
+            {@const full = hasFullData(s.po)}
+            {@const delta = egDeltaVsPrev(s.po)}
+            <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}
+              onmouseenter={() => hoverRankState(s.po)} onmouseleave={() => hovered = null}>
+              <span class="rank-state">{s.po}</span>
+              <span class="rank-name">{s.name}</span>
+              {#if delta !== null && Math.abs(delta) >= 0.01}
+                <span class="rank-delta" class:rank-delta-r={delta > 0} class:rank-delta-d={delta < 0}>{delta > 0 ? '↑' : '↓'}</span>
+              {/if}
+              <Pill party="R">{egLabel(s.eg)}</Pill>
+            </button>
+          {/each}
+        </div>
+
+        <div class="rank-divider"></div>
+
+        <div class="rank-section-label d-label">Most D-favoring</div>
+        <div class="rank-list">
+          {#each [...ranked].reverse().slice(0, 7) as s}
+            {@const full = hasFullData(s.po)}
+            {@const delta = egDeltaVsPrev(s.po)}
+            <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}
+              onmouseenter={() => hoverRankState(s.po)} onmouseleave={() => hovered = null}>
+              <span class="rank-state">{s.po}</span>
+              <span class="rank-name">{s.name}</span>
+              {#if delta !== null && Math.abs(delta) >= 0.01}
+                <span class="rank-delta" class:rank-delta-r={delta > 0} class:rank-delta-d={delta < 0}>{delta > 0 ? '↑' : '↓'}</span>
+              {/if}
+              <Pill party="D">{egLabel(s.eg)}</Pill>
+            </button>
+          {/each}
+        </div>
       </div>
-
-      <div class="rank-divider"></div>
-
-      <div class="rank-section-label d-label">Most D-favoring</div>
-      <div class="rank-list">
-        {#each [...ranked].reverse().slice(0, 7) as s}
-          {@const full = hasFullData(s.po)}
-          {@const delta = egDeltaVsPrev(s.po)}
-          <button class="rank-row" class:rank-clickable={full} onclick={() => full && onStateClick(s.po)} disabled={!full}
-            onmouseenter={() => hoverRankState(s.po)} onmouseleave={() => hovered = null}>
-            <span class="rank-state">{s.po}</span>
-            <span class="rank-name">{s.name}</span>
-            {#if delta !== null && Math.abs(delta) >= 0.01}
-              <span class="rank-delta" class:rank-delta-r={delta > 0} class:rank-delta-d={delta < 0}>{delta > 0 ? '↑' : '↓'}</span>
-            {/if}
-            <Pill party="D">{egLabel(s.eg)}</Pill>
-          </button>
-        {/each}
-      </div>
-
     </div>
   {/if}
 </div>
@@ -1161,6 +1194,8 @@
   }
 
   /* Rank panel */
+  .sheet-handle { display: none; }
+
   .rank-panel {
     position: absolute;
     top: 1rem;
@@ -1342,26 +1377,27 @@
       transform: translateY(0);
     }
 
-    /* Button tab embedded at top of panel, centered */
-    .mobile-rank-btn {
+    /* Drag handle at top of sheet */
+    .sheet-handle {
       display: flex;
-      position: static;
-      align-self: center;
-      background: transparent;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      border: none;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-      border-radius: 0;
-      color: rgba(255,255,255,0.88);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.55rem 1.25rem 0.45rem;
-      cursor: pointer;
-      box-shadow: none;
-      width: 100%;
       justify-content: center;
+      align-items: center;
+      padding: 0.55rem 0 0.4rem;
       flex-shrink: 0;
+      cursor: grab;
+      touch-action: none;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .sheet-handle-bar {
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.35);
+    }
+
+    /* Prevent accidental taps on content while panel is swiped closed */
+    .rank-panel:not(.rank-panel-open) .rank-content {
+      pointer-events: none;
     }
 
     .rank-heading { color: var(--text-label) !important; }
