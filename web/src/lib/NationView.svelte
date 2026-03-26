@@ -356,7 +356,7 @@
   }
 
   function _runIdle() {
-    if (zoomK > 1.08) return; // already manually zoomed — skip
+    if (zoomK > 1.5) return; // skip if user has manually zoomed in significantly
     _idleActive = true;
     const startK  = zoomK,  targetK  = zoomK * 1.18;
     const startTx = zoomTx, targetTx = zoomTx - svgW * 0.04;
