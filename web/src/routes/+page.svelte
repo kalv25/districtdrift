@@ -2877,37 +2877,45 @@
     .view-btn { flex: none; }
     .state-selector { flex: 1; justify-content: center; }
 
-    /* Mobile chrome: year bar + nav row, stacks between header and map */
+    /* Mobile chrome: year bar + nav row — solid dark bar matching panel palette */
     .mobile-chrome {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      background: rgb(26, 30, 52);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       flex-shrink: 0;
+      --text: rgba(255,255,255,0.88);
+      --text-muted: rgba(255,255,255,0.55);
+      --text-dim: rgba(255,255,255,0.40);
+      --border: rgba(255,255,255,0.11);
+      --border-dim: rgba(255,255,255,0.07);
+      --btn-bg: rgba(255,255,255,0.09);
+      --btn-border: rgba(255,255,255,0.14);
+      --btn-color: rgba(255,255,255,0.82);
     }
     .mobile-year-bar {
-      padding: 0.35rem 0.5rem 0.2rem;
-      border-bottom: 1px solid var(--border);
+      padding: 0.35rem 0.6rem 0.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .mobile-nav-row {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.3rem 0.5rem;
+      padding: 0.3rem 0.6rem;
     }
 
     /* Layer toggle: compact 3-button segmented control */
     .mobile-layer-toggle {
       display: flex;
       flex-shrink: 0;
-      border: 1px solid var(--border);
-      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 7px;
       overflow: hidden;
     }
     .mobile-layer-toggle button {
       flex: 1;
       background: transparent;
       border: none;
-      border-right: 1px solid var(--border);
-      color: var(--text);
+      border-right: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.70);
       font-size: 0.68rem;
       font-weight: 500;
       padding: 0.3rem 0.5rem;
@@ -2917,8 +2925,8 @@
     }
     .mobile-layer-toggle button:last-child { border-right: none; }
     .mobile-layer-toggle button.active {
-      background: var(--text);
-      color: var(--surface);
+      background: rgba(255,255,255,0.92);
+      color: rgb(26,30,52);
     }
 
     /* Section scroll: horizontally scrollable pill nav */
@@ -2930,25 +2938,27 @@
       -webkit-overflow-scrolling: touch;
       flex: 1;
       min-width: 0;
+      padding: 0 0.125rem;
     }
     .mobile-section-scroll::-webkit-scrollbar { display: none; }
     .mobile-sec-btn {
       flex-shrink: 0;
-      background: transparent;
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.13);
       border-radius: 12px;
-      color: var(--text-dim);
+      color: rgba(255,255,255,0.65);
       font-size: 0.68rem;
       font-weight: 500;
-      padding: 0.25rem 0.55rem;
+      padding: 0.25rem 0.58rem;
       cursor: pointer;
       white-space: nowrap;
       transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
     .mobile-sec-btn.active {
-      background: #4a90d9;
-      border-color: #4a90d9;
-      color: #fff;
+      background: rgba(255,255,255,0.92);
+      border-color: transparent;
+      color: rgb(26,30,52);
+      font-weight: 600;
     }
 
     /* Map fills the full main area */
@@ -2963,35 +2973,47 @@
     /* State floating cycle bar: hidden on mobile (shown in chrome above) */
     .state-cycle-bar { display: none; }
 
-    /* Panel: floating translucent card fixed to viewport bottom */
+    /* Panel: Weather app-style frosted glass card */
     .panel-group {
       position: fixed !important;
-      bottom: 2.5rem !important;
-      left: 0.75rem !important;
-      right: 0.75rem !important;
+      bottom: 3.75rem !important;
+      left: 0.875rem !important;
+      right: 0.875rem !important;
       width: auto !important;
       height: auto !important;
       max-height: 42vh !important;
       overflow: hidden !important;
       flex-direction: column !important;
-      border: none !important;
-      background: var(--surface-tl) !important;
-      backdrop-filter: blur(14px) !important;
-      -webkit-backdrop-filter: blur(14px) !important;
-      box-shadow: 0 4px 28px rgba(0,0,0,0.18) !important;
+      border: 1px solid rgba(255,255,255,0.13) !important;
+      background: rgba(26, 30, 52, 0.76) !important;
+      backdrop-filter: blur(24px) saturate(1.6) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(1.6) !important;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.32), 0 1px 0 rgba(255,255,255,0.07) inset !important;
       z-index: 25 !important;
-      border-radius: 12px !important;
-      mask-image: linear-gradient(to right, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent),
-                  linear-gradient(to bottom, transparent, black 0.75rem, black calc(100% - 0.75rem), transparent);
-      mask-composite: intersect;
-      -webkit-mask-image: linear-gradient(to right, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent),
-                          linear-gradient(to bottom, transparent, black 0.75rem, black calc(100% - 0.75rem), transparent);
-      -webkit-mask-composite: source-in;
+      border-radius: 18px !important;
       transform: translateY(0);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      /* CSS variable overrides — white-on-dark for glass context */
+      --text: rgba(255,255,255,0.90);
+      --text-muted: rgba(255,255,255,0.58);
+      --text-dim: rgba(255,255,255,0.42);
+      --text-strong: #fff;
+      --text-label: rgba(255,255,255,0.52);
+      --text-soft: rgba(255,255,255,0.35);
+      --text-med: rgba(255,255,255,0.62);
+      --text-faint: rgba(255,255,255,0.26);
+      --border: rgba(255,255,255,0.11);
+      --border-dim: rgba(255,255,255,0.07);
+      --surface: rgba(255,255,255,0.06);
+      --surface-2: rgba(255,255,255,0.04);
+      --btn-bg: rgba(255,255,255,0.09);
+      --btn-border: rgba(255,255,255,0.14);
+      --btn-color: rgba(255,255,255,0.82);
+      --btn-hover: rgba(255,255,255,0.15);
+      --link: rgba(120,180,255,0.90);
     }
     .panel-group.panel-closed {
-      transform: translateY(calc(100% + 3rem));
+      transform: translateY(calc(100% + 4.5rem));
       pointer-events: none;
     }
     /* Hide divider between state and district panels on mobile */
