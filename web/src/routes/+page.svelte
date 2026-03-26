@@ -360,7 +360,22 @@
       localStorage.setItem(HELP_KEY, '1');
     }
 
-    return () => window.removeEventListener('resize', updateMobile);
+    // Reset state-view idle timer on any pointer/keyboard activity
+    let _activityDebounce: ReturnType<typeof setTimeout> | null = null;
+    function onActivity() {
+      _cancelStateIdle();
+      if (_activityDebounce) clearTimeout(_activityDebounce);
+      _activityDebounce = setTimeout(_scheduleStateIdle, 1000);
+    }
+    document.addEventListener('pointermove', onActivity, { passive: true });
+    document.addEventListener('keydown', onActivity, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', updateMobile);
+      document.removeEventListener('pointermove', onActivity);
+      document.removeEventListener('keydown', onActivity);
+      _cancelStateIdle();
+    };
   });
 
   $effect(() => { localStorage.setItem(VIEW_KEY, viewMode); });
@@ -557,6 +572,26 @@
   });
 
   function stopAnimation() { if (animating) { manualYear = selectedYear; animating = false; } }
+
+  // ── State view idle: auto-play years after 15 s of inactivity (desktop only) ──
+  let _stateIdleTimer: ReturnType<typeof setTimeout> | null = null;
+  function _cancelStateIdle() {
+    if (_stateIdleTimer) { clearTimeout(_stateIdleTimer); _stateIdleTimer = null; }
+  }
+  function _scheduleStateIdle() {
+    _cancelStateIdle();
+    if (viewMode === 'nation' || animating || window.innerWidth < 640) return;
+    _stateIdleTimer = setTimeout(() => {
+      if (viewMode !== 'nation' && !animating) toggleAnimation();
+    }, 15000);
+  }
+  // Reschedule when animation finishes or view changes
+  $effect(() => {
+    const _v = viewMode, _a = animating; // track dependencies
+    if (!_a && _v !== 'nation') _scheduleStateIdle();
+    else _cancelStateIdle();
+  });
+
   function toggleAnimation() {
     if (animating) { stopAnimation(); return; }
     // Always start from 1992→2002.

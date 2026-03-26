@@ -344,35 +344,37 @@
     _scheduleIdle();
   });
 
-  // Idle animation: after 3 s of no interaction on mobile, gently drift
+  // Idle animation: gentle zoom-in + rightward drift when no interaction
+  // Mobile: fires after 3 s; Desktop: fires after 20 s (subtler params)
   let _idleTimer: ReturnType<typeof setTimeout> | null = null;
   let _idleRaf: number | null = null;
   let _idleActive = false;
+  let _wheelDebounce: ReturnType<typeof setTimeout> | null = null;
 
   function _cancelIdle() {
     _idleActive = false;
-    if (_idleTimer) { clearTimeout(_idleTimer); _idleTimer = null; }
-    if (_idleRaf)   { cancelAnimationFrame(_idleRaf); _idleRaf = null; }
+    if (_idleTimer)    { clearTimeout(_idleTimer); _idleTimer = null; }
+    if (_idleRaf)      { cancelAnimationFrame(_idleRaf); _idleRaf = null; }
+    if (_wheelDebounce){ clearTimeout(_wheelDebounce); _wheelDebounce = null; }
   }
 
   function _runIdle() {
-    if (zoomK > 1.5) return; // skip if user has manually zoomed in significantly
+    if (zoomK > 1.5) return;
     _idleActive = true;
+    const desktop = svgW >= 640;
     const startK  = zoomK;
-    const targetK = zoomK * 1.18;
-    // World-space coordinates of the current viewport centre — held fixed during zoom
+    const targetK = zoomK * (desktop ? 1.06 : 1.18); // subtler on desktop
+    // World-space centre — stays fixed while zooming
     const cx = (svgW / 2 - zoomTx) / zoomK;
     const cy = (svgH / 2 - zoomTy) / zoomK;
-    // Gentle rightward pan (≈4% of viewport width)
-    const pan = svgW * 0.04;
-    const duration = 11000;
+    const pan      = svgW * (desktop ? 0.025 : 0.04);
+    const duration = desktop ? 22000 : 11000;
     const t0 = performance.now();
     function tick(now: number) {
       if (!_idleActive) return;
       const p  = Math.min((now - t0) / duration, 1);
-      const ep = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // ease-in-out quad
+      const ep = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
       const k  = startK + (targetK - startK) * ep;
-      // Keep centre fixed while zooming, then add the horizontal drift
       zoomK  = k;
       zoomTx = svgW / 2 - cx * k + pan * ep;
       zoomTy = svgH / 2 - cy * k;
@@ -383,10 +385,18 @@
   }
 
   function _scheduleIdle() {
-    if (svgW >= 640) return; // mobile only
     _cancelIdle();
-    _idleTimer = setTimeout(_runIdle, 3000);
+    const delay = svgW >= 640 ? 20000 : 3000;
+    _idleTimer = setTimeout(_runIdle, delay);
   }
+
+  // Initial idle schedule for desktop (mobile handled by _mobileZoomApplied effect)
+  let _desktopIdleScheduled = false;
+  $effect(() => {
+    if (_desktopIdleScheduled || svgW < 640 || svgH <= 0) return;
+    _desktopIdleScheduled = true;
+    _scheduleIdle();
+  });
 
   let _dragActive = false;
   let _dragMoved  = false;
@@ -406,6 +416,9 @@
 
   function handleWheel(e: WheelEvent) {
     e.preventDefault();
+    _cancelIdle();
+    // Reschedule idle after wheel activity settles
+    _wheelDebounce = setTimeout(_scheduleIdle, 1500);
     neZoomed = false;
     const rect = (e.currentTarget as SVGElement).getBoundingClientRect();
     const mx = e.clientX - rect.left;
