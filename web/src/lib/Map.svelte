@@ -1021,7 +1021,7 @@
 </div>
 
 <style>
-  .map-wrap   { position: relative; width: 100%; height: 100%; }
+  .map-wrap   { position: relative; width: 100%; height: 100%; touch-action: none; }
   .map-canvas { width: 100%; height: 100%; }
 
   .district-tooltip {

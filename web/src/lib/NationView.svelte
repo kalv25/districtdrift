@@ -921,6 +921,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    touch-action: none;
   }
 
   /* Theme-aware stroke colors for the year badge */
