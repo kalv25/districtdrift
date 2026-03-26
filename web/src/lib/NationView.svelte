@@ -445,6 +445,7 @@
   // ── Tooltip ───────────────────────────────────────────────────────────────────
 
   let hovered = $state<{ po: string; x: number; y: number } | null>(null);
+  let showRankings = $state(false);
 
   function handleMouseMove(e: MouseEvent, po: string) {
     hovered = { po, x: e.offsetX, y: e.offsetY };
@@ -857,8 +858,15 @@
       </div>
     </div>
 
+    <!-- Mobile rankings toggle button -->
+    <button class="mobile-rank-btn" onclick={() => showRankings = !showRankings}
+      aria-expanded={showRankings} aria-controls="rank-panel">
+      Rankings {showRankings ? '▾' : '▴'}
+    </button>
+
     <!-- Rank panel -->
-    <div class="rank-panel" role="region" aria-label="States ranked by efficiency gap">
+    <div id="rank-panel" class="rank-panel" class:rank-panel-open={showRankings}
+      role="region" aria-label="States ranked by efficiency gap">
       <p class="rank-heading">National — {selectedYear}</p>
       <div class="national-totals">
         <span class="nt-d">{nationalTotals.d}D</span>
@@ -1194,6 +1202,9 @@
   .rank-play:hover { background: var(--btn-hover); color: var(--text); }
   .rank-play.playing { color: #f0a500; border-color: #f0a500; }
 
+  /* Rankings toggle: desktop hidden, mobile shown */
+  .mobile-rank-btn { display: none; }
+
   .zoom-controls {
     position: absolute;
     bottom: 2.5rem;
@@ -1242,9 +1253,68 @@
   }
 
   @media (max-width: 639px) {
-    .rank-panel { display: none; }
+    /* Rankings toggle button — floating bottom-left */
+    .mobile-rank-btn {
+      display: flex;
+      position: fixed;
+      bottom: 1rem;
+      left: 0.875rem;
+      z-index: 26;
+      background: rgba(26, 30, 52, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 99px;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+
+    /* Rank panel: hidden by default on mobile; slides up as bottom sheet */
+    .rank-panel {
+      display: flex !important;
+      position: fixed !important;
+      bottom: 3.5rem !important;
+      left: 0.875rem !important;
+      right: 0.875rem !important;
+      top: auto !important;
+      width: auto !important;
+      max-height: 55vh;
+      overflow-y: auto;
+      flex-direction: column;
+      background: rgba(26, 30, 52, 0.82) !important;
+      backdrop-filter: blur(24px) saturate(1.6) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(1.6) !important;
+      border: 1px solid rgba(255,255,255,0.13) !important;
+      border-radius: 18px !important;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.32) !important;
+      z-index: 25;
+      transform: translateY(calc(100% + 4rem));
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      /* white-on-dark text overrides */
+      --text: rgba(255,255,255,0.90);
+      --text-muted: rgba(255,255,255,0.55);
+      --text-label: rgba(255,255,255,0.50);
+      --border: rgba(255,255,255,0.10);
+    }
+    .rank-panel.rank-panel-open {
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .rank-heading { color: var(--text-label) !important; }
+    .rank-state, .rank-name { color: rgba(255,255,255,0.88) !important; }
+    .r-label { color: #f87171 !important; background: rgba(220,90,90,0.18) !important; }
+    .d-label { color: #93c5fd !important; background: rgba(74,144,217,0.18) !important; }
+    .rank-row { border-radius: 6px !important; }
+    .rank-row:hover { background: rgba(255,255,255,0.08) !important; }
+    .rank-divider { background: rgba(255,255,255,0.10) !important; }
+
     .eg-legend { bottom: 3.5rem; }
-    .zoom-controls { bottom: 1rem; right: 0.5rem; }
-    .zoom-btn { width: 36px; height: 36px; }
+    .zoom-controls { display: none; }
   }
 </style>

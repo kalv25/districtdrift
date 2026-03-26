@@ -12,7 +12,7 @@
 
   const W = 248;
   const H = 110;
-  const margin = { top: 14, right: 8, bottom: 20, left: 30 };
+  const margin = { top: 14, right: 22, bottom: 20, left: 30 };
   const innerW = W - margin.left - margin.right;
   const innerH = H - margin.top - margin.bottom;
 

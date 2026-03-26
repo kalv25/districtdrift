@@ -6,7 +6,7 @@
 	const prefillState = $page.url.searchParams.get('state') ?? '';
 	const prefillYear = $page.url.searchParams.get('year') ?? '';
 
-	const prefillMessage = `What I noticed:\n\nMy feedback or question:\n`;
+	const prefillMessage = '';
 
 	const STATES = [
 		'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
@@ -100,7 +100,8 @@
 
 				<div class="field">
 					<label for="message">Message <span class="required">*</span></label>
-					<textarea id="message" name="message" rows="6" required bind:value={messageValue}></textarea>
+					<textarea id="message" name="message" rows="6" required bind:value={messageValue}
+					placeholder="What I noticed:&#10;&#10;My feedback or question:"></textarea>
 				</div>
 
 				<div class="field">

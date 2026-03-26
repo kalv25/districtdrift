@@ -949,7 +949,7 @@
         <div class="mobile-layer-toggle" role="group" aria-label="Map layer">
           <button class:active={mobileLayer === 'districts'} onclick={() => mobileLayer = 'districts'}>Districts</button>
           <button class:active={mobileLayer === 'precincts'} onclick={() => mobileLayer = 'precincts'}>Demo</button>
-          <button class:active={mobileLayer === 'none'} onclick={() => mobileLayer = 'none'}>—</button>
+          <button class:active={mobileLayer === 'none'} onclick={() => mobileLayer = 'none'}>Off</button>
         </div>
         <div class="mobile-section-scroll" role="group" aria-label="View section">
           {#each stateCardLabels as label, i}
@@ -2968,8 +2968,18 @@
     /* Hide all floating map controls on mobile (replaced by chrome + layer toggle) */
     .map-float-controls { display: none !important; }
 
-    /* Nation cycle bar: top of map on mobile */
-    .nation-cycle-bar { bottom: auto; top: 0.5rem; }
+    /* Nation cycle bar: top of map on mobile, allow scroll if wider than screen */
+    .nation-cycle-bar {
+      bottom: auto;
+      top: 0.5rem;
+      left: 0.5rem;
+      right: 0.5rem;
+      transform: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+      justify-content: flex-start;
+    }
+    .nation-cycle-bar::-webkit-scrollbar { display: none; }
     /* State floating cycle bar: hidden on mobile (shown in chrome above) */
     .state-cycle-bar { display: none; }
 
