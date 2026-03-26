@@ -335,9 +335,9 @@
     if (_mobileZoomApplied || svgW <= 0 || svgH <= 0 || svgW >= 640) return;
     _mobileZoomApplied = true;
     const k = 1.38;
-    // Centre of CONUS is roughly 45% across, 45% down in AlbersUSA
+    // Centre of CONUS is roughly 45% across, 38% down in AlbersUSA
     const cx = svgW * 0.45;
-    const cy = svgH * 0.45;
+    const cy = svgH * 0.38;
     zoomK  = k;
     zoomTx = svgW / 2 - k * cx;
     zoomTy = svgH / 2 - k * cy;

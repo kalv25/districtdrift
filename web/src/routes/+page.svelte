@@ -918,6 +918,13 @@
       aria-label="Share"
     >{shareCopied ? '✓ Copied' : '⤴ Share'}</button>
 
+    <a
+      class="feedback-btn"
+      href="/feedback{viewMode !== 'nation' ? `?state=${encodeURIComponent(STATES[selectedState]?.name ?? selectedState)}&year=${selectedYear}` : ''}"
+      title="Leave feedback"
+      aria-label="Feedback"
+    >Feedback</a>
+
     <div class="theme-toggle" role="group" aria-label="Color theme">
       <button class:active={theme === 'light'} onclick={() => theme = 'light'} title="Light mode" aria-label="Light mode">☀</button>
       <button class:active={theme === 'system'} onclick={() => theme = 'system'} title="System theme" aria-label="System theme">◐</button>
@@ -1415,6 +1422,7 @@
       <div class="help-hook">
         <p>Every ten years, after the Census, state legislatures redraw the lines of congressional districts — one of the most consequential and least scrutinized acts in American democracy. Occasionally states redraw mid-decade too: Texas famously did so in 2003 under Tom DeLay to lock in a Republican majority.</p>
         <p>District Drift is a retrospective: <em>how have those lines been drawn since 1992, and who benefited?</em> Both parties have gerrymandered. This site shows all of it.</p>
+        <p class="help-feedback-nudge">Spotted a data error or have a question? Use the <strong>Feedback</strong> button in the header — all reports are read and appreciated.</p>
       </div>
 
       <nav class="help-tabs" role="tablist">
@@ -2457,6 +2465,24 @@
   .share-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
   .share-btn.copied { background: rgba(60,180,100,0.25); border-color: rgba(60,180,100,0.5); color: #7effa0; }
 
+  .feedback-btn {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    border-radius: 99px;
+    padding: 0 0.65rem;
+    height: 1.75rem;
+    cursor: pointer;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.15s, color 0.15s;
+    display: flex; align-items: center;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .feedback-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
   .help-btn {
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.12);
@@ -2542,6 +2568,7 @@
     color: var(--text);
   }
   .help-hook em { font-style: italic; color: var(--text-strong); }
+  .help-feedback-nudge { opacity: 0.6; font-size: 0.8rem !important; }
 
   /* Tab nav */
   .help-tabs {
