@@ -356,8 +356,8 @@
 
   function _cancelIdle() {
     _idleActive = false;
-    reelCard = null;
-    flipCard = null;
+    reelCard = null; reelCardExiting = false;
+    flipCard = null; flipCardExiting = false;
     if (_idleTimer)    { clearTimeout(_idleTimer); _idleTimer = null; }
     if (_idleRaf)      { cancelAnimationFrame(_idleRaf); _idleRaf = null; }
     if (_wheelDebounce){ clearTimeout(_wheelDebounce); _wheelDebounce = null; }
@@ -415,6 +415,8 @@
   type FlipCard = { po: string; name: string; eg: number; party: 'D' | 'R' | 'N'; tagline: string };
   let reelCard = $state<ReelCard | null>(null);
   let flipCard = $state<FlipCard | null>(null);
+  let reelCardExiting = $state(false);
+  let flipCardExiting = $state(false);
 
   function _pickReelStates(): string[] {
     const valid = ranked.filter(s => hasFullData(s.po) && Math.abs(s.eg) > 0.04);
@@ -517,7 +519,7 @@
       const pcx = path.cx, pcy = path.cy, parea = path.area;
 
       // Zoom-out to full national view (the "beat")
-      _reelReset(1900, () => {
+      _reelReset(2200, () => {
         if (!_idleActive) return;
         // Brief pause at national view — show flip card teaser for upcoming state
         _idleTimer = setTimeout(() => {
@@ -527,18 +529,25 @@
             if (!_idleActive) return;
             const relArea = parea / (svgW * svgH);
             const k = relArea < 0.003 ? 5.2 : relArea < 0.015 ? 3.6 : 2.4;
-            // Dismiss flip card ~600ms after zoom starts so it feels like a reveal
-            setTimeout(() => { flipCard = null; }, 650);
-            _reelZoomTo(pcx, pcy, k, 2500, () => {
+            // Fade flip card to corner ~700ms after zoom starts
+            setTimeout(() => {
+              flipCardExiting = true;
+              setTimeout(() => { flipCard = null; flipCardExiting = false; }, 900);
+            }, 700);
+            _reelZoomTo(pcx, pcy, k, 3200, () => {
               if (!_idleActive) return;
               reelCard = _buildReelCard(po);
               _idleTimer = setTimeout(() => {
-                reelCard = null;
-                _idleTimer = setTimeout(beat, 400);
-              }, 4800);
+                // Fade reel card to corner before advancing
+                reelCardExiting = true;
+                setTimeout(() => {
+                  reelCard = null; reelCardExiting = false;
+                  _idleTimer = setTimeout(beat, 500);
+                }, 800);
+              }, 6000);
             });
-          }, 1400); // hold flip card before starting zoom
-        }, 300); // tiny pause before flip card appears
+          }, 1600); // hold flip card before starting zoom
+        }, 400); // pause before flip card appears
       });
     }
     beat();
@@ -550,6 +559,7 @@
     _runDemoReel();
   }
 
+  let _wasInReel  = false; // true when a tap interrupted an active reel
   let _dragActive = false;
   let _dragMoved  = false;
   let _dragStartX = 0, _dragStartY = 0;
@@ -583,6 +593,7 @@
   }
 
   function handlePointerDown(e: PointerEvent) {
+    _wasInReel = _idleActive; // capture before cancelling
     _cancelIdle();
     _activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (_activePointers.size === 2) {
@@ -705,8 +716,15 @@
   }
 
   // On touch devices, first tap shows the tooltip; the CTA button (or a second tap) navigates.
+  // During the reel, a single tap navigates directly (clear intent, no need for two-tap pattern).
   function handleTap(e: MouseEvent, po: string, full: boolean) {
     if (!full) return;
+    if (_wasInReel) {
+      _wasInReel = false;
+      hovered = null;
+      onStateClick(po);
+      return;
+    }
     // If tooltip already open for this state, navigate
     if (hovered?.po === po) {
       hovered = null;
@@ -1131,25 +1149,32 @@
       </div>
     {/if}
 
-    <!-- Demo reel callout card (shown while zoomed into a state) -->
+    <!-- Demo reel callout card (shown while zoomed into a state) — clickable to explore -->
     {#if reelCard}
-      <div class="reel-card" class:reel-card-r={reelCard.party === 'R'} class:reel-card-d={reelCard.party === 'D'}>
-        <div class="reel-name">{reelCard.name} · {selectedYear}</div>
-        <div class="reel-eg" class:reel-eg-r={reelCard.party === 'R'} class:reel-eg-d={reelCard.party === 'D'}>
-          {egLabel(reelCard.eg)}
+      {@const rc = reelCard}
+      <div class="reel-card" class:reel-card-r={rc.party === 'R'} class:reel-card-d={rc.party === 'D'}
+           class:exiting={reelCardExiting}
+           onclick={() => { _cancelIdle(); onStateClick(rc.po); }}
+           role="button" tabindex="0" aria-label="Explore {rc.name}"
+           onkeydown={(e) => e.key === 'Enter' && (_cancelIdle(), onStateClick(rc.po))}>
+        <div class="reel-name">{rc.name} · {selectedYear}</div>
+        <div class="reel-eg" class:reel-eg-r={rc.party === 'R'} class:reel-eg-d={rc.party === 'D'}>
+          {egLabel(rc.eg)}
         </div>
         <div class="reel-seats">
-          <span class="reel-sd">{reelCard.seatsD}D</span>
+          <span class="reel-sd">{rc.seatsD}D</span>
           <span class="reel-sep"> / </span>
-          <span class="reel-sr">{reelCard.seatsR}R</span>
-          <span class="reel-of"> of {reelCard.seats}</span>
+          <span class="reel-sr">{rc.seatsR}R</span>
+          <span class="reel-of"> of {rc.seats}</span>
         </div>
+        <div class="reel-cta">Explore →</div>
       </div>
     {/if}
 
     <!-- Flip card: teaser shown during the national-view beat between states -->
     {#if flipCard}
-      <div class="flip-card" class:flip-card-r={flipCard.party === 'R'} class:flip-card-d={flipCard.party === 'D'}>
+      <div class="flip-card" class:flip-card-r={flipCard.party === 'R'} class:flip-card-d={flipCard.party === 'D'}
+           class:exiting={flipCardExiting}>
         <div class="flip-state">{flipCard.name}</div>
         <div class="flip-year">{selectedYear}</div>
         <div class="flip-tagline">{flipCard.tagline}</div>
@@ -1659,11 +1684,14 @@
     border-left: 3px solid rgba(255,255,255,0.2);
     border-radius: 10px;
     padding: 0.75rem 1.1rem 0.7rem;
-    pointer-events: none;
+    cursor: pointer;
     z-index: 20;
     min-width: 180px;
     animation: reel-in 0.35s cubic-bezier(0.22,1,0.36,1) both;
+    transition: opacity 0.85s ease, transform 0.85s ease;
   }
+  .reel-card:hover { background: rgba(24, 30, 56, 0.94); border-left-width: 4px; }
+  .reel-card.exiting { opacity: 0; transform: translate(-8px, 8px) scale(0.82); }
   .reel-card-r { border-left-color: #e05c5c; }
   .reel-card-d { border-left-color: #4a90d9; }
 
@@ -1691,6 +1719,15 @@
   }
   .reel-sd { color: #4a90d9; font-weight: 700; }
   .reel-sr { color: #e05c5c; font-weight: 700; }
+
+  .reel-cta {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.38);
+    margin-top: 0.45rem;
+    letter-spacing: 0.04em;
+  }
+  .reel-card:hover .reel-cta { color: rgba(255,255,255,0.65); }
 
   /* Highlighted state in reel — bright outline + slight glow */
   .state-path.reel-highlight {
@@ -1725,6 +1762,12 @@
     min-width: 260px;
     max-width: 380px;
     animation: flip-in 0.45s cubic-bezier(0.22,1,0.36,1) both;
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.4,0,0.2,1);
+  }
+  /* Exit: fade and drift to top-right corner */
+  .flip-card.exiting {
+    opacity: 0;
+    transform: translate(calc(-50% + 36vw), calc(-50% - 16vh)) scale(0.38);
   }
   .flip-card-r { border-top: 3px solid #e05c5c; }
   .flip-card-d { border-top: 3px solid #4a90d9; }
