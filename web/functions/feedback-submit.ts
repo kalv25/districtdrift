@@ -7,11 +7,14 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 	try {
 		const data = await request.formData();
 
-		const token = (data.get('cf-turnstile-response') as string) || '';
-		const state = (data.get('state') as string) || '';
-		const role = (data.get('role') as string) || '';
-		const message = (data.get('message') as string) || '';
-		const email = (data.get('email') as string) || '';
+		const token      = (data.get('cf-turnstile-response') as string) || '';
+		const state      = (data.get('state') as string) || '';
+		const role       = (data.get('role') as string) || '';
+		const message    = (data.get('message') as string) || '';
+		const email      = (data.get('email') as string) || '';
+		const screenshot = (data.get('screenshot') as string) || '';
+		const viewType   = (data.get('view_type') as string) || '';
+		const appVersion = (data.get('app_version') as string) || '';
 
 		if (!message.trim()) {
 			return Response.json({ error: 'Message is required.' }, { status: 400 });
@@ -30,11 +33,14 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
 		// Build plain-text email body
 		const lines = [
-			state ? `State visited: ${state}` : null,
+			state      ? `State visited: ${state}` : null,
 			`Role: ${role || 'Not specified'}`,
+			viewType   ? `View: ${viewType}` : null,
+			appVersion ? `Version: ${appVersion}` : null,
 			'',
 			message,
-			email ? `\nReply-to: ${email}` : null
+			email ? `\nReply-to: ${email}` : null,
+			screenshot ? '\n[Screenshot attached]' : null,
 		].filter((x): x is string => x !== null);
 
 		const res = await fetch('https://api.resend.com/emails', {
@@ -48,7 +54,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 				to: ['hello@districtdrift.org'],
 				...(email ? { reply_to: email } : {}),
 				subject: `Feedback${role ? ` from ${role}` : ''}${state ? ` — ${state}` : ''}`,
-				text: lines.join('\n')
+				text: lines.join('\n'),
+				...(screenshot ? {
+					attachments: [{ filename: 'screenshot.jpg', content: screenshot, content_type: 'image/jpeg' }]
+				} : {})
 			})
 		});
 

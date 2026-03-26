@@ -9,6 +9,7 @@
   import CompetitivenessChart from '$lib/CompetitivenessChart.svelte';
   import Pill from '$lib/Pill.svelte';
   import Tooltip from '$lib/Tooltip.svelte';
+  import FeedbackModal from '$lib/FeedbackModal.svelte';
 
   function drawnByTooltip(controller: string): { title: string; text: string } {
     if (/commission/i.test(controller))
@@ -193,8 +194,8 @@
   let mobileLayer = $state<'districts' | 'precincts' | 'none'>('districts');
   let mobileSectionIdx = $state<number | null>(null);
   const showDistrictsFills = $derived(!isMobileState || mobileLayer !== 'none');
-  let mapComponent: { takeScreenshot: (state: string, year: number) => void } | undefined;
-  let nationComponent: { takeScreenshot: (year: number) => void } | undefined;
+  let mapComponent: { takeScreenshot: (state: string, year: number) => void; captureDataUrl: () => string | null } | undefined;
+  let nationComponent: { takeScreenshot: (year: number) => void; captureDataUrl: () => Promise<string | null> } | undefined;
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
 
   let hoveredYear = $state<number | null>(null);
@@ -281,6 +282,7 @@
 
   const HELP_KEY = 'districtdrift.helpSeen';
   let helpOpen = $state(false);
+  let feedbackOpen = $state(false);
   let helpTab = $state<'nation' | 'state' | 'metrics' | 'data'>('nation');
   let statePickerGridEl = $state<HTMLElement | null>(null);
 
@@ -373,6 +375,11 @@
     p.set('layout', panelLayout === 'vertical' ? 'v' : 'h');
     history.replaceState({}, '', `${window.location.pathname}?${p}`);
   });
+
+  async function captureScreenshot(): Promise<string | null> {
+    if (viewMode === 'nation') return (await nationComponent?.captureDataUrl()) ?? null;
+    return mapComponent?.captureDataUrl() ?? null;
+  }
 
   let shareCopied = $state(false);
   async function copyShareLink() {
@@ -918,12 +925,12 @@
       aria-label="Share"
     >{shareCopied ? '✓ Copied' : '⤴ Share'}</button>
 
-    <a
+    <button
       class="feedback-btn"
-      href="/feedback{viewMode !== 'nation' ? `?state=${encodeURIComponent(STATES[selectedState]?.name ?? selectedState)}&year=${selectedYear}` : ''}"
+      onclick={() => feedbackOpen = true}
       title="Leave feedback"
       aria-label="Feedback"
-    >Feedback</a>
+    >Feedback</button>
 
     <div class="theme-toggle" role="group" aria-label="Color theme">
       <button class:active={theme === 'light'} onclick={() => theme = 'light'} title="Light mode" aria-label="Light mode">☀</button>
@@ -1375,6 +1382,15 @@
     </span>
   </footer>
 </div>
+
+<FeedbackModal
+  open={feedbackOpen}
+  onclose={() => feedbackOpen = false}
+  {captureScreenshot}
+  prefillState={viewMode !== 'nation' ? (STATES[selectedState]?.name ?? selectedState) : ''}
+  prefillYear={viewMode !== 'nation' ? String(selectedYear) : ''}
+  viewType={typeof window !== 'undefined' ? (window.innerWidth < 640 ? 'Mobile' : 'Desktop') : ''}
+/>
 
 {#if statePickerOpen}
   <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -2475,11 +2491,11 @@
     cursor: pointer;
     font-size: 0.72rem;
     font-weight: 600;
+    font-family: inherit;
     letter-spacing: 0.02em;
     transition: background 0.15s, color 0.15s;
     display: flex; align-items: center;
     white-space: nowrap;
-    text-decoration: none;
   }
   .feedback-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
 

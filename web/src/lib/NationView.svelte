@@ -655,6 +655,31 @@
     };
     img.src = url;
   }
+
+  /** Returns a small JPEG data URL for attaching to feedback. No watermark. */
+  export function captureDataUrl(): Promise<string | null> {
+    return new Promise((resolve) => {
+      if (!svgEl) { resolve(null); return; }
+      const w = Math.min(svgEl.clientWidth || svgW, 600);
+      const h = Math.round((svgEl.clientHeight || svgH) * (w / (svgEl.clientWidth || svgW)));
+      const xml  = new XMLSerializer().serializeToString(svgEl);
+      const blob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' });
+      const url  = URL.createObjectURL(blob);
+      const img  = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d')!;
+        ctx.fillStyle = '#1a1a2e';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        resolve(canvas.toDataURL('image/jpeg', 0.75));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+  }
 </script>
 
 <div class="nation-wrap" bind:this={container}>

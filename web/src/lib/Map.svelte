@@ -976,6 +976,19 @@
       URL.revokeObjectURL(url);
     }, 'image/png');
   }
+
+  /** Returns a small JPEG data URL for attaching to feedback. No watermark. */
+  export function captureDataUrl(): string | null {
+    if (!map) return null;
+    const src = map.getCanvas();
+    const maxW = 600;
+    const scale = Math.min(1, maxW / src.width);
+    const out = document.createElement('canvas');
+    out.width  = Math.round(src.width  * scale);
+    out.height = Math.round(src.height * scale);
+    out.getContext('2d')!.drawImage(src, 0, 0, out.width, out.height);
+    return out.toDataURL('image/jpeg', 0.75);
+  }
 </script>
 
 <div class="map-wrap">
