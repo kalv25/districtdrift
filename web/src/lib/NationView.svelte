@@ -915,15 +915,13 @@
       </div>
     </div>
 
-    <!-- Mobile rankings toggle button -->
-    <button class="mobile-rank-btn" onclick={() => showRankings = !showRankings}
-      aria-expanded={showRankings} aria-controls="rank-panel">
-      Rankings {showRankings ? '▾' : '▴'}
-    </button>
-
-    <!-- Rank panel -->
+    <!-- Rank panel with toggle button embedded at top -->
     <div id="rank-panel" class="rank-panel" class:rank-panel-open={showRankings}
       role="region" aria-label="States ranked by efficiency gap">
+      <button class="mobile-rank-btn" onclick={() => showRankings = !showRankings}
+        aria-expanded={showRankings}>
+        Rankings {showRankings ? '▾' : '▴'}
+      </button>
       <p class="rank-heading">National — {selectedYear}</p>
       <div class="national-totals">
         <span class="nt-d">{nationalTotals.d}D</span>
@@ -1311,31 +1309,11 @@
   }
 
   @media (max-width: 639px) {
-    /* Rankings toggle button — floating above footer */
-    .mobile-rank-btn {
-      display: flex;
-      position: fixed;
-      bottom: 5.5rem;
-      left: 0.875rem;
-      z-index: 26;
-      background: rgba(26, 30, 52, 0.82);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 99px;
-      color: rgba(255,255,255,0.88);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.35rem 0.85rem;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-    }
-
-    /* Rank panel: hidden by default on mobile; slides up as bottom sheet */
+    /* Rank panel: glass card anchored to bottom-centre; button tab at top */
     .rank-panel {
       display: flex !important;
       position: fixed !important;
-      bottom: 7rem !important;
+      bottom: 3.5rem !important;
       left: 0.875rem !important;
       right: 0.875rem !important;
       top: auto !important;
@@ -1343,6 +1321,7 @@
       max-height: 55vh;
       overflow-y: auto;
       flex-direction: column;
+      align-items: stretch;
       background: rgba(26, 30, 52, 0.82) !important;
       backdrop-filter: blur(24px) saturate(1.6) !important;
       -webkit-backdrop-filter: blur(24px) saturate(1.6) !important;
@@ -1350,9 +1329,9 @@
       border-radius: 18px !important;
       box-shadow: 0 8px 40px rgba(0,0,0,0.32) !important;
       z-index: 25;
-      transform: translateY(calc(100% + 4rem));
+      /* closed: only button tab peeks above bottom */
+      transform: translateY(calc(100% - 2.4rem));
       transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      pointer-events: none;
       /* white-on-dark text overrides */
       --text: rgba(255,255,255,0.90);
       --text-muted: rgba(255,255,255,0.55);
@@ -1361,7 +1340,28 @@
     }
     .rank-panel.rank-panel-open {
       transform: translateY(0);
-      pointer-events: auto;
+    }
+
+    /* Button tab embedded at top of panel, centered */
+    .mobile-rank-btn {
+      display: flex;
+      position: static;
+      align-self: center;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      border-radius: 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.55rem 1.25rem 0.45rem;
+      cursor: pointer;
+      box-shadow: none;
+      width: 100%;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
     .rank-heading { color: var(--text-label) !important; }
