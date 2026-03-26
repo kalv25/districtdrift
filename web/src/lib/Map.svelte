@@ -562,7 +562,6 @@
       const resp = await fetch(tilesPath);
       if (!resp.ok) {
         console.info(`Precinct tiles not found for ${stateL} — skipping.`);
-        onPrecinctLoadingChange?.(false);
         return;
       }
       const buf = await resp.arrayBuffer();
@@ -573,84 +572,81 @@
         }),
       };
       protocol.add(new PMTiles(bufferSource as any));
-    } catch {
+
+      if (!map.getSource('state-precincts')) {
+        map.addSource('state-precincts', {
+          type: 'vector',
+          url: `pmtiles://${tilesPath}`,
+        });
+
+        const layerName = `${stateL}_precincts`;
+        const initYear = precinctYear(selectedYear);
+
+        // Precinct fill — sits between district fill and boundary layers
+        map.addLayer({
+          id: 'precincts-fill',
+          type: 'fill',
+          source: 'state-precincts',
+          'source-layer': layerName,
+          filter: ['==', ['get', 'cycle_year'], initYear],
+          layout: { visibility: 'none' },
+          paint: {
+            'fill-color': PRECINCT_FILL_COLOR,
+            'fill-opacity': 0.82,
+          },
+        }, 'swing-fill'); // insert below swing overlay
+
+        // Thin precinct boundary lines for context
+        map.addLayer({
+          id: 'precincts-lines',
+          type: 'line',
+          source: 'state-precincts',
+          'source-layer': layerName,
+          filter: ['==', ['get', 'cycle_year'], initYear],
+          layout: { visibility: 'none' },
+          paint: {
+            'line-color': 'rgba(0,0,0,0.12)',
+            'line-width': 0.4,
+          },
+        }, 'swing-fill');
+
+        // Precinct hover
+        map.on('mousemove', 'precincts-fill', (e) => {
+          if (!e.features?.length) return;
+          const p = e.features[0].properties;
+          map.getCanvas().style.cursor = 'crosshair';
+          hoveredPrecinct = {
+            pct_d: typeof p?.pct_d === 'number' ? p.pct_d : null,
+            d_votes: p?.d_votes ?? 0,
+            r_votes: p?.r_votes ?? 0,
+            x: e.point.x,
+            y: e.point.y,
+          };
+        });
+        map.on('mouseleave', 'precincts-fill', () => {
+          map.getCanvas().style.cursor = '';
+          hoveredPrecinct = null;
+        });
+      }
+
+      precinctSourceLoaded = true;
+      precinctSourceState = stateL;
+
+      // The $effect that called us already returned early (async gap), so it
+      // won't re-run to apply visibility. Do it directly here instead.
+      if (showPrecincts && map.getLayer('precincts-fill')) {
+        const pYear = precinctYear(selectedYear);
+        precinctDisplayYear = pYear;
+        map.setLayoutProperty('precincts-fill', 'visibility', 'visible');
+        map.setLayoutProperty('precincts-lines', 'visibility', 'visible');
+        map.setFilter('precincts-fill', ['==', ['get', 'cycle_year'], pYear]);
+        map.setFilter('precincts-lines', ['==', ['get', 'cycle_year'], pYear]);
+        map.setPaintProperty('districts-fill-front', 'fill-opacity', 0);
+        map.setPaintProperty('districts-fill-back', 'fill-opacity', 0);
+      }
+    } finally {
       onPrecinctLoadingChange?.(false);
-      return;
     }
-
-    if (!map.getSource('state-precincts')) {
-      map.addSource('state-precincts', {
-        type: 'vector',
-        url: `pmtiles://${tilesPath}`,
-      });
-
-      const layerName = `${stateL}_precincts`;
-      const initYear = precinctYear(selectedYear);
-
-      // Precinct fill — sits between district fill and boundary layers
-      map.addLayer({
-        id: 'precincts-fill',
-        type: 'fill',
-        source: 'state-precincts',
-        'source-layer': layerName,
-        filter: ['==', ['get', 'cycle_year'], initYear],
-        layout: { visibility: 'none' },
-        paint: {
-          'fill-color': PRECINCT_FILL_COLOR,
-          'fill-opacity': 0.82,
-        },
-      }, 'swing-fill'); // insert below swing overlay
-
-      // Thin precinct boundary lines for context
-      map.addLayer({
-        id: 'precincts-lines',
-        type: 'line',
-        source: 'state-precincts',
-        'source-layer': layerName,
-        filter: ['==', ['get', 'cycle_year'], initYear],
-        layout: { visibility: 'none' },
-        paint: {
-          'line-color': 'rgba(0,0,0,0.12)',
-          'line-width': 0.4,
-        },
-      }, 'swing-fill');
-
-      // Precinct hover
-      map.on('mousemove', 'precincts-fill', (e) => {
-        if (!e.features?.length) return;
-        const p = e.features[0].properties;
-        map.getCanvas().style.cursor = 'crosshair';
-        hoveredPrecinct = {
-          pct_d: typeof p?.pct_d === 'number' ? p.pct_d : null,
-          d_votes: p?.d_votes ?? 0,
-          r_votes: p?.r_votes ?? 0,
-          x: e.point.x,
-          y: e.point.y,
-        };
-      });
-      map.on('mouseleave', 'precincts-fill', () => {
-        map.getCanvas().style.cursor = '';
-        hoveredPrecinct = null;
-      });
-    }
-
-    precinctSourceLoaded = true;
-    precinctSourceState = stateL;
-
-    // The $effect that called us already returned early (async gap), so it
-    // won't re-run to apply visibility. Do it directly here instead.
-    if (showPrecincts && map.getLayer('precincts-fill')) {
-      const pYear = precinctYear(selectedYear);
-      precinctDisplayYear = pYear;
-      map.setLayoutProperty('precincts-fill', 'visibility', 'visible');
-      map.setLayoutProperty('precincts-lines', 'visibility', 'visible');
-      map.setFilter('precincts-fill', ['==', ['get', 'cycle_year'], pYear]);
-      map.setFilter('precincts-lines', ['==', ['get', 'cycle_year'], pYear]);
-      map.setPaintProperty('districts-fill-front', 'fill-opacity', 0);
-      map.setPaintProperty('districts-fill-back', 'fill-opacity', 0);
-    }
-
-    onPrecinctLoadingChange?.(false);
   }
 
   // Show/hide precinct layer and dim district fill when active

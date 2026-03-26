@@ -3149,9 +3149,11 @@
       border: none !important;
       background: transparent !important;
       border-radius: 0 !important;
-      padding: 0.55rem 1.1rem 0.55rem 0.75rem;
+      padding: 0.55rem 1.25rem 0.55rem 0.75rem;
     }
     .panel-resize-handle { display: none !important; }
+    /* Header right padding must clear 18px border-radius to avoid corner clipping */
+    .panel-header { padding-right: 1.25rem; }
 
     /* iOS-style drag handle — tap to collapse panel to full-map mode */
     .mobile-panel-handle {
@@ -3188,7 +3190,7 @@
       border: none !important;
       background: transparent !important;
       border-radius: 0 !important;
-      padding: 0.55rem 1.1rem 0.55rem 0.75rem;
+      padding: 0.55rem 1.25rem 0.55rem 0.75rem;
     }
 
     /* Pills on dark glass: ensure legibility */
