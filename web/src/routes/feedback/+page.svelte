@@ -262,7 +262,7 @@
 	}
 
 	button[type="submit"] {
-		background: #4a90d9;
+		background: var(--color-d);
 		color: #fff;
 		border: none;
 		border-radius: 6px;

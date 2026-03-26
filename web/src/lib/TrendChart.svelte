@@ -1,5 +1,6 @@
 <script lang="ts">
   import { scaleLinear } from 'd3';
+  import { D_PRIMARY, D_SECONDARY } from './colors';
 
   type CycleStat = {
     cycle_year: number;
@@ -53,11 +54,11 @@
     <!-- Vote share line (solid, lighter blue) -->
     {#if pts.length > 1}
       <polyline points={line('vote')}
-        fill="none" stroke="#4a90d9" stroke-width="2"
+        fill="none" stroke={D_PRIMARY} stroke-width="2"
         stroke-linejoin="round" stroke-linecap="round" />
       <!-- Seat share line (dashed, darker blue) -->
       <polyline points={line('seat')}
-        fill="none" stroke="#2471a3" stroke-width="2" stroke-dasharray="5,3"
+        fill="none" stroke={D_SECONDARY} stroke-width="2" stroke-dasharray="5,3"
         stroke-linejoin="round" stroke-linecap="round" />
     {/if}
 
@@ -65,8 +66,8 @@
     {#each pts as p}
       {@const x = xScale(p.year)}
       {@const sel = p.year === selectedYear}
-      <circle cx={x} cy={yScale(p.vote)} r={sel ? 4 : 2.5} fill="#4a90d9" />
-      <circle cx={x} cy={yScale(p.seat)} r={sel ? 4 : 2.5} fill="#2471a3" />
+      <circle cx={x} cy={yScale(p.vote)} r={sel ? 4 : 2.5} fill={D_PRIMARY} />
+      <circle cx={x} cy={yScale(p.seat)} r={sel ? 4 : 2.5} fill={D_SECONDARY} />
       <text x={x} y={innerH + 14} text-anchor="middle" font-size="9"
         fill={sel ? '#222' : '#aaa'} font-weight={sel ? '600' : '400'}>
         {p.year}
@@ -74,9 +75,9 @@
     {/each}
 
     <!-- Legend -->
-    <line x1={0} x2={14} y1={-6} y2={-6} stroke="#4a90d9" stroke-width="2" />
+    <line x1={0} x2={14} y1={-6} y2={-6} stroke={D_PRIMARY} stroke-width="2" />
     <text x={17} y={-6} dy="0.32em" font-size="8" fill="#666">Votes D</text>
-    <line x1={60} x2={74} y1={-6} y2={-6} stroke="#2471a3" stroke-width="2" stroke-dasharray="4,2" />
+    <line x1={60} x2={74} y1={-6} y2={-6} stroke={D_SECONDARY} stroke-width="2" stroke-dasharray="4,2" />
     <text x={77} y={-6} dy="0.32em" font-size="8" fill="#666">Seats D</text>
   </g>
 </svg>

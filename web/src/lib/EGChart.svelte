@@ -1,5 +1,6 @@
 <script lang="ts">
   import { scaleLinear, scaleBand, max, min } from 'd3';
+  import { egBarColor } from './colors';
 
   type CycleStat = { cycle_year: number; efficiency_gap: number; redistricting_controller: string };
 
@@ -33,12 +34,6 @@
 
   const yTicks = $derived(yScale.ticks(4).map((t) => ({ v: t, y: yScale(t) })));
 
-  function barColor(eg: number, year: number): string {
-    const active = year === selectedYear;
-    if (eg > 0.02) return active ? '#c0392b' : '#e8a09a';
-    if (eg < -0.02) return active ? '#2471a3' : '#8db8d8';
-    return active ? '#888' : '#bbb';
-  }
 </script>
 
 <svg width="95%" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Efficiency gap by cycle">
@@ -70,7 +65,7 @@
         y={c.efficiency_gap >= 0 ? y1 : y0}
         width={xScale.bandwidth()}
         height={barH || 1}
-        fill={barColor(c.efficiency_gap, c.cycle_year)}
+        fill={egBarColor(c.efficiency_gap, c.cycle_year === selectedYear)}
         rx="2"
       />
       <!-- Cycle label -->

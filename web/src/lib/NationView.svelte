@@ -6,6 +6,7 @@
   import { tweened } from 'svelte/motion';
   import { linear } from 'svelte/easing';
   import Pill from './Pill.svelte';
+  import { egColor, egBarColor } from './colors';
 
   // Total duration for the wipe to sweep across the full map width
   // Each state blends over ±BLEND px of wipe travel (wider = softer per-state fade)
@@ -114,46 +115,8 @@
     return FIPS_TO_POSTAL[s] ?? '';
   }
 
-  // ── EG color scale ────────────────────────────────────────────────────────────
-
-  function egColor(eg: number | null | undefined, active = true): string {
-    if (eg === null || eg === undefined) return active ? '#c8c8c8' : '#e0e0e0';
-    const abs = Math.abs(eg);
-    const t = Math.min(1, abs / 0.25);
-    if (active) {
-      if (eg > 0.02)  return interpolateRed(t);
-      if (eg < -0.02) return interpolateBlue(t);
-      return '#b0b8b0';
-    } else {
-      if (eg > 0.02)  return `rgba(220,90,90,${0.15 + t * 0.2})`;
-      if (eg < -0.02) return `rgba(74,144,217,${0.15 + t * 0.2})`;
-      return '#d8d8d8';
-    }
-  }
-
-  function interpolateRed(t: number): string {
-    const r = Math.round(220 + (180 - 220) * t);
-    const g = Math.round(150 + (30  - 150) * t);
-    const b = Math.round(150 + (30  - 150) * t);
-    return `rgb(${r},${g},${b})`;
-  }
-
-  function interpolateBlue(t: number): string {
-    const r = Math.round(150 + (25  - 150) * t);
-    const g = Math.round(190 + (80  - 190) * t);
-    const b = Math.round(220 + (180 - 220) * t);
-    return `rgb(${r},${g},${b})`;
-  }
-
   // ── EG overlay ────────────────────────────────────────────────────────────────
   const EG_RANGE = 0.25; // ±25% = max font size + max arrow size
-
-  function egBarColor(eg: number | null): string {
-    if (eg === null) return '#999';
-    if (eg >  0.02) return '#c0392b';
-    if (eg < -0.02) return '#2471a3';
-    return '#777';
-  }
 
   function parseRgb(s: string): [number, number, number] {
     const m = s.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
@@ -1466,8 +1429,8 @@
     font-weight: 700;
     margin-bottom: 0.1rem;
   }
-  .nt-d { color: #4a90d9; }
-  .nt-r { color: #e05c5c; }
+  .nt-d { color: var(--color-d); }
+  .nt-r { color: var(--color-r); }
   .nt-sep, .nt-of { color: var(--text-muted); font-weight: 400; font-size: 0.72rem; }
 
   .rank-section-label {
@@ -1562,7 +1525,7 @@
   .zoom-btn:hover { background: #fff; border-color: rgba(0,0,0,0.3); }
   .zoom-reset { font-size: 12px; }
   .zoom-ne { font-size: 10px; font-weight: 700; letter-spacing: 0.02em; }
-  .zoom-ne.active { background: #2471a3; color: #fff; border-color: #1a5276; }
+  .zoom-ne.active { background: var(--color-d-dark); color: #fff; border-color: #1a5276; }
   .zoom-ne.active:hover { background: #1a5276; }
   .zoom-tour { font-size: 10px; }
   .zoom-tour.active { background: #1a1a2e; color: #fff; border-color: #000; }
@@ -1684,8 +1647,8 @@
   }
   /* Fade out at end of hold */
   .flip-card.fading { opacity: 0; }
-  .flip-card-r { border-top: 3px solid #e05c5c; }
-  .flip-card-d { border-top: 3px solid #4a90d9; }
+  .flip-card-r { border-top: 3px solid var(--color-r); }
+  .flip-card-d { border-top: 3px solid var(--color-d); }
 
   .flip-state {
     font-size: 1.65rem;

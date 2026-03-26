@@ -10,6 +10,7 @@
   import Pill from '$lib/Pill.svelte';
   import Tooltip from '$lib/Tooltip.svelte';
   import FeedbackModal from '$lib/FeedbackModal.svelte';
+  import { YEAR_COLORS } from '$lib/colors';
 
   function drawnByTooltip(controller: string): { title: string; text: string } {
     if (/commission/i.test(controller))
@@ -169,9 +170,6 @@
   }
 
   const CYCLES = [1992, 2002, 2012, 2022, 2024];
-  const YEAR_COLOR: Record<number, string> = {
-    1992: '#CA8A04', 2002: '#0D9488', 2012: '#9333EA', 2022: '#DB2777', 2024: '#EA580C',
-  };
   const SPEED_SETTINGS = {
     fast:   { interval: 3500,  wipe: 1500 },
     normal: { interval: 8000,  wipe: 4500 },
@@ -233,47 +231,43 @@
   const MIN_PANEL_W = 300;
   const MAX_PANEL_W = 480;
 
-  function startPanelResize(e: MouseEvent | TouchEvent) {
-    e.preventDefault();
-    const startY = e instanceof TouchEvent ? e.touches[0].clientY : e.clientY;
-    const startH = panelH;
-    function onMove(ev: MouseEvent | TouchEvent) {
-      const y = ev instanceof TouchEvent ? ev.touches[0].clientY : ev.clientY;
-      panelH = Math.max(MIN_PANEL_H, Math.min(MAX_PANEL_H, startH - (y - startY)));
-    }
-    function onUp() {
-      window.removeEventListener('mousemove', onMove as EventListener);
-      window.removeEventListener('mouseup', onUp);
-      window.removeEventListener('touchmove', onMove as EventListener);
-      window.removeEventListener('touchend', onUp);
-      localStorage.setItem(PANEL_H_KEY, String(panelH));
-    }
-    window.addEventListener('mousemove', onMove as EventListener);
-    window.addEventListener('mouseup', onUp);
-    window.addEventListener('touchmove', onMove as EventListener, { passive: false });
-    window.addEventListener('touchend', onUp);
+  function makeDragResize(
+    axis: 'x' | 'y',
+    startVal: () => number,
+    min: number,
+    max: number,
+    apply: (v: number) => void,
+    storageKey: string,
+    invert = false,
+  ) {
+    return (e: MouseEvent | TouchEvent) => {
+      e.preventDefault();
+      const getPos = (ev: MouseEvent | TouchEvent) =>
+        ev instanceof TouchEvent
+          ? (axis === 'x' ? ev.touches[0].clientX : ev.touches[0].clientY)
+          : (axis === 'x' ? ev.clientX : ev.clientY);
+      const start = getPos(e);
+      const startV = startVal();
+      function onMove(ev: MouseEvent | TouchEvent) {
+        const delta = getPos(ev) - start;
+        apply(Math.max(min, Math.min(max, startV + (invert ? -delta : delta))));
+      }
+      function onUp() {
+        window.removeEventListener('mousemove', onMove as EventListener);
+        window.removeEventListener('mouseup', onUp);
+        window.removeEventListener('touchmove', onMove as EventListener);
+        window.removeEventListener('touchend', onUp);
+        localStorage.setItem(storageKey, String(startVal()));
+      }
+      window.addEventListener('mousemove', onMove as EventListener);
+      window.addEventListener('mouseup', onUp);
+      window.addEventListener('touchmove', onMove as EventListener, { passive: false });
+      window.addEventListener('touchend', onUp);
+    };
   }
 
-  function startPanelWidthResize(e: MouseEvent | TouchEvent) {
-    e.preventDefault();
-    const startX = e instanceof TouchEvent ? e.touches[0].clientX : e.clientX;
-    const startW = panelW;
-    function onMove(ev: MouseEvent | TouchEvent) {
-      const x = ev instanceof TouchEvent ? ev.touches[0].clientX : ev.clientX;
-      panelW = Math.max(MIN_PANEL_W, Math.min(MAX_PANEL_W, startW - (x - startX)));
-    }
-    function onUp() {
-      window.removeEventListener('mousemove', onMove as EventListener);
-      window.removeEventListener('mouseup', onUp);
-      window.removeEventListener('touchmove', onMove as EventListener);
-      window.removeEventListener('touchend', onUp);
-      localStorage.setItem(PANEL_W_KEY, String(panelW));
-    }
-    window.addEventListener('mousemove', onMove as EventListener);
-    window.addEventListener('mouseup', onUp);
-    window.addEventListener('touchmove', onMove as EventListener, { passive: false });
-    window.addEventListener('touchend', onUp);
-  }
+  const startPanelResize      = makeDragResize('y', () => panelH, MIN_PANEL_H, MAX_PANEL_H, v => { panelH = v; }, PANEL_H_KEY, true);
+  const startPanelWidthResize = makeDragResize('x', () => panelW, MIN_PANEL_W, MAX_PANEL_W, v => { panelW = v; }, PANEL_W_KEY, true);
 
   const THEME_KEY = 'districtdrift.theme';
   let theme = $state<'light' | 'dark' | 'system'>('system');
@@ -1683,6 +1677,11 @@
 <style>
   :global(:root) {
     color-scheme: light;
+    --color-d: #4a90d9;
+    --color-r: #e05c5c;
+    --color-d-dark: #2471a3;
+    --color-r-dark: #c0392b;
+    --color-2024: #EA580C;
     --bg: #f5f5f3;
     --surface: #fff;
     --surface-tl: rgba(255, 255, 255, 0.86);
@@ -1753,7 +1752,7 @@
 
   .brand { display: flex; flex-direction: column; gap: 0.05rem; position: relative; cursor: default; }
   h1 { margin: 0; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
-  .accent { color: #e05c5c; }
+  .accent { color: var(--color-r); }
   .tagline { margin: 0; font-size: 0.72rem; opacity: 0.45; letter-spacing: 0.01em; }
   .version { opacity: 0.45; font-size: 0.65rem; margin-left: 0.4rem; }
 
@@ -1921,8 +1920,8 @@
   .float-icon { font-size: 0.85rem; line-height: 1; }
   .float-label { font-size: 0.6rem; letter-spacing: 0.02em; opacity: 0.7; text-transform: uppercase; }
   .map-float-btn:hover { background: var(--surface-2); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-  .map-float-btn.playing { color: var(--accent, #4a90d9); }
-  .map-float-btn.active { color: var(--accent, #4a90d9); background: var(--surface-2); }
+  .map-float-btn.playing { color: var(--color-d); }
+  .map-float-btn.active { color: var(--color-d); background: var(--surface-2); }
   .map-float-btn.loading { opacity: 0.75; cursor: wait; overflow: hidden; }
   .precinct-load-bar {
     position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
@@ -1931,7 +1930,7 @@
   }
   .precinct-load-bar::after {
     content: ''; position: absolute; top: 0; bottom: 0;
-    width: 45%; background: #4a90d9;
+    width: 45%; background: var(--color-d);
     animation: precinct-slide 1.1s ease-in-out infinite;
   }
   @keyframes precinct-slide {
@@ -1965,7 +1964,7 @@
   .precinct-toast-spinner {
     width: 12px; height: 12px;
     border: 2px solid rgba(255,255,255,0.25);
-    border-top-color: #4a90d9;
+    border-top-color: var(--color-d);
     border-radius: 50%;
     animation: precinct-spin 0.7s linear infinite;
     flex-shrink: 0;
@@ -2313,7 +2312,7 @@
 
   .preview-badge {
     font-size: 0.65rem;
-    background: #4a90d9;
+    background: var(--color-d);
     color: #fff;
     padding: 0.1rem 0.4rem;
     border-radius: 99px;
@@ -2338,10 +2337,10 @@
   dd { margin: 0; font-weight: 500; }
   dd.drawn-by { min-height: 2.4em; }
 
-  .d { color: #4a90d9; font-weight: 700; }
-  .r { color: #e05c5c; font-weight: 700; }
-  .favor-r { color: #e05c5c; }
-  .favor-d { color: #4a90d9; }
+  .d { color: var(--color-d); font-weight: 700; }
+  .r { color: var(--color-r); font-weight: 700; }
+  .favor-r { color: var(--color-r); }
+  .favor-d { color: var(--color-d); }
 
   .note { margin: 0.5rem 0 0; font-size: 0.72rem; color: var(--text-dim); line-height: 1.4; min-height: 2.8em; }
 
@@ -2470,8 +2469,8 @@
 
   .legend-items { display: flex; align-items: center; font-size: 0.82rem; }
   .swatch { display: inline-block; width: 13px; height: 13px; border-radius: 2px; margin-right: 4px; }
-  .swatch.d { background: #4a90d9; }
-  .swatch.r { background: #e05c5c; }
+  .swatch.d { background: var(--color-d); }
+  .swatch.r { background: var(--color-r); }
 
   .chart-section { display: flex; flex-direction: column; gap: 0.2rem; }
   .chart-note { margin: 0; font-size: 0.7rem; color: var(--text-faint); }
@@ -2679,8 +2678,8 @@
     color: var(--text);
   }
   .help-step div strong { color: var(--text-strong); }
-  .help-d { color: #2471a3; font-weight: 600; }
-  .help-r { color: #c0392b; font-weight: 600; }
+  .help-d { color: var(--color-d-dark); font-weight: 600; }
+  .help-r { color: var(--color-r-dark); font-weight: 600; }
 
   /* Metrics */
   .help-metrics {
@@ -2695,8 +2694,8 @@
     padding-left: 0.75rem;
     border-left: 2px solid var(--border);
   }
-  .help-r-val { color: #c0392b; font-weight: 600; }
-  .help-d-val { color: #2471a3; font-weight: 600; }
+  .help-r-val { color: var(--color-r-dark); font-weight: 600; }
+  .help-d-val { color: var(--color-d-dark); font-weight: 600; }
   .help-note {
     font-size: 0.79rem;
     color: var(--text-dim);
@@ -2745,7 +2744,7 @@
     margin-top: 0.4rem;
     padding: 0.6rem 0.75rem;
     background: rgba(234, 88, 12, 0.08);
-    border-left: 3px solid #EA580C;
+    border-left: 3px solid var(--color-2024);
     border-radius: 0 6px 6px 0;
     color: var(--text);
   }
@@ -2816,7 +2815,7 @@
   }
   .nation-yr-btn.anim-btn.playing { background: #fff8e1; border-color: #f0a500; color: #a06000; }
   .nation-delta-btn { width: auto; padding: 0.45rem 0.55rem; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
-  .nation-delta-btn.active { color: #4a90d9; border-color: rgba(74,144,217,0.4); background: rgba(74,144,217,0.08); }
+  .nation-delta-btn.active { color: var(--color-d); border-color: rgba(74,144,217,0.4); background: rgba(74,144,217,0.08); }
   :global([data-theme=dark]) .nation-delta-btn.active { color: #60a5fa; border-color: rgba(96,165,250,0.35); background: rgba(96,165,250,0.1); }
   .nation-screenshot-btn { width: auto; padding: 0.45rem 0.5rem; color: var(--text-muted); }
 
@@ -2857,8 +2856,8 @@
     flex-direction: column;
     overflow: hidden;
   }
-  .district-card.d { border-top-color: #4a90d9; }
-  .district-card.r { border-top-color: #e05c5c; }
+  .district-card.d { border-top-color: var(--color-d); }
+  .district-card.r { border-top-color: var(--color-r); }
 
 
   .dc-body {

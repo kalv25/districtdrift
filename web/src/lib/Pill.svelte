@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { PILL_COLORS } from './colors';
+
   let {
     party = null,
     solid  = false,
@@ -12,22 +14,7 @@
   } = $props();
 
   // Subtle: white bg + colored text  |  Solid: colored bg + white text
-  const COLORS = {
-    D: {
-      subtle: { bg: 'rgba(36,113,163,0.1)',   text: '#1a5276', border: 'rgba(36,113,163,0.28)' },
-      solid:  { bg: '#2471a3',                text: '#fff',    border: '#1a5276' },
-    },
-    R: {
-      subtle: { bg: 'rgba(192,57,43,0.1)',    text: '#922b21', border: 'rgba(192,57,43,0.28)' },
-      solid:  { bg: '#c0392b',                text: '#fff',    border: '#922b21' },
-    },
-    neutral: {
-      subtle: { bg: 'rgba(100,100,100,0.08)', text: '#555',    border: 'rgba(0,0,0,0.15)' },
-      solid:  { bg: '#666',                   text: '#fff',    border: '#555' },
-    },
-  };
-
-  const scheme = party ? COLORS[party] : COLORS.neutral;
+  const scheme = party ? PILL_COLORS[party] : PILL_COLORS.neutral;
   const c = solid ? scheme.solid : scheme.subtle;
 </script>
 

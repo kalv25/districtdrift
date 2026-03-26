@@ -1,5 +1,6 @@
 <script lang="ts">
   import { tweened } from 'svelte/motion';
+  import { D_PRIMARY, R_PRIMARY, D_SECONDARY, R_SECONDARY } from './colors';
   import { cubicOut } from 'svelte/easing';
 
   let {
@@ -41,8 +42,8 @@
   <title>Seat and vote share comparison</title>
   <!-- Vote share row -->
   <text x={0} y={row1Label} font-size="9" fill="#888" font-weight="600" style="text-transform: uppercase" letter-spacing="0.5">VOTES</text>
-  <rect x={0} y={row1Bar} width={W * $vShare} height={barH} fill="#4a90d9" rx="2" />
-  <rect x={W * $vShare} y={row1Bar} width={W * (1 - $vShare)} height={barH} fill="#e05c5c" rx="2" />
+  <rect x={0} y={row1Bar} width={W * $vShare} height={barH} fill={D_PRIMARY} rx="2" />
+  <rect x={W * $vShare} y={row1Bar} width={W * (1 - $vShare)} height={barH} fill={R_PRIMARY} rx="2" />
   <text x={W * $vShare / 2} y={row1Bar + barH / 2} dominant-baseline="middle"
     text-anchor="middle" font-size="9" fill="#fff" font-weight="600">
     {pct($vShare)}
@@ -54,8 +55,8 @@
 
   <!-- Seat share row -->
   <text x={0} y={row2Label} font-size="9" fill="#888" font-weight="600" letter-spacing="0.5">SEATS</text>
-  <rect x={0} y={row2Bar} width={W * $sShare} height={barH} fill="#2471a3" rx="2" />
-  <rect x={W * $sShare} y={row2Bar} width={W * (1 - $sShare)} height={barH} fill="#c0392b" rx="2" />
+  <rect x={0} y={row2Bar} width={W * $sShare} height={barH} fill={D_SECONDARY} rx="2" />
+  <rect x={W * $sShare} y={row2Bar} width={W * (1 - $sShare)} height={barH} fill={R_SECONDARY} rx="2" />
   <text x={W * $sShare / 2} y={row2Bar + barH / 2} dominant-baseline="middle"
     text-anchor="middle" font-size="9" fill="#fff" font-weight="600">
     {seatsD}D ({pct($sShare)})

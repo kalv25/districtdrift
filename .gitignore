@@ -5,6 +5,7 @@ PROJECT_SCOPE.md
 scripts/update_work_log.py
 scripts/init_project_logs.py
 .claude/
+private/
 data/
 # Exclude root-level tiles dir (tippecanoe workspace) but allow web/static/tiles
 /tiles/

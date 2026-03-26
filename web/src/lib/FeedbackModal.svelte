@@ -262,7 +262,7 @@
     cursor: pointer;
   }
   .include-label input[type="checkbox"] {
-    accent-color: #4a90d9;
+    accent-color: var(--color-d);
     width: 14px;
     height: 14px;
   }
@@ -320,7 +320,7 @@
   }
 
   button[type="submit"] {
-    background: #4a90d9;
+    background: var(--color-d);
     color: #fff;
     border: none;
     border-radius: 6px;

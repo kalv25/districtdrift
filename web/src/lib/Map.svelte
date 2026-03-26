@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
+  import { D_PRIMARY, R_PRIMARY } from './colors';
   import maplibregl from 'maplibre-gl';
   import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
@@ -50,8 +51,8 @@
 
   const FILL_COLOR = [
     'case',
-    ['==', ['get', 'won_by'], 'D'], '#4a90d9',
-    ['==', ['get', 'won_by'], 'R'], '#e05c5c',
+    ['==', ['get', 'won_by'], 'D'], D_PRIMARY,
+    ['==', ['get', 'won_by'], 'R'], R_PRIMARY,
     '#ccc',
   ] as maplibregl.ExpressionSpecification;
 
@@ -809,8 +810,8 @@
         layout: { visibility: 'none' },
         paint: {
           'fill-color': ['case',
-            ['==', ['get', 'swing_dir'],  1], '#4a90d9',
-            ['==', ['get', 'swing_dir'], -1], '#e05c5c',
+            ['==', ['get', 'swing_dir'],  1], D_PRIMARY,
+            ['==', ['get', 'swing_dir'], -1], R_PRIMARY,
             '#808080',
           ] as maplibregl.ExpressionSpecification,
           'fill-opacity': 0.65,
@@ -1063,8 +1064,8 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     z-index: 20;
   }
-  .district-tooltip.d { border-left-color: #4a90d9; }
-  .district-tooltip.r { border-left-color: #e05c5c; }
+  .district-tooltip.d { border-left-color: var(--color-d); }
+  .district-tooltip.r { border-left-color: var(--color-r); }
 
   .precinct-tooltip {
     position: absolute;
