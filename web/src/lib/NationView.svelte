@@ -356,9 +356,9 @@
 
   function _cancelIdle() {
     _idleActive = false;
-    reelCard = null; reelCardExiting = false;
-    flipCard = null; flipCardExiting = false;
-    flipExitX = 0; flipExitY = 0; reelExitX = 0; reelExitY = 0;
+    flipCard = null; flipCardExiting = false; flipCardFading = false;
+    flipExitX = 0; flipExitY = 0; flipExitScale = 1;
+    _reelFadeDeltas = false;
     if (_idleTimer)    { clearTimeout(_idleTimer); _idleTimer = null; }
     if (_idleRaf)      { cancelAnimationFrame(_idleRaf); _idleRaf = null; }
     if (_wheelDebounce){ clearTimeout(_wheelDebounce); _wheelDebounce = null; }
@@ -412,16 +412,14 @@
   });
 
   // ── Demo reel: cycles through the most gerrymandered states (desktop only) ──
-  type ReelCard = { po: string; name: string; eg: number; party: 'D' | 'R' | 'N'; seatsD: number; seatsR: number; seats: number };
   type FlipCard = { po: string; name: string; eg: number; party: 'D' | 'R' | 'N'; tagline: string };
-  let reelCard = $state<ReelCard | null>(null);
   let flipCard = $state<FlipCard | null>(null);
-  let reelCardExiting = $state(false);
   let flipCardExiting = $state(false);
+  let flipCardFading = $state(false);
   let flipExitX = $state(0);
   let flipExitY = $state(0);
-  let reelExitX = $state(0);
-  let reelExitY = $state(0);
+  let flipExitScale = $state(1);
+  let _reelFadeDeltas = $state(false);
 
   function _pickReelStates(): string[] {
     const valid = ranked.filter(s => hasFullData(s.po) && Math.abs(s.eg) > 0.04);
@@ -432,18 +430,6 @@
     const n = Math.min(topR.length, topD.length);
     for (let i = 0; i < n; i++) { result.push(topR[i], topD[i]); }
     return result;
-  }
-
-  function _buildReelCard(po: string): ReelCard {
-    const cycle = getCycle(po);
-    const eg = cycle?.efficiency_gap ?? 0;
-    return {
-      po, name: getStateName(po), eg,
-      party: eg > 0.02 ? 'R' : eg < -0.02 ? 'D' : 'N',
-      seatsD: cycle?.seats_d ?? 0,
-      seatsR: cycle?.seats_r ?? 0,
-      seats:  cycle?.seats   ?? 0,
-    };
   }
 
   function _buildFlipCard(po: string): FlipCard {
@@ -466,7 +452,7 @@
     return { po, name: getStateName(po), eg, party, tagline };
   }
 
-  function _reelZoomTo(cx: number, cy: number, k: number, ms: number, done: () => void) {
+  function _reelZoomTo(cx: number, cy: number, k: number, ms: number, done: () => void, onTick?: (ep: number) => void) {
     const sk = zoomK, stx = zoomTx, sty = zoomTy;
     const etx = svgW / 2 - cx * k;
     const ety = svgH / 2 - cy * k;
@@ -478,6 +464,7 @@
       zoomK  = sk  + (k   - sk)  * ep;
       zoomTx = stx + (etx - stx) * ep;
       zoomTy = sty + (ety - sty) * ep;
+      onTick?.(ep);
       if (p < 1) _idleRaf = requestAnimationFrame(tick); else done();
     }
     _idleRaf = requestAnimationFrame(tick);
@@ -526,38 +513,40 @@
       // Zoom-out to full national view (the "beat")
       _reelReset(2200, () => {
         if (!_idleActive) return;
-        // Brief pause at national view — show flip card teaser for upcoming state
+        // Brief pause at national view — show flip card teaser at screen center
         _idleTimer = setTimeout(() => {
           if (!_idleActive) return;
+          flipExitX = 0; flipExitY = 0; flipExitScale = 1;
           flipCard = _buildFlipCard(po);
           _idleTimer = setTimeout(() => {
             if (!_idleActive) return;
             const relArea = parea / (svgW * svgH);
             const k = relArea < 0.003 ? 5.2 : relArea < 0.015 ? 3.6 : 2.4;
-            // Drift flip card toward state ~700ms after zoom starts
-            setTimeout(() => {
-              const sx = pcx * zoomK + zoomTx;
-              const sy = pcy * zoomK + zoomTy;
-              flipExitX = (sx - svgW / 2) * 0.3;
-              flipExitY = (sy - svgH / 2) * 0.3;
-              flipCardExiting = true;
-              setTimeout(() => { flipCard = null; flipCardExiting = false; }, 1500);
-            }, 700);
+            // Release animation fill-mode so per-frame transform updates take effect
+            flipCardExiting = true;
+            _reelFadeDeltas = true;
             _reelZoomTo(pcx, pcy, k, 3200, () => {
               if (!_idleActive) return;
-              reelCard = _buildReelCard(po);
+              // Zoom done — card is at state center (screen center); hold then fade
               _idleTimer = setTimeout(() => {
-                // Drift reel card toward state interior before advancing
-                reelExitX = (svgW / 2 - 50) * 0.22;
-                reelExitY = (svgH / 2 - (svgH - 88)) * 0.22;
-                reelCardExiting = true;
+                if (!_idleActive) return;
+                flipCardFading = true;
                 setTimeout(() => {
-                  reelCard = null; reelCardExiting = false;
+                  flipCard = null; flipCardExiting = false; flipCardFading = false; flipExitScale = 1;
+                  _reelFadeDeltas = false;
                   _idleTimer = setTimeout(beat, 500);
-                }, 1500);
-              }, 6000);
+                }, 700);
+              }, 3200);
+            }, (ep) => {
+              // Per frame: card tracks the state's screen position
+              // Weight ramps from 0→1 in first ~33% of zoom so card smoothly
+              // "catches up" to the state before locking on and riding it to center
+              const w = Math.min(ep * 3, 1);
+              flipExitX = (pcx * zoomK + zoomTx - svgW / 2) * w;
+              flipExitY = (pcy * zoomK + zoomTy - svgH / 2) * w;
+              flipExitScale = 1 - ep * 0.18; // 1.0 → 0.82
             });
-          }, 1600); // hold flip card before starting zoom
+          }, 1400); // hold flip card at center before zoom starts
         }, 400); // pause before flip card appears
       });
     }
@@ -924,7 +913,6 @@
             stroke-width="0.6"
             class="state-path"
             class:has-full-data={full}
-            class:reel-highlight={reelCard?.po === po}
             onmousemove={(e) => handleMouseMove(e, po)}
             onmouseleave={() => hovered = null}
             onclick={(e) => { if (_dragMoved) { _dragMoved = false; return; } handleTap(e, po, full); }}
@@ -956,6 +944,7 @@
 
       <!-- EG prev→current size contrast + arrow overlay — animated and static -->
       {#if showEgLabels && (wipeFromYear !== null || (showDeltas && staticPrevYear !== null))}
+        <g class="delta-overlay" class:delta-fading={_reelFadeDeltas}>
         {#each statePaths as { po, cx, cy, area }}
           {#if po && cx !== null && cy !== null && area > 900}
             {@const currEg    = getEg(po)}
@@ -1040,6 +1029,7 @@
             {/if}
           {/if}
         {/each}
+        </g>
       {/if}
 
       <!-- Wipe line clipped to state land masses only -->
@@ -1160,34 +1150,12 @@
       </div>
     {/if}
 
-    <!-- Demo reel callout card (shown while zoomed into a state) — clickable to explore -->
-    {#if reelCard}
-      {@const rc = reelCard}
-      <div class="reel-card" class:reel-card-r={rc.party === 'R'} class:reel-card-d={rc.party === 'D'}
-           class:exiting={reelCardExiting}
-           style="--ex:{reelExitX}px;--ey:{reelExitY}px"
-           onclick={() => { _cancelIdle(); onStateClick(rc.po); }}
-           role="button" tabindex="0" aria-label="Explore {rc.name}"
-           onkeydown={(e) => e.key === 'Enter' && (_cancelIdle(), onStateClick(rc.po))}>
-        <div class="reel-name">{rc.name} · {selectedYear}</div>
-        <div class="reel-eg" class:reel-eg-r={rc.party === 'R'} class:reel-eg-d={rc.party === 'D'}>
-          {egLabel(rc.eg)}
-        </div>
-        <div class="reel-seats">
-          <span class="reel-sd">{rc.seatsD}D</span>
-          <span class="reel-sep"> / </span>
-          <span class="reel-sr">{rc.seatsR}R</span>
-          <span class="reel-of"> of {rc.seats}</span>
-        </div>
-        <div class="reel-cta">Explore →</div>
-      </div>
-    {/if}
-
-    <!-- Flip card: teaser shown during the national-view beat between states -->
+    <!-- Flip card: teaser shown during zoom into a state -->
     {#if flipCard}
       <div class="flip-card" class:flip-card-r={flipCard.party === 'R'} class:flip-card-d={flipCard.party === 'D'}
            class:exiting={flipCardExiting}
-           style="--ex:{flipExitX}px;--ey:{flipExitY}px">
+           class:fading={flipCardFading}
+           style="--ex:{flipExitX}px;--ey:{flipExitY}px;--fcs:{flipExitScale}">
         <div class="flip-state">{flipCard.name}</div>
         <div class="flip-year">{selectedYear}</div>
         <div class="flip-tagline">{flipCard.tagline}</div>
@@ -1685,79 +1653,11 @@
     .zoom-controls { display: none; }
   }
 
-  /* ── Demo reel callout card ─────────────────────────────────────────────── */
-  .reel-card {
-    position: absolute;
-    bottom: 5.5rem;
-    left: 1.5rem;
-    background: rgba(16, 20, 40, 0.88);
-    backdrop-filter: blur(18px) saturate(1.4);
-    -webkit-backdrop-filter: blur(18px) saturate(1.4);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-left: 3px solid rgba(255,255,255,0.2);
-    border-radius: 10px;
-    padding: 0.75rem 1.1rem 0.7rem;
-    cursor: pointer;
-    z-index: 20;
-    min-width: 180px;
-    animation: reel-in 0.35s cubic-bezier(0.22,1,0.36,1) both;
-    transition: transform 1.5s cubic-bezier(0.15, 0, 0.4, 1);
-  }
-  .reel-card:hover { background: rgba(24, 30, 56, 0.94); border-left-width: 4px; }
-  .reel-card.exiting { animation: none; transform: translate(var(--ex, 0px), var(--ey, 0px)) scale(0.88); }
-  .reel-card-r { border-left-color: #e05c5c; }
-  .reel-card-d { border-left-color: #4a90d9; }
+  /* ── Delta overlay fade during reel ─────────────────────────────────────── */
+  .delta-overlay { transition: opacity 1.0s ease; }
+  .delta-overlay.delta-fading { opacity: 0; }
 
-  .reel-name {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.65);
-    letter-spacing: 0.03em;
-    margin-bottom: 0.2rem;
-    text-transform: uppercase;
-  }
-  .reel-eg {
-    font-size: 1.35rem;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 0.35rem;
-    color: rgba(255,255,255,0.9);
-  }
-  .reel-eg-r { color: #f87171; }
-  .reel-eg-d { color: #60a5fa; }
-
-  .reel-seats {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.5);
-  }
-  .reel-sd { color: #4a90d9; font-weight: 700; }
-  .reel-sr { color: #e05c5c; font-weight: 700; }
-
-  .reel-cta {
-    font-size: 0.68rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.38);
-    margin-top: 0.45rem;
-    letter-spacing: 0.04em;
-  }
-  .reel-card:hover .reel-cta { color: rgba(255,255,255,0.65); }
-
-  /* Highlighted state in reel — bright outline + slight glow */
-  .state-path.reel-highlight {
-    stroke: rgba(255,255,255,0.85) !important;
-    stroke-width: 1.8 !important;
-    filter: brightness(1.25) drop-shadow(0 0 4px rgba(255,255,255,0.3));
-  }
-
-  @keyframes reel-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Hide reel card on mobile (reel doesn't run there anyway) */
-  @media (max-width: 639px) { .reel-card { display: none; } }
-
-  /* ── Flip card: cinematic teaser shown at national view between reel states ── */
+  /* ── Flip card: cinematic teaser shown during reel zoom ─────────────────── */
   .flip-card {
     position: absolute;
     top: 50%;
@@ -1775,13 +1675,15 @@
     min-width: 260px;
     max-width: 380px;
     animation: flip-in 0.45s cubic-bezier(0.22,1,0.36,1) both;
-    transition: transform 1.4s cubic-bezier(0.15, 0, 0.4, 1);
+    transition: opacity 0.7s ease; /* transform is per-frame — no transition needed */
   }
-  /* Exit: drift toward the state on the map, shrink slightly */
+  /* Tracking: release animation fill-mode so per-frame transform updates take effect */
   .flip-card.exiting {
-    animation: none; /* release fill-mode lock so transition can drive the transform */
-    transform: translate(calc(-50% + var(--ex, 0px)), calc(-50% + var(--ey, 0px))) scale(0.85);
+    animation: none;
+    transform: translate(calc(-50% + var(--ex, 0px)), calc(-50% + var(--ey, 0px))) scale(var(--fcs, 1));
   }
+  /* Fade out at end of hold */
+  .flip-card.fading { opacity: 0; }
   .flip-card-r { border-top: 3px solid #e05c5c; }
   .flip-card-d { border-top: 3px solid #4a90d9; }
 

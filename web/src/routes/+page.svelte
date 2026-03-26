@@ -3139,6 +3139,7 @@
     }
     .panel-group.panel-demo .snap-cards-district .snap-card {
       width: 100%;
+      box-sizing: border-box;
       flex-shrink: 0;
       overflow-y: auto;
       border: none !important;
@@ -3178,6 +3179,7 @@
     }
     .snap-cards-state .snap-card {
       width: 100%;
+      box-sizing: border-box;
       flex-shrink: 0;
       overflow-y: auto;
       max-height: none;
