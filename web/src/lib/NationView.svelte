@@ -1059,7 +1059,7 @@
       <button
         class="zoom-btn zoom-tour"
         class:active={_idleActive}
-        onclick={() => { if (_idleActive) { _cancelIdle(); _scheduleIdle(); } else startReel(); }}
+        onclick={() => { if (_idleActive) { _cancelIdle(); resetZoom(); _scheduleIdle(); } else startReel(); }}
         title={_idleActive ? 'Stop tour' : 'Tour the most gerrymandered states'}
         aria-label={_idleActive ? 'Stop tour' : 'Start tour'}
       >{_idleActive ? '■' : '▶'}</button>
