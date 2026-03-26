@@ -501,7 +501,12 @@
   function centerNavBtn(btn: HTMLElement) {
     const row = btn.parentElement;
     if (!row) return;
-    row.scrollTo({ left: btn.offsetLeft - row.clientWidth / 2 + btn.offsetWidth / 2, behavior: 'smooth' });
+    // getBoundingClientRect gives viewport-relative positions, so subtracting
+    // rowRect.left and adding current scrollLeft gives position within scroll container
+    const btnRect = btn.getBoundingClientRect();
+    const rowRect = row.getBoundingClientRect();
+    const btnLeftInRow = btnRect.left - rowRect.left + row.scrollLeft;
+    row.scrollTo({ left: btnLeftInRow - row.clientWidth / 2 + btn.offsetWidth / 2, behavior: 'smooth' });
   }
 
   function jumpToCard(el: HTMLElement | null, idx: number) {
