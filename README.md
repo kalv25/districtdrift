@@ -6,7 +6,16 @@
 
 ---
 
-![District Drift — nation view at 2022](web/static/og-image.png)
+<table>
+<tr>
+<td align="center"><strong>Desktop</strong></td>
+<td align="center"><strong>Mobile</strong></td>
+</tr>
+<tr>
+<td><img src="web/static/og-image.png" alt="Desktop — nation view" width="720" /></td>
+<td><img src="web/static/mobile-preview.png" alt="Mobile — nation view" width="220" /></td>
+</tr>
+</table>
 
 ---
 
@@ -21,8 +30,9 @@ Key features:
 - **State view** — district-by-district maps with boundary morph animations between cycles
 - **Partisan metrics** — efficiency gap, mean-median difference, seat/vote ratio, competitiveness
 - **Demographics** — race, income, and education per district per cycle
-- **Precinct layer** — raw precinct vote data overlaid on district maps (Michigan 2022, more states coming)
+- **Precinct layer** — raw precinct vote data for all 50 states (2012 and 2022 cycles)
 - **Historical events** — key redistricting events and litigation for all 44 states with congressional districts
+- **Mobile-optimised** — full touch support, pinch-zoom, bottom-sheet panels, and glassmorphism UI
 
 ## Stack
 
