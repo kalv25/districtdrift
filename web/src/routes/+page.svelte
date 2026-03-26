@@ -956,7 +956,7 @@
       <div class="mobile-nav-row">
         <div class="mobile-layer-toggle" role="group" aria-label="Map layer">
           <button class:active={mobileLayer === 'districts'} onclick={() => mobileLayer = 'districts'}>Districts</button>
-          <button class:active={mobileLayer === 'precincts'} onclick={() => mobileLayer = 'precincts'}>Demo</button>
+          <button class:active={mobileLayer === 'precincts'} onclick={() => mobileLayer = 'precincts'}>Precincts</button>
           <button class:active={mobileLayer === 'none'} onclick={() => { mobileLayer = 'none'; mobileSectionIdx = null; }}>Off</button>
         </div>
         {#if mobileLayer !== 'none'}
