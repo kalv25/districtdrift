@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 
 	const SITE_KEY = '0x4AAAAAACvo9eAug0OpeMuc';
@@ -7,6 +8,9 @@
 	const prefillYear = $page.url.searchParams.get('year') ?? '';
 
 	const prefillMessage = '';
+
+	let viewType = $state('');
+	onMount(() => { viewType = window.innerWidth < 640 ? 'Mobile' : 'Desktop'; });
 
 	const STATES = [
 		'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
@@ -78,6 +82,8 @@
 		{:else}
 			<form onsubmit={handleSubmit}>
 				{#if prefillYear}<input type="hidden" name="year" value={prefillYear} />{/if}
+			{#if viewType}<input type="hidden" name="view_type" value={viewType} />{/if}
+			<input type="hidden" name="app_version" value={__APP_VERSION__} />
 				<div class="field">
 					<label for="state">State visited <span class="optional">optional</span></label>
 					<select id="state" name="state">
