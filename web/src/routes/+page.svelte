@@ -295,12 +295,7 @@
 
   const isMobile = () => isMobileState;
 
-  // Mobile: sync layer toggle → showPrecincts; reset section when layer changes
-  $effect(() => {
-    if (!isMobileState) return;
-    showPrecincts = mobileLayer === 'precincts';
-    mobileSectionIdx = null;
-  });
+  // Mobile: auto-scroll panel to selected section (mobileLayer sync is in onclick handlers)
 
   // Mobile: auto-scroll panel to selected section
   $effect(() => {
@@ -1004,9 +999,9 @@
       </div>
       <div class="mobile-nav-row">
         <div class="mobile-layer-toggle" role="group" aria-label="Map layer">
-          <button class:active={mobileLayer === 'districts'} onclick={() => mobileLayer = 'districts'}>Districts</button>
-          <button class:active={mobileLayer === 'precincts'} onclick={() => mobileLayer = 'precincts'}>Precincts</button>
-          <button class:active={mobileLayer === 'none'} onclick={() => { mobileLayer = 'none'; mobileSectionIdx = null; }}>Off</button>
+          <button class:active={mobileLayer === 'districts'} onclick={() => { mobileLayer = 'districts'; showPrecincts = false; mobileSectionIdx = null; }}>Districts</button>
+          <button class:active={mobileLayer === 'precincts'} onclick={() => { mobileLayer = 'precincts'; showPrecincts = true; mobileSectionIdx = null; }}>Precincts</button>
+          <button class:active={mobileLayer === 'none'} onclick={() => { mobileLayer = 'none'; showPrecincts = false; mobileSectionIdx = null; }}>Off</button>
         </div>
         {#if mobileLayer !== 'none'}
           <div class="mobile-section-scroll" role="group" aria-label="View section">
