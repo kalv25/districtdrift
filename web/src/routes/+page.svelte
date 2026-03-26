@@ -293,16 +293,17 @@
 
   const isMobile = () => isMobileState;
 
-  // Mobile: sync layer toggle → showPrecincts
+  // Mobile: sync layer toggle → showPrecincts; reset section when layer changes
   $effect(() => {
     if (!isMobileState) return;
     showPrecincts = mobileLayer === 'precincts';
+    mobileSectionIdx = null;
   });
 
   // Mobile: auto-scroll panel to selected section
   $effect(() => {
     if (!isMobileState || mobileSectionIdx === null) return;
-    jumpToCard(stateCardsEl, mobileSectionIdx);
+    jumpToCard(mobileLayer === 'precincts' ? distCardsEl : stateCardsEl, mobileSectionIdx);
   });
 
   // Lock body scroll when any modal is open (prevents background scroll on mobile)
@@ -469,6 +470,8 @@
       ...(credits.length ? ['Credits'] : []),
     ] : []
   );
+  const distCardLabels = ['Partisan', 'Race & pop', 'Income & edu'];
+  const mobileCardLabels = $derived(mobileLayer === 'precincts' ? distCardLabels : stateCardLabels);
 
   $effect(() => {
     // Reset snap positions when state/year/layout changes
@@ -952,7 +955,7 @@
           <button class:active={mobileLayer === 'none'} onclick={() => mobileLayer = 'none'}>Off</button>
         </div>
         <div class="mobile-section-scroll" role="group" aria-label="View section">
-          {#each stateCardLabels as label, i}
+          {#each mobileCardLabels as label, i}
             <button
               class="mobile-sec-btn"
               class:active={mobileSectionIdx === i}
@@ -1051,6 +1054,7 @@
         class:vertical={panelLayout === 'vertical'}
         class:horizontal={panelLayout === 'horizontal'}
         class:panel-closed={isMobileState && mobileSectionIdx === null}
+        class:panel-demo={isMobileState && mobileLayer === 'precincts'}
         style={isMobileState ? '' : (panelLayout === 'horizontal' ? `height: ${panelH}px` : `width: ${panelW}px`)}
       >
         {#if isMobileState}
@@ -3035,10 +3039,29 @@
     }
     /* Hide divider between state and district panels on mobile */
     .panel-group .panel-divider { display: none !important; }
-    /* Hide district panel on mobile — state panel only */
+    /* Default: state panel visible, district panel hidden */
     .panel-district { display: none !important; }
-    /* State panel fills the group and clips overflow */
     .panel-state.panel { flex: 1 !important; min-height: 0 !important; max-height: none !important; overflow: hidden !important; }
+    /* Demo mode: swap — show district panel, hide state panel */
+    .panel-group.panel-demo .panel-district { display: flex !important; flex: 1 !important; min-height: 0 !important; max-height: none !important; overflow: hidden !important; }
+    .panel-group.panel-demo .panel-state { display: none !important; }
+    /* District snap cards: same treatment as state cards on mobile */
+    .panel-group.panel-demo .snap-cards-district {
+      padding: 0.25rem 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      height: 100%;
+      scrollbar-width: none;
+    }
+    .panel-group.panel-demo .snap-cards-district .snap-card {
+      width: 100%;
+      flex-shrink: 0;
+      overflow-y: auto;
+      border: none !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      padding: 0.55rem 1.1rem 0.55rem 0.75rem;
+    }
     .panel-resize-handle { display: none !important; }
 
     /* iOS-style drag handle — tap to collapse panel to full-map mode */
