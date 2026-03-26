@@ -359,17 +359,16 @@
     if (_wheelDebounce){ clearTimeout(_wheelDebounce); _wheelDebounce = null; }
   }
 
+  // Mobile-only: gentle zoom-in + rightward drift
   function _runIdle() {
     if (zoomK > 1.5) return;
     _idleActive = true;
-    const desktop = svgW >= 640;
     const startK  = zoomK;
-    const targetK = zoomK * (desktop ? 1.06 : 1.18); // subtler on desktop
-    // World-space centre — stays fixed while zooming
+    const targetK = zoomK * 1.18;
     const cx = (svgW / 2 - zoomTx) / zoomK;
     const cy = (svgH / 2 - zoomTy) / zoomK;
-    const pan      = svgW * (desktop ? 0.025 : 0.04);
-    const duration = desktop ? 22000 : 11000;
+    const pan      = svgW * 0.04;
+    const duration = 11000;
     const t0 = performance.now();
     function tick(now: number) {
       if (!_idleActive) return;
@@ -383,8 +382,6 @@
         _idleRaf = requestAnimationFrame(tick);
       } else {
         _idleActive = false;
-        // Chain demo reel on desktop after a short pause
-        if (svgW >= 640) _idleTimer = setTimeout(_runDemoReel, 7000);
       }
     }
     _idleRaf = requestAnimationFrame(tick);
@@ -392,8 +389,13 @@
 
   function _scheduleIdle() {
     _cancelIdle();
-    const delay = svgW >= 640 ? 20000 : 3000;
-    _idleTimer = setTimeout(_runIdle, delay);
+    if (svgW >= 640) {
+      // Desktop: launch attract mode (demo reel) after 12 s of inactivity
+      _idleTimer = setTimeout(_runDemoReel, 12000);
+    } else {
+      // Mobile: gentle zoom drift after 3 s
+      _idleTimer = setTimeout(_runIdle, 3000);
+    }
   }
 
   // Initial idle schedule for desktop (mobile handled by _mobileZoomApplied effect)
@@ -466,35 +468,54 @@
 
   function _runDemoReel() {
     if (svgW < 640) return; // desktop only
-    const states = _pickReelStates();
-    if (!states.length) return;
     _idleActive = true;
+    let states: string[] = [];
     let i = 0;
 
-    function step() {
-      if (!_idleActive || i >= states.length) {
-        reelCard = null;
-        _reelReset(2200, () => { _idleActive = false; });
+    function beat() {
+      if (!_idleActive) return;
+      // Re-pick states at the start of each loop
+      if (i === 0) {
+        states = _pickReelStates();
+        if (!states.length) { _idleActive = false; return; }
+      }
+      if (i >= states.length) {
+        i = 0;
+        beat(); // next loop immediately
         return;
       }
+
       const po = states[i++];
       const path = statePaths.find(p => p.po === po);
-      if (!path?.cx || !path?.cy) { step(); return; }
+      if (!path?.cx || !path?.cy) { beat(); return; }
+      const pcx = path.cx, pcy = path.cy, parea = path.area;
 
-      // Zoom level: larger for small states, smaller for large ones
-      const relArea = path.area / (svgW * svgH);
-      const k = relArea < 0.003 ? 5.2 : relArea < 0.015 ? 3.6 : 2.4;
-
-      _reelZoomTo(path.cx, path.cy, k, 1700, () => {
+      // Zoom-out to full national view first (the "beat"), then zoom into state
+      _reelReset(1400, () => {
         if (!_idleActive) return;
-        reelCard = _buildReelCard(po);
+        // Brief pause at full view so the national context registers
         _idleTimer = setTimeout(() => {
-          reelCard = null;
-          _idleTimer = setTimeout(step, 450);
-        }, 3800);
+          if (!_idleActive) return;
+          const relArea = parea / (svgW * svgH);
+          const k = relArea < 0.003 ? 5.2 : relArea < 0.015 ? 3.6 : 2.4;
+          _reelZoomTo(pcx, pcy, k, 1700, () => {
+            if (!_idleActive) return;
+            reelCard = _buildReelCard(po);
+            _idleTimer = setTimeout(() => {
+              reelCard = null;
+              _idleTimer = setTimeout(beat, 300);
+            }, 3800);
+          });
+        }, 900);
       });
     }
-    step();
+    beat();
+  }
+
+  /** Start the demo reel on demand (e.g. from Tour button or parent component). */
+  export function startReel() {
+    _cancelIdle();
+    _runDemoReel();
   }
 
   let _dragActive = false;
@@ -984,6 +1005,13 @@
       {#if zoomK > 1}
         <button class="zoom-btn zoom-reset" onclick={resetZoom} title="Reset zoom" aria-label="Reset zoom">⊡</button>
       {/if}
+      <button
+        class="zoom-btn zoom-tour"
+        class:active={_idleActive}
+        onclick={() => { if (_idleActive) { _cancelIdle(); _scheduleIdle(); } else startReel(); }}
+        title={_idleActive ? 'Stop tour' : 'Tour the most gerrymandered states'}
+        aria-label={_idleActive ? 'Stop tour' : 'Start tour'}
+      >{_idleActive ? '■' : '▶'}</button>
     </div>
 
     {#if neZoomed}
@@ -1486,6 +1514,9 @@
   .zoom-ne { font-size: 10px; font-weight: 700; letter-spacing: 0.02em; }
   .zoom-ne.active { background: #2471a3; color: #fff; border-color: #1a5276; }
   .zoom-ne.active:hover { background: #1a5276; }
+  .zoom-tour { font-size: 10px; }
+  .zoom-tour.active { background: #1a1a2e; color: #fff; border-color: #000; }
+  .zoom-tour.active:hover { background: #2c2c4a; }
 
   .ne-note {
     position: absolute;

@@ -195,7 +195,7 @@
   let mobileSectionIdx = $state<number | null>(null);
   const showDistrictsFills = $derived(!isMobileState || mobileLayer !== 'none');
   let mapComponent: { takeScreenshot: (state: string, year: number) => void; captureDataUrl: () => string | null } | undefined;
-  let nationComponent: { takeScreenshot: (year: number) => void; captureDataUrl: () => Promise<string | null> } | undefined;
+  let nationComponent: { takeScreenshot: (year: number) => void; captureDataUrl: () => Promise<string | null>; startReel: () => void } | undefined;
   let selectedYear = $derived(animating ? CYCLES[animTick] : manualYear);
 
   let hoveredYear = $state<number | null>(null);
