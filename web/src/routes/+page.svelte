@@ -3029,7 +3029,7 @@
 
     /* Snap cards: horizontal snap, fill panel height so card content can scroll */
     .snap-cards-state {
-      padding: 0.5rem;
+      padding: 0.25rem 0;
       overflow-x: auto;
       overflow-y: hidden;
       height: 100%;
@@ -3039,6 +3039,18 @@
       flex-shrink: 0;
       overflow-y: auto;
       max-height: none;
+      /* Remove card chrome — glass panel IS the card */
+      border: none !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      padding: 0.55rem 1.1rem 0.55rem 0.75rem;
+    }
+
+    /* Pills on dark glass: ensure legibility */
+    .panel-group .pill {
+      background: rgba(255,255,255,0.14) !important;
+      color: rgba(255,255,255,0.90) !important;
+      border-color: rgba(255,255,255,0.22) !important;
     }
 
     /* Cycle buttons: hide seat counts */
