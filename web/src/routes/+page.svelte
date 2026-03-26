@@ -1475,7 +1475,7 @@
             </div>
             <div class="help-step">
               <span class="step-num">4</span>
-              <div>The <strong>Rankings</strong> panel on the right ranks every state by efficiency gap magnitude, so you can quickly find the most and least gerrymandered maps.</div>
+              <div>The <strong>Rankings</strong> panel lists every state by efficiency gap magnitude. On desktop it's always visible on the right. On mobile, <strong>swipe up</strong> from the handle bar at the bottom of the screen to open it.</div>
             </div>
           </div>
         </section>
