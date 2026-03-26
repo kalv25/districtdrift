@@ -327,6 +327,61 @@
   let zoomTx = $state(0);
   let zoomTy = $state(0);
 
+  // ── Mobile: initial zoom + idle animation ─────────────────────────────────
+  let _mobileZoomApplied = false;
+
+  // Apply a slightly zoomed-in default view the first time the container is sized on mobile
+  $effect(() => {
+    if (_mobileZoomApplied || svgW <= 0 || svgH <= 0 || svgW >= 640) return;
+    _mobileZoomApplied = true;
+    const k = 1.38;
+    // Centre of CONUS is roughly 45% across, 45% down in AlbersUSA
+    const cx = svgW * 0.45;
+    const cy = svgH * 0.45;
+    zoomK  = k;
+    zoomTx = svgW / 2 - k * cx;
+    zoomTy = svgH / 2 - k * cy;
+    _scheduleIdle();
+  });
+
+  // Idle animation: after 3 s of no interaction on mobile, gently drift
+  let _idleTimer: ReturnType<typeof setTimeout> | null = null;
+  let _idleRaf: number | null = null;
+  let _idleActive = false;
+
+  function _cancelIdle() {
+    _idleActive = false;
+    if (_idleTimer) { clearTimeout(_idleTimer); _idleTimer = null; }
+    if (_idleRaf)   { cancelAnimationFrame(_idleRaf); _idleRaf = null; }
+  }
+
+  function _runIdle() {
+    if (zoomK > 1.08) return; // already manually zoomed — skip
+    _idleActive = true;
+    const startK  = zoomK,  targetK  = zoomK * 1.18;
+    const startTx = zoomTx, targetTx = zoomTx - svgW * 0.04;
+    const startTy = zoomTy, targetTy = zoomTy - svgH * 0.03;
+    const duration = 11000;
+    const t0 = performance.now();
+    function tick(now: number) {
+      if (!_idleActive) return;
+      const p  = Math.min((now - t0) / duration, 1);
+      const ep = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // ease-in-out quad
+      zoomK  = startK  + (targetK  - startK)  * ep;
+      zoomTx = startTx + (targetTx - startTx) * ep;
+      zoomTy = startTy + (targetTy - startTy) * ep;
+      if (p < 1) _idleRaf = requestAnimationFrame(tick);
+      else _idleActive = false;
+    }
+    _idleRaf = requestAnimationFrame(tick);
+  }
+
+  function _scheduleIdle() {
+    if (svgW >= 640) return; // mobile only
+    _cancelIdle();
+    _idleTimer = setTimeout(_runIdle, 3000);
+  }
+
   let _dragActive = false;
   let _dragMoved  = false;
   let _dragStartX = 0, _dragStartY = 0;
@@ -357,6 +412,7 @@
   }
 
   function handlePointerDown(e: PointerEvent) {
+    _cancelIdle();
     _activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (_activePointers.size === 2) {
       // Starting a pinch — capture distance and stop drag
@@ -404,6 +460,7 @@
     _activePointers.delete(e.pointerId);
     if (_activePointers.size < 2) _pinchDist = 0;
     _dragActive = false;
+    _scheduleIdle();
   }
 
   function zoomStep(factor: number) {
@@ -1254,11 +1311,11 @@
   }
 
   @media (max-width: 639px) {
-    /* Rankings toggle button — floating bottom-left */
+    /* Rankings toggle button — floating above footer */
     .mobile-rank-btn {
       display: flex;
       position: fixed;
-      bottom: 1rem;
+      bottom: 5.5rem;
       left: 0.875rem;
       z-index: 26;
       background: rgba(26, 30, 52, 0.82);
@@ -1278,7 +1335,7 @@
     .rank-panel {
       display: flex !important;
       position: fixed !important;
-      bottom: 3.5rem !important;
+      bottom: 7rem !important;
       left: 0.875rem !important;
       right: 0.875rem !important;
       top: auto !important;
