@@ -717,7 +717,7 @@
         <span class="r">{displayStats.seats_r}R</span>
         of {displayStats.total_seats}
       </dd>
-      <dt>D votes</dt>
+      <dt><Tooltip text="Democratic share of the two-party vote across all US House races in this state for this cycle. Only D and R votes are counted — third-party votes are excluded." placement="right"><span class="has-tip">D vote share</span></Tooltip></dt>
       <dd>{voteShare(displayStats.votes_d, displayStats.votes_r)}</dd>
       <dt>Eff. gap</dt>
       <dd class:favor-r={displayStats.efficiency_gap > 0.02}
@@ -2263,6 +2263,7 @@
   }
 
   dt { color: var(--text-muted); white-space: nowrap; font-size: 0.76rem; }
+  dt .has-tip { cursor: help; border-bottom: 1px dotted currentColor; }
   dd { margin: 0; font-weight: 500; }
   dd.drawn-by { min-height: 2.4em; }
 
