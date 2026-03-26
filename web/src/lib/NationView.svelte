@@ -1704,7 +1704,7 @@
     transition: transform 1.5s cubic-bezier(0.15, 0, 0.4, 1);
   }
   .reel-card:hover { background: rgba(24, 30, 56, 0.94); border-left-width: 4px; }
-  .reel-card.exiting { transform: translate(var(--ex, 0px), var(--ey, 0px)) scale(0.88); }
+  .reel-card.exiting { animation: none; transform: translate(var(--ex, 0px), var(--ey, 0px)) scale(0.88); }
   .reel-card-r { border-left-color: #e05c5c; }
   .reel-card-d { border-left-color: #4a90d9; }
 
@@ -1779,6 +1779,7 @@
   }
   /* Exit: drift toward the state on the map, shrink slightly */
   .flip-card.exiting {
+    animation: none; /* release fill-mode lock so transition can drive the transform */
     transform: translate(calc(-50% + var(--ex, 0px)), calc(-50% + var(--ey, 0px))) scale(0.85);
   }
   .flip-card-r { border-top: 3px solid #e05c5c; }
