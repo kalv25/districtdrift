@@ -3081,9 +3081,15 @@
 
     /* Pills on dark glass: ensure legibility */
     .panel-group .pill {
-      background: rgba(255,255,255,0.14) !important;
-      color: rgba(255,255,255,0.90) !important;
-      border-color: rgba(255,255,255,0.22) !important;
+      background: rgba(255,255,255,0.18) !important;
+      color: rgba(255,255,255,0.92) !important;
+      border-color: rgba(255,255,255,0.30) !important;
+    }
+    /* Drawn-by dd: allow pill to show fully rather than being clipped */
+    .panel-group dd.drawn-by {
+      white-space: normal !important;
+      text-align: left !important;
+      overflow: visible !important;
     }
 
     /* Cycle buttons: hide seat counts */

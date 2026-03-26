@@ -18,16 +18,23 @@
   function show() {
     if (!wrapEl) return;
     const r = wrapEl.getBoundingClientRect();
+    const vw  = window.innerWidth;
+    const ttW = Math.min(260, vw - 16);
+    const pad = 8;
     const bottomPx = window.innerHeight - r.top + 8;
-    let posCss = '';
+
+    // Compute ideal left edge based on placement, then clamp to viewport
+    let left: number;
     if (placement === 'center') {
-      posCss = `left:${r.left + r.width / 2}px; transform:translateX(-50%);`;
+      left = r.left + r.width / 2 - ttW / 2;
     } else if (placement === 'left') {
-      posCss = `left:${r.left}px;`;
+      left = r.left;
     } else {
-      posCss = `right:${window.innerWidth - r.right}px;`;
+      left = r.right - ttW;
     }
-    fixedStyle = `bottom:${bottomPx}px; ${posCss}`;
+    left = Math.max(pad, Math.min(left, vw - ttW - pad));
+
+    fixedStyle = `bottom:${bottomPx}px; left:${left}px; width:${ttW}px;`;
     visible = true;
   }
 
@@ -63,7 +70,7 @@
 
   .tt-box {
     position: fixed;
-    width: 260px;
+    /* width is set inline by show() so it clamps to the viewport */
     background: #1a1a2e;
     color: #e8e8f0;
     border-radius: 8px;
@@ -75,6 +82,8 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     z-index: 9999;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* Arrow pointing down toward the trigger */
