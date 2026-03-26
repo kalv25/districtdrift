@@ -358,6 +358,7 @@
     _idleActive = false;
     reelCard = null; reelCardExiting = false;
     flipCard = null; flipCardExiting = false;
+    flipExitX = 0; flipExitY = 0; reelExitX = 0; reelExitY = 0;
     if (_idleTimer)    { clearTimeout(_idleTimer); _idleTimer = null; }
     if (_idleRaf)      { cancelAnimationFrame(_idleRaf); _idleRaf = null; }
     if (_wheelDebounce){ clearTimeout(_wheelDebounce); _wheelDebounce = null; }
@@ -417,6 +418,10 @@
   let flipCard = $state<FlipCard | null>(null);
   let reelCardExiting = $state(false);
   let flipCardExiting = $state(false);
+  let flipExitX = $state(0);
+  let flipExitY = $state(0);
+  let reelExitX = $state(0);
+  let reelExitY = $state(0);
 
   function _pickReelStates(): string[] {
     const valid = ranked.filter(s => hasFullData(s.po) && Math.abs(s.eg) > 0.04);
@@ -529,21 +534,27 @@
             if (!_idleActive) return;
             const relArea = parea / (svgW * svgH);
             const k = relArea < 0.003 ? 5.2 : relArea < 0.015 ? 3.6 : 2.4;
-            // Fade flip card to corner ~700ms after zoom starts
+            // Drift flip card toward state ~700ms after zoom starts
             setTimeout(() => {
+              const sx = pcx * zoomK + zoomTx;
+              const sy = pcy * zoomK + zoomTy;
+              flipExitX = (sx - svgW / 2) * 0.3;
+              flipExitY = (sy - svgH / 2) * 0.3;
               flipCardExiting = true;
-              setTimeout(() => { flipCard = null; flipCardExiting = false; }, 900);
+              setTimeout(() => { flipCard = null; flipCardExiting = false; }, 1500);
             }, 700);
             _reelZoomTo(pcx, pcy, k, 3200, () => {
               if (!_idleActive) return;
               reelCard = _buildReelCard(po);
               _idleTimer = setTimeout(() => {
-                // Fade reel card to corner before advancing
+                // Drift reel card toward state interior before advancing
+                reelExitX = (svgW / 2 - 50) * 0.22;
+                reelExitY = (svgH / 2 - (svgH - 88)) * 0.22;
                 reelCardExiting = true;
                 setTimeout(() => {
                   reelCard = null; reelCardExiting = false;
                   _idleTimer = setTimeout(beat, 500);
-                }, 800);
+                }, 1500);
               }, 6000);
             });
           }, 1600); // hold flip card before starting zoom
@@ -1154,6 +1165,7 @@
       {@const rc = reelCard}
       <div class="reel-card" class:reel-card-r={rc.party === 'R'} class:reel-card-d={rc.party === 'D'}
            class:exiting={reelCardExiting}
+           style="--ex:{reelExitX}px;--ey:{reelExitY}px"
            onclick={() => { _cancelIdle(); onStateClick(rc.po); }}
            role="button" tabindex="0" aria-label="Explore {rc.name}"
            onkeydown={(e) => e.key === 'Enter' && (_cancelIdle(), onStateClick(rc.po))}>
@@ -1174,7 +1186,8 @@
     <!-- Flip card: teaser shown during the national-view beat between states -->
     {#if flipCard}
       <div class="flip-card" class:flip-card-r={flipCard.party === 'R'} class:flip-card-d={flipCard.party === 'D'}
-           class:exiting={flipCardExiting}>
+           class:exiting={flipCardExiting}
+           style="--ex:{flipExitX}px;--ey:{flipExitY}px">
         <div class="flip-state">{flipCard.name}</div>
         <div class="flip-year">{selectedYear}</div>
         <div class="flip-tagline">{flipCard.tagline}</div>
@@ -1688,10 +1701,10 @@
     z-index: 20;
     min-width: 180px;
     animation: reel-in 0.35s cubic-bezier(0.22,1,0.36,1) both;
-    transition: opacity 0.85s ease, transform 0.85s ease;
+    transition: transform 1.5s cubic-bezier(0.15, 0, 0.4, 1);
   }
   .reel-card:hover { background: rgba(24, 30, 56, 0.94); border-left-width: 4px; }
-  .reel-card.exiting { opacity: 0; transform: translate(-8px, 8px) scale(0.82); }
+  .reel-card.exiting { transform: translate(var(--ex, 0px), var(--ey, 0px)) scale(0.88); }
   .reel-card-r { border-left-color: #e05c5c; }
   .reel-card-d { border-left-color: #4a90d9; }
 
@@ -1762,12 +1775,11 @@
     min-width: 260px;
     max-width: 380px;
     animation: flip-in 0.45s cubic-bezier(0.22,1,0.36,1) both;
-    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.4,0,0.2,1);
+    transition: transform 1.4s cubic-bezier(0.15, 0, 0.4, 1);
   }
-  /* Exit: fade and drift to top-right corner */
+  /* Exit: drift toward the state on the map, shrink slightly */
   .flip-card.exiting {
-    opacity: 0;
-    transform: translate(calc(-50% + 36vw), calc(-50% - 16vh)) scale(0.38);
+    transform: translate(calc(-50% + var(--ex, 0px)), calc(-50% + var(--ey, 0px))) scale(0.85);
   }
   .flip-card-r { border-top: 3px solid #e05c5c; }
   .flip-card-d { border-top: 3px solid #4a90d9; }
