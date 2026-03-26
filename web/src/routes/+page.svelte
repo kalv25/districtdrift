@@ -1512,6 +1512,10 @@
               <span class="step-num">4</span>
               <div>The <strong>Rankings</strong> panel lists every state by efficiency gap magnitude. On desktop it's always visible on the right. On mobile, <strong>swipe up</strong> from the handle bar at the bottom of the screen to open it.</div>
             </div>
+            <div class="help-step">
+              <span class="step-num">5</span>
+              <div>Press <strong>▶ Tour</strong> (bottom-right, desktop) to launch an auto-tour of the most gerrymandered states. Each state gets a brief spotlight — click the card or tap the state to jump straight to it. Press <strong>■</strong> to stop at any time.</div>
+            </div>
           </div>
         </section>
         {/if}
