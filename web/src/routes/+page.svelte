@@ -957,17 +957,19 @@
         <div class="mobile-layer-toggle" role="group" aria-label="Map layer">
           <button class:active={mobileLayer === 'districts'} onclick={() => mobileLayer = 'districts'}>Districts</button>
           <button class:active={mobileLayer === 'precincts'} onclick={() => mobileLayer = 'precincts'}>Demo</button>
-          <button class:active={mobileLayer === 'none'} onclick={() => mobileLayer = 'none'}>Off</button>
+          <button class:active={mobileLayer === 'none'} onclick={() => { mobileLayer = 'none'; mobileSectionIdx = null; }}>Off</button>
         </div>
-        <div class="mobile-section-scroll" role="group" aria-label="View section">
-          {#each mobileCardLabels as label, i}
-            <button
-              class="mobile-sec-btn"
-              class:active={mobileSectionIdx === i}
-              onclick={(e) => { mobileSectionIdx = mobileSectionIdx === i ? null : i; centerNavBtn(e.currentTarget); }}
-            >{label}</button>
-          {/each}
-        </div>
+        {#if mobileLayer !== 'none'}
+          <div class="mobile-section-scroll" role="group" aria-label="View section">
+            {#each mobileCardLabels as label, i}
+              <button
+                class="mobile-sec-btn"
+                class:active={mobileSectionIdx === i}
+                onclick={(e) => { mobileSectionIdx = mobileSectionIdx === i ? null : i; centerNavBtn(e.currentTarget); }}
+              >{label}</button>
+            {/each}
+          </div>
+        {/if}
       </div>
     </div>
   {/if}
