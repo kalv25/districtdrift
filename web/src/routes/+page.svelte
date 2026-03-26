@@ -11,32 +11,20 @@
   import Tooltip from '$lib/Tooltip.svelte';
   import FeedbackModal from '$lib/FeedbackModal.svelte';
   import { YEAR_COLORS } from '$lib/colors';
+  import { UI, STATE, CHARTS, HELP, FEEDBACK, NATION,
+           cycleTitleFn, keyEventsTitleFn, districtNotExistFn,
+           districtElectionResultFn, districtNoResultFn } from '$lib/strings';
 
   function drawnByTooltip(controller: string): { title: string; text: string } {
     if (/commission/i.test(controller))
-      return {
-        title: 'Independent / bipartisan commission',
-        text:  'These lines were drawn by a body insulated from direct party control. Commission-drawn maps tend to produce lower efficiency gaps and fewer legal challenges.',
-      };
+      return { title: STATE.DRAWN_BY_COMMISSION_TITLE, text: STATE.DRAWN_BY_COMMISSION_TEXT };
     if (/court/i.test(controller))
-      return {
-        title: 'Court-ordered map',
-        text:  'A federal or state court intervened — typically after a legal challenge to a gerrymandered map — and imposed or approved these district lines.',
-      };
+      return { title: STATE.DRAWN_BY_COURT_TITLE, text: STATE.DRAWN_BY_COURT_TEXT };
     if (/republican/i.test(controller))
-      return {
-        title: 'Republican-controlled legislature',
-        text:  'The party that controls redistricting can draw boundaries to maximize its seat advantage. Republican control here means the GOP had significant influence over where district lines were placed.',
-      };
+      return { title: STATE.DRAWN_BY_R_TITLE, text: STATE.DRAWN_BY_R_TEXT };
     if (/democrat/i.test(controller))
-      return {
-        title: 'Democratic-controlled legislature',
-        text:  'The party that controls redistricting can draw boundaries to maximize its seat advantage. Democratic control here means the party had significant influence over where district lines were placed.',
-      };
-    return {
-      title: controller,
-      text:  'The body responsible for drawing congressional district lines for this cycle.',
-    };
+      return { title: STATE.DRAWN_BY_D_TITLE, text: STATE.DRAWN_BY_D_TEXT };
+    return { title: controller, text: STATE.DRAWN_BY_DEFAULT_TEXT };
   }
 
   type Resource = { label: string; url: string; description: string; };
@@ -908,7 +896,7 @@
               <p class="dc-source">Source: {pinnedCycleData.demographics.income_source}</p>
             {/if}
           {:else}
-            <p class="dc-pending">Income &amp; education data not yet available for this cycle.</p>
+            <p class="dc-pending">{STATE.DIST_INCOME_UNAVAIL}</p>
           {/if}
         {/if}
       {/if}
@@ -922,14 +910,11 @@
   <header>
     <div class="brand">
       <h1>District<span class="accent">Drift</span></h1>
-      <p class="tagline">Three decades of congressional redistricting <span class="version">v{__APP_VERSION__}</span></p>
+      <p class="tagline">{UI.TAGLINE} <span class="version">v{__APP_VERSION__}</span></p>
       <div class="brand-popup" role="tooltip">
-        <strong>What's inside</strong>
+        <strong>{UI.BRAND_POPUP_HEADING}</strong>
         <ul>
-          <li>50 states · 5 redistricting cycles · 1992–2024</li>
-          <li>Per-district election results &amp; census demographics</li>
-          <li>Precinct vote maps for all 50 states (2012 &amp; 2022)</li>
-          <li>Efficiency gap, mean-median difference &amp; competitiveness</li>
+          {#each UI.BRAND_ITEMS as item}<li>{item}</li>{/each}
         </ul>
       </div>
     </div>
@@ -937,7 +922,7 @@
     <button
       class="help-btn"
       onclick={() => { helpOpen = true; helpTab = 'nation'; }}
-      title="How to use this site"
+      title={UI.HELP_TITLE}
       aria-label="Help"
     >?</button>
 
@@ -945,16 +930,16 @@
       class="share-btn"
       class:copied={shareCopied}
       onclick={copyShareLink}
-      title="Share this view"
+      title={UI.SHARE_TITLE}
       aria-label="Share"
-    >{shareCopied ? '✓ Copied' : '⤴ Share'}</button>
+    >{shareCopied ? UI.SHARE_COPIED : UI.SHARE_LABEL}</button>
 
     <button
       class="feedback-btn"
       onclick={() => feedbackOpen = true}
-      title="Leave feedback"
+      title={UI.FEEDBACK_TITLE}
       aria-label="Feedback"
-    >Feedback</button>
+    >{UI.FEEDBACK_LABEL}</button>
 
     <div class="theme-toggle" role="group" aria-label="Color theme">
       <button class:active={theme === 'light'} onclick={() => theme = 'light'} title="Light mode" aria-label="Light mode">☀</button>
@@ -967,7 +952,7 @@
         class="view-btn"
         class:active={viewMode === 'nation'}
         onclick={goNation}
-      >All states</button>
+      >{UI.NAV_ALL_STATES}</button>
 
       <button
         class="state-selector"
@@ -978,7 +963,7 @@
         {#if viewMode !== 'nation'}
           <span class="state-name">{STATES[selectedState]?.name ?? selectedState}</span>
         {:else}
-          <span class="state-name" style="opacity:0.55">Select state</span>
+          <span class="state-name" style="opacity:0.55">{UI.SELECT_STATE_PLACEHOLDER}</span>
         {/if}
         <span class="state-chevron">▾</span>
       </button>
@@ -993,9 +978,9 @@
       </div>
       <div class="mobile-nav-row">
         <div class="mobile-layer-toggle" role="group" aria-label="Map layer">
-          <button class:active={mobileLayer === 'districts'} onclick={() => { mobileLayer = 'districts'; showPrecincts = false; mobileSectionIdx = null; }}>Districts</button>
-          <button class:active={mobileLayer === 'precincts'} onclick={() => { mobileLayer = 'precincts'; showPrecincts = true; mobileSectionIdx = null; }}>Precincts</button>
-          <button class:active={mobileLayer === 'none'} onclick={() => { mobileLayer = 'none'; showPrecincts = false; mobileSectionIdx = null; }}>Off</button>
+          <button class:active={mobileLayer === 'districts'} onclick={() => { mobileLayer = 'districts'; showPrecincts = false; mobileSectionIdx = null; }}>{UI.MOBILE_DISTRICTS}</button>
+          <button class:active={mobileLayer === 'precincts'} onclick={() => { mobileLayer = 'precincts'; showPrecincts = true; mobileSectionIdx = null; }}>{UI.MOBILE_PRECINCTS}</button>
+          <button class:active={mobileLayer === 'none'} onclick={() => { mobileLayer = 'none'; showPrecincts = false; mobileSectionIdx = null; }}>{UI.MOBILE_OFF}</button>
         </div>
         {#if mobileLayer !== 'none'}
           <div class="mobile-section-scroll" role="group" aria-label="View section">
@@ -1047,7 +1032,7 @@
       {#if precinctLoading}
         <div class="precinct-toast">
           <span class="precinct-toast-spinner"></span>
-          Loading precinct data…
+          {UI.PRECINCT_TOAST}
         </div>
       {/if}
 
@@ -1057,8 +1042,8 @@
           <button
             class="map-float-btn"
             title={isMobileState
-              ? (panelOpen ? 'Hide stats panel' : 'Show stats panel')
-              : (panelLayout === 'vertical' ? 'Switch to bottom panels' : 'Switch to side panels')}
+              ? (panelOpen ? UI.PANEL_HIDE_TITLE : UI.PANEL_SHOW_TITLE)
+              : (panelLayout === 'vertical' ? UI.PANEL_TO_BOTTOM_TITLE : UI.PANEL_TO_SIDE_TITLE)}
             onclick={() => {
               if (isMobileState) panelOpen = !panelOpen;
               else panelLayout = panelLayout === 'vertical' ? 'horizontal' : 'vertical';
@@ -1067,27 +1052,27 @@
             <span class="float-icon">
               {#if isMobileState}{panelOpen ? '▾' : '▴'}{:else}{panelLayout === 'vertical' ? '⬇' : '➡'}{/if}
             </span>
-            <span class="float-label">{isMobileState ? 'Stats' : 'Layout'}</span>
+            <span class="float-label">{isMobileState ? UI.FLOAT_STATS : UI.FLOAT_LAYOUT}</span>
           </button>
           <button
             class="map-float-btn"
             class:active={showPrecincts && !precinctLoading}
             class:loading={precinctLoading}
             disabled={precinctLoading}
-            title={precinctLoading ? 'Loading precinct data…' : showPrecincts ? 'Hide precinct vote map' : 'Show precinct vote map'}
+            title={precinctLoading ? UI.PRECINCT_LOADING_TITLE : showPrecincts ? UI.PRECINCT_VISIBLE_TITLE : UI.PRECINCT_HIDDEN_TITLE}
             onclick={() => { if (!precinctLoading) showPrecincts = !showPrecincts; }}
           >
             <span class="float-icon precinct-icon" class:spinning={precinctLoading}>P</span>
-            <span class="float-label">{precinctLoading ? 'Loading…' : 'Precincts'}</span>
+            <span class="float-label">{precinctLoading ? UI.FLOAT_PRECINCT_LOADING : UI.FLOAT_PRECINCTS}</span>
             {#if precinctLoading}<span class="precinct-load-bar"></span>{/if}
           </button>
           <button
             class="map-float-btn"
-            title="Save map as PNG"
+            title={UI.SAVE_TITLE}
             onclick={() => mapComponent?.takeScreenshot(selectedState, displayYear)}
           >
             <span class="float-icon">💾</span>
-            <span class="float-label">Save</span>
+            <span class="float-label">{UI.FLOAT_SAVE}</span>
           </button>
         </div>
       {/if}
@@ -1149,16 +1134,16 @@
                   </dd>
                   <dt>Seats</dt>
                   <dd><span class="d">{displayStats.seats_d}D</span> / <span class="r">{displayStats.seats_r}R</span> <span class="muted">of {displayStats.total_seats}</span></dd>
-                  <dt><Tooltip text="Democratic share of the two-party vote across all US House races in this state for this cycle. Only D and R votes are counted — third-party votes are excluded." placement="right"><span class="has-tip">D vote share</span></Tooltip></dt>
+                  <dt><Tooltip text={STATE.VOTE_SHARE_D_TIP} placement="right"><span class="has-tip">{STATE.DT_D_VOTE_SHARE}</span></Tooltip></dt>
                   <dd>{voteShare(displayStats.votes_d, displayStats.votes_r)}</dd>
-                  <dt><Tooltip text="Republican share of the two-party vote across all US House races in this state for this cycle." placement="right"><span class="has-tip">R vote share</span></Tooltip></dt>
+                  <dt><Tooltip text={STATE.VOTE_SHARE_R_TIP} placement="right"><span class="has-tip">{STATE.DT_R_VOTE_SHARE}</span></Tooltip></dt>
                   <dd>{voteShare(displayStats.votes_r, displayStats.votes_d)}</dd>
                   {#if displayStats.efficiency_gap !== null}
                     <dt>Eff. gap</dt>
                     <dd>
                       <Tooltip
-                        title="Efficiency gap"
-                        text="Measures wasted votes — votes cast for the losing party, or surplus votes beyond what the winning party needed. A positive value means Republican votes were used more efficiently, indicating a potential R-favoring gerrymander. Values above ±8% are generally considered significant."
+                        title={STATE.EFF_GAP_TITLE}
+                        text={STATE.EFF_GAP_TIP}
                         placement="left"
                       >
                         <Pill party={displayStats.efficiency_gap > 0.02 ? 'R' : displayStats.efficiency_gap < -0.02 ? 'D' : null}>
@@ -1180,7 +1165,7 @@
 
               <!-- Card: Seat vs. vote -->
               <div class="snap-card">
-                <p class="snap-card-title">Seat vs. vote share <Tooltip text="Compares seats won vs. votes cast for each party. If one party wins 60% of seats with only 50% of votes, the map may be structurally tilted." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
+                <p class="snap-card-title">{CHARTS.SEAT_VOTE_TITLE} <Tooltip text={CHARTS.SEAT_VOTE_TIP} placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                 <SeatVoteChart
                   seatsD={displayStats.seats_d}
                   seatsR={displayStats.seats_r}
@@ -1192,22 +1177,22 @@
 
               <!-- Card: Trend -->
               <div class="snap-card">
-                <p class="snap-card-title">Vote vs. seat share <Tooltip text="Tracks Democratic vote share (solid line) and seat share (dashed line) across all cycles. A persistent gap between the two lines suggests a structural partisan advantage built into the map." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
-                <p class="snap-card-note">— votes &nbsp;·&nbsp; – – seats</p>
+                <p class="snap-card-title">{CHARTS.TREND_TITLE} <Tooltip text={CHARTS.TREND_TIP} placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
+                <p class="snap-card-note">{CHARTS.TREND_NOTE}</p>
                 <TrendChart cycles={stats} selectedYear={displayYear} />
               </div>
 
               <!-- Card: Efficiency gap -->
               <div class="snap-card">
-                <p class="snap-card-title">Efficiency gap <Tooltip text="Measures partisan bias by counting 'wasted votes' — votes cast for a losing candidate, or surplus votes beyond what a winner needed. A positive value means Republican votes were used more efficiently. Values above ±8% are generally considered significant." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
-                <p class="snap-card-note">+ favors R &nbsp;·&nbsp; − favors D</p>
+                <p class="snap-card-title">{CHARTS.EG_TITLE} <Tooltip text={CHARTS.EG_TIP} placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
+                <p class="snap-card-note">{CHARTS.EG_NOTE}</p>
                 <EGChart cycles={egCycles} selectedYear={displayYear} />
               </div>
 
               {#if competCycles.length}
                 <!-- Card: Competitiveness -->
                 <div class="snap-card">
-                  <p class="snap-card-title">District competitiveness <Tooltip text="Shows how many districts were safe (won by >10%), leaning, or competitive for each party. Heavy clustering of safe districts is a hallmark of packing — concentrating one party's voters to waste their votes." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
+                  <p class="snap-card-title">{CHARTS.COMPETE_TITLE} <Tooltip text={CHARTS.COMPETE_TIP} placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                   <CompetitivenessChart cycles={competCycles} selectedYear={displayYear} />
                 </div>
               {/if}
@@ -1230,7 +1215,7 @@
               {#if credits.length}
                 <!-- Card: Credits -->
                 <div class="snap-card">
-                  <p class="snap-card-title">Data credits</p>
+                  <p class="snap-card-title">{STATE.SNAP_CREDITS_TITLE}</p>
                   <ul class="snap-credits">
                     {#each credits as c}
                       <li><a href={c.url} target="_blank" rel="noopener">{c.label}</a> — {c.note}</li>
@@ -1259,10 +1244,10 @@
               {#if pinnedDistData != null}
                 <Tooltip
                   text={won_by === 'D'
-                    ? `This district returned a Democratic representative in the ${selectedYear} election cycle.`
+                    ? districtElectionResultFn('D', selectedYear)
                     : won_by === 'R'
-                    ? `This district returned a Republican representative in the ${selectedYear} election cycle.`
-                    : `Election result not available for this district and cycle.`}
+                    ? districtElectionResultFn('R', selectedYear)
+                    : districtNoResultFn()}
                   placement="center"
                 >
                   <Pill party={won_by === 'D' ? 'D' : won_by === 'R' ? 'R' : null} solid size="md">
@@ -1277,7 +1262,7 @@
               <p class="dc-pending" style="padding: 0.5rem 0.75rem">D{pinnedDistrict} did not exist in {selectedYear}.</p>
             {:else}
               <nav class="snap-nav" aria-label="District sections">
-                {#each ['Partisan', 'Race & pop', 'Income & edu'] as label, i}
+                {#each [STATE.DIST_PARTISAN_LABEL, STATE.DIST_RACE_LABEL, STATE.DIST_INCOME_LABEL] as label, i}
                   <button class="snap-nav-btn" class:active={i === distCardIdx}
                     onclick={() => jumpToCard(distCardsEl, i)}>{label}</button>
                 {/each}
@@ -1287,7 +1272,7 @@
                 onkeydown={(e) => snapKeydown(e, distCardsEl, distCardIdx, 3)}>
                 <!-- Card: Partisan -->
                 <div class="snap-card">
-                  <p class="snap-card-title">Partisan <Tooltip text="Election results and partisan lean for this district. 'Lean' is the two-party Democratic vote share from US House elections in this cycle. 'Margin' is the winning candidate's margin of victory." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
+                  <p class="snap-card-title">{STATE.DIST_PARTISAN_LABEL} <Tooltip text={STATE.PARTISAN_CARD_TIP} placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                   <dl class="snap-dl">
                     {#if pinnedDistData.partisan_lean_d !== null}
                       {@const prev = prevDistData?.partisan_lean_d}
@@ -1315,7 +1300,7 @@
 
                 <!-- Card: Race & pop -->
                 <div class="snap-card">
-                  <p class="snap-card-title">Race &amp; pop <Tooltip text="Racial and ethnic composition and total population for this district, from the decennial census closest to this redistricting cycle. Arrows show change from the previous cycle." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
+                  <p class="snap-card-title">{STATE.DIST_RACE_LABEL} <Tooltip text={STATE.RACE_CARD_TIP} placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                   {#if hasDemog}
                     <dl class="snap-dl">
                       {#if pinnedDistData.population != null}
@@ -1355,13 +1340,13 @@
                       {/if}
                     </dl>
                   {:else}
-                    <p class="dc-pending">Not yet available.</p>
+                    <p class="dc-pending">{STATE.DIST_DEMOG_UNAVAIL}</p>
                   {/if}
                 </div>
 
                 <!-- Card: Income & edu -->
                 <div class="snap-card">
-                  <p class="snap-card-title">Income &amp; edu <Tooltip text="Median household income and educational attainment for this district, from the decennial census closest to this redistricting cycle. Arrows show change from the previous cycle." placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
+                  <p class="snap-card-title">{STATE.DIST_INCOME_LABEL} <Tooltip text={STATE.INCOME_CARD_TIP} placement="left"><span class="info-icon">ⓘ</span></Tooltip></p>
                   {#if hasDemog && (pinnedDistData.median_income != null || pinnedDistData.pct_bachelors_plus != null)}
                     <dl class="snap-dl">
                       {#if pinnedDistData.median_income != null}
@@ -1380,7 +1365,7 @@
                       {/if}
                     </dl>
                   {:else}
-                    <p class="dc-pending">Not yet available.</p>
+                    <p class="dc-pending">{STATE.DIST_DEMOG_UNAVAIL}</p>
                   {/if}
                 </div>
               </div>
@@ -1456,13 +1441,13 @@
     onkeydown={(e) => e.key === 'Enter' && (helpOpen = false)}>
     <div class="help-modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Help">
       <div class="help-header">
-        <h2>About District Drift</h2>
+        <h2>{HELP.MODAL_TITLE}</h2>
         <button class="help-close" onclick={() => helpOpen = false} aria-label="Close">✕</button>
       </div>
       <div class="help-hook">
-        <p>Every ten years, after the Census, state legislatures redraw the lines of congressional districts — one of the most consequential and least scrutinized acts in American democracy. Occasionally states redraw mid-decade too: Texas famously did so in 2003 under Tom DeLay to lock in a Republican majority.</p>
-        <p>District Drift is a retrospective: <em>how have those lines been drawn since 1992, and who benefited?</em> Both parties have gerrymandered. This site shows all of it.</p>
-        <p class="help-feedback-nudge">Spotted a data error or have a question? Use the <strong>Feedback</strong> button in the header — all reports are read and appreciated.</p>
+        <p>{HELP.HOOK_P1}</p>
+        <p>{HELP.HOOK_P2_PREFIX}<em>{HELP.HOOK_P2_ITALIC}</em>{HELP.HOOK_P2_SUFFIX}</p>
+        <p class="help-feedback-nudge">{@html HELP.FEEDBACK_NUDGE.replace('Feedback', '<strong>Feedback</strong>')}</p>
       </div>
 
       <nav class="help-tabs" role="tablist">
@@ -1536,25 +1521,25 @@
         <section>
           <dl class="help-metrics">
             <div class="help-metric-row">
-              <dt>Efficiency gap</dt>
+              <dt>{HELP.METRIC_EG}</dt>
               <dd>Counts "wasted votes" — votes for a losing candidate, or surplus votes beyond what a winner needed. When one party's votes are systematically wasted through <em>packing</em> (concentrating opponents into a few safe seats) and <em>cracking</em> (diluting them across many losing ones), the map structurally favors the other. <span class="help-r-val">+5%</span> means Democrats wasted 5 pp more (map favors Republicans); <span class="help-d-val">−5%</span> means the reverse.</dd>
             </div>
             <div class="help-metric-row">
-              <dt>Mean–median difference</dt>
+              <dt>{HELP.METRIC_MM}</dt>
               <dd>Compares the average Democratic district vote share to the median. Packing concentrates Democratic votes into a few blowout districts, pushing the median below the mean — a negative value signals a Republican-favoring map. Near zero suggests more even distribution.</dd>
             </div>
             <div class="help-metric-row">
-              <dt>Seat / vote ratio</dt>
+              <dt>{HELP.METRIC_SV}</dt>
               <dd>Seats won relative to statewide vote share. <strong>1.0×</strong> is proportional. Above 1× means a party wins more seats than its votes would predict; below 1× means fewer. Both parties can exceed 1× — one state's gerrymander doesn't cancel another's.</dd>
             </div>
             <div class="help-metric-row">
-              <dt>Compactness (Polsby-Popper)</dt>
+              <dt>{HELP.METRIC_COMPACT}</dt>
               <dd>Shape regularity on a 0–1 scale (circle = 1). Bizarrely shaped districts can signal packing and cracking — though geography and communities of interest also produce non-compact shapes legitimately.</dd>
             </div>
           </dl>
 
           <figure class="help-diagram-wrap">
-            <svg viewBox="0 0 540 190" class="help-diagram" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing packing and cracking gerrymandering techniques">
+            <svg viewBox="0 0 540 190" class="help-diagram" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={HELP.DIAGRAM_ARIA}>
               <defs>
                 <clipPath id="lc1"><rect x="30" y="46" width="150" height="16" rx="3"/></clipPath>
                 <clipPath id="lc2"><rect x="30" y="70" width="150" height="16" rx="3"/></clipPath>
@@ -1568,8 +1553,8 @@
 
               <!-- ── PACKING ─────────────────────────────────── -->
               <rect x="1" y="1" width="253" height="185" rx="7" fill="var(--surface-2)" stroke="var(--border)" stroke-width="1"/>
-              <text x="127" y="19" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text-strong)" letter-spacing=".06em">PACKING</text>
-              <text x="127" y="31" text-anchor="middle" font-size="8.5" fill="var(--text-dim)">D voters crammed into one seat</text>
+              <text x="127" y="19" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text-strong)" letter-spacing=".06em">{HELP.DIAGRAM_PACKING}</text>
+              <text x="127" y="31" text-anchor="middle" font-size="8.5" fill="var(--text-dim)">{HELP.DIAGRAM_PACKING_SUB}</text>
 
               <!-- 50% marker -->
               <line x1="105" y1="42" x2="105" y2="137" stroke="var(--text-faint)" stroke-width="1" stroke-dasharray="2,2"/>
@@ -1609,8 +1594,8 @@
 
               <!-- ── CRACKING ─────────────────────────────────── -->
               <rect x="287" y="1" width="253" height="185" rx="7" fill="var(--surface-2)" stroke="var(--border)" stroke-width="1"/>
-              <text x="413" y="19" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text-strong)" letter-spacing=".06em">CRACKING</text>
-              <text x="413" y="31" text-anchor="middle" font-size="8.5" fill="var(--text-dim)">D voters diluted — never a majority</text>
+              <text x="413" y="19" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text-strong)" letter-spacing=".06em">{HELP.DIAGRAM_CRACKING}</text>
+              <text x="413" y="31" text-anchor="middle" font-size="8.5" fill="var(--text-dim)">{HELP.DIAGRAM_CRACKING_SUB}</text>
 
               <!-- 50% marker -->
               <line x1="390" y1="42" x2="390" y2="137" stroke="var(--text-faint)" stroke-width="1" stroke-dasharray="2,2"/>
@@ -1648,22 +1633,22 @@
               <text x="413" y="161" text-anchor="middle" font-size="8.5" fill="var(--text-muted)">49% D votes</text>
               <text x="413" y="176" text-anchor="middle" font-size="10" font-weight="700" fill="#c0392b">0 of 4 seats (0%)</text>
             </svg>
-            <figcaption class="help-diagram-caption">Hypothetical 4-district state. Both methods give R most seats despite near-even vote share — through opposite techniques.</figcaption>
+            <figcaption class="help-diagram-caption">{HELP.DIAGRAM_CAPTION}</figcaption>
           </figure>
 
-          <p class="help-note">These metrics can behave counterintuitively in landslide states, where dominant parties also "waste" many votes. Always read them alongside seat and vote totals.</p>
+          <p class="help-note">{HELP.METRICS_NOTE}</p>
         </section>
         {/if}
 
         {#if helpTab === 'data'}
         <section>
           <div class="help-sources">
-            <div class="help-source-row"><span class="source-label">Boundaries</span><span>NHGIS (U of Minnesota) — 103rd–118th Congress shapefiles</span></div>
-            <div class="help-source-row"><span class="source-label">Elections</span><span>MIT Election Lab — US House returns 1976–2024</span></div>
-            <div class="help-source-row"><span class="source-label">Demographics</span><span>US Census via NHGIS — 1990 STF1/3, 2000 SF1/3, ACS 2008–12 and 2018–22</span></div>
-            <div class="help-source-row help-note-row"><span>The 1992 cycle has known boundary gaps in the NHGIS source data for some states.</span></div>
+            <div class="help-source-row"><span class="source-label">{HELP.DATA_BOUNDARIES}</span><span>{HELP.DATA_BOUNDARIES_TEXT}</span></div>
+            <div class="help-source-row"><span class="source-label">{HELP.DATA_ELECTIONS}</span><span>{HELP.DATA_ELECTIONS_TEXT}</span></div>
+            <div class="help-source-row"><span class="source-label">{HELP.DATA_DEMOGRAPHICS}</span><span>{HELP.DATA_DEMOGRAPHICS_TEXT}</span></div>
+            <div class="help-source-row help-note-row"><span>{HELP.DATA_1992_NOTE}</span></div>
             <div class="help-source-row help-note-row help-note-2024">
-              <span><strong>About the 2024 cycle:</strong> The 2024 elections used the same 118th Congress district maps as 2022 — no new redistricting occurred between cycles. Election results are actual 2024 House race outcomes. District demographics (race, income, education) reflect the 2020 Census, identical to the 2022 data. Four states (AL, GA, LA, NC) used court-ordered remedial maps in 2024 due to VRA litigation; their cycle notes describe the changes.</span>
+              <span><strong>About the 2024 cycle:</strong> {HELP.DATA_2024_NOTE}</span>
             </div>
           </div>
         </section>

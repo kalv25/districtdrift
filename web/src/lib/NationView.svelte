@@ -7,6 +7,7 @@
   import { linear } from 'svelte/easing';
   import Pill from './Pill.svelte';
   import { egColor, egBarColor } from './colors';
+  import { NATION, stateAriaLabel, rankingsHeadingFn } from '$lib/strings';
 
   // Total duration for the wipe to sweep across the full map width
   // Each state blends over ±BLEND px of wipe travel (wider = softer per-state fade)
@@ -836,7 +837,7 @@
 
 <div class="nation-wrap" bind:this={container}>
   {#if loading}
-    <div class="loading">Loading map…</div>
+    <div class="loading">{NATION.LOADING}</div>
   {:else}
     <svg width={svgW} height={svgH} class="nation-svg" bind:this={svgEl}
       onwheel={handleWheel}
@@ -881,7 +882,7 @@
             onclick={(e) => { if (_dragMoved) { _dragMoved = false; return; } handleTap(e, po, full); }}
             role={full ? 'button' : 'img'}
             tabindex={full ? 0 : undefined}
-            aria-label="{getStateName(po)}{full ? ' — click to explore' : ''}"
+            aria-label={stateAriaLabel(getStateName(po), full)}
             onkeydown={(e) => full && e.key === 'Enter' && onStateClick(po)}
           />
         {/if}
@@ -1007,30 +1008,30 @@
 
     <!-- Zoom controls -->
     <div class="zoom-controls">
-      <button class="zoom-btn" onclick={() => zoomStep(1.5)} title="Zoom in" aria-label="Zoom in">+</button>
-      <button class="zoom-btn" onclick={() => zoomStep(1/1.5)} title="Zoom out" aria-label="Zoom out">−</button>
+      <button class="zoom-btn" onclick={() => zoomStep(1.5)} title={NATION.ZOOM_IN} aria-label={NATION.ZOOM_IN}>+</button>
+      <button class="zoom-btn" onclick={() => zoomStep(1/1.5)} title={NATION.ZOOM_OUT} aria-label={NATION.ZOOM_OUT}>−</button>
       <button
         class="zoom-btn zoom-ne"
         class:active={neZoomed}
         onclick={zoomToNE}
-        title="Northeast corridor — 12 small states pack ~90 congressional seats into a densely contested region"
+        title={NATION.NE_TITLE}
         aria-label="Zoom to Northeast"
-      >NE</button>
+      >{NATION.NE_LABEL}</button>
       {#if zoomK > 1}
-        <button class="zoom-btn zoom-reset" onclick={resetZoom} title="Reset zoom" aria-label="Reset zoom">⊡</button>
+        <button class="zoom-btn zoom-reset" onclick={resetZoom} title={NATION.ZOOM_RESET} aria-label={NATION.ZOOM_RESET}>⊡</button>
       {/if}
       <button
         class="zoom-btn zoom-tour"
         class:active={_idleActive}
         onclick={() => { if (_idleActive) { _cancelIdle(); resetZoom(); _scheduleIdle(); } else startReel(); }}
-        title={_idleActive ? 'Stop tour' : 'Tour the most gerrymandered states'}
-        aria-label={_idleActive ? 'Stop tour' : 'Start tour'}
+        title={_idleActive ? NATION.TOUR_STOP_TITLE : NATION.TOUR_START_TITLE}
+        aria-label={_idleActive ? NATION.TOUR_STOP_ARIA : NATION.TOUR_START_ARIA}
       >{_idleActive ? '■' : '▶'}</button>
     </div>
 
     {#if neZoomed}
       <div class="ne-note">
-        Northeast corridor — 12 states, ~90 seats, the most geographically compressed congressional battleground in the US
+        {NATION.NE_NOTE}
       </div>
     {/if}
 
@@ -1060,29 +1061,29 @@
         </div>
         {#if c}
           <span class="tt-row">
-            <span class="tt-label">Efficiency gap</span>
+            <span class="tt-label">{NATION.TOOLTIP_EG}</span>
             <span class="tt-val">{egLabel(c.efficiency_gap)}</span>
           </span>
           <span class="tt-row">
-            <span class="tt-label">Seats</span>
+            <span class="tt-label">{NATION.TOOLTIP_SEATS}</span>
             <span class="tt-val">{c.seats_d}D / {c.seats_r}R of {c.seats}</span>
           </span>
           <span class="tt-row">
-            <span class="tt-label">D vote share</span>
+            <span class="tt-label">{NATION.TOOLTIP_D_VOTE}</span>
             <span class="tt-val">{voteShareLabel(c)}</span>
           </span>
           {#if c.mean_median_diff !== null}
             <span class="tt-row">
-              <span class="tt-label">Mean–median</span>
+              <span class="tt-label">{NATION.TOOLTIP_MM}</span>
               <span class="tt-val">{c.mean_median_diff > 0 ? '+' : ''}{(c.mean_median_diff * 100).toFixed(1)}%</span>
             </span>
           {/if}
           <span class="tt-row">
-            <span class="tt-label">Seat gap</span>
+            <span class="tt-label">{NATION.TOOLTIP_SEAT_GAP}</span>
             <span class="tt-val">{seatGapLabel(c)}</span>
           </span>
         {:else}
-          <span>No election data</span>
+          <span>{NATION.TOOLTIP_NO_DATA}</span>
         {/if}
         {#if history.some(h => h.eg !== null)}
           <div class="tt-trend">
@@ -1106,9 +1107,9 @@
         {/if}
         {#if full}
           {@const po = hovered.po}
-          <button class="tooltip-cta" onclick={() => { hovered = null; onStateClick(po); }}>Explore districts →</button>
+          <button class="tooltip-cta" onclick={() => { hovered = null; onStateClick(po); }}>{NATION.TOOLTIP_EXPLORE}</button>
         {:else}
-          <span class="tooltip-soon">District maps coming soon</span>
+          <span class="tooltip-soon">{NATION.TOOLTIP_COMING_SOON}</span>
         {/if}
       </div>
     {/if}
@@ -1135,15 +1136,15 @@
         <span>−25%</span><span>−15%</span><span>−5%</span><span>0</span><span>+5%</span><span>+15%</span><span>+25%</span>
       </div>
       <div class="legend-labels">
-        <span>D gerrymander</span>
-        <span>Neutral</span>
-        <span>R gerrymander</span>
+        <span>{NATION.LEGEND_D}</span>
+        <span>{NATION.LEGEND_NEUTRAL}</span>
+        <span>{NATION.LEGEND_R}</span>
       </div>
     </div>
 
     <!-- Rank panel with toggle button embedded at top -->
     <div id="rank-panel" class="rank-panel" class:rank-panel-open={showRankings} class:reel-mode={_idleActive}
-      role="region" aria-label="States ranked by efficiency gap">
+      role="region" aria-label={NATION.RANKINGS_ARIA}>
       <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
       <!-- Drag handle: tap or swipe to open/close on mobile -->
       <div class="sheet-handle"
@@ -1156,7 +1157,7 @@
         <span class="sheet-handle-bar"></span>
       </div>
       <div class="rank-content">
-        <p class="rank-heading">National — {selectedYear}</p>
+        <p class="rank-heading">{rankingsHeadingFn(selectedYear)}</p>
         <div class="national-totals">
           <span class="nt-d">{nationalTotals.d}D</span>
           <span class="nt-sep">/</span>
@@ -1164,7 +1165,7 @@
           <span class="nt-of">of {nationalTotals.total}</span>
         </div>
 
-        <div class="rank-section-label r-label">Most R-favoring</div>
+        <div class="rank-section-label r-label">{NATION.RANKINGS_R_SECTION}</div>
         <div class="rank-list">
           {#each ranked.slice(0, 7) as s}
             {@const full = hasFullData(s.po)}
@@ -1183,7 +1184,7 @@
 
         <div class="rank-divider"></div>
 
-        <div class="rank-section-label d-label">Most D-favoring</div>
+        <div class="rank-section-label d-label">{NATION.RANKINGS_D_SECTION}</div>
         <div class="rank-list">
           {#each [...ranked].reverse().slice(0, 7) as s}
             {@const full = hasFullData(s.po)}

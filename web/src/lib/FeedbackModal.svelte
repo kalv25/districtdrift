@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { FEEDBACK } from '$lib/strings';
 
   let {
     open,
@@ -30,7 +31,7 @@
     'Virginia','Washington','West Virginia','Wisconsin','Wyoming'
   ];
 
-  const ROLES = ['General public','Journalist','Educator','Researcher','Other'];
+  const ROLES = FEEDBACK.ROLES;
 
   let screenshotDataUrl  = $state<string | null>(null);
   let screenshotCapturing = $state(false);
@@ -81,10 +82,10 @@
       if (json.success) {
         success = true;
       } else {
-        error = json.error ?? 'Something went wrong.';
+        error = json.error ?? FEEDBACK.GENERIC_ERROR;
       }
     } catch {
-      error = 'Could not reach the server. Please try again.';
+      error = FEEDBACK.NETWORK_ERROR;
     } finally {
       submitting = false;
     }
@@ -94,16 +95,16 @@
 {#if open}
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="backdrop" onclick={onclose} onkeydown={(e) => e.key === 'Escape' && onclose()} role="button" tabindex="-1" aria-label="Close feedback">
-    <div class="modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Leave feedback">
+    <div class="modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={FEEDBACK.MODAL_TITLE}>
 
       <div class="modal-header">
-        <span class="modal-title">Leave feedback</span>
-        <button class="close-btn" onclick={onclose} aria-label="Close">✕</button>
+        <span class="modal-title">{FEEDBACK.MODAL_TITLE}</span>
+        <button class="close-btn" onclick={onclose} aria-label={FEEDBACK.CLOSE_ARIA}>✕</button>
       </div>
 
       {#if success}
         <div class="success-box">
-          <strong>Thank you!</strong> Your feedback has been sent.
+          <strong>{FEEDBACK.SUCCESS_HEADING}</strong> {FEEDBACK.SUCCESS_BODY}
         </div>
       {:else}
         <form onsubmit={handleSubmit} class="form-body">
@@ -113,21 +114,21 @@
 
           <!-- Screenshot preview -->
           {#if screenshotCapturing}
-            <div class="screenshot-row capturing">Capturing screenshot…</div>
+            <div class="screenshot-row capturing">{FEEDBACK.SCREENSHOT_CAPTURING}</div>
           {:else if screenshotDataUrl}
             <div class="screenshot-row">
-              <img src={screenshotDataUrl} alt="Current view screenshot" class="screenshot-thumb" />
+              <img src={screenshotDataUrl} alt={FEEDBACK.SCREENSHOT_ALT} class="screenshot-thumb" />
               <label class="include-label">
                 <input type="checkbox" bind:checked={includeScreenshot} />
-                Include screenshot
+                {FEEDBACK.SCREENSHOT_LABEL}
               </label>
             </div>
           {/if}
 
           <div class="field">
-            <label for="fb-state">State visited <span class="optional">optional</span></label>
+            <label for="fb-state">{FEEDBACK.STATE_LABEL} <span class="optional">optional</span></label>
             <select id="fb-state" name="state">
-              <option value="">— select a state —</option>
+              <option value="">{FEEDBACK.STATE_PLACEHOLDER}</option>
               {#each STATES as s}
                 <option value={s} selected={s === prefillState}>{s}</option>
               {/each}
@@ -135,9 +136,9 @@
           </div>
 
           <div class="field">
-            <label for="fb-role">Your role <span class="optional">optional</span></label>
+            <label for="fb-role">{FEEDBACK.ROLE_LABEL} <span class="optional">optional</span></label>
             <select id="fb-role" name="role">
-              <option value="">— select —</option>
+              <option value="">{FEEDBACK.ROLE_PLACEHOLDER}</option>
               {#each ROLES as r}
                 <option value={r}>{r}</option>
               {/each}
@@ -145,14 +146,14 @@
           </div>
 
           <div class="field">
-            <label for="fb-message">Message <span class="required">*</span></label>
+            <label for="fb-message">{FEEDBACK.MESSAGE_LABEL} <span class="required">*</span></label>
             <textarea id="fb-message" name="message" rows="5" required
-              placeholder="What I noticed:&#10;&#10;My feedback or question:"></textarea>
+              placeholder={FEEDBACK.MESSAGE_PLACEHOLDER}></textarea>
           </div>
 
           <div class="field">
-            <label for="fb-email">Email <span class="optional">optional — if you'd like a reply</span></label>
-            <input type="email" id="fb-email" name="email" placeholder="you@example.com" />
+            <label for="fb-email">{FEEDBACK.EMAIL_LABEL} <span class="optional">{FEEDBACK.EMAIL_OPTIONAL_HINT}</span></label>
+            <input type="email" id="fb-email" name="email" placeholder={FEEDBACK.EMAIL_PLACEHOLDER} />
           </div>
 
           <div class="cf-turnstile" data-sitekey={SITE_KEY} data-appearance="interaction-only"></div>
@@ -162,7 +163,7 @@
           {/if}
 
           <button type="submit" disabled={submitting}>
-            {submitting ? 'Sending…' : 'Send feedback'}
+            {submitting ? FEEDBACK.SUBMIT_SENDING : FEEDBACK.SUBMIT_LABEL}
           </button>
         </form>
       {/if}

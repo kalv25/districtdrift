@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { FEEDBACK } from '$lib/strings';
 
 	const SITE_KEY = '0x4AAAAAACvo9eAug0OpeMuc';
 
@@ -23,13 +24,7 @@
 		'Virginia','Washington','West Virginia','Wisconsin','Wyoming'
 	];
 
-	const ROLES = [
-		'General public',
-		'Journalist',
-		'Educator',
-		'Researcher',
-		'Other'
-	];
+	const ROLES = FEEDBACK.ROLES;
 
 	let submitting = $state(false);
 	let success = $state(false);
@@ -50,10 +45,10 @@
 			if (json.success) {
 				success = true;
 			} else {
-				error = json.error ?? 'Something went wrong.';
+				error = json.error ?? FEEDBACK.GENERIC_ERROR;
 			}
 		} catch {
-			error = 'Could not reach the server. Please try again.';
+			error = FEEDBACK.NETWORK_ERROR;
 		} finally {
 			submitting = false;
 		}
@@ -68,16 +63,16 @@
 
 <div class="page">
 	<header>
-		<a href="/" class="back">← District Drift</a>
+		<a href="/" class="back">{FEEDBACK.BACK_LINK}</a>
 	</header>
 
 	<main>
-		<h1>Leave feedback</h1>
-		<p class="subtitle">Questions, suggestions, corrections — all welcome.</p>
+		<h1>{FEEDBACK.PAGE_TITLE}</h1>
+		<p class="subtitle">{FEEDBACK.PAGE_SUBTITLE}</p>
 
 		{#if success}
 			<div class="success-box">
-				<strong>Thank you!</strong> Your feedback has been sent.
+				<strong>{FEEDBACK.SUCCESS_HEADING}</strong> {FEEDBACK.SUCCESS_BODY}
 			</div>
 		{:else}
 			<form onsubmit={handleSubmit}>
@@ -85,9 +80,9 @@
 			{#if viewType}<input type="hidden" name="view_type" value={viewType} />{/if}
 			<input type="hidden" name="app_version" value={__APP_VERSION__} />
 				<div class="field">
-					<label for="state">State visited <span class="optional">optional</span></label>
+					<label for="state">{FEEDBACK.STATE_LABEL} <span class="optional">optional</span></label>
 					<select id="state" name="state">
-						<option value="">— select a state —</option>
+						<option value="">{FEEDBACK.STATE_PLACEHOLDER}</option>
 						{#each STATES as s}
 							<option value={s} selected={s === prefillState}>{s}</option>
 						{/each}
@@ -95,9 +90,9 @@
 				</div>
 
 				<div class="field">
-					<label for="role">Your role <span class="optional">optional</span></label>
+					<label for="role">{FEEDBACK.ROLE_LABEL} <span class="optional">optional</span></label>
 					<select id="role" name="role">
-						<option value="">— select —</option>
+						<option value="">{FEEDBACK.ROLE_PLACEHOLDER}</option>
 						{#each ROLES as r}
 							<option value={r}>{r}</option>
 						{/each}
@@ -105,14 +100,14 @@
 				</div>
 
 				<div class="field">
-					<label for="message">Message <span class="required">*</span></label>
+					<label for="message">{FEEDBACK.MESSAGE_LABEL} <span class="required">*</span></label>
 					<textarea id="message" name="message" rows="6" required bind:value={messageValue}
-					placeholder="What I noticed:&#10;&#10;My feedback or question:"></textarea>
+					placeholder={FEEDBACK.MESSAGE_PLACEHOLDER}></textarea>
 				</div>
 
 				<div class="field">
-					<label for="email">Email <span class="optional">optional — if you'd like a reply</span></label>
-					<input type="email" id="email" name="email" placeholder="you@example.com" />
+					<label for="email">{FEEDBACK.EMAIL_LABEL} <span class="optional">{FEEDBACK.EMAIL_OPTIONAL_HINT}</span></label>
+					<input type="email" id="email" name="email" placeholder={FEEDBACK.EMAIL_PLACEHOLDER} />
 				</div>
 
 				<div class="cf-turnstile" data-sitekey={SITE_KEY} data-appearance="interaction-only"></div>
@@ -122,7 +117,7 @@
 				{/if}
 
 				<button type="submit" disabled={submitting}>
-					{submitting ? 'Sending…' : 'Send feedback'}
+					{submitting ? FEEDBACK.SUBMIT_SENDING : FEEDBACK.SUBMIT_LABEL}
 				</button>
 			</form>
 		{/if}
