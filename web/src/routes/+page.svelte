@@ -3057,8 +3057,12 @@
       overflow-x: auto;
       scrollbar-width: none;
       justify-content: flex-start;
+      /* Move horizontal padding to the inner content so it's part of the
+         scrollable area — avoids iOS border-radius clipping the first button */
+      padding-inline: 0;
     }
     .nation-cycle-bar::-webkit-scrollbar { display: none; }
+    .nation-cycle-bar .nation-btns { padding-inline: 0.75rem; }
     /* State floating cycle bar: hidden on mobile (shown in chrome above) */
     .state-cycle-bar { display: none; }
 

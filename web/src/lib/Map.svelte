@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { D_PRIMARY, R_PRIMARY } from './colors';
+  import { STATE, precinctDataYearFn } from '$lib/strings';
   import maplibregl from 'maplibre-gl';
   import { Protocol, PMTiles } from 'pmtiles';
   import 'maplibre-gl/dist/maplibre-gl.css';
@@ -1030,14 +1031,14 @@
     <div class="precinct-legend">
       <div class="precinct-legend-bar"></div>
       <div class="precinct-legend-labels">
-        <span>R</span><span>Neutral</span><span>D</span>
+        <span>{STATE.PRECINCT_LEGEND_R}</span><span>{STATE.PRECINCT_LEGEND_NEUTRAL}</span><span>{STATE.PRECINCT_LEGEND_D}</span>
       </div>
       {#if precinctDisplayYear !== selectedYear}
-        <div class="precinct-legend-note">Precinct data: {precinctDisplayYear}</div>
+        <div class="precinct-legend-note">{precinctDataYearFn(precinctDisplayYear)}</div>
       {/if}
     </div>
     {#if mapZoom < PRECINCT_MIN_ZOOM}
-      <div class="precinct-zoom-hint">Zoom in to see precinct data</div>
+      <div class="precinct-zoom-hint">{STATE.PRECINCT_ZOOM_HINT}</div>
     {/if}
   {/if}
 

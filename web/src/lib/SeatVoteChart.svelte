@@ -2,6 +2,7 @@
   import { tweened } from 'svelte/motion';
   import { D_PRIMARY, R_PRIMARY, D_SECONDARY, R_SECONDARY } from './colors';
   import { cubicOut } from 'svelte/easing';
+  import { CHARTS } from '$lib/strings';
 
   let {
     seatsD, seatsR, votesD, votesR, totalSeats
@@ -41,7 +42,7 @@
 <svg width="95%" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Seat and vote share comparison">
   <title>Seat and vote share comparison</title>
   <!-- Vote share row -->
-  <text x={0} y={row1Label} font-size="9" fill="#888" font-weight="600" style="text-transform: uppercase" letter-spacing="0.5">VOTES</text>
+  <text x={0} y={row1Label} font-size="9" fill="#888" font-weight="600" style="text-transform: uppercase" letter-spacing="0.5">{CHARTS.SEAT_VOTE_VOTES}</text>
   <rect x={0} y={row1Bar} width={W * $vShare} height={barH} fill={D_PRIMARY} rx="2" />
   <rect x={W * $vShare} y={row1Bar} width={W * (1 - $vShare)} height={barH} fill={R_PRIMARY} rx="2" />
   <text x={W * $vShare / 2} y={row1Bar + barH / 2} dominant-baseline="middle"
@@ -54,7 +55,7 @@
   </text>
 
   <!-- Seat share row -->
-  <text x={0} y={row2Label} font-size="9" fill="#888" font-weight="600" letter-spacing="0.5">SEATS</text>
+  <text x={0} y={row2Label} font-size="9" fill="#888" font-weight="600" letter-spacing="0.5">{CHARTS.SEAT_VOTE_SEATS}</text>
   <rect x={0} y={row2Bar} width={W * $sShare} height={barH} fill={D_SECONDARY} rx="2" />
   <rect x={W * $sShare} y={row2Bar} width={W * (1 - $sShare)} height={barH} fill={R_SECONDARY} rx="2" />
   <text x={W * $sShare / 2} y={row2Bar + barH / 2} dominant-baseline="middle"

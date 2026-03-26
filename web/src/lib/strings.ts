@@ -510,7 +510,34 @@ export const STATE = {
   // Data credits
   /** Snap card title for data credits. Two words. Related: STATE.SNAP_CREDITS_LABEL. */
   SNAP_CREDITS_TITLE: 'Data credits',
+
+  // Precinct legend (Map.svelte overlay, visible when showPrecincts=true)
+  /** Left end of precinct color bar: Republican-leaning. One letter. Related: STATE.PRECINCT_LEGEND_D. */
+  PRECINCT_LEGEND_R: 'R',
+
+  /** Center of precinct color bar: balanced precincts. One word. Related: STATE.PRECINCT_LEGEND_R. */
+  PRECINCT_LEGEND_NEUTRAL: 'Neutral',
+
+  /** Right end of precinct color bar: Democratic-leaning. One letter. Related: STATE.PRECINCT_LEGEND_R. */
+  PRECINCT_LEGEND_D: 'D',
+
+  /** Hint shown below map when precinct layer is on but zoom is too low. Short sentence. Related: precinctDataYearFn. */
+  PRECINCT_ZOOM_HINT: 'Zoom in to see precinct data',
 } as const;
+
+// ---------------------------------------------------------------------------
+// STATE factory functions
+// ---------------------------------------------------------------------------
+
+/**
+ * Precinct data year note shown in the precinct legend when displayed year differs from selected year.
+ * Used: Map.svelte .precinct-legend-note div.
+ * Constraints: short; the year is the fallback year actually shown, not the selected cycle.
+ * Related: STATE.PRECINCT_LEGEND_R, STATE.PRECINCT_ZOOM_HINT.
+ */
+export function precinctDataYearFn(year: number): string {
+  return `Precinct data: ${year}`;
+}
 
 // ---------------------------------------------------------------------------
 // CHARTS — chart titles, axis labels, legends, hint text
@@ -558,6 +585,36 @@ export const CHARTS = {
   // Seat / vote ratio (label)
   /** Short label for seat/vote ratio metric. Three words. Related: HELP.METRIC_SV. */
   SV_TITLE: 'Seat / vote',
+
+  // SeatVoteChart row labels
+  /** All-caps row label above the votes bar in SeatVoteChart. One word, displayed uppercase via style attr. Related: CHARTS.SEAT_VOTE_SEATS. */
+  SEAT_VOTE_VOTES: 'VOTES',
+
+  /** All-caps row label above the seats bar in SeatVoteChart. One word. Related: CHARTS.SEAT_VOTE_VOTES. */
+  SEAT_VOTE_SEATS: 'SEATS',
+
+  // TrendChart legend labels
+  /** Legend label for the Democratic vote-share line in TrendChart. Short. Related: CHARTS.TREND_LEGEND_SEATS. */
+  TREND_LEGEND_VOTES: 'Votes D',
+
+  /** Legend label for the Democratic seat-share line in TrendChart. Short. Related: CHARTS.TREND_LEGEND_VOTES. */
+  TREND_LEGEND_SEATS: 'Seats D',
+
+  // CompetitivenessChart bucket labels (appear in legend)
+  /** Competitiveness legend label: safe Democratic seat. Related: CHARTS.COMPETE_LEAN_D. */
+  COMPETE_SOLID_D: 'Solid D',
+
+  /** Competitiveness legend label: leaning Democratic. Related: CHARTS.COMPETE_SOLID_D. */
+  COMPETE_LEAN_D: 'Lean D',
+
+  /** Competitiveness legend label: competitive seat. Abbreviated to fit the bar. Related: CHARTS.COMPETE_LEAN_D. */
+  COMPETE_COMPETITIVE: 'Comp.',
+
+  /** Competitiveness legend label: leaning Republican. Related: CHARTS.COMPETE_SOLID_R. */
+  COMPETE_LEAN_R: 'Lean R',
+
+  /** Competitiveness legend label: safe Republican seat. Related: CHARTS.COMPETE_LEAN_R. */
+  COMPETE_SOLID_R: 'Solid R',
 } as const;
 
 // ---------------------------------------------------------------------------

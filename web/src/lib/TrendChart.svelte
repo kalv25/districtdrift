@@ -1,6 +1,7 @@
 <script lang="ts">
   import { scaleLinear } from 'd3';
   import { D_PRIMARY, D_SECONDARY } from './colors';
+  import { CHARTS } from '$lib/strings';
 
   type CycleStat = {
     cycle_year: number;
@@ -28,6 +29,19 @@
       .domain([cycles[0]?.cycle_year ?? 1992, cycles[cycles.length - 1]?.cycle_year ?? 2022])
       .range([0, innerW])
   );
+
+  // Only show x-axis labels that are at least MIN_LABEL_GAP viewBox units apart.
+  // Prevents 2022/2024 collision (those years are only ~12 units apart vs ~61 for others).
+  // Always include the last year; earlier years are shown only if next label is far enough.
+  const MIN_LABEL_GAP = 20;
+  const shownLabelYears = $derived(new Set(
+    pts
+      .filter((p, i) =>
+        i === pts.length - 1 ||
+        xScale(pts[i + 1].year) - xScale(p.year) >= MIN_LABEL_GAP
+      )
+      .map(p => p.year)
+  ));
 
   const yScale = $derived(
     scaleLinear().domain([0.25, 0.75]).range([innerH, 0]).clamp(true)
@@ -68,16 +82,18 @@
       {@const sel = p.year === selectedYear}
       <circle cx={x} cy={yScale(p.vote)} r={sel ? 4 : 2.5} fill={D_PRIMARY} />
       <circle cx={x} cy={yScale(p.seat)} r={sel ? 4 : 2.5} fill={D_SECONDARY} />
-      <text x={x} y={innerH + 14} text-anchor="middle" font-size="9"
-        fill={sel ? '#222' : '#aaa'} font-weight={sel ? '600' : '400'}>
-        {p.year}
-      </text>
+      {#if shownLabelYears.has(p.year)}
+        <text x={x} y={innerH + 14} text-anchor="middle" font-size="9"
+          fill={sel ? '#222' : '#aaa'} font-weight={sel ? '600' : '400'}>
+          {p.year}
+        </text>
+      {/if}
     {/each}
 
     <!-- Legend -->
     <line x1={0} x2={14} y1={-6} y2={-6} stroke={D_PRIMARY} stroke-width="2" />
-    <text x={17} y={-6} dy="0.32em" font-size="8" fill="#666">Votes D</text>
+    <text x={17} y={-6} dy="0.32em" font-size="8" fill="#666">{CHARTS.TREND_LEGEND_VOTES}</text>
     <line x1={60} x2={74} y1={-6} y2={-6} stroke={D_SECONDARY} stroke-width="2" stroke-dasharray="4,2" />
-    <text x={77} y={-6} dy="0.32em" font-size="8" fill="#666">Seats D</text>
+    <text x={77} y={-6} dy="0.32em" font-size="8" fill="#666">{CHARTS.TREND_LEGEND_SEATS}</text>
   </g>
 </svg>

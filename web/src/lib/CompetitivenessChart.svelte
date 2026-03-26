@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { CHARTS } from '$lib/strings';
+
   type Competitiveness = {
     solid_d: number; lean_d: number; competitive: number;
     lean_r: number; solid_r: number;
@@ -8,11 +10,11 @@
   let { cycles, selectedYear }: { cycles: CycleStat[]; selectedYear: number } = $props();
 
   const BUCKETS: { key: keyof Competitiveness; label: string; fill: string; dimFill: string }[] = [
-    { key: 'solid_d',    label: 'Solid D',    fill: '#2563eb', dimFill: '#93c5fd' },
-    { key: 'lean_d',     label: 'Lean D',     fill: '#60a5fa', dimFill: '#bfdbfe' },
-    { key: 'competitive',label: 'Comp.',      fill: '#9ca3af', dimFill: '#d1d5db' },
-    { key: 'lean_r',     label: 'Lean R',     fill: '#f87171', dimFill: '#fecaca' },
-    { key: 'solid_r',    label: 'Solid R',    fill: '#dc2626', dimFill: '#fca5a5' },
+    { key: 'solid_d',    label: CHARTS.COMPETE_SOLID_D,    fill: '#2563eb', dimFill: '#93c5fd' },
+    { key: 'lean_d',     label: CHARTS.COMPETE_LEAN_D,     fill: '#60a5fa', dimFill: '#bfdbfe' },
+    { key: 'competitive',label: CHARTS.COMPETE_COMPETITIVE, fill: '#9ca3af', dimFill: '#d1d5db' },
+    { key: 'lean_r',     label: CHARTS.COMPETE_LEAN_R,     fill: '#f87171', dimFill: '#fecaca' },
+    { key: 'solid_r',    label: CHARTS.COMPETE_SOLID_R,    fill: '#dc2626', dimFill: '#fca5a5' },
   ];
 
   const ROW_H = 20;
