@@ -113,6 +113,9 @@
   let precinctSourceLoaded = false;
   let precinctSourceState = stateL; // track which state's precincts are loaded
 
+  // Precinct tiles exist from this zoom level (Tippecanoe min-zoom=5)
+  const PRECINCT_MIN_ZOOM = 5;
+
   // Precinct data is only available for these cycle years
   const PRECINCT_CYCLE_YEARS = [2012, 2022];
   // Map selected year to the nearest available precinct cycle year (≤ selected)
@@ -121,6 +124,7 @@
     return available.length > 0 ? Math.max(...available) : PRECINCT_CYCLE_YEARS[0];
   }
   let precinctDisplayYear = $state(precinctYear(selectedYear));
+  let mapZoom = $state(5); // updated on map zoom events; used to show "zoom in" hint
 
   // Legend state (reactive so the overlay updates)
 
@@ -643,6 +647,8 @@
         map.setFilter('precincts-lines', ['==', ['get', 'cycle_year'], pYear]);
         map.setPaintProperty('districts-fill-front', 'fill-opacity', 0);
         map.setPaintProperty('districts-fill-back', 'fill-opacity', 0);
+        if (map.getZoom() < PRECINCT_MIN_ZOOM)
+          map.easeTo({ zoom: PRECINCT_MIN_ZOOM, duration: 900, essential: true });
       }
     } finally {
       onPrecinctLoadingChange?.(false);
@@ -675,6 +681,8 @@
         // Dim district fill so precinct coloring reads clearly
         map.setPaintProperty('districts-fill-front', 'fill-opacity', 0);
         map.setPaintProperty('districts-fill-back', 'fill-opacity', 0);
+        if (map.getZoom() < PRECINCT_MIN_ZOOM)
+          map.easeTo({ zoom: PRECINCT_MIN_ZOOM, duration: 900, essential: true });
       }
     } else {
       if (map.getLayer('precincts-fill')) {
@@ -751,6 +759,8 @@
 
     if (!window.matchMedia('(max-width: 640px)').matches)
       map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+    map.on('zoom', () => { mapZoom = map.getZoom(); });
 
     map.on('load', () => {
       map.addSource('state-districts', {
@@ -1025,6 +1035,9 @@
         <div class="precinct-legend-note">Precinct data: {precinctDisplayYear}</div>
       {/if}
     </div>
+    {#if mapZoom < PRECINCT_MIN_ZOOM}
+      <div class="precinct-zoom-hint">Zoom in to see precinct data</div>
+    {/if}
   {/if}
 
 </div>
@@ -1104,6 +1117,22 @@
     opacity: 0.7;
     text-align: center;
     margin-top: 0.2rem;
+  }
+  .precinct-zoom-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(12, 14, 28, 0.82);
+    backdrop-filter: blur(10px);
+    color: rgba(255,255,255,0.82);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    pointer-events: none;
+    white-space: nowrap;
   }
 
 
