@@ -353,6 +353,7 @@
 
   function _cancelIdle() {
     _idleActive = false;
+    reelCard = null;
     if (_idleTimer)    { clearTimeout(_idleTimer); _idleTimer = null; }
     if (_idleRaf)      { cancelAnimationFrame(_idleRaf); _idleRaf = null; }
     if (_wheelDebounce){ clearTimeout(_wheelDebounce); _wheelDebounce = null; }
@@ -378,8 +379,13 @@
       zoomK  = k;
       zoomTx = svgW / 2 - cx * k + pan * ep;
       zoomTy = svgH / 2 - cy * k;
-      if (p < 1) _idleRaf = requestAnimationFrame(tick);
-      else _idleActive = false;
+      if (p < 1) {
+        _idleRaf = requestAnimationFrame(tick);
+      } else {
+        _idleActive = false;
+        // Chain demo reel on desktop after a short pause
+        if (svgW >= 640) _idleTimer = setTimeout(_runDemoReel, 7000);
+      }
     }
     _idleRaf = requestAnimationFrame(tick);
   }
@@ -397,6 +403,99 @@
     _desktopIdleScheduled = true;
     _scheduleIdle();
   });
+
+  // ── Demo reel: cycles through the most gerrymandered states (desktop only) ──
+  type ReelCard = { po: string; name: string; eg: number; party: 'D' | 'R' | 'N'; seatsD: number; seatsR: number; seats: number };
+  let reelCard = $state<ReelCard | null>(null);
+
+  function _pickReelStates(): string[] {
+    const valid = ranked.filter(s => hasFullData(s.po) && Math.abs(s.eg) > 0.04);
+    if (valid.length < 2) return [];
+    const topR = valid.slice(0, 3).map(s => s.po);
+    const topD = [...valid].reverse().slice(0, 3).map(s => s.po);
+    const result: string[] = [];
+    const n = Math.min(topR.length, topD.length);
+    for (let i = 0; i < n; i++) { result.push(topR[i], topD[i]); }
+    return result;
+  }
+
+  function _buildReelCard(po: string): ReelCard {
+    const cycle = getCycle(po);
+    const eg = cycle?.efficiency_gap ?? 0;
+    return {
+      po, name: getStateName(po), eg,
+      party: eg > 0.02 ? 'R' : eg < -0.02 ? 'D' : 'N',
+      seatsD: cycle?.seats_d ?? 0,
+      seatsR: cycle?.seats_r ?? 0,
+      seats:  cycle?.seats   ?? 0,
+    };
+  }
+
+  function _reelZoomTo(cx: number, cy: number, k: number, ms: number, done: () => void) {
+    const sk = zoomK, stx = zoomTx, sty = zoomTy;
+    const etx = svgW / 2 - cx * k;
+    const ety = svgH / 2 - cy * k;
+    const t0 = performance.now();
+    function tick(now: number) {
+      if (!_idleActive) return;
+      const p  = Math.min((now - t0) / ms, 1);
+      const ep = p < 0.5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+      zoomK  = sk  + (k   - sk)  * ep;
+      zoomTx = stx + (etx - stx) * ep;
+      zoomTy = sty + (ety - sty) * ep;
+      if (p < 1) _idleRaf = requestAnimationFrame(tick); else done();
+    }
+    _idleRaf = requestAnimationFrame(tick);
+  }
+
+  function _reelReset(ms: number, done: () => void) {
+    const sk = zoomK, stx = zoomTx, sty = zoomTy;
+    const t0 = performance.now();
+    function tick(now: number) {
+      if (!_idleActive) return;
+      const p  = Math.min((now - t0) / ms, 1);
+      const ep = p < 0.5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+      zoomK  = sk  * (1 - ep);
+      zoomTx = stx * (1 - ep);
+      zoomTy = sty * (1 - ep);
+      if (zoomK < 1) zoomK = 1;
+      if (p < 1) _idleRaf = requestAnimationFrame(tick); else done();
+    }
+    _idleRaf = requestAnimationFrame(tick);
+  }
+
+  function _runDemoReel() {
+    if (svgW < 640) return; // desktop only
+    const states = _pickReelStates();
+    if (!states.length) return;
+    _idleActive = true;
+    let i = 0;
+
+    function step() {
+      if (!_idleActive || i >= states.length) {
+        reelCard = null;
+        _reelReset(2200, () => { _idleActive = false; });
+        return;
+      }
+      const po = states[i++];
+      const path = statePaths.find(p => p.po === po);
+      if (!path?.cx || !path?.cy) { step(); return; }
+
+      // Zoom level: larger for small states, smaller for large ones
+      const relArea = path.area / (svgW * svgH);
+      const k = relArea < 0.003 ? 5.2 : relArea < 0.015 ? 3.6 : 2.4;
+
+      _reelZoomTo(path.cx, path.cy, k, 1700, () => {
+        if (!_idleActive) return;
+        reelCard = _buildReelCard(po);
+        _idleTimer = setTimeout(() => {
+          reelCard = null;
+          _idleTimer = setTimeout(step, 450);
+        }, 3800);
+      });
+    }
+    step();
+  }
 
   let _dragActive = false;
   let _dragMoved  = false;
@@ -743,6 +842,7 @@
             stroke-width="0.6"
             class="state-path"
             class:has-full-data={full}
+            class:reel-highlight={reelCard?.po === po}
             onmousemove={(e) => handleMouseMove(e, po)}
             onmouseleave={() => hovered = null}
             onclick={(e) => { if (_dragMoved) { _dragMoved = false; return; } handleTap(e, po, full); }}
@@ -968,6 +1068,22 @@
         {:else}
           <span class="tooltip-soon">District maps coming soon</span>
         {/if}
+      </div>
+    {/if}
+
+    <!-- Demo reel callout card -->
+    {#if reelCard}
+      <div class="reel-card" class:reel-card-r={reelCard.party === 'R'} class:reel-card-d={reelCard.party === 'D'}>
+        <div class="reel-name">{reelCard.name} · {selectedYear}</div>
+        <div class="reel-eg" class:reel-eg-r={reelCard.party === 'R'} class:reel-eg-d={reelCard.party === 'D'}>
+          {egLabel(reelCard.eg)}
+        </div>
+        <div class="reel-seats">
+          <span class="reel-sd">{reelCard.seatsD}D</span>
+          <span class="reel-sep"> / </span>
+          <span class="reel-sr">{reelCard.seatsR}R</span>
+          <span class="reel-of"> of {reelCard.seats}</span>
+        </div>
       </div>
     {/if}
 
@@ -1455,4 +1571,64 @@
     .eg-legend { bottom: 3.5rem; }
     .zoom-controls { display: none; }
   }
+
+  /* ── Demo reel callout card ─────────────────────────────────────────────── */
+  .reel-card {
+    position: absolute;
+    bottom: 5.5rem;
+    left: 1.5rem;
+    background: rgba(16, 20, 40, 0.88);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-left: 3px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 0.75rem 1.1rem 0.7rem;
+    pointer-events: none;
+    z-index: 20;
+    min-width: 180px;
+    animation: reel-in 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .reel-card-r { border-left-color: #e05c5c; }
+  .reel-card-d { border-left-color: #4a90d9; }
+
+  .reel-name {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+  }
+  .reel-eg {
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.35rem;
+    color: rgba(255,255,255,0.9);
+  }
+  .reel-eg-r { color: #f87171; }
+  .reel-eg-d { color: #60a5fa; }
+
+  .reel-seats {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+  }
+  .reel-sd { color: #4a90d9; font-weight: 700; }
+  .reel-sr { color: #e05c5c; font-weight: 700; }
+
+  /* Highlighted state in reel — bright outline + slight glow */
+  .state-path.reel-highlight {
+    stroke: rgba(255,255,255,0.85) !important;
+    stroke-width: 1.8 !important;
+    filter: brightness(1.25) drop-shadow(0 0 4px rgba(255,255,255,0.3));
+  }
+
+  @keyframes reel-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hide reel card on mobile (reel doesn't run there anyway) */
+  @media (max-width: 639px) { .reel-card { display: none; } }
 </style>
