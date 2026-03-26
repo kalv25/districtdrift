@@ -335,9 +335,12 @@
     if (_mobileZoomApplied || svgW <= 0 || svgH <= 0 || svgW >= 640) return;
     _mobileZoomApplied = true;
     const k = 1.38;
-    // Centre of CONUS is roughly 45% across, 38% down in AlbersUSA
+    // cy is the world-space point that appears at the screen centre after zoom.
+    // CONUS centre sits at ~46% of svgH in world space; to make it appear at
+    // ~38% down the *screen* (leaving breathing room above for the chrome),
+    // solve: k*(world_conus_y - cy) + svgH/2 = 0.38*svgH → cy ≈ svgH*0.55
     const cx = svgW * 0.45;
-    const cy = svgH * 0.38;
+    const cy = svgH * 0.55;
     zoomK  = k;
     zoomTx = svgW / 2 - k * cx;
     zoomTy = svgH / 2 - k * cy;
