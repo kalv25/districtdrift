@@ -1053,6 +1053,10 @@
         class:panel-closed={isMobileState && mobileSectionIdx === null}
         style={isMobileState ? '' : (panelLayout === 'horizontal' ? `height: ${panelH}px` : `width: ${panelW}px`)}
       >
+        {#if isMobileState}
+          <button class="mobile-panel-handle" onclick={() => mobileSectionIdx = null}
+            aria-label="Collapse panel, show full map"></button>
+        {/if}
         {#if panelLayout === 'horizontal'}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
           <div class="panel-resize-handle panel-resize-h" onmousedown={startPanelResize} ontouchstart={startPanelResize}></div>
@@ -3033,6 +3037,22 @@
     /* State panel fills the group and clips overflow */
     .panel-state.panel { flex: 1 !important; min-height: 0 !important; max-height: none !important; overflow: hidden !important; }
     .panel-resize-handle { display: none !important; }
+
+    /* iOS-style drag handle — tap to collapse panel to full-map mode */
+    .mobile-panel-handle {
+      display: block;
+      width: 36px;
+      height: 4px;
+      background: rgba(255,255,255,0.30);
+      border: none;
+      border-radius: 99px;
+      margin: 0.5rem auto 0.15rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.15s;
+    }
+    .mobile-panel-handle:hover { background: rgba(255,255,255,0.55); }
 
     /* Hide in-panel snap nav — external section nav row serves this role */
     .snap-nav { display: none !important; }
