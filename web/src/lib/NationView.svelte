@@ -354,6 +354,7 @@
   function _cancelIdle() {
     _idleActive = false;
     reelCard = null;
+    flipCard = null;
     if (_idleTimer)    { clearTimeout(_idleTimer); _idleTimer = null; }
     if (_idleRaf)      { cancelAnimationFrame(_idleRaf); _idleRaf = null; }
     if (_wheelDebounce){ clearTimeout(_wheelDebounce); _wheelDebounce = null; }
@@ -408,7 +409,9 @@
 
   // ── Demo reel: cycles through the most gerrymandered states (desktop only) ──
   type ReelCard = { po: string; name: string; eg: number; party: 'D' | 'R' | 'N'; seatsD: number; seatsR: number; seats: number };
+  type FlipCard = { po: string; name: string; eg: number; party: 'D' | 'R' | 'N'; tagline: string };
   let reelCard = $state<ReelCard | null>(null);
+  let flipCard = $state<FlipCard | null>(null);
 
   function _pickReelStates(): string[] {
     const valid = ranked.filter(s => hasFullData(s.po) && Math.abs(s.eg) > 0.04);
@@ -431,6 +434,26 @@
       seatsR: cycle?.seats_r ?? 0,
       seats:  cycle?.seats   ?? 0,
     };
+  }
+
+  function _buildFlipCard(po: string): FlipCard {
+    const cycle = getCycle(po);
+    const eg = cycle?.efficiency_gap ?? 0;
+    const party: 'D' | 'R' | 'N' = eg > 0.02 ? 'R' : eg < -0.02 ? 'D' : 'N';
+    const total = (cycle?.votes_d ?? 0) + (cycle?.votes_r ?? 0);
+    const voteD = total ? Math.round((cycle!.votes_d / total) * 100) : 0;
+    const voteR = 100 - voteD;
+    const seatsD = cycle?.seats_d ?? 0;
+    const seatsR = cycle?.seats_r ?? 0;
+    const seats  = cycle?.seats   ?? 0;
+    let tagline = '';
+    if (party === 'R' && seats > 0)
+      tagline = `Republicans won ${seatsR} of ${seats} seats with ${voteR}% of votes`;
+    else if (party === 'D' && seats > 0)
+      tagline = `Democrats won ${seatsD} of ${seats} seats with ${voteD}% of votes`;
+    else
+      tagline = 'Seats closely matched votes';
+    return { po, name: getStateName(po), eg, party, tagline };
   }
 
   function _reelZoomTo(cx: number, cy: number, k: number, ms: number, done: () => void) {
@@ -490,23 +513,29 @@
       if (!path?.cx || !path?.cy) { beat(); return; }
       const pcx = path.cx, pcy = path.cy, parea = path.area;
 
-      // Zoom-out to full national view first (the "beat"), then zoom into state
-      _reelReset(1400, () => {
+      // Zoom-out to full national view (the "beat")
+      _reelReset(1900, () => {
         if (!_idleActive) return;
-        // Brief pause at full view so the national context registers
+        // Brief pause at national view — show flip card teaser for upcoming state
         _idleTimer = setTimeout(() => {
           if (!_idleActive) return;
-          const relArea = parea / (svgW * svgH);
-          const k = relArea < 0.003 ? 5.2 : relArea < 0.015 ? 3.6 : 2.4;
-          _reelZoomTo(pcx, pcy, k, 1700, () => {
+          flipCard = _buildFlipCard(po);
+          _idleTimer = setTimeout(() => {
             if (!_idleActive) return;
-            reelCard = _buildReelCard(po);
-            _idleTimer = setTimeout(() => {
-              reelCard = null;
-              _idleTimer = setTimeout(beat, 300);
-            }, 3800);
-          });
-        }, 900);
+            const relArea = parea / (svgW * svgH);
+            const k = relArea < 0.003 ? 5.2 : relArea < 0.015 ? 3.6 : 2.4;
+            // Dismiss flip card ~600ms after zoom starts so it feels like a reveal
+            setTimeout(() => { flipCard = null; }, 650);
+            _reelZoomTo(pcx, pcy, k, 2500, () => {
+              if (!_idleActive) return;
+              reelCard = _buildReelCard(po);
+              _idleTimer = setTimeout(() => {
+                reelCard = null;
+                _idleTimer = setTimeout(beat, 400);
+              }, 4800);
+            });
+          }, 1400); // hold flip card before starting zoom
+        }, 300); // tiny pause before flip card appears
       });
     }
     beat();
@@ -1099,7 +1128,7 @@
       </div>
     {/if}
 
-    <!-- Demo reel callout card -->
+    <!-- Demo reel callout card (shown while zoomed into a state) -->
     {#if reelCard}
       <div class="reel-card" class:reel-card-r={reelCard.party === 'R'} class:reel-card-d={reelCard.party === 'D'}>
         <div class="reel-name">{reelCard.name} · {selectedYear}</div>
@@ -1111,6 +1140,18 @@
           <span class="reel-sep"> / </span>
           <span class="reel-sr">{reelCard.seatsR}R</span>
           <span class="reel-of"> of {reelCard.seats}</span>
+        </div>
+      </div>
+    {/if}
+
+    <!-- Flip card: teaser shown during the national-view beat between states -->
+    {#if flipCard}
+      <div class="flip-card" class:flip-card-r={flipCard.party === 'R'} class:flip-card-d={flipCard.party === 'D'}>
+        <div class="flip-state">{flipCard.name}</div>
+        <div class="flip-year">{selectedYear}</div>
+        <div class="flip-tagline">{flipCard.tagline}</div>
+        <div class="flip-eg" class:flip-eg-r={flipCard.party === 'R'} class:flip-eg-d={flipCard.party === 'D'}>
+          {egLabel(flipCard.eg)} efficiency gap
         </div>
       </div>
     {/if}
@@ -1129,7 +1170,7 @@
     </div>
 
     <!-- Rank panel with toggle button embedded at top -->
-    <div id="rank-panel" class="rank-panel" class:rank-panel-open={showRankings}
+    <div id="rank-panel" class="rank-panel" class:rank-panel-open={showRankings} class:reel-mode={_idleActive}
       role="region" aria-label="States ranked by efficiency gap">
       <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
       <!-- Drag handle: tap or swipe to open/close on mobile -->
@@ -1662,4 +1703,77 @@
 
   /* Hide reel card on mobile (reel doesn't run there anyway) */
   @media (max-width: 639px) { .reel-card { display: none; } }
+
+  /* ── Flip card: cinematic teaser shown at national view between reel states ── */
+  .flip-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(10, 12, 28, 0.92);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1.6rem 2.2rem 1.4rem;
+    pointer-events: none;
+    z-index: 25;
+    text-align: center;
+    min-width: 260px;
+    max-width: 380px;
+    animation: flip-in 0.45s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .flip-card-r { border-top: 3px solid #e05c5c; }
+  .flip-card-d { border-top: 3px solid #4a90d9; }
+
+  .flip-state {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 0.15rem;
+  }
+  .flip-year {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .flip-tagline {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.45;
+    margin-bottom: 0.7rem;
+  }
+  .flip-eg {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .flip-eg-r { color: #f87171; }
+  .flip-eg-d { color: #60a5fa; }
+
+  @keyframes flip-in {
+    from { opacity: 0; transform: translate(-50%, -48%) scale(0.95); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  @media (max-width: 639px) { .flip-card { display: none; } }
+
+  /* ── Hide rankings panel during attract mode (desktop only) ─────────────── */
+  @media (min-width: 640px) {
+    .rank-panel {
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .rank-panel.reel-mode {
+      opacity: 0;
+      transform: translateX(0.6rem);
+      pointer-events: none;
+    }
+  }
 </style>
