@@ -1100,8 +1100,10 @@
                   </dd>
                   <dt>Seats</dt>
                   <dd><span class="d">{displayStats.seats_d}D</span> / <span class="r">{displayStats.seats_r}R</span> <span class="muted">of {displayStats.total_seats}</span></dd>
-                  <dt>D votes</dt><dd>{(displayStats.votes_d * 100).toFixed(1)}%</dd>
-                  <dt>R votes</dt><dd>{(displayStats.votes_r * 100).toFixed(1)}%</dd>
+                  <dt><Tooltip text="Democratic share of the two-party vote across all US House races in this state for this cycle. Only D and R votes are counted — third-party votes are excluded." placement="right"><span class="has-tip">D vote share</span></Tooltip></dt>
+                  <dd>{voteShare(displayStats.votes_d, displayStats.votes_r)}</dd>
+                  <dt><Tooltip text="Republican share of the two-party vote across all US House races in this state for this cycle." placement="right"><span class="has-tip">R vote share</span></Tooltip></dt>
+                  <dd>{voteShare(displayStats.votes_r, displayStats.votes_d)}</dd>
                   {#if displayStats.efficiency_gap !== null}
                     <dt>Eff. gap</dt>
                     <dd>
