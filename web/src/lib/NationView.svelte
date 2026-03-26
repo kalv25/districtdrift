@@ -358,18 +358,24 @@
   function _runIdle() {
     if (zoomK > 1.5) return; // skip if user has manually zoomed in significantly
     _idleActive = true;
-    const startK  = zoomK,  targetK  = zoomK * 1.18;
-    const startTx = zoomTx, targetTx = zoomTx - svgW * 0.04;
-    const startTy = zoomTy, targetTy = zoomTy - svgH * 0.03;
+    const startK  = zoomK;
+    const targetK = zoomK * 1.18;
+    // World-space coordinates of the current viewport centre — held fixed during zoom
+    const cx = (svgW / 2 - zoomTx) / zoomK;
+    const cy = (svgH / 2 - zoomTy) / zoomK;
+    // Gentle rightward pan (≈4% of viewport width)
+    const pan = svgW * 0.04;
     const duration = 11000;
     const t0 = performance.now();
     function tick(now: number) {
       if (!_idleActive) return;
       const p  = Math.min((now - t0) / duration, 1);
       const ep = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // ease-in-out quad
-      zoomK  = startK  + (targetK  - startK)  * ep;
-      zoomTx = startTx + (targetTx - startTx) * ep;
-      zoomTy = startTy + (targetTy - startTy) * ep;
+      const k  = startK + (targetK - startK) * ep;
+      // Keep centre fixed while zooming, then add the horizontal drift
+      zoomK  = k;
+      zoomTx = svgW / 2 - cx * k + pan * ep;
+      zoomTy = svgH / 2 - cy * k;
       if (p < 1) _idleRaf = requestAnimationFrame(tick);
       else _idleActive = false;
     }
