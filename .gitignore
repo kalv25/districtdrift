@@ -1,7 +1,5 @@
 CLAUDE.md
 FEEDBACK.md
-scripts/update_work_log.py
-scripts/init_project_logs.py
 .claude/
 private/
 data/
