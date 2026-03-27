@@ -2947,30 +2947,27 @@
 
   /* ── Tablet (641–1024 px — iPad Mini / iPad Air) ─────────────────────────── */
   @media (min-width: 641px) and (max-width: 1024px) {
-    /* Cycle bar: top-center of map area, contained within map-wrap */
+    /* Cycle bar: flat toolbar pinned to top-center of map area */
     .state-cycle-bar {
       bottom: auto;
-      top: 0.75rem;
-      /* Replace left:50%+translateX(-50%) with inset centering to stay in bounds */
-      left: 0.75rem;
-      right: 0.75rem;
-      transform: none;
-      width: auto;
-      max-width: none;
-      justify-content: center;
-      overflow-x: auto;
-      scrollbar-width: none;
+      top: 0.5rem;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      border-radius: 8px;
+      padding: 0.25rem 0.4rem;
+      white-space: normal;
+      max-width: calc(100% - 1rem);
     }
-    .state-cycle-bar::-webkit-scrollbar { display: none; }
-
-    /* Year buttons: fixed min-width, no flex:1 shrink */
+    .cycle-buttons { gap: 0.2rem; flex-wrap: nowrap; }
+    /* Compact year buttons — all 5 + play must fit in ~400px */
     .cycle-buttons button:not(.anim-btn) {
-      flex: none;
-      min-width: 3.25rem;
-      padding: 0.5rem 0.35rem;
+      flex: 1 1 0;
+      min-width: 2.5rem;
+      padding: 0.4rem 0.2rem;
     }
-    .btn-year { font-size: 0.7rem; }
-    /* Hide D/R seat count columns — not enough room at tablet widths */
+    .btn-year { font-size: 0.68rem; }
+    /* Hide D/R seat count columns */
     .btn-d-delta, .btn-r-delta { display: none !important; }
     .cycle-buttons button:not(.anim-btn) { grid-template-columns: 1fr !important; }
 
