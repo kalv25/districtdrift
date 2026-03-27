@@ -2947,6 +2947,8 @@
 
   /* ── Tablet (641–1024 px — iPad Mini / iPad Air) ─────────────────────────── */
   @media (min-width: 641px) and (max-width: 1024px) {
+    /* Keep cycle bar inside the map column */
+    .map-wrap { overflow: hidden; }
     /* Cycle bar: flat toolbar pinned to top-center of map area */
     .state-cycle-bar {
       bottom: auto;
