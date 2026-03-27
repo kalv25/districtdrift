@@ -2947,12 +2947,21 @@
 
   /* ── Tablet (641–1024 px — iPad Mini / iPad Air) ─────────────────────────── */
   @media (min-width: 641px) and (max-width: 1024px) {
-    /* Cycle bar: move to top of map area so it doesn't overlap the panel */
+    /* Cycle bar: top-center of map area, contained within map-wrap */
     .state-cycle-bar {
       bottom: auto;
       top: 0.75rem;
-      max-width: calc(100% - 1.5rem);
+      /* Replace left:50%+translateX(-50%) with inset centering to stay in bounds */
+      left: 0.75rem;
+      right: 0.75rem;
+      transform: none;
+      width: auto;
+      max-width: none;
+      justify-content: center;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
+    .state-cycle-bar::-webkit-scrollbar { display: none; }
 
     /* Year buttons: fixed min-width, no flex:1 shrink */
     .cycle-buttons button:not(.anim-btn) {
