@@ -2949,26 +2949,13 @@
   @media (min-width: 641px) and (max-width: 1024px) {
     /* Keep cycle bar inside the map column */
     .map-wrap { overflow: hidden; }
-    /* Cycle bar: flat toolbar pinned to top-center of map area */
+    /* Cycle bar: top-center of map area, sized to content */
     .state-cycle-bar {
       bottom: auto;
       top: 0.5rem;
-      left: 50%;
-      right: auto;
-      transform: translateX(-50%);
-      border-radius: 8px;
-      padding: 0.25rem 0.4rem;
-      white-space: normal;
-      max-width: calc(100% - 1rem);
+      width: max-content;
     }
-    .cycle-buttons { gap: 0.2rem; flex-wrap: nowrap; }
-    /* Compact year buttons — all 5 + play must fit in ~400px */
-    .cycle-buttons button:not(.anim-btn) {
-      flex: 1 1 0;
-      min-width: 2.5rem;
-      padding: 0.4rem 0.2rem;
-    }
-    .btn-year { font-size: 0.68rem; }
+    .cycle-buttons { width: max-content; }
     /* Hide D/R seat count columns */
     .btn-d-delta, .btn-r-delta { display: none !important; }
     .cycle-buttons button:not(.anim-btn) { grid-template-columns: 1fr !important; }
