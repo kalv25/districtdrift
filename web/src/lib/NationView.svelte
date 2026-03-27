@@ -1690,6 +1690,23 @@
 
   @media (max-width: 639px) { .flip-card { display: none; } }
 
+  /* ── Tablet (641–1024 px) ──────────────────────────────────────────────── */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    /* Bug 3: Rankings panel clips off right edge at 1024px */
+    .rank-panel {
+      width: 180px;
+      right: 0.5rem;
+      padding: 0.5rem;
+      font-size: 0.92em;
+    }
+    .rank-row { gap: 0.2rem; padding: 0.15rem 0.2rem; }
+
+    /* Bug 2: Year badge too large for tablet — shrink to avoid overlap */
+    .wby-from, .wby-to { font-size: 2.6rem; }
+    .wby-arrow { font-size: 1rem; }
+    .wipe-year-badge { gap: 0.3rem; }
+  }
+
   /* ── Hide rankings panel during attract mode (desktop only) ─────────────── */
   @media (min-width: 640px) {
     .rank-panel {

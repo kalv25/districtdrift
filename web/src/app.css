@@ -1,0 +1,24 @@
+/*
+ * app.css — Global base styles for districtdrift.org
+ *
+ * Breakpoint custom properties (documentation / calc() use):
+ *   Phone:   ≤ 640px
+ *   Tablet:  641–1024px
+ *   Desktop: ≥ 1025px
+ */
+
+:root {
+  --bp-mobile: 640px;
+  --bp-tablet: 1024px;
+}
+
+/* Prevent iOS font inflation on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Prevent layout jump when scrollbar appears/disappears on orientation change */
+html {
+  scrollbar-gutter: stable;
+}
