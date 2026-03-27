@@ -985,7 +985,8 @@
     }, 'image/png');
   }
 
-  /** Returns a small JPEG data URL for attaching to feedback. No watermark. */
+  /** Returns a small JPEG data URL for attaching to feedback. No watermark.
+   *  Returns null if capture fails (e.g. WebGL returns a blank canvas on iPad Safari). */
   export function captureDataUrl(): string | null {
     if (!map) return null;
     const src = map.getCanvas();
@@ -994,7 +995,16 @@
     const out = document.createElement('canvas');
     out.width  = Math.round(src.width  * scale);
     out.height = Math.round(src.height * scale);
-    out.getContext('2d')!.drawImage(src, 0, 0, out.width, out.height);
+    const ctx = out.getContext('2d')!;
+    ctx.drawImage(src, 0, 0, out.width, out.height);
+    // Guard: WebGL may return a blank canvas on some devices (iPad Safari).
+    // Sample a few pixels — if all are black/transparent, treat as failed capture.
+    const sample = ctx.getImageData(0, 0, Math.min(out.width, 32), Math.min(out.height, 32)).data;
+    let nonBlank = false;
+    for (let i = 0; i < sample.length; i += 16) {
+      if (sample[i] > 5 || sample[i + 1] > 5 || sample[i + 2] > 5) { nonBlank = true; break; }
+    }
+    if (!nonBlank) return null;
     return out.toDataURL('image/jpeg', 0.75);
   }
 </script>

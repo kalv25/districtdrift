@@ -827,7 +827,16 @@
         ctx.fillRect(0, 0, w, h);
         ctx.drawImage(img, 0, 0, w, h);
         URL.revokeObjectURL(url);
-        resolve(canvas.toDataURL('image/jpeg', 0.75));
+        // Guard: if draw failed, the canvas is just the fill colour — check for variety
+        const sample = ctx.getImageData(0, 0, Math.min(w, 32), Math.min(h, 32)).data;
+        let varied = false;
+        const r0 = sample[0], g0 = sample[1], b0 = sample[2];
+        for (let i = 4; i < sample.length; i += 16) {
+          if (Math.abs(sample[i] - r0) > 5 || Math.abs(sample[i+1] - g0) > 5 || Math.abs(sample[i+2] - b0) > 5) {
+            varied = true; break;
+          }
+        }
+        resolve(varied ? canvas.toDataURL('image/jpeg', 0.75) : null);
       };
       img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
       img.src = url;
