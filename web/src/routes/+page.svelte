@@ -2947,7 +2947,14 @@
 
   /* ── Tablet (641–1024 px — iPad Mini / iPad Air) ─────────────────────────── */
   @media (min-width: 641px) and (max-width: 1024px) {
-    /* Bug 1: Year buttons collapse at 768px — fixed min-width, no flex:1 shrink */
+    /* Cycle bar: move to top of map area so it doesn't overlap the panel */
+    .state-cycle-bar {
+      bottom: auto;
+      top: 0.75rem;
+      max-width: calc(100% - 1.5rem);
+    }
+
+    /* Year buttons: fixed min-width, no flex:1 shrink */
     .cycle-buttons button:not(.anim-btn) {
       flex: none;
       min-width: 3.25rem;
@@ -2958,7 +2965,7 @@
     .btn-d-delta, .btn-r-delta { display: none !important; }
     .cycle-buttons button:not(.anim-btn) { grid-template-columns: 1fr !important; }
 
-    /* Bug 4: Snap-nav wraps to two rows — make it a single scrollable row */
+    /* Snap-nav: single scrollable row instead of wrapping */
     .snap-nav {
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -2971,7 +2978,7 @@
       font-size: 0.68rem;
     }
 
-    /* Bug 5: Chart title truncation — tighter letter-spacing to fit */
+    /* Chart title truncation — tighter letter-spacing to fit */
     .snap-card-title {
       letter-spacing: 0.04em;
       font-size: 0.68rem;
