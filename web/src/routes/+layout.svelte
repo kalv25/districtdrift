@@ -42,6 +42,7 @@
 		"url": "https://districtdrift.org/",
 		"description": "Three decades of US congressional gerrymandering — partisan outcomes, efficiency gap, and demographic breakdowns for every state from 1992 to 2024.",
 		"author": { "@type": "Person", "name": "Kana Nadarajan", "email": "kana@districtdrift.org" },
+		"creator": { "@type": "Person", "name": "Kana Nadarajan", "email": "kana@districtdrift.org" },
 		"license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
 		"temporalCoverage": "1992/2024",
 		"spatialCoverage": { "@type": "Place", "name": "United States" },
