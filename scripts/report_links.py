@@ -97,8 +97,9 @@ def main():
 
     data = json.loads(RESULTS_FILE.read_text())
     broken = data["broken"]
+    warned = data.get("warned", [])
     total = len(data["results"])
-    body = build_body(broken, total)
+    body = build_body(broken, warned, total)
 
     existing = find_existing_issue(repo)
 
